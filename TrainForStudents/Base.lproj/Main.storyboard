@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QpV-3D-uZv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -3553,7 +3553,7 @@
             </objects>
             <point key="canvasLocation" x="702" y="2521"/>
         </scene>
-        <!--Item 2-->
+        <!--功能-->
         <scene sceneID="GBo-yG-5AM">
             <objects>
                 <viewController id="u3w-42-dHy" sceneMemberID="viewController">
@@ -3566,11 +3566,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="3ck-ts-ZPL"/>
+                    <tabBarItem key="tabBarItem" title="功能" id="3ck-ts-ZPL"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjl-DL-uC8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="3896"/>
+            <point key="canvasLocation" x="534" y="3986"/>
+        </scene>
+        <!--我的-->
+        <scene sceneID="70z-MV-y1r">
+            <objects>
+                <viewController id="REE-96-bhw" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="D1c-O9-5ex"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jtk-oC-fLg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RyK-Cg-fG5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="我的" id="cBn-0W-Zir"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zDk-bh-RwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="534" y="4716"/>
         </scene>
         <!--首页-->
         <scene sceneID="eLx-pO-Yh0">
@@ -3996,11 +4015,12 @@
                     <connections>
                         <segue destination="fTR-Ak-S9e" kind="relationship" relationship="viewControllers" id="98c-2b-6DG"/>
                         <segue destination="u3w-42-dHy" kind="relationship" relationship="viewControllers" id="Out-sP-aNp"/>
+                        <segue destination="REE-96-bhw" kind="relationship" relationship="viewControllers" id="ezr-xj-gtj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mfc-xh-6qa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-372" y="3564"/>
+            <point key="canvasLocation" x="-409" y="3987"/>
         </scene>
         <!--Wish Add Controller-->
         <scene sceneID="UkI-Tp-VFe">
