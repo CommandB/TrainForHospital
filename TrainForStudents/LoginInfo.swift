@@ -17,5 +17,7 @@ enum LoginInfo :String {
     case cloud_port = "cloud_port"
     case hospital = "hospital"
     case token = "token"
+    case officeId = "officeId"
+    case officeName = "officeName"
     
 }

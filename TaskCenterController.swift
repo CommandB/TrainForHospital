@@ -88,9 +88,6 @@ class TaskCenterController: MyBaseUIViewController , AVCaptureMetadataOutputObje
         datePicker.addTarget(self, action: #selector(datePickerChange), for: .valueChanged)
         datePicker.datePickerMode = .date
         
-        
-        btn_scanner.layer.cornerRadius = btn_scanner.frame.width/2
-        
         undoneCollection.gtm_addRefreshHeaderView(refreshBlock:{
             self.undoneView.refresh()
         })
@@ -329,7 +326,7 @@ class TaskCenterController: MyBaseUIViewController , AVCaptureMetadataOutputObje
 //        scannerView.myClosure = myClosure
 //        present(scannerView, animated: true, completion: nil)
         
-        
+        myPresentView(self, viewName: "scannerView")
         
     }
     

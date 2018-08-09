@@ -190,7 +190,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
             return
         }
         
-        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = PORTAL_PORT + "rest/loginCheck.do"
 //        let url = "http://192.168.1.106:8081/doctor_portal/rest/loginCheck.do"
         myPostRequest(url,["loginid":txt_loginId.text , "password":txt_password.text?.sha1()]).responseJSON(completionHandler: {resp in
@@ -216,15 +216,48 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                     //注册极光推送别名
                     JPUSHService.setAlias(json["userkey"].stringValue, callbackSelector: nil, object: 0)
                     //print("极光推送注册的别名:\(json["userkey"].stringValue)")
+                    
+                    
+                    //请求科室信息
+                    let getOfficeURL = SERVER_PORT+"rest/app/queryMyOffice.do"
+                    myPostRequest(getOfficeURL).responseJSON(completionHandler: { resp in
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                        switch  resp.result{
+                        case .success(let result):
+                            
+                            let json = JSON(result)
+                            if json["code"].stringValue == "1"{
+                                let data = json["data"].arrayValue[0]
+                                UserDefaults.standard.set(data["officeid"].stringValue, forKey:
+                                    LoginInfo.officeId.rawValue)
+                                UserDefaults.standard.set(data["officename"].stringValue, forKey:
+                                    LoginInfo.officeName.rawValue)
+                            }else{
+                                myAlert(self, message: json["msg"].stringValue)
+                            }
+                            
+                            
+                        case .failure(let err):
+                            
+                            myAlert(self, message: "服务器异常!")
+                            print(err)
+                        }
+                        
+                    })
+                    
+                    
+                    
                     myPresentView(self, viewName: "tabBarView")
                     
                 }else{
+                    MBProgressHUD.hide(for: self.view, animated: true)
                     myAlert(self, message: json["msg"].stringValue)
                 }
                 
                 self.checkNewVersion()
                 
             case .failure(let error):
+                MBProgressHUD.hide(for: self.view, animated: true)
                 myAlert(self, message: "服务器异常!")
                 print(error)
             }

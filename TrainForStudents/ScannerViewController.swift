@@ -147,11 +147,12 @@ class ScannerViewController: MyBaseUIViewController , AVCaptureMetadataOutputObj
     }
 
     @IBAction func btn_back_inside(_ sender: UIButton) {
-        let tabBar = self.tabBarController
-        tabBar?.selectedIndex = selectedTabBarIndex
-        if selectedTabBarIndex == 3 {
-            tabBar?.selectedIndex = 0
-        }
+//        let tabBar = self.tabBarController
+//        tabBar?.selectedIndex = selectedTabBarIndex
+//        if selectedTabBarIndex == 3 {
+//            tabBar?.selectedIndex = 0
+//        }
+        dismiss(animated: true, completion: nil)
     }
     
     func myClosureImpl(_ val : String , vc : UIViewController){

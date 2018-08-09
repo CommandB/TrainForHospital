@@ -122,6 +122,7 @@ class MyselfController: MyBaseUIViewController {
     override func refresh() {
         getMySelfData()
         getMyQr()
+        //UserDefaults.standard.string(forKey: LoginInfo.)
     }
     
 }

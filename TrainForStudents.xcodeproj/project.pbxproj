@@ -68,6 +68,11 @@
 		0A42F8331F1E01B2001DF281 /* artboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A42F8321F1E01B2001DF281 /* artboard.png */; };
 		0A42F8351F1E01BE001DF281 /* splashlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A42F8341F1E01BE001DF281 /* splashlogo.png */; };
 		0A44131D1EEAC64F00BAB679 /* BMCustomPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44131C1EEAC64F00BAB679 /* BMCustomPlayer.swift */; };
+		0A494F90211C247500E95332 /* OfficeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A494F8F211C247500E95332 /* OfficeController.swift */; };
+		0A494F9C211C286F00E95332 /* office_plan.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A494F9A211C286D00E95332 /* office_plan.png */; };
+		0A494F9D211C286F00E95332 /* office_person.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A494F9B211C286E00E95332 /* office_person.png */; };
+		0A494FA0211C29D100E95332 /* 科室-灰色@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A494F9E211C29CF00E95332 /* 科室-灰色@2x.png */; };
+		0A494FA1211C29D100E95332 /* 科室@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A494F9F211C29D000E95332 /* 科室@2x.png */; };
 		0A56E39C1F5D8A2300EF9855 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A56E39B1F5D8A2300EF9855 /* CoreTelephony.framework */; };
 		0A56E3A01F5D92C700EF9855 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A56E39F1F5D92C700EF9855 /* libz.tbd */; };
 		0A56E3A21F5D92CF00EF9855 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A56E3A11F5D92CF00EF9855 /* SystemConfiguration.framework */; };
@@ -717,6 +722,11 @@
 		0A42F8341F1E01BE001DF281 /* splashlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splashlogo.png; sourceTree = "<group>"; };
 		0A44131B1EE9BD4100BAB679 /* test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.mp4; sourceTree = "<group>"; };
 		0A44131C1EEAC64F00BAB679 /* BMCustomPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BMCustomPlayer.swift; path = ../BMCustomPlayer.swift; sourceTree = "<group>"; };
+		0A494F8F211C247500E95332 /* OfficeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeController.swift; sourceTree = "<group>"; };
+		0A494F9A211C286D00E95332 /* office_plan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = office_plan.png; sourceTree = "<group>"; };
+		0A494F9B211C286E00E95332 /* office_person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = office_person.png; sourceTree = "<group>"; };
+		0A494F9E211C29CF00E95332 /* 科室-灰色@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "科室-灰色@2x.png"; sourceTree = "<group>"; };
+		0A494F9F211C29D000E95332 /* 科室@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "科室@2x.png"; sourceTree = "<group>"; };
 		0A56E39B1F5D8A2300EF9855 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		0A56E39F1F5D92C700EF9855 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		0A56E3A11F5D92CF00EF9855 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1731,18 +1741,10 @@
 		0A210FCF20B44C04006BC5C9 /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				0A210FD020B44C04006BC5C9 /* css */,
 				0A210FD120B44C04006BC5C9 /* js */,
 				0A210FD320B44C04006BC5C9 /* html */,
 			);
 			path = Web;
-			sourceTree = "<group>";
-		};
-		0A210FD020B44C04006BC5C9 /* css */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = css;
 			sourceTree = "<group>";
 		};
 		0A210FD120B44C04006BC5C9 /* js */ = {
@@ -1886,12 +1888,19 @@
 			name = Collection;
 			sourceTree = "<group>";
 		};
+		0AAB7799211C224C009C372B /* Office */ = {
+			isa = PBXGroup;
+			children = (
+				0A494F8F211C247500E95332 /* OfficeController.swift */,
+			);
+			name = Office;
+			sourceTree = "<group>";
+		};
 		0AB5AA962105D41000A9E2EC /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				0AB5AAA22105D55600A9E2EC /* Collection */,
 				0AB5AAA02105D50900A9E2EC /* HomeController.swift */,
-				0AB5AAA32105DD5000A9E2EC /* Students */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1902,13 +1911,6 @@
 				0AB5AAA42105DD6F00A9E2EC /* HomeCollectionView.swift */,
 			);
 			path = Collection;
-			sourceTree = "<group>";
-		};
-		0AB5AAA32105DD5000A9E2EC /* Students */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Students;
 			sourceTree = "<group>";
 		};
 		0AC3B9261EE4730B00227194 = {
@@ -1932,6 +1934,7 @@
 		0AC3B9311EE4730B00227194 /* TrainForStudents */ = {
 			isa = PBXGroup;
 			children = (
+				0AAB7799211C224C009C372B /* Office */,
 				0AB5AA962105D41000A9E2EC /* Home */,
 				0A210FCF20B44C04006BC5C9 /* Web */,
 				0A0C570B1F4ADB80008551D3 /* TrainForStudents.entitlements */,
@@ -2019,6 +2022,8 @@
 			isa = PBXGroup;
 			children = (
 				B46D5F5321076E3900A1C3C7 /* excel.png */,
+				0A494F9B211C286E00E95332 /* office_person.png */,
+				0A494F9A211C286D00E95332 /* office_plan.png */,
 				B46D5F5121076E2E00A1C3C7 /* 暂停.png */,
 				0A667BD02085EA1B00594BE7 /* 播放.png */,
 				0A667BCD2085DE7300594BE7 /* cover1.jpg */,
@@ -2032,6 +2037,8 @@
 				0A15D54E1F0EA46000908B7F /* 轮转.png */,
 				0A15D5511F0EA52D00908B7F /* 考评-灰.png */,
 				0A15D5521F0EA52D00908B7F /* 考评.png */,
+				0A494F9E211C29CF00E95332 /* 科室-灰色@2x.png */,
+				0A494F9F211C29D000E95332 /* 科室@2x.png */,
 				0A15D5531F0EA52D00908B7F /* 我的-灰.png */,
 				0A15D5541F0EA52D00908B7F /* 我的.png */,
 				0A15D5591F0EA5ED00908B7F /* 任务中心.png */,
@@ -2494,6 +2501,7 @@
 				0A15D51E1F0C9B7F00908B7F /* wenhao.png in Resources */,
 				0A15D54F1F0EA46000908B7F /* 轮转-灰.png in Resources */,
 				0A7818ED1F32F6990072CF16 /* 答疑2x.png in Resources */,
+				0A494F9C211C286F00E95332 /* office_plan.png in Resources */,
 				0AC3B98C1EE586A500227194 /* back.png in Resources */,
 				0A42F81D1F15D706001DF281 /* location.png in Resources */,
 				0A644D5D1EFD0A9A009025DD /* OutlineItem.xib in Resources */,
@@ -2503,6 +2511,7 @@
 				0A15D5501F0EA46000908B7F /* 轮转.png in Resources */,
 				0A15C3621F46FAEE00C53F61 /* 签到成功.png in Resources */,
 				0A644D7C1F0190BE009025DD /* 试题1.png in Resources */,
+				0A494FA0211C29D100E95332 /* 科室-灰色@2x.png in Resources */,
 				B4F9E87C1F9106DD0001D88F /* OtherFilesCell.xib in Resources */,
 				0A7818F81F32F7740072CF16 /* 设置.png in Resources */,
 				0A7818F01F32F6990072CF16 /* 教材3x.png in Resources */,
@@ -2527,6 +2536,7 @@
 				0A0FA88B1F0F615300DFEA7E /* picture.png in Resources */,
 				0A0FA88A1F0F615300DFEA7E /* video.png in Resources */,
 				0A644D6B1F0113EC009025DD /* 出科2.png in Resources */,
+				0A494FA1211C29D100E95332 /* 科室@2x.png in Resources */,
 				0A0FA88E1F0F615300DFEA7E /* word.png in Resources */,
 				0A7818F11F32F6990072CF16 /* 心愿单2x.png in Resources */,
 				0A42F8351F1E01BE001DF281 /* splashlogo.png in Resources */,
@@ -2535,6 +2545,7 @@
 				0A667BCE2085DE7400594BE7 /* cover2.jpg in Resources */,
 				0AC3B9961EE6A55600227194 /* loginId.png in Resources */,
 				0A667BD12085EA1C00594BE7 /* 播放.png in Resources */,
+				0A494F9D211C286F00E95332 /* office_person.png in Resources */,
 				0A210FDF20B44C05006BC5C9 /* goods2.htm in Resources */,
 				0A210FDE20B44C05006BC5C9 /* echarts.min.js in Resources */,
 				0A15D5551F0EA52D00908B7F /* 考评-灰.png in Resources */,
@@ -2741,6 +2752,7 @@
 				0AC3BC9E1EE94DA300227194 /* LBXPermissions.swift in Sources */,
 				0A42F8271F1C7319001DF281 /* TaskApplyListCollectionView.swift in Sources */,
 				0A644D971F062480009025DD /* MyEvaluationListController.swift in Sources */,
+				0A494F90211C247500E95332 /* OfficeController.swift in Sources */,
 				B4FF1A8D1F94DF7D009C6685 /* SDWebImageManager.m in Sources */,
 				0A644D871F021634009025DD /* EvaluationDetailCollectionView.swift in Sources */,
 				B468B7CC1FCA9BA000ECF396 /* UIScrollView+MJExtension.m in Sources */,
