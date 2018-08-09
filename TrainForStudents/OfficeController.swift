@@ -167,16 +167,16 @@ class OfficeController: MyBaseUIViewController, UICollectionViewDelegate, UIColl
     func btn_nav_tui(sender : UIButton){
         switch sender.tag {
         case 20001:
-//            let vc = OfficePeopleViewController()
+            let vc = OfficePeopleViewController()
 //            vc.office = currentOffice
-//            let nav = UINavigationController(rootViewController: vc)
-//            self.present(nav, animated: true, completion: nil)
+            let nav = UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true, completion: nil)
             break
         case 20002:
-//            let vc = SmallLectureViewController()
+            let vc = SmallLectureViewController()
 //            vc.office = currentOffice
-//            let nav = UINavigationController(rootViewController: vc)
-//            self.present(nav, animated: true, completion: nil)
+            let nav = UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true, completion: nil)
             break
             
             

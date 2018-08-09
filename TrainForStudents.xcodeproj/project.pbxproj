@@ -186,6 +186,19 @@
 		0AFE94261F209C3F009C4CDF /* MyNoDataCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE94251F209C3F009C4CDF /* MyNoDataCellView.swift */; };
 		0AFE94281F209D46009C4CDF /* MyBaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE94271F209D46009C4CDF /* MyBaseCollectionView.swift */; };
 		351DE4A8F35C513E54679BCA /* Pods_TrainForStudents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734644A1ED16B32D9EAD775A /* Pods_TrainForStudents.framework */; };
+		B44FFFD9211C6BBD00844C07 /* OfficePeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFD2211C6BBD00844C07 /* OfficePeopleViewController.swift */; };
+		B44FFFDA211C6BBD00844C07 /* OfficePeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFD3211C6BBD00844C07 /* OfficePeopleCell.swift */; };
+		B44FFFDB211C6BBD00844C07 /* JHTrainingChangedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFD5211C6BBD00844C07 /* JHTrainingChangedCell.swift */; };
+		B44FFFDC211C6BBD00844C07 /* JHTrainingChangedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B44FFFD6211C6BBD00844C07 /* JHTrainingChangedCell.xib */; };
+		B44FFFDD211C6BBD00844C07 /* SmallLectureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFD7211C6BBD00844C07 /* SmallLectureViewController.swift */; };
+		B44FFFDE211C6BBD00844C07 /* LectureCompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFD8211C6BBD00844C07 /* LectureCompleteController.swift */; };
+		B44FFFE0211C6BF000844C07 /* JHBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFDF211C6BF000844C07 /* JHBaseViewController.swift */; };
+		B44FFFE2211C6E2D00844C07 /* JHGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFE1211C6E2D00844C07 /* JHGlobal.swift */; };
+		B44FFFE6211C73EA00844C07 /* NSDictionary+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFE4211C73EA00844C07 /* NSDictionary+Additions.m */; };
+		B44FFFE8211C745300844C07 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFE7211C745300844C07 /* String+Extension.swift */; };
+		B44FFFEA211C763600844C07 /* topBack.png in Resources */ = {isa = PBXBuildFile; fileRef = B44FFFE9211C763600844C07 /* topBack.png */; };
+		B44FFFEF211C7BC000844C07 /* 返回@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44FFFED211C7BC000844C07 /* 返回@2x.png */; };
+		B44FFFF0211C7BC000844C07 /* 返回@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44FFFEE211C7BC000844C07 /* 返回@3x.png */; };
 		B468B7BB1FCA9BA000ECF396 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = B468B78F1FCA9BA000ECF396 /* MJRefreshAutoFooter.m */; };
 		B468B7BC1FCA9BA000ECF396 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = B468B7911FCA9BA000ECF396 /* MJRefreshBackFooter.m */; };
 		B468B7BD1FCA9BA000ECF396 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B468B7931FCA9BA000ECF396 /* MJRefreshComponent.m */; };
@@ -847,6 +860,20 @@
 		734644A1ED16B32D9EAD775A /* Pods_TrainForStudents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrainForStudents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82FD0C3B5DF5EF07841E9B70 /* Pods-TrainForStudents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainForStudents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrainForStudents/Pods-TrainForStudents.debug.xcconfig"; sourceTree = "<group>"; };
 		8CCC089957700C973EA57112 /* Pods-TrainForStudents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainForStudents.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrainForStudents/Pods-TrainForStudents.release.xcconfig"; sourceTree = "<group>"; };
+		B44FFFD2211C6BBD00844C07 /* OfficePeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficePeopleViewController.swift; sourceTree = "<group>"; };
+		B44FFFD3211C6BBD00844C07 /* OfficePeopleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficePeopleCell.swift; sourceTree = "<group>"; };
+		B44FFFD5211C6BBD00844C07 /* JHTrainingChangedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHTrainingChangedCell.swift; sourceTree = "<group>"; };
+		B44FFFD6211C6BBD00844C07 /* JHTrainingChangedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHTrainingChangedCell.xib; sourceTree = "<group>"; };
+		B44FFFD7211C6BBD00844C07 /* SmallLectureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallLectureViewController.swift; sourceTree = "<group>"; };
+		B44FFFD8211C6BBD00844C07 /* LectureCompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureCompleteController.swift; sourceTree = "<group>"; };
+		B44FFFDF211C6BF000844C07 /* JHBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHBaseViewController.swift; sourceTree = "<group>"; };
+		B44FFFE1211C6E2D00844C07 /* JHGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHGlobal.swift; sourceTree = "<group>"; };
+		B44FFFE4211C73EA00844C07 /* NSDictionary+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Additions.m"; sourceTree = "<group>"; };
+		B44FFFE5211C73EA00844C07 /* NSDictionary+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Additions.h"; sourceTree = "<group>"; };
+		B44FFFE7211C745300844C07 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		B44FFFE9211C763600844C07 /* topBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topBack.png; sourceTree = "<group>"; };
+		B44FFFED211C7BC000844C07 /* 返回@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回@2x.png"; sourceTree = "<group>"; };
+		B44FFFEE211C7BC000844C07 /* 返回@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回@3x.png"; sourceTree = "<group>"; };
 		B468B78E1FCA9BA000ECF396 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		B468B78F1FCA9BA000ECF396 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		B468B7901FCA9BA000ECF396 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -1892,6 +1919,8 @@
 			isa = PBXGroup;
 			children = (
 				0A494F8F211C247500E95332 /* OfficeController.swift */,
+				B44FFFD1211C6BBD00844C07 /* OfficePeopleControllers */,
+				B44FFFD4211C6BBD00844C07 /* SmallLectureControllers */,
 			);
 			name = Office;
 			sourceTree = "<group>";
@@ -2021,6 +2050,9 @@
 		0AC3B98A1EE5868E00227194 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B44FFFED211C7BC000844C07 /* 返回@2x.png */,
+				B44FFFEE211C7BC000844C07 /* 返回@3x.png */,
+				B44FFFE9211C763600844C07 /* topBack.png */,
 				B46D5F5321076E3900A1C3C7 /* excel.png */,
 				0A494F9B211C286E00E95332 /* office_person.png */,
 				0A494F9A211C286D00E95332 /* office_plan.png */,
@@ -2099,15 +2131,19 @@
 		0AC3BC641EE94C9C00227194 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B44FFFE3211C73EA00844C07 /* NSDictionaryAddition */,
 				0A15D5121F0BF5E900908B7F /* Refresh */,
 				0AC3BC931EE94D9200227194 /* QrScanner */,
 				0A42F8221F179EDA001DF281 /* DateUtil.swift */,
 				0AC3BB011EE9499000227194 /* extension.swift */,
+				B44FFFE7211C745300844C07 /* String+Extension.swift */,
 				0A6A23A51EEC70A500A1AC5B /* ScannerViewController.swift */,
 				0A15D5101F0BA78700908B7F /* MyNotificationUtil.swift */,
 				0A125A871F2204B300FDD4F4 /* BMPlayerCustomControlView.swift */,
+				B44FFFDF211C6BF000844C07 /* JHBaseViewController.swift */,
 				0A44131C1EEAC64F00BAB679 /* BMCustomPlayer.swift */,
 				0A0FA88F1F110DB100DFEA7E /* Bridging-Header.h */,
+				B44FFFE1211C6E2D00844C07 /* JHGlobal.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2132,6 +2168,35 @@
 				8CCC089957700C973EA57112 /* Pods-TrainForStudents.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B44FFFD1211C6BBD00844C07 /* OfficePeopleControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B44FFFD2211C6BBD00844C07 /* OfficePeopleViewController.swift */,
+				B44FFFD3211C6BBD00844C07 /* OfficePeopleCell.swift */,
+			);
+			path = OfficePeopleControllers;
+			sourceTree = "<group>";
+		};
+		B44FFFD4211C6BBD00844C07 /* SmallLectureControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B44FFFD5211C6BBD00844C07 /* JHTrainingChangedCell.swift */,
+				B44FFFD6211C6BBD00844C07 /* JHTrainingChangedCell.xib */,
+				B44FFFD7211C6BBD00844C07 /* SmallLectureViewController.swift */,
+				B44FFFD8211C6BBD00844C07 /* LectureCompleteController.swift */,
+			);
+			path = SmallLectureControllers;
+			sourceTree = "<group>";
+		};
+		B44FFFE3211C73EA00844C07 /* NSDictionaryAddition */ = {
+			isa = PBXGroup;
+			children = (
+				B44FFFE4211C73EA00844C07 /* NSDictionary+Additions.m */,
+				B44FFFE5211C73EA00844C07 /* NSDictionary+Additions.h */,
+			);
+			path = NSDictionaryAddition;
 			sourceTree = "<group>";
 		};
 		B468B78C1FCA9BA000ECF396 /* MJRefresh */ = {
@@ -2513,6 +2578,7 @@
 				0A644D7C1F0190BE009025DD /* 试题1.png in Resources */,
 				0A494FA0211C29D100E95332 /* 科室-灰色@2x.png in Resources */,
 				B4F9E87C1F9106DD0001D88F /* OtherFilesCell.xib in Resources */,
+				B44FFFF0211C7BC000844C07 /* 返回@3x.png in Resources */,
 				0A7818F81F32F7740072CF16 /* 设置.png in Resources */,
 				0A7818F01F32F6990072CF16 /* 教材3x.png in Resources */,
 				0A42F82F1F1D2B0A001DF281 /* AnwsersItem.xib in Resources */,
@@ -2520,6 +2586,7 @@
 				0A7818FA1F3303260072CF16 /* 角标.png in Resources */,
 				0A0C57111F511D9D008551D3 /* 扫一扫.png in Resources */,
 				0A644D6D1F0113EC009025DD /* 年度2.png in Resources */,
+				B44FFFEF211C7BC000844C07 /* 返回@2x.png in Resources */,
 				B46D5F5421076E3900A1C3C7 /* excel.png in Resources */,
 				0A644D7E1F0190BE009025DD /* 试题3.png in Resources */,
 				0A7818F31F32F6990072CF16 /* 远程2x.png in Resources */,
@@ -2529,6 +2596,7 @@
 				0A15C3611F46FAEE00C53F61 /* 没通过.png in Resources */,
 				0A15D5581F0EA52D00908B7F /* 我的.png in Resources */,
 				0A7818F21F32F6990072CF16 /* 心愿单3X.png in Resources */,
+				B44FFFDC211C6BBD00844C07 /* JHTrainingChangedCell.xib in Resources */,
 				0A15D55A1F0EA5ED00908B7F /* 任务中心.png in Resources */,
 				0A15D51C1F0C9A2F00908B7F /* more.png in Resources */,
 				0AC3BCAB1EE9577B00227194 /* CodeScan.bundle in Resources */,
@@ -2546,6 +2614,7 @@
 				0AC3B9961EE6A55600227194 /* loginId.png in Resources */,
 				0A667BD12085EA1C00594BE7 /* 播放.png in Resources */,
 				0A494F9D211C286F00E95332 /* office_person.png in Resources */,
+				B44FFFEA211C763600844C07 /* topBack.png in Resources */,
 				0A210FDF20B44C05006BC5C9 /* goods2.htm in Resources */,
 				0A210FDE20B44C05006BC5C9 /* echarts.min.js in Resources */,
 				0A15D5551F0EA52D00908B7F /* 考评-灰.png in Resources */,
@@ -2661,6 +2730,7 @@
 				0A9605D2208F0AE400A1ABB4 /* LiveMessageCollectionView.swift in Sources */,
 				0AB5AAA12105D50900A9E2EC /* HomeController.swift in Sources */,
 				0AC3B99F1EE8F9A100227194 /* UndoneCollectionView.swift in Sources */,
+				B44FFFDD211C6BBD00844C07 /* SmallLectureViewController.swift in Sources */,
 				B4FF1A921F94DF7D009C6685 /* UIImageView+HighlightedWebCache.m in Sources */,
 				0AB5AAA52105DD6F00A9E2EC /* HomeCollectionView.swift in Sources */,
 				0AFE94281F209D46009C4CDF /* MyBaseCollectionView.swift in Sources */,
@@ -2671,6 +2741,7 @@
 				B468B7BD1FCA9BA000ECF396 /* MJRefreshComponent.m in Sources */,
 				0A7818E41F3090980072CF16 /* TaskDetail2Controller.swift in Sources */,
 				0A15D5071F0B3D2A00908B7F /* OnlineAskController.swift in Sources */,
+				B44FFFD9211C6BBD00844C07 /* OfficePeopleViewController.swift in Sources */,
 				0A6A23B51EF28E9900A1AC5B /* ShortAnswerCollectionView.swift in Sources */,
 				0A644D991F062560009025DD /* MyEvaluationListCollectionView.swift in Sources */,
 				B4FF1A861F94DF7D009C6685 /* NSImage+WebCache.m in Sources */,
@@ -2679,6 +2750,8 @@
 				B4FF1A8A1F94DF7D009C6685 /* SDWebImageDecoder.m in Sources */,
 				0A644D851F021388009025DD /* EvaluationDetailController.swift in Sources */,
 				0A644D751F0189D0009025DD /* HistoryExamCollectionView.swift in Sources */,
+				B44FFFDB211C6BBD00844C07 /* JHTrainingChangedCell.swift in Sources */,
+				B44FFFE0211C6BF000844C07 /* JHBaseViewController.swift in Sources */,
 				0A644D8F1F04E556009025DD /* WishListController.swift in Sources */,
 				0A15D5171F0BF5FB00908B7F /* QQStyleRefreshHeader.swift in Sources */,
 				0AC3B9371EE4730B00227194 /* ExamCenterController.swift in Sources */,
@@ -2688,6 +2761,7 @@
 				B4FF1A8B1F94DF7D009C6685 /* SDWebImageDownloader.m in Sources */,
 				B4FF1A851F94DF7D009C6685 /* NSData+ImageContentType.m in Sources */,
 				0A6A23BB1EF3BEBE00A1AC5B /* DirectoryCollectionView.swift in Sources */,
+				B44FFFE2211C6E2D00844C07 /* JHGlobal.swift in Sources */,
 				0A15D5091F0B3E1B00908B7F /* OnlineAskCollectionView.swift in Sources */,
 				0A6A23A61EEC70A500A1AC5B /* ScannerViewController.swift in Sources */,
 				0A644D671F00F37A009025DD /* WaitExamInfoController.swift in Sources */,
@@ -2746,12 +2820,14 @@
 				0A42F8251F1C72AD001DF281 /* TaskApplyListController.swift in Sources */,
 				0AC3B98E1EE5A35200227194 /* TurnTaskCollectionView.swift in Sources */,
 				0AC3B97F1EE53F5900227194 /* UILabel.swift in Sources */,
+				B44FFFDA211C6BBD00844C07 /* OfficePeopleCell.swift in Sources */,
 				B468B7BE1FCA9BA000ECF396 /* MJRefreshFooter.m in Sources */,
 				0AC3B99B1EE8694B00227194 /* TaskCenterController.swift in Sources */,
 				0A15D50D1F0B8F6000908B7F /* OnlineAskDetailCollectionView.swift in Sources */,
 				0AC3BC9E1EE94DA300227194 /* LBXPermissions.swift in Sources */,
 				0A42F8271F1C7319001DF281 /* TaskApplyListCollectionView.swift in Sources */,
 				0A644D971F062480009025DD /* MyEvaluationListController.swift in Sources */,
+				B44FFFE8211C745300844C07 /* String+Extension.swift in Sources */,
 				0A494F90211C247500E95332 /* OfficeController.swift in Sources */,
 				B4FF1A8D1F94DF7D009C6685 /* SDWebImageManager.m in Sources */,
 				0A644D871F021634009025DD /* EvaluationDetailCollectionView.swift in Sources */,
@@ -2773,6 +2849,7 @@
 				B468B7C41FCA9BA000ECF396 /* MJRefreshBackNormalFooter.m in Sources */,
 				B468B7BC1FCA9BA000ECF396 /* MJRefreshBackFooter.m in Sources */,
 				0A91142F201D60D2001A1936 /* UserDefaults.swift in Sources */,
+				B44FFFE6211C73EA00844C07 /* NSDictionary+Additions.m in Sources */,
 				0A0C570D1F4D70AE008551D3 /* ChangePersonInfoController.swift in Sources */,
 				0A644D9D1F065B53009025DD /* MyEvaluationDetailCollection.swift in Sources */,
 				0A644D771F018F3E009025DD /* MockExamCenterController.swift in Sources */,
@@ -2780,6 +2857,7 @@
 				0A15D50B1F0B8F4F00908B7F /* OnlineAskDetailController.swift in Sources */,
 				0A6A23B71EF396FD00A1AC5B /* RecordsAnalysisCollectionView.swift in Sources */,
 				B468B7CD1FCA9BA000ECF396 /* UIScrollView+MJRefresh.m in Sources */,
+				B44FFFDE211C6BBD00844C07 /* LectureCompleteController.swift in Sources */,
 				0AC3BC9F1EE94DA300227194 /* LBXScanLineAnimation.swift in Sources */,
 				B49971851FBC702000192CCF /* Task.swift in Sources */,
 				0A42F8291F1C7F2D001DF281 /* TaskApplyController.swift in Sources */,

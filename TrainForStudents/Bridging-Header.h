@@ -15,4 +15,5 @@
 #import "MBProgressHUD+MJ.h"
 #import "MBProgressHUD.h"
 #import "PLPlayerKit/PLPlayerKit.h"
+#import "NSDictionary+Additions.h"
 #endif
