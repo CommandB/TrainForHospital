@@ -2983,7 +2983,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jiuhua.TrainForStudents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Applications/myProject/TrainForHospital/TrainForStudents/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/TrainForStudents/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -3059,7 +3059,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jiuhua.TrainForStudents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Applications/myProject/TrainForHospital/TrainForStudents/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/TrainForStudents/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
