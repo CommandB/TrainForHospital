@@ -166,12 +166,15 @@ class ScannerViewController: MyBaseUIViewController , AVCaptureMetadataOutputObj
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
                     myAlert(vc, title: "签到", message: json["msg"].stringValue, handler: { action in
-                        self.tabBarController?.selectedIndex = selectedTabBarIndex
+//                        self.tabBarController?.selectedIndex = selectedTabBarIndex
+                        self.dismiss(animated: true, completion: nil)
+                        
                     })
                     
                 }else{
                     myAlert(vc, message: json["msg"].stringValue , handler : { action in
-                        self.tabBarController?.selectedIndex = selectedTabBarIndex
+//                        self.tabBarController?.selectedIndex = selectedTabBarIndex
+                        self.dismiss(animated: true, completion: nil)
                     })
                 }
             case .failure(let error):
