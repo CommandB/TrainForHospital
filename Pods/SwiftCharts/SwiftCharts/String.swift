@@ -20,9 +20,9 @@ extension String {
     
     subscript (r: Range<Int>) -> String {
         let start = index(startIndex, offsetBy: r.lowerBound)
-//        let end = <#T##String.CharacterView corresponding to `start`##String.CharacterView#>.index(start, offsetBy: r.upperBound - r.lowerBound)
         let end = index(start, offsetBy: r.upperBound - r.lowerBound)
-        return String(self[Range(start..<end)])
+        let subStr = self.suffix(from: start)
+        return String(subStr.prefix(upTo: end))
     }
 
     func size(_ font: UIFont) -> CGSize {

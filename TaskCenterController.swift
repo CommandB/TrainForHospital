@@ -11,7 +11,7 @@ import SwiftyJSON
 import AVFoundation
 import GTMRefresh
 
-class TaskCenterController: MyBaseUIViewController , AVCaptureMetadataOutputObjectsDelegate  {
+class TaskCenterController: MyBaseUIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var lbl_markLine: UILabel!
     
@@ -325,11 +325,39 @@ class TaskCenterController: MyBaseUIViewController , AVCaptureMetadataOutputObje
 //        let scannerView = getViewToStoryboard("scannerView") as! ScannerViewController
 //        scannerView.myClosure = myClosure
 //        present(scannerView, animated: true, completion: nil)
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        if LBXPermissions.isGetPhotoPermission() {
+            picker.sourceType = .camera
+            self.present(picker, animated: true, completion: nil)
+            
+        }else{
+            myAlert(self, message: "没有相机权限")
+        }
         
-        myPresentView(self, viewName: "scannerView")
         
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let photo = info[UIImagePickerControllerOriginalImage] as! UIImage
+//        let showImageBtn = UIButton()
+//        showImageBtn.frame = self.view.frame
+//        showImageBtn.setImage(photo, for: .normal)
+//        showImageBtn.addTarget(self, action: #selector(btn_showImageBtn_tui), for: .touchUpInside)
+//        self.view.addSubview(showImageBtn)
+        //print("照片返回了...")
+        dismiss(animated: true, completion: {
+            let vc = getViewToStoryboard("scannerView") as! ScannerViewController
+            vc.uploadPhoto = photo
+            self.present(vc, animated: true, completion: nil)
+        })
+        
+    }
+    
+    func btn_showImageBtn_tui(sender: UIButton){
+        self.dismiss(animated: true, completion: nil)
+    }
     
     //获取未完成的任务
     func getUndoneCollectionDatasource(){
