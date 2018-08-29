@@ -191,12 +191,14 @@ class ScannerViewController: MyBaseUIViewController , AVCaptureMetadataOutputObj
                     })
                     
                 }else{
+                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
                     myAlert(vc, message: json["msg"].stringValue , handler : { action in
 //                        self.tabBarController?.selectedIndex = selectedTabBarIndex
                         self.dismiss(animated: true, completion: nil)
                     })
                 }
             case .failure(let error):
+                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
                 print(error)
             }
             

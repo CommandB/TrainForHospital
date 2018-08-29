@@ -315,22 +315,19 @@ class TaskCenterController: MyBaseUIViewController, UIImagePickerControllerDeleg
     //扫一扫
     @IBAction func btn_scanner_inside(_ sender: UIButton) {
         
-//        let vc = QQScanViewController();
-//        var style = LBXScanViewStyle()
-//        style.animationImage = UIImage(named: "CodeScan.bundle/qrcode_scan_light_green")
-//        vc.scanStyle = style
-//        vc.initResultClosure(myClosure)
-//        present(vc, animated: true, completion: nil)
-        
-//        let scannerView = getViewToStoryboard("scannerView") as! ScannerViewController
-//        scannerView.myClosure = myClosure
-//        present(scannerView, animated: true, completion: nil)
         let picker = UIImagePickerController()
         picker.delegate = self
         if LBXPermissions.isGetPhotoPermission() {
-            picker.sourceType = .camera
-            self.present(picker, animated: true, completion: nil)
-            
+            let takePhoto = UserDefaults.standard.string(forKey: AppConfiguration.signInTakePhoto.rawValue)
+            if takePhoto == "0"{
+                //不需要照片则直接打开扫码界面
+                let vc = getViewToStoryboard("scannerView") as! ScannerViewController
+                self.present(vc, animated: true, completion: nil)
+            }else{
+                //先拍照在扫码
+                picker.sourceType = .camera
+                self.present(picker, animated: true, completion: nil)
+            }
         }else{
             myAlert(self, message: "没有相机权限")
         }

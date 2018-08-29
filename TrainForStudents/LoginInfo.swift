@@ -19,5 +19,6 @@ enum LoginInfo :String {
     case token = "token"
     case officeId = "officeId"
     case officeName = "officeName"
+    case role = "role"
     
 }

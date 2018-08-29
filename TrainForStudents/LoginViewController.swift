@@ -226,12 +226,42 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                         case .success(let result):
                             
                             let json = JSON(result)
+                            print(json)
                             if json["code"].stringValue == "1"{
+                                //缓存科室信息
                                 let data = json["data"].arrayValue[0]
                                 UserDefaults.standard.set(data["officeid"].stringValue, forKey:
                                     LoginInfo.officeId.rawValue)
                                 UserDefaults.standard.set(data["officename"].stringValue, forKey:
                                     LoginInfo.officeName.rawValue)
+                                
+                                //缓存app配置信息
+                                let appConfig = json["appconfig"].arrayValue
+                                for config in appConfig{
+                                    let name = config["name"].stringValue
+                                    let val = config["value"].stringValue
+                                    if  name == AppConfiguration.teacherCreateNoticeText.rawValue{
+                                        UserDefaults.standard.set(val, forKey: AppConfiguration.teacherCreateNotice.rawValue)
+                                    }else if name == AppConfiguration.signInTakePhotoText.rawValue{
+                                        UserDefaults.standard.set(val, forKey: AppConfiguration.signInTakePhoto.rawValue)
+                                    }
+                                }
+                                
+                                //缓存角色信息
+                                let role = json["role"].arrayValue
+                                var roleDic = [String:Bool]()
+                                if role.count > 0{
+                                    let r = role[0]
+                                    for item in r{
+                                        if "0" == item.1{
+                                            roleDic[item.0] = false
+                                        }else{
+                                            roleDic[item.0] = true
+                                        }
+                                    }
+                                }
+                                UserDefaults.standard.set(roleDic, forKey: LoginInfo.role.rawValue)
+                                
                             }else{
                                 myAlert(self, message: json["msg"].stringValue)
                             }
