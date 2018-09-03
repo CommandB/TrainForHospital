@@ -247,7 +247,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                     }
                                 }
                                 
-                                //缓存角色信息
+                                //解析角色信息并缓存
                                 let role = json["role"].arrayValue
                                 var roleDic = [String:Bool]()
                                 if role.count > 0{
@@ -261,6 +261,9 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                     }
                                 }
                                 UserDefaults.standard.set(roleDic, forKey: LoginInfo.role.rawValue)
+                                
+                                //缓存web模块 (这里存不了json数组 所以存string 后面自己转一下)
+                                UserDefaults.standard.set(json["webmodule"].description, forKey: AppConfiguration.webModule.rawValue)
                                 
                             }else{
                                 myAlert(self, message: json["msg"].stringValue)

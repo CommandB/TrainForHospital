@@ -87,6 +87,24 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
             
             break
         case 1:
+            
+            let webModule = UserDefaults.standard.string(forKey: AppConfiguration.webModule.rawValue)
+            if webModule != nil{
+                let json = JSON.init(parseJSON: webModule!).arrayValue
+                var index = 1
+                for item in json{
+                    let img = cell.viewWithTag(60000+index)
+                    let btn = cell.viewWithTag(50000+index) as! UIButton
+                    btn.setTitle(item["modulename"].stringValue, for: .normal)
+                    btn.addTarget(self, action: #selector(openWebView), for: .touchUpInside)
+                    index += 1
+                    btn.isHidden = false
+                    img?.isHidden = false
+                }
+            }
+            
+            break
+        case 2:
             var lbl = cell.viewWithTag(10001) as! UILabel
             lbl.text = json["teachername"].stringValue
             lbl = cell.viewWithTag(10002) as! UILabel
@@ -98,18 +116,18 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
             lbl = cell.viewWithTag(30001) as! UILabel
             lbl.text = json["officename"].stringValue
             break
-        case 2:
+        case 3:
             let lbl = cell.viewWithTag(10001) as! UILabel
             lbl.text = json["unworkdays"].stringValue
             break
-        case 3:
+        case 4:
             parentView?.showImageView.isHidden = true
             break
-        case 4:
+        case 5:
             let lbl = cell.viewWithTag(10001) as! UILabel
             lbl.text = "\(json["evaluation_okratename"].doubleValue)%"
             break
-        case 5:
+        case 6:
             
             break
         default:
@@ -157,15 +175,18 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
             height = 225
             break
         case 1:
-            height = 125
+            height = 120
             break
         case 2:
-            height = 85
+            height = 125
             break
         case 3:
             height = 85
             break
         case 4:
+            height = 85
+            break
+        case 5:
             height = 85
             break
 //        case 5:
@@ -264,5 +285,17 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
     }
     
     
+    func openWebView(sender: UIButton){
+        let webModule = UserDefaults.standard.string(forKey: AppConfiguration.webModule.rawValue)
+        let json = JSON.init(parseJSON: webModule!).arrayValue
+        let index = sender.tag - 50001
+        var url = json[index]["moduleurl"].stringValue
+        url.removeSubrange(url.startIndex...url.index(url.startIndex, offsetBy: 13))
+        url = SERVER_PORT + url + "?token=" + UserDefaults.standard.string(forKey: LoginInfo.token.rawValue)!
+        let vc = getViewToStoryboard("webView") as! WebViewController
+        vc.webUrl = url
+        vc.viewTitlte = json[index]["modulename"].stringValue
+        parentView?.present(vc, animated: true, completion: nil)
+    }
     
 }

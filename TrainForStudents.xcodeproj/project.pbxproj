@@ -180,6 +180,7 @@
 		0AC3BCAD1EE97F2400227194 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC3BCAC1EE97F2400227194 /* SearchViewController.swift */; };
 		0AC3BCAF1EE9B56E00227194 /* VideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC3BCAE1EE9B56E00227194 /* VideoController.swift */; };
 		0AC49F621F347D290028A65C /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC49F611F347D290028A65C /* UIImage.swift */; };
+		0AD004AE213D27D1008D3062 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD004AD213D27D1008D3062 /* WebViewController.swift */; };
 		0AEBF3C21F207EB200520E27 /* 结业.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBF3BF1F207EB200520E27 /* 结业.png */; };
 		0AEBF3C31F207EB200520E27 /* 年度.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBF3C01F207EB200520E27 /* 年度.png */; };
 		0AEBF3C51F20804700520E27 /* 出科.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBF3C41F20804700520E27 /* 出科.png */; };
@@ -852,6 +853,7 @@
 		0AC3BCAC1EE97F2400227194 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0AC3BCAE1EE9B56E00227194 /* VideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoController.swift; sourceTree = "<group>"; };
 		0AC49F611F347D290028A65C /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		0AD004AD213D27D1008D3062 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0AD65A1420108C650069DDC0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0AD65A1620108E720069DDC0 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		0AEBF3BF1F207EB200520E27 /* 结业.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "结业.png"; sourceTree = "<group>"; };
@@ -1983,6 +1985,7 @@
 				0AC3BC641EE94C9C00227194 /* Utils */,
 				0AC3B98A1EE5868E00227194 /* Resource */,
 				B4FF1A601F94DF7D009C6685 /* Venders */,
+				0AD004AD213D27D1008D3062 /* WebViewController.swift */,
 				0AC3B9971EE6A60700227194 /* LoginViewController.swift */,
 				0AC3B9321EE4730B00227194 /* AppDelegate.swift */,
 				0A210FE020B44C1E006BC5C9 /* WebViewTestController.swift */,
@@ -2815,6 +2818,7 @@
 				0AC3B9821EE53F5900227194 /* UIScreen.swift in Sources */,
 				0A125A881F2204B300FDD4F4 /* BMPlayerCustomControlView.swift in Sources */,
 				0A6A23B01EF23A6E00A1AC5B /* RadioCollectionView.swift in Sources */,
+				0AD004AE213D27D1008D3062 /* WebViewController.swift in Sources */,
 				0A644D651F00F09F009025DD /* WaitEvanluationTaskCollectionView.swift in Sources */,
 				0AC3B9511EE5343A00227194 /* TurnCenterCollectionView.swift in Sources */,
 				0A42F81B1F14C13B001DF281 /* LoginInfo.swift in Sources */,

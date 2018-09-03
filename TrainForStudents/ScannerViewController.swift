@@ -167,28 +167,36 @@ class ScannerViewController: MyBaseUIViewController , AVCaptureMetadataOutputObj
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
                     let signMsg = json["msg"].stringValue
-                    let taskId = json["data"]["taskid"].stringValue
-                    let imgDir = ["file":self.uploadPhoto]
-                    let uplaodImageUrl = SERVER_PORT+"rest/taskSignResult/UploadSignImg.do"
-                    uploadImage(uplaodImageUrl, images: imgDir, parameters: ["taskid":taskId], completionHandler: {resp in
-                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-                        switch resp.result{
-                        case .success(let responseJson):
-                            
-                            let json = JSON(responseJson)
-                            if json["code"].stringValue == "1"{
-                                myAlert(vc, title: "签到", message: signMsg, handler: { action in
-                                    self.dismiss(animated: true, completion: nil)
-                                })
+                    //不需要上传照片则直接关闭view
+                    let takePhoto = UserDefaults.standard.string(forKey: AppConfiguration.signInTakePhoto.rawValue)
+                    if takePhoto == "0"{
+                        myAlert(vc, title: "签到", message: signMsg, handler: { action in
+                            self.dismiss(animated: true, completion: nil)
+                        })
+                    }else{
+                        //上传照片
+                        let taskId = json["data"]["taskid"].stringValue
+                        let imgDir = ["file":self.uploadPhoto]
+                        let uplaodImageUrl = SERVER_PORT+"rest/taskSignResult/UploadSignImg.do"
+                        uploadImage(uplaodImageUrl, images: imgDir, parameters: ["taskid":taskId], completionHandler: {resp in
+                            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                            switch resp.result{
+                            case .success(let responseJson):
                                 
-                            }else{
-                                myAlert(self, message: "签到失败!\(json["msg"].stringValue)")
+                                let json = JSON(responseJson)
+                                if json["code"].stringValue == "1"{
+                                    myAlert(vc, title: "签到", message: signMsg, handler: { action in
+                                        self.dismiss(animated: true, completion: nil)
+                                    })
+                                }else{
+                                    myAlert(self, message: "签到失败!\(json["msg"].stringValue)")
+                                }
+                            case .failure(let error):
+                                print(error)
                             }
-                        case .failure(let error):
-                            print(error)
-                        }
-                        
-                    })
+                            
+                        })
+                    }
                     
                 }else{
                     MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
