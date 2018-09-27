@@ -175,7 +175,8 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
             height = 225
             break
         case 1:
-            height = 120
+            //height = 120
+            height = 0
             break
         case 2:
             height = 125

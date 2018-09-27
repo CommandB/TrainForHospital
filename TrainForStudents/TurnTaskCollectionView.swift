@@ -121,7 +121,14 @@ class TurnTaskCollectionView : UIViewController,  UICollectionViewDelegate , UIC
                 let btn = cell.viewWithTag(10002) as! UIButton
                 btn.setTitleColor(UIColor.white, for: .normal)
                 btn.setTitle(json["mountcount"].stringValue, for: .normal)
-                btn.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: 500)
+                if #available(iOS 8.2, *) {
+                    btn.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: 500)
+                } else {
+                    let font = UIFont()
+                    font.withSize(13)
+                    btn.titleLabel?.font = font
+                    // Fallback on earlier versions
+                }
                 btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 13, bottom: 15, right: 0)
             }
             

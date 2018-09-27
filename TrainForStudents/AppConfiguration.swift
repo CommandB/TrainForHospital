@@ -20,4 +20,7 @@ enum AppConfiguration :String {
     ///web模块配置
     case webModule = "webModeule"
     
+    ///投诉模块标题
+    case complaintTitle = "complaintTitle"
+    
 }
