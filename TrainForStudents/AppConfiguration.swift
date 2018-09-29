@@ -21,6 +21,8 @@ enum AppConfiguration :String {
     case webModule = "webModeule"
     
     ///投诉模块标题
+    case complaintTitleText = "投诉功能名称"
     case complaintTitle = "complaintTitle"
+    
     
 }

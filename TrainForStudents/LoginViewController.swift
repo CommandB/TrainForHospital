@@ -226,7 +226,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                         case .success(let result):
                             
                             let json = JSON(result)
-                            print(json)
+                            //print(json)
                             if json["code"].stringValue == "1"{
                                 //缓存科室信息
                                 let data = json["data"].arrayValue[0]
@@ -244,6 +244,9 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                         UserDefaults.standard.set(val, forKey: AppConfiguration.teacherCreateNotice.rawValue)
                                     }else if name == AppConfiguration.signInTakePhotoText.rawValue{
                                         UserDefaults.standard.set(val, forKey: AppConfiguration.signInTakePhoto.rawValue)
+                                    }else if name == AppConfiguration.complaintTitleText.rawValue{
+                                        //缓存投诉功能模块名称
+                                        UserDefaults.standard.set(val, forKey: AppConfiguration.complaintTitle.rawValue)
                                     }
                                 }
                                 
@@ -264,6 +267,8 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                 
                                 //缓存web模块 (这里存不了json数组 所以存string 后面自己转一下)
                                 UserDefaults.standard.set(json["webmodule"].description, forKey: AppConfiguration.webModule.rawValue)
+                                
+                                
                                 
                             }else{
                                 myAlert(self, message: json["msg"].stringValue)

@@ -143,6 +143,10 @@
 		0A90EFB11EFA20B400B4CC7A /* CheckboxCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90EFB01EFA20B400B4CC7A /* CheckboxCollectionView.swift */; };
 		0A91142F201D60D2001A1936 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91142E201D60D2001A1936 /* UserDefaults.swift */; };
 		0A9605D2208F0AE400A1ABB4 /* LiveMessageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9605D1208F0AE400A1ABB4 /* LiveMessageCollectionView.swift */; };
+		0AB31E4A215CAC81002E3F32 /* ComplaintListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB31E49215CAC81002E3F32 /* ComplaintListController.swift */; };
+		0AB31E55215CAD39002E3F32 /* ComplaintListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB31E54215CAD39002E3F32 /* ComplaintListCollectionView.swift */; };
+		0AB31E57215CD14D002E3F32 /* ComplaintReplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB31E56215CD14D002E3F32 /* ComplaintReplyController.swift */; };
+		0AB31E59215CD1DC002E3F32 /* ComplaintReplyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB31E58215CD1DC002E3F32 /* ComplaintReplyCollection.swift */; };
 		0AB5AAA12105D50900A9E2EC /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5AAA02105D50900A9E2EC /* HomeController.swift */; };
 		0AB5AAA52105DD6F00A9E2EC /* HomeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5AAA42105DD6F00A9E2EC /* HomeCollectionView.swift */; };
 		0AC3B9331EE4730B00227194 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC3B9321EE4730B00227194 /* AppDelegate.swift */; };
@@ -814,6 +818,10 @@
 		0A90EFB01EFA20B400B4CC7A /* CheckboxCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxCollectionView.swift; sourceTree = "<group>"; };
 		0A91142E201D60D2001A1936 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		0A9605D1208F0AE400A1ABB4 /* LiveMessageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMessageCollectionView.swift; sourceTree = "<group>"; };
+		0AB31E49215CAC81002E3F32 /* ComplaintListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplaintListController.swift; sourceTree = "<group>"; };
+		0AB31E54215CAD39002E3F32 /* ComplaintListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplaintListCollectionView.swift; sourceTree = "<group>"; };
+		0AB31E56215CD14D002E3F32 /* ComplaintReplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplaintReplyController.swift; sourceTree = "<group>"; };
+		0AB31E58215CD1DC002E3F32 /* ComplaintReplyCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplaintReplyCollection.swift; sourceTree = "<group>"; };
 		0AB5AAA02105D50900A9E2EC /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		0AB5AAA42105DD6F00A9E2EC /* HomeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionView.swift; sourceTree = "<group>"; };
 		0AC3B92F1EE4730B00227194 /* TrainForStudents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainForStudents.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1870,6 +1878,8 @@
 				0A0C570C1F4D70AE008551D3 /* ChangePersonInfoController.swift */,
 				0A667BC82084B14800594BE7 /* LiveController.swift */,
 				0A667BCA2085CF4E00594BE7 /* LiveLIstController.swift */,
+				0AB31E49215CAC81002E3F32 /* ComplaintListController.swift */,
+				0AB31E56215CD14D002E3F32 /* ComplaintReplyController.swift */,
 			);
 			name = Myself;
 			sourceTree = "<group>";
@@ -1890,6 +1900,8 @@
 				0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */,
 				0A667BD62087C09600594BE7 /* LiveMessageTableView.swift */,
 				0A9605D1208F0AE400A1ABB4 /* LiveMessageCollectionView.swift */,
+				0AB31E54215CAD39002E3F32 /* ComplaintListCollectionView.swift */,
+				0AB31E58215CD1DC002E3F32 /* ComplaintReplyCollection.swift */,
 			);
 			name = Collection;
 			sourceTree = "<group>";
@@ -2726,6 +2738,7 @@
 				0AFE94241F209874009C4CDF /* MyCollectionBaseFooter.swift in Sources */,
 				0A291B681F429AA5008784B5 /* TaskApplyDetailController.swift in Sources */,
 				B468B7C31FCA9BA000ECF396 /* MJRefreshBackGifFooter.m in Sources */,
+				0AB31E55215CAD39002E3F32 /* ComplaintListCollectionView.swift in Sources */,
 				0A210FE120B44C1F006BC5C9 /* WebViewTestController.swift in Sources */,
 				0A6A23AA1EEE8FCD00A1AC5B /* ExamViewController.swift in Sources */,
 				0AC3BCAF1EE9B56E00227194 /* VideoController.swift in Sources */,
@@ -2745,6 +2758,7 @@
 				0AB5AAA52105DD6F00A9E2EC /* HomeCollectionView.swift in Sources */,
 				0AFE94281F209D46009C4CDF /* MyBaseCollectionView.swift in Sources */,
 				0A644D731F017C06009025DD /* HistoryEvaluationCollectionView.swift in Sources */,
+				0AB31E4A215CAC81002E3F32 /* ComplaintListController.swift in Sources */,
 				0AC3BB021EE9499000227194 /* extension.swift in Sources */,
 				0A15D5281F0E51F200908B7F /* MeterialListController.swift in Sources */,
 				0A44131D1EEAC64F00BAB679 /* BMCustomPlayer.swift in Sources */,
@@ -2754,6 +2768,7 @@
 				B44FFFD9211C6BBD00844C07 /* OfficePeopleViewController.swift in Sources */,
 				0A6A23B51EF28E9900A1AC5B /* ShortAnswerCollectionView.swift in Sources */,
 				0A644D991F062560009025DD /* MyEvaluationListCollectionView.swift in Sources */,
+				0AB31E57215CD14D002E3F32 /* ComplaintReplyController.swift in Sources */,
 				B4FF1A861F94DF7D009C6685 /* NSImage+WebCache.m in Sources */,
 				0A15D52A1F0E5F6100908B7F /* MeterialListCollectionView.swift in Sources */,
 				B475D8761F9C4B5F00A72543 /* MBProgressHUD+MJ.m in Sources */,
@@ -2852,6 +2867,7 @@
 				0A644DA11F078D9A009025DD /* DifficultListController.swift in Sources */,
 				0A90EFB11EFA20B400B4CC7A /* CheckboxCollectionView.swift in Sources */,
 				0A15D5111F0BA78700908B7F /* MyNotificationUtil.swift in Sources */,
+				0AB31E59215CD1DC002E3F32 /* ComplaintReplyCollection.swift in Sources */,
 				0AC3BCA01EE94DA300227194 /* LBXScanNetAnimation.swift in Sources */,
 				0A125A901F29D1FF00FDD4F4 /* ChangePasswordController.swift in Sources */,
 				B4FF1A891F94DF7D009C6685 /* SDWebImageCompat.m in Sources */,

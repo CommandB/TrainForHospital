@@ -28,27 +28,13 @@ extension String {
         return hexBytes.joined()
     }
     
+    func substring(to : Int) -> String {
+        return self.substring(to: self.index(self.startIndex, offsetBy: to))
+    }
     
-    
-    
-//    func substring(s: Int, _ e: Int?) -> String {
-//        let start = s >= 0 ? self.startIndex : self.endIndex
-//        let startIndex = start.advancedBy(s)
-//        
-//        var end: String.Index
-//        var endIndex: String.Index
-//        if(e == nil){
-//            end = self.endIndex
-//            endIndex = self.endIndex
-//        } else {
-//            end = e >= 0 ? self.startIndex : self.endIndex
-//            endIndex = end.advancedBy(e!)
-//        }
-//        
-//        let range = Range<String.Index>(startIndex..<endIndex)
-//        return self.substringWithRange(range)
-//        
-//    }
+    func substring(from : Int) -> String {
+        return self.substring(from: self.index(self.startIndex, offsetBy: from))
+    }
     
     static func className(aClass: AnyClass) -> String {
         return NSStringFromClass(aClass).components(separatedBy: ".").last!
