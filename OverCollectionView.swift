@@ -45,7 +45,7 @@ class OverCollectionView: MyBaseCollectionView{
         }else{
             lbl = cell.viewWithTag(10003) as! UILabel
         }
-        
+        //print(json["tasktypeshort"].stringValue)
         lbl.text = json["tasktypeshort"].stringValue
         lbl.textColor = UIColor.white
         lbl.font = UIFont.systemFont(ofSize: 12)

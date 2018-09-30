@@ -34,6 +34,8 @@ class ComplaintReplyController : MyBaseUIViewController{
         let btn_submit = view.viewWithTag(30002) as! UIButton
         btn_submit.addTarget(self, action: #selector(submit), for: .touchUpInside)
         
+        MyNotificationUtil.addKeyBoardWillChangeNotification(self)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

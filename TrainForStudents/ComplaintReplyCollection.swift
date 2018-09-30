@@ -15,12 +15,20 @@ class ComplaintReplyCollection : MyBaseCollectionView{
     var parentView : ComplaintReplyController? = nil
     let lineHeight = 18
     
+    //设置每个分区元素的个数
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        
+        return jsonDataSource.count + 1
+        
+    }
+    
     //实现UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         if showNoDataCell{
             return collectionView.dequeueReusableCell(withReuseIdentifier: MyNoDataCellView.identifier, for: indexPath)
         }
+        //print(indexPath)
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
             return cell

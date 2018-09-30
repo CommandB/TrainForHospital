@@ -85,7 +85,7 @@ class ComplaintListController : MyBaseUIViewController{
                     let arrayData = json["data"].arrayValue
                     //判断是否在最后一页
                     if(arrayData.count>0){
-                        self.complaintView.jsonDataSource += json["data"].arrayValue
+                        self.complaintView.jsonDataSource = json["data"].arrayValue
                     }else{
                         self.complaintView.isLastPage = true
                         self.complaintCollection.mj_footer.endRefreshingWithNoMoreData()

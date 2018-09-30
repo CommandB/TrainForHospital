@@ -28,10 +28,7 @@ class TaskDetailController : MyBaseUIViewController{
         
         var lbl = view.viewWithTag(80001)
         self.c.frame = (lbl?.frame)!
-//        self.c.backgroundColor = UIColor.white
-//        self.c.progress = 2/2
-//        
-//        self.view.addSubview(self.c)
+
         btn_start.isHidden = true
         lbl = view.viewWithTag(80002)
         lbl?.layer.cornerRadius = 4
@@ -44,7 +41,6 @@ class TaskDetailController : MyBaseUIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         
         var lbl = view.viewWithTag(10001) as! UILabel
         lbl.text = headDataJson["title"].stringValue

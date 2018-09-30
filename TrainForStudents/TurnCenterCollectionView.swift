@@ -135,9 +135,6 @@ class TurnCenterCollectionView : UIViewController,  UICollectionViewDelegate , U
         case UICollectionElementKindSectionHeader:
             let header:HeaderReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath as IndexPath) as! HeaderReusableView
             
-            //let json = jsonDataSource[indexPath.section]
-            
-            //header.headerLb!.text = json["group_title"].stringValue
             return header
         default:
             return HeaderReusableView()
@@ -176,7 +173,7 @@ class TurnCenterCollectionView : UIViewController,  UICollectionViewDelegate , U
             
             let outLineName = json["outlinename"].stringValue
             let lineNum = outLineName.getLineNumberForWidth(width: outLineContentWidth, cFont: outLineContentFont)
-            print("这个高度是:\(CGFloat(20 * lineNum + 25))")
+            //print("这个高度是:\(CGFloat(20 * lineNum + 25))")
             return CGSize(width: UIScreen.width, height: outLineContentHeight.multiplied(by: CGFloat(lineNum)).adding(25))
             
         }else{  //任务的cell

@@ -22,6 +22,10 @@ class VideoController : MyBaseUIViewController {
     var taskId = ""
     var headData = JSON([:])
     
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
