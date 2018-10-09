@@ -41,5 +41,11 @@ class ComplaintListCollectionView : MyBaseCollectionView{
         
     }
     
+    //计算大小
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize.init(width: UIScreen.width , height: 75)
+    }
+    
     
 }

@@ -51,12 +51,12 @@ class ComplaintReplyController : MyBaseUIViewController{
         contentLbl.frame.size = CGSize(width: contentLbl.frame.size.width, height: CGFloat(lineHeight * tn))
         
         let f = contentLbl.frame
-        let dateLbl = UILabel(frame: CGRect(x: f.origin.x, y: f.origin.y.adding(f.size.height).adding(10), width: f.size.width, height: 20))
+        let dateLbl = view.viewWithTag(10002) as! UILabel
+        dateLbl.frame = CGRect(x: f.origin.x, y: f.origin.y.adding(f.size.height).adding(10), width: f.size.width, height: 20)
         dateLbl.text = data["makingtime"].stringValue.substring(to: 16)
         dateLbl.textColor = UIColor.gray
         dateLbl.font = UIFont.systemFont(ofSize: 13)
         dateLbl.textAlignment = .right
-        view.addSubview(dateLbl)
         
         
         //计算collection的y轴
@@ -68,6 +68,13 @@ class ComplaintReplyController : MyBaseUIViewController{
         
         replyCollection.reloadData()
         
+        (view.viewWithTag(30001) as! UITextField).delegate = self
+        
+    }
+    
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hiddenKeyBoard()
+        return true
     }
     
     //返回按钮

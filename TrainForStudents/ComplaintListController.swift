@@ -69,16 +69,13 @@ class ComplaintListController : MyBaseUIViewController{
     //获取数据
     func getListData(){
         
-        if complaintView.isLastPage{
-            return
-        }
         let url = SERVER_PORT+"rest/proposalchannel/getGjwhisper.do"
         myPostRequest(url).responseJSON(completionHandler: {resp in
             
+            self.complaintCollection.mj_header.endRefreshing()
+            self.complaintCollection.mj_footer.endRefreshing()
             switch resp.result{
             case .success(let responseJson):
-                self.complaintCollection.mj_header.endRefreshing()
-                self.complaintCollection.mj_footer.endRefreshing()
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
                     
@@ -87,7 +84,6 @@ class ComplaintListController : MyBaseUIViewController{
                     if(arrayData.count>0){
                         self.complaintView.jsonDataSource = json["data"].arrayValue
                     }else{
-                        self.complaintView.isLastPage = true
                         self.complaintCollection.mj_footer.endRefreshingWithNoMoreData()
                     }
                     self.complaintCollection.reloadData()

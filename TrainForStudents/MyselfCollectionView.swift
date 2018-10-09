@@ -47,6 +47,8 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
             lbl.text = json["grade_show"].stringValue
             lbl = cell.viewWithTag(20001) as! UILabel
             lbl.text = json["phoneno"].stringValue
+            lbl = cell.viewWithTag(20002) as! UILabel
+            lbl.text = json["sex"].intValue == 1 ? "男":"女"
             lbl = cell.viewWithTag(30001) as! UILabel
             lbl.text = json["subjectname"].stringValue
             lbl = cell.viewWithTag(30002) as! UILabel
@@ -204,10 +206,10 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
-        case 3:
+        case 4:
             //我的二维码
             parentView?.showImageView.isHidden = false
-        case 4:
+        case 5:
             //评价
             myPresentView(parentView!, viewName: "myEvaluationListView")
         default:
