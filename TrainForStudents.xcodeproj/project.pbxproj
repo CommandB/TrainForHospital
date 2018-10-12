@@ -55,6 +55,9 @@
 		0A291B661F4202B3008784B5 /* DifficultAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A291B651F4202B3008784B5 /* DifficultAddController.swift */; };
 		0A291B681F429AA5008784B5 /* TaskApplyDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A291B671F429AA5008784B5 /* TaskApplyDetailController.swift */; };
 		0A291B6A1F429DDB008784B5 /* TaskApplyDetailImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A291B691F429DDB008784B5 /* TaskApplyDetailImageCollectionView.swift */; };
+		0A29CDC9216DA74800200650 /* QuestionnaireCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A29CDC8216DA74800200650 /* QuestionnaireCollectionView.swift */; };
+		0A29CDD4216DE1A200200650 /* QuestionnaireController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A29CDD3216DE1A200200650 /* QuestionnaireController.swift */; };
+		0A29CDD7216DE6A100200650 /* QuestionDetailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A29CDD6216DE6A100200650 /* QuestionDetailCollectionView.swift */; };
 		0A42F81B1F14C13B001DF281 /* LoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42F81A1F14C13B001DF281 /* LoginInfo.swift */; };
 		0A42F81D1F15D706001DF281 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A42F81C1F15D706001DF281 /* location.png */; };
 		0A42F8211F160F1D001DF281 /* AssistantCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42F8201F160F1D001DF281 /* AssistantCollectionView.swift */; };
@@ -728,6 +731,9 @@
 		0A291B651F4202B3008784B5 /* DifficultAddController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifficultAddController.swift; sourceTree = "<group>"; };
 		0A291B671F429AA5008784B5 /* TaskApplyDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskApplyDetailController.swift; sourceTree = "<group>"; };
 		0A291B691F429DDB008784B5 /* TaskApplyDetailImageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskApplyDetailImageCollectionView.swift; sourceTree = "<group>"; };
+		0A29CDC8216DA74800200650 /* QuestionnaireCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireCollectionView.swift; sourceTree = "<group>"; };
+		0A29CDD3216DE1A200200650 /* QuestionnaireController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireController.swift; sourceTree = "<group>"; };
+		0A29CDD6216DE6A100200650 /* QuestionDetailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailCollectionView.swift; sourceTree = "<group>"; };
 		0A42F81A1F14C13B001DF281 /* LoginInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInfo.swift; sourceTree = "<group>"; };
 		0A42F81C1F15D706001DF281 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		0A42F8201F160F1D001DF281 /* AssistantCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistantCollectionView.swift; sourceTree = "<group>"; };
@@ -1841,6 +1847,7 @@
 				0A644D701F017B08009025DD /* HistoryEvaluationController.swift */,
 				0A644D761F018F3E009025DD /* MockExamCenterController.swift */,
 				0A644D841F021388009025DD /* EvaluationDetailController.swift */,
+				0A29CDD3216DE1A200200650 /* QuestionnaireController.swift */,
 			);
 			name = Evaluation;
 			sourceTree = "<group>";
@@ -1850,6 +1857,8 @@
 			children = (
 				0A644D621F00D3BC009025DD /* WaitExamTaskCollectionView.swift */,
 				0A644D641F00F09F009025DD /* WaitEvanluationTaskCollectionView.swift */,
+				0A29CDC8216DA74800200650 /* QuestionnaireCollectionView.swift */,
+				0A29CDD6216DE6A100200650 /* QuestionDetailCollectionView.swift */,
 				0A644D721F017C06009025DD /* HistoryEvaluationCollectionView.swift */,
 				0A644D741F0189D0009025DD /* HistoryExamCollectionView.swift */,
 				0A644D861F021634009025DD /* EvaluationDetailCollectionView.swift */,
@@ -2793,6 +2802,7 @@
 				0AFE94261F209C3F009C4CDF /* MyNoDataCellView.swift in Sources */,
 				0A42F8311F1D2C07001DF281 /* AnwsersItem.swift in Sources */,
 				0A42F82B1F1C9520001DF281 /* TaskApplyImageCollectionView.swift in Sources */,
+				0A29CDD4216DE1A200200650 /* QuestionnaireController.swift in Sources */,
 				0AC3B9471EE4732700227194 /* CircleDataView.swift in Sources */,
 				0A667BCB2085CF4E00594BE7 /* LiveLIstController.swift in Sources */,
 				0AC3B9811EE53F5900227194 /* String.swift in Sources */,
@@ -2816,6 +2826,7 @@
 				B4FF1A8C1F94DF7D009C6685 /* SDWebImageDownloaderOperation.m in Sources */,
 				B468B7BF1FCA9BA000ECF396 /* MJRefreshHeader.m in Sources */,
 				0A15FB5B21366EEE008DC7E0 /* AppConfiguration.swift in Sources */,
+				0A29CDC9216DA74800200650 /* QuestionnaireCollectionView.swift in Sources */,
 				B4FF1A8F1F94DF7D009C6685 /* UIButton+WebCache.m in Sources */,
 				B4847FB01F9E13DC00307D6F /* AssistantController.swift in Sources */,
 				B4FF1A8E1F94DF7D009C6685 /* SDWebImagePrefetcher.m in Sources */,
@@ -2863,6 +2874,7 @@
 				0A6A23B21EF2690C00A1AC5B /* RecordsCollectionView.swift in Sources */,
 				0A42F8231F179EDA001DF281 /* DateUtil.swift in Sources */,
 				0A644D631F00D3BC009025DD /* WaitExamTaskCollectionView.swift in Sources */,
+				0A29CDD7216DE6A100200650 /* QuestionDetailCollectionView.swift in Sources */,
 				0AC3B9351EE4730B00227194 /* TurnCenterController.swift in Sources */,
 				0A644DA11F078D9A009025DD /* DifficultListController.swift in Sources */,
 				0A90EFB11EFA20B400B4CC7A /* CheckboxCollectionView.swift in Sources */,

@@ -109,12 +109,12 @@ class ComplaintListController : MyBaseUIViewController{
     
     func btn_submit_inside(){
         
-        let text = (addView.viewWithTag(10001) as! UITextView).text
-        
+        let text = (addView.viewWithTag(10001) as! UITextView).text.trimmingCharacters(in: .whitespacesAndNewlines)
         if text == "" {
             myAlert(self, message: "悄悄话内容不能为空!")
             return
         }
+        
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT+"rest/proposalchannel/addproposal.do"
         myPostRequest(url,["making":text]).responseJSON(completionHandler: {resp in

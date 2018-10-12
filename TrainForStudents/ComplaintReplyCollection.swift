@@ -13,7 +13,7 @@ import SwiftyJSON
 class ComplaintReplyCollection : MyBaseCollectionView{
     
     var parentView : ComplaintReplyController? = nil
-    let lineHeight = 18
+    let lineHeight = 17
     
     //设置每个分区元素的个数
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
@@ -38,10 +38,14 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         
         let contentLbl = cell.viewWithTag(10001) as! UILabel
         let text = json["reply"].stringValue
-        let tn = text.getLineNumberForUILabel(contentLbl)
+        let tn = text.getLineNumberForWidth(width: contentLbl.frame.width.subtracting(10), cFont: contentLbl.font)
         contentLbl.numberOfLines = 0
         contentLbl.text = text
-        contentLbl.frame.size = CGSize(width: contentLbl.frame.size.width, height: CGFloat(lineHeight * tn))
+        var lblHeight = lineHeight * tn
+        if lblHeight < 30{
+            lblHeight = 30
+        }
+        contentLbl.frame.size = CGSize(width: contentLbl.frame.size.width, height: CGFloat(lblHeight))
         
         //先删除20001 不然会重影
         let v = cell.viewWithTag(20001)
@@ -51,8 +55,7 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         
         let f = contentLbl.frame
         let dateLbl = UILabel(frame: CGRect(x: f.origin.x, y: f.origin.y.adding(f.size.height).adding(5), width: cell.frame.width.subtracting(75), height: 20))
-        let rt = json["replytime"].stringValue
-        dateLbl.text = rt.substring(to: rt.index(rt.startIndex, offsetBy: 16))
+        dateLbl.text = json["replytime1"].stringValue
         dateLbl.textColor = UIColor.gray
         dateLbl.font = UIFont.systemFont(ofSize: 13)
         dateLbl.textAlignment = .right
@@ -72,16 +75,27 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         if indexPath.item == 0{
             return CGSize.init(width: UIScreen.width , height: 30)
         }
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
+        let lbl = cell.viewWithTag(10001) as! UILabel
         let json = jsonDataSource[indexPath.item - 1]
         let str = json["reply"].stringValue
         
         //计算多行label的高度
-        let lineNumber = str.getLineNumberForWidth(width: UIScreen.width - 90)
+        let lineNumber = str.getLineNumberForWidth(width: lbl.frame.width.subtracting(10),cFont: lbl.font)
         let lblHeight = lineHeight * lineNumber
-        return CGSize.init(width: UIScreen.width - 10 , height: CGFloat(lblHeight + 40))
+        var cellHeight = lblHeight + 40
+        if cellHeight < 70{
+            cellHeight = 70
+        }
+        return CGSize.init(width: UIScreen.width - 10 , height: CGFloat(cellHeight))
         
         
+        
+    }
+    
+    //cell点击
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        parentView?.hiddenKeyBoard()
     }
 
 }

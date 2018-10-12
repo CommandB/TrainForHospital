@@ -45,7 +45,7 @@ class ExamViewController : MyBaseUIViewController{
     var isTheoryExam = false
     var passscore = "0"
     
-    //未完成 collection
+    //collection
     @IBOutlet weak var questionCollection: UICollectionView!
     
     var questionView = QuestionCollectionView()

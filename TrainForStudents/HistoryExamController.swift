@@ -56,7 +56,7 @@ class HistoryExamController: MyBaseUIViewController {
                     self.examView.jsonDataSource = json["data"].arrayValue
                     self.examCollection.reloadData()
                 }else{
-                    myAlert(self, message: "请求历史任务列表失败!")
+                    myAlert(self, message: "请求历史考试列表失败!")
                 }
                 
             case .failure(let error):

@@ -86,7 +86,7 @@ extension String {
     }
     
     func getLineNumberForUILabel(_ lbl : UILabel) -> Int{
-        return getLineNumberForWidth(width: lbl.frame.width, cFont: lbl.font)
+        return getLineNumberForWidth(width: lbl.frame.width.subtracting(5), cFont: lbl.font)
     }
     
 }

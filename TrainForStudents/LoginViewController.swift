@@ -171,8 +171,6 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                 print(error)
             }
             
-            
-            
         })
     }
     
@@ -208,9 +206,12 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                     let preLoginId = UserDefaults.standard.string(forKey: LoginInfo.loginId.rawValue)
                     if preLoginId != self.txt_loginId.text!{
                         let cacheAnswersDic = [String : [String : Dictionary<String, String>]]()
+                        //清除考试缓存
                         UserDefaults.Exam.set(value: cacheAnswersDic, forKey: .answerDic)
+                        //缓存登录人的信息
                         UserDefaults.standard.set(self.txt_loginId.text!, forKey:
                             LoginInfo.loginId.rawValue)
+                        UserDefaults.standard.set(json["personid"].stringValue, forKey: LoginInfo.personId.rawValue)
                     }
                     
                     //注册极光推送别名

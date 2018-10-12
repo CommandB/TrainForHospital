@@ -18,6 +18,8 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     
     @IBOutlet weak var evaluationCollection: UICollectionView!
     
+    @IBOutlet weak var questionnaireCollection: UICollectionView!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
 
@@ -35,8 +37,12 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     
     @IBOutlet weak var btn_evaluation: UIButton!
     
+    @IBOutlet weak var btn_questionnaire: UIButton!
+    
+    
     let examView = WaitExamTaskCollectionView()
     let evaluationView = WaitEvanluationTaskCollectionView()
+    let questionnaireView = QuestionnaireCollectionView()
     
     //按钮的集合
     var buttonGroup = [UIButton]()
@@ -91,6 +97,16 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         evaluationCollection.registerNoDataCellView()
         evaluationCollection.frame.origin = CGPoint(x: UIScreen.width, y: evaluationCollection.frame.origin.y)
         
+        //问卷
+        questionnaireView.parentView = self
+        questionnaireCollection.delegate = questionnaireView
+        questionnaireCollection.dataSource = questionnaireView
+        questionnaireCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: questionnaireView, refreshingAction: #selector(refresh))
+        questionnaireCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: questionnaireView, refreshingAction: #selector(loadMore))
+        questionnaireCollection.mj_header.beginRefreshing()
+        
+        questionnaireCollection.frame.origin = CGPoint(x: UIScreen.width.multiplied(by: 2), y: evaluationCollection.frame.origin.y)
+        
         //上部3个按钮
         btn_1.layer.cornerRadius = btn_1.frame.width / 2
         btn_2.layer.cornerRadius = btn_1.frame.width / 2
@@ -101,8 +117,8 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
 //        btn_2.titleEdgeInsets = UIEdgeInsets(top: 55, left: 0, bottom: 0, right: 0)
 //        btn_3.titleEdgeInsets = UIEdgeInsets(top: 55, left: 0, bottom: 0, right: 0)
         
-        //用作待考和待评左右滑动的容器
-        scrollView.contentSize = CGSize(width: UIScreen.width.multiplied(by: 2), height: scrollView.frame.height)
+        //用作待考,待评,问卷左右滑动的容器
+        scrollView.contentSize = CGSize(width: UIScreen.width.multiplied(by: 3), height: scrollView.frame.height)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
@@ -111,7 +127,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         //tab的下划线及tab需要的一些设置
         lbl_markLine.clipsToBounds = true
         lbl_markLine.layer.cornerRadius = 1
-        buttonGroup = [btn_exam , btn_evaluation]
+        buttonGroup = [btn_exam , btn_evaluation,btn_questionnaire]
         btn_exam.restorationIdentifier = "btn_exam"
         
         examView.initLimitPage()
@@ -152,7 +168,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         myPresentView(self, viewName: "historyEvaluationView")
     }
     
-    //待考任务 按钮
+    //待考任务 待评任务 调查问卷 按钮
     @IBAction func btn_undone_inside(_ sender: UIButton) {
         buttonView.isHidden = true
         btn_btnList.tag = 0
@@ -160,11 +176,11 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     }
     
     //待评任务 按钮
-    @IBAction func btn_over_inside(_ sender: UIButton) {
-        buttonView.isHidden = true
-        btn_btnList.tag = 0
-        tabsTouchAnimation(sender: sender)
-    }
+//    @IBAction func btn_over_inside(_ sender: UIButton) {
+//        buttonView.isHidden = true
+//        btn_btnList.tag = 0
+//        tabsTouchAnimation(sender: sender)
+//    }
     
     
     @IBAction func btn_123_inside(_ sender: UIButton) {
@@ -230,9 +246,11 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         if x < UIScreen.width.divided(by: 2){
 //            print("滑动到待考")
             tabsTouchAnimation(sender: btn_exam)
-        }else if x > UIScreen.width.divided(by: 2){
+        }else if x > UIScreen.width.divided(by: 2) && x < UIScreen.width.adding(UIScreen.width.divided(by: 2)){
 //            print("滑动到待评")
             tabsTouchAnimation(sender: btn_evaluation)
+        }else{
+            tabsTouchAnimation(sender: btn_questionnaire)
         }
 //        print(x)
 //        print("只是松手")
@@ -243,8 +261,10 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         let x = scrollView.contentOffset.x
         if x < UIScreen.width.divided(by: 2){
             tabsTouchAnimation(sender: btn_exam)
-        }else if x > UIScreen.width.divided(by: 2){
+        }else if x > UIScreen.width.divided(by: 2) && x < UIScreen.width.adding(UIScreen.width.divided(by: 2)){
             tabsTouchAnimation(sender: btn_evaluation)
+        }else{
+            tabsTouchAnimation(sender: btn_questionnaire)
         }
     }
     
@@ -338,6 +358,41 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         
     }
     
+    //获取问卷调查
+    func getQuestionnaireDatasource(){
+        
+        let url = SERVER_PORT+"rest/questionnaire/queryAllQuestionnaire.do"
+        myPostRequest(url,["personid":UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!]).responseJSON(completionHandler: {resp in
+            self.questionnaireCollection.mj_footer.endRefreshing()
+            self.questionnaireCollection.mj_header.endRefreshing()
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json = JSON(responseJson)
+                if json["code"].stringValue == "1"{
+                    
+                    let arrayData = json["data"].arrayValue
+                    //判断是否在最后一页
+                    if arrayData.count == 0 {
+                        self.questionnaireCollection.mj_footer.endRefreshingWithNoMoreData()
+                    }
+                    
+                    self.questionnaireView.jsonDataSource += json["data"].arrayValue
+                    
+                    self.questionnaireCollection.reloadData()
+                }else{
+                    
+                    myAlert(self, message: "请求调查问卷列表失败!")
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
+        
+    }
+    
     func tabsTouchAnimation( sender : UIButton){
         //-----------------计算 "下标线"label的动画参数
         
@@ -371,13 +426,15 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         //滚动效果
         if sender.restorationIdentifier == "btn_exam"{
             scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-        }else{
+        }else if sender.restorationIdentifier == "btn_over"{
             scrollView.setContentOffset(CGPoint(x: UIScreen.width, y: 0), animated: true)
+        }else if sender.restorationIdentifier == "btn_questionnaire"{
+            scrollView.setContentOffset(CGPoint(x: UIScreen.width.multiplied(by: 2), y: 0), animated: true)
         }
         UIView.setAnimationCurve(.easeOut)
         UIView.commitAnimations()
-        print("btn_x = \(btn_x)")
-        print("lbl_markLine.frame = \(lbl_markLine.frame)")
+        //print("btn_x = \(btn_x)")
+        //print("lbl_markLine.frame = \(lbl_markLine.frame)")
     }
     
     func getExerises(_ type : Int){
