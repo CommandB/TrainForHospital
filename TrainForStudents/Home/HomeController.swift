@@ -17,7 +17,6 @@ class HomeController : UIViewController{
         homeCollection.delegate = self
         homeCollection.dataSource = self
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

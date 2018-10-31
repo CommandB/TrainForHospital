@@ -7,11 +7,12 @@ target ’TrainForStudents’ do
   pod 'Alamofire', '~> 4.0'
   pod 'SwiftDate', '~>4.0'
   pod 'SwiftyJSON'
-  pod 'SwiftCharts' , '~> 0.6'
+  #pod 'SwiftCharts' , '~> 0.6'
   pod 'SnapKit' , '~> 3.2.0'
   pod 'BMPlayer'
   pod 'GTMRefresh'
   pod 'JPush'
+  pod 'Reachability'
   pod "PLPlayerKit", :podspec => 'https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec'
   
 end

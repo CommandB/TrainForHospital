@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import SwiftyJSON
-import SwiftCharts
 
 class TaskDetailController : MyBaseUIViewController{
     

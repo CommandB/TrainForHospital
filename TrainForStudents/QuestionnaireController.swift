@@ -39,6 +39,9 @@ class QuestionnaireController: MyBaseUIViewController{
         questionnaireCollection.dataSource = detailView
         questionnaireCollection.delegate = detailView
         
+        btn_prev.isEnabled = false
+        btn_prev.setTitleColor(UIColor.gray, for: .disabled)
+        
         MyNotificationUtil.addKeyBoardWillChangeNotification(self)
         loadData()
     }
@@ -60,7 +63,7 @@ class QuestionnaireController: MyBaseUIViewController{
         }
         if dataIndex == 0 {
             sender.isEnabled = false
-            sender.setTitleColor(UIColor.gray, for: .disabled)
+            
         }
     }
     

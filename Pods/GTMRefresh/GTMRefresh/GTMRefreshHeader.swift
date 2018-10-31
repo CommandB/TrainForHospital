@@ -109,7 +109,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         super.init(frame: frame)
         
         self.addSubview(self.contentView)
-        self.contentView.autoresizingMask = UIViewAutoresizing.flexibleWidth
+        self.contentView.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
     }
     
     required public init?(coder aDecoder: NSCoder) {

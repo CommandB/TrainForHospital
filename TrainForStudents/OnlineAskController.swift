@@ -69,8 +69,9 @@ class OnlineAskController: MyBaseUIViewController {
             self.askView.loadMore()
         })
         
-        let url = URL(string:SERVER_PORT + "../" + videoInfo["url"].stringValue)
-        
+        let url = URL(string:videoInfo["fullurl"].stringValue)
+//        let url = URL(string:SERVER_PORT + "../" + videoInfo["url"].stringValue)
+//        let url = URL(string:"http://122.224.121.186:8080/resources/video/16ab3d490-fb3a-4438-948f-04329cb4c22b.mp4")
         if videoInfo["typename"].stringValue == "VIDEO"{
             isVedio = true
             player.parentView = self

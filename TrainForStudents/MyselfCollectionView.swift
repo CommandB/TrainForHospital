@@ -74,6 +74,11 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
             
             btn.addTarget(self, action: #selector(btn_avatar_inside), for: .touchUpInside)
             
+//            let btn4_title = UserDefaults.standard.string(forKey: AppConfiguration.complaintTitle.rawValue)
+//            if btn4_title != nil && btn4_title != ""{
+//                (cell.viewWithTag(50004) as! UIButton).setTitle(btn4_title, for: .normal)
+//            }
+            
             //下面4个功能按钮
             let btns = [
                 cell.viewWithTag(50001) as! UIButton,
@@ -89,7 +94,7 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
             
             break
         case 1:
-            
+//            let title = UserDefaults.standard.string(forKey: AppConfiguration.complaintTitle.rawValue)
             let webModule = UserDefaults.standard.string(forKey: AppConfiguration.webModule.rawValue)
             if webModule != nil{
                 let json = JSON.init(parseJSON: webModule!).arrayValue

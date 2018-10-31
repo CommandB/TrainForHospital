@@ -11,7 +11,7 @@ import Foundation
 import Alamofire
 import UIKit
 import SwiftyJSON
-
+import Reachability
 
 let CLOUD_SERVER = "http://www.jiuhuatech.com:6023/cloud_doctor_train/"
 var SERVER_PORT = "http://192.168.1.108:8070/doctor_train/"
@@ -26,6 +26,13 @@ var r_param = [String:Any]()
 var r_token = "";
 ///图片下载默认id
 let congou_image_id = "congou_image_id"
+
+//MARK: 判断是否有网络
+func isReachable() -> Bool{
+    
+    let reachable = Reachability.forInternetConnection().isReachable()
+    return reachable
+}
 
 //post方式提交数据
 func myPostRequest(_ url:String, _ parameters: [String: Any]? = nil , method: HTTPMethod = HTTPMethod.post , timeoutInterval : TimeInterval = 60) -> DataRequest {

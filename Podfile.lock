@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.7.2)
+  - Alamofire (4.7.3)
   - BMPlayer (0.9.1):
     - BMPlayer/Full (= 0.9.1)
   - BMPlayer/Core (0.9.1)
@@ -7,20 +7,20 @@ PODS:
     - BMPlayer/Core
     - NVActivityIndicatorView (~> 3.5)
     - SnapKit (~> 3.2)
-  - GTMRefresh (1.3.3)
-  - JCore (1.1.9)
-  - JPush (3.0.9):
-    - JCore (~> 1.1.7)
+  - GTMRefresh (1.3.6)
+  - JCore (1.2.2)
+  - JPush (3.1.0):
+    - JCore (~> 1.2.0)
   - NVActivityIndicatorView (3.7.0):
     - NVActivityIndicatorView/Presenter (= 3.7.0)
   - NVActivityIndicatorView/Presenter (3.7.0)
-  - PLPlayerKit (3.3.0):
-    - PLPlayerKit/universal (= 3.3.0)
-  - PLPlayerKit/universal (3.3.0)
+  - PLPlayerKit (3.3.3):
+    - PLPlayerKit/universal (= 3.3.3)
+  - PLPlayerKit/universal (3.3.3)
+  - Reachability (3.2)
   - SnapKit (3.2.0)
-  - SwiftCharts (0.6.1)
   - SwiftDate (4.5.1)
-  - SwiftyJSON (4.1.0)
+  - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
@@ -28,8 +28,8 @@ DEPENDENCIES:
   - GTMRefresh
   - JPush
   - PLPlayerKit (from `https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec`)
+  - Reachability
   - SnapKit (~> 3.2.0)
-  - SwiftCharts (~> 0.6)
   - SwiftDate (~> 4.0)
   - SwiftyJSON
 
@@ -38,18 +38,18 @@ EXTERNAL SOURCES:
     :podspec: https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec
 
 SPEC CHECKSUMS:
-  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   BMPlayer: e68ba160d9c05ea5fffc31d37448aa02433418ab
-  GTMRefresh: a105a2d2688268556af715f529d9282357888d9e
-  JCore: 27598485098d0db99d2812cba048003457d08cfb
-  JPush: 003d9eaef8ba2df76de32573d0c8aa62b92b3c82
+  GTMRefresh: 9231cbdc1dca88d0a29daead8d6bd83314aa84dc
+  JCore: f14c0549968a63c22e246a4875aa9d428446f373
+  JPush: 5921e25ad13e0386351079217b009f2039084eac
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
-  PLPlayerKit: 7a1f9d6fde3ee49b0cd0ab13628a13a4714e9bfa
+  PLPlayerKit: 75bbb10e8428952e945dfbceb27ae8da5d15f0b8
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SwiftCharts: 77378d6cf667e95f9c79a745b6778e66eed5339c
   SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
-  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: bcb9ef175bd913cb47dcfd84e2a901d98f42e762
+PODFILE CHECKSUM: bfaa1b256315c2b0b247451b6e0a5e21087104b4
 
 COCOAPODS: 1.4.0.beta.2

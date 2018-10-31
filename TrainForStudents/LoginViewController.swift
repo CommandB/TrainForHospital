@@ -26,7 +26,6 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
     let pickerViewFirstStr = "请选择"
     
     @IBAction func btn_login_inside(_ sender: UIButton) {
-//        dismiss(animated: true, completion: nil)
         login()
     }
     
@@ -57,11 +56,6 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
         txt_hospital.tintColor = UIColor.clear
         txt_hospital.layer.borderColor = UIColor.clear.cgColor
         txt_hospital.layer.borderWidth = 1
-
-//        txt_hospital.editingRect(forBounds: CGRect(x: 0, y: 100, width: 100, height: 100))
-        
-//        txt_loginId.text = "439"
-//        txt_password.text = "123456"
         
         
         loadHospital()
@@ -85,7 +79,6 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
         
     }
     
-    
     override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if "loginId" == textField.restorationIdentifier{
@@ -104,9 +97,14 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
         return true
     }
     
-    
-    
-    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if pickerDataSource.count <= 0 {
+            loadHospital()
+            myAlert(self, message: "基地列表加载中,请稍后...")
+            return false
+        }
+        return true
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -152,6 +150,11 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
     //下载基地列表
     func loadHospital(){
         
+        if !isReachable(){
+            myAlert(self, message: "请检查网络连接...")
+            return
+        }
+        
         let url = CLOUD_SERVER + "rest/trainHospital/query.do"
         myPostRequest(url).responseJSON(completionHandler: {resp in
             
@@ -167,7 +170,6 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                 }
                 self.myPickerView.reloadAllComponents()
             case .failure(let error):
-                
                 print(error)
             }
             
@@ -191,7 +193,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = PORTAL_PORT + "rest/loginCheck.do"
 //        let url = "http://192.168.1.106:8081/doctor_portal/rest/loginCheck.do"
-        myPostRequest(url,["loginid":txt_loginId.text , "password":txt_password.text?.sha1()]).responseJSON(completionHandler: {resp in
+        myPostRequest(url,["loginid":txt_loginId.text , "password":txt_password.text?.sha1() ,"logintype":"iphone"]).responseJSON(completionHandler: {resp in
             
             switch resp.result{
             case .success(let responseJson):

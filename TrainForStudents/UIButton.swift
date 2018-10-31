@@ -13,7 +13,7 @@ extension UIButton{
     
     @objc func set(image anImage: UIImage?, title: String,
                    titlePosition: UIViewContentMode, additionalSpacing: CGFloat, state: UIControlState){
-        self.imageView?.contentMode = .center
+        self.imageView?.contentMode = .scaleAspectFit
         self.setImage(anImage, for: state)
         
         positionLabelRespectToImage(title: title, position: titlePosition, spacing: additionalSpacing)

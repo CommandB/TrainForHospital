@@ -38,7 +38,7 @@ class MyBaseUIViewController : UIViewController , UITextFieldDelegate  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.setStatusBarHidden(false, with: .fade)
+        //UIApplication.shared.setStatusBarHidden(false, with: .fade)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -65,14 +65,6 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                 self.subProtocol?.toNoMoreDataState?()
             case .refreshing:
                 self.loadMoreBlock()
-                
-                ////hws
-                if state == .noMoreData{
-                    self.subProtocol?.toNoMoreDataState?()
-                    return
-                }
-                
-                
                 // 展示正在加载动效
                 UIView.animate(withDuration: GTMRefreshConstant.fastAnimationDuration, animations: {
                     let overflowHeight = self.contentOverflowHeight
@@ -104,7 +96,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
         super.init(frame: frame)
         
         self.addSubview(self.contentView)
-        self.contentView.autoresizingMask = UIViewAutoresizing.flexibleWidth
+        self.contentView.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -259,7 +251,7 @@ public class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterPr
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
         indicator.activityIndicatorViewStyle = .gray
-        indicator.backgroundColor = UIColor.white
+        //indicator.backgroundColor = UIColor.white
         
         return indicator
     }()
@@ -320,10 +312,6 @@ public class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterPr
     }
     
     public func toNormalState() {
-        ///hws
-        if self.state != .idle{
-            return
-        }
         self.pullingIndicator.isHidden = false
         self.loaddingIndicator.isHidden = true
         self.loaddingIndicator.stopAnimating()
@@ -348,6 +336,7 @@ public class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterPr
         })
     }
     public func toRefreshingState() {
+        self.pullingIndicator.isHidden = true
         self.loaddingIndicator.isHidden = false
         self.loaddingIndicator.startAnimating()
         

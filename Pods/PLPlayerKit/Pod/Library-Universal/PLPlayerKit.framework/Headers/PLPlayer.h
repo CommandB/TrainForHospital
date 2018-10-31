@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
     /**
      PLPlayer 播放组件准备完成，准备开始连接
      
-     @waring 请勿在此状态时，调用 playWithURL 切换 URL 操作
+     @warning 请勿在此状态时，调用 playWithURL 切换 URL 操作
      
      @since v3.2.1
      */
@@ -134,24 +134,6 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
      */
     PLPlayerStatusCompleted,
     
-    /**
-     @abstract PLPlayer seek 状态中。
-     
-     @discussion 该状态会在调用 seekTo 后触发，seekTo 操作完成后会转至 PLPlayerStatusPlaying 状态。
-     
-     @since v3.3.0
-     */
-    PLPlayerStatusSeeking,
-    
-    /**
-     @abstract PLPlayer seek 完成状态。
-     
-     @discussion 该状态会在调用 seekTo 失败后触发。
-     
-     @since v3.3.0
-     */
-    PLPlayerStatusSeekFailed
-    
 };
 
 /**
@@ -194,7 +176,7 @@ extern NSString * _Nonnull playerVersion();
 /**
  告知代理对象 PLPlayer 即将结束后台播放状态任务
  
- @param player              调用该方法的 PLPlayer 对象
+ @param player 调用该方法的 PLPlayer 对象
  
  @since v2.1.1
  */
@@ -224,13 +206,13 @@ extern NSString * _Nonnull playerVersion();
  点播已缓冲区域
  
  @param player 调用该方法的 PLPlayer 对象
- @param timeRange  CMTimeRange , 表示当前缓冲区域，单位秒。
+ @param timeRange  CMTime , 表示从0时开始至当前缓冲区域，单位秒。
  
- @waring 仅对点播有效
+ @warning 仅对点播有效
  
  @since v2.4.1
  */
-- (void)player:(nonnull PLPlayer *)player loadedTimeRange:(CMTimeRange)timeRange;
+- (void)player:(nonnull PLPlayer *)player loadedTimeRange:(CMTime)timeRange;
 
 /**
  回调将要渲染的帧数据
@@ -304,7 +286,7 @@ extern NSString * _Nonnull playerVersion();
  
  @since v3.3.0
  */
-- (void)playerSeekToCompleted:(nonnull PLPlayer *)player;
+- (void)player:(nonnull PLPlayer *)player seekToCompleted:(BOOL)isCompleted;
 
 @end
 
@@ -340,7 +322,9 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 @property (nonatomic, strong, nullable) dispatch_queue_t    delegateQueue;
 
 /**
- 支持音频后台播放的开关, 默认为 YES. 当 [AVAudioSession canPlayInBackground] 为 NO 时, 该值无效。
+ 支持音频后台播放的开关, 默认为 YES. 请确认 [AVAudioSession canPlayInBackground] 为 YES。
+ 
+ @warning 当设置允许后台播放时，建议 iOS 9 及以下系统，在 AppDelegate.m 下的即将进入后台： - (void)applicationWillResignActive:(UIApplication *)application 里，设置 enableRender 为 NO 以取消画面渲染；已经进入前台：- (void)applicationDidBecomeActive:(UIApplication *)application 里，设置 enableRender 为 YES 以恢复画面渲染
  
  @since v1.0.0
  */
@@ -416,7 +400,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  是否开启重连，默认为 NO
  
- @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ @warning 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
  
  @since v2.2.2
  */
@@ -425,7 +409,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  设置画面旋转模式
  
- @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ @warning 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
  
  @since v2.3.0
  */
@@ -434,7 +418,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  是否渲染画面，默认为 YES
  
- @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ @warning 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
  
  @since v2.3.0
  */
@@ -477,7 +461,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  视频流的宽
  
- @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ @warning 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
  
  @since v2.3.0
  */
@@ -486,7 +470,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  视频流的高
  
- @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ @warning 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
  
  @since v2.3.0
  */
@@ -504,7 +488,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  播放渲染帧率
  
- @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ @warning 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
  
  @since v2.3.0
  */
@@ -522,7 +506,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  下载速率，单位 kb/s
  
- @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ @warning 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
  
  @since v2.3.0
  */
@@ -531,7 +515,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  私有DRM
  
- @waring 该属性仅对 HLS 点播有效
+ @warning 该属性仅对 HLS 点播有效
  
  @since v3.0.0
  */
@@ -540,7 +524,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  变速播放，范围是 0.2-32，默认是 1.0
  
- @waring 该属性仅对点播有效
+ @warning 该属性仅对点播有效
  
  @since v3.0.0
  */
@@ -549,7 +533,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
   rtmp 流中的视频时间戳信息
  
- @waring 该属性仅对 rtmp 有效
+ @warning 该属性仅对 rtmp 有效
  
  @since v3.1.0
  */
@@ -558,7 +542,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  rtmp 流中的音频时间戳信息
  
- @waring 该属性仅对 rtmp 有效
+ @warning 该属性仅对 rtmp 有效
  
  @since v3.1.0
  */
@@ -567,7 +551,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  视频旋转角度
  
- @waring 该属性属于视频本身旋转角度
+ @warning 该属性属于视频本身旋转角度
  
  @since v3.1.0
  */
@@ -576,7 +560,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  视频剪裁播放，配置参数：(x, y, width, height)，尺寸需是 4 的倍数，默认全视频画面
  
- @waring 该属性只播放和渲染指定位置的画面，其中 x、y、width、height 值均取整使用，若播放新链接需裁剪，则每次新链接 play 前重新设置；若需重置为全视频画面，传 CGRectZero 即可
+ @warning 该属性只播放和渲染指定位置的画面，其中 x、y、width、height 值均取整使用，若播放新链接需裁剪，则每次新链接 play 前重新设置；若需重置为全视频画面，传 CGRectZero 即可
  
  @since v3.2.1
  */
@@ -585,20 +569,37 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  是否循环播放，默认为 NO
  
- @waring 该属性仅对点播有效
+ @warning 该属性仅对点播有效
  
  @since v3.2.1
  */
 @property (nonatomic, assign) BOOL loopPlay;
 
 /**
- 提前使用 HppayDNS 解析 URL 中的域名。
+ 提前使用 DNS 解析 URL 中的域名。
  
- @discussion 在播放前调用该方法，预解析播放地址的域名。
+ @discussion 在初始化后，播放前调用该方法，预解析播放地址的域名。
  
- @since v2.4.0
+ @since v3.3.1
  */
-+ (void)preDNSHost:(nullable NSURL *)URL;
+- (void)preDNSHost:(nullable NSURL *)URL;
+
+
+/**
+ 提前设置 mp4 解析时间。
+ 
+ @since v3.3.1
+ */
+- (void)mp4PreLoadTime:(CMTime)loadTime;
+
+
+/**
+ 提前设置点播从某记忆点开始播放。
+ 
+ @since v3.3.1
+ */
+- (void)preStartPosTime:(CMTime)startTime;
+
 
 /**
  使用 url 和 option 生成一个 PLPlayer 对象, 直播使用此接口
@@ -632,7 +633,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  
  @return 初始化后的 PLPlayer 对象
  
- @waring 不支持使用 init, new 初始化 PLPlayer 对象。
+ @warning 不支持使用 init, new 初始化 PLPlayer 对象。
  
  @since v2.1.0
  */
@@ -678,7 +679,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  
  @return 是否成功播放
 
- @waring  当sameSource 为 YES 时，视频格式与切换前视频格式不同时，会导致视频打开失败
+ @warning  当sameSource 为 YES 时，视频格式与切换前视频格式不同时，会导致视频打开失败
  
  @since v3.2.1
  */
@@ -737,7 +738,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  *  @param handle 类型 ScreenShotWithCompletionHandler block 。
  *
  *  @discussion 截图操作为异步，完成后将通过 handle 回调返回 UIImage 类型图片数据。
- *              该功能只支持直播
+ *              该功能只支持软解
  *
  *  @since v2.2.3
  *
