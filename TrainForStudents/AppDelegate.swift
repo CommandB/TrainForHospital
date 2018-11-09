@@ -22,8 +22,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         // Override point for customization after application launch.
         
 //        registerForPushNotifications(launchOptions)
+        
+        //注册3D Touch
+        //UIApplicationShortcutIcon(type: .capturePhoto)
+        let scanIcon = UIApplicationShortcutIcon(templateImageName: "扫一扫")
+        let scanItem = UIApplicationShortcutItem(type: "scan", localizedTitle: "扫码签到", localizedSubtitle: nil , icon: scanIcon, userInfo: nil)
+        
+        UIApplication.shared.shortcutItems = [scanItem]
+        
+        //注册极光推送
         registerJPushService(launchOptions)
         
+        //验证服务器地址缓存
         let sp = UserDefaults.standard.string(forKey: LoginInfo.server_port.rawValue)
         let pp = UserDefaults.standard.string(forKey: LoginInfo.portal_port.rawValue)
         let token = UserDefaults.standard.string(forKey: LoginInfo.token.rawValue)
@@ -37,8 +47,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         if token != nil{
             r_token = token!
         }
+        //版本号验证
         checkNewVersion()
         return true
+    }
+    
+    //3D Touch 按钮对应的事件
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
+        
+        switch shortcutItem.type {
+        case "scan":
+            myPresentView(rootViewController!, viewName: "scannerView")
+            break
+        default:
+            break
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

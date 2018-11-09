@@ -116,12 +116,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrainForStudents/UIButton.swift"
-            timestampString = "562647375.79241"
+            timestampString = "562672566.997007"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "set(image:title:titlePosition:additionalSpacing:state:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "positionLabelRespectToImage(title:position:spacing:image:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -16,11 +16,22 @@ class HomeController : UIViewController{
         
         homeCollection.delegate = self
         homeCollection.dataSource = self
-        
+        let btn = view.viewWithTag(10001) as! UIButton
+        btn.addTarget(self, action: #selector(btn_message_event), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         homeCollection.reloadData()
+    }
+    
+    
+    func btn_message_event(){
+        myPresentView(self, viewName: "messageListView")
+        //UIApplication.shared.openURL(URL.init(string: "telprompt:13616543097")!)
+    }
+    
+    func presentToDoList(){
+        myPresentView(self, viewName: "todoListView")
     }
     
 }
@@ -58,6 +69,10 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             let bg = cell.viewWithTag(11111) as! UILabel
             bg.clipsToBounds = true
             bg.layer.cornerRadius = 8
+            var btn = cell.viewWithTag(10001) as! UIButton
+            btn.addTarget(self, action: #selector(presentToDoList), for: .touchUpInside)
+            btn = cell.viewWithTag(10002) as! UIButton
+            btn.addTarget(self, action: #selector(presentToDoList), for: .touchUpInside)
             break
         case 3:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuresCell", for: indexPath)
@@ -95,6 +110,36 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.item {
+        case 1,2:
+            let cell = collectionView.cellForItem(at: indexPath)
+            if cell?.backgroundColor != UIColor.orange{
+                cell?.backgroundColor = UIColor.orange
+                addRedPoint(cell)
+            }else{
+                cell?.backgroundColor = UIColor(hex: "3186E9")
+            }
+            
+            collectionView.reloadItems(at: [indexPath])
+        default:
+            break
+        }
+    }
+    
+    func addRedPoint(view :UIView){
+        let size = CGSize(width: 5, height: 5)
+        let center = CGPoint(x: view.frame.width.adding(view.frame.origin.x), y: view.frame.origin.y)
+        let redPoint = UILabel()
+        redPoint.center = center
+        redPoint.frame.size = size
+        redPoint.clipsToBounds = true
+        redPoint.layer.cornerRadius = 2.5
+        //redPoint.tag = 1000
+        view.superview?.addSubview(redPoint)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
