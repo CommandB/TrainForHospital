@@ -95,7 +95,7 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
             break
         case 1:
 //            let title = UserDefaults.standard.string(forKey: AppConfiguration.complaintTitle.rawValue)
-            let webModule = UserDefaults.standard.string(forKey: AppConfiguration.webModule.rawValue)
+            let webModule = UserDefaults.AppConfig.string(forKey: .webModule)
             if webModule != nil{
                 let json = JSON.init(parseJSON: webModule!).arrayValue
                 var index = 1
@@ -295,7 +295,7 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
     
     
     func openWebView(sender: UIButton){
-        let webModule = UserDefaults.standard.string(forKey: AppConfiguration.webModule.rawValue)
+        let webModule = UserDefaults.AppConfig.string(forKey: .webModule)
         let json = JSON.init(parseJSON: webModule!).arrayValue
         let index = sender.tag - 50001
         var url = json[index]["moduleurl"].stringValue

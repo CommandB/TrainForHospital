@@ -24,7 +24,7 @@ class ComplaintListController : MyBaseUIViewController{
         
         let barView = view.viewWithTag(11111)
         let titleView = view.viewWithTag(22222) as! UILabel
-        let title = UserDefaults.standard.string(forKey: AppConfiguration.complaintTitle.rawValue)
+        let title = UserDefaults.AppConfig.string(forKey: .complaintTitle)
         super.setNavigationBarColor(views: [barView,titleView], titleIndex: 1,titleText: title ?? "")
         
         complaintView.parentView = self

@@ -42,6 +42,50 @@ extension UserDefaults{
         }
     }
     
+    // App配置
+    struct AppConfig: UserDefaultsKeys {
+        enum defaultKeys: String {
+            ///投诉功能名称
+            case complaintTitle
+            ///延迟签到分钟数
+            case lateCheckInMinutes
+            ///教学计划未提报通知日期
+            case planNoticeDate
+            ///教学计划未提报通知时间
+            case planNoticeTime
+            ///是否秘书
+            case isSecretary
+            ///是否学生
+            case isStudent
+            ///是否老师
+            case isTeacher
+            ///教学活动默认评价目录
+            case teachingActivityEvaluationList
+            ///通用评价目录编码
+            case publicEvaluationList
+            ///培训是否默认签到
+            case trainingIsNeedCheckIn
+            ///观摩室观看的考站的编码
+            case watchClassroomId
+            ///延迟签到分钟数
+            case lateCheckOutMinutes
+            ///签到机扫码拍照
+            case checkInMachineTakePhoto
+            ///客户代码
+            case clientCode
+            ///扫码签到是否需要拍照
+            case scanCheckInTakePhoto
+            ///二维码失效时间
+            case qrCodeExpireTime
+            ///发布培训通知延时分钟数
+            case trainingDelayNoticeMinutes
+            ///带教老师是否允许发科室公告
+            case teacherAllowCreateDeptNotice
+            /// web模块配置
+            case webModule
+        }
+    }
+    
 }
 
 protocol UserDefaultsKeys {
@@ -52,6 +96,7 @@ extension UserDefaultsKeys where defaultKeys.RawValue == String {
     static func set(value: String?, forKey key: defaultKeys) {
         let aKey = key.rawValue
         UserDefaults.standard.set(value, forKey: aKey)
+        
     }
     
     static func set(value: Any?, forKey key: defaultKeys) {

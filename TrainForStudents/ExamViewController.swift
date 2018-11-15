@@ -67,6 +67,7 @@ class ExamViewController : MyBaseUIViewController{
         cacheAnswerDic[taskId] = answerDic
         // 将当前答案保存到应用缓存中
         UserDefaults.Exam.set(value: cacheAnswerDic, forKey: .answerDic)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

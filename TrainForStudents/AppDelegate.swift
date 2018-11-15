@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenterDelegate{
@@ -15,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     var window: UIWindow?
     //支持当前controller横屏
     var blockRotation = false
-
+    
+    fileprivate var loadAppConfigFailedCount = 0
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         application.applicationIconBadgeNumber = 0;
@@ -88,7 +90,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         let token = UserDefaults.standard.string(forKey: LoginInfo.token.rawValue)
         if token == nil{
             myPresentView((self.window?.rootViewController)!, viewName: "loginView")
+        }else{
+            loadAppConfigFailedCount = 0
+            loadAppConfig()
         }
+        
         
     }
 
@@ -223,6 +229,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
             alertController.addAction(okAction)
             self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
         }
+    }
+    
+    
+    func loadAppConfig(){
+        
+        
+        let rootView = self.window?.rootViewController
+        if loadAppConfigFailedCount > 10 {
+            myAlert(rootView!, message: "请求配置异常,请联系网络管理员!")
+            loadAppConfigFailedCount = 0
+            return
+        }
+        
+        let url = SERVER_PORT+"rest/app/systemConfigData.do"
+        myPostRequest(url).responseJSON(completionHandler: {resp in
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json = JSON(responseJson)
+                let data = json["data"]
+                
+//                UserDefaults.AppConfiguration.set(value: data["投诉功能名称"].stringValue, forKey:.com)
+                //UserDefaults.AppConfiguration.set(value: "", forKey:UserDefa)
+                
+                
+                
+                //缓存web模块 (这里存不了json数组 所以存string 后面自己转一下)
+            //                                UserDefaults.standard.set(json["webmodule"].description, forKey: AppConfiguration.webModule.rawValue)
+            case .failure(let error):
+                //记录错误次数
+                self.loadAppConfigFailedCount += 1
+                //延迟2秒重新执行
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0, execute: {
+                    self.loadAppConfig()
+                })
+                print(error)
+            }
+            
+        })
     }
 
 }

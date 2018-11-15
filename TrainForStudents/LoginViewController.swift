@@ -214,12 +214,14 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                         UserDefaults.standard.set(self.txt_loginId.text!, forKey:
                             LoginInfo.loginId.rawValue)
                         UserDefaults.standard.set(json["personid"].stringValue, forKey: LoginInfo.personId.rawValue)
+                        
                     }
                     
                     //注册极光推送别名
                     JPUSHService.setAlias(json["userkey"].stringValue, callbackSelector: nil, object: 0)
                     //print("极光推送注册的别名:\(json["userkey"].stringValue)")
                     
+                    self.appDelegate.loadAppConfig()
                     
                     //请求科室信息
                     let getOfficeURL = SERVER_PORT+"rest/app/queryMyOffice.do"
@@ -239,19 +241,19 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                     LoginInfo.officeName.rawValue)
                                 
                                 //缓存app配置信息
-                                let appConfig = json["appconfig"].arrayValue
-                                for config in appConfig{
-                                    let name = config["name"].stringValue
-                                    let val = config["value"].stringValue
-                                    if  name == AppConfiguration.teacherCreateNoticeText.rawValue{
-                                        UserDefaults.standard.set(val, forKey: AppConfiguration.teacherCreateNotice.rawValue)
-                                    }else if name == AppConfiguration.signInTakePhotoText.rawValue{
-                                        UserDefaults.standard.set(val, forKey: AppConfiguration.signInTakePhoto.rawValue)
-                                    }else if name == AppConfiguration.complaintTitleText.rawValue{
-                                        //缓存投诉功能模块名称
-                                        UserDefaults.standard.set(val, forKey: AppConfiguration.complaintTitle.rawValue)
-                                    }
-                                }
+//                                let appConfig = json["appconfig"].arrayValue
+//                                for config in appConfig{
+//                                    let name = config["name"].stringValue
+//                                    let val = config["value"].stringValue
+//                                    if  name == AppConfiguration.teacherCreateNoticeText.rawValue{
+//                                        UserDefaults.standard.set(val, forKey: AppConfiguration.teacherCreateNotice.rawValue)
+//                                    }else if name == AppConfiguration.signInTakePhotoText.rawValue{
+//                                        UserDefaults.standard.set(val, forKey: AppConfiguration.signInTakePhoto.rawValue)
+//                                    }else if name == AppConfiguration.complaintTitleText.rawValue{
+//                                        //缓存投诉功能模块名称
+//                                        UserDefaults.standard.set(val, forKey: AppConfiguration.complaintTitle.rawValue)
+//                                    }
+//                                }
                                 
                                 //解析角色信息并缓存
                                 let role = json["role"].arrayValue
@@ -268,8 +270,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                 }
                                 UserDefaults.standard.set(roleDic, forKey: LoginInfo.role.rawValue)
                                 
-                                //缓存web模块 (这里存不了json数组 所以存string 后面自己转一下)
-                                UserDefaults.standard.set(json["webmodule"].description, forKey: AppConfiguration.webModule.rawValue)
+                                
                                 
                                 
                                 

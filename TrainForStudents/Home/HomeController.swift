@@ -115,30 +115,23 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
         switch indexPath.item {
         case 1,2:
             let cell = collectionView.cellForItem(at: indexPath)
-            if cell?.backgroundColor != UIColor.orange{
-                cell?.backgroundColor = UIColor.orange
-                addRedPoint(cell)
+            let bg = cell?.viewWithTag(11111)
+            if bg?.backgroundColor != UIColor.orange{
+                bg?.backgroundColor = UIColor.orange
+                let redPointTag = HUtilView.addRedPoint(view:bg!)
+                bg?.restorationIdentifier = redPointTag.description
             }else{
-                cell?.backgroundColor = UIColor(hex: "3186E9")
+                bg?.backgroundColor = UIColor(hex: "3186E9")
+                let tag = Int(bg?.restorationIdentifier ?? "0")
+                HUtilView.removeRedPoint(tag: tag!)
             }
             
-            collectionView.reloadItems(at: [indexPath])
+            //collectionView.reloadItems(at: [indexPath])
         default:
             break
         }
     }
     
-    func addRedPoint(view :UIView){
-        let size = CGSize(width: 5, height: 5)
-        let center = CGPoint(x: view.frame.width.adding(view.frame.origin.x), y: view.frame.origin.y)
-        let redPoint = UILabel()
-        redPoint.center = center
-        redPoint.frame.size = size
-        redPoint.clipsToBounds = true
-        redPoint.layer.cornerRadius = 2.5
-        //redPoint.tag = 1000
-        view.superview?.addSubview(redPoint)
-    }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

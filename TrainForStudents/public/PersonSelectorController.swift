@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class PersonSelectorController: UIViewController {
+class PersonSelectorController: HBaseViewController {
     
     static var addStudentsNotificationName = NSNotification.Name(rawValue: "addStudentsNotification")
     @IBOutlet weak var personCollection: UICollectionView!
@@ -59,7 +59,7 @@ class PersonSelectorController: UIViewController {
     }
     
     func touchCheckbox(btn :UIButton){
-        
+        super.hiddenKeyBoard()
         if btn.isSelected{
             btn.setImage(UIImage(named: "未选择-小"), for: .normal)
         }else{
@@ -114,7 +114,7 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        super.hiddenKeyBoard()
         let data = jds[indexPath.item]
         if cellIsSelected[indexPath] ?? false{
             selectedList.removeValue(forKey: indexPath)
@@ -125,12 +125,17 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
         collectionView.reloadItems(at: [indexPath])
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: UIScreen.width, height: 40)
+    }
+    
     
 }
 
-extension PersonSelectorController : UITextFieldDelegate{
+extension PersonSelectorController{
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         refresh()
         return true
     }
