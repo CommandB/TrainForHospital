@@ -106,7 +106,7 @@ class QuestionnaireController: MyBaseUIViewController{
                     case .success(let result):
                         let json = JSON(result)
                         if json["code"].intValue == 1 {
-                            myAlert(self, message: "提交成功!")
+                            self.dismiss(animated: true, completion: nil)
                         }else{
                             myAlert(self, title: "提交失败", message: json["msg"].stringValue)
                         }
