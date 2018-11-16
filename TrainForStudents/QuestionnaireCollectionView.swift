@@ -23,7 +23,7 @@ class QuestionnaireCollectionView : MyBaseCollectionView{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath)
         
         var lbl = cell.viewWithTag(10001) as? UILabel
-        lbl?.text = json["title"].stringValue
+        lbl?.text = json["questionname"].stringValue
         lbl = cell.viewWithTag(20001) as? UILabel
         lbl?.text = json["endtime"].stringValue.substring(to: 16)
         lbl = cell.viewWithTag(20002) as? UILabel
