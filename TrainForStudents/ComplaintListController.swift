@@ -17,6 +17,8 @@ class ComplaintListController : MyBaseUIViewController{
     
     @IBOutlet weak var addView: UIView!
     
+    @IBOutlet weak var strangerLabel: UILabel!//匿名
+    @IBOutlet weak var strangerSwitch: UISwitch!
     let complaintView = ComplaintListCollectionView()
     
     override func viewDidLoad() {
@@ -54,6 +56,14 @@ class ComplaintListController : MyBaseUIViewController{
         getListData()
     }
     
+    
+    @IBAction func changeStatus(_ sender: UISwitch) {
+        if sender.isOn {
+            strangerLabel.text = "匿名"
+        }else{
+            strangerLabel.text = "非匿名"
+        }
+    }
     //返回按钮
     @IBAction func btn_back_inside(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -114,10 +124,14 @@ class ComplaintListController : MyBaseUIViewController{
             myAlert(self, message: "悄悄话内容不能为空!")
             return
         }
+        var params = ["making":text,"isanonymous":"1"]
+        if strangerSwitch.isOn {
+            params = ["making":text,"isanonymous":"0"]
+        }
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT+"rest/proposalchannel/addproposal.do"
-        myPostRequest(url,["making":text]).responseJSON(completionHandler: {resp in
+        myPostRequest(url,params).responseJSON(completionHandler: {resp in
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             switch resp.result{
             case .success(let responseJson):

@@ -65,6 +65,14 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         cell.layer.cornerRadius = 4
         cell.clipsToBounds = true
         
+        let nameLbl =  cell.viewWithTag(22222) as! UILabel
+        let selfPersonid = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)
+        if json["personid"].stringValue == selfPersonid {
+            nameLbl.text = json["personname"].stringValue
+        }else{
+            nameLbl.text = "科教回复"
+        }
+        
         return cell
         
     }
