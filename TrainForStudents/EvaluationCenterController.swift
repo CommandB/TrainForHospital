@@ -102,7 +102,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         questionnaireCollection.delegate = questionnaireView
         questionnaireCollection.dataSource = questionnaireView
         questionnaireCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: questionnaireView, refreshingAction: #selector(refresh))
-        questionnaireCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: questionnaireView, refreshingAction: #selector(loadMore))
+//        questionnaireCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: questionnaireView, refreshingAction: #selector(loadMore))
         questionnaireCollection.mj_header.beginRefreshing()
         
         questionnaireCollection.frame.origin = CGPoint(x: UIScreen.width.multiplied(by: 2), y: evaluationCollection.frame.origin.y)
@@ -134,7 +134,8 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         evaluationView.initLimitPage()
         getExamDatasource()
         getEvaluationDatasource()
-        
+        //提交调查问卷成功
+        NotificationCenter.default.addObserver(self, selector: #selector(QuestionnaireCommitSuccess), name: NSNotification.Name(rawValue: "QuestionnaireCommitSuccess"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -363,7 +364,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         
         let url = SERVER_PORT+"rest/questionnaire/queryAllQuestionnaire.do"
         myPostRequest(url,["personid":UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!]).responseJSON(completionHandler: {resp in
-            self.questionnaireCollection.mj_footer.endRefreshing()
+//            self.questionnaireCollection.mj_footer.endRefreshing()
             self.questionnaireCollection.mj_header.endRefreshing()
             switch resp.result{
             case .success(let responseJson):
@@ -459,6 +460,11 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
                 debugPrint(error)
             }
         })
+    }
+    //提交调查问卷成功
+    func QuestionnaireCommitSuccess() {
+        self.questionnaireView.jsonDataSource.removeAll()
+        getQuestionnaireDatasource()
     }
     
     
