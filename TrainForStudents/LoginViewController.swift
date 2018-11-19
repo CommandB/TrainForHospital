@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import SwiftyJSON
-
+import CoreTelephony
 class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIPickerViewDelegate{
     
     @IBOutlet weak var txt_loginId: UITextField!
@@ -57,10 +57,33 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
         txt_hospital.layer.borderColor = UIColor.clear.cgColor
         txt_hospital.layer.borderWidth = 1
         
+        checkNetworkEnable()
         
         loadHospital()
     }
     
+    func checkNetworkEnable() {
+        let cellularData = CTCellularData()
+        cellularData.cellularDataRestrictionDidUpdateNotifier = { (_ state:CTCellularDataRestrictedState)->() in
+            switch state {
+            case .restricted:
+                let alert = UIAlertController(title: "请到设置中设置允许网络访问", message: nil, preferredStyle: .alert)
+                let setAction = UIAlertAction(title: "设置", style: UIAlertActionStyle.default, handler: { (action) in
+                    if let url = URL.init(string: UIApplicationOpenSettingsURLString) {
+                        UIApplication.shared.openURL(url)
+                    }
+                })
+                break
+            case .notRestricted:
+                break
+            case .restrictedStateUnknown:
+                break
+            default:
+                break
+            }
+        }
+        
+    }
     
     
     override func viewWillAppear(_ animated: Bool) {
