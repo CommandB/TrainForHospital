@@ -11,6 +11,7 @@ import UIKit
 import SwiftyJSON
 
 class ComplaintReplyCollection : MyBaseCollectionView{
+    var isanonymous = true
     
     var parentView : ComplaintReplyController? = nil
     let lineHeight = 17
@@ -68,7 +69,11 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         let nameLbl =  cell.viewWithTag(22222) as! UILabel
         let selfPersonid = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)
         if json["personid"].stringValue == selfPersonid {
-            nameLbl.text = json["personname"].stringValue
+            if isanonymous == true {
+                nameLbl.text = json["personname"].stringValue
+            }else{
+                nameLbl.text = "匿名"
+            }
         }else{
             nameLbl.text = "科教回复"
         }
