@@ -26,7 +26,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.0)
   - BMPlayer
   - GTMRefresh
-  - JPush
+  - JPush (~> 3.1.0)
   - PLPlayerKit (from `https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec`)
   - Reachability
   - SnapKit (~> 3.2.0)
@@ -50,6 +50,6 @@ SPEC CHECKSUMS:
   SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: bfaa1b256315c2b0b247451b6e0a5e21087104b4
+PODFILE CHECKSUM: 21d0ae59dd4ebf71d5ac6adc0d85ed9cf8a08047
 
 COCOAPODS: 1.4.0.beta.2
