@@ -89,4 +89,12 @@ extension String {
         return getLineNumberForWidth(width: lbl.frame.width.subtracting(5), cFont: lbl.font)
     }
     
+    func toInt() -> Int{
+        let i = Int(self)
+        if i == nil {
+            return 0
+        }
+        return i!
+    }
+    
 }

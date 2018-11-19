@@ -74,9 +74,9 @@ extension InspectStudentsController : UICollectionViewDelegate , UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         cell.tag = indexPath.item
         var lbl = cell.viewWithTag(10001) as! UILabel
-        lbl.text = data["name"].stringValue
+        lbl.text = data["personname"].stringValue
         lbl = cell.viewWithTag(10002) as! UILabel
-        lbl.text = data["type"].stringValue
+        lbl.text = data["officename"].stringValue
         let btn = cell.viewWithTag(10003) as! UIButton
         btn.addTarget(self, action: #selector(removeStudents), for: .touchUpInside)
         

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class InspectController : MyBaseUIViewController{
+class InspectController : HBaseViewController{
     
     @IBOutlet weak var btn_baseInfo: UIButton!
     
@@ -35,6 +35,9 @@ class InspectController : MyBaseUIViewController{
     //按钮的集合
     var buttonGroup = [UIButton]()
     
+    //提交时候用的数据
+    var submitParam = [String:Any]()
+    
     override func viewDidLoad() {
         
         datePicker.datePickerMode = .dateAndTime
@@ -55,8 +58,9 @@ class InspectController : MyBaseUIViewController{
         patient_View.frame.origin = CGPoint(x: UIScreen.width.multiplied(by: 2), y: patient_View.frame.origin.y)
         
         //基础数据设置
-        
-        var txt = baseInfo_view.viewWithTag(30001) as! TextFieldForNoMenu
+        var txt = baseInfo_view.viewWithTag(10001) as! UITextField
+        txt.delegate = self
+        txt = baseInfo_view.viewWithTag(30001) as! TextFieldForNoMenu
         txt.inputView = datePicker
         txt.delegate = self
         txt = baseInfo_view.viewWithTag(30002) as! TextFieldForNoMenu
@@ -69,11 +73,18 @@ class InspectController : MyBaseUIViewController{
         txt.inputView = datePicker
         txt.delegate = self
         var btn = view.viewWithTag(50001) as! UIButton
-        btn.set(image: UIImage(named: "箭头2"), title: "默认常用地址", titlePosition: .left, additionalSpacing: -40.0, state: .normal)
+        btn.set(image: UIImage(named: "箭头2"), title: "选择地址", titlePosition: .left, additionalSpacing: -40.0, state: .normal)
         btn = view.viewWithTag(60001) as! UIButton
         btn.set(image: UIImage(named: "箭头2"), title: "默认常用老师", titlePosition: .left, additionalSpacing: -40.0, state: .normal)
-        btn = view.viewWithTag(70001) as! UIButton
-        btn.set(image: UIImage(named: "箭头2"), title: "默认常用记录人", titlePosition: .left, additionalSpacing: -55.0, state: .normal)
+        
+        let isNeedCheckIn = UserDefaults.AppConfig.string(forKey: .trainingIsNeedCheckIn)
+        
+        //签到方式
+        btn = baseInfo_view.viewWithTag(80001+(isNeedCheckIn?.toInt())!) as! UIButton
+        btn.setImage(UIImage(named: "选择-大"), for: .normal)
+        
+        btn = baseInfo_view.viewWithTag(80001) as! UIButton
+        btn.addTarget(self, action: #selector(chooseCheckInType), for: .touchUpInside)
         
         
         //培训学员设置
@@ -84,6 +95,7 @@ class InspectController : MyBaseUIViewController{
         
         //附件设置
         
+        
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -91,7 +103,77 @@ class InspectController : MyBaseUIViewController{
     }
     
     @IBAction func btn_sure_inside(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
+        
+        submitParam["isfreein"] = 0
+        
+        let url = SERVER_PORT + "/doctor_train/rest/app/train/releaseTrain.do"
+        
+        //标题
+        let txt_title = baseInfo_view.viewWithTag(10001) as! UITextField
+        if txt_title.text == ""{
+            myAlert(self, message: "主题不能为空!")
+            return
+        }
+        submitParam["title"] = txt_title.text
+        
+        //开始结束时间
+        let startTime = (baseInfo_view.viewWithTag(30001) as! UITextField).text! + " " + (baseInfo_view.viewWithTag(30002) as! UITextField).text!
+        let endTime = (baseInfo_view.viewWithTag(40001) as! UITextField).text! + " " + (baseInfo_view.viewWithTag(40002) as! UITextField).text!
+        
+        if startTime.count != 16{
+            myAlert(self, message: "开始时间不合法!")
+            return
+        }
+        submitParam["starttime"]  = startTime
+        
+        if endTime.count != 16{
+            myAlert(self, message: "结束时间不合法!")
+            return
+        }
+        submitParam["endtime"] = endTime
+        
+        
+        
+        //学员信息
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addStudentsNotificationName, object: nil)
+        
+        print(submitParam)
+        
+        
+        
+        //view.current
+        
+        //        myPostRequest(url, submitParam, method: .post).responseString(completionHandler: {resp in
+        //            switch resp.result{
+        //            case .success(let respStr):
+        //                let json = JSON(respStr)
+        //                if json["code"].stringValue == "1"{
+        //
+        //                }else{
+        //                    myAlert(self, message: json["msg"].stringValue)
+        //                }
+        //                break
+        //            case .failure(let error):
+        //                myAlert(self, message: "提交异常!")
+        //                print(error)
+        //                break
+        //            }
+        //        })
+        
+    }
+    
+    func receiveNotice(notification : NSNotification){
+        if notification.userInfo != nil{
+            let result = notification.userInfo!["data"] as! [JSON]
+            var stuList = [[String:String]]()
+            for item in result {
+                var stu = ["personid":item["personid"].stringValue]
+                stu["personname"] = item["personname"].stringValue
+                stuList.append(stu)
+            }
+            submitParam["studentlist"] = stuList
+        }
     }
     
     //待考任务 待评任务 调查问卷 按钮
@@ -154,6 +236,23 @@ class InspectController : MyBaseUIViewController{
         //print("btn_x = \(btn_x)")
         //print("lbl_markLine.frame = \(lbl_markLine.frame)")
     }
+    
+    func chooseCheckInType(sender : UIButton){
+        
+        var i = 0
+        while (i < 3){
+            let btn = baseInfo_view.viewWithTag(80001+i) as! UIButton
+            if btn.tag == sender.tag{
+                btn.setImage(UIImage(named: "选择-大"), for: .normal)
+                submitParam["sign"] = i
+            }else{
+                btn.setImage(UIImage(named: "未选择-大"), for: .normal)
+            }
+            i += 1
+        }
+        
+    }
+    
     
     func chooseDate(picker :UIDatePicker){
         let t31 = baseInfo_view.viewWithTag(30001) as! UITextField
