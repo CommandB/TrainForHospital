@@ -100,7 +100,7 @@ class ComplaintReplyController : MyBaseUIViewController{
                 
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
-                    let item = ["reply":content ,"replytime":DateUtil.getCurrentDateTime(),"personid":json["respondentid"].stringValue]
+                    let item = ["reply":content ,"replytime":DateUtil.getCurrentDateTime(),"personid":json["data"].arrayValue.last!["respondentid"].stringValue]
                     self.replyView.jsonDataSource.append(JSON.init(item))
                     self.replyCollection.reloadData()
                     //清空text

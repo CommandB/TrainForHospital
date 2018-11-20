@@ -56,7 +56,7 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         
         let f = contentLbl.frame
         let dateLbl = UILabel(frame: CGRect(x: f.origin.x, y: f.origin.y.adding(f.size.height).adding(5), width: cell.frame.width.subtracting(75), height: 20))
-        dateLbl.text = json["replytime1"].stringValue
+        dateLbl.text = json["replytime"].stringValue
         dateLbl.textColor = UIColor.gray
         dateLbl.font = UIFont.systemFont(ofSize: 13)
         dateLbl.textAlignment = .right
