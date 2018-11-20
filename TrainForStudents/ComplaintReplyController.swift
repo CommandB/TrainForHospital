@@ -64,6 +64,7 @@ class ComplaintReplyController : MyBaseUIViewController{
         //计算collection的高度
         let h = UIScreen.height.subtracting(replyCollection.frame.origin.y).subtracting(CGFloat(collectionMarginBottom))
         replyCollection.frame.size = CGSize(width: replyCollection.frame.width, height: h)
+        self.replyView.isanonymous = self.data["isanonymous"].boolValue
         replyView.jsonDataSource = data["gjwhisperreply"].arrayValue
         
         replyCollection.reloadData()
@@ -99,7 +100,7 @@ class ComplaintReplyController : MyBaseUIViewController{
                 
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
-                    var item = ["reply":content ,"replytime":DateUtil.getCurrentDateTime()]
+                    let item = ["reply":content ,"replytime":DateUtil.getCurrentDateTime(),"personid":json["respondentid"].stringValue]
                     self.replyView.jsonDataSource.append(JSON.init(item))
                     self.replyCollection.reloadData()
                     //清空text

@@ -70,12 +70,35 @@ class PersonSelectorController: HBaseViewController {
     
     //下载数据
     func getListData(){
-        let dd = [["name":"老大","type":"医生"],["name":"老二","type":"护士"]]
-        jds = JSON.init(dd).arrayValue
-        print(jds)
-        personCollection.mj_header.endRefreshing()
-        personCollection.mj_footer.endRefreshing()
-        personCollection.reloadData()
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        let url = SERVER_PORT + "/rest/app/searchPerson.do"
+        myPostRequest(url,["officeid":143]).responseJSON(completionHandler: {resp in
+            
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            self.personCollection.mj_header.endRefreshing()
+            self.personCollection.mj_footer.endRefreshing()
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json = JSON(responseJson)
+                if json["code"].stringValue == "1"{
+                    
+                    self.jds = json["data"].arrayValue
+                    //print(self.jds)
+                    self.personCollection.mj_footer.endRefreshingWithNoMoreData()
+                }else{
+                    myAlert(self, message: "请求人员列表失败!")
+                }
+                
+                
+                self.personCollection.reloadData()
+                
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
     }
     
     func refresh() {
