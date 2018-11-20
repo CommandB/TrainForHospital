@@ -11,17 +11,17 @@ import Foundation
 extension UserDefaults{
     
     // 登录信息
-//    struct LoginInfo: UserDefaultsKeys {
-//        enum defaultKeys: String {
-//            case loginId
-//            case password
-//            case server_port
-//            case portal_port
-//            case cloud_port
-//            case hospital
-//            case token
-//        }
-//    }
+    //    struct LoginInfo: UserDefaultsKeys {
+    //        enum defaultKeys: String {
+    //            case loginId
+    //            case password
+    //            case server_port
+    //            case portal_port
+    //            case cloud_port
+    //            case hospital
+    //            case token
+    //        }
+    //    }
     
     // 考试信息
     struct Exam: UserDefaultsKeys {
@@ -49,6 +49,8 @@ extension UserDefaults{
             case complaintTitle
             ///延迟签到分钟数
             case lateCheckInMinutes
+            ///延迟签出分钟数
+            case lateCheckOutMinutes
             ///教学计划未提报通知日期
             case planNoticeDate
             ///教学计划未提报通知时间
@@ -67,8 +69,6 @@ extension UserDefaults{
             case trainingIsNeedCheckIn
             ///观摩室观看的考站的编码
             case watchClassroomId
-            ///延迟签到分钟数
-            case lateCheckOutMinutes
             ///签到机扫码拍照
             case checkInMachineTakePhoto
             ///客户代码
@@ -83,6 +83,12 @@ extension UserDefaults{
             case teacherAllowCreateDeptNotice
             /// web模块配置
             case webModule
+            ///教学活动学员评价老师默认评价表
+            case teachingActivityS2TEvaluationList
+            ///教学活动老师评价学员默认评价表
+            case teachingActivityT2SEvaluationList
+            ///教学活动类型
+            case teachingActivityType
         }
     }
     

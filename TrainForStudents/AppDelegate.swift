@@ -236,6 +236,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         
         
         let rootView = self.window?.rootViewController
+        
+        //如果没登录 则不去查询
+        if r_token == ""{
+            return
+        }
+        
+        
         if loadAppConfigFailedCount > 10 {
             myAlert(rootView!, message: "请求配置异常,请联系网络管理员!")
             loadAppConfigFailedCount = 0
@@ -249,11 +256,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
             case .success(let responseJson):
                 
                 let json = JSON(responseJson)
-                let data = json["data"]
-                
-//                UserDefaults.AppConfiguration.set(value: data["投诉功能名称"].stringValue, forKey:.com)
-                //UserDefaults.AppConfiguration.set(value: "", forKey:UserDefa)
-                
+                if json["code"].stringValue == "1"{
+                    let data = json["data"]
+                    print(json)
+                    UserDefaults.AppConfig.set(value: data["投诉功能名称"].stringValue, forKey:.complaintTitle)
+                    UserDefaults.AppConfig.set(value: data["教学计划未提报通知时间"].stringValue, forKey: .planNoticeTime)
+                    UserDefaults.AppConfig.set(value: data["培训是否默认需要签到"].stringValue, forKey: .trainingIsNeedCheckIn)
+                    UserDefaults.AppConfig.set(value: data["教学活动学员评价老师默认评价表"].stringValue, forKey:.teachingActivityS2TEvaluationList)
+                    UserDefaults.AppConfig.set(value: data["教学活动老师评价学员默认评价表"].stringValue, forKey:.teachingActivityT2SEvaluationList)
+                    UserDefaults.AppConfig.set(value: data["教学计划未提报通知日期"].stringValue, forKey:.planNoticeDate)
+                    UserDefaults.AppConfig.set(value: data["客户代码"].stringValue, forKey:.clientCode)
+                    UserDefaults.AppConfig.set(value: data["观摩室观看考站编码"].stringValue, forKey:.watchClassroomId)
+                    UserDefaults.AppConfig.set(value: data["教学活动类型"].stringValue, forKey:.teachingActivityType)
+                    UserDefaults.AppConfig.set(value: data["通用评价表编码"].stringValue, forKey:.publicEvaluationList)
+                    UserDefaults.AppConfig.set(value: data["延迟签出分钟数"].stringValue, forKey:.lateCheckOutMinutes)
+                    UserDefaults.AppConfig.set(value: data["延迟签到分钟数"].stringValue, forKey:.lateCheckInMinutes)
+                    UserDefaults.AppConfig.set(value: data["发布培训通知延时时间（分钟）"].stringValue, forKey:.trainingDelayNoticeMinutes)
+                    UserDefaults.AppConfig.set(value: data["带教老师是否允许发科室公告"].stringValue, forKey:.teacherAllowCreateDeptNotice)
+                    UserDefaults.AppConfig.set(value: data["扫码签到是否需要拍照上传"].stringValue, forKey:.scanCheckInTakePhoto)
+                    UserDefaults.AppConfig.set(value: data["是否学员"].stringValue, forKey:.isStudent)
+                    UserDefaults.AppConfig.set(value: data["是否老师"].stringValue, forKey:.isTeacher)
+                    UserDefaults.AppConfig.set(value: data["是否秘书"].stringValue, forKey:.isSecretary)
+                    UserDefaults.AppConfig.set(value: data["签到机扫码拍照"].stringValue, forKey:.checkInMachineTakePhoto)
+                    UserDefaults.AppConfig.set(value: data["二维码失效时间"].stringValue, forKey:.qrCodeExpireTime)
+                }else{
+                    myAlert(rootView!, message: json["msg"].stringValue)
+                }
                 
                 
                 //缓存web模块 (这里存不了json数组 所以存string 后面自己转一下)

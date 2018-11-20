@@ -168,6 +168,10 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     @IBAction func btn_historyEvaludation_inside(_ sender: UIButton) {
         myPresentView(self, viewName: "historyEvaluationView")
     }
+    //历史问卷
+    @IBAction func btn_historyQuestionnaire_inside(_ sender: UIButton) {
+        //myPresentView(self, viewName: "historyEvaluationView")
+    }
     
     //待考任务 待评任务 调查问卷 按钮
     @IBAction func btn_undone_inside(_ sender: UIButton) {

@@ -14,7 +14,7 @@ class InspectStudentsController : UIViewController{
     
     @IBOutlet weak var studentsCollection: UICollectionView!
     
-    var jds = [JSON]()
+    static var jds = [JSON]()
     
     override func viewDidLoad() {
         
@@ -32,9 +32,14 @@ class InspectStudentsController : UIViewController{
         
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         //self.studentsCollection.mj_header.beginRefreshing()
-        print("接收通知.....")
+        
+//        print("接收通知.....")
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addStudentsNotificationName, object: nil)
     }
     
@@ -44,33 +49,23 @@ class InspectStudentsController : UIViewController{
     
     func receiveNotice(notification : NSNotification){
         if notification.userInfo != nil{
-            jds = notification.userInfo!["data"] as! [JSON]
+            InspectStudentsController.jds = notification.userInfo!["data"] as! [JSON]
             studentsCollection.reloadData()
+            
         }
     }
-    
-//    func refresh() {
-//        self.studentsCollection.mj_header.endRefreshing()
-//        self.studentsCollection.mj_footer.endRefreshing()
-//        studentsCollection.mj_footer.endRefreshingWithNoMoreData()
-//        studentsCollection.reloadData()
-//    }
-    
-//    func loadMore() {
-//        getListData()
-//    }
     
 }
 
 extension InspectStudentsController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return jds.count
+        return InspectStudentsController.jds.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let data = jds[indexPath.item]
+        let data = InspectStudentsController.jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         cell.tag = indexPath.item
         var lbl = cell.viewWithTag(10001) as! UILabel
@@ -94,7 +89,7 @@ extension InspectStudentsController : UICollectionViewDelegate , UICollectionVie
     
     func removeStudents(sender : UIButton){
         if sender.superview?.tag != nil{
-            jds.remove(at: sender.superview!.tag)
+            InspectStudentsController.jds.remove(at: sender.superview!.tag)
             studentsCollection.reloadData()
         }
     }

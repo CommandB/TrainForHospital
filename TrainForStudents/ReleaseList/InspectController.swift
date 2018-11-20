@@ -49,6 +49,8 @@ class InspectController : HBaseViewController{
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
         
+        
+        
         //tab的下划线及tab需要的一些设置
         lbl_markLine.clipsToBounds = true
         lbl_markLine.layer.cornerRadius = 1
@@ -77,8 +79,10 @@ class InspectController : HBaseViewController{
         btn = view.viewWithTag(60001) as! UIButton
         btn.set(image: UIImage(named: "箭头2"), title: "默认常用老师", titlePosition: .left, additionalSpacing: -40.0, state: .normal)
         
-        let isNeedCheckIn = UserDefaults.AppConfig.string(forKey: .trainingIsNeedCheckIn)
-        
+        var isNeedCheckIn = UserDefaults.AppConfig.string(forKey: .trainingIsNeedCheckIn)
+        if isNeedCheckIn == nil {
+            isNeedCheckIn = "0"
+        }
         //签到方式
         btn = baseInfo_view.viewWithTag(80001+(isNeedCheckIn?.toInt())!) as! UIButton
         btn.setImage(UIImage(named: "选择-大"), for: .normal)
@@ -86,15 +90,9 @@ class InspectController : HBaseViewController{
         btn = baseInfo_view.viewWithTag(80001) as! UIButton
         btn.addTarget(self, action: #selector(chooseCheckInType), for: .touchUpInside)
         
-        
         //培训学员设置
         let sv_btn = students_view.viewWithTag(10001) as! UIButton
         sv_btn.addTarget(self, action: #selector(presentPersonSelector), for: .touchUpInside)
-        
-        //患者信息设置
-        
-        //附件设置
-        
         
     }
     
@@ -133,11 +131,18 @@ class InspectController : HBaseViewController{
         }
         submitParam["endtime"] = endTime
         
-        
-        
         //学员信息
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addStudentsNotificationName, object: nil)
-        
+        if InspectStudentsController.jds.count == 0 {
+            myAlert(self, message: "请选择参加学员!")
+            return
+        }
+        var stuList = [[String:String]]()
+        for item in InspectStudentsController.jds {
+            var stu = ["personid":item["personid"].stringValue]
+            stu["personname"] = item["personname"].stringValue
+            stuList.append(stu)
+        }
+        submitParam["studentlist"] = stuList
         print(submitParam)
         
         
@@ -161,19 +166,6 @@ class InspectController : HBaseViewController{
         //            }
         //        })
         
-    }
-    
-    func receiveNotice(notification : NSNotification){
-        if notification.userInfo != nil{
-            let result = notification.userInfo!["data"] as! [JSON]
-            var stuList = [[String:String]]()
-            for item in result {
-                var stu = ["personid":item["personid"].stringValue]
-                stu["personname"] = item["personname"].stringValue
-                stuList.append(stu)
-            }
-            submitParam["studentlist"] = stuList
-        }
     }
     
     //待考任务 待评任务 调查问卷 按钮
