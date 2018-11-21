@@ -42,6 +42,10 @@ class HBaseViewController : UIViewController , UITextFieldDelegate  {
         self.view.endEditing(true)
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         keyBoardHidden = false
         //        print("textFieldDidBeginEditing")

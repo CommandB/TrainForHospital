@@ -27,7 +27,7 @@ class InspectStudentsController : UIViewController{
         
         
         
-        let btn_addStudents = view.viewWithTag(10001) as! UIButton
+        let btn_addStudents = view.viewWithTag(210001) as! UIButton
         btn_addStudents.addTarget(self, action: #selector(addStudents), for: .touchUpInside)
         
     }
@@ -68,11 +68,11 @@ extension InspectStudentsController : UICollectionViewDelegate , UICollectionVie
         let data = InspectStudentsController.jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         cell.tag = indexPath.item
-        var lbl = cell.viewWithTag(10001) as! UILabel
+        var lbl = cell.viewWithTag(200001) as! UILabel
         lbl.text = data["personname"].stringValue
-        lbl = cell.viewWithTag(10002) as! UILabel
+        lbl = cell.viewWithTag(200002) as! UILabel
         lbl.text = data["officename"].stringValue
-        let btn = cell.viewWithTag(10003) as! UIButton
+        let btn = cell.viewWithTag(200003) as! UIButton
         btn.addTarget(self, action: #selector(removeStudents), for: .touchUpInside)
         
         return cell

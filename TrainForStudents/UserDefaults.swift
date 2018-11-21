@@ -62,7 +62,7 @@ extension UserDefaults{
             ///是否老师
             case isTeacher
             ///教学活动默认评价目录
-            case teachingActivityEvaluationList
+            case teachingActivityDefaultEvaluationList
             ///通用评价目录编码
             case publicEvaluationList
             ///培训是否默认签到
@@ -87,8 +87,14 @@ extension UserDefaults{
             case teachingActivityS2TEvaluationList
             ///教学活动老师评价学员默认评价表
             case teachingActivityT2SEvaluationList
+            //评价表清单
+            case teachingActivityEvaluationList
             ///教学活动类型
             case teachingActivityType
+            ///科室清单
+            case officeList
+            //是否开启Mini-CEX
+            case isOpenMiniCex
         }
     }
     

@@ -189,6 +189,7 @@
 		0A940F1021A2AB87001BEE9D /* 第三名.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A940F0D21A2AB86001BEE9D /* 第三名.png */; };
 		0A9605D2208F0AE400A1ABB4 /* LiveMessageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9605D1208F0AE400A1ABB4 /* LiveMessageCollectionView.swift */; };
 		0A97554721A3F1D800267E10 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97554621A3F1D800267E10 /* UIView.swift */; };
+		0A97555421A50A7800267E10 /* HUIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97555321A50A7800267E10 /* HUIScrollView.swift */; };
 		0AB31E4A215CAC81002E3F32 /* ComplaintListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB31E49215CAC81002E3F32 /* ComplaintListController.swift */; };
 		0AB31E55215CAD39002E3F32 /* ComplaintListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB31E54215CAD39002E3F32 /* ComplaintListCollectionView.swift */; };
 		0AB31E57215CD14D002E3F32 /* ComplaintReplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB31E56215CD14D002E3F32 /* ComplaintReplyController.swift */; };
@@ -968,6 +969,7 @@
 		0A940F0D21A2AB86001BEE9D /* 第三名.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "第三名.png"; sourceTree = "<group>"; };
 		0A9605D1208F0AE400A1ABB4 /* LiveMessageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMessageCollectionView.swift; sourceTree = "<group>"; };
 		0A97554621A3F1D800267E10 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		0A97555321A50A7800267E10 /* HUIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUIScrollView.swift; sourceTree = "<group>"; };
 		0AB31E49215CAC81002E3F32 /* ComplaintListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplaintListController.swift; sourceTree = "<group>"; };
 		0AB31E54215CAD39002E3F32 /* ComplaintListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplaintListCollectionView.swift; sourceTree = "<group>"; };
 		0AB31E56215CD14D002E3F32 /* ComplaintReplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplaintReplyController.swift; sourceTree = "<group>"; };
@@ -2373,6 +2375,7 @@
 				0A291B631F3D8136008784B5 /* UIButton.swift */,
 				0A91142E201D60D2001A1936 /* UserDefaults.swift */,
 				0A97554621A3F1D800267E10 /* UIView.swift */,
+				0A97555321A50A7800267E10 /* HUIScrollView.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -3235,6 +3238,7 @@
 				0AC3B9371EE4730B00227194 /* ExamCenterController.swift in Sources */,
 				0AC3B9861EE5810900227194 /* TurnDetailController.swift in Sources */,
 				0A644D601F00BD52009025DD /* EvaluationCenterController.swift in Sources */,
+				0A97555421A50A7800267E10 /* HUIScrollView.swift in Sources */,
 				B4FF1A941F94DF7D009C6685 /* UIView+WebCache.m in Sources */,
 				B4FF1A8B1F94DF7D009C6685 /* SDWebImageDownloader.m in Sources */,
 				B4FF1A851F94DF7D009C6685 /* NSData+ImageContentType.m in Sources */,

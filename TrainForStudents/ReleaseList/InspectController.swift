@@ -22,9 +22,7 @@ class InspectController : HBaseViewController{
     
     @IBOutlet weak var lbl_markLine: UILabel!
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    
-    @IBOutlet weak var baseInfo_view: UIView!
+    @IBOutlet weak var scrollView: HUIScrollView!
     
     @IBOutlet weak var students_view: UIView!
     
@@ -43,13 +41,12 @@ class InspectController : HBaseViewController{
         datePicker.datePickerMode = .dateAndTime
         datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
         
+        
         //用作滚动页的容器
         scrollView.contentSize = CGSize(width: UIScreen.width.multiplied(by: 3), height: scrollView.frame.height)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
-        
-        
         
         //tab的下划线及tab需要的一些设置
         lbl_markLine.clipsToBounds = true
@@ -60,39 +57,39 @@ class InspectController : HBaseViewController{
         patient_View.frame.origin = CGPoint(x: UIScreen.width.multiplied(by: 2), y: patient_View.frame.origin.y)
         
         //基础数据设置
-        var txt = baseInfo_view.viewWithTag(10001) as! UITextField
+        var txt = view.viewWithTag(10001) as! UITextField
         txt.delegate = self
-        txt = baseInfo_view.viewWithTag(30001) as! TextFieldForNoMenu
+        txt = view.viewWithTag(30001) as! TextFieldForNoMenu
         txt.inputView = datePicker
         txt.delegate = self
-        txt = baseInfo_view.viewWithTag(30002) as! TextFieldForNoMenu
+        txt = view.viewWithTag(30002) as! TextFieldForNoMenu
         txt.inputView = datePicker
         txt.delegate = self
-        txt = baseInfo_view.viewWithTag(40001) as! TextFieldForNoMenu
+        txt = view.viewWithTag(40001) as! TextFieldForNoMenu
         txt.inputView = datePicker
         txt.delegate = self
-        txt = baseInfo_view.viewWithTag(40002) as! TextFieldForNoMenu
+        txt = view.viewWithTag(40002) as! TextFieldForNoMenu
         txt.inputView = datePicker
         txt.delegate = self
         var btn = view.viewWithTag(50001) as! UIButton
-        btn.set(image: UIImage(named: "箭头2"), title: "选择地址", titlePosition: .left, additionalSpacing: -40.0, state: .normal)
+        btn.set(image: UIImage(named: "箭头2"), title: "选择地址", titlePosition: .left, additionalSpacing: -10.0, state: .normal)
         btn = view.viewWithTag(60001) as! UIButton
         btn.set(image: UIImage(named: "箭头2"), title: "默认常用老师", titlePosition: .left, additionalSpacing: -40.0, state: .normal)
-        
+
         var isNeedCheckIn = UserDefaults.AppConfig.string(forKey: .trainingIsNeedCheckIn)
         if isNeedCheckIn == nil {
             isNeedCheckIn = "0"
         }
         //签到方式
-        btn = baseInfo_view.viewWithTag(80001+(isNeedCheckIn?.toInt())!) as! UIButton
+        btn = view.viewWithTag(80001+(isNeedCheckIn?.toInt())!) as! UIButton
         btn.setImage(UIImage(named: "选择-大"), for: .normal)
-        
-        btn = baseInfo_view.viewWithTag(80001) as! UIButton
+
+        btn = view.viewWithTag(80001) as! UIButton
         btn.addTarget(self, action: #selector(chooseCheckInType), for: .touchUpInside)
-        
-        //培训学员设置
-        let sv_btn = students_view.viewWithTag(10001) as! UIButton
-        sv_btn.addTarget(self, action: #selector(presentPersonSelector), for: .touchUpInside)
+        btn = view.viewWithTag(80002) as! UIButton
+        btn.addTarget(self, action: #selector(chooseCheckInType), for: .touchUpInside)
+        btn = view.viewWithTag(80003) as! UIButton
+        btn.addTarget(self, action: #selector(chooseCheckInType), for: .touchUpInside)
         
     }
     
@@ -105,10 +102,10 @@ class InspectController : HBaseViewController{
         
         submitParam["isfreein"] = 0
         
-        let url = SERVER_PORT + "/doctor_train/rest/app/train/releaseTrain.do"
+        let url = SERVER_PORT + "rest/app/train/releaseTrain.do"
         
         //标题
-        let txt_title = baseInfo_view.viewWithTag(10001) as! UITextField
+        let txt_title = view.viewWithTag(10001) as! UITextField
         if txt_title.text == ""{
             myAlert(self, message: "主题不能为空!")
             return
@@ -116,8 +113,8 @@ class InspectController : HBaseViewController{
         submitParam["title"] = txt_title.text
         
         //开始结束时间
-        let startTime = (baseInfo_view.viewWithTag(30001) as! UITextField).text! + " " + (baseInfo_view.viewWithTag(30002) as! UITextField).text!
-        let endTime = (baseInfo_view.viewWithTag(40001) as! UITextField).text! + " " + (baseInfo_view.viewWithTag(40002) as! UITextField).text!
+        let startTime = (view.viewWithTag(30001) as! UITextField).text! + " " + (view.viewWithTag(30002) as! UITextField).text!
+        let endTime = (view.viewWithTag(40001) as! UITextField).text! + " " + (view.viewWithTag(40002) as! UITextField).text!
         
         if startTime.count != 16{
             myAlert(self, message: "开始时间不合法!")
@@ -131,6 +128,21 @@ class InspectController : HBaseViewController{
         }
         submitParam["endtime"] = endTime
         
+        //地址
+        submitParam["address"] = "dddd"
+        //评价功能
+        var evaluaList = [[String:String]]()
+        let s2t = JSON(parseJSON: UserDefaults.AppConfig.string(forKey: .teachingActivityS2TEvaluationList)!)
+        let t2s = JSON(parseJSON: UserDefaults.AppConfig.string(forKey: .teachingActivityT2SEvaluationList)!)
+        if !s2t.isEmpty {
+            evaluaList.append(["beevaluateid":"1","evaluationid":s2t["evaluationid"].stringValue])
+        }
+        if !t2s.isEmpty {
+            evaluaList.append(["beevaluateid":"5","evaluationid":t2s["evaluationid"].stringValue])
+        }
+        
+        submitParam["evaluatelist"] = evaluaList
+        
         //学员信息
         if InspectStudentsController.jds.count == 0 {
             myAlert(self, message: "请选择参加学员!")
@@ -143,51 +155,59 @@ class InspectController : HBaseViewController{
             stuList.append(stu)
         }
         submitParam["studentlist"] = stuList
+        
         print(submitParam)
         
         
         
         //view.current
         
-        //        myPostRequest(url, submitParam, method: .post).responseString(completionHandler: {resp in
-        //            switch resp.result{
-        //            case .success(let respStr):
-        //                let json = JSON(respStr)
-        //                if json["code"].stringValue == "1"{
-        //
-        //                }else{
-        //                    myAlert(self, message: json["msg"].stringValue)
-        //                }
-        //                break
-        //            case .failure(let error):
-        //                myAlert(self, message: "提交异常!")
-        //                print(error)
-        //                break
-        //            }
-        //        })
+        myPostRequest(url, submitParam, method: .post).responseString(completionHandler: {resp in
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                print(json)
+                if json["code"].stringValue == "1"{
+
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                }
+                break
+            case .failure(let error):
+                myAlert(self, message: "提交异常!")
+                print(error)
+                break
+            }
+        })
         
     }
     
     //待考任务 待评任务 调查问卷 按钮
     @IBAction func btn_undone_inside(_ sender: UIButton) {
+        hiddenKeyBoard()
         tabsTouchAnimation(sender: sender)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if (textField.tag - 30002) > 0{
-            let t31 = baseInfo_view.viewWithTag(30001) as! UITextField
+            let t31 = view.viewWithTag(30001) as! UITextField
             if t31.text == nil || t31.text == ""{
                 myAlert(self, message: "请先选择开始时间!")
                 return false
             }
         }else{
             datePicker.minimumDate = nil
+            let t41 = view.viewWithTag(40001) as! UITextField
+            t41.text = ""
+            let t42 = view.viewWithTag(40002) as! UITextField
+            t42.text = ""
         }
         return true
     }
     
-    func presentPersonSelector(){
-        myPresentView(self, viewName: "personSelectorView")
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        hiddenKeyBoard()
+        return true
     }
     
     func tabsTouchAnimation( sender : UIButton){
@@ -230,10 +250,10 @@ class InspectController : HBaseViewController{
     }
     
     func chooseCheckInType(sender : UIButton){
-        
+        hiddenKeyBoard()
         var i = 0
         while (i < 3){
-            let btn = baseInfo_view.viewWithTag(80001+i) as! UIButton
+            let btn = view.viewWithTag(80001+i) as! UIButton
             if btn.tag == sender.tag{
                 btn.setImage(UIImage(named: "选择-大"), for: .normal)
                 submitParam["sign"] = i
@@ -247,10 +267,10 @@ class InspectController : HBaseViewController{
     
     
     func chooseDate(picker :UIDatePicker){
-        let t31 = baseInfo_view.viewWithTag(30001) as! UITextField
-        let t32 = baseInfo_view.viewWithTag(30002) as! UITextField
-        let t41 = baseInfo_view.viewWithTag(40001) as! UITextField
-        let t42 = baseInfo_view.viewWithTag(40002) as! UITextField
+        let t31 = view.viewWithTag(30001) as! UITextField
+        let t32 = view.viewWithTag(30002) as! UITextField
+        let t41 = view.viewWithTag(40001) as! UITextField
+        let t42 = view.viewWithTag(40002) as! UITextField
         let datetime = DateUtil.formatDate(picker.date, pattern: DateUtil.dateTimePattern)
         let date = datetime.substring(to: 10)
         let time = datetime.substring(from: 11).substring(to:5)
@@ -264,7 +284,7 @@ class InspectController : HBaseViewController{
             t42.text = time
             //计算开始和结束时间的区间
             let interval = DateUtil.intervalDate("\(t31.text!) \(t32.text!)", to: "\(t41.text!) \(t42.text!)", pattern: "yyyy-MM-dd HH:mm")
-            let lbl = baseInfo_view.viewWithTag(20001) as! UILabel
+            let lbl = view.viewWithTag(20001) as! UILabel
             lbl.text = "时长：\(interval.hour)时\(interval.minute)分"
         }
         
@@ -273,6 +293,11 @@ class InspectController : HBaseViewController{
 }
 
 extension InspectController : UIScrollViewDelegate{
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        //print("will")
+        hiddenKeyBoard()
+    }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = scrollView.contentOffset.x
