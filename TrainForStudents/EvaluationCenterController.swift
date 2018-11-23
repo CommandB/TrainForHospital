@@ -102,7 +102,8 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         questionnaireCollection.delegate = questionnaireView
         questionnaireCollection.dataSource = questionnaireView
         questionnaireCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: questionnaireView, refreshingAction: #selector(refresh))
-//        questionnaireCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: questionnaireView, refreshingAction: #selector(loadMore))
+        questionnaireCollection.mj_footer = MJRefreshBackNormalFooter.init(refreshingTarget: questionnaireView, refreshingAction: #selector(loadMore))
+        
         questionnaireCollection.mj_header.beginRefreshing()
         
         questionnaireCollection.frame.origin = CGPoint(x: UIScreen.width.multiplied(by: 2), y: evaluationCollection.frame.origin.y)
@@ -368,7 +369,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         
         let url = SERVER_PORT+"rest/questionnaire/queryAllQuestionnaire.do"
         myPostRequest(url,["personid":UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!]).responseJSON(completionHandler: {resp in
-//            self.questionnaireCollection.mj_footer.endRefreshing()
+            self.questionnaireCollection.mj_footer.endRefreshing()
             self.questionnaireCollection.mj_header.endRefreshing()
             switch resp.result{
             case .success(let responseJson):

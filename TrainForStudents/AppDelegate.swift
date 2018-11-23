@@ -281,7 +281,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                     UserDefaults.AppConfig.set(value: data["二维码失效时间"].description, forKey:.qrCodeExpireTime)
                     UserDefaults.AppConfig.set(value: data["科室清单"].description, forKey:.officeList)
                     
-                    UserDefaults.AppConfig.set(value: data["教室清单"].description, forKey:.officeList)
+                    UserDefaults.AppConfig.set(value: data["科室清单"].description, forKey:.officeList)
+                    UserDefaults.AppConfig.set(value: data["教室清单"].description, forKey:.classroomList)
                     UserDefaults.AppConfig.set(value: data["评价表清单"].description, forKey:.teachingActivityEvaluationList)
                     UserDefaults.AppConfig.set(value: data["是否开启Mini-CEX"].description, forKey:.isOpenMiniCex)
                     

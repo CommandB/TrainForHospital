@@ -48,7 +48,7 @@ class QuestionnaireCollectionView : MyBaseCollectionView{
     
     public override func refresh() {
         jsonDataSource = [JSON]()
-//        parentView?.questionnaireCollection.mj_footer.resetNoMoreData()
+        parentView?.questionnaireCollection.mj_footer.resetNoMoreData()
         parentView?.getQuestionnaireDatasource()
     }
     

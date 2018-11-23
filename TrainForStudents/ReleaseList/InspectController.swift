@@ -29,6 +29,8 @@ class InspectController : HBaseViewController{
     @IBOutlet weak var patient_View: UIView!
     
     let datePicker = UIDatePicker()
+    let addrPicker = UIPickerView()
+    var addrPickerDs = [JSON]()
     
     //按钮的集合
     var buttonGroup = [UIButton]()
@@ -40,6 +42,11 @@ class InspectController : HBaseViewController{
         
         datePicker.datePickerMode = .dateAndTime
         datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
+        
+        addrPicker.delegate = self
+        addrPicker.dataSource = self
+        addrPickerDs = JSON(parseJSON:UserDefaults.AppConfig.string(forKey: .classroomList)!).arrayValue
+        
         
         
         //用作滚动页的容器
@@ -71,9 +78,11 @@ class InspectController : HBaseViewController{
         txt = view.viewWithTag(40002) as! TextFieldForNoMenu
         txt.inputView = datePicker
         txt.delegate = self
-        var btn = view.viewWithTag(50001) as! UIButton
-        btn.set(image: UIImage(named: "箭头2"), title: "选择地址", titlePosition: .left, additionalSpacing: -10.0, state: .normal)
-        btn = view.viewWithTag(60001) as! UIButton
+        txt = view.viewWithTag(50001) as! TextFieldForNoMenu
+        txt.inputView = addrPicker
+        txt.delegate = self
+        
+        var btn = view.viewWithTag(60001) as! UIButton
         btn.set(image: UIImage(named: "箭头2"), title: "默认常用老师", titlePosition: .left, additionalSpacing: -40.0, state: .normal)
 
         var isNeedCheckIn = UserDefaults.AppConfig.string(forKey: .trainingIsNeedCheckIn)
@@ -101,6 +110,9 @@ class InspectController : HBaseViewController{
         //dismiss(animated: true, completion: nil)
         
         submitParam["isfreein"] = 0
+        submitParam["issend"] = 1
+        submitParam["type"] = 5
+        submitParam["officeid"] = UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)
         
         let url = SERVER_PORT + "rest/app/train/releaseTrain.do"
         
@@ -128,8 +140,6 @@ class InspectController : HBaseViewController{
         }
         submitParam["endtime"] = endTime
         
-        //地址
-        submitParam["address"] = "dddd"
         //评价功能
         var evaluaList = [[String:String]]()
         let s2t = JSON(parseJSON: UserDefaults.AppConfig.string(forKey: .teachingActivityS2TEvaluationList)!)
@@ -189,12 +199,16 @@ class InspectController : HBaseViewController{
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if (textField.tag - 30002) > 0{
+        let tag = textField.tag
+        if tag == 40001 || tag == 40002{
             let t31 = view.viewWithTag(30001) as! UITextField
             if t31.text == nil || t31.text == ""{
                 myAlert(self, message: "请先选择开始时间!")
                 return false
             }
+        }else if tag == 50001{
+            textField.text = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesname"].stringValue
+            submitParam["address"] = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesid"].stringValue
         }else{
             datePicker.minimumDate = nil
             let t41 = view.viewWithTag(40001) as! UITextField
@@ -287,8 +301,31 @@ class InspectController : HBaseViewController{
             let lbl = view.viewWithTag(20001) as! UILabel
             lbl.text = "时长：\(interval.hour)时\(interval.minute)分"
         }
-        
     }
+    
+}
+
+extension InspectController : UIPickerViewDelegate , UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return addrPickerDs.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return addrPickerDs[row]["facilitiesname"].stringValue
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let addr = addrPickerDs[row]["facilitiesname"].stringValue
+        submitParam["address"] = addrPickerDs[row]["facilitiesid"].stringValue
+        let txt = view.viewWithTag(50001) as! TextFieldForNoMenu
+        txt.text = addr
+    }
+    
     
 }
 

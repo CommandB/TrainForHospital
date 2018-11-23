@@ -74,10 +74,10 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
             
             btn.addTarget(self, action: #selector(btn_avatar_inside), for: .touchUpInside)
             
-//            let btn4_title = UserDefaults.standard.string(forKey: AppConfiguration.complaintTitle.rawValue)
-//            if btn4_title != nil && btn4_title != ""{
-//                (cell.viewWithTag(50004) as! UIButton).setTitle(btn4_title, for: .normal)
-//            }
+            let btn4_title = UserDefaults.AppConfig.string(forKey: .complaintTitle)
+            if btn4_title != nil && btn4_title != ""{
+                (cell.viewWithTag(50004) as! UIButton).setTitle(btn4_title, for: .normal)
+            }
             
             //下面4个功能按钮
             let btns = [
