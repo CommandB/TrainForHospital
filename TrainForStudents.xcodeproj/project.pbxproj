@@ -278,7 +278,6 @@
 		0AF25E0D217DBB4500FE5425 /* LeaveOverCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF25E0C217DBB4500FE5425 /* LeaveOverCollection.swift */; };
 		0AF9D331217F26090068B05A /* 关闭.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D327217F26070068B05A /* 关闭.png */; };
 		0AF9D33721801BCA0068B05A /* 搜索.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D33221801BC20068B05A /* 搜索.png */; };
-		0AF9D33E2180212E0068B05A /* PersonSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9D33D2180212E0068B05A /* PersonSelectorController.swift */; };
 		0AF9D34321805EC60068B05A /* 未选择-大.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D33F21805EC10068B05A /* 未选择-大.png */; };
 		0AF9D34421805EC60068B05A /* 选择-大.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D34021805EC20068B05A /* 选择-大.png */; };
 		0AF9D34521805EC60068B05A /* 选择-小.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D34121805EC30068B05A /* 选择-小.png */; };
@@ -1062,7 +1061,6 @@
 		0AF25E0C217DBB4500FE5425 /* LeaveOverCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveOverCollection.swift; sourceTree = "<group>"; };
 		0AF9D327217F26070068B05A /* 关闭.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "关闭.png"; sourceTree = "<group>"; };
 		0AF9D33221801BC20068B05A /* 搜索.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索.png"; sourceTree = "<group>"; };
-		0AF9D33D2180212E0068B05A /* PersonSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSelectorController.swift; sourceTree = "<group>"; };
 		0AF9D33F21805EC10068B05A /* 未选择-大.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未选择-大.png"; sourceTree = "<group>"; };
 		0AF9D34021805EC20068B05A /* 选择-大.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选择-大.png"; sourceTree = "<group>"; };
 		0AF9D34121805EC30068B05A /* 选择-小.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选择-小.png"; sourceTree = "<group>"; };
@@ -2545,7 +2543,6 @@
 		0AF9D33C2180211F0068B05A /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				0AF9D33D2180212E0068B05A /* PersonSelectorController.swift */,
 				0AF9D351218949510068B05A /* MyTabBarController.swift */,
 				0A26BA3E219BD3120071C2DC /* HBaseViewController.swift */,
 				0A26BA46219C16D20071C2DC /* FilesCollectionView.swift */,
@@ -3266,7 +3263,6 @@
 				0A26BA33219AA4C20071C2DC /* CommentHistoryListController.swift in Sources */,
 				B4FF1A871F94DF7D009C6685 /* SDImageCache.m in Sources */,
 				0A42F82D1F1D23FB001DF281 /* OutlineTaskCollectionView.swift in Sources */,
-				0AF9D33E2180212E0068B05A /* PersonSelectorController.swift in Sources */,
 				B4FF1A881F94DF7D009C6685 /* SDImageCacheConfig.m in Sources */,
 				B468B7CB1FCA9BA000ECF396 /* NSBundle+MJRefresh.m in Sources */,
 				B4847FAE1F9E13B600307D6F /* ImageUploadView.swift in Sources */,
