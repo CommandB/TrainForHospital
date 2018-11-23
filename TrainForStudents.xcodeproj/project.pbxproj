@@ -190,6 +190,7 @@
 		0A9605D2208F0AE400A1ABB4 /* LiveMessageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9605D1208F0AE400A1ABB4 /* LiveMessageCollectionView.swift */; };
 		0A97554721A3F1D800267E10 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97554621A3F1D800267E10 /* UIView.swift */; };
 		0A97555421A50A7800267E10 /* HUIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97555321A50A7800267E10 /* HUIScrollView.swift */; };
+		0A97555821A7C21700267E10 /* PersonSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97555721A7C21700267E10 /* PersonSelectorController.swift */; };
 		0AB31E4A215CAC81002E3F32 /* ComplaintListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB31E49215CAC81002E3F32 /* ComplaintListController.swift */; };
 		0AB31E55215CAD39002E3F32 /* ComplaintListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB31E54215CAD39002E3F32 /* ComplaintListCollectionView.swift */; };
 		0AB31E57215CD14D002E3F32 /* ComplaintReplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB31E56215CD14D002E3F32 /* ComplaintReplyController.swift */; };
@@ -969,6 +970,7 @@
 		0A9605D1208F0AE400A1ABB4 /* LiveMessageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMessageCollectionView.swift; sourceTree = "<group>"; };
 		0A97554621A3F1D800267E10 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		0A97555321A50A7800267E10 /* HUIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUIScrollView.swift; sourceTree = "<group>"; };
+		0A97555721A7C21700267E10 /* PersonSelectorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonSelectorController.swift; path = TrainForStudents/public/PersonSelectorController.swift; sourceTree = SOURCE_ROOT; };
 		0AB31E49215CAC81002E3F32 /* ComplaintListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplaintListController.swift; sourceTree = "<group>"; };
 		0AB31E54215CAD39002E3F32 /* ComplaintListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplaintListCollectionView.swift; sourceTree = "<group>"; };
 		0AB31E56215CD14D002E3F32 /* ComplaintReplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplaintReplyController.swift; sourceTree = "<group>"; };
@@ -2543,6 +2545,7 @@
 		0AF9D33C2180211F0068B05A /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				0A97555721A7C21700267E10 /* PersonSelectorController.swift */,
 				0AF9D351218949510068B05A /* MyTabBarController.swift */,
 				0A26BA3E219BD3120071C2DC /* HBaseViewController.swift */,
 				0A26BA46219C16D20071C2DC /* FilesCollectionView.swift */,
@@ -3347,6 +3350,7 @@
 				0AC3BCA31EE94DA300227194 /* LBXScanViewStyle.swift in Sources */,
 				B468B7C41FCA9BA000ECF396 /* MJRefreshBackNormalFooter.m in Sources */,
 				B468B7BC1FCA9BA000ECF396 /* MJRefreshBackFooter.m in Sources */,
+				0A97555821A7C21700267E10 /* PersonSelectorController.swift in Sources */,
 				0A91142F201D60D2001A1936 /* UserDefaults.swift in Sources */,
 				B44FFFE6211C73EA00844C07 /* NSDictionary+Additions.m in Sources */,
 				0A0C570D1F4D70AE008551D3 /* ChangePersonInfoController.swift in Sources */,
