@@ -14,7 +14,7 @@ class PersonSelectorController: HBaseViewController {
     
     static var addStudentsNotificationName = NSNotification.Name(rawValue: "addStudentsNotification")
     
-    @IBOutlet weak var personCollection: UICollectionView! 
+    @IBOutlet weak var personCollection: UICollectionView!
     
     @IBOutlet weak var btn_all: UIButton!
     
@@ -53,7 +53,9 @@ class PersonSelectorController: HBaseViewController {
     
     var personTotal = 0
     let defaulSort = "initials"
-    var selectedType = 1
+    ///选中的人员类型
+    var selectedType = 0
+    ///选中的筛选条件类型
     var selectedSort = "initials"
     
     
@@ -108,10 +110,14 @@ class PersonSelectorController: HBaseViewController {
             
             view.viewWithTag(20003)?.isHidden = !(sender.restorationIdentifier == "btn_stu")
         }
-        selectedType = sender.tag - 10000
-        selectedSort = defaulSort
-        tabsTouchAnimation(sender: sender)
-        btn_sortType_inside(view.viewWithTag(20001) as! UIButton)
+        if sender.tag - 10000 != selectedType{
+            sectionIsSelected = [IndexPath : Bool]()
+            selectedType = sender.tag - 10000
+            selectedSort = defaulSort
+            tabsTouchAnimation(sender: sender)
+            btn_sortType_inside(view.viewWithTag(20001) as! UIButton)
+        }
+        
     }
     
     @IBAction func btn_sortType_inside(_ sender: UIButton) {
@@ -129,7 +135,7 @@ class PersonSelectorController: HBaseViewController {
         }
         
         jds = selectDataSource()
-        print(selectDataSource())
+        //print(selectDataSource())
         personCollection.reloadData()
     }
     
@@ -237,6 +243,9 @@ class PersonSelectorController: HBaseViewController {
     ///分解数据下载的数据到各个分类
     func dataDecomposer(json : [JSON]){
         
+        //全部
+        allPersonDir = [String:[JSON]]()
+        
         //学生
         var s_initialsList = [String:[JSON]]()
         var s_gradeList = [String:[JSON]]()
@@ -261,6 +270,9 @@ class PersonSelectorController: HBaseViewController {
                 allPersonDir[firstpy] = [JSON]()
             }
             if person["ismystudent"].stringValue == "1"{
+                if allPersonDir["我的学员"] == nil{
+                    allPersonDir["我的学员"] = [JSON]()
+                }
                 allPersonDir["我的学员"]?.append(person)
             }else{
                 allPersonDir[firstpy]?.append(person)
@@ -367,8 +379,8 @@ class PersonSelectorController: HBaseViewController {
             
             allPersonDir = sort(original: allPersonDir)
             studentsDir["initials"] = sort(original: s_initialsList)
-            studentsDir["position"] = sort(original: s_positionList)
-            studentsDir["grade"] = sort(original: s_gradeList)
+            studentsDir["position"] = sort(original: s_positionList, sortKey: "gradeyear")
+            studentsDir["grade"] = sort(original: s_gradeList, sortKey: "studenttype")
             
             teacherDir["initials"] = sort(original: t_initialsList)
             teacherDir["position"] = sort(original: t_positionList)
@@ -447,7 +459,15 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         //对key进行排序
-        sortedKeys = jds.keys.sorted()
+        if selectedType == 1{
+            let key = "我的学员"
+            let array = jds.removeValue(forKey: key)
+            sortedKeys = jds.keys.sorted()
+            sortedKeys.insert(key, at: 0)
+            jds[key] = array
+        }else{
+            sortedKeys = jds.keys.sorted()
+        }
         return jds.count
     }
     

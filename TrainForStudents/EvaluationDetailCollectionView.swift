@@ -15,7 +15,7 @@ class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelega
     var parentVC = UIViewController()
     var jsonDataSource = JSON([:])
     var isReadonly = false
-    let maxStarNumber = 5
+    var maxStarNumber = 5
     
     //设置collectionView的分区个数
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -64,10 +64,16 @@ class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelega
                 lightNumber = data["numbervalue"].intValue
             }
             touchStar(cell: cell, lightNumber: lightNumber)
-            
-            for i in 1 ... maxStarNumber{
+            let stars = data["starsvalue"].intValue
+            maxStarNumber = stars
+            for i in 1 ... stars{
                 let tag = 10000 + i
                 let btn = cell.viewWithTag(tag) as! UIButton
+                if i <= maxStarNumber{
+                    btn.isHidden = false
+                }else{
+                    btn.isHidden = true
+                }
                 btn.restorationIdentifier = "\(index)"
                 btn.addTarget(self, action: #selector(btn_star_inside), for: UIControlEvents.touchUpInside)
             }

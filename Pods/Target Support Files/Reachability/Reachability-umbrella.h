@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "Reachability.h"
 
-FOUNDATION_EXPORT double SwiftChartsVersionNumber;
-FOUNDATION_EXPORT const unsigned char SwiftChartsVersionString[];
+FOUNDATION_EXPORT double ReachabilityVersionNumber;
+FOUNDATION_EXPORT const unsigned char ReachabilityVersionString[];
 
