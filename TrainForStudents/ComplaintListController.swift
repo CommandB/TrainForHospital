@@ -34,11 +34,13 @@ class ComplaintListController : MyBaseUIViewController{
         complaintCollection.delegate = complaintView
         complaintCollection.dataSource = complaintView
 
+        let footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
         
         self.complaintCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
-        self.complaintCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
+        self.complaintCollection.mj_footer = footer
         self.complaintCollection.mj_header.beginRefreshing()
         
+        footer?.setTitle("", for: .idle)
         addView.isHidden = true
         
         var btn = addView.viewWithTag(20001) as! UIButton

@@ -73,6 +73,12 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                         UIApplication.shared.openURL(url)
                     }
                 })
+                let cancelAction =  UIAlertAction(title: "好的", style: UIAlertActionStyle.default, handler: { (action) in
+                    
+                })
+                alert.addAction(setAction)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
                 break
             case .notRestricted:
                 break
@@ -169,13 +175,18 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
         
     }
     
-    
+    var loadHospitalTotal = 0
     //下载基地列表
     func loadHospital(){
         
         if !isReachable(){
             myAlert(self, message: "请检查网络连接...")
             return
+        }
+        
+        if loadHospitalTotal == 10 {
+            myAlert(self, message: "请检查网络连接...")
+            loadHospitalTotal = 0
         }
         
         let url = CLOUD_SERVER + "rest/trainHospital/query.do"
@@ -193,6 +204,12 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                 }
                 self.myPickerView.reloadAllComponents()
             case .failure(let error):
+                //记录错误次数
+                self.loadHospitalTotal += 1
+                //延迟2秒重新执行
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0, execute: {
+                    self.loadHospital()
+                })
                 print(error)
             }
             

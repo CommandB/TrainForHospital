@@ -17,6 +17,7 @@ class QuestionDetailCollectionView : UIViewController,  UICollectionViewDelegate
     let selectedColor = UIColor.init(hex: "6AAFE4")
     let unSelectedColor = UIColor.groupTableViewBackground
     var questionId = ""
+    let titleFont = UIFont.systemFont(ofSize: 15)
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let type = jsonDataSource["itemtype"].intValue
@@ -39,6 +40,7 @@ class QuestionDetailCollectionView : UIViewController,  UICollectionViewDelegate
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
             let lbl_title = cell.viewWithTag(10001) as! UILabel
             let titleText = jsonDataSource["title"].stringValue
+            lbl_title.font = titleFont
             lbl_title.text = titleText
             //计算出需要的行数后在多加一行防止一些空格和符号显示不全
             lbl_title.numberOfLines = titleText.getLineNumberForWidth(width: lbl_title.frame.width, cFont: (lbl_title.font)!) + 1
@@ -103,12 +105,13 @@ class QuestionDetailCollectionView : UIViewController,  UICollectionViewDelegate
     //计算cell大小
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let type = jsonDataSource["itemtype"].intValue
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+        
         var lineHeight = 0
         switch indexPath.item {
-        case 0:
+            case 0:
             let titleText = jsonDataSource["title"].stringValue
-            let lineNumber = titleText.getLineNumberForUILabel((cell.viewWithTag(10001) as! UILabel))
+            let lineNumber = titleText.getLineNumberForWidth(width: UIScreen.width.subtracting(40), cFont: titleFont)
             lineHeight = lineNumber * 20 + 10
         case 1:
             lineHeight = 40
@@ -119,7 +122,9 @@ class QuestionDetailCollectionView : UIViewController,  UICollectionViewDelegate
             //TODO
             if type == 0 {  //选择题
                 let text = jsonDataSource["wordsvalue"].stringValue
-                let lineNumber = text.getLineNumberForUILabel((cell.viewWithTag(10001) as! UILabel))
+                
+                let lineNumber = text.getLineNumberForWidth(width: UIScreen.width.subtracting(40), cFont: titleFont)
+
                 lineHeight = lineNumber * 20 + 10
                 if lineHeight < 40{
                     lineHeight = 40

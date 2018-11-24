@@ -15,7 +15,8 @@ class ComplaintReplyCollection : MyBaseCollectionView{
     
     var parentView : ComplaintReplyController? = nil
     let lineHeight = 17
-    
+    let titleFont = UIFont.systemFont(ofSize: 14)
+
     //设置每个分区元素的个数
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         
@@ -38,6 +39,7 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
         
         let contentLbl = cell.viewWithTag(10001) as! UILabel
+        contentLbl.font = titleFont
         let text = json["reply"].stringValue
         let tn = text.getLineNumberForWidth(width: contentLbl.frame.width.subtracting(10), cFont: contentLbl.font)
         contentLbl.numberOfLines = 0
@@ -88,13 +90,16 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         if indexPath.item == 0{
             return CGSize.init(width: UIScreen.width , height: 30)
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
-        let lbl = cell.viewWithTag(10001) as! UILabel
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
+        
+//        let lbl = cell.viewWithTag(10001) as! UILabel
         let json = jsonDataSource[indexPath.item - 1]
         let str = json["reply"].stringValue
         
         //计算多行label的高度
-        let lineNumber = str.getLineNumberForWidth(width: lbl.frame.width.subtracting(10),cFont: lbl.font)
+//        let lineNumber = str.getLineNumberForWidth(width: lbl.frame.width.subtracting(10),cFont: lbl.font)
+        let lineNumber = str.getLineNumberForWidth(width: UIScreen.width.subtracting(10), cFont: titleFont)
+
         let lblHeight = lineHeight * lineNumber
         var cellHeight = lblHeight + 40
         if cellHeight < 70{
