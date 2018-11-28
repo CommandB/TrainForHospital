@@ -79,7 +79,9 @@ class PersonSelectorController: HBaseViewController {
         
     }
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        //print("删除通知..")
+        //NotificationCenter.default.removeObserver(self)
+        //NotificationCenter.default.removeObserver(self, name: PersonSelectorController.addPersonNotificationName, object: nil)
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -93,7 +95,8 @@ class PersonSelectorController: HBaseViewController {
             data.append(v)
         }
         //print(data)
-        NotificationCenter.default.post(name: PersonSelectorController.addPersonNotificationName, object: self, userInfo: ["data":data])
+        NotificationCenter.default.post(name: PersonSelectorController.addPersonNotificationName, object: nil, userInfo: ["data":data])
+        
         dismiss(animated: true, completion: nil)
     }
     

@@ -30,37 +30,39 @@ class PanoramicEvaluationDetailController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         let lbl = view.viewWithTag(22222) as! UILabel
         lbl.text = jds["data"]["personname"].stringValue
-        keys = [String](jds["evDic"].dictionaryValue.keys)
-        personCollection.reloadData()
+        keys = ([String](jds["evDic"].dictionaryValue.keys)).sorted()
         
+        print("接受通知")
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonNotificationName, object: nil)
     }
     
     func receiveNotice(notification : NSNotification){
+        NotificationCenter.default.removeObserver(self)
+        print("处理通知")
         if notification.userInfo != nil{
             let result = notification.userInfo!["data"] as! [JSON]
             var d = jds["data"]
             //studentsCollection.reloadData()
             switch selectedTabKey {
             case "nerse2s":
-                d["nurselist"] = JSON(d["nurselist"].arrayValue + result)
+                jds["data"]["nurselist"] = JSON(d["nurselist"].arrayValue + result)
             case "dir2s":
-                d["directorylist"] = JSON(d["directorylist"].arrayValue + result)
+                jds["data"]["directorylist"] = JSON(d["directorylist"].arrayValue + result)
             case "cm2s":
-                d["classmatelist"] = JSON(d["classmatelist"].arrayValue + result)
+                jds["data"]["classmatelist"] = JSON(d["classmatelist"].arrayValue + result)
             case "se2s":
-                d["secretarylist"] = JSON(d["secretarylist"].arrayValue + result)
+                jds["data"]["secretarylist"] = JSON(d["secretarylist"].arrayValue + result)
             case "t2s":
-                d["teacherlist"] = JSON(d["teacherlist"].arrayValue + result)
+                jds["data"]["teacherlist"] = JSON(d["teacherlist"].arrayValue + result)
             case "s2t":
-                d["teacherlist"] = JSON(d["teacherlist"].arrayValue + result)
+                jds["data"]["teacherlist"] = JSON(d["teacherlist"].arrayValue + result)
             case "s2o":
                   2
             default :
                 break
             }
-            personCollection.reloadData()
         }
+        personCollection.reloadData()
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -74,7 +76,67 @@ class PanoramicEvaluationDetailController : UIViewController{
         present(vc, animated: true, completion: nil)
     }
     
+    func removePerson(sender :UIButton){
+        let key = sender.viewParam!["key"] as! String
+        let index = sender.viewParam!["index"] as! Int
+        
+        
+//        switch key {
+//        case "nerse2s":
+//            jds["data"]["nurselist"].arrayValue.remove(at: index)
+//        case "dir2s":
+//            jds["data"]["directorylist"].arrayValue.remove(at: index)
+//        case "cm2s":
+//            jds["data"]["classmatelist"].arrayValue.remove(at: index)
+//        case "se2s":
+//            jds["data"]["secretarylist"].arrayValue.remove(at: index)
+//        case "t2s":
+//            jds["data"]["teacherlist"].arrayValue.remove(at: index)
+//        case "s2t":
+//            jds["data"]["teacherlist"].arrayValue.remove(at: index)
+//        case "s2o":
+//            break
+//        default :
+//            break
+//        }
+        let jsonKey = getJsonKey(key: key)
+        var arr = jds["data"][jsonKey].arrayValue
+        arr.remove(at: index)
+        jds["data"][jsonKey] = JSON(arr)
+        personCollection.reloadData()
+    }
+    
+    func getJsonKey(key : String) -> String{
+        
+        switch key {
+        case "nerse2s":
+            return "nurselist"
+        case "dir2s":
+            return "directorylist"
+        case "cm2s":
+            return "classmatelist"
+        case "se2s":
+            return "secretarylist"
+        case "t2s":
+            return "teacherlist"
+        case "s2t":
+            return "teacherlist"
+        case "s2o":
+            return "officelist"
+        default :
+            break
+        }
+        return ""
+    }
+    
+    
 }
+
+
+
+
+
+
 
 extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
@@ -83,30 +145,36 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
         return keys.count
     }
     
+    //设置每个section有几个item
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch keys[section] {
-        case "nerse2s":
-            return jds["data"]["nurselist"].count + 1
-        case "dir2s":
-            return jds["data"]["directorylist"].count + 1
-        case "cm2s":
-            return jds["data"]["classmatelist"].count + 1
-        case "se2s":
-            return jds["data"]["secretarylist"].count + 1
-        case "t2s":
-            return jds["data"]["teacherlist"].count + 1
-        case "s2t":
-            return jds["data"]["teacherlist"].count + 1
-        case "s2o":
+//        switch keys[section] {
+//        case "nerse2s":
+//            return jds["data"]["nurselist"].count + 1
+//        case "dir2s":
+//            return jds["data"]["directorylist"].count + 1
+//        case "cm2s":
+//            return jds["data"]["classmatelist"].count + 1
+//        case "se2s":
+//            return jds["data"]["secretarylist"].count + 1
+//        case "t2s":
+//            return jds["data"]["teacherlist"].count + 1
+//        case "s2t":
+//            return jds["data"]["teacherlist"].count + 1
+//        case "s2o":
+//            return 2
+//        default:
+//            break
+//        }
+        let key = getJsonKey(key: keys[section])
+        if key == "officelist"{
             return 2
-        default:
-            break
         }
-        return 0
+        return jds["data"][key].count + 1
     }
     
+    
+    //渲染cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         
         var cell = UICollectionViewCell()
         
@@ -116,6 +184,7 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
             let btn = cell.viewWithTag(10002) as! UIButton
             btn.addTarget(self, action: #selector(addPerson), for: .touchUpInside)
             btn.viewParam = ["key" : keys[indexPath.section]]
+            btn.isHidden = false
             switch keys[indexPath.section] {
             case "nerse2s":
                 cellData = jds["data"]["nurselist"].arrayValue
@@ -144,20 +213,24 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
             }
             
         }else{
-            var data = cellData[indexPath.item - 1]
-            print(data)
+            let index = indexPath.item - 1
+            var data = cellData[index]
+            //print(data)
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
             var lbl = cell.viewWithTag(10001) as! UILabel
             lbl.text = data["personname"].stringValue
             lbl = cell.viewWithTag(10002) as! UILabel
             lbl.text = "工号:"
             let btn = cell.viewWithTag(10003) as! UIButton
-            
-            
-            //如果是科室 则隐藏工行和 删除按钮
+            btn.viewParam = ["key" : keys[indexPath.section] ,"index" : index]
+            btn.addTarget(self, action: #selector(removePerson(sender:)), for: .touchUpInside)
+            //如果是科室 则隐藏工号和 删除按钮
             if data["officeid"].stringValue != ""{
                 lbl.isHidden = true
                 btn.isHidden = true
+            }else{
+                lbl.isHidden = false
+                btn.isHidden = false
             }
         }
         

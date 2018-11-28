@@ -44,6 +44,7 @@ class InspectStudentsController : UIViewController{
     }
     
     func receiveNotice(notification : NSNotification){
+        NotificationCenter.default.removeObserver(self)
         if notification.userInfo != nil{
             InspectStudentsController.jds = notification.userInfo!["data"] as! [JSON]
             studentsCollection.reloadData()
