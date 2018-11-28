@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class PersonSelectorController: HBaseViewController {
     
-    static var addStudentsNotificationName = NSNotification.Name(rawValue: "addStudentsNotification")
+    static var addPersonNotificationName = NSNotification.Name(rawValue: "addPersonNotification")
     
     @IBOutlet weak var personCollection: UICollectionView!
     
@@ -92,9 +92,9 @@ class PersonSelectorController: HBaseViewController {
         for v in selectedList.values{
             data.append(v)
         }
-        print(data)
-//        NotificationCenter.default.post(name: PersonSelectorController.addStudentsNotificationName, object: self, userInfo: ["data":data])
-//        dismiss(animated: true, completion: nil)
+        //print(data)
+        NotificationCenter.default.post(name: PersonSelectorController.addPersonNotificationName, object: self, userInfo: ["data":data])
+        dismiss(animated: true, completion: nil)
     }
     
     //全部  学员  医生  护士
@@ -176,7 +176,7 @@ class PersonSelectorController: HBaseViewController {
     
     func selectDataSource() -> [String : [JSON]]{
         
-        print("selectedType:\(selectedType)\nselectedSort:\(selectedSort)")
+        //print("selectedType:\(selectedType)\nselectedSort:\(selectedSort)")
         personTotal = 0
         var result = [String : [JSON]]()
         switch selectedType {
@@ -359,7 +359,7 @@ class PersonSelectorController: HBaseViewController {
                 
                 //人员类型
                 let isHeadNurse = person["isheadnurse"].stringValue
-                if isHeadNurse == "0"{
+                if isHeadNurse == "1"{
                     if n_positionList["护士长"] == nil{
                         n_positionList["护士长"] = [JSON]()
                     }
@@ -370,7 +370,6 @@ class PersonSelectorController: HBaseViewController {
                     }
                     n_positionList["护士"]?.append(person)
                 }
-                
                 
             }else{
                 //TODO
@@ -461,10 +460,13 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
         //对key进行排序
         if selectedType == 1{
             let key = "我的学员"
-            let array = jds.removeValue(forKey: key)
             sortedKeys = jds.keys.sorted()
-            sortedKeys.insert(key, at: 0)
-            jds[key] = array
+            if jds.keys.contains(key){
+                let array = jds.removeValue(forKey: key)
+                sortedKeys.insert(key, at: 0)
+                jds[key] = array
+            }
+            
         }else{
             sortedKeys = jds.keys.sorted()
         }
@@ -565,7 +567,6 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
         //cellIsSelected[indexPath] = !(cellIsSelected[indexPath] ?? false)
         collectionView.reloadItems(at: [indexPath])
         
-        print(indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -29,7 +29,7 @@ class SmallLectureStudentsController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         //self.studentsCollection.mj_header.beginRefreshing()
         print("接收通知.....")
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addStudentsNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonNotificationName, object: nil)
     }
     
     func addStudents(){

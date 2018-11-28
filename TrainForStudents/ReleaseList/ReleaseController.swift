@@ -8,25 +8,31 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 class ReleaseController : UIViewController{
     
+    @IBOutlet weak var btnCollection: UICollectionView!
+    
+    var jds = [JSON]()
+    
     override func viewDidLoad() {
         
+        btnCollection.delegate = self
+        btnCollection.dataSource = self
         
+        jds = UserDefaults.AppConfig.json(forKey: .teachingActivityType).arrayValue
         
-        var btn = view.viewWithTag(10001) as! UIButton
-//        btn.set(image: UIImage(named: "病例讨论"), title: "病例讨论", titlePosition: .bottom, additionalSpacing: 10.0, state: .normal)
-//        btn = view.viewWithTag(10002) as! UIButton
-//        btn.set(image: UIImage(named: "小讲课"), title: "小讲课", titlePosition: .center, additionalSpacing: 10.0, state: .normal)
-//        btn = view.viewWithTag(10003) as! UIButton
-//        btn.set(image: UIImage(named: "阅片会"), title: "阅片会", titlePosition: .center, additionalSpacing: -40.0, state: .normal)
-//        btn = view.viewWithTag(10004) as! UIButton
-//        btn.set(image: nil, title: "教学查房", titlePosition: .center, additionalSpacing: 20.0, state: .normal)
-//        btn = view.viewWithTag(10005) as! UIButton
-//        btn.set(image: UIImage(named: "其他教学活动"), title:"其他教学活动", titlePosition: .scaleAspectFill, additionalSpacing: 50.0, state: .normal)
-//        btn = view.viewWithTag(10006) as! UIButton
-//        btn.set(image: UIImage(named: "release-360评价"), title: "360评价", titlePosition: .bottomLeft, additionalSpacing: 60.0, state: .normal)
+        btnCollection.reloadData()
+        
+//        var index = 1
+//        for item in btnConfig.arrayValue{
+//            var tag = 10000 + index
+//            let btn = view.viewWithTag(tag) as! UIButton
+//            let name = item["traintypename"].stringValue
+//            btn.setTitle(name, for: .normal)
+//            btn.setImage(UIImage(named: name), for: .normal)
+//        }
         
     }
     
@@ -42,6 +48,45 @@ class ReleaseController : UIViewController{
         dismiss(animated: true, completion: nil)
     }
     
+    
+    
+}
+
+
+extension ReleaseController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+        
+        let i = jds.count - collectionView.numberOfItems(inSection: indexPath.section)
+        let index = indexPath.item + i
+        let btn = cell.viewWithTag(10001) as! UIButton
+        if index >= 0 {
+            btn.isHidden = false
+            let data = jds[index]
+            let title = data["traintypename"].stringValue
+            var icon = UIImage(named: title)
+            if icon?.size == nil{
+                icon = UIImage(named: "其他教学活动")
+            }
+            btn.setImage(icon, for: .normal)
+            btn.setTitle(title, for: .normal)
+        }else{
+            btn.isHidden = true
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //myPresentView(self, viewName: "todoDetailView")
+    }
     
     
 }

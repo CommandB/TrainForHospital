@@ -63,10 +63,13 @@ class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelega
             if isReadonly {
                 lightNumber = data["numbervalue"].intValue
             }
+//            if data["itemtitle"].stringValue.range(of: "是否有分配带教老师") != nil {
+//                print()
+//            }
             touchStar(cell: cell, lightNumber: lightNumber)
             let stars = data["starsvalue"].intValue
             maxStarNumber = stars
-            for i in 1 ... stars{
+            for i in 1 ... 5{
                 let tag = 10000 + i
                 let btn = cell.viewWithTag(tag) as! UIButton
                 if i <= maxStarNumber{

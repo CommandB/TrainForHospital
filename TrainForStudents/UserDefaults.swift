@@ -8,6 +8,8 @@
 //
 
 import Foundation
+import SwiftyJSON
+
 extension UserDefaults{
     
     // 登录信息
@@ -121,6 +123,12 @@ extension UserDefaultsKeys where defaultKeys.RawValue == String {
     static func string(forKey key: defaultKeys) -> String? {
         let aKey = key.rawValue
         return UserDefaults.standard.string(forKey: aKey)
+    }
+    
+    static func json(forKey key: defaultKeys) -> JSON {
+        let aKey = key.rawValue
+        let str = UserDefaults.standard.string(forKey: aKey)
+        return JSON.init(parseJSON: str!)
     }
     
     static func any(forKey key: defaultKeys) -> Any? {

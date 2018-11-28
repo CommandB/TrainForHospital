@@ -79,4 +79,3 @@ extension MessageListController : UICollectionViewDelegate , UICollectionViewDat
     }
     
 }
-

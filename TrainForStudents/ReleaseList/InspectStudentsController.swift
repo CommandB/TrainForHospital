@@ -40,11 +40,7 @@ class InspectStudentsController : UIViewController{
         //self.studentsCollection.mj_header.beginRefreshing()
         
 //        print("接收通知.....")
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addStudentsNotificationName, object: nil)
-    }
-    
-    func addStudents(){
-        myPresentView(self, viewName: "personSelectorView")
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonNotificationName, object: nil)
     }
     
     func receiveNotice(notification : NSNotification){
@@ -53,6 +49,10 @@ class InspectStudentsController : UIViewController{
             studentsCollection.reloadData()
             
         }
+    }
+    
+    func addStudents(){
+        myPresentView(self, viewName: "personSelectorView")
     }
     
 }

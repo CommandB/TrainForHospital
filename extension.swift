@@ -148,7 +148,6 @@ func myPresentView(_ controller:UIViewController, viewName:String , completion: 
     //跳转
     controller.present(vc, animated: true, completion: nil)
     
-    
 }
 
 func getViewToStoryboard(_ viewName:String) -> UIViewController{
