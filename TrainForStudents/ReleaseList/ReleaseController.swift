@@ -25,15 +25,6 @@ class ReleaseController : UIViewController{
         
         btnCollection.reloadData()
         
-//        var index = 1
-//        for item in btnConfig.arrayValue{
-//            var tag = 10000 + index
-//            let btn = view.viewWithTag(tag) as! UIButton
-//            let name = item["traintypename"].stringValue
-//            btn.setTitle(name, for: .normal)
-//            btn.setImage(UIImage(named: name), for: .normal)
-//        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,7 +76,14 @@ extension ReleaseController : UICollectionViewDelegate , UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //myPresentView(self, viewName: "todoDetailView")
+        let vc = getViewToStoryboard("inspectView") as! InspectController
+        
+        let i = jds.count - collectionView.numberOfItems(inSection: indexPath.section)
+        let index = indexPath.item + i
+        if index >= 0 {
+            vc.trainType = jds[index]
+            present(vc, animated: true, completion: nil)
+        }
     }
     
     

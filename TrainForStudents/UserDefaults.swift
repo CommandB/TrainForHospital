@@ -89,7 +89,7 @@ extension UserDefaults{
             case teachingActivityS2TEvaluationList
             ///教学活动老师评价学员默认评价表
             case teachingActivityT2SEvaluationList
-            //评价表清单
+            ///评价表清单
             case teachingActivityEvaluationList
             ///教学活动类型
             case teachingActivityType

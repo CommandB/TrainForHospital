@@ -319,7 +319,7 @@ class TaskCenterController: MyBaseUIViewController, UIImagePickerControllerDeleg
         picker.delegate = self
         if LBXPermissions.isGetPhotoPermission() {
             let takePhoto = UserDefaults.AppConfig.string(forKey: .scanCheckInTakePhoto)
-            if takePhoto == "0"{
+            if takePhoto == "0" || true{    //暂时不需要拍照 直接扫码
                 //不需要照片则直接打开扫码界面
                 let vc = getViewToStoryboard("scannerView") as! ScannerViewController
                 self.present(vc, animated: true, completion: nil)

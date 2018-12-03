@@ -78,11 +78,6 @@ class PersonSelectorController: HBaseViewController {
         
         
     }
-    deinit {
-        //print("删除通知..")
-        //NotificationCenter.default.removeObserver(self)
-        //NotificationCenter.default.removeObserver(self, name: PersonSelectorController.addPersonNotificationName, object: nil)
-    }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -444,6 +439,20 @@ class PersonSelectorController: HBaseViewController {
     }
     
     func refresh() {
+        print("刷新数据....")
+        ///排序后的key
+        sortedKeys = [String]()
+        ///选中的人员数据
+        selectedList = [String:JSON]()
+        ///已全选的section
+        sectionIsSelected = [IndexPath:Bool]()
+        ///是否全选
+        isSelectedAll = false
+        //
+        var selectedType = 0
+        ///选中的筛选条件类型
+        var selectedSort = "initials"
+        
         jds.removeAll()
         //personCollection.mj_footer.resetNoMoreData()
         getListData()
@@ -473,12 +482,14 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
         }else{
             sortedKeys = jds.keys.sorted()
         }
+        print("section:\(jds.count)")
         return jds.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         let key = sortedKeys[section]
+        print("items:\(jds[key]!.count + 1)")
         return jds[key]!.count + 1
     }
     
@@ -553,7 +564,7 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         super.hiddenKeyBoard()
         
-        if indexPath.item == 0{
+        if indexPath.item == 0 || sortedKeys.count == 0{
             return
         }
         
@@ -568,6 +579,7 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
             selectedList[personId] = data
         }
         //cellIsSelected[indexPath] = !(cellIsSelected[indexPath] ?? false)
+        print("选中了..需要刷新...")
         collectionView.reloadItems(at: [indexPath])
         
     }

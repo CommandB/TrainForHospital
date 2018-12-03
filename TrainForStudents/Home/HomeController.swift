@@ -24,14 +24,36 @@ class HomeController : UIViewController{
         homeCollection.reloadData()
     }
     
-    
+    ///跳转到消息列表
     func btn_message_event(){
         myPresentView(self, viewName: "messageListView")
         //UIApplication.shared.openURL(URL.init(string: "telprompt:13616543097")!)
     }
     
+    ///跳转到待办事项
     func presentToDoList(){
         myPresentView(self, viewName: "todoListView")
+    }
+    
+    ///6个功能按钮
+    func btn_features_event(sender : UIButton){
+        switch sender.tag - 10000 {
+        case 1:
+            myPresentView(self, viewName: "panoramicEvaluationView")
+            break
+        case 2:
+            break
+        case 3:
+            break
+        case 4:
+            break
+        case 5:
+            break
+        case 6:
+            break
+        default:
+            break
+        }
     }
     
 }
@@ -78,16 +100,22 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuresCell", for: indexPath)
             var btn = cell.viewWithTag(10001) as! UIButton
             btn.set(image: nil, title: "360评价", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
+            btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             btn = cell.viewWithTag(10002) as! UIButton
             btn.set(image: nil, title: "出科考试", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
+            btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             btn = cell.viewWithTag(10003) as! UIButton
             btn.set(image: nil, title: "教学督查", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
-            btn = cell.viewWithTag(20001) as! UIButton
+            btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
+            btn = cell.viewWithTag(10004) as! UIButton
             btn.set(image: nil, title: "入科安排", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
-            btn = cell.viewWithTag(20002) as! UIButton
+            btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
+            btn = cell.viewWithTag(10005) as! UIButton
             btn.set(image: nil, title: "考情登记", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
-            btn = cell.viewWithTag(20003) as! UIButton
+            btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
+            btn = cell.viewWithTag(10006) as! UIButton
             btn.set(image: nil, title: "学员轮转", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
+            btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             break
         case 4:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "classTitleCell", for: indexPath)

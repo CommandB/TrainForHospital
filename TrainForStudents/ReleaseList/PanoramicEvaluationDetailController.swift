@@ -12,8 +12,11 @@ import SwiftyJSON
 
 class PanoramicEvaluationDetailController : UIViewController{
     
+    static var callbackNotificationName = NSNotification.Name(rawValue: "callbackNotificationName")
+    
     @IBOutlet weak var personCollection: UICollectionView!
     
+    var parentIndexPath = IndexPath()
     var jds = JSON()
     var keys = [String]()
     var cellData = [JSON]()
@@ -66,6 +69,7 @@ class PanoramicEvaluationDetailController : UIViewController{
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
+        NotificationCenter.default.post(name: PanoramicEvaluationDetailController.callbackNotificationName, object: nil, userInfo: ["data":jds["data"],"indexPath": parentIndexPath])
         dismiss(animated: true, completion: nil)
     }
     
@@ -128,7 +132,6 @@ class PanoramicEvaluationDetailController : UIViewController{
         }
         return ""
     }
-    
     
 }
 

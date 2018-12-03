@@ -107,4 +107,12 @@ extension UIView{
     func setY( y : CGFloat){
         self.frame.origin = CGPoint(x: frame.origin.x, y: y)
     }
+    
+    func setWidth( width : CGFloat){
+        self.frame.size = CGSize(width: width, height: self.H)
+    }
+    
+    func setHight(height :CGFloat){
+        self.frame.size = CGSize(width: self.W, height: height)
+    }
 }

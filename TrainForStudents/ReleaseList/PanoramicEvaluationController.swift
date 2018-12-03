@@ -42,12 +42,16 @@ class PanoramicEvaluationController : UIViewController{
         
         let lbl = view.viewWithTag(10001) as! UILabel
         lbl.setCornerRadius(radius: lbl.W.divided(by: 2))
+        let btn = view.viewWithTag(30002) as! UIButton
+        btn.addTarget(self, action: #selector(presentDimension), for: .touchUpInside)
         
         self.personCollection.mj_header.beginRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PanoramicEvaluationDetailController.callbackNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice2), name: EvaluationDimensionController.callbackNotificationName, object: nil)
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -55,7 +59,75 @@ class PanoramicEvaluationController : UIViewController{
     }
     
     @IBAction func btn_sure_inside(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        
+        let url = SERVER_PORT + "rest/app/release360evaluate.do"
+        let officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
+        
+        var param = ["officeid":officeId , "studentlist" : jds] as [String : Any]
+        
+        for key in evDic.keys{
+            switch key{
+            case "nerse2s":
+                param["NurseEvStudent"] = evDic[key]!
+            case "dir2s":
+                param["DirectorEvStudent"] = evDic[key]!
+            case "cm2s":
+                param["ClassmateEvStudent"] = evDic[key]!
+            case "se2s":
+                param["SecretaryEvStudent"] = evDic[key]!
+            case "t2s":
+                param["TeacherEvStudent"] = evDic[key]!
+            case "s2t":
+                param["StudentEvTeacher"] = evDic[key]!
+            case "s2o":
+                param["StudentEvOffice"] = evDic[key]!
+            default:
+                break
+            }
+        }
+        
+        myPostRequest(url, param, method: .post).responseString(completionHandler: {resp in
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                if json["code"].stringValue == "1"{
+                    myAlert(self, message: "发布成功!")
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                }
+                break
+            case .failure(let error):
+                myAlert(self, message: "发布异常!")
+                print(error)
+                break
+            }
+        })
+    }
+    
+    func receiveNotice(notification : NSNotification){
+        NotificationCenter.default.removeObserver(self, name: PanoramicEvaluationDetailController.callbackNotificationName, object: nil)
+        //print("处理通知")
+        if notification.userInfo != nil{
+            let result = notification.userInfo!["data"] as! JSON
+            let index = notification.userInfo!["indexPath"] as! IndexPath
+            jds[index.item] = result
+            //print(jds[index.item])
+        }
+    }
+    
+    func receiveNotice2(notification : NSNotification){
+        NotificationCenter.default.removeObserver(self, name: EvaluationDimensionController.callbackNotificationName, object: nil)
+        //print("处理通知")
+        if notification.userInfo != nil{
+            let result = notification.userInfo!["data"] as! [String : JSON]
+            evDic = result
+        }
+    }
+    
+    func presentDimension(){
+        let vc = getViewToStoryboard("evaluationDimensionView") as! EvaluationDimensionController
+        vc.evDic = evDic
+        present(vc, animated: true, completion: nil)
     }
     
     func getListData(){
@@ -82,6 +154,14 @@ class PanoramicEvaluationController : UIViewController{
                     self.evDic["t2s"] = json["TeacherEvStudent"]
                     self.evDic["s2t"] = json["StudentEvTeacher"]
                     self.evDic["s2o"] = json["StudentEvOffice"]
+                    
+                    var total = 0
+                    for k in self.evDic.keys{
+                        if self.evDic[k]?.count != 0{
+                            total += 1
+                        }
+                    }
+                    (self.view.viewWithTag(30001) as! UILabel).text = "共\(total)个评价维度"
                     
                     
                     self.personCollection.reloadData()
@@ -140,6 +220,7 @@ extension PanoramicEvaluationController : UICollectionViewDelegate , UICollectio
         let vc = getViewToStoryboard("panoramicEvaluationDetailDetail") as! PanoramicEvaluationDetailController
         vc.jds["evDic"] = JSON(evDic)
         vc.jds["data"] = jds[indexPath.item]
+        vc.parentIndexPath = indexPath
         present(vc, animated: true, completion: nil)
         
     }

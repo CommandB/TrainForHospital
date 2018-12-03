@@ -59,8 +59,6 @@
 		0A26BA3B219AABB20071C2DC /* 白星星-空.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26BA38219AABB10071C2DC /* 白星星-空.png */; };
 		0A26BA3D219ABB5B0071C2DC /* CommentListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA3C219ABB5B0071C2DC /* CommentListController.swift */; };
 		0A26BA3F219BD3120071C2DC /* HBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA3E219BD3120071C2DC /* HBaseViewController.swift */; };
-		0A26BA41219BF00D0071C2DC /* SmallLectureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA40219BF00D0071C2DC /* SmallLectureController.swift */; };
-		0A26BA43219BFD710071C2DC /* SmallLectureStudentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA42219BFD710071C2DC /* SmallLectureStudentsController.swift */; };
 		0A26BA47219C16D20071C2DC /* FilesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA46219C16D20071C2DC /* FilesCollectionView.swift */; };
 		0A26BA4D219C18710071C2DC /* word.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26BA48219C186A0071C2DC /* word.png */; };
 		0A26BA4E219C18710071C2DC /* vedio.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26BA49219C186B0071C2DC /* vedio.png */; };
@@ -77,6 +75,8 @@
 		0A31A98C21ABD36E007AB138 /* PanoramicEvaluationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */; };
 		0A31A99721AD33E1007AB138 /* 添加人员.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A31A99621AD33DE007AB138 /* 添加人员.png */; };
 		0A31A99921AD39CA007AB138 /* PanoramicEvaluationDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */; };
+		0A31A9A521AE9ACA007AB138 /* EvaluationDimensionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A9A421AE9ACA007AB138 /* EvaluationDimensionController.swift */; };
+		0A31A9A821B50441007AB138 /* HSimplePickerViewImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A9A721B50441007AB138 /* HSimplePickerViewImpl.swift */; };
 		0A3A7F6F2192942200334307 /* 入科.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A7F632192941F00334307 /* 入科.png */; };
 		0A3A7F702192942200334307 /* 操作-电话-蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A7F6D2192942000334307 /* 操作-电话-蓝.png */; };
 		0A3A7F712192942200334307 /* 日历-蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A7F6E2192942100334307 /* 日历-蓝.png */; };
@@ -840,8 +840,6 @@
 		0A26BA38219AABB10071C2DC /* 白星星-空.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "白星星-空.png"; sourceTree = "<group>"; };
 		0A26BA3C219ABB5B0071C2DC /* CommentListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListController.swift; sourceTree = "<group>"; };
 		0A26BA3E219BD3120071C2DC /* HBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBaseViewController.swift; sourceTree = "<group>"; };
-		0A26BA40219BF00D0071C2DC /* SmallLectureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallLectureController.swift; sourceTree = "<group>"; };
-		0A26BA42219BFD710071C2DC /* SmallLectureStudentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallLectureStudentsController.swift; sourceTree = "<group>"; };
 		0A26BA46219C16D20071C2DC /* FilesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesCollectionView.swift; sourceTree = "<group>"; };
 		0A26BA48219C186A0071C2DC /* word.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = word.png; sourceTree = "<group>"; };
 		0A26BA49219C186B0071C2DC /* vedio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vedio.png; sourceTree = "<group>"; };
@@ -858,6 +856,8 @@
 		0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramicEvaluationController.swift; sourceTree = "<group>"; };
 		0A31A99621AD33DE007AB138 /* 添加人员.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加人员.png"; sourceTree = "<group>"; };
 		0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramicEvaluationDetailController.swift; sourceTree = "<group>"; };
+		0A31A9A421AE9ACA007AB138 /* EvaluationDimensionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationDimensionController.swift; sourceTree = "<group>"; };
+		0A31A9A721B50441007AB138 /* HSimplePickerViewImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSimplePickerViewImpl.swift; sourceTree = "<group>"; };
 		0A3A7F632192941F00334307 /* 入科.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "入科.png"; sourceTree = "<group>"; };
 		0A3A7F6D2192942000334307 /* 操作-电话-蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "操作-电话-蓝.png"; sourceTree = "<group>"; };
 		0A3A7F6E2192942100334307 /* 日历-蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "日历-蓝.png"; sourceTree = "<group>"; };
@@ -2025,6 +2025,7 @@
 			children = (
 				0A26BA28219578070071C2DC /* HUtilView.swift */,
 				0A26BA30219A9F3A0071C2DC /* ZYStarRateView.swift */,
+				0A31A9A721B50441007AB138 /* HSimplePickerViewImpl.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2275,10 +2276,9 @@
 				0A8293C9217ECBFD006047B1 /* InspectController.swift */,
 				0AF9D34D21830D570068B05A /* InspectStudentsController.swift */,
 				0AF9D34F21830EA00068B05A /* InspectPatientsController.swift */,
-				0A26BA40219BF00D0071C2DC /* SmallLectureController.swift */,
-				0A26BA42219BFD710071C2DC /* SmallLectureStudentsController.swift */,
 				0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */,
 				0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */,
+				0A31A9A421AE9ACA007AB138 /* EvaluationDimensionController.swift */,
 			);
 			path = ReleaseList;
 			sourceTree = "<group>";
@@ -3220,7 +3220,6 @@
 				0A644D731F017C06009025DD /* HistoryEvaluationCollectionView.swift in Sources */,
 				0AB31E4A215CAC81002E3F32 /* ComplaintListController.swift in Sources */,
 				0AC3BB021EE9499000227194 /* extension.swift in Sources */,
-				0A26BA43219BFD710071C2DC /* SmallLectureStudentsController.swift in Sources */,
 				0AD14563217D81FB004670A9 /* LeaveApprovedController.swift in Sources */,
 				0A15D5281F0E51F200908B7F /* MeterialListController.swift in Sources */,
 				0A44131D1EEAC64F00BAB679 /* BMCustomPlayer.swift in Sources */,
@@ -3252,7 +3251,6 @@
 				B4FF1A941F94DF7D009C6685 /* UIView+WebCache.m in Sources */,
 				B4FF1A8B1F94DF7D009C6685 /* SDWebImageDownloader.m in Sources */,
 				B4FF1A851F94DF7D009C6685 /* NSData+ImageContentType.m in Sources */,
-				0A26BA41219BF00D0071C2DC /* SmallLectureController.swift in Sources */,
 				0A6A23BB1EF3BEBE00A1AC5B /* DirectoryCollectionView.swift in Sources */,
 				B44FFFE2211C6E2D00844C07 /* JHGlobal.swift in Sources */,
 				0A15D5091F0B3E1B00908B7F /* OnlineAskCollectionView.swift in Sources */,
@@ -3339,6 +3337,7 @@
 				0A494F90211C247500E95332 /* OfficeController.swift in Sources */,
 				B4FF1A8D1F94DF7D009C6685 /* SDWebImageManager.m in Sources */,
 				0A644D871F021634009025DD /* EvaluationDetailCollectionView.swift in Sources */,
+				0A31A9A521AE9ACA007AB138 /* EvaluationDimensionController.swift in Sources */,
 				B468B7CC1FCA9BA000ECF396 /* UIScrollView+MJExtension.m in Sources */,
 				0A644D711F017B08009025DD /* HistoryEvaluationController.swift in Sources */,
 				0A8293CA217ECBFD006047B1 /* InspectController.swift in Sources */,
@@ -3353,6 +3352,7 @@
 				0A90EFB11EFA20B400B4CC7A /* CheckboxCollectionView.swift in Sources */,
 				0A15D5111F0BA78700908B7F /* MyNotificationUtil.swift in Sources */,
 				0AB31E59215CD1DC002E3F32 /* ComplaintReplyCollection.swift in Sources */,
+				0A31A9A821B50441007AB138 /* HSimplePickerViewImpl.swift in Sources */,
 				0AC3BCA01EE94DA300227194 /* LBXScanNetAnimation.swift in Sources */,
 				0A125A901F29D1FF00FDD4F4 /* ChangePasswordController.swift in Sources */,
 				B4FF1A891F94DF7D009C6685 /* SDWebImageCompat.m in Sources */,

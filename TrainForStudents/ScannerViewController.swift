@@ -169,7 +169,7 @@ class ScannerViewController: MyBaseUIViewController , AVCaptureMetadataOutputObj
                     let signMsg = json["msg"].stringValue
                     //不需要上传照片则直接关闭view
                     let takePhoto = UserDefaults.AppConfig.string(forKey: .scanCheckInTakePhoto)
-                    if takePhoto == "0"{
+                    if takePhoto == "0" || true{    //暂时不需要拍照 直接扫码
                         myAlert(vc, title: "签到", message: signMsg, handler: { action in
                             self.dismiss(animated: true, completion: nil)
                         })

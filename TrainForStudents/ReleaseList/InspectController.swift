@@ -30,15 +30,28 @@ class InspectController : HBaseViewController{
     
     let datePicker = UIDatePicker()
     let addrPicker = UIPickerView()
+    var evPicker = UIPickerView()
+    let hPickerImpl = HSimplePickerViewImpl()
+    
     var addrPickerDs = [JSON]()
+    
+    //发布的培训类型
+    var trainType = JSON()
     
     //按钮的集合
     var buttonGroup = [UIButton]()
     
     //提交时候用的数据
     var submitParam = [String:Any]()
+    //评价功能
+    var evaluaList = [String:[String:String]]()
+    
+    var selectedTextField : UITextField?
     
     override func viewDidLoad() {
+        
+        let lbl_viewTitle = view.viewWithTag(11111) as! UILabel
+        lbl_viewTitle.text = trainType["traintypename"].stringValue
         
         datePicker.datePickerMode = .dateAndTime
         datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
@@ -48,6 +61,10 @@ class InspectController : HBaseViewController{
         addrPickerDs = JSON(parseJSON:UserDefaults.AppConfig.string(forKey: .classroomList)!).arrayValue
         
         
+        evPicker = hPickerImpl.getDefaultPickerView()
+        hPickerImpl.titleKey = "evaluationname"
+        hPickerImpl.dataSource = UserDefaults.AppConfig.json(forKey: .teachingActivityEvaluationList).arrayValue
+        hPickerImpl.clorsureImpl = evClosureImpl
         
         //用作滚动页的容器
         scrollView.contentSize = CGSize(width: UIScreen.width.multiplied(by: 3), height: scrollView.frame.height)
@@ -100,10 +117,31 @@ class InspectController : HBaseViewController{
         btn = view.viewWithTag(80003) as! UIButton
         btn.addTarget(self, action: #selector(chooseCheckInType), for: .touchUpInside)
         
+        //评价功能
+        
+        
+        let s2t = JSON(parseJSON: UserDefaults.AppConfig.string(forKey: .teachingActivityS2TEvaluationList)!)
+        let t2s = JSON(parseJSON: UserDefaults.AppConfig.string(forKey: .teachingActivityT2SEvaluationList)!)
+        
+        txt = view.viewWithTag(90001) as! UITextField
+        txt.delegate = self
+        txt.inputView = evPicker
+        evaluaList["1"] = ["beevaluateid":"1","evaluationid":s2t["evaluationid"].stringValue]
+        txt.text = s2t["evaluationname"].stringValue
+        
+        txt = view.viewWithTag(90002) as! UITextField
+        txt.delegate = self
+        txt.inputView = evPicker
+        txt.text = t2s["evaluationname"].stringValue
+        evaluaList["5"] = ["beevaluateid":"5","evaluationid":t2s["evaluationid"].stringValue]
+
+        
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        myConfirm(self, message: "确定退出编辑吗?" , okHandler : { action in
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
     @IBAction func btn_sure_inside(_ sender: UIButton) {
@@ -111,7 +149,7 @@ class InspectController : HBaseViewController{
         
         submitParam["isfreein"] = 0
         submitParam["issend"] = 1
-        submitParam["type"] = 5
+        submitParam["type"] = trainType["traintypeid"].intValue
         submitParam["officeid"] = UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)
         
         let url = SERVER_PORT + "rest/app/train/releaseTrain.do"
@@ -141,17 +179,7 @@ class InspectController : HBaseViewController{
         submitParam["endtime"] = endTime
         
         //评价功能
-        var evaluaList = [[String:String]]()
-        let s2t = JSON(parseJSON: UserDefaults.AppConfig.string(forKey: .teachingActivityS2TEvaluationList)!)
-        let t2s = JSON(parseJSON: UserDefaults.AppConfig.string(forKey: .teachingActivityT2SEvaluationList)!)
-        if !s2t.isEmpty {
-            evaluaList.append(["beevaluateid":"1","evaluationid":s2t["evaluationid"].stringValue])
-        }
-        if !t2s.isEmpty {
-            evaluaList.append(["beevaluateid":"5","evaluationid":t2s["evaluationid"].stringValue])
-        }
-        
-        submitParam["evaluatelist"] = evaluaList
+        submitParam["evaluatelist"] = evaluaList.values as! [String:String]
         
         //学员信息
         if InspectStudentsController.jds.count == 0 {
@@ -209,6 +237,9 @@ class InspectController : HBaseViewController{
         }else if tag == 50001{
             textField.text = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesname"].stringValue
             submitParam["address"] = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesid"].stringValue
+        }else if tag == 90002 || tag == 90001 {
+            evPicker.reloadAllComponents()
+            selectedTextField = textField
         }else{
             datePicker.minimumDate = nil
             let t41 = view.viewWithTag(40001) as! UITextField
@@ -300,6 +331,18 @@ class InspectController : HBaseViewController{
             let interval = DateUtil.intervalDate("\(t31.text!) \(t32.text!)", to: "\(t41.text!) \(t42.text!)", pattern: "yyyy-MM-dd HH:mm")
             let lbl = view.viewWithTag(20001) as! UILabel
             lbl.text = "时长：\(interval.hour)时\(interval.minute)分"
+        }
+    }
+    
+    func evClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+        if let t = selectedTextField{
+            let data = ds[row]
+            t.text = data["evaluationname"].stringValue
+            if t.tag == 90001{
+                evaluaList["1"]!["evaluationid"] = data["evaluationid"].stringValue
+            }else{
+                evaluaList["5"]!["evaluationid"] = data["evaluationid"].stringValue
+            }
         }
     }
     
