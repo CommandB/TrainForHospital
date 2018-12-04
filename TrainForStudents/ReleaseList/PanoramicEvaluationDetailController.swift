@@ -84,25 +84,6 @@ class PanoramicEvaluationDetailController : UIViewController{
         let key = sender.viewParam!["key"] as! String
         let index = sender.viewParam!["index"] as! Int
         
-        
-//        switch key {
-//        case "nerse2s":
-//            jds["data"]["nurselist"].arrayValue.remove(at: index)
-//        case "dir2s":
-//            jds["data"]["directorylist"].arrayValue.remove(at: index)
-//        case "cm2s":
-//            jds["data"]["classmatelist"].arrayValue.remove(at: index)
-//        case "se2s":
-//            jds["data"]["secretarylist"].arrayValue.remove(at: index)
-//        case "t2s":
-//            jds["data"]["teacherlist"].arrayValue.remove(at: index)
-//        case "s2t":
-//            jds["data"]["teacherlist"].arrayValue.remove(at: index)
-//        case "s2o":
-//            break
-//        default :
-//            break
-//        }
         let jsonKey = getJsonKey(key: key)
         var arr = jds["data"][jsonKey].arrayValue
         arr.remove(at: index)

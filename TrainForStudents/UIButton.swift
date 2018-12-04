@@ -62,7 +62,7 @@ extension UIButton{
         self.titleEdgeInsets = titleInsets
         self.imageEdgeInsets = imageInsets
         //print("title=\(self.titleLabel?.frame)")
-        print("titleInsets=\(titleInsets)")
+        //print("titleInsets=\(titleInsets)")
         //print("image=\(self.imageView?.frame)")
         //print("imageInsets=\(imageInsets)")
         
