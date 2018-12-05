@@ -40,7 +40,11 @@ class HSimplePickerViewImpl :UIViewController, UIPickerViewDelegate , UIPickerVi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        clorsureImpl!(dataSource,pickerView,row,component)
+        
+        if clorsureImpl != nil{
+            clorsureImpl!(dataSource,pickerView,row,component)
+        }
+        
     }
     
 }

@@ -444,10 +444,12 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     }
     
     func getExerises(_ type : Int){
+        MBProgressHUD.showAdded(to: view, animated: true)
         let vc = getViewToStoryboard("examView") as! ExamViewController
         let url = SERVER_PORT + "rest/questions/queryExercisesQuestions.do"
 //        let url = "http://120.77.181.22:8080/cloud_doctor_train/rest/questions/queryExercisesQuestions.do"
         myPostRequest(url,["exercisestype" : type]).responseJSON(completionHandler: { resp in
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             switch  resp.result{
             case .success(let result):
                 let json = JSON(result)

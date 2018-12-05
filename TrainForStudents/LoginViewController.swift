@@ -197,6 +197,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                 
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
+                    self.pickerDataSource = [JSON]()
                     self.pickerDataSource.append(JSON(["name":self.pickerViewFirstStr]))
                     self.pickerDataSource += json["data"].arrayValue
                 }else{

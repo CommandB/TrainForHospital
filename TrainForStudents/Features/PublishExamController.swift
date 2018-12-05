@@ -14,25 +14,49 @@ class PublishExamController : HBaseViewController{
     
     @IBOutlet weak var personCollection: UICollectionView!
     
+    @IBOutlet weak var questionsCollection: UICollectionView!
+    
     var jds = [JSON]()
+    
+    var directoryView = DirectoryCollectionView()
     
     let datePicker = UIDatePicker()
     
     var addrPicker = UIPickerView()
-    let hPickerImpl = HSimplePickerViewImpl()
+    let addrPickerImpl = HSimplePickerViewImpl()
+    
+    var paperPicker = UIPickerView()
+    let paperPickerImpl = HSimplePickerViewImpl()
     
     override func viewDidLoad() {
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         
         personCollection.delegate = self
         personCollection.dataSource = self
         
+        questionsCollection.delegate = directoryView
+        questionsCollection.dataSource = directoryView
+        
         datePicker.datePickerMode = .dateAndTime
         datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
         
-        addrPicker = hPickerImpl.getDefaultPickerView()
-        hPickerImpl.titleKey = "facilitiesname"
-        hPickerImpl.dataSource = UserDefaults.AppConfig.json(forKey: .classroomList).arrayValue
-        hPickerImpl.clorsureImpl = addrClosureImpl
+        addrPicker = addrPickerImpl.getDefaultPickerView()
+        addrPickerImpl.titleKey = "facilitiesname"
+        addrPickerImpl.dataSource = UserDefaults.AppConfig.json(forKey: .classroomList).arrayValue
+        addrPickerImpl.clorsureImpl = addrClosureImpl
+        
+        paperPicker = paperPickerImpl.getDefaultPickerView()
+        paperPickerImpl.titleKey = "title"
+        paperPickerImpl.clorsureImpl = paperClosureImpl
+        paperPicker.backgroundColor = UIColor.groupTableViewBackground
+        paperPicker.setWidth(width: UIScreen.width)
+        paperPicker.setHight(height: 200)
+        paperPicker.setY(y: UIScreen.height.subtracting(paperPicker.H))
+        paperPicker.isHidden = true
+        
+        view.addSubview(paperPicker)
+        
         
         var btn = view.viewWithTag(10002) as! UIButton
         btn.setBorder(width: 1, color: (btn.titleLabel?.textColor)!)
@@ -57,11 +81,41 @@ class PublishExamController : HBaseViewController{
         txt = view.viewWithTag(50001) as! TextFieldForNoMenu
         txt.inputView = addrPicker
         
+        let url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
+        
+        myPostRequest(url, method: .post).responseString(completionHandler: {resp in
+            
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                if json["code"].stringValue == "1"{
+                    self.paperPickerImpl.dataSource = json["data"].arrayValue
+                    self.paperPicker.reloadAllComponents()
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                }
+                break
+            case .failure(let error):
+                myAlert(self, message: "加载试卷异常!")
+                print(error)
+                break
+            }
+        })
+        
+        questionsCollection.register(TitleReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         //self.personCollection.mj_header.beginRefreshing()
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonNotificationName, object: nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //收起键盘
+        self.view.endEditing(true)
+        self.paperPicker.isHidden = true
     }
     
     func receiveNotice(notification : NSNotification){
@@ -78,15 +132,19 @@ class PublishExamController : HBaseViewController{
         dismiss(animated: true, completion: nil)
     }
     
+    //选人
     @IBAction func btn_addPerson_inside(_ sender: UIButton) {
         myPresentView(self, viewName: "personSelectorView")
     }
     
+    //选择试卷
     @IBAction func btn_selectPaper_inside(_ sender: UIButton) {
-        //dismiss(animated: true, completion: nil)
+        hiddenKeyBoard()
+        self.paperPicker.isHidden = false
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.paperPicker.isHidden = true
         let tag = textField.tag
         if tag == 40001 || tag == 40002{
             let t31 = view.viewWithTag(30001) as! UITextField
@@ -130,6 +188,31 @@ class PublishExamController : HBaseViewController{
     func addrClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
         let txt = view.viewWithTag(50001) as! UITextField
         txt.text = ds[row]["facilitiesname"].stringValue
+    }
+    
+    func paperClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+        
+        MBProgressHUD.showAdded(to: questionsCollection, animated: true)
+        let url = SERVER_PORT + "rest/app/getTheoryExercisesDetail.do"
+        myPostRequest(url, ["exercisesid":ds[row]["exercisesid"].stringValue], method: .post).responseString(completionHandler: {resp in
+            MBProgressHUD.hideAllHUDs(for: self.questionsCollection, animated: true)
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                if json["code"].stringValue == "1"{
+                    self.directoryView.jsonDataSource = json["data"].arrayValue
+                    self.questionsCollection.reloadData()
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                }
+                break
+            case .failure(let error):
+                myAlert(self, message: "加载试卷异常!")
+                print(error)
+                break
+            }
+        })
+        
     }
     
 }
