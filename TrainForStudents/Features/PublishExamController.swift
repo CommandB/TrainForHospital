@@ -81,6 +81,18 @@ class PublishExamController : HBaseViewController{
         txt = view.viewWithTag(50001) as! TextFieldForNoMenu
         txt.inputView = addrPicker
         
+        
+        btn = view.viewWithTag(70001) as! UIButton
+        btn.addTarget(self, action: #selector(chooseExamType(sender:)), for: .touchUpInside)
+        btn = view.viewWithTag(70002) as! UIButton
+        btn.addTarget(self, action: #selector(chooseExamType(sender:)), for: .touchUpInside)
+        btn = view.viewWithTag(70003) as! UIButton
+        btn.addTarget(self, action: #selector(chooseExamType(sender:)), for: .touchUpInside)
+        btn = view.viewWithTag(80001) as! UIButton
+        btn.addTarget(self, action: #selector(chooseSignInType(sender:)), for: .touchUpInside)
+        btn = view.viewWithTag(80002) as! UIButton
+        btn.addTarget(self, action: #selector(chooseSignInType(sender:)), for: .touchUpInside)
+        
         let url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
         
         myPostRequest(url, method: .post).responseString(completionHandler: {resp in
@@ -182,6 +194,36 @@ class PublishExamController : HBaseViewController{
             let interval = DateUtil.intervalDate("\(t31.text!) \(t32.text!)", to: "\(t41.text!) \(t42.text!)", pattern: "yyyy-MM-dd HH:mm")
             let lbl = view.viewWithTag(20001) as! UILabel
             lbl.text = "时长：\(interval.hour)时\(interval.minute)分"
+        }
+    }
+    
+    func chooseExamType(sender : UIButton){
+        hiddenKeyBoard()
+        var i = 0
+        while (i < 3){
+            let btn = view.viewWithTag(70001+i) as! UIButton
+            if btn.tag == sender.tag{
+                btn.setImage(UIImage(named: "选择-大"), for: .normal)
+                //submitParam["sign"] = i
+            }else{
+                btn.setImage(UIImage(named: "未选择-大"), for: .normal)
+            }
+            i += 1
+        }
+    }
+    
+    func chooseSignInType(sender : UIButton){
+        hiddenKeyBoard()
+        var i = 0
+        while (i < 2){
+            let btn = view.viewWithTag(80001+i) as! UIButton
+            if btn.tag == sender.tag{
+                btn.setImage(UIImage(named: "选择-大"), for: .normal)
+                //submitParam["sign"] = i
+            }else{
+                btn.setImage(UIImage(named: "未选择-大"), for: .normal)
+            }
+            i += 1
         }
     }
     

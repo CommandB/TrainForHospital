@@ -307,7 +307,6 @@ class InspectController : HBaseViewController{
             }
             i += 1
         }
-        
     }
     
     
