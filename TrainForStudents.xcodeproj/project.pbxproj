@@ -77,7 +77,7 @@
 		0A31A99921AD39CA007AB138 /* PanoramicEvaluationDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */; };
 		0A31A9A521AE9ACA007AB138 /* EvaluationDimensionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A9A421AE9ACA007AB138 /* EvaluationDimensionController.swift */; };
 		0A31A9A821B50441007AB138 /* HSimplePickerViewImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A9A721B50441007AB138 /* HSimplePickerViewImpl.swift */; };
-		0A31A9B321B52931007AB138 /* 考试.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A31A9B221B5292E007AB138 /* 考试.png */; };
+		0A31A9B321B52931007AB138 /* 考试试卷.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A31A9B221B5292E007AB138 /* 考试试卷.png */; };
 		0A31A9B521B5293B007AB138 /* 人员LOGO.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A31A9B421B5293A007AB138 /* 人员LOGO.png */; };
 		0A31A9B721B6567A007AB138 /* PublishExamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A9B621B6567A007AB138 /* PublishExamController.swift */; };
 		0A3A7F6F2192942200334307 /* 入科.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A7F632192941F00334307 /* 入科.png */; };
@@ -861,7 +861,7 @@
 		0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramicEvaluationDetailController.swift; sourceTree = "<group>"; };
 		0A31A9A421AE9ACA007AB138 /* EvaluationDimensionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationDimensionController.swift; sourceTree = "<group>"; };
 		0A31A9A721B50441007AB138 /* HSimplePickerViewImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSimplePickerViewImpl.swift; sourceTree = "<group>"; };
-		0A31A9B221B5292E007AB138 /* 考试.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "考试.png"; path = "../../../../../Users/huangweisheng/Downloads/切图1122/切图/发布考试详情/2x/考试.png"; sourceTree = "<group>"; };
+		0A31A9B221B5292E007AB138 /* 考试试卷.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "考试试卷.png"; path = "../../../../../Users/huangweisheng/Downloads/切图1122/切图/发布考试详情/2x/考试试卷.png"; sourceTree = "<group>"; };
 		0A31A9B421B5293A007AB138 /* 人员LOGO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "人员LOGO.png"; sourceTree = "<group>"; };
 		0A31A9B621B6567A007AB138 /* PublishExamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishExamController.swift; sourceTree = "<group>"; };
 		0A3A7F632192941F00334307 /* 入科.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "入科.png"; sourceTree = "<group>"; };
@@ -2188,7 +2188,7 @@
 			isa = PBXGroup;
 			children = (
 				0A31A9B421B5293A007AB138 /* 人员LOGO.png */,
-				0A31A9B221B5292E007AB138 /* 考试.png */,
+				0A31A9B221B5292E007AB138 /* 考试试卷.png */,
 				0A26BA38219AABB10071C2DC /* 白星星-空.png */,
 				0A26BA36219AABAC0071C2DC /* 黄星星-空.png */,
 				0A26BA37219AABAF0071C2DC /* 黄星星-实.png */,
@@ -3074,7 +3074,7 @@
 				0A3A7F852194225A00334307 /* 上升.png in Resources */,
 				0AD1454921797B47004670A9 /* 箭头4.png in Resources */,
 				0A6B344621747AD0007FF54D /* 教学监督.png in Resources */,
-				0A31A9B321B52931007AB138 /* 考试.png in Resources */,
+				0A31A9B321B52931007AB138 /* 考试试卷.png in Resources */,
 				0AC3C44E219028EB006C0DAB /* 评价2.png in Resources */,
 				0A644D6B1F0113EC009025DD /* 出科2.png in Resources */,
 				0A494FA1211C29D100E95332 /* 科室@2x.png in Resources */,

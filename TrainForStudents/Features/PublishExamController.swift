@@ -17,6 +17,7 @@ class PublishExamController : HBaseViewController{
     @IBOutlet weak var questionsCollection: UICollectionView!
     
     var jds = [JSON]()
+    var submitParam = [String : Any]()
     
     var directoryView = DirectoryCollectionView()
     
@@ -117,6 +118,9 @@ class PublishExamController : HBaseViewController{
         
         questionsCollection.register(TitleReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
         
+        chooseSignInType(sender: view.viewWithTag(80001) as! UIButton)
+        chooseExamType(sender: view.viewWithTag(70001) as! UIButton)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -137,11 +141,37 @@ class PublishExamController : HBaseViewController{
             personCollection.reloadData()
             let lbl = view.viewWithTag(10001) as! UIButton
             lbl.setTitle(jds.count.description, for: .normal)
+            //添加考试人员
+            submitParam["studentlist"] = jds
         }
     }
     
+    //返回
     @IBAction func btn_back_inside(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    //发布
+    @IBAction func btn_submit_inside(_ sender: UIButton) {
+        
+        submitParam["appexamination"] = 0
+        
+        //开始结束时间
+        let startTime = (view.viewWithTag(30001) as! UITextField).text! + " " + (view.viewWithTag(30002) as! UITextField).text!
+        let endTime = (view.viewWithTag(40001) as! UITextField).text! + " " + (view.viewWithTag(40002) as! UITextField).text!
+        if startTime.count != 16{
+            myAlert(self, message: "开始时间不合法!")
+            return
+        }
+        submitParam["starttime"]  = startTime
+        
+        if endTime.count != 16{
+            myAlert(self, message: "结束时间不合法!")
+            return
+        }
+        submitParam["endtime"] = endTime
+        print(submitParam)
+        
     }
     
     //选人
@@ -154,6 +184,7 @@ class PublishExamController : HBaseViewController{
         hiddenKeyBoard()
         self.paperPicker.isHidden = false
     }
+    
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         self.paperPicker.isHidden = true
@@ -173,6 +204,8 @@ class PublishExamController : HBaseViewController{
         }
         return true
     }
+    
+    
     
     func chooseDate(picker :UIDatePicker){
         let t31 = view.viewWithTag(30001) as! UITextField
@@ -204,7 +237,7 @@ class PublishExamController : HBaseViewController{
             let btn = view.viewWithTag(70001+i) as! UIButton
             if btn.tag == sender.tag{
                 btn.setImage(UIImage(named: "选择-大"), for: .normal)
-                //submitParam["sign"] = i
+                submitParam["stagetype"] = sender.tag - 70001
             }else{
                 btn.setImage(UIImage(named: "未选择-大"), for: .normal)
             }
@@ -219,7 +252,7 @@ class PublishExamController : HBaseViewController{
             let btn = view.viewWithTag(80001+i) as! UIButton
             if btn.tag == sender.tag{
                 btn.setImage(UIImage(named: "选择-大"), for: .normal)
-                //submitParam["sign"] = i
+                submitParam["isneedsign"] = sender.tag - 80001
             }else{
                 btn.setImage(UIImage(named: "未选择-大"), for: .normal)
             }
@@ -228,15 +261,32 @@ class PublishExamController : HBaseViewController{
     }
     
     func addrClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+        let text = ds[row]["facilitiesname"].stringValue
         let txt = view.viewWithTag(50001) as! UITextField
-        txt.text = ds[row]["facilitiesname"].stringValue
+        txt.text = text
+        submitParam["facilitiesid"] = ds[row]["facilitiesid"].stringValue
+        submitParam["name"] = text
     }
     
     func paperClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
         
+        let exercisesId = ds[row]["exercisesid"].stringValue
+        
+        view.viewWithTag(90001)?.isHidden = true
+        view.viewWithTag(90002)?.isHidden = true
+        if ds[row]["marking"].intValue == 1 {
+            view.viewWithTag(90001)?.isHidden = false
+            view.viewWithTag(90002)?.isHidden = false
+        }
+        (view.viewWithTag(10004) as! UILabel).text = ds[row]["title"].stringValue
+        
+        submitParam["exercisesid"] = exercisesId
+        submitParam["versionnumber"] = ds[row]["versionnumber"].intValue
+        submitParam["examname"] = ds[row]["title"].stringValue
+        
         MBProgressHUD.showAdded(to: questionsCollection, animated: true)
         let url = SERVER_PORT + "rest/app/getTheoryExercisesDetail.do"
-        myPostRequest(url, ["exercisesid":ds[row]["exercisesid"].stringValue], method: .post).responseString(completionHandler: {resp in
+        myPostRequest(url, ["exercisesid": exercisesId], method: .post).responseString(completionHandler: {resp in
             MBProgressHUD.hideAllHUDs(for: self.questionsCollection, animated: true)
             switch resp.result{
             case .success(let respStr):
@@ -269,12 +319,15 @@ extension PublishExamController : UICollectionViewDelegate , UICollectionViewDat
         
         let data = jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
-        let btn = cell.viewWithTag(10001) as! UIButton
+        var btn = cell.viewWithTag(10001) as! UIButton
         btn.setCornerRadius(radius: btn.W.divided(by: 2))
         btn.setImage(UIImage(named: "loginId"), for: .normal)
         let lbl = cell.viewWithTag(10002) as! UILabel
         lbl.text = data["personname"].stringValue
-        
+        btn = cell.viewWithTag(10003) as! UIButton
+        btn.setCornerRadius(radius: btn.W.divided(by: 2))
+        btn.addTarget(self, action: #selector(removePerson), for: .touchUpInside)
+        btn.viewParam = ["indexPath" : indexPath]
         return cell
     }
     
@@ -287,6 +340,13 @@ extension PublishExamController : UICollectionViewDelegate , UICollectionViewDat
         
         //return CGSize(width: UIScreen.width, height: 95)
         return CGSize(width: 60, height: 70)
+    }
+    
+    func removePerson(sender : UIButton){
+        let indexPath = sender.viewParam!["indexPath"] as! IndexPath
+        jds.remove(at: indexPath.item)
+        submitParam["studentlist"] = jds
+        personCollection.reloadData()
     }
     
 }

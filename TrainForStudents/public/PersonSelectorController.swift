@@ -482,14 +482,14 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
         }else{
             sortedKeys = jds.keys.sorted()
         }
-        print("section:\(jds.count)")
+        //print("section:\(jds.count)")
         return jds.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         let key = sortedKeys[section]
-        print("items:\(jds[key]!.count + 1)")
+        //print("items:\(jds[key]!.count + 1)")
         return jds[key]!.count + 1
     }
     
