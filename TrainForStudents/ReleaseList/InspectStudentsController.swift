@@ -40,7 +40,7 @@ class InspectStudentsController : UIViewController{
         //self.studentsCollection.mj_header.beginRefreshing()
         
 //        print("接收通知.....")
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonDefaultNotificationName, object: nil)
     }
     
     func receiveNotice(notification : NSNotification){

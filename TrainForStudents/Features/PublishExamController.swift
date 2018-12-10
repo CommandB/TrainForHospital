@@ -29,6 +29,13 @@ class PublishExamController : HBaseViewController{
     var paperPicker = UIPickerView()
     let paperPickerImpl = HSimplePickerViewImpl()
     
+    //选考试人
+    let stuNotice = "stuNotice"
+    //选监考老师
+    let teacherNotice = "teacherNotice"
+    //选阅卷老师
+    let markingNotice = "markingNotice"
+    
     override func viewDidLoad() {
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -82,6 +89,9 @@ class PublishExamController : HBaseViewController{
         txt = view.viewWithTag(50001) as! TextFieldForNoMenu
         txt.inputView = addrPicker
         
+        btn = view.viewWithTag(60001) as! UIButton
+        btn.addTarget(self, action: #selector(btn_teacher_evet), for: .touchUpInside)
+        
         
         btn = view.viewWithTag(70001) as! UIButton
         btn.addTarget(self, action: #selector(chooseExamType(sender:)), for: .touchUpInside)
@@ -125,7 +135,8 @@ class PublishExamController : HBaseViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         //self.personCollection.mj_header.beginRefreshing()
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: Notification.Name.init(stuNotice), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveTeacherNotice), name: Notification.Name.init(teacherNotice), object: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -135,7 +146,7 @@ class PublishExamController : HBaseViewController{
     }
     
     func receiveNotice(notification : NSNotification){
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(stuNotice), object: nil)
         if notification.userInfo != nil{
             jds = notification.userInfo!["data"] as! [JSON]
             personCollection.reloadData()
@@ -143,6 +154,32 @@ class PublishExamController : HBaseViewController{
             lbl.setTitle(jds.count.description, for: .normal)
             //添加考试人员
             submitParam["studentlist"] = jds
+        }
+    }
+    
+    func receiveTeacherNotice(notification : NSNotification){
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(teacherNotice), object: nil)
+        if notification.userInfo != nil{
+            let data = notification.userInfo!["data"] as! [JSON]
+            var text = ""
+            for item in data{
+                text += item["personname"].stringValue + " "
+                
+            }
+            //添加监考老师
+            submitParam["teacherlist"] = data
+            let btn = view.viewWithTag(60001) as! UIButton
+            if text.count > 0{
+                btn.setTitle(text, for: .normal)
+                btn.setTitleColor(UIColor.darkText, for: .normal)
+                btn.alpha = 1
+            }else{
+                btn.setTitle("请选择监考老师", for: .normal)
+                btn.setTitleColor(UIColor.lightGray, for: .normal)
+                btn.alpha = 0.6
+            }
+            
+            
         }
     }
     
@@ -176,7 +213,7 @@ class PublishExamController : HBaseViewController{
     
     //选人
     @IBAction func btn_addPerson_inside(_ sender: UIButton) {
-        myPresentView(self, viewName: "personSelectorView")
+        PersonSelectorController.presentPersonSelector(viewController: self, data: jds , noticeName: stuNotice)
     }
     
     //选择试卷
@@ -203,6 +240,11 @@ class PublishExamController : HBaseViewController{
             t42.text = ""
         }
         return true
+    }
+    
+    //选监考老师
+    func btn_teacher_evet(sender : UIButton){
+        PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON](), noticeName: teacherNotice)
     }
     
     

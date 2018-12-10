@@ -36,7 +36,7 @@ class PanoramicEvaluationDetailController : UIViewController{
         keys = ([String](jds["evDic"].dictionaryValue.keys)).sorted()
         
         print("接受通知")
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonDefaultNotificationName, object: nil)
     }
     
     func receiveNotice(notification : NSNotification){

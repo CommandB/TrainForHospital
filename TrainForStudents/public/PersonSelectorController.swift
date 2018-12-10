@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class PersonSelectorController: HBaseViewController {
     
-    static var addPersonNotificationName = NSNotification.Name(rawValue: "addPersonNotification")
+    static var addPersonDefaultNotificationName = NSNotification.Name(rawValue: "addPersonNotification")
     
     @IBOutlet weak var personCollection: UICollectionView!
     
@@ -25,6 +25,8 @@ class PersonSelectorController: HBaseViewController {
     @IBOutlet weak var btn_nurse: UIButton!
     
     @IBOutlet weak var lbl_markLine: UILabel!
+    
+    var notificationName = ""
     
     //按钮的集合
     var buttonGroup = [UIButton]()
@@ -58,6 +60,16 @@ class PersonSelectorController: HBaseViewController {
     ///选中的筛选条件类型
     var selectedSort = "initials"
     
+    static func presentPersonSelector(viewController :UIViewController , data : [JSON] , noticeName : String = ""){
+        let vc = getViewToStoryboard("personSelectorView") as! PersonSelectorController
+        var selectedPerson = [String:JSON]()
+        for item in data{
+            selectedPerson[item["personid"].stringValue] = item
+        }
+        vc.selectedList = selectedPerson
+        vc.notificationName = noticeName
+        viewController.present(vc, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         
@@ -90,7 +102,12 @@ class PersonSelectorController: HBaseViewController {
             data.append(v)
         }
         //print(data)
-        NotificationCenter.default.post(name: PersonSelectorController.addPersonNotificationName, object: nil, userInfo: ["data":data])
+        var nName = PersonSelectorController.addPersonDefaultNotificationName
+        if notificationName.count > 1{
+            nName = Notification.Name(notificationName)
+        }
+        
+        NotificationCenter.default.post(name: nName, object: nil, userInfo: ["data":data])
         
         dismiss(animated: true, completion: nil)
     }
@@ -439,14 +456,14 @@ class PersonSelectorController: HBaseViewController {
     }
     
     func refresh() {
-        print("刷新数据....")
+        //print("刷新数据....")
         ///排序后的key
         sortedKeys = [String]()
-        ///选中的人员数据
-        selectedList = [String:JSON]()
-        ///已全选的section
+        //选中的人员数据
+        //selectedList = [String:JSON]()
+        //已全选的section
         sectionIsSelected = [IndexPath:Bool]()
-        ///是否全选
+        //是否全选
         isSelectedAll = false
         //
         var selectedType = 0
@@ -579,7 +596,7 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
             selectedList[personId] = data
         }
         //cellIsSelected[indexPath] = !(cellIsSelected[indexPath] ?? false)
-        print("选中了..需要刷新...")
+        //print("选中了..需要刷新...")
         collectionView.reloadItems(at: [indexPath])
         
     }
