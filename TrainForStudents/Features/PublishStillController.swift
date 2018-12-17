@@ -31,7 +31,7 @@ class PublishStillController : HBaseViewController{
         //paperPicker.backgroundColor = UIColor.groupTableViewBackground
         paperPicker.setWidth(width: UIScreen.width)
         paperPicker.setHight(height: 200)
-        paperPicker.setY(y: 20)
+        paperPicker.setY(y: 90)
         
         view.addSubview(paperPicker)
         view.sendSubview(toBack: paperPicker)
