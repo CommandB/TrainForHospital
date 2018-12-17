@@ -38,6 +38,8 @@ class PublishExamController : HBaseViewController{
     
     override func viewDidLoad() {
         
+        submitParam["markingteacherlist"] = [JSON]()
+        
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
         personCollection.delegate = self
@@ -104,6 +106,9 @@ class PublishExamController : HBaseViewController{
         btn = view.viewWithTag(80002) as! UIButton
         btn.addTarget(self, action: #selector(chooseSignInType(sender:)), for: .touchUpInside)
         
+        btn = view.viewWithTag(90002) as! UIButton
+        btn.addTarget(self, action: #selector(btn_marking_evet), for: .touchUpInside)
+        
         let url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
         
         myPostRequest(url, method: .post).responseString(completionHandler: {resp in
@@ -137,6 +142,7 @@ class PublishExamController : HBaseViewController{
         //self.personCollection.mj_header.beginRefreshing()
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: Notification.Name.init(stuNotice), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receiveTeacherNotice), name: Notification.Name.init(teacherNotice), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveMarkingNotice), name: Notification.Name.init(markingNotice), object: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -179,6 +185,29 @@ class PublishExamController : HBaseViewController{
                 btn.alpha = 0.6
             }
             
+        }
+    }
+    
+    func receiveMarkingNotice(notification : NSNotification){
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(markingNotice), object: nil)
+        if notification.userInfo != nil{
+            let data = (notification.userInfo!["data"] as! [JSON])
+            var text = ""
+            for item in data{
+                text += item["personname"].stringValue + " "
+            }
+            //添加监考老师
+            submitParam["markingteacherlist"] = data
+            let btn = view.viewWithTag(90002) as! UIButton
+            if text.count > 0{
+                btn.setTitle(text, for: .normal)
+                btn.setTitleColor(UIColor.darkText, for: .normal)
+                btn.alpha = 1
+            }else{
+                btn.setTitle("请选择阅卷老师", for: .normal)
+                btn.setTitleColor(UIColor.lightGray, for: .normal)
+                btn.alpha = 0.6
+            }
             
         }
     }
@@ -190,8 +219,9 @@ class PublishExamController : HBaseViewController{
     
     //发布
     @IBAction func btn_submit_inside(_ sender: UIButton) {
-        
+        self.paperPicker.isHidden = true
         submitParam["appexamination"] = 0
+        submitParam["officeid"] = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
         
         //开始结束时间
         let startTime = (view.viewWithTag(30001) as! UITextField).text! + " " + (view.viewWithTag(30002) as! UITextField).text!
@@ -206,18 +236,70 @@ class PublishExamController : HBaseViewController{
             myAlert(self, message: "结束时间不合法!")
             return
         }
+        
+        if submitParam["studentlist"] == nil{
+            myAlert(self, message: "请选择考试学员!")
+            return
+        }
+        
+        if submitParam["facilitiesid"] == nil{
+            myAlert(self, message: "请选择考试地址!")
+            return
+        }
+        
+        if submitParam["exercisesid"] == nil{
+            myAlert(self, message: "请选择试卷!")
+            return
+        }
+        
+        if submitParam["teacherlist"] == nil{
+            myAlert(self, message: "请选择监考老师!")
+            return
+        }
+        
+        if submitParam["marking"].debugDescription == "1" && (submitParam["markingteacherlist"] as! [JSON]).count == 1 {
+            myAlert(self, message: "请选择阅卷老师!")
+            return
+        }
+        
         submitParam["endtime"] = endTime
         print(submitParam)
         
+        
+        let url = SERVER_PORT + "rest/app/releaseTheoryExam.do"
+        
+        myPostRequest(url, submitParam, method: .post).responseString(completionHandler: {resp in
+            
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                if json["code"].stringValue == "1"{
+                    myAlert(self, message: "发布成功!" ,handler :{  action in
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                }
+                break
+                
+            case .failure(let error):
+                myAlert(self, message: "发布考试异常!")
+                print(error)
+                break
+            }
+        })
     }
     
     //选人
     @IBAction func btn_addPerson_inside(_ sender: UIButton) {
+        self.paperPicker.isHidden = true
         PersonSelectorController.presentPersonSelector(viewController: self, data: jds , noticeName: stuNotice)
     }
     
     //选择试卷
     @IBAction func btn_selectPaper_inside(_ sender: UIButton) {
+        self.paperPicker.isHidden = true
         hiddenKeyBoard()
         self.paperPicker.isHidden = false
     }
@@ -244,12 +326,18 @@ class PublishExamController : HBaseViewController{
     
     //选监考老师
     func btn_teacher_evet(sender : UIButton){
+        self.paperPicker.isHidden = true
         PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON](), noticeName: teacherNotice)
     }
     
-    
+    //选阅卷老师
+    func btn_marking_evet(sender : UIButton){
+        self.paperPicker.isHidden = true
+        PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON](), noticeName: markingNotice)
+    }
     
     func chooseDate(picker :UIDatePicker){
+        self.paperPicker.isHidden = true
         let t31 = view.viewWithTag(30001) as! UITextField
         let t32 = view.viewWithTag(30002) as! UITextField
         let t41 = view.viewWithTag(40001) as! UITextField
@@ -268,11 +356,12 @@ class PublishExamController : HBaseViewController{
             //计算开始和结束时间的区间
             let interval = DateUtil.intervalDate("\(t31.text!) \(t32.text!)", to: "\(t41.text!) \(t42.text!)", pattern: "yyyy-MM-dd HH:mm")
             let lbl = view.viewWithTag(20001) as! UILabel
-            lbl.text = "时长：\(interval.hour)时\(interval.minute)分"
+            lbl.text = "时长：\(interval.day*24 + interval.hour)时\(interval.minute)分"
         }
     }
     
     func chooseExamType(sender : UIButton){
+        self.paperPicker.isHidden = true
         hiddenKeyBoard()
         var i = 0
         while (i < 3){
@@ -325,6 +414,7 @@ class PublishExamController : HBaseViewController{
         submitParam["exercisesid"] = exercisesId
         submitParam["versionnumber"] = ds[row]["versionnumber"].intValue
         submitParam["examname"] = ds[row]["title"].stringValue
+        submitParam["marking"] = ds[row]["marking"].stringValue
         
         MBProgressHUD.showAdded(to: questionsCollection, animated: true)
         let url = SERVER_PORT + "rest/app/getTheoryExercisesDetail.do"
