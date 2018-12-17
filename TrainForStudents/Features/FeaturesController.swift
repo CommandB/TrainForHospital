@@ -14,7 +14,7 @@ class FeaturesController : UIViewController{
     override func viewDidLoad() {
         
         var btn = view.viewWithTag(10001) as! UIButton
-        btn.set(image: nil, title: "教学活动", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.set(image: nil, title: "技能考试", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(10002) as! UIButton
         btn.set(image: nil, title: "考试任务", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
@@ -44,6 +44,7 @@ class FeaturesController : UIViewController{
         
         switch sender.tag {
         case 10001:
+            myPresentView(self, viewName: "publishStillView")
             break
         case 10002:
             myPresentView(self, viewName: "publishExamView")

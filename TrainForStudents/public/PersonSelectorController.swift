@@ -26,6 +26,8 @@ class PersonSelectorController: HBaseViewController {
     
     @IBOutlet weak var lbl_markLine: UILabel!
     
+    var singleSelect = false
+    
     var notificationName = ""
     
     //按钮的集合
@@ -60,14 +62,23 @@ class PersonSelectorController: HBaseViewController {
     ///选中的筛选条件类型
     var selectedSort = "initials"
     
-    static func presentPersonSelector(viewController :UIViewController , data : [JSON] , noticeName : String = ""){
+    static func presentPersonSelector(viewController :UIViewController , data : [JSON] , noticeName : String = "" , single : Bool = false){
         let vc = getViewToStoryboard("personSelectorView") as! PersonSelectorController
         var selectedPerson = [String:JSON]()
-        for item in data{
-            selectedPerson[item["personid"].stringValue] = item
+        if single{
+            //如果是单选 则默认只接收传入的人员数组的第一个元素
+            if data.count > 0 {
+                selectedPerson[data[0]["personid"].stringValue] = data[0]
+            }
+        }else{
+            for item in data{
+                selectedPerson[item["personid"].stringValue] = item
+            }
         }
+        
         vc.selectedList = selectedPerson
         vc.notificationName = noticeName
+        vc.singleSelect = single
         viewController.present(vc, animated: true, completion: nil)
     }
     
@@ -87,6 +98,9 @@ class PersonSelectorController: HBaseViewController {
         txt.delegate = self
         
         personCollection.mj_header.beginRefreshing()
+        
+        //如果是单选 则隐藏全选按钮
+        view.viewWithTag(40002)?.isHidden = singleSelect
         
         
     }
@@ -122,8 +136,8 @@ class PersonSelectorController: HBaseViewController {
         }else{
             view.viewWithTag(30001)?.isHidden = true
             view.viewWithTag(30002)?.isHidden = true
-            
             view.viewWithTag(20003)?.isHidden = !(sender.restorationIdentifier == "btn_stu")
+            
         }
         if sender.tag - 10000 != selectedType{
             sectionIsSelected = [IndexPath : Bool]()
@@ -523,6 +537,10 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
             let lbl = cell.viewWithTag(10001) as! UILabel
             lbl.text = key
             let btn = cell.viewWithTag(10002) as! UIButton
+            //单选 则隐藏分组的全选按钮
+            if singleSelect{
+                btn.isHidden = true
+            }
             btn.viewParam = [String:Any]()
             btn.viewParam!["key"] = key
             btn.viewParam!["index"] = indexPath
@@ -566,7 +584,6 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
                 lbl.text = "【\(data["officename"].stringValue)】"
             }
             
-            
             let btn = cell.viewWithTag(10003) as! UIButton
             if selectedList.keys.contains(personId) {
                 btn.setImage(UIImage(named: "选择-小"), for: .normal)
@@ -585,6 +602,11 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
             return
         }
         
+        //如果是单选 则每次选择前 清空所有已选对象
+        if singleSelect{
+            selectedList = [String:JSON]()
+        }
+        
         let key = sortedKeys[indexPath.section]
         
         let data = jds[key]![indexPath.item - 1]
@@ -597,7 +619,7 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
         }
         //cellIsSelected[indexPath] = !(cellIsSelected[indexPath] ?? false)
         //print("选中了..需要刷新...")
-        collectionView.reloadItems(at: [indexPath])
+        collectionView.reloadData()
         
     }
     

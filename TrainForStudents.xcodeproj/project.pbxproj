@@ -90,6 +90,7 @@
 		0A3A7F872194225A00334307 /* 日历.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A7F832194225700334307 /* 日历.png */; };
 		0A3A7F89219425F500334307 /* 紧急.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A7F88219425F200334307 /* 紧急.png */; };
 		0A3A7F8D2194309200334307 /* MessageListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A7F8C2194309200334307 /* MessageListController.swift */; };
+		0A3E186321C79FAA00BF1816 /* PublishStillController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3E186221C79FAA00BF1816 /* PublishStillController.swift */; };
 		0A42F81B1F14C13B001DF281 /* LoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42F81A1F14C13B001DF281 /* LoginInfo.swift */; };
 		0A42F81D1F15D706001DF281 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A42F81C1F15D706001DF281 /* location.png */; };
 		0A42F8211F160F1D001DF281 /* AssistantCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42F8201F160F1D001DF281 /* AssistantCollectionView.swift */; };
@@ -874,6 +875,7 @@
 		0A3A7F832194225700334307 /* 日历.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "日历.png"; sourceTree = "<group>"; };
 		0A3A7F88219425F200334307 /* 紧急.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "紧急.png"; sourceTree = "<group>"; };
 		0A3A7F8C2194309200334307 /* MessageListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListController.swift; sourceTree = "<group>"; };
+		0A3E186221C79FAA00BF1816 /* PublishStillController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishStillController.swift; sourceTree = "<group>"; };
 		0A42F81A1F14C13B001DF281 /* LoginInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInfo.swift; sourceTree = "<group>"; };
 		0A42F81C1F15D706001DF281 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		0A42F8201F160F1D001DF281 /* AssistantCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistantCollectionView.swift; sourceTree = "<group>"; };
@@ -2547,6 +2549,7 @@
 				0A26BA34219AA8690071C2DC /* CommentHistoryDetailController.swift */,
 				0A26BA3C219ABB5B0071C2DC /* CommentListController.swift */,
 				0A31A9B621B6567A007AB138 /* PublishExamController.swift */,
+				0A3E186221C79FAA00BF1816 /* PublishStillController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -3206,6 +3209,7 @@
 				0A42F8211F160F1D001DF281 /* AssistantCollectionView.swift in Sources */,
 				0AF25E0D217DBB4500FE5425 /* LeaveOverCollection.swift in Sources */,
 				0A31A9B721B6567A007AB138 /* PublishExamController.swift in Sources */,
+				0A3E186321C79FAA00BF1816 /* PublishStillController.swift in Sources */,
 				0A291B6A1F429DDB008784B5 /* TaskApplyDetailImageCollectionView.swift in Sources */,
 				0AC3B9A11EE8FC0000227194 /* OverCollectionView.swift in Sources */,
 				0AFE94241F209874009C4CDF /* MyCollectionBaseFooter.swift in Sources */,
