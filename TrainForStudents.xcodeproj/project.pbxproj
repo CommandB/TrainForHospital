@@ -72,6 +72,8 @@
 		0A29CDC9216DA74800200650 /* QuestionnaireCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A29CDC8216DA74800200650 /* QuestionnaireCollectionView.swift */; };
 		0A29CDD4216DE1A200200650 /* QuestionnaireController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A29CDD3216DE1A200200650 /* QuestionnaireController.swift */; };
 		0A29CDD7216DE6A100200650 /* QuestionDetailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A29CDD6216DE6A100200650 /* QuestionDetailCollectionView.swift */; };
+		0A2B354A21C8CDB200E17AC9 /* CEXStudentsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B354921C8CDB200E17AC9 /* CEXStudentsListController.swift */; };
+		0A2B355521C8CE4100E17AC9 /* CEXCheckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B355421C8CE4100E17AC9 /* CEXCheckController.swift */; };
 		0A31A98C21ABD36E007AB138 /* PanoramicEvaluationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */; };
 		0A31A99721AD33E1007AB138 /* 添加人员.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A31A99621AD33DE007AB138 /* 添加人员.png */; };
 		0A31A99921AD39CA007AB138 /* PanoramicEvaluationDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */; };
@@ -857,6 +859,8 @@
 		0A29CDC8216DA74800200650 /* QuestionnaireCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireCollectionView.swift; sourceTree = "<group>"; };
 		0A29CDD3216DE1A200200650 /* QuestionnaireController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireController.swift; sourceTree = "<group>"; };
 		0A29CDD6216DE6A100200650 /* QuestionDetailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailCollectionView.swift; sourceTree = "<group>"; };
+		0A2B354921C8CDB200E17AC9 /* CEXStudentsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEXStudentsListController.swift; sourceTree = "<group>"; };
+		0A2B355421C8CE4100E17AC9 /* CEXCheckController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEXCheckController.swift; sourceTree = "<group>"; };
 		0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramicEvaluationController.swift; sourceTree = "<group>"; };
 		0A31A99621AD33DE007AB138 /* 添加人员.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加人员.png"; sourceTree = "<group>"; };
 		0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramicEvaluationDetailController.swift; sourceTree = "<group>"; };
@@ -2550,6 +2554,8 @@
 				0A26BA3C219ABB5B0071C2DC /* CommentListController.swift */,
 				0A31A9B621B6567A007AB138 /* PublishExamController.swift */,
 				0A3E186221C79FAA00BF1816 /* PublishStillController.swift */,
+				0A2B354921C8CDB200E17AC9 /* CEXStudentsListController.swift */,
+				0A2B355421C8CE4100E17AC9 /* CEXCheckController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -3336,8 +3342,10 @@
 				0A644D9F1F078CC9009025DD /* DifficultListCollectionView.swift in Sources */,
 				0A26BA3F219BD3120071C2DC /* HBaseViewController.swift in Sources */,
 				B468B7C71FCA9BA000ECF396 /* MJRefreshNormalHeader.m in Sources */,
+				0A2B355521C8CE4100E17AC9 /* CEXCheckController.swift in Sources */,
 				0A291B641F3D8136008784B5 /* UIButton.swift in Sources */,
 				0A125A8C1F29CBDB00FDD4F4 /* SettingsController.swift in Sources */,
+				0A2B354A21C8CDB200E17AC9 /* CEXStudentsListController.swift in Sources */,
 				0A42F8251F1C72AD001DF281 /* TaskApplyListController.swift in Sources */,
 				0AC3B98E1EE5A35200227194 /* TurnTaskCollectionView.swift in Sources */,
 				0AC3B97F1EE53F5900227194 /* UILabel.swift in Sources */,

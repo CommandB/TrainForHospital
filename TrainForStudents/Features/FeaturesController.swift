@@ -64,6 +64,7 @@ class FeaturesController : UIViewController{
             present(vc, animated: true, completion: nil)
             break
         case 20002:
+            myPresentView(self, viewName: "cexStudentsView")
             break
         case 20003:
             break
