@@ -38,11 +38,10 @@ class PublishStillController : HBaseViewController{
         
         questionsCollection.register(TitleReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
         
-        var btn = view.viewWithTag(100001) as! UIButton
+        let btn = view.viewWithTag(100001) as! UIButton
         btn.addTarget(self, action: #selector(btn_student_evet), for: .touchUpInside)
         
-//        let url = SERVER_PORT + "rest/app/getSkillExercisesList.do"
-        let url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
+        let url = SERVER_PORT + "rest/app/getSkillExercisesList.do"
         //下载试卷
         myPostRequest(url, method: .post).responseString(completionHandler: {resp in
             

@@ -14,7 +14,7 @@ class FeaturesController : UIViewController{
     override func viewDidLoad() {
         
         var btn = view.viewWithTag(10001) as! UIButton
-        btn.set(image: nil, title: "技能考试", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.set(image: nil, title: "现场考试", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(10002) as! UIButton
         btn.set(image: nil, title: "考试任务", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
@@ -26,7 +26,7 @@ class FeaturesController : UIViewController{
         btn.set(image: nil, title: "大纲审批", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(20001) as! UIButton
-        btn.set(image: nil, title: "监考清单", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.set(image: nil, title: "技能考试", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(20002) as! UIButton
         btn.set(image: nil, title: "mini-cex", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
@@ -44,16 +44,24 @@ class FeaturesController : UIViewController{
         
         switch sender.tag {
         case 10001:
+            //现场技能考试
             myPresentView(self, viewName: "publishStillView")
             break
         case 10002:
-            myPresentView(self, viewName: "publishExamView")
+            //理论考试
+            let vc = getViewToStoryboard("publishExamView") as! PublishExamController
+            vc.isSkillExam = false
+            present(vc, animated: true, completion: nil)
             break
         case 10003:
             break
         case 10004:
             break
         case 20001:
+            //技能考试
+            let vc = getViewToStoryboard("publishExamView") as! PublishExamController
+            vc.isSkillExam = true
+            present(vc, animated: true, completion: nil)
             break
         case 20002:
             break

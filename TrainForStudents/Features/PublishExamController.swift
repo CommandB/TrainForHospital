@@ -16,6 +16,8 @@ class PublishExamController : HBaseViewController{
     
     @IBOutlet weak var questionsCollection: UICollectionView!
     
+    var isSkillExam = false
+    
     var jds = [JSON]()
     var submitParam = [String : Any]()
     
@@ -109,7 +111,13 @@ class PublishExamController : HBaseViewController{
         btn = view.viewWithTag(90002) as! UIButton
         btn.addTarget(self, action: #selector(btn_marking_evet), for: .touchUpInside)
         
-        let url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
+        var url = ""
+        if isSkillExam{
+            url = SERVER_PORT + "rest/app/getSkillExercisesList.do"
+        }else{
+            url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
+        }
+        
         
         myPostRequest(url, method: .post).responseString(completionHandler: {resp in
             
@@ -263,11 +271,14 @@ class PublishExamController : HBaseViewController{
         }
         
         submitParam["endtime"] = endTime
-        print(submitParam)
+        //print(submitParam)
         
-        
-        let url = SERVER_PORT + "rest/app/releaseTheoryExam.do"
-        
+        var url = ""
+        if isSkillExam{
+            url = SERVER_PORT + "rest/app/releaseSkillExam.do"
+        }else{
+            url = SERVER_PORT + "rest/app/releaseTheoryExam.do"
+        }
         myPostRequest(url, submitParam, method: .post).responseString(completionHandler: {resp in
             
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
