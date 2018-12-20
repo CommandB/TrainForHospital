@@ -101,12 +101,16 @@ class PublishExamController : HBaseViewController{
         btn.addTarget(self, action: #selector(chooseExamType(sender:)), for: .touchUpInside)
         btn = view.viewWithTag(70002) as! UIButton
         btn.addTarget(self, action: #selector(chooseExamType(sender:)), for: .touchUpInside)
-        btn = view.viewWithTag(70003) as! UIButton
-        btn.addTarget(self, action: #selector(chooseExamType(sender:)), for: .touchUpInside)
+
         btn = view.viewWithTag(80001) as! UIButton
         btn.addTarget(self, action: #selector(chooseSignInType(sender:)), for: .touchUpInside)
         btn = view.viewWithTag(80002) as! UIButton
         btn.addTarget(self, action: #selector(chooseSignInType(sender:)), for: .touchUpInside)
+        
+        btn = view.viewWithTag(100001) as! UIButton
+        btn.addTarget(self, action: #selector(chooseAppExam(sender:)), for: .touchUpInside)
+        btn = view.viewWithTag(100002) as! UIButton
+        btn.addTarget(self, action: #selector(chooseAppExam(sender:)), for: .touchUpInside)
         
         btn = view.viewWithTag(90002) as! UIButton
         btn.addTarget(self, action: #selector(btn_marking_evet), for: .touchUpInside)
@@ -143,6 +147,7 @@ class PublishExamController : HBaseViewController{
         
         chooseSignInType(sender: view.viewWithTag(80001) as! UIButton)
         chooseExamType(sender: view.viewWithTag(70001) as! UIButton)
+        chooseAppExam(sender: view.viewWithTag(100001) as! UIButton)
         
     }
     
@@ -228,7 +233,7 @@ class PublishExamController : HBaseViewController{
     //发布
     @IBAction func btn_submit_inside(_ sender: UIButton) {
         self.paperPicker.isHidden = true
-        submitParam["appexamination"] = 0
+        
         submitParam["officeid"] = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
         
         //开始结束时间
@@ -375,7 +380,7 @@ class PublishExamController : HBaseViewController{
         self.paperPicker.isHidden = true
         hiddenKeyBoard()
         var i = 0
-        while (i < 3){
+        while (i < 2){
             let btn = view.viewWithTag(70001+i) as! UIButton
             if btn.tag == sender.tag{
                 btn.setImage(UIImage(named: "选择-大"), for: .normal)
@@ -395,6 +400,21 @@ class PublishExamController : HBaseViewController{
             if btn.tag == sender.tag{
                 btn.setImage(UIImage(named: "选择-大"), for: .normal)
                 submitParam["isneedsign"] = sender.tag - 80001
+            }else{
+                btn.setImage(UIImage(named: "未选择-大"), for: .normal)
+            }
+            i += 1
+        }
+    }
+    
+    func chooseAppExam(sender : UIButton){
+        hiddenKeyBoard()
+        var i = 0
+        while (i < 2){
+            let btn = view.viewWithTag(100001+i) as! UIButton
+            if btn.tag == sender.tag{
+                btn.setImage(UIImage(named: "选择-大"), for: .normal)
+                submitParam["appexamination"] = sender.tag - 80001
             }else{
                 btn.setImage(UIImage(named: "未选择-大"), for: .normal)
             }

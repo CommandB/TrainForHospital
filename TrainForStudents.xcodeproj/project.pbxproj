@@ -74,6 +74,18 @@
 		0A29CDD7216DE6A100200650 /* QuestionDetailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A29CDD6216DE6A100200650 /* QuestionDetailCollectionView.swift */; };
 		0A2B354A21C8CDB200E17AC9 /* CEXStudentsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B354921C8CDB200E17AC9 /* CEXStudentsListController.swift */; };
 		0A2B355521C8CE4100E17AC9 /* CEXCheckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B355421C8CE4100E17AC9 /* CEXCheckController.swift */; };
+		0A2B355721C8F7E800E17AC9 /* StillExamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B355621C8F7E800E17AC9 /* StillExamController.swift */; };
+		0A2B355921C8F83E00E17AC9 /* ExamingSubScoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B355821C8F83E00E17AC9 /* ExamingSubScoController.swift */; };
+		0A2B355B21C8F97700E17AC9 /* ExamingSubScrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B355A21C8F97700E17AC9 /* ExamingSubScrController.swift */; };
+		0A2B355E21C8FAE800E17AC9 /* SubScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B355C21C8FAE700E17AC9 /* SubScoreCell.swift */; };
+		0A2B355F21C8FAE800E17AC9 /* SubScoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B355D21C8FAE800E17AC9 /* SubScoreCell.xib */; };
+		0A2B356321C8FB9700E17AC9 /* BRCommitDataManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B356221C8FB9600E17AC9 /* BRCommitDataManage.swift */; };
+		0A2B356521C9104900E17AC9 /* ExamResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B356421C9104800E17AC9 /* ExamResultController.swift */; };
+		0A2B356721C9109000E17AC9 /* QuestionListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B356621C9109000E17AC9 /* QuestionListController.swift */; };
+		0A2B356921C9134D00E17AC9 /* 通过@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B356821C9134A00E17AC9 /* 通过@2x.png */; };
+		0A2B356C21CB3EFA00E17AC9 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B356A21CB3EF600E17AC9 /* add.png */; };
+		0A2B356D21CB3EFA00E17AC9 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B356B21CB3EF800E17AC9 /* minus.png */; };
+		0A2B356F21CB48E600E17AC9 /* nextQuestion.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B356E21CB48E100E17AC9 /* nextQuestion.png */; };
 		0A31A98C21ABD36E007AB138 /* PanoramicEvaluationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */; };
 		0A31A99721AD33E1007AB138 /* 添加人员.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A31A99621AD33DE007AB138 /* 添加人员.png */; };
 		0A31A99921AD39CA007AB138 /* PanoramicEvaluationDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */; };
@@ -861,6 +873,18 @@
 		0A29CDD6216DE6A100200650 /* QuestionDetailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailCollectionView.swift; sourceTree = "<group>"; };
 		0A2B354921C8CDB200E17AC9 /* CEXStudentsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEXStudentsListController.swift; sourceTree = "<group>"; };
 		0A2B355421C8CE4100E17AC9 /* CEXCheckController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEXCheckController.swift; sourceTree = "<group>"; };
+		0A2B355621C8F7E800E17AC9 /* StillExamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillExamController.swift; sourceTree = "<group>"; };
+		0A2B355821C8F83E00E17AC9 /* ExamingSubScoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamingSubScoController.swift; sourceTree = "<group>"; };
+		0A2B355A21C8F97700E17AC9 /* ExamingSubScrController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamingSubScrController.swift; sourceTree = "<group>"; };
+		0A2B355C21C8FAE700E17AC9 /* SubScoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubScoreCell.swift; sourceTree = "<group>"; };
+		0A2B355D21C8FAE800E17AC9 /* SubScoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubScoreCell.xib; sourceTree = "<group>"; };
+		0A2B356221C8FB9600E17AC9 /* BRCommitDataManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCommitDataManage.swift; sourceTree = "<group>"; };
+		0A2B356421C9104800E17AC9 /* ExamResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamResultController.swift; sourceTree = "<group>"; };
+		0A2B356621C9109000E17AC9 /* QuestionListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionListController.swift; sourceTree = "<group>"; };
+		0A2B356821C9134A00E17AC9 /* 通过@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "通过@2x.png"; sourceTree = "<group>"; };
+		0A2B356A21CB3EF600E17AC9 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		0A2B356B21CB3EF800E17AC9 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
+		0A2B356E21CB48E100E17AC9 /* nextQuestion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextQuestion.png; sourceTree = "<group>"; };
 		0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramicEvaluationController.swift; sourceTree = "<group>"; };
 		0A31A99621AD33DE007AB138 /* 添加人员.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加人员.png"; sourceTree = "<group>"; };
 		0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramicEvaluationDetailController.swift; sourceTree = "<group>"; };
@@ -2042,6 +2066,16 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		0A2B356121C8FAFD00E17AC9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0A2B356221C8FB9600E17AC9 /* BRCommitDataManage.swift */,
+				0A2B355C21C8FAE700E17AC9 /* SubScoreCell.swift */,
+				0A2B355D21C8FAE800E17AC9 /* SubScoreCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		0A42F8191F14C120001DF281 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2193,6 +2227,10 @@
 		0A6B327321746BFE007FF54D /* image */ = {
 			isa = PBXGroup;
 			children = (
+				0A2B356E21CB48E100E17AC9 /* nextQuestion.png */,
+				0A2B356A21CB3EF600E17AC9 /* add.png */,
+				0A2B356B21CB3EF800E17AC9 /* minus.png */,
+				0A2B356821C9134A00E17AC9 /* 通过@2x.png */,
 				0A31A9B421B5293A007AB138 /* 人员LOGO.png */,
 				0A31A9B221B5292E007AB138 /* 考试试卷.png */,
 				0A26BA38219AABB10071C2DC /* 白星星-空.png */,
@@ -2546,6 +2584,7 @@
 		0AD14561217D8064004670A9 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				0A2B356121C8FAFD00E17AC9 /* Views */,
 				0AF25E09217DB9CF00FE5425 /* Collection */,
 				0AF9D35321894C7C0068B05A /* FeaturesController.swift */,
 				0AD14562217D81FB004670A9 /* LeaveApprovedController.swift */,
@@ -2556,6 +2595,11 @@
 				0A3E186221C79FAA00BF1816 /* PublishStillController.swift */,
 				0A2B354921C8CDB200E17AC9 /* CEXStudentsListController.swift */,
 				0A2B355421C8CE4100E17AC9 /* CEXCheckController.swift */,
+				0A2B355621C8F7E800E17AC9 /* StillExamController.swift */,
+				0A2B355821C8F83E00E17AC9 /* ExamingSubScoController.swift */,
+				0A2B355A21C8F97700E17AC9 /* ExamingSubScrController.swift */,
+				0A2B356421C9104800E17AC9 /* ExamResultController.swift */,
+				0A2B356621C9109000E17AC9 /* QuestionListController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -2968,6 +3012,7 @@
 				B46D5F5221076E2E00A1C3C7 /* 暂停.png in Resources */,
 				0A3A7F842194225A00334307 /* 下降.png in Resources */,
 				0AC3B9951EE6A55600227194 /* password.png in Resources */,
+				0A2B356C21CB3EFA00E17AC9 /* add.png in Resources */,
 				0A644DA31F07A0E4009025DD /* hot.png in Resources */,
 				0AF9D34521805EC60068B05A /* 选择-小.png in Resources */,
 				0A15D51A1F0C9A1E00908B7F /* left.png in Resources */,
@@ -3036,6 +3081,7 @@
 				B44FFFF0211C7BC000844C07 /* 返回@3x.png in Resources */,
 				0A7818F81F32F7740072CF16 /* 设置.png in Resources */,
 				0AC3C44A218FE32D006C0DAB /* 历史.png in Resources */,
+				0A2B356921C9134D00E17AC9 /* 通过@2x.png in Resources */,
 				0A940F1021A2AB87001BEE9D /* 第三名.png in Resources */,
 				0A7818F01F32F6990072CF16 /* 教材3x.png in Resources */,
 				0AF9D34321805EC60068B05A /* 未选择-大.png in Resources */,
@@ -3044,6 +3090,7 @@
 				0AC3C4462189B77A006C0DAB /* 科主任.png in Resources */,
 				0AD14578217D8F89004670A9 /* 加号.png in Resources */,
 				0A42F82F1F1D2B0A001DF281 /* AnwsersItem.xib in Resources */,
+				0A2B356D21CB3EFA00E17AC9 /* minus.png in Resources */,
 				0A3A7F862194225A00334307 /* 无变化.png in Resources */,
 				0A0C570F1F4F00F2008551D3 /* 标签.png in Resources */,
 				0A7818FA1F3303260072CF16 /* 角标.png in Resources */,
@@ -3064,6 +3111,7 @@
 				0AC3C4402189B77A006C0DAB /* 合并形状.png in Resources */,
 				0AC3C44C218FE32D006C0DAB /* 箭头.png in Resources */,
 				0AF9D36A218963380068B05A /* 其他教学活动.png in Resources */,
+				0A2B356F21CB48E600E17AC9 /* nextQuestion.png in Resources */,
 				0A0FA88C1F0F615300DFEA7E /* voice.png in Resources */,
 				B468B7C91FCA9BA000ECF396 /* MJRefresh.bundle in Resources */,
 				0A3A7F7F2193F3CD00334307 /* 理论培训2.png in Resources */,
@@ -3120,6 +3168,7 @@
 				0A6B344221747AD0007FF54D /* 出科考试.png in Resources */,
 				0A26BA2C219969330071C2DC /* 技能考试.png in Resources */,
 				0A667BCF2085DE7400594BE7 /* cover1.jpg in Resources */,
+				0A2B355F21C8FAE800E17AC9 /* SubScoreCell.xib in Resources */,
 				0A3A7F872194225A00334307 /* 日历.png in Resources */,
 				0AF9D34421805EC60068B05A /* 选择-大.png in Resources */,
 			);
@@ -3209,10 +3258,12 @@
 				0AC3BCAD1EE97F2400227194 /* SearchViewController.swift in Sources */,
 				0A6A23AC1EEE95BE00A1AC5B /* QuestionCollectionView.swift in Sources */,
 				0AFCF6AD1FFDF91D00CF044E /* FITBCollectionView.swift in Sources */,
+				0A2B356721C9109000E17AC9 /* QuestionListController.swift in Sources */,
 				0AC3B99C1EE8694B00227194 /* TaskDetailController.swift in Sources */,
 				0A125A8E1F29CC6400FDD4F4 /* SettingsCollectionView.swift in Sources */,
 				0A15C3681F494FD100C53F61 /* DifficultReplyView.swift in Sources */,
 				0A42F8211F160F1D001DF281 /* AssistantCollectionView.swift in Sources */,
+				0A2B355721C8F7E800E17AC9 /* StillExamController.swift in Sources */,
 				0AF25E0D217DBB4500FE5425 /* LeaveOverCollection.swift in Sources */,
 				0A31A9B721B6567A007AB138 /* PublishExamController.swift in Sources */,
 				0A3E186321C79FAA00BF1816 /* PublishStillController.swift in Sources */,
@@ -3264,11 +3315,13 @@
 				B44FFFDB211C6BBD00844C07 /* JHTrainingChangedCell.swift in Sources */,
 				B44FFFE0211C6BF000844C07 /* JHBaseViewController.swift in Sources */,
 				0A26BA3D219ABB5B0071C2DC /* CommentListController.swift in Sources */,
+				0A2B355E21C8FAE800E17AC9 /* SubScoreCell.swift in Sources */,
 				0A644D8F1F04E556009025DD /* WishListController.swift in Sources */,
 				0A15D5171F0BF5FB00908B7F /* QQStyleRefreshHeader.swift in Sources */,
 				0AC3B9371EE4730B00227194 /* ExamCenterController.swift in Sources */,
 				0AC3B9861EE5810900227194 /* TurnDetailController.swift in Sources */,
 				0A644D601F00BD52009025DD /* EvaluationCenterController.swift in Sources */,
+				0A2B355921C8F83E00E17AC9 /* ExamingSubScoController.swift in Sources */,
 				0A97555421A50A7800267E10 /* HUIScrollView.swift in Sources */,
 				B4FF1A941F94DF7D009C6685 /* UIView+WebCache.m in Sources */,
 				B4FF1A8B1F94DF7D009C6685 /* SDWebImageDownloader.m in Sources */,
@@ -3301,6 +3354,7 @@
 				B4847FAE1F9E13B600307D6F /* ImageUploadView.swift in Sources */,
 				B4FF1A911F94DF7D009C6685 /* UIImage+MultiFormat.m in Sources */,
 				0AF9D35421894C7C0068B05A /* FeaturesController.swift in Sources */,
+				0A2B355B21C8F97700E17AC9 /* ExamingSubScrController.swift in Sources */,
 				0A291B661F4202B3008784B5 /* DifficultAddController.swift in Sources */,
 				B468B7C01FCA9BA000ECF396 /* MJRefreshAutoGifFooter.m in Sources */,
 				0AD14557217D6819004670A9 /* ToDoDetailController.swift in Sources */,
@@ -3323,6 +3377,7 @@
 				0AC3B9981EE6A60700227194 /* LoginViewController.swift in Sources */,
 				0AC3BB041EE94A0D00227194 /* MyBaseUIViewController.swift in Sources */,
 				0A644D5B1EFD0A5A009025DD /* OutlineItem.swift in Sources */,
+				0A2B356521C9104900E17AC9 /* ExamResultController.swift in Sources */,
 				0A26BA35219AA8690071C2DC /* CommentHistoryDetailController.swift in Sources */,
 				0AD145542179CB45004670A9 /* ToDoListController.swift in Sources */,
 				B4F9E87B1F9106DD0001D88F /* OtherFilesCell.swift in Sources */,
@@ -3369,6 +3424,7 @@
 				0A97554721A3F1D800267E10 /* UIView.swift in Sources */,
 				0A42F8231F179EDA001DF281 /* DateUtil.swift in Sources */,
 				0AF9D352218949510068B05A /* MyTabBarController.swift in Sources */,
+				0A2B356321C8FB9700E17AC9 /* BRCommitDataManage.swift in Sources */,
 				0A644D631F00D3BC009025DD /* WaitExamTaskCollectionView.swift in Sources */,
 				0A29CDD7216DE6A100200650 /* QuestionDetailCollectionView.swift in Sources */,
 				0AC3B9351EE4730B00227194 /* TurnCenterController.swift in Sources */,

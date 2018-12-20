@@ -176,6 +176,15 @@ func baseHttpRequestSuccessHandle(_ vc:UIViewController , httpResult:AnyObject, 
     
 }
 
+//MARK: 计算label长度
+func getLabWidth(labelStr:String,font:CGFloat,height:CGFloat) -> CGFloat {
+    let statusLabelText: NSString = NSString(string: labelStr)
+    let size = CGSize.init(width: 900, height: height)
+    let dic = NSDictionary(object: UIFont.systemFont(ofSize: font), forKey: NSFontAttributeName as NSCopying)
+    let strSize = statusLabelText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [String : AnyObject], context:nil).size
+    return strSize.width+20
+    
+}
 
 extension UIImage {
     

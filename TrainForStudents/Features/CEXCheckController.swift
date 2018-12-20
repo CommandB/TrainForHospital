@@ -42,9 +42,11 @@ class CEXCheckController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         
-//        let lbl_title = view.viewWithTag(11001) as! UILabel
-//        lbl_title.text = studentName + " " + lbl_title.text!
-        //lbl_title.setBorderBottom(size: 1, color: UIColor.groupTableViewBackground)
+        let lbl_title = view.viewWithTag(11001) as! UILabel
+        lbl_title.text = studentName + " " + lbl_title.text!
+        lbl_title.setBorderBottom(size: 1, color: UIColor.red)
+        //lbl_title.borderColor = UIColor.red
+        //lbl_title.borderWidth = 1
         
         viewArray=[view1,view2,view3,view4,view5,view6,view7,view8,view9]
         //        view2.isHidden = true

@@ -16,7 +16,20 @@ class HBaseViewController : UIViewController , UITextFieldDelegate  {
     ///键盘显示时为true 隐藏时为false
     var keyBoardHidden = true
     
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        let sbv = view.subviews
+        if sbv.count > 0 {
+            if sbv[0] is UIImageView{
+                return .lightContent
+            }else{
+                return .default
+            }
+        }
+        return .default
+    }
+    
     override func viewDidLoad() {
+        
         
     }
     

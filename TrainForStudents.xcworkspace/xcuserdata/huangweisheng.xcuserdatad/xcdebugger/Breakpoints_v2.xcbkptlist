@@ -173,5 +173,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrainForStudents/Features/ExamingSubScoController.swift"
+            timestampString = "566971108.31152"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
+            landmarkName = "toAddScore(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TrainForStudents.ExamingSubScoController.toAddScore(__C.UIButton) -&gt; ()"
+                  moduleName = "TrainForStudents"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
+                  timestampString = "566971108.784974"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "322"
+                  endingLineNumber = "322"
+                  offsetFromSymbolStart = "78">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TrainForStudents.ExamingSubScoController.toAddScore(__C.UIButton) -&gt; ()"
+                  moduleName = "TrainForStudents"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
+                  timestampString = "566971108.788056"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "322"
+                  endingLineNumber = "322"
+                  offsetFromSymbolStart = "9015">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
