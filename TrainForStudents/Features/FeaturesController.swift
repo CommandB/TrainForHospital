@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 class FeaturesController : UIViewController{
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     override func viewDidLoad() {
         
         var btn = view.viewWithTag(10001) as! UIButton

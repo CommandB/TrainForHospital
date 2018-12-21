@@ -25,6 +25,8 @@ class StillExamController: HBaseViewController ,UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         setSubviews()
         requestExamInfo()
     }
@@ -34,7 +36,7 @@ class StillExamController: HBaseViewController ,UIScrollViewDelegate {
         
         myConfirm(self, message:"是否退出考试?" ,
                   okHandler:{action in
-                    
+                  self.dismiss(animated: true, completion: nil)
         } , cancelHandler:{action in
             
         })

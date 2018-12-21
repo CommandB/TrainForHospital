@@ -82,10 +82,12 @@
 		0A2B356321C8FB9700E17AC9 /* BRCommitDataManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B356221C8FB9600E17AC9 /* BRCommitDataManage.swift */; };
 		0A2B356521C9104900E17AC9 /* ExamResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B356421C9104800E17AC9 /* ExamResultController.swift */; };
 		0A2B356721C9109000E17AC9 /* QuestionListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B356621C9109000E17AC9 /* QuestionListController.swift */; };
-		0A2B356921C9134D00E17AC9 /* 通过@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B356821C9134A00E17AC9 /* 通过@2x.png */; };
 		0A2B356C21CB3EFA00E17AC9 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B356A21CB3EF600E17AC9 /* add.png */; };
 		0A2B356D21CB3EFA00E17AC9 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B356B21CB3EF800E17AC9 /* minus.png */; };
 		0A2B356F21CB48E600E17AC9 /* nextQuestion.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B356E21CB48E100E17AC9 /* nextQuestion.png */; };
+		0A2B357621CB7C4400E17AC9 /* 通过2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B357421CB7C3700E17AC9 /* 通过2.png */; };
+		0A2B357721CB7C4400E17AC9 /* 未通过2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2B357521CB7C3D00E17AC9 /* 未通过2.png */; };
+		0A2B357B21CBA0F700E17AC9 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2B357A21CBA0F700E17AC9 /* MyTabBarController.swift */; };
 		0A31A98C21ABD36E007AB138 /* PanoramicEvaluationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */; };
 		0A31A99721AD33E1007AB138 /* 添加人员.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A31A99621AD33DE007AB138 /* 添加人员.png */; };
 		0A31A99921AD39CA007AB138 /* PanoramicEvaluationDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */; };
@@ -203,6 +205,7 @@
 		0A7818F81F32F7740072CF16 /* 设置.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7818F71F32F7740072CF16 /* 设置.png */; };
 		0A7818FA1F3303260072CF16 /* 角标.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7818F91F3303260072CF16 /* 角标.png */; };
 		0A8293CA217ECBFD006047B1 /* InspectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8293C9217ECBFD006047B1 /* InspectController.swift */; };
+		0A88A1BE21CC980500D9AB47 /* PaperSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A88A1BD21CC980500D9AB47 /* PaperSelectorController.swift */; };
 		0A90EFB11EFA20B400B4CC7A /* CheckboxCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90EFB01EFA20B400B4CC7A /* CheckboxCollectionView.swift */; };
 		0A91142F201D60D2001A1936 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91142E201D60D2001A1936 /* UserDefaults.swift */; };
 		0A940F0E21A2AB87001BEE9D /* 第一名.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A940F0221A2AB86001BEE9D /* 第一名.png */; };
@@ -306,7 +309,6 @@
 		0AF9D34621805EC60068B05A /* 未选择-小.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D34221805EC50068B05A /* 未选择-小.png */; };
 		0AF9D34E21830D570068B05A /* InspectStudentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9D34D21830D570068B05A /* InspectStudentsController.swift */; };
 		0AF9D35021830EA00068B05A /* InspectPatientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9D34F21830EA00068B05A /* InspectPatientsController.swift */; };
-		0AF9D352218949510068B05A /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9D351218949510068B05A /* MyTabBarController.swift */; };
 		0AF9D35421894C7C0068B05A /* FeaturesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9D35321894C7C0068B05A /* FeaturesController.swift */; };
 		0AF9D36021895D660068B05A /* ReleaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9D35F21895D660068B05A /* ReleaseController.swift */; };
 		0AF9D368218963380068B05A /* 病例讨论.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D361218963270068B05A /* 病例讨论.png */; };
@@ -881,10 +883,12 @@
 		0A2B356221C8FB9600E17AC9 /* BRCommitDataManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCommitDataManage.swift; sourceTree = "<group>"; };
 		0A2B356421C9104800E17AC9 /* ExamResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamResultController.swift; sourceTree = "<group>"; };
 		0A2B356621C9109000E17AC9 /* QuestionListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionListController.swift; sourceTree = "<group>"; };
-		0A2B356821C9134A00E17AC9 /* 通过@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "通过@2x.png"; sourceTree = "<group>"; };
 		0A2B356A21CB3EF600E17AC9 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		0A2B356B21CB3EF800E17AC9 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
 		0A2B356E21CB48E100E17AC9 /* nextQuestion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextQuestion.png; sourceTree = "<group>"; };
+		0A2B357421CB7C3700E17AC9 /* 通过2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "通过2.png"; sourceTree = "<group>"; };
+		0A2B357521CB7C3D00E17AC9 /* 未通过2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未通过2.png"; sourceTree = "<group>"; };
+		0A2B357A21CBA0F700E17AC9 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyTabBarController.swift; path = TrainForStudents/public/MyTabBarController.swift; sourceTree = SOURCE_ROOT; };
 		0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramicEvaluationController.swift; sourceTree = "<group>"; };
 		0A31A99621AD33DE007AB138 /* 添加人员.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加人员.png"; sourceTree = "<group>"; };
 		0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramicEvaluationDetailController.swift; sourceTree = "<group>"; };
@@ -1004,6 +1008,7 @@
 		0A7818F71F32F7740072CF16 /* 设置.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "设置.png"; sourceTree = "<group>"; };
 		0A7818F91F3303260072CF16 /* 角标.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "角标.png"; sourceTree = "<group>"; };
 		0A8293C9217ECBFD006047B1 /* InspectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectController.swift; sourceTree = "<group>"; };
+		0A88A1BD21CC980500D9AB47 /* PaperSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaperSelectorController.swift; path = TrainForStudents/public/PaperSelectorController.swift; sourceTree = SOURCE_ROOT; };
 		0A90EFB01EFA20B400B4CC7A /* CheckboxCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxCollectionView.swift; sourceTree = "<group>"; };
 		0A91142E201D60D2001A1936 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		0A940F0221A2AB86001BEE9D /* 第一名.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "第一名.png"; sourceTree = "<group>"; };
@@ -1111,7 +1116,6 @@
 		0AF9D34221805EC50068B05A /* 未选择-小.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未选择-小.png"; sourceTree = "<group>"; };
 		0AF9D34D21830D570068B05A /* InspectStudentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectStudentsController.swift; sourceTree = "<group>"; };
 		0AF9D34F21830EA00068B05A /* InspectPatientsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectPatientsController.swift; sourceTree = "<group>"; };
-		0AF9D351218949510068B05A /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		0AF9D35321894C7C0068B05A /* FeaturesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesController.swift; sourceTree = "<group>"; };
 		0AF9D35F21895D660068B05A /* ReleaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseController.swift; sourceTree = "<group>"; };
 		0AF9D361218963270068B05A /* 病例讨论.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "病例讨论.png"; sourceTree = "<group>"; };
@@ -2228,9 +2232,10 @@
 			isa = PBXGroup;
 			children = (
 				0A2B356E21CB48E100E17AC9 /* nextQuestion.png */,
+				0A2B357421CB7C3700E17AC9 /* 通过2.png */,
+				0A2B357521CB7C3D00E17AC9 /* 未通过2.png */,
 				0A2B356A21CB3EF600E17AC9 /* add.png */,
 				0A2B356B21CB3EF800E17AC9 /* minus.png */,
-				0A2B356821C9134A00E17AC9 /* 通过@2x.png */,
 				0A31A9B421B5293A007AB138 /* 人员LOGO.png */,
 				0A31A9B221B5292E007AB138 /* 考试试卷.png */,
 				0A26BA38219AABB10071C2DC /* 白星星-空.png */,
@@ -2617,9 +2622,10 @@
 			isa = PBXGroup;
 			children = (
 				0A97555721A7C21700267E10 /* PersonSelectorController.swift */,
-				0AF9D351218949510068B05A /* MyTabBarController.swift */,
+				0A88A1BD21CC980500D9AB47 /* PaperSelectorController.swift */,
 				0A26BA3E219BD3120071C2DC /* HBaseViewController.swift */,
 				0A26BA46219C16D20071C2DC /* FilesCollectionView.swift */,
+				0A2B357A21CBA0F700E17AC9 /* MyTabBarController.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -3025,6 +3031,7 @@
 				0A644D831F0209B5009025DD /* star.png in Resources */,
 				0A6B344121747AD0007FF54D /* 顶部固定.png in Resources */,
 				0AD1456E217D850B004670A9 /* 大纲.png in Resources */,
+				0A2B357621CB7C4400E17AC9 /* 通过2.png in Resources */,
 				0A15D5571F0EA52D00908B7F /* 我的-灰.png in Resources */,
 				B475D8771F9C4B5F00A72543 /* MBProgressHUD.bundle in Resources */,
 				0A7818EF1F32F6990072CF16 /* 教材2x.png in Resources */,
@@ -3072,6 +3079,7 @@
 				0AD1454621797B47004670A9 /* 星形3.png in Resources */,
 				0A15C3621F46FAEE00C53F61 /* 签到成功.png in Resources */,
 				0AF9D36E218963380068B05A /* 小讲课.png in Resources */,
+				0A2B357721CB7C4400E17AC9 /* 未通过2.png in Resources */,
 				0A644D7C1F0190BE009025DD /* 试题1.png in Resources */,
 				0A6B344A21747AD0007FF54D /* 待办事宜.png in Resources */,
 				0A494FA0211C29D100E95332 /* 科室-灰色@2x.png in Resources */,
@@ -3081,7 +3089,6 @@
 				B44FFFF0211C7BC000844C07 /* 返回@3x.png in Resources */,
 				0A7818F81F32F7740072CF16 /* 设置.png in Resources */,
 				0AC3C44A218FE32D006C0DAB /* 历史.png in Resources */,
-				0A2B356921C9134D00E17AC9 /* 通过@2x.png in Resources */,
 				0A940F1021A2AB87001BEE9D /* 第三名.png in Resources */,
 				0A7818F01F32F6990072CF16 /* 教材3x.png in Resources */,
 				0AF9D34321805EC60068B05A /* 未选择-大.png in Resources */,
@@ -3423,8 +3430,8 @@
 				0A6A23B21EF2690C00A1AC5B /* RecordsCollectionView.swift in Sources */,
 				0A97554721A3F1D800267E10 /* UIView.swift in Sources */,
 				0A42F8231F179EDA001DF281 /* DateUtil.swift in Sources */,
-				0AF9D352218949510068B05A /* MyTabBarController.swift in Sources */,
 				0A2B356321C8FB9700E17AC9 /* BRCommitDataManage.swift in Sources */,
+				0A88A1BE21CC980500D9AB47 /* PaperSelectorController.swift in Sources */,
 				0A644D631F00D3BC009025DD /* WaitExamTaskCollectionView.swift in Sources */,
 				0A29CDD7216DE6A100200650 /* QuestionDetailCollectionView.swift in Sources */,
 				0AC3B9351EE4730B00227194 /* TurnCenterController.swift in Sources */,
@@ -3445,6 +3452,7 @@
 				0A91142F201D60D2001A1936 /* UserDefaults.swift in Sources */,
 				B44FFFE6211C73EA00844C07 /* NSDictionary+Additions.m in Sources */,
 				0A0C570D1F4D70AE008551D3 /* ChangePersonInfoController.swift in Sources */,
+				0A2B357B21CBA0F700E17AC9 /* MyTabBarController.swift in Sources */,
 				0A644D9D1F065B53009025DD /* MyEvaluationDetailCollection.swift in Sources */,
 				0A644D771F018F3E009025DD /* MockExamCenterController.swift in Sources */,
 				0AC3BCA11EE94DA300227194 /* LBXScanView.swift in Sources */,

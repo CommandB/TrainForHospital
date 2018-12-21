@@ -22,6 +22,8 @@ class PublishStillController : HBaseViewController{
     var exercisesId = ""
     var submitParam = [String : Any]()
     
+    
+    
     override func viewDidLoad() {
         
         questionsCollection.delegate = directoryView
@@ -107,7 +109,7 @@ class PublishStillController : HBaseViewController{
             return
         }
         
-        print(submitParam)
+//        print(submitParam)
         
         let url = SERVER_PORT + "rest/app/onceSkillExam.do"
         //发布

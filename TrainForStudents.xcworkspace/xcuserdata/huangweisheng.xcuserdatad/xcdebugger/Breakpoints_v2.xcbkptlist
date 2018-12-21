@@ -180,7 +180,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrainForStudents/Features/ExamingSubScoController.swift"
-            timestampString = "566971108.31152"
+            timestampString = "566996614.452088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "322"
@@ -196,12 +196,12 @@
                   moduleName = "TrainForStudents"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
-                  timestampString = "566971108.784974"
+                  timestampString = "567078324.944688"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
                   endingLineNumber = "322"
-                  offsetFromSymbolStart = "78">
+                  offsetFromSymbolStart = "44">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -211,14 +211,30 @@
                   moduleName = "TrainForStudents"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
-                  timestampString = "566971108.788056"
+                  timestampString = "567078324.947839"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
                   endingLineNumber = "322"
-                  offsetFromSymbolStart = "9015">
+                  offsetFromSymbolStart = "6612">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrainForStudents/Features/ExamResultController.swift"
+            timestampString = "566996614.452503"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "reloadHeadView()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

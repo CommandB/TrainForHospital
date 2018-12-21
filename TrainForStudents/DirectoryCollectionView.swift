@@ -49,7 +49,7 @@ class DirectoryCollectionView: UIViewController,  UICollectionViewDelegate , UIC
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: UIScreen.width, height: 50)
+        return CGSize(width: UIScreen.width, height: 40)
         
         
     }

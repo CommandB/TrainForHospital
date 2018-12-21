@@ -40,6 +40,10 @@ class MyTabBarController : UITabBarController{
         case "我的":
             lastViewName = "mineView"
             selectedTabBarIndex = 4
+            //退出系统
+            UserDefaults.standard.set(nil, forKey: LoginInfo.token.rawValue)
+            r_token = ""
+            myPresentView(self, viewName: "loginView")
             break
         default:
             break

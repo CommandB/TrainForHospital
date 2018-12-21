@@ -187,7 +187,7 @@ class ExamingSubScoController: UIViewController,UITableViewDelegate,UITableViewD
                                 let examResultView = storyboard.instantiateViewController(withIdentifier: "ExamResultView") as! ExamResultController
                                 examResultView.dataSource = json["data"]
                                 examResultView.listData = self.headDataArr
-                                self.navigationController?.pushViewController(examResultView, animated: true)
+                                self.present(examResultView, animated: true, completion: nil)
                             })
                         }
                     }

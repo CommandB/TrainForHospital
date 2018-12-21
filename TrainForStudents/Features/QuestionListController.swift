@@ -18,10 +18,16 @@ class QuestionListController: UIViewController,UITableViewDataSource,UITableView
 //        let nib1 = UINib(nibName: "SubScoreCell", bundle: nil)
 //        tableview.register(nib1, forCellReuseIdentifier: "SubScoreCell")
         self.tableview.tableFooterView = UIView()
-        let image = UIImage(named: "返回")!.withRenderingMode(.alwaysOriginal)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image:image, style: .done, target: self, action: #selector(backAction))
+        tableview.delegate = self
+        tableview.dataSource = self
+        tableview.reloadData()
     }
 
+    //返回
+    @IBAction func btn_back_inside(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -42,9 +48,6 @@ class QuestionListController: UIViewController,UITableViewDataSource,UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableview.deselectRow(at: indexPath, animated: true)
-    }
-    func backAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {

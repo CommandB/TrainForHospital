@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class MessageListController : UIViewController{
+class MessageListController : HBaseViewController{
     
     @IBOutlet weak var messageCollection: UICollectionView!
     

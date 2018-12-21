@@ -311,10 +311,6 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                 }
                                 UserDefaults.standard.set(roleDic, forKey: LoginInfo.role.rawValue)
                                 
-                                
-                                
-                                
-                                
                             }else{
                                 myAlert(self, message: json["msg"].stringValue)
                             }
@@ -329,8 +325,8 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                     })
                     
                     
-                    
-                    myPresentView(self, viewName: "tabBarView")
+//                    myPresentView(self, viewName: "tabBarView")
+                    myPresentView(self, viewName: "hTabBarView")
                     
                 }else{
                     MBProgressHUD.hide(for: self.view, animated: true)

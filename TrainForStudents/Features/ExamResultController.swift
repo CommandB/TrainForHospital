@@ -23,6 +23,9 @@ class ExamResultController: UIViewController,UITableViewDataSource,UITableViewDe
         self.navigationItem.hidesBackButton = true
         tableview.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "basecell")
         tableview.tableFooterView = UIView()
+        tableview.delegate = self
+        tableview.dataSource = self
+        tableview.reloadData()
         totalScoreLabel.layer.cornerRadius = totalScoreLabel.frame.size.height/2
         totalScoreLabel.layer.masksToBounds = true
         reloadHeadView()
@@ -32,9 +35,9 @@ class ExamResultController: UIViewController,UITableViewDataSource,UITableViewDe
         totalScoreLabel.text = "总分"+dataSource["exercisesscore"].stringValue+"分"
         getScore.text = "总得分"+dataSource["score"].stringValue+"分"
         if dataSource["ispass"].stringValue == "1" {
-            passImageView.image = UIImage.init(named: "通过")
+            passImageView.image = UIImage.init(named: "通过2")
         }else{
-            passImageView.image = UIImage.init(named: "未通过")
+            passImageView.image = UIImage.init(named: "未通过2")
         }
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,7 +66,7 @@ class ExamResultController: UIViewController,UITableViewDataSource,UITableViewDe
     }
     
     @IBAction func backToExamCenter(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
