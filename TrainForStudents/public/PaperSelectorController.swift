@@ -12,6 +12,8 @@ import SwiftyJSON
 
 class PaperSelectorController : HBaseViewController{
     
+    static var defaultNoticeName = NSNotification.Name(rawValue: "paperSelectorDefaultNoticeName")
+    
     @IBOutlet weak var paperCollection: UICollectionView!
     
     var jds = [JSON]()
@@ -40,9 +42,17 @@ class PaperSelectorController : HBaseViewController{
     
     @IBAction func btn_sure_inside(_ sender: UIButton) {
         
+        
+        if selectedIndex != IndexPath(){
+            NotificationCenter.default.post(name: PaperSelectorController.defaultNoticeName, object: nil, userInfo: ["data":jds[selectedIndex.item]])
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
     
     func getListData(){
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
         self.paperCollection.mj_header.endRefreshing()
         
         let url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
@@ -77,11 +87,12 @@ class PaperSelectorController : HBaseViewController{
         getListData()
     }
     
-    func requestQuestions(exercisesId :String ,collection : UICollectionView){
+    ///请求试题
+    func requestQuestions(exercisesId :String ,vn:String ,collection : UICollectionView){
         
         MBProgressHUD.showAdded(to: collection, animated: true)
         let url = SERVER_PORT + "rest/app/getTheoryExercisesDetail.do"
-        myPostRequest(url, ["exercisesid": exercisesId], method: .post).responseString(completionHandler :{resp in
+        myPostRequest(url, ["exercisesid": exercisesId , "versionnumber":""], method: .post).responseString(completionHandler :{resp in
             MBProgressHUD.hideAllHUDs(for: collection, animated: true)
             switch resp.result{
             case .success(let respStr):
@@ -121,12 +132,14 @@ extension PaperSelectorController : UICollectionViewDelegate , UICollectionViewD
         let exercisesId = data["exercisesid"].stringValue
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         
+        cell.viewWithTag(10000)?.isHidden = true
         (cell.viewWithTag(10001) as! UILabel).text = data["title"].stringValue
         (cell.viewWithTag(20001) as! UILabel).text = data["creater"].stringValue
         (cell.viewWithTag(20002) as! UILabel).text = data["score"].stringValue + "分"
         
         
         if selectedIndex == indexPath{
+            cell.viewWithTag(10000)?.isHidden = false
             let questionsCollection = cell.viewWithTag(30001) as! UICollectionView
             questionsCollection.delegate = questionsView
             questionsCollection.dataSource = questionsView
@@ -140,7 +153,7 @@ extension PaperSelectorController : UICollectionViewDelegate , UICollectionViewD
                 questionsView.jsonDataSource = questionData
             }else{
                 print("请求的试卷ID=\(exercisesId)")
-                requestQuestions(exercisesId: exercisesId, collection: questionsCollection)
+                requestQuestions(exercisesId: exercisesId, vn: data["versionnumber"].stringValue, collection: questionsCollection)
             }
         }
         

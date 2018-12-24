@@ -196,12 +196,12 @@
                   moduleName = "TrainForStudents"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
-                  timestampString = "567078324.944688"
+                  timestampString = "567334667.848686"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
                   endingLineNumber = "322"
-                  offsetFromSymbolStart = "44">
+                  offsetFromSymbolStart = "78">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -211,12 +211,12 @@
                   moduleName = "TrainForStudents"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
-                  timestampString = "567078324.947839"
+                  timestampString = "567334667.8524359"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
                   endingLineNumber = "322"
-                  offsetFromSymbolStart = "6612">
+                  offsetFromSymbolStart = "9015">
                </Location>
             </Locations>
          </BreakpointContent>
