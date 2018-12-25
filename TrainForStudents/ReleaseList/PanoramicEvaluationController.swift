@@ -134,7 +134,7 @@ class PanoramicEvaluationController : UIViewController{
         
         let url = SERVER_PORT + "rest/app/getPreExitOfficePerson.do"
         let officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
-        myPostRequest(url, ["officeid":officeId,"month":"201908"], method: .post).responseString(completionHandler: {resp in
+        myPostRequest(url, ["officeid":officeId ,"month":"201908" ,"fortype":"evaluation"], method: .post).responseString(completionHandler: {resp in
             self.personCollection.mj_header.endRefreshing()
             self.personCollection.mj_footer.endRefreshing()
             switch resp.result{
@@ -209,7 +209,7 @@ extension PanoramicEvaluationController : UICollectionViewDelegate , UICollectio
         lbl = cell.viewWithTag(10003) as! UILabel
         lbl.text = ""
         lbl = cell.viewWithTag(10004) as! UILabel
-        lbl.text = "\(data["roundstarttime"].stringValue) - \(data["roundendtime"].stringValue)"
+        lbl.text = "\(data["starttime"].stringValue) - \(data["endtime"].stringValue)"
         
         
         return cell

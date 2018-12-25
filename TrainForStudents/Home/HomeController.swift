@@ -26,7 +26,7 @@ class HomeController : UIViewController{
     
     ///跳转到消息列表
     func btn_message_event(){
-        myPresentView(self, viewName: "messageListView")
+        //myPresentView(self, viewName: "messageListView")
         //UIApplication.shared.openURL(URL.init(string: "telprompt:13616543097")!)
     }
     

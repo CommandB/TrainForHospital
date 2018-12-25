@@ -148,7 +148,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrainForStudents/ReleaseList/PanoramicEvaluationController.swift"
-            timestampString = "565685161.4240201"
+            timestampString = "567418185.147144"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "143"
@@ -196,12 +196,12 @@
                   moduleName = "TrainForStudents"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
-                  timestampString = "567334667.848686"
+                  timestampString = "567418187.717587"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
                   endingLineNumber = "322"
-                  offsetFromSymbolStart = "78">
+                  offsetFromSymbolStart = "44">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -211,12 +211,12 @@
                   moduleName = "TrainForStudents"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
-                  timestampString = "567334667.8524359"
+                  timestampString = "567418187.723097"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
                   endingLineNumber = "322"
-                  offsetFromSymbolStart = "9015">
+                  offsetFromSymbolStart = "6612">
                </Location>
             </Locations>
          </BreakpointContent>

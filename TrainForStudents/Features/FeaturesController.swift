@@ -55,7 +55,8 @@ class FeaturesController : UIViewController{
             vc.isSkillExam = false
             present(vc, animated: true, completion: nil)
             break
-        case 10003:
+        case 10003: //待评任务
+            myPresentView(self, viewName: "evaluationListView")
             break
         case 10004:
             break

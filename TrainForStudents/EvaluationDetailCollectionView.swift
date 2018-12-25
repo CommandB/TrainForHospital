@@ -12,10 +12,9 @@ import SwiftyJSON
 
 class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
     
-    var parentVC = UIViewController()
+    var parentVC : EvaluationDetailController? = nil
     var jsonDataSource = JSON([:])
     var isReadonly = false
-    var maxStarNumber = 5
     
     //设置collectionView的分区个数
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -46,8 +45,7 @@ class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelega
             index = (indexPath.item - 1) / 2
             cellName = "c2"
         }
-        //设置默认评价都为五颗星
-//        jsonDataSource[index]["get_value"] = 5
+        
         let data = jsonDataSource[index]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath)
         
@@ -55,34 +53,29 @@ class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelega
             let lbl = cell.viewWithTag(10001) as? UILabel
             lbl?.text = data["itemtitle"].stringValue
         }else{
+            let slider = cell.viewWithTag(10001) as! UISlider
             let selectedNumber = data["get_value"].int
             var lightNumber = data["starsvalue"].intValue
             if selectedNumber != nil{
                 lightNumber = selectedNumber!
             }
-            if isReadonly {
+            if isReadonly { //只读
                 lightNumber = data["numbervalue"].intValue
+                slider.isEnabled = false
             }
-//            if data["itemtitle"].stringValue.range(of: "是否有分配带教老师") != nil {
-//                print()
-//            }
-            touchStar(cell: cell, lightNumber: lightNumber)
-            let stars = data["starsvalue"].intValue
-            maxStarNumber = stars
-            for i in 1 ... 5{
-                let tag = 10000 + i
-                let btn = cell.viewWithTag(tag) as! UIButton
-                if i <= maxStarNumber{
-                    btn.isHidden = false
-                }else{
-                    btn.isHidden = true
-                }
-                btn.restorationIdentifier = "\(index)"
-                btn.addTarget(self, action: #selector(btn_star_inside), for: UIControlEvents.touchUpInside)
-            }
+            let maxStarNumber = data["starsvalue"].intValue
+            
+            slider.viewParam = ["index":index ,"maxValue" : maxStarNumber ,"indexPath":indexPath]
+            slider.minimumValue = 0
+            slider.maximumValue = Float(maxStarNumber)
+            slider.value = Float(lightNumber)
+            slider.addTarget(self, action: #selector(setScore), for: .valueChanged)
+            
+            //展示分数
+            let lbl = cell.viewWithTag(10002) as! UILabel
+            lbl.text = "\(lightNumber)/\(maxStarNumber)分"
             
         }
-        
         
         return cell
         
@@ -91,9 +84,6 @@ class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelega
     //cell点击
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-//        if indexPath.item % 2 == 1 && !isReadonly{
-//            
-//        }
         print(indexPath.item)
         
     }
@@ -105,28 +95,14 @@ class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelega
         
     }
     
-    func btn_star_inside(sender : UIButton){
-        if !isReadonly {
-            let index = sender.tag - 10000
-            touchStar(cell: sender.superview!, lightNumber: index)
-            let i = Int(sender.restorationIdentifier!)!
-            jsonDataSource[i]["get_value"] = JSON(index)
-            //print(jsonDataSource[index - 1].description)
-        }
-    }
-    
-    func touchStar(cell : UIView , lightNumber : Int){
+    func setScore(sender : UISlider){
         
-        for i in 1 ... maxStarNumber{
-            let tag = 10000 + i
-            let btn = cell.viewWithTag(tag) as! UIButton
-            if i <= lightNumber{
-                btn.setBackgroundImage(UIImage(named: "lightStar.png"), for: .normal)
-            }else{
-                btn.setBackgroundImage(UIImage(named: "star.png"), for: .normal)
-            }
-        }
+        let indexPath = sender.viewParam!["indexPath"] as! IndexPath
+        let index = sender.viewParam!["index"] as! Int
+        //四舍五入
+        let score = lroundf(sender.value)
+        jsonDataSource[index]["get_value"] = JSON(score)
+        parentVC!.detailCollection.reloadItems(at: [indexPath])
     }
-    
     
 }
