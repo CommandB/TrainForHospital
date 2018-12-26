@@ -38,12 +38,14 @@ class HomeController : UIViewController{
     ///6个功能按钮
     func btn_features_event(sender : UIButton){
         switch sender.tag - 10000 {
-        case 1:
+        case 1: //360评价
             myPresentView(self, viewName: "panoramicEvaluationView")
             break
-        case 2:
+        case 2: //出科理论考试
+            myPresentView(self, viewName: "publishSubjectExamView")
             break
-        case 3:
+        case 3: //出科技能考试
+            myPresentView(self, viewName: "publishSubjectExamView")
             break
         case 4:
             break
@@ -102,10 +104,10 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             btn.set(image: nil, title: "360评价", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
             btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             btn = cell.viewWithTag(10002) as! UIButton
-            btn.set(image: nil, title: "出科考试", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
+            btn.set(image: nil, title: "出科理论考试", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
             btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             btn = cell.viewWithTag(10003) as! UIButton
-            btn.set(image: nil, title: "教学督查", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
+            btn.set(image: nil, title: "出科技能考试", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
             btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             btn = cell.viewWithTag(10004) as! UIButton
             btn.set(image: nil, title: "入科安排", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)

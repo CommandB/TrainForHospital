@@ -229,7 +229,7 @@ extension PanoramicEvaluationController : UICollectionViewDelegate , UICollectio
         
         
         //return CGSize(width: UIScreen.width, height: 95)
-        return CGSize(width: UIScreen.width, height: 55)
+        return CGSize(width: UIScreen.width, height: 60)
     }
     
 }

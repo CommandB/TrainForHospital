@@ -45,6 +45,7 @@
 		0A15D55A1F0EA5ED00908B7F /* 任务中心.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15D5591F0EA5ED00908B7F /* 任务中心.png */; };
 		0A15FB5B21366EEE008DC7E0 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15FB5A21366EEE008DC7E0 /* AppConfiguration.swift */; };
 		0A1A97B121D206250097C467 /* EvalueationListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A97B021D206250097C467 /* EvalueationListController.swift */; };
+		0A1A97BC21D32AD40097C467 /* PublishSubjectExamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A97BB21D32AD40097C467 /* PublishSubjectExamController.swift */; };
 		0A210FDE20B44C05006BC5C9 /* echarts.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0A210FD220B44C04006BC5C9 /* echarts.min.js */; };
 		0A210FDF20B44C05006BC5C9 /* goods2.htm in Resources */ = {isa = PBXBuildFile; fileRef = 0A210FD420B44C04006BC5C9 /* goods2.htm */; };
 		0A210FE120B44C1F006BC5C9 /* WebViewTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A210FE020B44C1E006BC5C9 /* WebViewTestController.swift */; };
@@ -847,6 +848,7 @@
 		0A15D5591F0EA5ED00908B7F /* 任务中心.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务中心.png"; sourceTree = "<group>"; };
 		0A15FB5A21366EEE008DC7E0 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		0A1A97B021D206250097C467 /* EvalueationListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvalueationListController.swift; sourceTree = "<group>"; };
+		0A1A97BB21D32AD40097C467 /* PublishSubjectExamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishSubjectExamController.swift; sourceTree = "<group>"; };
 		0A210FD220B44C04006BC5C9 /* echarts.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = echarts.min.js; sourceTree = "<group>"; };
 		0A210FD420B44C04006BC5C9 /* goods2.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = goods2.htm; sourceTree = "<group>"; };
 		0A210FE020B44C1E006BC5C9 /* WebViewTestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewTestController.swift; sourceTree = "<group>"; };
@@ -2335,8 +2337,6 @@
 				0A8293C9217ECBFD006047B1 /* InspectController.swift */,
 				0AF9D34D21830D570068B05A /* InspectStudentsController.swift */,
 				0AF9D34F21830EA00068B05A /* InspectPatientsController.swift */,
-				0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */,
-				0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */,
 				0A31A9A421AE9ACA007AB138 /* EvaluationDimensionController.swift */,
 			);
 			path = ReleaseList;
@@ -2359,6 +2359,9 @@
 				0AD145532179CB45004670A9 /* ToDoListController.swift */,
 				0AD14556217D6819004670A9 /* ToDoDetailController.swift */,
 				0A3A7F8C2194309200334307 /* MessageListController.swift */,
+				0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */,
+				0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */,
+				0A1A97BB21D32AD40097C467 /* PublishSubjectExamController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3302,6 +3305,7 @@
 				0AFE94281F209D46009C4CDF /* MyBaseCollectionView.swift in Sources */,
 				0A644D731F017C06009025DD /* HistoryEvaluationCollectionView.swift in Sources */,
 				0AB31E4A215CAC81002E3F32 /* ComplaintListController.swift in Sources */,
+				0A1A97BC21D32AD40097C467 /* PublishSubjectExamController.swift in Sources */,
 				0AC3BB021EE9499000227194 /* extension.swift in Sources */,
 				0AD14563217D81FB004670A9 /* LeaveApprovedController.swift in Sources */,
 				0A15D5281F0E51F200908B7F /* MeterialListController.swift in Sources */,
