@@ -13,6 +13,7 @@
 		0A0C570F1F4F00F2008551D3 /* 标签.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C570E1F4F00F2008551D3 /* 标签.png */; };
 		0A0C57111F511D9D008551D3 /* 扫一扫.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C57101F511D9D008551D3 /* 扫一扫.png */; };
 		0A0FA88C1F0F615300DFEA7E /* voice.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0FA8871F0F615300DFEA7E /* voice.png */; };
+		0A1018BD21D4B5AA00E07B33 /* StudentsInExamCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1018BC21D4B5AA00E07B33 /* StudentsInExamCollection.swift */; };
 		0A125A881F2204B300FDD4F4 /* BMPlayerCustomControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A871F2204B300FDD4F4 /* BMPlayerCustomControlView.swift */; };
 		0A125A8C1F29CBDB00FDD4F4 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */; };
 		0A125A8E1F29CC6400FDD4F4 /* SettingsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */; };
@@ -298,6 +299,7 @@
 		0AD14579217D8F89004670A9 /* 页面 1驳回.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AD14575217D8F7F004670A9 /* 页面 1驳回.png */; };
 		0AD1457A217D8F89004670A9 /* 通过.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AD14576217D8F84004670A9 /* 通过.png */; };
 		0AD1457B217D8F89004670A9 /* 操作-电话.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AD14577217D8F86004670A9 /* 操作-电话.png */; };
+		0AE552B421D398BB00B82032 /* PublishSubjectExamDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE552B321D398BB00B82032 /* PublishSubjectExamDetailController.swift */; };
 		0AEBF3C21F207EB200520E27 /* 结业.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBF3BF1F207EB200520E27 /* 结业.png */; };
 		0AEBF3C31F207EB200520E27 /* 年度.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBF3C01F207EB200520E27 /* 年度.png */; };
 		0AEBF3C51F20804700520E27 /* 出科.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBF3C41F20804700520E27 /* 出科.png */; };
@@ -816,6 +818,7 @@
 		0A0C57101F511D9D008551D3 /* 扫一扫.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫一扫.png"; sourceTree = "<group>"; };
 		0A0FA8871F0F615300DFEA7E /* voice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice.png; sourceTree = "<group>"; };
 		0A0FA88F1F110DB100DFEA7E /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		0A1018BC21D4B5AA00E07B33 /* StudentsInExamCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsInExamCollection.swift; sourceTree = "<group>"; };
 		0A125A871F2204B300FDD4F4 /* BMPlayerCustomControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMPlayerCustomControlView.swift; sourceTree = "<group>"; };
 		0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCollectionView.swift; sourceTree = "<group>"; };
@@ -1107,6 +1110,7 @@
 		0AD14577217D8F86004670A9 /* 操作-电话.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "操作-电话.png"; sourceTree = "<group>"; };
 		0AD65A1420108C650069DDC0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0AD65A1620108E720069DDC0 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		0AE552B321D398BB00B82032 /* PublishSubjectExamDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishSubjectExamDetailController.swift; sourceTree = "<group>"; };
 		0AEBF3BF1F207EB200520E27 /* 结业.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "结业.png"; sourceTree = "<group>"; };
 		0AEBF3C01F207EB200520E27 /* 年度.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "年度.png"; sourceTree = "<group>"; };
 		0AEBF3C41F20804700520E27 /* 出科.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "出科.png"; sourceTree = "<group>"; };
@@ -2030,6 +2034,14 @@
 			path = JPush;
 			sourceTree = "<group>";
 		};
+		0A1018BB21D4B56300E07B33 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				0A1018BC21D4B5AA00E07B33 /* StudentsInExamCollection.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
 		0A15D5121F0BF5E900908B7F /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -2355,6 +2367,7 @@
 		0AB5AA962105D41000A9E2EC /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0A1018BB21D4B56300E07B33 /* Collection */,
 				0AB5AAA02105D50900A9E2EC /* HomeController.swift */,
 				0AD145532179CB45004670A9 /* ToDoListController.swift */,
 				0AD14556217D6819004670A9 /* ToDoDetailController.swift */,
@@ -2362,6 +2375,7 @@
 				0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */,
 				0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */,
 				0A1A97BB21D32AD40097C467 /* PublishSubjectExamController.swift */,
+				0AE552B321D398BB00B82032 /* PublishSubjectExamDetailController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3282,6 +3296,7 @@
 				0A3E186321C79FAA00BF1816 /* PublishStillController.swift in Sources */,
 				0A291B6A1F429DDB008784B5 /* TaskApplyDetailImageCollectionView.swift in Sources */,
 				0AC3B9A11EE8FC0000227194 /* OverCollectionView.swift in Sources */,
+				0A1018BD21D4B5AA00E07B33 /* StudentsInExamCollection.swift in Sources */,
 				0AFE94241F209874009C4CDF /* MyCollectionBaseFooter.swift in Sources */,
 				0A291B681F429AA5008784B5 /* TaskApplyDetailController.swift in Sources */,
 				B468B7C31FCA9BA000ECF396 /* MJRefreshBackGifFooter.m in Sources */,
@@ -3382,6 +3397,7 @@
 				0A15FB5B21366EEE008DC7E0 /* AppConfiguration.swift in Sources */,
 				0A29CDC9216DA74800200650 /* QuestionnaireCollectionView.swift in Sources */,
 				B4FF1A8F1F94DF7D009C6685 /* UIButton+WebCache.m in Sources */,
+				0AE552B421D398BB00B82032 /* PublishSubjectExamDetailController.swift in Sources */,
 				B4847FB01F9E13DC00307D6F /* AssistantController.swift in Sources */,
 				B4FF1A8E1F94DF7D009C6685 /* SDWebImagePrefetcher.m in Sources */,
 				B4F9E8781F91014A0001D88F /* OtherFilesController.swift in Sources */,

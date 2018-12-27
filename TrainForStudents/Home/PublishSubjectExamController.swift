@@ -12,14 +12,14 @@ import SwiftyJSON
 
 class PublishSubjectExamController : HBaseViewController{
     
+    var isSkillExam = false
+    
     @IBOutlet weak var studentsCollection: UICollectionView!
     
     var jds = [JSON]()
     let datePicker = UIPickerView()
     
     var selectedStudents = [IndexPath:JSON]()
-    
-    var submitData = [String:Any]()
     
     override func viewDidLoad() {
         
@@ -29,13 +29,13 @@ class PublishSubjectExamController : HBaseViewController{
         datePicker.delegate = self
         datePicker.dataSource = self
         
-        submitData["exerciseslist"] = [JSON]()
-        
         let txt = view.viewWithTag(10001) as! TextFieldForNoMenu
         txt.inputView = datePicker
         
         let btn = view.viewWithTag(10004) as! UIButton
         btn.addTarget(self, action: #selector(btn_selectorExam_inside), for: .touchUpInside)
+        btn.setCornerRadius(radius: 4)
+        btn.setBorder(width: 1, color: (btn.titleLabel?.textColor)!)
         
         self.studentsCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.studentsCollection.mj_header.beginRefreshing()
@@ -49,6 +49,13 @@ class PublishSubjectExamController : HBaseViewController{
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func btn_next_inside(_ sender: UIButton) {
+        let vc = getViewToStoryboard("publishSubjectExamDetailView") as! PublishSubjectExamDetailController
+        vc.jds = jds
+        vc.isSkillExam = isSkillExam
+        present(vc, animated: true, completion: nil)
     }
     
     

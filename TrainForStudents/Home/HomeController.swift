@@ -42,10 +42,14 @@ class HomeController : UIViewController{
             myPresentView(self, viewName: "panoramicEvaluationView")
             break
         case 2: //出科理论考试
-            myPresentView(self, viewName: "publishSubjectExamView")
+            let vc = getViewToStoryboard("publishSubjectExamView") as! PublishSubjectExamController
+            vc.isSkillExam = false
+            present(vc, animated: true, completion: nil)
             break
         case 3: //出科技能考试
-            myPresentView(self, viewName: "publishSubjectExamView")
+            let vc = getViewToStoryboard("publishSubjectExamView") as! PublishSubjectExamController
+            vc.isSkillExam = true
+            present(vc, animated: true, completion: nil)
             break
         case 4:
             break
