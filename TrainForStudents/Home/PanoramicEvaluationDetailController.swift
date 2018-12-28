@@ -116,12 +116,6 @@ class PanoramicEvaluationDetailController : UIViewController{
     
 }
 
-
-
-
-
-
-
 extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     
@@ -131,24 +125,6 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
     
     //设置每个section有几个item
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        switch keys[section] {
-//        case "nerse2s":
-//            return jds["data"]["nurselist"].count + 1
-//        case "dir2s":
-//            return jds["data"]["directorylist"].count + 1
-//        case "cm2s":
-//            return jds["data"]["classmatelist"].count + 1
-//        case "se2s":
-//            return jds["data"]["secretarylist"].count + 1
-//        case "t2s":
-//            return jds["data"]["teacherlist"].count + 1
-//        case "s2t":
-//            return jds["data"]["teacherlist"].count + 1
-//        case "s2o":
-//            return 2
-//        default:
-//            break
-//        }
         let key = getJsonKey(key: keys[section])
         if key == "officelist"{
             return 2

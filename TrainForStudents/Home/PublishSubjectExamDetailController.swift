@@ -112,16 +112,20 @@ class PublishSubjectExamDetailController : HBaseViewController{
             exercisesList[index] = examInfo
         }
         
-        
-//        print(exercisesList)
         submitData["exerciseslist"] = exercisesList
         submitData["marking"] = "0"
         jds = exercisesList
+        
+        examInfoCollection.reloadData()
+        //reloadExamCollection()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(receiveTeacherNotice), name: Notification.Name.init(teacherNotice), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receiveMarkingNotice), name: Notification.Name.init(markingNotice), object: nil)
+        
+        
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -251,7 +255,6 @@ class PublishSubjectExamDetailController : HBaseViewController{
     
     ///选阅卷老师 回调
     func receiveMarkingNotice(notification : NSNotification){
-        print("你猜毁掉了几次????")
         NotificationCenter.default.removeObserver(self, name: Notification.Name(markingNotice), object: nil)
         if notification.userInfo != nil{
             let data = (notification.userInfo!["data"] as! [JSON])
@@ -269,6 +272,7 @@ class PublishSubjectExamDetailController : HBaseViewController{
             submitData["exerciseslist"] = examArr
             jds = examArr
             examInfoCollection.reloadData()
+//            reloadExamCollection()
             
         }
     }
@@ -353,9 +357,12 @@ class PublishSubjectExamDetailController : HBaseViewController{
         submitData["name"] = text
     }
     
-    func getListData(){
-        
-        examInfoCollection.reloadData()
+    func reloadExamCollection(){
+        var arr = [IndexPath]()
+        for (index,item) in jds.enumerated(){
+            arr.append(IndexPath(item: index, section: 0))
+        }
+        examInfoCollection.reloadItems(at: arr)
     }
     
 }
@@ -380,8 +387,7 @@ extension PublishSubjectExamDetailController : UICollectionViewDelegate , UIColl
         stuCollection.delegate = stuView
         stuCollection.dataSource = stuView
         stuView.jds = data["studentlist"].arrayValue
-//        print(data)
-//        print("--------------------------------")
+
         //控制阅卷老师
         cell.viewWithTag(10003)?.isHidden = true
         cell.viewWithTag(10004)?.isHidden = true
@@ -404,13 +410,14 @@ extension PublishSubjectExamDetailController : UICollectionViewDelegate , UIColl
             btn.alpha = 0.6
         }
         
-        stuCollection.reloadData()
+        //stuCollection.reloadData()
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //myPresentView(self, viewName: "todoDetailView")
+        collectionView.reloadItems(at: [indexPath])
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

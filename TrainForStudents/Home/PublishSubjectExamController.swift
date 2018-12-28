@@ -19,6 +19,7 @@ class PublishSubjectExamController : HBaseViewController{
     var jds = [JSON]()
     let datePicker = UIPickerView()
     
+    var isSelectedAll = false
     var selectedStudents = [IndexPath:JSON]()
     
     override func viewDidLoad() {
@@ -31,11 +32,19 @@ class PublishSubjectExamController : HBaseViewController{
         
         let txt = view.viewWithTag(10001) as! TextFieldForNoMenu
         txt.inputView = datePicker
+        txt.delegate = self
         
-        let btn = view.viewWithTag(10004) as! UIButton
+        let currentDate = Date()
+        (view.viewWithTag(10002) as! UILabel).text = "\(currentDate.month)月"
+        (view.viewWithTag(10003) as! UILabel).text = "\(currentDate.year)"
+        
+        var btn = view.viewWithTag(10004) as! UIButton
         btn.addTarget(self, action: #selector(btn_selectorExam_inside), for: .touchUpInside)
         btn.setCornerRadius(radius: 4)
         btn.setBorder(width: 1, color: (btn.titleLabel?.textColor)!)
+        
+        btn = view.viewWithTag(40002) as! UIButton
+        btn.addTarget(self, action: #selector(btn_selectAll), for: .touchUpInside)
         
         self.studentsCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.studentsCollection.mj_header.beginRefreshing()
@@ -74,6 +83,9 @@ class PublishSubjectExamController : HBaseViewController{
             }
             //清除已选学员
             selectedStudents.removeAll()
+            if isSelectedAll{
+                btn_selectAll(sender: (view.viewWithTag(40002) as! UIButton))
+            }
             
             studentsCollection.reloadData()
         }
@@ -88,10 +100,47 @@ class PublishSubjectExamController : HBaseViewController{
         myPresentView(self, viewName: "paperSelectorView")
     }
     
+    ///全选
+    func btn_selectAll(sender : UIButton){
+        if isSelectedAll{
+            isSelectedAll = false
+            selectedStudents.removeAll()
+            sender.setImage(UIImage(named: "未选择-大"), for: .normal)
+        }else{
+            isSelectedAll = true
+            sender.setImage(UIImage(named: "选择-大"), for: .normal)
+            
+            for (index,stu) in jds.enumerated(){
+                let indexPath = IndexPath(item: index, section: 0)
+                selectedStudents[indexPath] = stu
+            }
+            
+        }
+        studentsCollection.reloadData()
+    }
+    
     func getListData(){
+        
+        
+        var month = (view.viewWithTag(10002) as! UILabel).text
+        let year = (view.viewWithTag(10003) as! UILabel).text
+        if (month?.count)! < 3{
+            month = "0" + month!
+        }
+        let paramMonth = (year! + month!).replacingOccurrences(of: "月", with: "")
+        
+        //清除已选学生
+        selectedStudents.removeAll()
+        if isSelectedAll{
+            btn_selectAll(sender: (view.viewWithTag(40002) as! UIButton))
+        }
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
         let url = SERVER_PORT + "rest/app/getPreExitOfficePerson.do"
         let officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
-        myPostRequest(url, ["officeid":officeId ,"month":"201908" ,"fortype":"exam"], method: .post).responseString(completionHandler: {resp in
+        myPostRequest(url, ["officeid":officeId ,"month":paramMonth ,"fortype":"exam"], method: .post).responseString(completionHandler: {resp in
+            
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             self.studentsCollection.mj_header.endRefreshing()
             
             switch resp.result{
@@ -160,7 +209,9 @@ extension PublishSubjectExamController : UICollectionViewDelegate , UICollection
         }else{
             selectedStudents[indexPath] = nil
         }
-        
+        if selectedStudents.count == 0 && isSelectedAll{
+            btn_selectAll(sender: (view.viewWithTag(40002) as! UIButton))
+        }
         collectionView.reloadData()
     }
     
@@ -175,8 +226,6 @@ extension PublishSubjectExamController : UICollectionViewDelegate , UICollection
 
 
 extension PublishSubjectExamController : UIPickerViewDelegate , UIPickerViewDataSource{
-    
-    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
@@ -207,8 +256,7 @@ extension PublishSubjectExamController : UIPickerViewDelegate , UIPickerViewData
             let month = row + 1
             (view.viewWithTag(10002) as! UILabel).text = "\(month)月"
         }
+        getListData()
     }
-    
-    
     
 }

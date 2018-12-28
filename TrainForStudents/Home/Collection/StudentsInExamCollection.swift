@@ -15,13 +15,14 @@ class StudentsInExamCollection: UIViewController ,UICollectionViewDelegate , UIC
     var jds = [JSON]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("count=\(jds.count) \t")
         return jds.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let data = jds[indexPath.item]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
         let btn = cell.viewWithTag(10001) as! UIButton
         btn.setCornerRadius(radius: btn.W.divided(by: 2))
         btn.setImage(UIImage(named: "loginId"), for: .normal)
@@ -35,6 +36,7 @@ class StudentsInExamCollection: UIViewController ,UICollectionViewDelegate , UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //myPresentView(self, viewName: "todoDetailView")
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
