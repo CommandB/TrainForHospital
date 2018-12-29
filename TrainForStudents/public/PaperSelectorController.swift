@@ -12,6 +12,8 @@ import SwiftyJSON
 
 class PaperSelectorController : HBaseViewController{
     
+    var notReload = false
+    
     static var defaultNoticeName = NSNotification.Name(rawValue: "paperSelectorDefaultNoticeName")
     
     @IBOutlet weak var paperCollection: UICollectionView!
@@ -29,12 +31,17 @@ class PaperSelectorController : HBaseViewController{
         
         self.paperCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         
-        jds = UserDefaults.AppConfig.json(forKey: .subjectExamPaper).arrayValue
-        if jds == nil || jds.count == 0{
-            self.paperCollection.mj_header.beginRefreshing()
+        if notReload{
+            jds = UserDefaults.AppConfig.json(forKey: .subjectExamPaper).arrayValue
+            if jds.count == 0{
+                self.paperCollection.mj_header.beginRefreshing()
+            }else{
+                paperCollection.reloadData()
+            }
         }else{
-            paperCollection.reloadData()
+            getListData()
         }
+        
         
         
     }

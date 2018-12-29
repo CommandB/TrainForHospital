@@ -196,7 +196,7 @@
                   moduleName = "TrainForStudents"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
-                  timestampString = "567756993.680717"
+                  timestampString = "567759924.863861"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
@@ -211,7 +211,7 @@
                   moduleName = "TrainForStudents"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
-                  timestampString = "567756993.685747"
+                  timestampString = "567759924.867267"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
@@ -234,22 +234,6 @@
             startingLineNumber = "35"
             endingLineNumber = "35"
             landmarkName = "reloadHeadView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TrainForStudents/Home/PublishSubjectExamDetailController.swift"
-            timestampString = "567756993.234006"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
-            landmarkName = "btn_marking_evet(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

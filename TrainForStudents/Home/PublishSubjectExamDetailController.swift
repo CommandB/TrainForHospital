@@ -169,6 +169,10 @@ class PublishSubjectExamDetailController : HBaseViewController{
             myAlert(self, message: "请选择监考老师!")
             return
         }
+        if submitData["appexamination"] == nil{
+            myAlert(self, message: "请确认是否允许APP进行考试!")
+            return
+        }
         
         let exerciseslist = JSON(submitData["exerciseslist"]).arrayValue
         for exam in exerciseslist{
@@ -199,6 +203,7 @@ class PublishSubjectExamDetailController : HBaseViewController{
                     })
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
+                    print(json)
                 }
                 break
 

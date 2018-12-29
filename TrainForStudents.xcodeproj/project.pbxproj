@@ -196,6 +196,14 @@
 		0A6B344921747AD0007FF54D /* 360评价.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6B343F21747ACD007FF54D /* 360评价.png */; };
 		0A6B344A21747AD0007FF54D /* 待办事宜.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6B344021747ACE007FF54D /* 待办事宜.png */; };
 		0A6DD15521213BD900060A4A /* 扫一扫-白.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6DD14B21213BD700060A4A /* 扫一扫-白.png */; };
+		0A75CF0921D751DF004E9734 /* 功能.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A75CEFC21D751D6004E9734 /* 功能.png */; };
+		0A75CF0A21D751DF004E9734 /* 发布.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A75CF0621D751D7004E9734 /* 发布.png */; };
+		0A75CF0B21D751DF004E9734 /* 我的.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A75CF0721D751D8004E9734 /* 我的.png */; };
+		0A75CF0C21D751DF004E9734 /* 资讯.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A75CF0821D751DD004E9734 /* 资讯.png */; };
+		0A75CF1121D7532E004E9734 /* 首页-选择.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A75CF0D21D75327004E9734 /* 首页-选择.png */; };
+		0A75CF1221D7532E004E9734 /* 功能-选择.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A75CF0E21D75329004E9734 /* 功能-选择.png */; };
+		0A75CF1321D7532E004E9734 /* 我的-选择.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A75CF0F21D7532B004E9734 /* 我的-选择.png */; };
+		0A75CF1421D7532E004E9734 /* 资讯-选择.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A75CF1021D7532B004E9734 /* 资讯-选择.png */; };
 		0A7818E41F3090980072CF16 /* TaskDetail2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7818E31F3090980072CF16 /* TaskDetail2Controller.swift */; };
 		0A7818ED1F32F6990072CF16 /* 答疑2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7818E51F32F6990072CF16 /* 答疑2x.png */; };
 		0A7818EE1F32F6990072CF16 /* 答疑3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7818E61F32F6990072CF16 /* 答疑3x.png */; };
@@ -823,6 +831,7 @@
 		0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCollectionView.swift; sourceTree = "<group>"; };
 		0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
+		0A15B9B821D7506D00CD1137 /* 首页.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页.png"; sourceTree = "<group>"; };
 		0A15C35F1F46FAEE00C53F61 /* 没通过.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没通过.png"; sourceTree = "<group>"; };
 		0A15C3601F46FAEE00C53F61 /* 签到成功.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "签到成功.png"; sourceTree = "<group>"; };
 		0A15C3631F46FC8A00C53F61 /* 通过了.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "通过了.png"; sourceTree = "<group>"; };
@@ -1003,6 +1012,14 @@
 		0A6B343F21747ACD007FF54D /* 360评价.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "360评价.png"; sourceTree = "<group>"; };
 		0A6B344021747ACE007FF54D /* 待办事宜.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "待办事宜.png"; sourceTree = "<group>"; };
 		0A6DD14B21213BD700060A4A /* 扫一扫-白.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫一扫-白.png"; sourceTree = "<group>"; };
+		0A75CEFC21D751D6004E9734 /* 功能.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "功能.png"; sourceTree = "<group>"; };
+		0A75CF0621D751D7004E9734 /* 发布.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发布.png"; sourceTree = "<group>"; };
+		0A75CF0721D751D8004E9734 /* 我的.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的.png"; sourceTree = "<group>"; };
+		0A75CF0821D751DD004E9734 /* 资讯.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "资讯.png"; sourceTree = "<group>"; };
+		0A75CF0D21D75327004E9734 /* 首页-选择.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页-选择.png"; sourceTree = "<group>"; };
+		0A75CF0E21D75329004E9734 /* 功能-选择.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "功能-选择.png"; sourceTree = "<group>"; };
+		0A75CF0F21D7532B004E9734 /* 我的-选择.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的-选择.png"; sourceTree = "<group>"; };
+		0A75CF1021D7532B004E9734 /* 资讯-选择.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "资讯-选择.png"; sourceTree = "<group>"; };
 		0A7818E31F3090980072CF16 /* TaskDetail2Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetail2Controller.swift; sourceTree = "<group>"; };
 		0A7818E51F32F6990072CF16 /* 答疑2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "答疑2x.png"; sourceTree = "<group>"; };
 		0A7818E61F32F6990072CF16 /* 答疑3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "答疑3x.png"; sourceTree = "<group>"; };
@@ -2327,6 +2344,15 @@
 				0A6B343921747ABB007FF54D /* 科室空间.png */,
 				0A6B343A21747ABF007FF54D /* 入科安排.png */,
 				0A6B343B21747AC3007FF54D /* 学员轮转.png */,
+				0A75CF0E21D75329004E9734 /* 功能-选择.png */,
+				0A75CF0D21D75327004E9734 /* 首页-选择.png */,
+				0A75CF0F21D7532B004E9734 /* 我的-选择.png */,
+				0A75CF1021D7532B004E9734 /* 资讯-选择.png */,
+				0A75CF0621D751D7004E9734 /* 发布.png */,
+				0A75CEFC21D751D6004E9734 /* 功能.png */,
+				0A75CF0721D751D8004E9734 /* 我的.png */,
+				0A75CF0821D751DD004E9734 /* 资讯.png */,
+				0A15B9B821D7506D00CD1137 /* 首页.png */,
 				0AD1454121797B42004670A9 /* 箭头1.png */,
 				0AD1454021797B40004670A9 /* 箭头2.png */,
 				0AD1453421797B3C004670A9 /* 箭头3.png */,
@@ -3059,6 +3085,7 @@
 				0A3A7F6F2192942200334307 /* 入科.png in Resources */,
 				0AC3B93F1EE4730B00227194 /* LaunchScreen.storyboard in Resources */,
 				0A7818F41F32F6990072CF16 /* 远程3x.png in Resources */,
+				0A75CF0B21D751DF004E9734 /* 我的.png in Resources */,
 				0AC3B93C1EE4730B00227194 /* Assets.xcassets in Resources */,
 				0A3A7F89219425F500334307 /* 紧急.png in Resources */,
 				0A15D5561F0EA52D00908B7F /* 考评.png in Resources */,
@@ -3084,6 +3111,7 @@
 				0AD1455021797FA8004670A9 /* 删除.png in Resources */,
 				0A644D5D1EFD0A9A009025DD /* OutlineItem.xib in Resources */,
 				0A6B344921747AD0007FF54D /* 360评价.png in Resources */,
+				0A75CF0921D751DF004E9734 /* 功能.png in Resources */,
 				0A940F0E21A2AB87001BEE9D /* 第一名.png in Resources */,
 				0A644D7F1F0190BE009025DD /* 试题4.png in Resources */,
 				0AD1454421797B47004670A9 /* 箭头3.png in Resources */,
@@ -3097,11 +3125,13 @@
 				0A6B344421747AD0007FF54D /* 入科安排.png in Resources */,
 				0A31A9B521B5293B007AB138 /* 人员LOGO.png in Resources */,
 				0AD1454621797B47004670A9 /* 星形3.png in Resources */,
+				0A75CF1221D7532E004E9734 /* 功能-选择.png in Resources */,
 				0A15C3621F46FAEE00C53F61 /* 签到成功.png in Resources */,
 				0AF9D36E218963380068B05A /* 小讲课.png in Resources */,
 				0A2B357721CB7C4400E17AC9 /* 未通过2.png in Resources */,
 				0A644D7C1F0190BE009025DD /* 试题1.png in Resources */,
 				0A6B344A21747AD0007FF54D /* 待办事宜.png in Resources */,
+				0A75CF0C21D751DF004E9734 /* 资讯.png in Resources */,
 				0A494FA0211C29D100E95332 /* 科室-灰色@2x.png in Resources */,
 				0AD1457B217D8F89004670A9 /* 操作-电话.png in Resources */,
 				B4F9E87C1F9106DD0001D88F /* OtherFilesCell.xib in Resources */,
@@ -3135,6 +3165,7 @@
 				0AD1454721797B47004670A9 /* 箭头2.png in Resources */,
 				0AD14570217D850B004670A9 /* 拍照.png in Resources */,
 				0A7818F31F32F6990072CF16 /* 远程2x.png in Resources */,
+				0A75CF1321D7532E004E9734 /* 我的-选择.png in Resources */,
 				0AC3C4402189B77A006C0DAB /* 合并形状.png in Resources */,
 				0AC3C44C218FE32D006C0DAB /* 箭头.png in Resources */,
 				0AF9D36A218963380068B05A /* 其他教学活动.png in Resources */,
@@ -3142,8 +3173,10 @@
 				0A0FA88C1F0F615300DFEA7E /* voice.png in Resources */,
 				B468B7C91FCA9BA000ECF396 /* MJRefresh.bundle in Resources */,
 				0A3A7F7F2193F3CD00334307 /* 理论培训2.png in Resources */,
+				0A75CF1121D7532E004E9734 /* 首页-选择.png in Resources */,
 				0AC3BCA91EE9532200227194 /* qr_scan.png in Resources */,
 				0A15C3611F46FAEE00C53F61 /* 没通过.png in Resources */,
+				0A75CF0A21D751DF004E9734 /* 发布.png in Resources */,
 				0AC3C4562190304C006C0DAB /* release-360评价.png in Resources */,
 				0A15D5581F0EA52D00908B7F /* 我的.png in Resources */,
 				0A6B343621747AAF007FF54D /* 新消息.png in Resources */,
@@ -3198,6 +3231,7 @@
 				0A2B355F21C8FAE800E17AC9 /* SubScoreCell.xib in Resources */,
 				0A3A7F872194225A00334307 /* 日历.png in Resources */,
 				0AF9D34421805EC60068B05A /* 选择-大.png in Resources */,
+				0A75CF1421D7532E004E9734 /* 资讯-选择.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

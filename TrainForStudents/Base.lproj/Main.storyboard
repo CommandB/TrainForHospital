@@ -7976,7 +7976,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Lz0-PL-9z5"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="发布" id="MqF-vY-iCm"/>
+                    <tabBarItem key="tabBarItem" title="发布" image="发布.png" id="MqF-vY-iCm">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CQx-My-ELR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -17992,6 +17994,7 @@
         <image name="出科考试.png" width="183" height="210"/>
         <image name="删除.png" width="90" height="114"/>
         <image name="加号.png" width="96" height="96"/>
+        <image name="发布.png" width="164" height="164"/>
         <image name="合并形状.png" width="280" height="44"/>
         <image name="大纲.png" width="366" height="366"/>
         <image name="学员轮转.png" width="201" height="198"/>
@@ -17999,7 +18002,7 @@
         <image name="年度.png" width="30" height="30"/>
         <image name="待办事宜.png" width="120" height="120"/>
         <image name="心愿单2x.png" width="68" height="68"/>
-        <image name="我的.png" width="25" height="25"/>
+        <image name="我的.png" width="80" height="80"/>
         <image name="扫一扫-白.png" width="32" height="32"/>
         <image name="扫一扫.png" width="26" height="25"/>
         <image name="技能考试.png" width="88" height="68"/>

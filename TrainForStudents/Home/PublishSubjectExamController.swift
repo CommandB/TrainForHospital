@@ -103,7 +103,9 @@ class PublishSubjectExamController : HBaseViewController{
             myAlert(self, message: "请先选择学员!")
             return
         }
-        myPresentView(self, viewName: "paperSelectorView")
+        let vc = getViewToStoryboard("paperSelectorView") as! PaperSelectorController
+        vc.notReload = true
+        present(vc, animated: true, completion: nil)
     }
     
     ///已分配 未分配

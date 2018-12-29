@@ -286,7 +286,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                     UserDefaults.AppConfig.set(value: data["评价表清单"].description, forKey:.teachingActivityEvaluationList)
                     UserDefaults.AppConfig.set(value: data["是否开启Mini-CEX"].description, forKey:.isOpenMiniCex)
                     
-                    
                 }else{
                     myAlert(rootView!, message: json["msg"].stringValue)
                 }
@@ -306,6 +305,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
             
         })
     }
+    
 
 }
 
