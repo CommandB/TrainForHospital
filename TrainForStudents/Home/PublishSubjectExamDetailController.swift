@@ -116,9 +116,11 @@ class PublishSubjectExamDetailController : HBaseViewController{
         submitData["marking"] = "0"
         jds = exercisesList
         
-        examInfoCollection.reloadData()
-        //reloadExamCollection()
+//        examInfoCollection.reloadData()
         
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            self.reloadExamCollection()
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -271,8 +273,8 @@ class PublishSubjectExamDetailController : HBaseViewController{
             
             submitData["exerciseslist"] = examArr
             jds = examArr
-            examInfoCollection.reloadData()
-//            reloadExamCollection()
+//            examInfoCollection.reloadData()
+            reloadExamCollection()
             
         }
     }
@@ -358,11 +360,9 @@ class PublishSubjectExamDetailController : HBaseViewController{
     }
     
     func reloadExamCollection(){
-        var arr = [IndexPath]()
-        for (index,item) in jds.enumerated(){
-            arr.append(IndexPath(item: index, section: 0))
+        for (index ,item) in jds.enumerated(){
+            examInfoCollection.reloadItems(at: [IndexPath(item: index, section: 0)])
         }
-        examInfoCollection.reloadItems(at: arr)
     }
     
 }
@@ -373,6 +373,7 @@ extension PublishSubjectExamDetailController : UICollectionViewDelegate , UIColl
         return jds.count
     }
     
+    //构造cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let data = jds[indexPath.item]
@@ -410,21 +411,33 @@ extension PublishSubjectExamDetailController : UICollectionViewDelegate , UIColl
             btn.alpha = 0.6
         }
         
-        //stuCollection.reloadData()
+        print("初始化:\(indexPath)")
+        print("btn.param:\(btn.viewParam)")
+        print("stuView.jds:\(stuView.jds.count)")
+        print("d--------分割线--------b")
+        
+        stuCollection.reloadData()
         
         return cell
     }
     
+    //点击cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //myPresentView(self, viewName: "todoDetailView")
         collectionView.reloadItems(at: [indexPath])
     }
     
+    
+    //设置cell大小
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        let data = jds[indexPath.item]
+        if data["marking"].intValue == 1{
+            return CGSize(width: UIScreen.width, height: 125)
+        }else{
+            return CGSize(width: UIScreen.width, height: 100)
+        }
         
-        //return CGSize(width: UIScreen.width, height: 95)
-        return CGSize(width: UIScreen.width, height: 125)
     }
     
 }

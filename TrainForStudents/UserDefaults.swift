@@ -99,6 +99,11 @@ extension UserDefaults{
             case isOpenMiniCex
             ///教室清单
             case classroomList
+            
+            
+            ///我自己添加的 不是初始化时候下载的
+            ///出科考试试卷
+            case subjectExamPaper
         }
     }
     
@@ -128,6 +133,9 @@ extension UserDefaultsKeys where defaultKeys.RawValue == String {
     static func json(forKey key: defaultKeys) -> JSON {
         let aKey = key.rawValue
         let str = UserDefaults.standard.string(forKey: aKey)
+        if str == nil{
+            return JSON()
+        }
         return JSON.init(parseJSON: str!)
     }
     

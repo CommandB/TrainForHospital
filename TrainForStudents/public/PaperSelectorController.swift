@@ -28,7 +28,14 @@ class PaperSelectorController : HBaseViewController{
         
         
         self.paperCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
-        self.paperCollection.mj_header.beginRefreshing()
+        
+        jds = UserDefaults.AppConfig.json(forKey: .subjectExamPaper).arrayValue
+        if jds == nil || jds.count == 0{
+            self.paperCollection.mj_header.beginRefreshing()
+        }else{
+            paperCollection.reloadData()
+        }
+        
         
     }
     
@@ -64,9 +71,10 @@ class PaperSelectorController : HBaseViewController{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)
                 if json["code"].stringValue == "1"{
-                    
-                    self.jds = json["data"].arrayValue
-                    
+                    let data = json["data"].arrayValue
+                    self.jds = data
+                    //缓存试卷
+                    UserDefaults.AppConfig.set(value: data.description, forKey: .subjectExamPaper)
                     self.paperCollection.reloadData()
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
@@ -98,10 +106,11 @@ class PaperSelectorController : HBaseViewController{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)
                 if json["code"].stringValue == "1"{
-                    self.questionsView.jsonDataSource = json["data"].arrayValue
+                    let data = json["data"].arrayValue
+                    self.questionsView.jsonDataSource = data
                     
                     //缓存考题
-                    self.questionCache[exercisesId] = json["data"].arrayValue
+                    self.questionCache[exercisesId] = data
                     collection.reloadData()
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
@@ -122,7 +131,6 @@ class PaperSelectorController : HBaseViewController{
 extension PaperSelectorController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 20
         return jds.count
     }
     

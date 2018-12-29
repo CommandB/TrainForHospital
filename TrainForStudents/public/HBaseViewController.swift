@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import GTMRefresh
 
 class HBaseViewController : UIViewController , UITextFieldDelegate  {
     

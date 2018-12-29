@@ -40,6 +40,12 @@ class PublishExamController : HBaseViewController{
     
     override func viewDidLoad() {
         
+        if isSkillExam{
+            (view.viewWithTag(22222) as! UILabel).text = "发布技能考试"
+            (view.viewWithTag(100001) as! UIButton).isEnabled = false
+            (view.viewWithTag(100002) as! UIButton).isEnabled = false
+        }
+        
         submitParam["markingteacherlist"] = [JSON]()
         
         MBProgressHUD.showAdded(to: self.view, animated: true)

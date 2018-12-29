@@ -16,6 +16,7 @@ class PublishSubjectExamController : HBaseViewController{
     
     @IBOutlet weak var studentsCollection: UICollectionView!
     
+    var basicData = [JSON]()
     var jds = [JSON]()
     let datePicker = UIPickerView()
     
@@ -43,6 +44,11 @@ class PublishSubjectExamController : HBaseViewController{
         btn.setCornerRadius(radius: 4)
         btn.setBorder(width: 1, color: (btn.titleLabel?.textColor)!)
         
+        btn = view.viewWithTag(30001) as! UIButton
+        btn.addTarget(self, action: #selector(btn_sort), for: .touchUpInside)
+        btn = view.viewWithTag(30002) as! UIButton
+        btn.addTarget(self, action: #selector(btn_sort), for: .touchUpInside)
+        
         btn = view.viewWithTag(40002) as! UIButton
         btn.addTarget(self, action: #selector(btn_selectAll), for: .touchUpInside)
         
@@ -62,7 +68,7 @@ class PublishSubjectExamController : HBaseViewController{
     
     @IBAction func btn_next_inside(_ sender: UIButton) {
         let vc = getViewToStoryboard("publishSubjectExamDetailView") as! PublishSubjectExamDetailController
-        vc.jds = jds
+        vc.jds = basicData
         vc.isSkillExam = isSkillExam
         present(vc, animated: true, completion: nil)
     }
@@ -78,7 +84,7 @@ class PublishSubjectExamController : HBaseViewController{
             //把试卷内容组合到学员信息里
             for indexPath in selectedStudents.keys{
                 for item in paper{
-                    jds[indexPath.item][item.0] = item.1
+                    basicData[indexPath.item][item.0] = item.1
                 }
             }
             //清除已选学员
@@ -87,7 +93,7 @@ class PublishSubjectExamController : HBaseViewController{
                 btn_selectAll(sender: (view.viewWithTag(40002) as! UIButton))
             }
             
-            studentsCollection.reloadData()
+            refreshStudentsCollection()
         }
     }
     
@@ -98,6 +104,48 @@ class PublishSubjectExamController : HBaseViewController{
             return
         }
         myPresentView(self, viewName: "paperSelectorView")
+    }
+    
+    ///已分配 未分配
+    func btn_sort(sender : UIButton){
+        hiddenKeyBoard()
+        if isSelectedAll{
+            btn_selectAll(sender: (view.viewWithTag(40002) as! UIButton))
+        }
+        if sender.isSelected{
+            sender.setImage(UIImage(named: "未选择-大"), for: .normal)
+        }else{
+            sender.setImage(UIImage(named: "选择-大"), for: .normal)
+        }
+        sender.isSelected = !sender.isSelected
+        refreshStudentsCollection()
+    }
+    
+    ///刷新学生列表
+    func refreshStudentsCollection(){
+        
+        jds = [JSON]()
+        let b1 = view.viewWithTag(30001) as! UIButton
+        let b2 = view.viewWithTag(30002) as! UIButton
+        if b1.isSelected && b2.isSelected{
+            jds = basicData
+        }else if b1.isSelected{ //未分配
+            for stu in basicData{
+                if stu["exercisesid"].intValue == 0{
+                    jds.append(stu)
+                }
+            }
+        }else if b2.isSelected{ //已分配
+            for stu in basicData{
+                if stu["exercisesid"].intValue > 0{
+                    jds.append(stu)
+                }
+            }
+        }else{
+            jds = basicData
+        }
+        
+        studentsCollection.reloadData()
     }
     
     ///全选
@@ -116,7 +164,7 @@ class PublishSubjectExamController : HBaseViewController{
             }
             
         }
-        studentsCollection.reloadData()
+        refreshStudentsCollection()
     }
     
     func getListData(){
@@ -149,8 +197,9 @@ class PublishSubjectExamController : HBaseViewController{
                 if json["code"].stringValue == "1"{
                     
                     let data = json["data"].arrayValue
+                    self.basicData = data
                     self.jds = data
-                    self.studentsCollection.reloadData()
+                    self.refreshStudentsCollection()
                     
                 }else{
                     myAlert(self, message: json["msg"].stringValue)

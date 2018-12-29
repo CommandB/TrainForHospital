@@ -19,7 +19,7 @@ class FeaturesController : UIViewController{
         btn.set(image: nil, title: "现场考试", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(10002) as! UIButton
-        btn.set(image: nil, title: "考试任务", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.set(image: nil, title: "理论考试", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(10003) as! UIButton
         btn.set(image: nil, title: "评价", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
@@ -59,6 +59,7 @@ class FeaturesController : UIViewController{
             myPresentView(self, viewName: "evaluationListView")
             break
         case 10004:
+            myAlert(self, message: "暂未开放!")
             break
         case 20001:
             //技能考试
@@ -70,8 +71,10 @@ class FeaturesController : UIViewController{
             myPresentView(self, viewName: "cexStudentsView")
             break
         case 20003:
+            myAlert(self, message: "暂未开放!")
             break
         case 20004:
+            myAlert(self, message: "暂未开放!")
             break
         default:
             break
