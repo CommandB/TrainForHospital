@@ -148,6 +148,7 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
         return cell
     }
     
+    //cell选中
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case 1,2:
@@ -164,6 +165,9 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             }
             
             //collectionView.reloadItems(at: [indexPath])
+        case 5,6:
+            myPresentView(self, viewName: "createNoticeView")
+            break
         default:
             break
         }

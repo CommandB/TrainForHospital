@@ -196,7 +196,7 @@
                   moduleName = "TrainForStudents"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
-                  timestampString = "567759924.863861"
+                  timestampString = "568111093.219623"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
@@ -211,7 +211,7 @@
                   moduleName = "TrainForStudents"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/TrainForHospital/TrainForStudents/Features/ExamingSubScoController.swift"
-                  timestampString = "567759924.867267"
+                  timestampString = "568111093.222613"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
@@ -234,6 +234,22 @@
             startingLineNumber = "35"
             endingLineNumber = "35"
             landmarkName = "reloadHeadView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrainForStudents/Home/CreateNoticeController.swift"
+            timestampString = "568111136.366818"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "btn_submit_tui(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
