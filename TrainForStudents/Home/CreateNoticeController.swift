@@ -34,8 +34,8 @@ class CreateNoticeController : UIViewController{
         }
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        let url = SERVER_PORT + "rest/app/addOfficeNotice.do"
-        myPostRequest(url,["officeid":office["officeid"].stringValue, "title":title, "msg":content]).responseJSON(completionHandler: {resp in
+        let url = SERVER_PORT + "rest/app/addTeamNotice.do"
+        myPostRequest(url,["teamid":office["teamid"].stringValue, "title":title, "msg":content]).responseJSON(completionHandler: {resp in
             MBProgressHUD.hide(for: self.view, animated: true)
             switch resp.result{
             case .success(let responseJson):

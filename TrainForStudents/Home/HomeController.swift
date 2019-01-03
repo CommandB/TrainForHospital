@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class HomeController : UIViewController{
     
     @IBOutlet weak var homeCollection: UICollectionView!
+    var officeTeamJds = [JSON]()
+    var messageCellLastIndex = 0
     
     override func viewDidLoad() {
         
@@ -18,6 +21,11 @@ class HomeController : UIViewController{
         homeCollection.dataSource = self
         let btn = view.viewWithTag(10001) as! UIButton
         btn.addTarget(self, action: #selector(btn_message_event), for: .touchUpInside)
+        
+        homeCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
+        
+        getOfficeTeamList()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,17 +73,53 @@ class HomeController : UIViewController{
         }
     }
     
+    ///获取科室社群列表
+    func getOfficeTeamList(){
+        
+        let url = SERVER_PORT + "rest/app/getTeamList.do"
+        myPostRequest(url,  method: .post).responseString(completionHandler: {resp in
+            
+            self.homeCollection.mj_header.endRefreshing()
+            
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                if json["code"].stringValue == "1"{
+                    self.officeTeamJds = json["data"].arrayValue
+                    self.messageCellLastIndex = 5 + self.officeTeamJds.count
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                    print(json)
+                }
+                break
+            case .failure(let error):
+                myAlert(self, message: "获取社群列表异常!")
+                print(error)
+                break
+            }
+            self.homeCollection.reloadData()
+        })
+        
+    }
+    
+    func refresh() {
+        officeTeamJds.removeAll()
+        getOfficeTeamList()
+    }
+    
 }
 
 extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return 5 + officeTeamJds.endIndex
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell = UICollectionViewCell()
+        
+        print("indexPath.item:\(indexPath.item)")
         
         switch indexPath.item {
         case 0:
@@ -129,19 +173,24 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
         case 4:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "classTitleCell", for: indexPath)
             break
-        case 5,6:
+        case 5...messageCellLastIndex:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "messageCell", for: indexPath)
+            let data = officeTeamJds[indexPath.item - 5]
             let btn_headShow = cell.viewWithTag(10001) as! UIButton
             btn_headShow.clipsToBounds = true
             btn_headShow.layer.cornerRadius = btn_headShow.frame.width.divided(by: 2)
+            
             var lbl = cell.viewWithTag(10002) as! UILabel
+            lbl.text = data["teamname"].stringValue
             lbl = cell.viewWithTag(10003) as! UILabel
             lbl = cell.viewWithTag(20001) as! UILabel
+            lbl.text = data["lastmsg"].stringValue
             lbl = cell.viewWithTag(20002) as! UILabel
             lbl.clipsToBounds = true
             lbl.layer.cornerRadius = lbl.frame.width.divided(by: 2)
             break
         default:
+            print("怎么到这里起来了..")
             break
         }
         
@@ -165,8 +214,12 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             }
             
             //collectionView.reloadItems(at: [indexPath])
-        case 5,6:
-            myPresentView(self, viewName: "createNoticeView")
+        case 5...messageCellLastIndex:
+            let data = officeTeamJds[indexPath.item - 5]
+            let vc = getViewToStoryboard("officeGroupView") as! IMOfficeGroupController
+            vc.officeInfo = data
+            present(vc, animated: true, completion: nil)
+            
             break
         default:
             break
@@ -186,7 +239,7 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             return CGSize(width: UIScreen.width, height: 160)
         case 4:
             return CGSize(width: UIScreen.width, height: 40)
-        case 5,6:
+        case 5...messageCellLastIndex:
             return CGSize(width: UIScreen.width, height: 60)
         default:
             return CGSize(width: UIScreen.width, height: 100)

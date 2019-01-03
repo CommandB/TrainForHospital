@@ -258,7 +258,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
                     let data = json["data"]
-                    print(json)
+//                    print(json)
                     UserDefaults.AppConfig.set(value: data["投诉功能名称"].description, forKey:.complaintTitle)
                     UserDefaults.AppConfig.set(value: data["教学计划未提报通知时间"].description, forKey: .planNoticeTime)
                     UserDefaults.AppConfig.set(value: data["培训是否默认需要签到"].description, forKey: .trainingIsNeedCheckIn)
