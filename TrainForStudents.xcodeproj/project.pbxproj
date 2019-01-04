@@ -18,8 +18,10 @@
 		0A125A8C1F29CBDB00FDD4F4 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */; };
 		0A125A8E1F29CC6400FDD4F4 /* SettingsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */; };
 		0A125A901F29D1FF00FDD4F4 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */; };
+		0A137E8A21DF04CB00C7328D /* NoticeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A137E8921DF04CB00C7328D /* NoticeListController.swift */; };
 		0A14BD8E21DDB37A00261797 /* IMOfficeGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14BD8D21DDB37A00261797 /* IMOfficeGroupController.swift */; };
 		0A14BD9021DDF88600261797 /* 公告-蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A14BD8F21DDF88200261797 /* 公告-蓝.png */; };
+		0A14BD9221DE0D1000261797 /* NoticeDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14BD9121DE0D1000261797 /* NoticeDetailController.swift */; };
 		0A15C3611F46FAEE00C53F61 /* 没通过.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15C35F1F46FAEE00C53F61 /* 没通过.png */; };
 		0A15C3621F46FAEE00C53F61 /* 签到成功.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15C3601F46FAEE00C53F61 /* 签到成功.png */; };
 		0A15C3641F46FC8A00C53F61 /* 通过了.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15C3631F46FC8A00C53F61 /* 通过了.png */; };
@@ -845,8 +847,10 @@
 		0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCollectionView.swift; sourceTree = "<group>"; };
 		0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
+		0A137E8921DF04CB00C7328D /* NoticeListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListController.swift; sourceTree = "<group>"; };
 		0A14BD8D21DDB37A00261797 /* IMOfficeGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMOfficeGroupController.swift; sourceTree = "<group>"; };
 		0A14BD8F21DDF88200261797 /* 公告-蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "公告-蓝.png"; sourceTree = "<group>"; };
+		0A14BD9121DE0D1000261797 /* NoticeDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailController.swift; sourceTree = "<group>"; };
 		0A15B9B821D7506D00CD1137 /* 首页.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页.png"; sourceTree = "<group>"; };
 		0A15C35F1F46FAEE00C53F61 /* 没通过.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没通过.png"; sourceTree = "<group>"; };
 		0A15C3601F46FAEE00C53F61 /* 签到成功.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "签到成功.png"; sourceTree = "<group>"; };
@@ -2452,6 +2456,8 @@
 				0A1A97BB21D32AD40097C467 /* PublishSubjectExamController.swift */,
 				0AE552B321D398BB00B82032 /* PublishSubjectExamDetailController.swift */,
 				0A17DFEC21DCA6EE002A4194 /* CreateNoticeController.swift */,
+				0A14BD9121DE0D1000261797 /* NoticeDetailController.swift */,
+				0A137E8921DF04CB00C7328D /* NoticeListController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3460,6 +3466,7 @@
 				0AF25E0B217DBA4500FE5425 /* LeaveUndoneCollection.swift in Sources */,
 				0A6A23A61EEC70A500A1AC5B /* ScannerViewController.swift in Sources */,
 				0A644D671F00F37A009025DD /* WaitExamInfoController.swift in Sources */,
+				0A14BD9221DE0D1000261797 /* NoticeDetailController.swift in Sources */,
 				0A26BA47219C16D20071C2DC /* FilesCollectionView.swift in Sources */,
 				0AFE94261F209C3F009C4CDF /* MyNoDataCellView.swift in Sources */,
 				0A42F8311F1D2C07001DF281 /* AnwsersItem.swift in Sources */,
@@ -3468,6 +3475,7 @@
 				0AC3B9471EE4732700227194 /* CircleDataView.swift in Sources */,
 				0A667BCB2085CF4E00594BE7 /* LiveLIstController.swift in Sources */,
 				0AC3B9811EE53F5900227194 /* String.swift in Sources */,
+				0A137E8A21DF04CB00C7328D /* NoticeListController.swift in Sources */,
 				0A15D5161F0BF5FB00908B7F /* QQStylePullingIndicator.swift in Sources */,
 				0AC3BCA41EE94DA300227194 /* LBXScanWrapper.swift in Sources */,
 				0A644D9B1F065B26009025DD /* MyEvaluationDetailController.swift in Sources */,

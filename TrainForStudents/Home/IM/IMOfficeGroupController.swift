@@ -97,7 +97,12 @@ extension IMOfficeGroupController : UICollectionViewDelegate , UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         hiddenKeyBoard()
-        //myPresentView(self, viewName: "todoDetailView")
+        if indexPath.item == 0{
+            let fakeData = ["teamid":officeInfo["teamid"].stringValue ,"msg":"我们是共产主义接班人..你们是资本主义接班人..我们是共产主义接班人..你们是资本主义接班人..我们是共产主义接班人..你们是资本主义接班人..我们是共产主义接班人..你们是资本主义接班人..我们是共产主义接班人..你们是资本主义接班人.."]
+            let vc = getViewToStoryboard("noticeDetailView") as! NoticeDetailController
+            vc.noticeJson = JSON(fakeData)
+            present(vc, animated: true, completion: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
