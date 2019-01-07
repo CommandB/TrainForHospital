@@ -58,6 +58,7 @@ extension MessageListController : UICollectionViewDelegate , UICollectionViewDat
         return jds.count
     }
     
+    //渲染cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let data = jds[indexPath.item]
@@ -67,6 +68,7 @@ extension MessageListController : UICollectionViewDelegate , UICollectionViewDat
         return cell
     }
     
+    //点击cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //myPresentView(self, viewName: "todoDetailView")
     }

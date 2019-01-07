@@ -119,8 +119,6 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
         
         var cell = UICollectionViewCell()
         
-        print("indexPath.item:\(indexPath.item)")
-        
         switch indexPath.item {
         case 0:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "statisticCell", for: indexPath)

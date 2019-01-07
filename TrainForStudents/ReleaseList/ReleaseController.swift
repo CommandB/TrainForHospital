@@ -34,7 +34,7 @@ class ReleaseController : UIViewController{
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
         let app = (UIApplication.shared.delegate) as! AppDelegate
-        let tabBar = (app.window?.rootViewController) as! UITabBarController
+        let tabBar = (app.window?.rootViewController) as! MyTabBarController
         tabBar.selectedIndex = selectedTabBarIndex
         dismiss(animated: true, completion: nil)
     }

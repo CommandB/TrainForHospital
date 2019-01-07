@@ -326,7 +326,9 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                     
                     
 //                    myPresentView(self, viewName: "tabBarView")
-                    myPresentView(self, viewName: "hTabBarView")
+//                    let vc = getViewToStoryboard("hTabBarView") as! MyTabBarController
+//                    self.present(vc, animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                     
                 }else{
                     MBProgressHUD.hide(for: self.view, animated: true)

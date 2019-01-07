@@ -71,8 +71,6 @@ class NoticeListController : HBaseViewController{
             self.messageCollection.reloadData()
         })
         
-        
-        
     }
     
     func refresh() {
@@ -98,16 +96,17 @@ extension NoticeListController : UICollectionViewDelegate , UICollectionViewData
         let data = jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noticeCell", for: indexPath)
         cell.setCornerRadius(radius: 4)
-        var lbl = cell.viewWithTag(10001) as? UILabel
+        var lbl = cell.viewWithTag(10001) as! UILabel
+        lbl.text = data["createtime"].stringValue
         
-        lbl = cell.viewWithTag(20001) as? UILabel
-        let content = data["msg"].stringValue
+        lbl = cell.viewWithTag(20001) as! UILabel
+        let content = data["noticemsg"].stringValue
         
         //计算展示大纲label的行数与高度
-        lbl?.text = content
-        let lineNum = content.getLineNumberForUILabel(lbl!)
-        lbl?.numberOfLines = lineNum
-        lbl?.frame.size = CGSize(width: (lbl?.frame.width)!, height: size12LineHeight.multiplied(by: CGFloat(lineNum)))
+        lbl.text = content
+        let lineNum = content.getLineNumberForUILabel(lbl)
+        lbl.numberOfLines = lineNum
+        lbl.frame.size = CGSize(width: lbl.frame.width, height: size12LineHeight.multiplied(by: CGFloat(lineNum)))
         
         return cell
     }
@@ -121,12 +120,12 @@ extension NoticeListController : UICollectionViewDelegate , UICollectionViewData
         let data = jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noticeCell", for: indexPath)
         
-        let content = data["msg"].stringValue
+        let content = data["noticemsg"].stringValue
         let lbl = cell.viewWithTag(20001) as! UILabel
         let lineNumber = content.getLineNumberForUILabel(lbl)
         
-        let cellHeight = size12LineHeight.multiplied(by: CGFloat(lineNumber)).adding(60)
-        
+        let cellHeight = size12LineHeight.multiplied(by: CGFloat(lineNumber)).adding(50)
+        print("cellHeight:\(cellHeight)")
         //return CGSize(width: UIScreen.width, height: 95)
         return CGSize(width: UIScreen.width - 15, height: cellHeight)
     }

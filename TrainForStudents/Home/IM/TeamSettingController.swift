@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class CreateNoticeController : UIViewController{
+class TeamSettingController : UIViewController{
     
     var office = JSON()
     
@@ -24,12 +24,12 @@ class CreateNoticeController : UIViewController{
     @IBAction func btn_submit_tui(_ sender: UIButton) {
         let title = txt_title.text
         let content = txtv_content.text
-        if (title?.length)! < 4 || (title?.length)! > 40 {
-            myAlert(self, message: "请将标题长度控制在4-40个字符内!")
+        if (title?.length)! < 4 || (title?.length)! > 30 {
+            myAlert(self, message: "请将标题长度控制在4-30个字符内!")
             return
         }
-        if (content?.length)! < 15 || (content?.length)! > 500 {
-            myAlert(self, message: "请将公告正文控制在15-500个字符内!")
+        if (content?.length)! < 15 || (content?.length)! > 100 {
+            myAlert(self, message: "请将公告正文控制在15-100个字符内!")
             return
         }
         
@@ -59,6 +59,9 @@ class CreateNoticeController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        let lbl_title = view.viewWithTag(10001) as! UILabel
+        lbl_title.text = office["teamname"].stringValue
         
         txtv_content.borderWidth = 1
         txtv_content.borderColor = UIColor.groupTableViewBackground

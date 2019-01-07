@@ -116,7 +116,9 @@ class PublishStillController : HBaseViewController{
     //选择试卷
     func btn_paper_evet(sender : UIButton){
         
-        myPresentView(self, viewName: "paperSelectorView")
+        let vc = getViewToStoryboard("paperSelectorView") as! PaperSelectorController
+        vc.isSkillExam = true
+        present(vc, animated: true, completion: nil)
         
     }
     

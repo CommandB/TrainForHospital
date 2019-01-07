@@ -13,6 +13,7 @@ import SwiftyJSON
 class PaperSelectorController : HBaseViewController{
     
     var notReload = false
+    var isSkillExam = false
     
     static var defaultNoticeName = NSNotification.Name(rawValue: "paperSelectorDefaultNoticeName")
     
@@ -69,7 +70,12 @@ class PaperSelectorController : HBaseViewController{
         MBProgressHUD.showAdded(to: view, animated: true)
         self.paperCollection.mj_header.endRefreshing()
         
-        let url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
+        var url = ""
+        if isSkillExam{
+            url = SERVER_PORT + "rest/app/getSkillExercisesList.do"
+        }else{
+            url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
+        }
         //下载试卷
         myPostRequest(url, method: .post).responseString(completionHandler: {resp in
             
@@ -155,21 +161,27 @@ extension PaperSelectorController : UICollectionViewDelegate , UICollectionViewD
         
         if selectedIndex == indexPath{
             cell.viewWithTag(10000)?.isHidden = false
-            let questionsCollection = cell.viewWithTag(30001) as! UICollectionView
-            questionsCollection.delegate = questionsView
-            questionsCollection.dataSource = questionsView
-            questionsCollection.register(TitleReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
             
-            questionsView.jsonDataSource = [JSON]()
-            questionsCollection.reloadData()
-            
-            if let questionData = questionCache[exercisesId]{
-                print("用了缓存")
-                questionsView.jsonDataSource = questionData
-            }else{
-                print("请求的试卷ID=\(exercisesId)")
-                requestQuestions(exercisesId: exercisesId, vn: data["versionnumber"].stringValue, collection: questionsCollection)
+            if !isSkillExam{
+                
+                let questionsCollection = cell.viewWithTag(30001) as! UICollectionView
+                questionsCollection.delegate = questionsView
+                questionsCollection.dataSource = questionsView
+                questionsCollection.register(TitleReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+                
+                questionsView.jsonDataSource = [JSON]()
+                questionsCollection.reloadData()
+                
+                if let questionData = questionCache[exercisesId]{
+                    print("读取已缓存的试题")
+                    questionsView.jsonDataSource = questionData
+                }else{
+                    print("请求的试卷ID=\(exercisesId)")
+                    requestQuestions(exercisesId: exercisesId, vn: data["versionnumber"].stringValue, collection: questionsCollection)
+                }
             }
+            
+            
         }
         
         return cell
@@ -191,7 +203,7 @@ extension PaperSelectorController : UICollectionViewDelegate , UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if selectedIndex == indexPath{
+        if selectedIndex == indexPath && !isSkillExam{
             return CGSize(width: UIScreen.width, height: 238)
         }else{
             return CGSize(width: UIScreen.width, height: 60)
