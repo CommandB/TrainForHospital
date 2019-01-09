@@ -19,6 +19,9 @@
 		0A125A8E1F29CC6400FDD4F4 /* SettingsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */; };
 		0A125A901F29D1FF00FDD4F4 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */; };
 		0A137E8A21DF04CB00C7328D /* NoticeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A137E8921DF04CB00C7328D /* NoticeListController.swift */; };
+		0A14531321E443AD00741F5B /* JoinOfficeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14531221E443AD00741F5B /* JoinOfficeController.swift */; };
+		0A14531E21E4443300741F5B /* OfficeTeacherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14531D21E4443300741F5B /* OfficeTeacherController.swift */; };
+		0A14532021E4911500741F5B /* TeachingPlanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14531F21E4911500741F5B /* TeachingPlanController.swift */; };
 		0A14BD8E21DDB37A00261797 /* IMOfficeGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14BD8D21DDB37A00261797 /* IMOfficeGroupController.swift */; };
 		0A14BD9021DDF88600261797 /* 公告-蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A14BD8F21DDF88200261797 /* 公告-蓝.png */; };
 		0A14BD9221DE0D1000261797 /* NoticeDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14BD9121DE0D1000261797 /* NoticeDetailController.swift */; };
@@ -851,6 +854,9 @@
 		0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCollectionView.swift; sourceTree = "<group>"; };
 		0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
 		0A137E8921DF04CB00C7328D /* NoticeListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListController.swift; sourceTree = "<group>"; };
+		0A14531221E443AD00741F5B /* JoinOfficeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinOfficeController.swift; sourceTree = "<group>"; };
+		0A14531D21E4443300741F5B /* OfficeTeacherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeTeacherController.swift; sourceTree = "<group>"; };
+		0A14531F21E4911500741F5B /* TeachingPlanController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingPlanController.swift; sourceTree = "<group>"; };
 		0A14BD8D21DDB37A00261797 /* IMOfficeGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMOfficeGroupController.swift; sourceTree = "<group>"; };
 		0A14BD8F21DDF88200261797 /* 公告-蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "公告-蓝.png"; sourceTree = "<group>"; };
 		0A14BD9121DE0D1000261797 /* NoticeDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailController.swift; sourceTree = "<group>"; };
@@ -2467,6 +2473,9 @@
 				0AE552B321D398BB00B82032 /* PublishSubjectExamDetailController.swift */,
 				0A14BD9121DE0D1000261797 /* NoticeDetailController.swift */,
 				0A137E8921DF04CB00C7328D /* NoticeListController.swift */,
+				0A14531221E443AD00741F5B /* JoinOfficeController.swift */,
+				0A14531D21E4443300741F5B /* OfficeTeacherController.swift */,
+				0A14531F21E4911500741F5B /* TeachingPlanController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3397,6 +3406,7 @@
 				B4FF1A951F94DF7D009C6685 /* UIView+WebCacheOperation.m in Sources */,
 				0AC49F621F347D290028A65C /* UIImage.swift in Sources */,
 				0AC3BCAD1EE97F2400227194 /* SearchViewController.swift in Sources */,
+				0A14531321E443AD00741F5B /* JoinOfficeController.swift in Sources */,
 				0A6A23AC1EEE95BE00A1AC5B /* QuestionCollectionView.swift in Sources */,
 				0AFCF6AD1FFDF91D00CF044E /* FITBCollectionView.swift in Sources */,
 				0A2B356721C9109000E17AC9 /* QuestionListController.swift in Sources */,
@@ -3438,6 +3448,7 @@
 				0AC3BB021EE9499000227194 /* extension.swift in Sources */,
 				0AD14563217D81FB004670A9 /* LeaveApprovedController.swift in Sources */,
 				0A15D5281F0E51F200908B7F /* MeterialListController.swift in Sources */,
+				0A14532021E4911500741F5B /* TeachingPlanController.swift in Sources */,
 				0A44131D1EEAC64F00BAB679 /* BMCustomPlayer.swift in Sources */,
 				B468B7BD1FCA9BA000ECF396 /* MJRefreshComponent.m in Sources */,
 				0A14BD8E21DDB37A00261797 /* IMOfficeGroupController.swift in Sources */,
@@ -3466,6 +3477,7 @@
 				0AC3B9371EE4730B00227194 /* ExamCenterController.swift in Sources */,
 				0AC3B9861EE5810900227194 /* TurnDetailController.swift in Sources */,
 				0A644D601F00BD52009025DD /* EvaluationCenterController.swift in Sources */,
+				0A14531E21E4443300741F5B /* OfficeTeacherController.swift in Sources */,
 				0A2B355921C8F83E00E17AC9 /* ExamingSubScoController.swift in Sources */,
 				0A1A97B121D206250097C467 /* EvalueationListController.swift in Sources */,
 				0A97555421A50A7800267E10 /* HUIScrollView.swift in Sources */,

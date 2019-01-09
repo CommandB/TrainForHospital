@@ -14,6 +14,7 @@ class HBaseViewController : UIViewController , UITextFieldDelegate  {
     let loadingDialog = UIAlertController(title: "", message: "加载中,请稍后...", preferredStyle: .alert)
     ///键盘显示时为true 隐藏时为false
     var keyBoardHidden = true
+    let pageSize = 20
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
 //        let sbv = view.subviews

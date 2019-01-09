@@ -59,14 +59,17 @@ class HomeController : UIViewController{
             vc.isSkillExam = true
             present(vc, animated: true, completion: nil)
             break
-        case 4:
-            myAlert(self, message: "暂未开放!")
+        case 4://入科安排
+            let vc = getViewToStoryboard("joinOfficeView") as! JoinOfficeController
+            vc.office = JSON(["officeid":UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)])
+            self.present(vc, animated: true, completion: nil)
             break
         case 5:
             myAlert(self, message: "暂未开放!")
             break
         case 6:
-            myAlert(self, message: "暂未开放!")
+            //myAlert(self, message: "teachingPlanView")
+            myPresentView(self, viewName: "teachingPlanView")
             break
         default:
             break

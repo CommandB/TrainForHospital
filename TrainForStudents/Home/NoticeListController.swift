@@ -14,7 +14,6 @@ class NoticeListController : HBaseViewController{
     
     @IBOutlet weak var messageCollection: UICollectionView!
     
-    let pageSize = 20
     let size12LineHeight = CGFloat(16)
     var teamId = 0
     var jds = [JSON]()
@@ -42,7 +41,7 @@ class NoticeListController : HBaseViewController{
     func getListData(){
         
         let url = SERVER_PORT + "rest/app/queryTeamNotice.do"
-        myPostRequest(url,["teamid":teamId ,"pageindex":jds.count * pageSize ,"pagesize":pageSize] ,method: .post).responseString(completionHandler: {resp in
+        myPostRequest(url,["teamid":teamId ,"pageindex":jds.count,"pagesize":pageSize] ,method: .post).responseString(completionHandler: {resp in
             
             self.messageCollection.mj_header.endRefreshing()
             self.messageCollection.mj_footer.endRefreshing()
