@@ -67,6 +67,7 @@
 		0A17E00A21DCBF91002A4194 /* 发送附件.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17E00321DCBF8B002A4194 /* 发送附件.png */; };
 		0A17E00B21DCBF91002A4194 /* 教学分享.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17E00421DCBF8D002A4194 /* 教学分享.png */; };
 		0A17E00C21DCBF91002A4194 /* 评论.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17E00521DCBF8E002A4194 /* 评论.png */; };
+		0A19658A21E735D800379F1E /* TeachingPlanDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A19658921E735D800379F1E /* TeachingPlanDetailController.swift */; };
 		0A1A97B121D206250097C467 /* EvalueationListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A97B021D206250097C467 /* EvalueationListController.swift */; };
 		0A1A97BC21D32AD40097C467 /* PublishSubjectExamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A97BB21D32AD40097C467 /* PublishSubjectExamController.swift */; };
 		0A210FDE20B44C05006BC5C9 /* echarts.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0A210FD220B44C04006BC5C9 /* echarts.min.js */; };
@@ -903,6 +904,7 @@
 		0A17E00321DCBF8B002A4194 /* 发送附件.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发送附件.png"; sourceTree = "<group>"; };
 		0A17E00421DCBF8D002A4194 /* 教学分享.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "教学分享.png"; sourceTree = "<group>"; };
 		0A17E00521DCBF8E002A4194 /* 评论.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "评论.png"; sourceTree = "<group>"; };
+		0A19658921E735D800379F1E /* TeachingPlanDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingPlanDetailController.swift; sourceTree = "<group>"; };
 		0A1A97B021D206250097C467 /* EvalueationListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvalueationListController.swift; sourceTree = "<group>"; };
 		0A1A97BB21D32AD40097C467 /* PublishSubjectExamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishSubjectExamController.swift; sourceTree = "<group>"; };
 		0A210FD220B44C04006BC5C9 /* echarts.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = echarts.min.js; sourceTree = "<group>"; };
@@ -2476,6 +2478,7 @@
 				0A14531221E443AD00741F5B /* JoinOfficeController.swift */,
 				0A14531D21E4443300741F5B /* OfficeTeacherController.swift */,
 				0A14531F21E4911500741F5B /* TeachingPlanController.swift */,
+				0A19658921E735D800379F1E /* TeachingPlanDetailController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3451,6 +3454,7 @@
 				0A14532021E4911500741F5B /* TeachingPlanController.swift in Sources */,
 				0A44131D1EEAC64F00BAB679 /* BMCustomPlayer.swift in Sources */,
 				B468B7BD1FCA9BA000ECF396 /* MJRefreshComponent.m in Sources */,
+				0A19658A21E735D800379F1E /* TeachingPlanDetailController.swift in Sources */,
 				0A14BD8E21DDB37A00261797 /* IMOfficeGroupController.swift in Sources */,
 				0A7818E41F3090980072CF16 /* TaskDetail2Controller.swift in Sources */,
 				0A3A7F8D2194309200334307 /* MessageListController.swift in Sources */,

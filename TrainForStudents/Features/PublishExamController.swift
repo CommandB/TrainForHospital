@@ -14,22 +14,15 @@ class PublishExamController : HBaseViewController{
     
     @IBOutlet weak var personCollection: UICollectionView!
     
-    @IBOutlet weak var questionsCollection: UICollectionView!
-    
     var isSkillExam = false
     
     var jds = [JSON]()
     var submitParam = [String : Any]()
     
-    var directoryView = DirectoryCollectionView()
-    
     let datePicker = UIDatePicker()
     
     var addrPicker = UIPickerView()
     let addrPickerImpl = HSimplePickerViewImpl()
-    
-    var paperPicker = UIPickerView()
-    let paperPickerImpl = HSimplePickerViewImpl()
     
     //选考试人
     let stuNotice = "stuNotice"
@@ -48,13 +41,9 @@ class PublishExamController : HBaseViewController{
         
         submitParam["markingteacherlist"] = [JSON]()
         
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        
         personCollection.delegate = self
         personCollection.dataSource = self
         
-        questionsCollection.delegate = directoryView
-        questionsCollection.dataSource = directoryView
         
         datePicker.datePickerMode = .dateAndTime
         datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
@@ -63,17 +52,6 @@ class PublishExamController : HBaseViewController{
         addrPickerImpl.titleKey = "facilitiesname"
         addrPickerImpl.dataSource = UserDefaults.AppConfig.json(forKey: .classroomList).arrayValue
         addrPickerImpl.clorsureImpl = addrClosureImpl
-        
-        paperPicker = paperPickerImpl.getDefaultPickerView()
-        paperPickerImpl.titleKey = "title"
-        paperPickerImpl.clorsureImpl = paperClosureImpl
-        paperPicker.backgroundColor = UIColor.groupTableViewBackground
-        paperPicker.setWidth(width: UIScreen.width)
-        paperPicker.setHight(height: 200)
-        paperPicker.setY(y: UIScreen.height.subtracting(paperPicker.H))
-        paperPicker.isHidden = true
-        
-        view.addSubview(paperPicker)
         
         
         var btn = view.viewWithTag(10002) as! UIButton
@@ -113,6 +91,17 @@ class PublishExamController : HBaseViewController{
         btn = view.viewWithTag(80002) as! UIButton
         btn.addTarget(self, action: #selector(chooseSignInType(sender:)), for: .touchUpInside)
         
+        
+        //技能考试 隐藏 app进行考试的选项,并把阅卷老师的选项往上移
+        if isSkillExam{
+            (view.viewWithTag(100000))?.isHidden = true
+            (view.viewWithTag(100001))?.isHidden = true
+            (view.viewWithTag(100002))?.isHidden = true
+            (view.viewWithTag(100003))?.isHidden = true
+            (view.viewWithTag(90001))?.frame = ((view.viewWithTag(100001))?.frame)!
+            (view.viewWithTag(90002))?.setY(y: ((view.viewWithTag(100002))?.Y)!)
+        }
+        
         btn = view.viewWithTag(100001) as! UIButton
         btn.addTarget(self, action: #selector(chooseAppExam(sender:)), for: .touchUpInside)
         btn = view.viewWithTag(100002) as! UIButton
@@ -120,36 +109,6 @@ class PublishExamController : HBaseViewController{
         
         btn = view.viewWithTag(90002) as! UIButton
         btn.addTarget(self, action: #selector(btn_marking_evet), for: .touchUpInside)
-        
-        var url = ""
-        if isSkillExam{
-            url = SERVER_PORT + "rest/app/getSkillExercisesList.do"
-        }else{
-            url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
-        }
-        
-        
-        myPostRequest(url, method: .post).responseString(completionHandler: {resp in
-            
-            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-            switch resp.result{
-            case .success(let respStr):
-                let json = JSON(parseJSON: respStr)
-                if json["code"].stringValue == "1"{
-                    self.paperPickerImpl.dataSource = json["data"].arrayValue
-                    self.paperPicker.reloadAllComponents()
-                }else{
-                    myAlert(self, message: json["msg"].stringValue)
-                }
-                break
-            case .failure(let error):
-                myAlert(self, message: "加载试卷异常!")
-                print(error)
-                break
-            }
-        })
-        
-        questionsCollection.register(TitleReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
         
         chooseSignInType(sender: view.viewWithTag(80001) as! UIButton)
         chooseExamType(sender: view.viewWithTag(70001) as! UIButton)
@@ -162,12 +121,13 @@ class PublishExamController : HBaseViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: Notification.Name.init(stuNotice), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receiveTeacherNotice), name: Notification.Name.init(teacherNotice), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receiveMarkingNotice), name: Notification.Name.init(markingNotice), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receivePaperNotice), name: PaperSelectorController.defaultNoticeName, object: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //收起键盘
         self.view.endEditing(true)
-        self.paperPicker.isHidden = true
+        
     }
     
     func receiveNotice(notification : NSNotification){
@@ -231,6 +191,33 @@ class PublishExamController : HBaseViewController{
         }
     }
     
+    //试卷选择器 callback
+    func receivePaperNotice(notification : NSNotification){
+        NotificationCenter.default.removeObserver(self, name: PaperSelectorController.defaultNoticeName, object: nil)
+        
+        if notification.userInfo != nil{
+            let data = notification.userInfo!["data"] as! JSON
+            if !data.isEmpty{
+                
+                view.viewWithTag(90001)?.isHidden = true
+                view.viewWithTag(90002)?.isHidden = true
+                if  data["marking"].intValue == 1 {
+                    view.viewWithTag(90001)?.isHidden = false
+                    view.viewWithTag(90002)?.isHidden = false
+                }
+                (view.viewWithTag(10004) as! UILabel).text =  data["title"].stringValue
+                
+                submitParam["exercisesid"] = data["exercisesid"].stringValue
+                submitParam["versionnumber"] =  data["versionnumber"].intValue
+                submitParam["examname"] =  data["title"].stringValue
+                submitParam["marking"] =  data["marking"].stringValue
+                
+            }
+            
+        }
+        
+    }
+    
     //返回
     @IBAction func btn_back_inside(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -238,7 +225,6 @@ class PublishExamController : HBaseViewController{
     
     //发布
     @IBAction func btn_submit_inside(_ sender: UIButton) {
-        self.paperPicker.isHidden = true
         
         submitParam["officeid"] = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
         
@@ -315,20 +301,21 @@ class PublishExamController : HBaseViewController{
     
     //选人
     @IBAction func btn_addPerson_inside(_ sender: UIButton) {
-        self.paperPicker.isHidden = true
         PersonSelectorController.presentPersonSelector(viewController: self, data: jds , noticeName: stuNotice)
     }
     
     //选择试卷
     @IBAction func btn_selectPaper_inside(_ sender: UIButton) {
-        self.paperPicker.isHidden = true
-        hiddenKeyBoard()
-        self.paperPicker.isHidden = false
+        
+        let vc = getViewToStoryboard("paperSelectorView") as! PaperSelectorController
+        vc.isSkillExam = isSkillExam
+        present(vc, animated: true, completion: nil)
+        
     }
     
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        self.paperPicker.isHidden = true
+        
         let tag = textField.tag
         if tag == 40001 || tag == 40002{
             let t31 = view.viewWithTag(30001) as! UITextField
@@ -348,18 +335,16 @@ class PublishExamController : HBaseViewController{
     
     //选监考老师
     func btn_teacher_evet(sender : UIButton){
-        self.paperPicker.isHidden = true
         PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON](), noticeName: teacherNotice)
     }
     
     //选阅卷老师
     func btn_marking_evet(sender : UIButton){
-        self.paperPicker.isHidden = true
         PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON](), noticeName: markingNotice)
     }
     
     func chooseDate(picker :UIDatePicker){
-        self.paperPicker.isHidden = true
+        
         let t31 = view.viewWithTag(30001) as! UITextField
         let t32 = view.viewWithTag(30002) as! UITextField
         let t41 = view.viewWithTag(40001) as! UITextField
@@ -383,7 +368,7 @@ class PublishExamController : HBaseViewController{
     }
     
     func chooseExamType(sender : UIButton){
-        self.paperPicker.isHidden = true
+        
         hiddenKeyBoard()
         var i = 0
         while (i < 2){
@@ -436,45 +421,24 @@ class PublishExamController : HBaseViewController{
         submitParam["name"] = text
     }
     
-    func paperClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
-        
-        let exercisesId = ds[row]["exercisesid"].stringValue
-        
-        view.viewWithTag(90001)?.isHidden = true
-        view.viewWithTag(90002)?.isHidden = true
-        if ds[row]["marking"].intValue == 1 {
-            view.viewWithTag(90001)?.isHidden = false
-            view.viewWithTag(90002)?.isHidden = false
-        }
-        (view.viewWithTag(10004) as! UILabel).text = ds[row]["title"].stringValue
-        
-        submitParam["exercisesid"] = exercisesId
-        submitParam["versionnumber"] = ds[row]["versionnumber"].intValue
-        submitParam["examname"] = ds[row]["title"].stringValue
-        submitParam["marking"] = ds[row]["marking"].stringValue
-        
-        MBProgressHUD.showAdded(to: questionsCollection, animated: true)
-        let url = SERVER_PORT + "rest/app/getTheoryExercisesDetail.do"
-        myPostRequest(url, ["exercisesid": exercisesId], method: .post).responseString(completionHandler: {resp in
-            MBProgressHUD.hideAllHUDs(for: self.questionsCollection, animated: true)
-            switch resp.result{
-            case .success(let respStr):
-                let json = JSON(parseJSON: respStr)
-                if json["code"].stringValue == "1"{
-                    self.directoryView.jsonDataSource = json["data"].arrayValue
-                    self.questionsCollection.reloadData()
-                }else{
-                    myAlert(self, message: json["msg"].stringValue)
-                }
-                break
-            case .failure(let error):
-                myAlert(self, message: "加载试卷异常!")
-                print(error)
-                break
-            }
-        })
-        
-    }
+//    func paperClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+//
+//        let exercisesId = ds[row]["exercisesid"].stringValue
+//
+//        view.viewWithTag(90001)?.isHidden = true
+//        view.viewWithTag(90002)?.isHidden = true
+//        if ds[row]["marking"].intValue == 1 {
+//            view.viewWithTag(90001)?.isHidden = false
+//            view.viewWithTag(90002)?.isHidden = false
+//        }
+//        (view.viewWithTag(10004) as! UILabel).text = ds[row]["title"].stringValue
+//
+//        submitParam["exercisesid"] = exercisesId
+//        submitParam["versionnumber"] = ds[row]["versionnumber"].intValue
+//        submitParam["examname"] = ds[row]["title"].stringValue
+//        submitParam["marking"] = ds[row]["marking"].stringValue
+//
+//    }
     
 }
 

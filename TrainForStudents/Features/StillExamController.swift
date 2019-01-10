@@ -25,8 +25,6 @@ class StillExamController: HBaseViewController ,UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         setSubviews()
         requestExamInfo()
     }
