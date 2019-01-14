@@ -100,7 +100,8 @@ class InspectController : HBaseViewController{
         txt.delegate = self
         
         var btn = view.viewWithTag(60001) as! UIButton
-        btn.set(image: UIImage(named: "箭头2"), title: "默认常用老师", titlePosition: .left, additionalSpacing: -40.0, state: .normal)
+        btn.addTarget(self, action: #selector(addSpeaker), for: .touchUpInside)
+        btn.contentHorizontalAlignment = .right
 
         var isNeedCheckIn = UserDefaults.AppConfig.string(forKey: .trainingIsNeedCheckIn)
         if isNeedCheckIn == nil {
@@ -137,6 +138,39 @@ class InspectController : HBaseViewController{
 
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonDefaultNotificationName, object: nil)
+    }
+    
+    func receiveNotice(notification : NSNotification){
+        NotificationCenter.default.removeObserver(self)
+        if notification.userInfo != nil{
+            let data = notification.userInfo!["data"] as! [JSON]
+            var text = ""
+            for item in data{
+                text += item["personname"].stringValue + " "
+            }
+            let btn = view.viewWithTag(60001) as! UIButton
+            if text.count > 0 {
+                btn.setTitle(text, for: .normal)
+                btn.alpha = 1
+                btn.setTitleColor(UIColor.black, for: .normal)
+            }else{
+                btn.setTitle("点击选择主讲人", for: .normal)
+                btn.alpha = 0.8
+                btn.setTitleColor(UIColor.gray, for: .normal)
+            }
+            
+        }
+    }
+    
+    func addSpeaker(sender : UIButton){
+        myPresentView(self, viewName: "personSelectorView")
+    }
+    
+    
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
         myConfirm(self, message: "确定退出编辑吗?" , okHandler : { action in
@@ -230,10 +264,14 @@ class InspectController : HBaseViewController{
         let tag = textField.tag
         if tag == 40001 || tag == 40002{
             let t31 = view.viewWithTag(30001) as! UITextField
+            let t32 = view.viewWithTag(30002) as! UITextField
             if t31.text == nil || t31.text == ""{
                 myAlert(self, message: "请先选择开始时间!")
                 return false
             }
+            //设置开始时间为最小时间
+            let dateStr = "\(t31.text!) \(t32.text!):00"
+            datePicker.minimumDate = DateUtil.stringToDateTime(dateStr)
         }else if tag == 50001{
             textField.text = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesname"].stringValue
             submitParam["address"] = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesid"].stringValue
@@ -321,8 +359,6 @@ class InspectController : HBaseViewController{
         if t31.isFirstResponder || t32.isFirstResponder{
             t31.text = date
             t32.text = time
-            //设置当前时间为最小时间
-            picker.minimumDate = picker.date
         }else if t41.isFirstResponder || t42.isFirstResponder{
             t41.text = date
             t42.text = time

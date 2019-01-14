@@ -319,10 +319,14 @@ class PublishExamController : HBaseViewController{
         let tag = textField.tag
         if tag == 40001 || tag == 40002{
             let t31 = view.viewWithTag(30001) as! UITextField
+            let t32 = view.viewWithTag(30002) as! UITextField
             if t31.text == nil || t31.text == ""{
                 myAlert(self, message: "请先选择开始时间!")
                 return false
             }
+            //设置开始时间为最小时间
+            let dateStr = "\(t31.text!) \(t32.text!):00"
+            datePicker.minimumDate = DateUtil.stringToDateTime(dateStr)
         }else{
             datePicker.minimumDate = nil
             let t41 = view.viewWithTag(40001) as! UITextField
@@ -355,8 +359,6 @@ class PublishExamController : HBaseViewController{
         if t31.isFirstResponder || t32.isFirstResponder{
             t31.text = date
             t32.text = time
-            //设置当前时间为最小时间
-            picker.minimumDate = picker.date
         }else if t41.isFirstResponder || t42.isFirstResponder{
             t41.text = date
             t42.text = time

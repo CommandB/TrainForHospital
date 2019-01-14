@@ -164,10 +164,10 @@ class PersonSelectorController: HBaseViewController {
         }
         
         jds = selectDataSource()
-        //print(selectDataSource())
+        
         personCollection.reloadData()
     }
-    
+    //全选按钮
     @IBAction func btn_selectAll_inside(_ sender: UIButton) {
         if isSelectedAll{
             //反选
@@ -190,6 +190,7 @@ class PersonSelectorController: HBaseViewController {
             }
             isSelectedAll = true
         }
+        //jds = selectDataSource()
         personCollection.reloadData()
     }
     
@@ -257,9 +258,6 @@ class PersonSelectorController: HBaseViewController {
                 }else{
                     myAlert(self, message: "请求人员列表失败!")
                 }
-                
-                
-                //self.personCollection.reloadData()
                 
             case .failure(let error):
                 print(error)
@@ -474,18 +472,20 @@ class PersonSelectorController: HBaseViewController {
         ///排序后的key
         sortedKeys = [String]()
         //选中的人员数据
-        //selectedList = [String:JSON]()
+        selectedList = [String:JSON]()
         //已全选的section
         sectionIsSelected = [IndexPath:Bool]()
-        //是否全选
-        isSelectedAll = false
+        
         //
-        var selectedType = 0
+        selectedType = 0
         ///选中的筛选条件类型
-        var selectedSort = "initials"
+        selectedSort = "initials"
         
         jds.removeAll()
-        //personCollection.mj_footer.resetNoMoreData()
+        
+        //重置全选按钮的状态
+        isSelectedAll = false
+        (view.viewWithTag(40002) as! UIButton).setImage(UIImage(named: "未选择-大"), for: .normal)
         getListData()
     }
     

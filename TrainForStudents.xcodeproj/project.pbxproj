@@ -73,6 +73,7 @@
 		0A210FDE20B44C05006BC5C9 /* echarts.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0A210FD220B44C04006BC5C9 /* echarts.min.js */; };
 		0A210FDF20B44C05006BC5C9 /* goods2.htm in Resources */ = {isa = PBXBuildFile; fileRef = 0A210FD420B44C04006BC5C9 /* goods2.htm */; };
 		0A210FE120B44C1F006BC5C9 /* WebViewTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A210FE020B44C1E006BC5C9 /* WebViewTestController.swift */; };
+		0A22C0B921EC29B700759554 /* OfficePersonListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22C0B821EC29B700759554 /* OfficePersonListController.swift */; };
 		0A26BA29219578070071C2DC /* HUtilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA28219578070071C2DC /* HUtilView.swift */; };
 		0A26BA2C219969330071C2DC /* 技能考试.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26BA2A2199692E0071C2DC /* 技能考试.png */; };
 		0A26BA2D219969330071C2DC /* 理论考试.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26BA2B219969310071C2DC /* 理论考试.png */; };
@@ -910,6 +911,7 @@
 		0A210FD220B44C04006BC5C9 /* echarts.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = echarts.min.js; sourceTree = "<group>"; };
 		0A210FD420B44C04006BC5C9 /* goods2.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = goods2.htm; sourceTree = "<group>"; };
 		0A210FE020B44C1E006BC5C9 /* WebViewTestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewTestController.swift; sourceTree = "<group>"; };
+		0A22C0B821EC29B700759554 /* OfficePersonListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficePersonListController.swift; sourceTree = "<group>"; };
 		0A26BA28219578070071C2DC /* HUtilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUtilView.swift; sourceTree = "<group>"; };
 		0A26BA2A2199692E0071C2DC /* 技能考试.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "技能考试.png"; sourceTree = "<group>"; };
 		0A26BA2B219969310071C2DC /* 理论考试.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "理论考试.png"; sourceTree = "<group>"; };
@@ -2728,6 +2730,7 @@
 				0A2B356421C9104800E17AC9 /* ExamResultController.swift */,
 				0A2B356621C9109000E17AC9 /* QuestionListController.swift */,
 				0A1A97B021D206250097C467 /* EvalueationListController.swift */,
+				0A22C0B821EC29B700759554 /* OfficePersonListController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -3568,6 +3571,7 @@
 				0A2B354A21C8CDB200E17AC9 /* CEXStudentsListController.swift in Sources */,
 				0A42F8251F1C72AD001DF281 /* TaskApplyListController.swift in Sources */,
 				0AC3B98E1EE5A35200227194 /* TurnTaskCollectionView.swift in Sources */,
+				0A22C0B921EC29B700759554 /* OfficePersonListController.swift in Sources */,
 				0AC3B97F1EE53F5900227194 /* UILabel.swift in Sources */,
 				0AF9D34E21830D570068B05A /* InspectStudentsController.swift in Sources */,
 				B44FFFDA211C6BBD00844C07 /* OfficePeopleCell.swift in Sources */,

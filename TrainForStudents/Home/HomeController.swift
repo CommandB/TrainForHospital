@@ -68,8 +68,8 @@ class HomeController : UIViewController{
             myAlert(self, message: "暂未开放!")
             break
         case 6:
-            //myAlert(self, message: "teachingPlanView")
-            myPresentView(self, viewName: "teachingPlanView")
+//            myPresentView(self, viewName: "teachingPlanView")
+            myPresentView(self, viewName: "officePersonListView")
             break
         default:
             break
