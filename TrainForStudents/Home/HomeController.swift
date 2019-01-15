@@ -13,6 +13,7 @@ class HomeController : UIViewController{
     
     @IBOutlet weak var homeCollection: UICollectionView!
     var officeTeamJds = [JSON]()
+    var statisticJds = [JSON]()
     var messageCellLastIndex = 0
     
     override func viewDidLoad() {
@@ -25,6 +26,7 @@ class HomeController : UIViewController{
         homeCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         
         getOfficeTeamList()
+        getStatisticData()
         
     }
     
@@ -74,6 +76,33 @@ class HomeController : UIViewController{
         default:
             break
         }
+    }
+    
+    func getStatisticData(){
+        
+        let url = SERVER_PORT + "rest/app/getHomeInfo.do"
+        myPostRequest(url,  method: .post).responseString(completionHandler: {resp in
+            
+            self.homeCollection.mj_header.endRefreshing()
+            
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                print(json)
+                if json["code"].stringValue == "1"{
+                    self.statisticJds = json["data"].arrayValue
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                    print(json)
+                }
+                break
+            case .failure(let error):
+                myAlert(self, message: "获取统计数据异常!")
+                print(error)
+                break
+            }
+            self.homeCollection.reloadData()
+        })
     }
     
     ///获取科室社群列表

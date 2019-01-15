@@ -41,8 +41,15 @@ class PersonSelectorController: HBaseViewController {
     var selectedList = [String:JSON]()
     ///已全选的section
     var sectionIsSelected = [IndexPath:Bool]()
-    ///是否全选
+    ///是否全选 (只控制是否选中)
     var isSelectedAll = false
+    ///培训学员是否全选
+    var isSelectedAllStu = false
+    ///培训学员是否全选
+    var isSelectedAllTeacer = false
+    ///培训学员是否全选
+    var isSelectedAllNurse = false
+    
     ///当前查询的科室
     var officeId = 0
     
@@ -56,7 +63,7 @@ class PersonSelectorController: HBaseViewController {
     var nurseDir = [String:[String:[JSON]]]()
     
     var personTotal = 0
-    let defaulSort = "initials"
+    let defaulSort = "position"
     ///选中的人员类型
     var selectedType = 0
     ///选中的筛选条件类型
@@ -99,10 +106,6 @@ class PersonSelectorController: HBaseViewController {
         
         personCollection.mj_header.beginRefreshing()
         
-        //如果是单选 则隐藏全选按钮
-        view.viewWithTag(40002)?.isHidden = singleSelect
-        
-        
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -133,18 +136,39 @@ class PersonSelectorController: HBaseViewController {
         if sender.restorationIdentifier == "btn_all"{
             view.viewWithTag(30001)?.isHidden = false
             view.viewWithTag(30002)?.isHidden = false
+            view.viewWithTag(40002)?.isHidden = true
         }else{
             view.viewWithTag(30001)?.isHidden = true
             view.viewWithTag(30002)?.isHidden = true
             view.viewWithTag(20003)?.isHidden = !(sender.restorationIdentifier == "btn_stu")
+            //如果允许复原 才显示全选按钮
+            if !singleSelect{
+                view.viewWithTag(40002)?.isHidden = false
+            }
             
         }
+        
+        switch sender.restorationIdentifier{
+        case "btn_stu":
+            changeSelectAllBtnStatus(status: isSelectedAll && isSelectedAllStu)
+            break
+        case "btn_teacher":
+            changeSelectAllBtnStatus(status: isSelectedAll && isSelectedAllTeacer)
+            break
+        case "btn_nurse":
+            changeSelectAllBtnStatus(status: isSelectedAll && isSelectedAllNurse)
+            break
+        default:
+            break
+        }
+        
+        
         if sender.tag - 10000 != selectedType{
             sectionIsSelected = [IndexPath : Bool]()
             selectedType = sender.tag - 10000
             selectedSort = defaulSort
             tabsTouchAnimation(sender: sender)
-            btn_sortType_inside(view.viewWithTag(20001) as! UIButton)
+            btn_sortType_inside(view.viewWithTag(20002) as! UIButton)
         }
         
     }
@@ -171,7 +195,6 @@ class PersonSelectorController: HBaseViewController {
     @IBAction func btn_selectAll_inside(_ sender: UIButton) {
         if isSelectedAll{
             //反选
-            sender.setImage(UIImage(named: "未选择-大"), for: .normal)
             for key in jds.keys{
                 for person in jds[key]!{
                     let id = person["personid"].stringValue
@@ -181,7 +204,6 @@ class PersonSelectorController: HBaseViewController {
             isSelectedAll = false
         }else{
             //全选
-            sender.setImage(UIImage(named: "选择-大"), for: .normal)
             for key in jds.keys{
                 for person in jds[key]!{
                     let id = person["personid"].stringValue
@@ -190,7 +212,24 @@ class PersonSelectorController: HBaseViewController {
             }
             isSelectedAll = true
         }
-        //jds = selectDataSource()
+        
+        switch selectedType{
+        case 2:
+            isSelectedAllStu = isSelectedAll
+            break
+        case 3:
+            isSelectedAllTeacer = isSelectedAll
+            break
+        case 4:
+            isSelectedAllNurse = isSelectedAll
+            break
+        default:
+            break
+        }
+        
+        changeSelectAllBtnStatus(status: isSelectedAll)
+        
+        
         personCollection.reloadData()
     }
     
@@ -203,6 +242,18 @@ class PersonSelectorController: HBaseViewController {
 //        }
 //        btn.isSelected = !btn.isSelected
 //    }
+    
+    ///修改全选按钮的状态
+    func changeSelectAllBtnStatus(status : Bool){
+        let sender = view.viewWithTag(40002) as! UIButton
+        if status{
+            //全选
+            sender.setImage(UIImage(named: "选择-大"), for: .normal)
+        }else{
+            //反选
+            sender.setImage(UIImage(named: "未选择-大"), for: .normal)
+        }
+    }
     
     func selectDataSource() -> [String : [JSON]]{
         
@@ -257,6 +308,7 @@ class PersonSelectorController: HBaseViewController {
                     self.personCollection.mj_footer.endRefreshingWithNoMoreData()
                 }else{
                     myAlert(self, message: "请求人员列表失败!")
+                    print(json["msg"].stringValue)
                 }
                 
             case .failure(let error):
@@ -483,8 +535,12 @@ class PersonSelectorController: HBaseViewController {
         
         jds.removeAll()
         
-        //重置全选按钮的状态
+        //重置所有全选按钮的状态
         isSelectedAll = false
+        isSelectedAllStu = false
+        isSelectedAllTeacer = false
+        isSelectedAllNurse = false
+        
         (view.viewWithTag(40002) as! UIButton).setImage(UIImage(named: "未选择-大"), for: .normal)
         getListData()
     }

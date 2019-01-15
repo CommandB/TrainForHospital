@@ -213,7 +213,7 @@ class InspectController : HBaseViewController{
         submitParam["endtime"] = endTime
         
         //评价功能
-        submitParam["evaluatelist"] = evaluaList.values as! [String:String]
+        submitParam["evaluatelist"] = ([[String:String]])(evaluaList.values)
         
         //学员信息
         if InspectStudentsController.jds.count == 0 {
