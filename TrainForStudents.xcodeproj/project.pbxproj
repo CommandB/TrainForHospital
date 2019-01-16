@@ -14,6 +14,12 @@
 		0A0C57111F511D9D008551D3 /* 扫一扫.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C57101F511D9D008551D3 /* 扫一扫.png */; };
 		0A0FA88C1F0F615300DFEA7E /* voice.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0FA8871F0F615300DFEA7E /* voice.png */; };
 		0A1018BD21D4B5AA00E07B33 /* StudentsInExamCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1018BC21D4B5AA00E07B33 /* StudentsInExamCollection.swift */; };
+		0A1214B221EF1ACB00BA17EE /* 面授.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1214A321EF1ABF00BA17EE /* 面授.png */; };
+		0A1214B321EF1ACB00BA17EE /* 自主训练.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1214AD21EF1AC200BA17EE /* 自主训练.png */; };
+		0A1214B421EF1ACB00BA17EE /* 读书报告.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1214AE21EF1AC300BA17EE /* 读书报告.png */; };
+		0A1214B521EF1ACB00BA17EE /* 技能培训.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1214AF21EF1AC500BA17EE /* 技能培训.png */; };
+		0A1214B621EF1ACB00BA17EE /* 入科教育.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1214B021EF1AC700BA17EE /* 入科教育.png */; };
+		0A1214B721EF1ACB00BA17EE /* 理论培训.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1214B121EF1AC800BA17EE /* 理论培训.png */; };
 		0A125A881F2204B300FDD4F4 /* BMPlayerCustomControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A871F2204B300FDD4F4 /* BMPlayerCustomControlView.swift */; };
 		0A125A8C1F29CBDB00FDD4F4 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */; };
 		0A125A8E1F29CC6400FDD4F4 /* SettingsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */; };
@@ -55,6 +61,7 @@
 		0A16C2F621E33EDA00C6B319 /* 双箭头-右蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A16C2F321E33ECA00C6B319 /* 双箭头-右蓝.png */; };
 		0A16C2F721E33EDA00C6B319 /* 箭头-右灰.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A16C2F421E33ED100C6B319 /* 箭头-右灰.png */; };
 		0A16C2F821E33EDA00C6B319 /* 二维码-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A16C2F521E33ED500C6B319 /* 二维码-icon.png */; };
+		0A1701DF21EED4A200B12EC4 /* TeachingStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1701DE21EED4A200B12EC4 /* TeachingStatisticsController.swift */; };
 		0A17DFED21DCA6EE002A4194 /* TeamSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A17DFEC21DCA6EE002A4194 /* TeamSettingController.swift */; };
 		0A17DFFB21DCB795002A4194 /* 圆形问好-蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17DFF721DCB790002A4194 /* 圆形问好-蓝.png */; };
 		0A17DFFC21DCB795002A4194 /* 人员-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17DFF821DCB792002A4194 /* 人员-2.png */; };
@@ -851,6 +858,12 @@
 		0A0FA8871F0F615300DFEA7E /* voice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice.png; sourceTree = "<group>"; };
 		0A0FA88F1F110DB100DFEA7E /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		0A1018BC21D4B5AA00E07B33 /* StudentsInExamCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsInExamCollection.swift; sourceTree = "<group>"; };
+		0A1214A321EF1ABF00BA17EE /* 面授.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "面授.png"; sourceTree = "<group>"; };
+		0A1214AD21EF1AC200BA17EE /* 自主训练.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "自主训练.png"; sourceTree = "<group>"; };
+		0A1214AE21EF1AC300BA17EE /* 读书报告.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "读书报告.png"; sourceTree = "<group>"; };
+		0A1214AF21EF1AC500BA17EE /* 技能培训.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "技能培训.png"; sourceTree = "<group>"; };
+		0A1214B021EF1AC700BA17EE /* 入科教育.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "入科教育.png"; sourceTree = "<group>"; };
+		0A1214B121EF1AC800BA17EE /* 理论培训.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "理论培训.png"; sourceTree = "<group>"; };
 		0A125A871F2204B300FDD4F4 /* BMPlayerCustomControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMPlayerCustomControlView.swift; sourceTree = "<group>"; };
 		0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCollectionView.swift; sourceTree = "<group>"; };
@@ -893,6 +906,7 @@
 		0A16C2F321E33ECA00C6B319 /* 双箭头-右蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "双箭头-右蓝.png"; sourceTree = "<group>"; };
 		0A16C2F421E33ED100C6B319 /* 箭头-右灰.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "箭头-右灰.png"; path = "../../../../../Users/huangweisheng/Downloads/切图1122/切图/设置/2x/箭头-右灰.png"; sourceTree = "<group>"; };
 		0A16C2F521E33ED500C6B319 /* 二维码-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "二维码-icon.png"; sourceTree = "<group>"; };
+		0A1701DE21EED4A200B12EC4 /* TeachingStatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingStatisticsController.swift; sourceTree = "<group>"; };
 		0A17DFEC21DCA6EE002A4194 /* TeamSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingController.swift; sourceTree = "<group>"; };
 		0A17DFF721DCB790002A4194 /* 圆形问好-蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆形问好-蓝.png"; sourceTree = "<group>"; };
 		0A17DFF821DCB792002A4194 /* 人员-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "人员-2.png"; sourceTree = "<group>"; };
@@ -2321,6 +2335,12 @@
 		0A6B327321746BFE007FF54D /* image */ = {
 			isa = PBXGroup;
 			children = (
+				0A1214AE21EF1AC300BA17EE /* 读书报告.png */,
+				0A1214AF21EF1AC500BA17EE /* 技能培训.png */,
+				0A1214B121EF1AC800BA17EE /* 理论培训.png */,
+				0A1214A321EF1ABF00BA17EE /* 面授.png */,
+				0A1214B021EF1AC700BA17EE /* 入科教育.png */,
+				0A1214AD21EF1AC200BA17EE /* 自主训练.png */,
 				0A16C2F521E33ED500C6B319 /* 二维码-icon.png */,
 				0A16C2F321E33ECA00C6B319 /* 双箭头-右蓝.png */,
 				0A16C2F421E33ED100C6B319 /* 箭头-右灰.png */,
@@ -2468,6 +2488,7 @@
 				0A14BD8C21DDB34500261797 /* IM */,
 				0A1018BB21D4B56300E07B33 /* Collection */,
 				0AB5AAA02105D50900A9E2EC /* HomeController.swift */,
+				0A1701DE21EED4A200B12EC4 /* TeachingStatisticsController.swift */,
 				0AD145532179CB45004670A9 /* ToDoListController.swift */,
 				0AD14556217D6819004670A9 /* ToDoDetailController.swift */,
 				0A3A7F8C2194309200334307 /* MessageListController.swift */,
@@ -3147,6 +3168,7 @@
 				0A2B356C21CB3EFA00E17AC9 /* add.png in Resources */,
 				0A644DA31F07A0E4009025DD /* hot.png in Resources */,
 				0AF9D34521805EC60068B05A /* 选择-小.png in Resources */,
+				0A1214B421EF1ACB00BA17EE /* 读书报告.png in Resources */,
 				0A15D51A1F0C9A1E00908B7F /* left.png in Resources */,
 				0A15C3641F46FC8A00C53F61 /* 通过了.png in Resources */,
 				0A17E00621DCBF91002A4194 /* 教学提问.png in Resources */,
@@ -3172,6 +3194,8 @@
 				0AC3B93C1EE4730B00227194 /* Assets.xcassets in Resources */,
 				0A3A7F89219425F500334307 /* 紧急.png in Resources */,
 				0A15D5561F0EA52D00908B7F /* 考评.png in Resources */,
+				0A1214B221EF1ACB00BA17EE /* 面授.png in Resources */,
+				0A1214B721EF1ACB00BA17EE /* 理论培训.png in Resources */,
 				0A644D6C1F0113EC009025DD /* 结业2.png in Resources */,
 				0AC3C4452189B77A006C0DAB /* 打钩.png in Resources */,
 				0AC3B93A1EE4730B00227194 /* Main.storyboard in Resources */,
@@ -3232,6 +3256,7 @@
 				0A26BA2D219969330071C2DC /* 理论考试.png in Resources */,
 				0AC3C4462189B77A006C0DAB /* 科主任.png in Resources */,
 				0AD14578217D8F89004670A9 /* 加号.png in Resources */,
+				0A1214B321EF1ACB00BA17EE /* 自主训练.png in Resources */,
 				0A42F82F1F1D2B0A001DF281 /* AnwsersItem.xib in Resources */,
 				0A2B356D21CB3EFA00E17AC9 /* minus.png in Resources */,
 				0A3A7F862194225A00334307 /* 无变化.png in Resources */,
@@ -3295,11 +3320,13 @@
 				0A42F8351F1E01BE001DF281 /* splashlogo.png in Resources */,
 				0AF9D36D218963380068B05A /* 阅片会.png in Resources */,
 				0AEBF3C51F20804700520E27 /* 出科.png in Resources */,
+				0A1214B621EF1ACB00BA17EE /* 入科教育.png in Resources */,
 				0A644D821F0209B5009025DD /* lightStar.png in Resources */,
 				0AC3C4432189B77A006C0DAB /* 老师.png in Resources */,
 				0A26BA51219C18710071C2DC /* ppt.png in Resources */,
 				0A16C2F621E33EDA00C6B319 /* 双箭头-右蓝.png in Resources */,
 				0A667BCE2085DE7400594BE7 /* cover2.jpg in Resources */,
+				0A1214B521EF1ACB00BA17EE /* 技能培训.png in Resources */,
 				0A26BA4F219C18710071C2DC /* picture.png in Resources */,
 				0A26BA3A219AABB20071C2DC /* 黄星星-实.png in Resources */,
 				0A6B344821747AD0007FF54D /* 进入按钮.png in Resources */,
@@ -3599,6 +3626,7 @@
 				0AC3B9351EE4730B00227194 /* TurnCenterController.swift in Sources */,
 				0A644DA11F078D9A009025DD /* DifficultListController.swift in Sources */,
 				0A90EFB11EFA20B400B4CC7A /* CheckboxCollectionView.swift in Sources */,
+				0A1701DF21EED4A200B12EC4 /* TeachingStatisticsController.swift in Sources */,
 				0A15D5111F0BA78700908B7F /* MyNotificationUtil.swift in Sources */,
 				0AB31E59215CD1DC002E3F32 /* ComplaintReplyCollection.swift in Sources */,
 				0A31A9A821B50441007AB138 /* HSimplePickerViewImpl.swift in Sources */,

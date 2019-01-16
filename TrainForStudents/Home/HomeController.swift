@@ -12,9 +12,17 @@ import SwiftyJSON
 class HomeController : UIViewController{
     
     @IBOutlet weak var homeCollection: UICollectionView!
+    
+    var lbl_markLine: UILabel!
+    
+    //按钮的集合
+    var buttonGroup = [UIButton]()
+    
     var officeTeamJds = [JSON]()
-    var statisticJds = [JSON]()
+    var statisticJds = JSON()
+    var taskJds = [JSON]()
     var messageCellLastIndex = 0
+    var selectedPanelKey = ""
     
     override func viewDidLoad() {
         
@@ -24,14 +32,10 @@ class HomeController : UIViewController{
         btn.addTarget(self, action: #selector(btn_message_event), for: .touchUpInside)
         
         homeCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
-        
-        getOfficeTeamList()
-        getStatisticData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        homeCollection.reloadData()
+        homeCollection.mj_header.beginRefreshing()
     }
     
     ///跳转到消息列表
@@ -42,7 +46,9 @@ class HomeController : UIViewController{
     
     ///跳转到待办事项
     func presentToDoList(){
-        myPresentView(self, viewName: "todoListView")
+        let vc = getViewToStoryboard("todoListView") as! ToDoListController
+        vc.jds = taskJds
+        present(vc, animated: true, completion: nil)
     }
     
     ///6个功能按钮
@@ -83,14 +89,11 @@ class HomeController : UIViewController{
         let url = SERVER_PORT + "rest/app/getHomeInfo.do"
         myPostRequest(url,  method: .post).responseString(completionHandler: {resp in
             
-            self.homeCollection.mj_header.endRefreshing()
-            
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)
-                print(json)
                 if json["code"].stringValue == "1"{
-                    self.statisticJds = json["data"].arrayValue
+                    self.statisticJds = json
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
                     print(json)
@@ -98,6 +101,33 @@ class HomeController : UIViewController{
                 break
             case .failure(let error):
                 myAlert(self, message: "获取统计数据异常!")
+                print(error)
+                break
+            }
+            self.homeCollection.reloadData()
+        })
+    }
+    
+    func getTask(){
+//        let kTaskDetailURL = "doctor_train/rest/task/queryTaskAllPerson.do"
+        let url = SERVER_PORT + "rest/task/queryTeacherTask.do"
+        myPostRequest(url, ["task_state":"3,4" ,"pageindex":0 ,"pagesize":100],  method: .post).responseString(completionHandler: {resp in
+            
+            self.homeCollection.mj_header.endRefreshing()
+            
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                print(json)
+                if json["code"].stringValue == "1"{
+                    self.taskJds = json["data"].arrayValue
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                    print(json)
+                }
+                break
+            case .failure(let error):
+                myAlert(self, message: "获取待办任务异常!")
                 print(error)
                 break
             }
@@ -134,9 +164,53 @@ class HomeController : UIViewController{
         
     }
     
+    //第一栏 的更多按钮
+    func showMoreTeachingData(){
+        let vc = getViewToStoryboard("teachingStatisticsView") as! TeachingStatisticsController
+        vc.jds = statisticJds[selectedPanelKey].arrayValue
+        present(vc, animated: true, completion: nil)
+    }
+    //第一栏 顶部两个按钮 切换老师和秘书的统计面板
+    func panelSwitch(sender : UIButton){
+        selectedPanelKey = sender.restorationIdentifier!
+        tabsTouchAnimation(sender: sender)
+        self.homeCollection.reloadData()
+    }
+    
     func refresh() {
         officeTeamJds.removeAll()
         getOfficeTeamList()
+        getStatisticData()
+        getTask()
+    }
+    
+    func tabsTouchAnimation( sender : UIButton){
+        //-----------------计算 "下标线"label的动画参数
+        
+        for b in buttonGroup {
+            if b == sender{
+                b.alpha = 1
+            }else{
+                b.alpha = 0.7
+            }
+        }
+        
+        let btn_x = sender.frame.origin.x                      //按钮x轴
+        let btn_middle = sender.frame.size.width / 2           //按钮中线
+        let lbl_half = lbl_markLine.frame.size.width / 2       //下标线的一半宽度
+        //计算下标线的x轴位置
+        let target_x = btn_x + btn_middle - lbl_half
+        let target_y = lbl_markLine.frame.origin.y
+        
+        //动画开始
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.3)
+        
+        lbl_markLine.frame = CGRect(origin: CGPoint(x:target_x,y:target_y), size: lbl_markLine.frame.size)
+        
+        UIView.setAnimationCurve(.easeOut)
+        UIView.commitAnimations()
+        
     }
     
 }
@@ -156,28 +230,62 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "statisticCell", for: indexPath)
             cell.clipsToBounds = true
             cell.layer.cornerRadius = 8
-            var btn = cell.viewWithTag(30001) as! UIButton
-            btn.set(image: nil, title: "考试未通过", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
-            btn = cell.viewWithTag(30002) as! UIButton
-            btn.set(image: nil, title: "缺勤天数", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
-            btn = cell.viewWithTag(30003) as! UIButton
-            btn.set(image: nil, title: "科室满意度", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
-            btn = cell.viewWithTag(50001) as! UIButton
-            btn.set(image: nil, title: "师资绩效积分", titlePosition: .bottom, additionalSpacing: 20.0, state: .normal)
-            btn = cell.viewWithTag(50002) as! UIButton
-            btn.set(image: nil, title: "带教统计", titlePosition: .bottom, additionalSpacing: 20.0, state: .normal)
-            btn = cell.viewWithTag(50003) as! UIButton
-            btn.set(image: nil, title: "待评事件", titlePosition: .bottom, additionalSpacing: 20.0, state: .normal)
+            lbl_markLine = cell.viewWithTag(10003) as! UILabel
+            lbl_markLine.clipsToBounds = true
+            lbl_markLine.layer.cornerRadius = 1
+            if statisticJds.isEmpty{
+                break
+            }
+            
+            let btn_panel_1 = cell.viewWithTag(10001) as! UIButton
+            let btn_panel_2 = cell.viewWithTag(10002) as! UIButton
+            buttonGroup = [btn_panel_1 ,btn_panel_2]
+            btn_panel_1.addTarget(self, action: #selector(panelSwitch), for: .touchUpInside)
+            btn_panel_2.addTarget(self, action: #selector(panelSwitch), for: .touchUpInside)
+            if statisticJds["teacherpanel"].arrayValue.count > 0{
+                btn_panel_1.restorationIdentifier = "teacherpanel"
+                btn_panel_1.isHidden = false
+                selectedPanelKey = selectedPanelKey == "" ? "teacherpanel" : selectedPanelKey
+            }
+            if  statisticJds["secretarypanel"].arrayValue.count > 0{
+                if btn_panel_1.isHidden{
+                    btn_panel_1.restorationIdentifier = "secretarypanel"
+                    btn_panel_1.isHidden = false
+                    selectedPanelKey = "secretarypanel"
+                }else{
+                    btn_panel_2.restorationIdentifier = "secretarypanel"
+                    btn_panel_2.isHidden = false
+                }
+            }
+            
+            for i in 0...4{
+                let data = statisticJds[selectedPanelKey].arrayValue[i]
+                (cell.viewWithTag(20001 + i) as! UILabel).text = data["times"].stringValue
+                (cell.viewWithTag(30001 + i) as! UIButton).setTitle(data["traintypename"].stringValue, for: .normal)
+            }
+            
+            (cell.viewWithTag(30006) as! UIButton).addTarget(self, action: #selector(showMoreTeachingData), for: .touchUpInside)
             break
         case 1,2:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingCell", for: indexPath)
+            if taskJds.count == 0 {
+                break
+            }
+            let data = taskJds[0]
             let bg = cell.viewWithTag(11111) as! UILabel
             bg.clipsToBounds = true
             bg.layer.cornerRadius = 8
             var btn = cell.viewWithTag(10001) as! UIButton
             btn.addTarget(self, action: #selector(presentToDoList), for: .touchUpInside)
+            btn.setTitle(taskJds.count.description, for: .normal)
             btn = cell.viewWithTag(10002) as! UIButton
             btn.addTarget(self, action: #selector(presentToDoList), for: .touchUpInside)
+            
+            (cell.viewWithTag(20001) as! UILabel).text = data["title"].stringValue
+            (cell.viewWithTag(20002) as! UILabel).text = ""
+            (cell.viewWithTag(30001) as! UILabel).text = "时间:\(data["starttime_show"].stringValue)"
+            (cell.viewWithTag(40001) as! UILabel).text = "地址:\(data["addr"].stringValue)"
+            
             break
         case 3:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuresCell", for: indexPath)

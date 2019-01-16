@@ -70,7 +70,6 @@ class TeachingPlanController : HBaseViewController{
                         let monthCellData = JSON(["text":monthKey ,"isHeader":true])
                         self.jds.append(monthCellData)
                         self.jds += self.dataMap[monthKey]!
-                        
                     }
                     
                     if dataArr.count < self.pageSize{

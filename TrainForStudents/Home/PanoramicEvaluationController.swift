@@ -42,6 +42,8 @@ class PanoramicEvaluationController : UIViewController{
         
         let lbl = view.viewWithTag(10001) as! UILabel
         lbl.setCornerRadius(radius: lbl.W.divided(by: 2))
+        lbl.text = "\(Date().month)月"
+        
         let btn = view.viewWithTag(30002) as! UIButton
         btn.addTarget(self, action: #selector(presentDimension), for: .touchUpInside)
         
@@ -133,8 +135,10 @@ class PanoramicEvaluationController : UIViewController{
     func getListData(){
         
         let url = SERVER_PORT + "rest/app/getPreExitOfficePerson.do"
+        let month = DateUtil.getCurrentDate().substring(to: 7).replacingOccurrences(of: "-", with: "")
+        print(month)
         let officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
-        myPostRequest(url, ["officeid":officeId ,"month":"201908" ,"fortype":"evaluation"], method: .post).responseString(completionHandler: {resp in
+        myPostRequest(url, ["officeid":officeId ,"month":month ,"fortype":"evaluation"], method: .post).responseString(completionHandler: {resp in
             self.personCollection.mj_header.endRefreshing()
             self.personCollection.mj_footer.endRefreshing()
             switch resp.result{
