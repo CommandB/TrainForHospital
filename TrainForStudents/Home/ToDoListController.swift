@@ -10,24 +10,22 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class ToDoListController : UIViewController{
+class ToDoListController : HBaseViewController{
     
     @IBOutlet weak var toDoCollection: UICollectionView!
     
     var jds = [JSON]()
     var dataMap = [String:[JSON]]()
-    
+    var dataArr = [JSON]()
     
     override func viewDidLoad() {
         
         toDoCollection.delegate = self
         toDoCollection.dataSource = self
         
-        let dataArr = jds
-        
         //先将数据 按月份分组
         for item in dataArr{
-            let startDate = DateUtil.stringToDateTime(item["starttime"].stringValue)
+            let startDate = DateUtil.stringToDateTime(item["starttime_show"].stringValue)
             let month = startDate.month.description
             var monthPlans = self.dataMap[month]
             if monthPlans == nil{
@@ -60,16 +58,12 @@ class ToDoListController : UIViewController{
     
     func getListData(){
         self.toDoCollection.mj_header.endRefreshing()
-        self.toDoCollection.mj_footer.endRefreshing()
+        self.toDoCollection.mj_footer.endRefreshingWithNoMoreData()
         toDoCollection.reloadData()
     }
     
     func refresh() {
-        toDoCollection.mj_footer.resetNoMoreData()
-        getListData()
-    }
-    
-    func loadMore() {
+        //toDoCollection.mj_footer.resetNoMoreData()
         getListData()
     }
     
@@ -87,22 +81,34 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
         var cell = UICollectionViewCell()
         if let _ = data["isHeader"].bool{
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath)
-            (cell.viewWithTag(10001) as! UILabel).text = data["text"].stringValue
+            (cell.viewWithTag(10002) as! UILabel).text = data["text"].stringValue + "月"
         }else{
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bodyCell", for: indexPath)
             let date = DateUtil.stringToDateTime(data["starttime_show"].stringValue)
             
-            (cell.viewWithTag(10001) as! UILabel).text = date.day.description
-            (cell.viewWithTag(10002) as! UILabel).text = data["weekday"].stringValue
-            if date.isToday{
-                (cell.viewWithTag(10003) as! UILabel).text = "今天"
-            }else{
-                (cell.viewWithTag(10003) as! UILabel).text = ""
+            //判断一下 如果当前日期和上一个日期一样 则这一个cell不显示日期
+            let previousItem = jds[indexPath.item - 1]
+            var previousItemDateStr = previousItem["starttime_show"].stringValue
+            if previousItemDateStr == ""{
+                previousItemDateStr = data["starttime_show"].stringValue
             }
+            if previousItem["isHeader"].boolValue || date.day != DateUtil.stringToDateTime(previousItemDateStr).day{
+                (cell.viewWithTag(10001) as! UILabel).text = date.day.description
+                (cell.viewWithTag(10002) as! UILabel).text = DateUtil.getWeek(date)
+                //            if date.isToday{
+                //                (cell.viewWithTag(10003) as! UILabel).text = "今天"
+                //            }else{
+                //                (cell.viewWithTag(10003) as! UILabel).text = ""
+                //            }
+            }else{
+                (cell.viewWithTag(10001) as! UILabel).text = ""
+                (cell.viewWithTag(10002) as! UILabel).text = ""
+            }
+            
             (cell.viewWithTag(20001) as! UILabel).text = data["title"].stringValue
             (cell.viewWithTag(30001) as! UILabel).text = data["starttime_show"].stringValue.substring(from: 11).substring(to: 5) + " - " + data["endtime_show"].stringValue.substring(from: 11).substring(to: 5)
             (cell.viewWithTag(40001) as! UILabel).text = data["title"].stringValue
-            (cell.viewWithTag(50001) as! UILabel).text = data["addressname"].stringValue
+            (cell.viewWithTag(50002) as! UILabel).text = data["addressname"].stringValue
             
         }
         
@@ -111,19 +117,21 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        myPresentView(self, viewName: "todoDetailView")
+        //myPresentView(self, viewName: "todoDetailView")
+        let vc = getViewToStoryboard("taskDetail2View") as! TaskDetail2Controller
+        vc.headDataJson = jds[indexPath.item]
+        present(vc, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let data = jds[indexPath.item]
-        let cellName = data["cellName"].stringValue
-        if cellName == "headerCell"{
+        if data["isHeader"].boolValue{
             return CGSize(width: UIScreen.width, height: 50)
-        }else if cellName == "bodyCell"{
+        }else{
             return CGSize(width: UIScreen.width, height: 110)
         }
-        return CGSize(width: UIScreen.width.subtracting(20), height: 0)
+        //return CGSize(width: UIScreen.width.subtracting(20), height: 0)
     }
     
 }

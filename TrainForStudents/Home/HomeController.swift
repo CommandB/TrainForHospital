@@ -47,7 +47,7 @@ class HomeController : UIViewController{
     ///跳转到待办事项
     func presentToDoList(){
         let vc = getViewToStoryboard("todoListView") as! ToDoListController
-        vc.jds = taskJds
+        vc.dataArr = taskJds
         present(vc, animated: true, completion: nil)
     }
     
@@ -76,8 +76,8 @@ class HomeController : UIViewController{
             myAlert(self, message: "暂未开放!")
             break
         case 6:
-//            myPresentView(self, viewName: "teachingPlanView")
-            myPresentView(self, viewName: "officePersonListView")
+            myPresentView(self, viewName: "teachingPlanView")
+//            myPresentView(self, viewName: "officePersonListView")
             break
         default:
             break
@@ -118,7 +118,7 @@ class HomeController : UIViewController{
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)
-                print(json)
+//                print(json)
                 if json["code"].stringValue == "1"{
                     self.taskJds = json["data"].arrayValue
                 }else{

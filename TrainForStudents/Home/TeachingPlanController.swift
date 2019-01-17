@@ -137,7 +137,14 @@ extension TeachingPlanController : UICollectionViewDelegate , UICollectionViewDa
     
     //点击cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //myPresentView(self, viewName: "todoDetailView")
+        
+        let data = jds[indexPath.item]
+        if !data["isHeader"].boolValue{
+            let vc = getViewToStoryboard("teachingPlanDetailView") as! TeachingPlanDetailController
+            vc.taskInfo = data
+            present(vc, animated: true, completion: nil)
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

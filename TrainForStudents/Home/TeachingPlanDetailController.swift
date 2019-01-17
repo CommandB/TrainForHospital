@@ -17,10 +17,22 @@ class TeachingPlanDetailController : HBaseViewController{
     
     override func viewDidLoad() {
         timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(reloadAction), userInfo: nil, repeats: true)
+        
+        (view.viewWithTag(10001) as! UILabel).text = taskInfo["title"].stringValue
+        (view.viewWithTag(20001) as! UILabel).text = taskInfo["starttime"].stringValue
+        (view.viewWithTag(30001) as! UILabel).text = taskInfo["endtime"].stringValue
+        (view.viewWithTag(40001) as! UILabel).text = taskInfo["addressname"].stringValue
+        
+        requestQRCode()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         timer?.invalidate()
+    }
+    
+    @IBAction func btn_back_inside(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
     func requestQRCode() {
@@ -36,7 +48,9 @@ class TeachingPlanDetailController : HBaseViewController{
                 if json["code"].stringValue == "1" {
                     
                     self.qrcodeStr = json["qrcode"].stringValue
-//                    self.codeImageView.image =                self.setupQRCodeImage(json["qrcode"].stringValue, image: nil)
+                    let imageView = self.view.viewWithTag(50001) as! UIImageView
+                    imageView.image = UIImage.createQR(text: self.qrcodeStr, size: imageView.H)
+                    
                 }else{
                     print("error")
                 }
