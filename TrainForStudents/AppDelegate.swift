@@ -258,7 +258,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
                     let data = json["data"]
-//                    print(json)
+                    print(json)
                     UserDefaults.AppConfig.set(value: data["投诉功能名称"].description, forKey:.complaintTitle)
                     UserDefaults.AppConfig.set(value: data["教学计划未提报通知时间"].description, forKey: .planNoticeTime)
                     UserDefaults.AppConfig.set(value: data["培训是否默认需要签到"].description, forKey: .trainingIsNeedCheckIn)
@@ -285,6 +285,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                     UserDefaults.AppConfig.set(value: data["教室清单"].description, forKey:.classroomList)
                     UserDefaults.AppConfig.set(value: data["评价表清单"].description, forKey:.teachingActivityEvaluationList)
                     UserDefaults.AppConfig.set(value: data["是否开启Mini-CEX"].description, forKey:.isOpenMiniCex)
+                    UserDefaults.AppConfig.set(value: data["专业基地清单"].description, forKey:.majorList)
+                    UserDefaults.AppConfig.set(value: data["职称清单"].description, forKey:.professionalList)
+                    UserDefaults.AppConfig.set(value: data["学历清单"].description, forKey:.highestdegreeList)
+                    UserDefaults.AppConfig.set(value: data["年级清单"].description, forKey:.gradeList)
+                    UserDefaults.AppConfig.set(value: data["届别清单"].description, forKey:.gradeYearList)
+                    UserDefaults.AppConfig.set(value: data["学员类型清单"].description, forKey:.studentTypeList)
+                    UserDefaults.AppConfig.set(value: data["人员分组清单"].description, forKey:.personGroupList)
                     
                 }else{
                     myAlert(rootView!, message: json["msg"].stringValue)

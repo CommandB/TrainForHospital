@@ -67,6 +67,7 @@ class HBaseViewController : UIViewController , UITextFieldDelegate  {
     func textFieldDidEndEditing(_ textField: UITextField) {
         //        print("textFieldDidEndEditing")
         keyBoardHidden = true
+        hiddenKeyBoard()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

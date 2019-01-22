@@ -99,7 +99,20 @@ extension UserDefaults{
             case isOpenMiniCex
             ///教室清单
             case classroomList
-            
+            ///专业基地清单
+            case majorList
+            ///职称清单
+            case professionalList
+            ///学历清单
+            case highestdegreeList
+            ///年级清单
+            case gradeList
+            ///届别清单
+            case gradeYearList
+            ///学员类型清单
+            case studentTypeList
+            ///人员分组清单
+            case personGroupList
             
             ///我自己添加的 不是初始化时候下载的
             ///出科考试试卷

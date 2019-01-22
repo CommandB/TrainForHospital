@@ -21,6 +21,7 @@ class HomeController : UIViewController{
     var officeTeamJds = [JSON]()
     var statisticJds = JSON()
     var taskJds = [JSON]()
+    var teachingJds = [JSON]()
     var messageCellLastIndex = 0
     var selectedPanelKey = ""
     
@@ -45,9 +46,13 @@ class HomeController : UIViewController{
     }
     
     ///跳转到待办事项
-    func presentToDoList(){
+    func presentToDoList(sender :UIButton){
         let vc = getViewToStoryboard("todoListView") as! ToDoListController
-        vc.dataArr = taskJds
+        if (sender.restorationIdentifier?.contains("task"))!{
+            vc.dataArr = taskJds
+        }else{
+            vc.dataArr = teachingJds
+        }
         present(vc, animated: true, completion: nil)
     }
     
@@ -108,10 +113,10 @@ class HomeController : UIViewController{
         })
     }
     
+    //我的任务
     func getTask(){
-//        let kTaskDetailURL = "doctor_train/rest/task/queryTaskAllPerson.do"
-        let url = SERVER_PORT + "rest/task/queryTeacherTask.do"
-        myPostRequest(url, ["task_state":"3,4" ,"pageindex":0 ,"pagesize":100],  method: .post).responseString(completionHandler: {resp in
+        let url = SERVER_PORT + "rest/task/query.do"
+        myPostRequest(url, ["task_state":"0" ,"pageindex":0 ,"pagesize":100],  method: .post).responseString(completionHandler: {resp in
             
             self.homeCollection.mj_header.endRefreshing()
             
@@ -128,6 +133,33 @@ class HomeController : UIViewController{
                 break
             case .failure(let error):
                 myAlert(self, message: "获取待办任务异常!")
+                print(error)
+                break
+            }
+            self.homeCollection.reloadData()
+        })
+    }
+    
+    //我的带教
+    func getTeaching(){
+        let url = SERVER_PORT + "rest/task/queryTeacherTask.do"
+        myPostRequest(url, ["task_state":"1,2" ,"pageindex":0 ,"pagesize":100],  method: .post).responseString(completionHandler: {resp in
+            
+            self.homeCollection.mj_header.endRefreshing()
+            
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                //                print(json)
+                if json["code"].stringValue == "1"{
+                    self.teachingJds = json["data"].arrayValue
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                    print(json)
+                }
+                break
+            case .failure(let error):
+                myAlert(self, message: "获取带教任务异常!")
                 print(error)
                 break
             }
@@ -182,6 +214,7 @@ class HomeController : UIViewController{
         getOfficeTeamList()
         getStatisticData()
         getTask()
+        getTeaching()
     }
     
     func tabsTouchAnimation( sender : UIButton){
@@ -266,7 +299,7 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             
             (cell.viewWithTag(30006) as! UIButton).addTarget(self, action: #selector(showMoreTeachingData), for: .touchUpInside)
             break
-        case 1,2:
+        case 1:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingCell", for: indexPath)
             if taskJds.count == 0 {
                 break
@@ -278,8 +311,33 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             var btn = cell.viewWithTag(10001) as! UIButton
             btn.addTarget(self, action: #selector(presentToDoList), for: .touchUpInside)
             btn.setTitle(taskJds.count.description, for: .normal)
+            btn.restorationIdentifier = "btn_task1"
             btn = cell.viewWithTag(10002) as! UIButton
             btn.addTarget(self, action: #selector(presentToDoList), for: .touchUpInside)
+            btn.restorationIdentifier = "btn_task2"
+            
+            (cell.viewWithTag(20001) as! UILabel).text = data["title"].stringValue
+            (cell.viewWithTag(20002) as! UILabel).text = ""
+            (cell.viewWithTag(30001) as! UILabel).text = "时间:\(data["starttime_show"].stringValue)"
+            (cell.viewWithTag(40001) as! UILabel).text = "地址:\(data["addr"].stringValue)"
+            
+            break
+        case 2:
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingCell", for: indexPath)
+            if teachingJds.count == 0 {
+                break
+            }
+            let data = teachingJds[0]
+            let bg = cell.viewWithTag(11111) as! UILabel
+            bg.clipsToBounds = true
+            bg.layer.cornerRadius = 8
+            var btn = cell.viewWithTag(10001) as! UIButton
+            btn.addTarget(self, action: #selector(presentToDoList), for: .touchUpInside)
+            btn.setTitle(teachingJds.count.description, for: .normal)
+            btn.restorationIdentifier = "btn_teaching1"
+            btn = cell.viewWithTag(10002) as! UIButton
+            btn.addTarget(self, action: #selector(presentToDoList), for: .touchUpInside)
+            btn.restorationIdentifier = "btn_teaching2"
             
             (cell.viewWithTag(20001) as! UILabel).text = data["title"].stringValue
             (cell.viewWithTag(20002) as! UILabel).text = ""
@@ -371,8 +429,18 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
         switch indexPath.item {
         case 0:
             return CGSize(width: UIScreen.width.subtracting(20), height: 200)
-        case 1,2:
-            return CGSize(width: UIScreen.width, height: 165)
+        case 1:
+            if taskJds.count > 0{
+                return CGSize(width: UIScreen.width, height: 165)
+            }else{
+                return CGSize(width: UIScreen.width, height: 0)
+            }
+        case 2:
+            if teachingJds.count > 0{
+                return CGSize(width: UIScreen.width, height: 165)
+            }else{
+                return CGSize(width: UIScreen.width, height: 0)
+            }
         case 3:
             return CGSize(width: UIScreen.width, height: 160)
         case 4:

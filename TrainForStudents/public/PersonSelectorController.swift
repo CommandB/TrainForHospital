@@ -108,8 +108,18 @@ class PersonSelectorController: HBaseViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveAdvanceSearch), name: PersonSelectorAdvanceSearchController.defaultNoticeName, object: nil)
+        
+    }
+    
     @IBAction func btn_back_inside(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func btn_advanceSearch_inside(_ sender: UIButton) {
+        myPresentView(self, viewName: "personSelectorAdvanceSearchView")
     }
     
     @IBAction func btn_sure_inside(_ sender: UIButton) {
@@ -233,15 +243,19 @@ class PersonSelectorController: HBaseViewController {
         personCollection.reloadData()
     }
     
-//    func touchCheckbox(btn :UIButton){
-//        super.hiddenKeyBoard()
-//        if btn.isSelected{
-//            btn.setImage(UIImage(named: "未选择-小"), for: .normal)
-//        }else{
-//            btn.setImage(UIImage(named: "选择-小"), for: .normal)
-//        }
-//        btn.isSelected = !btn.isSelected
-//    }
+    func receiveAdvanceSearch(notification : NSNotification){
+        NotificationCenter.default.removeObserver(self, name: PersonSelectorAdvanceSearchController.defaultNoticeName, object: nil)
+        
+        if notification.userInfo != nil{
+            let data = (JSON)(notification.userInfo!["data"])
+            if !data.isEmpty{
+                resetAllStatus()
+                getListData(data.dictionaryObject!)
+                
+            }
+            
+        }
+    }
     
     ///修改全选按钮的状态
     func changeSelectAllBtnStatus(status : Bool){
@@ -282,15 +296,23 @@ class PersonSelectorController: HBaseViewController {
     }
     
     //下载数据
-    func getListData(){
+    func getListData(_ param : [String:Any] = [String:Any]() ){
         
+        var submitParam = [String:Any]()
         if officeId == 0{
             officeId = UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)
         }
-        
+        if param.count == 0 {
+            submitParam["officeid"] = officeId
+        }else{
+            submitParam["officeid"] = officeId
+            submitParam.merge(param)
+            
+        }
+        print("查询参数=\(submitParam)")
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT + "/rest/app/searchPerson.do"
-        myPostRequest(url,["officeid":officeId]).responseString(completionHandler: {resp in
+        myPostRequest(url,submitParam).responseString(completionHandler: {resp in
             
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             self.personCollection.mj_header.endRefreshing()
@@ -520,6 +542,16 @@ class PersonSelectorController: HBaseViewController {
     }
     
     func refresh() {
+        resetAllStatus()
+        getListData()
+    }
+    
+    func loadMore() {
+        getListData()
+    }
+    
+    ///重置当前页面所有状态
+    func resetAllStatus(){
         //print("刷新数据....")
         ///排序后的key
         sortedKeys = [String]()
@@ -542,11 +574,6 @@ class PersonSelectorController: HBaseViewController {
         isSelectedAllNurse = false
         
         (view.viewWithTag(40002) as! UIButton).setImage(UIImage(named: "未选择-大"), for: .normal)
-        getListData()
-    }
-    
-    func loadMore() {
-        getListData()
     }
     
 }
