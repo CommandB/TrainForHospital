@@ -16,9 +16,12 @@ class IMOfficeGroupController : HBaseViewController{
     
     var officeInfo = JSON()
     var jds = [JSON]()
+    ///是否为科室群
+    var isOffice = false
     
     override func viewDidLoad() {
         
+        isOffice = officeInfo["teamtype"].intValue == 1 ? true : false
         messageCollection.delegate = self
         messageCollection.dataSource = self
         
@@ -30,12 +33,23 @@ class IMOfficeGroupController : HBaseViewController{
         
         var btn = view.viewWithTag(40001) as! UIButton
         btn.addTarget(self, action: #selector(btn_bottomBtnGroup_inside(sender:)), for: .touchUpInside)
+        btn.isHidden = !isOffice
+        btn.setTitle("科室人员", for: .normal)
+        
         btn = view.viewWithTag(40002) as! UIButton
         btn.addTarget(self, action: #selector(btn_bottomBtnGroup_inside(sender:)), for: .touchUpInside)
+        btn.isHidden = !isOffice
+        btn.setTitle("入科", for: .normal)
+        
         btn = view.viewWithTag(40003) as! UIButton
         btn.addTarget(self, action: #selector(btn_bottomBtnGroup_inside(sender:)), for: .touchUpInside)
+        btn.isHidden = !isOffice
+        btn.setTitle("教学计划", for: .normal)
+        
         btn = view.viewWithTag(40004) as! UIButton
         btn.addTarget(self, action: #selector(btn_bottomBtnGroup_inside(sender:)), for: .touchUpInside)
+        btn.isHidden = !isOffice
+        
         
         
         MyNotificationUtil.addKeyBoardWillChangeNotification(self)
@@ -61,7 +75,22 @@ class IMOfficeGroupController : HBaseViewController{
         
         switch sender.tag {
         case 40001:
-            //
+            let vc = getViewToStoryboard("officePersonListView") as! OfficePersonListController
+            vc.officeId = officeInfo["officeid"].stringValue
+            self.present(vc, animated: true, completion: nil)
+            break
+        case 40002:
+            let vc = getViewToStoryboard("joinOfficeView") as! JoinOfficeController
+            vc.office = officeInfo
+            self.present(vc, animated: true, completion: nil)
+            break
+        case 40003:
+            let vc = getViewToStoryboard("teachingPlanView") as! TeachingPlanController
+            vc.officeId = officeInfo["officeid"].stringValue
+            self.present(vc, animated: true, completion: nil)
+            break
+        case 40004:
+            myAlert(self, message: "暂未开放")
             break
         default:
             break
@@ -79,8 +108,10 @@ class IMOfficeGroupController : HBaseViewController{
                 let json = JSON(parseJSON: respStr)
                 if json["code"].stringValue == "1"{
                     var dataArr = json["data"].arrayValue
-                    dataArr[0]["type"] = JSON(1)
-                    self.jds.append(dataArr[0])
+                    if dataArr.count > 0{
+                        dataArr[0]["type"] = JSON(1)
+                        self.jds.append(dataArr[0])
+                    }
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
                     print(json)

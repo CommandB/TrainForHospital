@@ -73,9 +73,7 @@ class HomeController : UIViewController{
             present(vc, animated: true, completion: nil)
             break
         case 4://入科安排
-            let vc = getViewToStoryboard("joinOfficeView") as! JoinOfficeController
-            vc.office = JSON(["officeid":UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)])
-            self.present(vc, animated: true, completion: nil)
+            
             break
         case 5:
             myAlert(self, message: "暂未开放!")
@@ -379,11 +377,24 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             var lbl = cell.viewWithTag(10002) as! UILabel
             lbl.text = data["teamname"].stringValue
             lbl = cell.viewWithTag(10003) as! UILabel
+            lbl.text = ""
+            let lastMsgDateStr = data["lastmsgtime"].stringValue.substring(from: 0).substring(to: 18)
+            let lastMsgDate = DateUtil.stringToDateTime(lastMsgDateStr)
+            if lastMsgDate.isYesterday{
+                lbl.text = "昨天 "
+            }else {
+                if !lastMsgDate.isToday{
+                    lbl.text = "\(lastMsgDate.month)-\(lastMsgDate.day) "
+                }
+            }
+            lbl.text = "\(lbl.text!)\(lastMsgDate.hour):\(lastMsgDate.minute)"
+            
             lbl = cell.viewWithTag(20001) as! UILabel
             lbl.text = data["lastmsg"].stringValue
             lbl = cell.viewWithTag(20002) as! UILabel
             lbl.clipsToBounds = true
             lbl.layer.cornerRadius = lbl.frame.width.divided(by: 2)
+            lbl.isHidden = true
             break
         default:
             print("怎么到这里起来了..")

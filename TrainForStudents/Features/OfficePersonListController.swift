@@ -15,13 +15,17 @@ class OfficePersonListController : HBaseViewController{
     @IBOutlet weak var personCollection: UICollectionView!
     
     var jds = [JSON]()
+    var officeId = "0"
     
     override func viewDidLoad() {
         
         personCollection.delegate = self
         personCollection.dataSource = self
         
+        personCollection.backgroundColor = UIColor(hex: "f5f8fb")
+        
         personCollection.register(TitleReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+        
         
         self.personCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.personCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: nil)
@@ -38,8 +42,12 @@ class OfficePersonListController : HBaseViewController{
     
     func getListData(){
         
+        if officeId == "0" || officeId.isEmpty{
+            officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)!
+        }
+        
         let url = SERVER_PORT + "rest/app/getOfficePerson.do"
-        myPostRequest(url, ["officeid":UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)], method: .post).responseJSON(completionHandler: { resp in
+        myPostRequest(url, ["officeid":officeId], method: .post).responseJSON(completionHandler: { resp in
             
             self.personCollection.mj_header.endRefreshing()
             self.personCollection.mj_footer.endRefreshing()
@@ -101,6 +109,7 @@ extension OfficePersonListController : UICollectionViewDelegate , UICollectionVi
         }
         
         
+        
         return cell
     }
     
@@ -125,6 +134,7 @@ extension OfficePersonListController : UICollectionViewDelegate , UICollectionVi
             
             header.headerLb!.text = "  "+jds[indexPath.section]["rolename"].stringValue
             header.headerLb.font = UIFont.systemFont(ofSize: 17)
+            header.headerLb.backgroundColor = UIColor.groupTableViewBackground
             
             return header
         default:

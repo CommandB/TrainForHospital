@@ -16,6 +16,7 @@ class TeachingPlanController : HBaseViewController{
     
     var jds = [JSON]()
     var dataMap = [String:[JSON]]()
+    var officeId = ""
     
     override func viewDidLoad() {
         
@@ -38,8 +39,10 @@ class TeachingPlanController : HBaseViewController{
     func getListData(){
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        
-        var param = ["task_state":"1,2" ,"officeid":UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue),"pagesize":pageSize ,"pageindex":jds.count] as [String : Any]
+        if officeId == "0" || officeId.isEmpty{
+            officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)!
+        }
+        var param = ["task_state":"1,2" ,"officeid":officeId,"pagesize":pageSize ,"pageindex":jds.count] as [String : Any]
         
         let url = SERVER_PORT + "rest/app/queryOfficeTrain.do"
         myPostRequest(url,param).responseJSON(completionHandler: {resp in

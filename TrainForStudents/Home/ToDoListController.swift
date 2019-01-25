@@ -25,7 +25,7 @@ class ToDoListController : HBaseViewController{
         
         //先将数据 按月份分组
         for item in dataArr{
-            let startDate = DateUtil.stringToDateTime(item["starttime_show"].stringValue)
+            let startDate = DateUtil.stringToDateTime(item["starttime"].stringValue.replacingOccurrences(of: ".0", with: ""))
             let month = startDate.month.description
             var monthPlans = self.dataMap[month]
             if monthPlans == nil{
@@ -84,13 +84,13 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
             (cell.viewWithTag(10002) as! UILabel).text = data["text"].stringValue + "月"
         }else{
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bodyCell", for: indexPath)
-            let date = DateUtil.stringToDateTime(data["starttime_show"].stringValue)
+            let date = DateUtil.stringToDateTime(data["starttime"].stringValue.replacingOccurrences(of: ".0", with: ""))
             
             //判断一下 如果当前日期和上一个日期一样 则这一个cell不显示日期
             let previousItem = jds[indexPath.item - 1]
             var previousItemDateStr = previousItem["starttime_show"].stringValue
             if previousItemDateStr == ""{
-                previousItemDateStr = data["starttime_show"].stringValue
+                previousItemDateStr = data["starttime"].stringValue.replacingOccurrences(of: ".0", with: "")
             }
             if previousItem["isHeader"].boolValue || date.day != DateUtil.stringToDateTime(previousItemDateStr).day{
                 (cell.viewWithTag(10001) as! UILabel).text = date.day.description
@@ -106,7 +106,7 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
             }
             
             (cell.viewWithTag(20001) as! UILabel).text = data["title"].stringValue
-            (cell.viewWithTag(30001) as! UILabel).text = data["starttime_show"].stringValue.substring(from: 11).substring(to: 5) + " - " + data["endtime_show"].stringValue.substring(from: 11).substring(to: 5)
+            (cell.viewWithTag(30001) as! UILabel).text = data["starttime"].stringValue.substring(from: 11).substring(to: 5) + " - " + data["endtime"].stringValue.substring(from: 11).substring(to: 5)
             (cell.viewWithTag(40001) as! UILabel).text = data["title"].stringValue
             (cell.viewWithTag(50002) as! UILabel).text = data["addressname"].stringValue
             
