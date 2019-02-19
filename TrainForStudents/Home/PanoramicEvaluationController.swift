@@ -23,9 +23,11 @@ import SwiftyJSON
  */
 
 
-class PanoramicEvaluationController : UIViewController{
+class PanoramicEvaluationController : HBaseViewController{
     
     @IBOutlet weak var personCollection: UICollectionView!
+    
+    let datePicker = UIPickerView()
     
     var jds = [JSON]()
     ///各种评价表的dic
@@ -33,25 +35,36 @@ class PanoramicEvaluationController : UIViewController{
     
     override func viewDidLoad() {
         
+        datePicker.delegate = self
+        datePicker.dataSource = self
+        datePicker.setWidth(width: UIScreen.width)
+        datePicker.setHight(height: 300)
+        datePicker.setY(y: UIScreen.height.subtracting(300))
+        datePicker.isHidden = true
+        view.addSubview(datePicker)
+        
+
         personCollection.delegate = self
         personCollection.dataSource = self
         
         self.personCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.personCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
         
+        var btn = view.viewWithTag(10001) as! UIButton
+        btn.setTitle("\(Date().month)月", for: .normal)
+        btn.setCornerRadius(radius: btn.W.divided(by: 2))
+        btn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+        let lbl = view.viewWithTag(10002) as! UILabel
+        lbl.text = "\(Date().year)"
         
-        let lbl = view.viewWithTag(10001) as! UILabel
-        lbl.setCornerRadius(radius: lbl.W.divided(by: 2))
-        lbl.text = "\(Date().month)月"
-        
-        let btn = view.viewWithTag(30002) as! UIButton
+        btn = view.viewWithTag(30002) as! UIButton
         btn.addTarget(self, action: #selector(presentDimension), for: .touchUpInside)
         
         self.personCollection.mj_header.beginRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        datePicker.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PanoramicEvaluationDetailController.callbackNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice2), name: EvaluationDimensionController.callbackNotificationName, object: nil)
     }
@@ -62,6 +75,18 @@ class PanoramicEvaluationController : UIViewController{
     
     @IBAction func btn_sure_inside(_ sender: UIButton) {
         
+        myConfirm(self, message: "是否确认发布?" ,okTitle: "是" ,cancelTitle: "否", okHandler : { action in
+            self.sureSubmit()
+        })
+        
+    }
+    
+    func showDatePicker(sender: UIButton){
+        datePicker.isHidden = !datePicker.isHidden
+    }
+    
+    //确认发布
+    func sureSubmit(){
         let url = SERVER_PORT + "rest/app/release360evaluate.do"
         let officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
         
@@ -135,10 +160,18 @@ class PanoramicEvaluationController : UIViewController{
     func getListData(){
         
         let url = SERVER_PORT + "rest/app/getPreExitOfficePerson.do"
-        let month = DateUtil.getCurrentDate().substring(to: 7).replacingOccurrences(of: "-", with: "")
-        print(month)
+        
+        
+        var month = (view.viewWithTag(10001) as! UIButton).title(for: .normal)
+        let year = (view.viewWithTag(10002) as! UILabel).text
+        if (month?.count)! < 3{
+            month = "0" + month!
+        }
+        let paramMonth = (year! + month!).replacingOccurrences(of: "月", with: "")
+        
+        print("paramMonth:\(paramMonth)")
         let officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
-        myPostRequest(url, ["officeid":officeId ,"month":month ,"fortype":"evaluation"], method: .post).responseString(completionHandler: {resp in
+        myPostRequest(url, ["officeid":officeId ,"month":paramMonth ,"fortype":"evaluation"], method: .post).responseString(completionHandler: {resp in
             self.personCollection.mj_header.endRefreshing()
             self.personCollection.mj_footer.endRefreshing()
             switch resp.result{
@@ -234,6 +267,42 @@ extension PanoramicEvaluationController : UICollectionViewDelegate , UICollectio
         
         //return CGSize(width: UIScreen.width, height: 95)
         return CGSize(width: UIScreen.width, height: 60)
+    }
+    
+}
+
+extension PanoramicEvaluationController : UIPickerViewDelegate , UIPickerViewDataSource{
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0{
+            return 3
+        }else{
+            return 12
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            let year = Date().year - 1
+            return String(year + row)
+        }else{
+            return String(row + 1)
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0{
+            let year = Date().year - 1 + row
+            (view.viewWithTag(10002) as! UILabel).text = "\(year)"
+        }else{
+            let month = row + 1
+            (view.viewWithTag(10001) as! UIButton).setTitle("\(month)月", for: .normal)
+        }
+        getListData()
     }
     
 }

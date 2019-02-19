@@ -26,7 +26,8 @@ class ToDoListController : HBaseViewController{
         //先将数据 按月份分组
         for item in dataArr{
             let startDate = DateUtil.stringToDateTime(item["starttime"].stringValue.replacingOccurrences(of: ".0", with: ""))
-            let month = startDate.month.description
+            //key要加上年份 不然跨年时候 当年1月会拍在上一年的12月前面
+            let month = "\(startDate.year)\(startDate.month)"
             var monthPlans = self.dataMap[month]
             if monthPlans == nil{
                 monthPlans = [JSON]()
@@ -38,7 +39,8 @@ class ToDoListController : HBaseViewController{
         //然后按月份排序分组
         let softedKeys = self.dataMap.keys.sorted()
         for monthKey in softedKeys{
-            let monthCellData = JSON(["text":monthKey ,"isHeader":true])
+            //因为key是 年月的结构 要截断前面的年
+            let monthCellData = JSON(["text":monthKey.substring(to: 4) ,"isHeader":true])
             self.jds.append(monthCellData)
             self.jds += self.dataMap[monthKey]!
         }

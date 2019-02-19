@@ -164,6 +164,7 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
             case "s2t":
                 cellData = jds["data"]["teacherlist"].arrayValue
                 lbl.text = "已选择\(jds["data"]["teacherlist"].count)位带教老师"
+                btn.isHidden = true
             case "s2o":
                 cellData = JSON([["officeid":UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue) ,"personname":UserDefaults.standard.string(forKey: LoginInfo.officeName.rawValue)]]).arrayValue
                 lbl.text = "已选择1个科室"
@@ -184,8 +185,8 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
             let btn = cell.viewWithTag(10003) as! UIButton
             btn.viewParam = ["key" : keys[indexPath.section] ,"index" : index]
             btn.addTarget(self, action: #selector(removePerson(sender:)), for: .touchUpInside)
-            //如果是科室 则隐藏工号和 删除按钮
-            if data["officeid"].stringValue != ""{
+            //如果是科室或者学生评价老师 则隐藏工号和 删除按钮
+            if data["officeid"].stringValue != "" || keys[indexPath.section] == "s2t"{
                 lbl.isHidden = true
                 btn.isHidden = true
             }else{

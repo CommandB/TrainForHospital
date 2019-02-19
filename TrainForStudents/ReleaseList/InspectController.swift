@@ -28,12 +28,21 @@ class InspectController : HBaseViewController{
     
     @IBOutlet weak var patient_View: UIView!
     
+    @IBOutlet weak var officeList_View: UIView!
+    
+    @IBOutlet weak var officeList_collection: UICollectionView!
+    
+    var jds = [JSON]()
+    
     let datePicker = UIDatePicker()
     let addrPicker = UIPickerView()
     var evPicker = UIPickerView()
     let hPickerImpl = HSimplePickerViewImpl()
     
     var addrPickerDs = [JSON]()
+    
+    //选主讲人
+    let speakerNotice = "speakerNotice"
     
     //发布的培训类型
     var trainType = JSON()
@@ -53,13 +62,18 @@ class InspectController : HBaseViewController{
         let lbl_viewTitle = view.viewWithTag(11111) as! UILabel
         lbl_viewTitle.text = trainType["traintypename"].stringValue
         
+        officeList_collection.delegate = self
+        officeList_collection.dataSource = self
+        jds = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue
+        
+        officeList_collection.reloadData()
+        
         datePicker.datePickerMode = .dateAndTime
         datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
         
         addrPicker.delegate = self
         addrPicker.dataSource = self
         addrPickerDs = JSON(parseJSON:UserDefaults.AppConfig.string(forKey: .classroomList)!).arrayValue
-        
         
         evPicker = hPickerImpl.getDefaultPickerView()
         hPickerImpl.titleKey = "evaluationname"
@@ -102,6 +116,11 @@ class InspectController : HBaseViewController{
         var btn = view.viewWithTag(60001) as! UIButton
         btn.addTarget(self, action: #selector(addSpeaker), for: .touchUpInside)
         btn.contentHorizontalAlignment = .right
+        
+        btn = view.viewWithTag(70001) as! UIButton
+        btn.addTarget(self, action: #selector(showOfficeList), for: .touchUpInside)
+        btn.setTitle(UserDefaults.standard.string(forKey: LoginInfo.officeName.rawValue), for: .normal)
+        
 
         var isNeedCheckIn = UserDefaults.AppConfig.string(forKey: .trainingIsNeedCheckIn)
         if isNeedCheckIn == nil {
@@ -141,7 +160,7 @@ class InspectController : HBaseViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonDefaultNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: Notification.Name.init(speakerNotice), object: nil)
     }
     
     func receiveNotice(notification : NSNotification){
@@ -167,13 +186,20 @@ class InspectController : HBaseViewController{
     }
     
     func addSpeaker(sender : UIButton){
-        myPresentView(self, viewName: "personSelectorView")
+        PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON]() , noticeName: speakerNotice)
+    }
+    
+    func showOfficeList(){
+        officeList_View.isHidden = false
     }
     
     
+    @IBAction func btn_hiddenOfficeList_inside(_ sender: UIButton) {
+        officeList_View.isHidden = true
+    }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
-        myConfirm(self, message: "确定退出编辑吗?" , okHandler : { action in
+        myConfirm(self, message: "确定退出编辑吗?" ,okTitle: "是" ,cancelTitle: "否", okHandler : { action in
             self.dismiss(animated: true, completion: nil)
         })
     }
@@ -435,4 +461,35 @@ extension InspectController : UIScrollViewDelegate{
             tabsTouchAnimation(sender: btn_patient)
         }
     }
+}
+
+
+extension InspectController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return jds.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let data = jds[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+        let lbl = cell.viewWithTag(10001) as! UILabel
+        lbl.text = data["officename"].stringValue
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = jds[indexPath.item]
+        let btn = view.viewWithTag(70001) as! UIButton
+        btn.setTitle(data["officename"].stringValue, for: .normal)
+        submitParam["officeid"] = data["officeid"].stringValue
+        officeList_View.isHidden = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.W, height: 40)
+    }
+    
 }
