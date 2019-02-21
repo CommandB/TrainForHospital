@@ -51,9 +51,9 @@ class MyTabBarController : UITabBarController{
             lastViewName = "mineView"
             selectedTabBarIndex = 4
             //退出系统
-            UserDefaults.standard.set(nil, forKey: LoginInfo.token.rawValue)
-            r_token = ""
-            myPresentView(self, viewName: "loginView")
+//            UserDefaults.standard.set(nil, forKey: LoginInfo.token.rawValue)
+//            r_token = ""
+//            myPresentView(self, viewName: "loginView")
             break
         default:
             break

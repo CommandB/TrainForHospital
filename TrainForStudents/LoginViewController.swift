@@ -264,6 +264,9 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                     
                     self.appDelegate.loadAppConfig()
                     
+                    //请求登录人的个人信息
+                    self.getMySelfData()
+                    
                     //请求科室信息
                     let getOfficeURL = SERVER_PORT+"rest/app/queryMyOffice.do"
                     myPostRequest(getOfficeURL).responseJSON(completionHandler: { resp in
@@ -324,11 +327,16 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                         
                     })
                     
+                    if isOnlyStudent(){
+                        myPresentView(self, viewName: "tabBarView")
+                    }else{
+                        //myPresentView(self, viewName: "hTabBarView")
+                        self.dismiss(animated: true, completion: nil)
+                    }
                     
-//                    myPresentView(self, viewName: "tabBarView")
 //                    let vc = getViewToStoryboard("hTabBarView") as! MyTabBarController
 //                    self.present(vc, animated: true, completion: nil)
-                    self.dismiss(animated: true, completion: nil)
+//                    self.dismiss(animated: true, completion: nil)
                     
                 }else{
                     MBProgressHUD.hide(for: self.view, animated: true)
@@ -340,6 +348,37 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
             case .failure(let error):
                 MBProgressHUD.hide(for: self.view, animated: true)
                 myAlert(self, message: "服务器异常!")
+                print(error)
+            }
+            
+        })
+        
+    }
+    
+    //获取我的信息
+    func getMySelfData(){
+        
+        let url = SERVER_PORT+"rest/personStudent/query.do"
+        myPostRequest(url).responseJSON(completionHandler: {resp in
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json=JSON(responseJson)
+                if json["code"].stringValue == "1"{
+                    
+                    //缓存用户基础信息
+                    UserDefaults.User.set(value: json["data"]["personid"].stringValue, forKey: .personId)
+                    UserDefaults.User.set(value: json["data"]["jobnum"].stringValue, forKey: .jobNum)
+                    UserDefaults.User.set(value: json["data"]["personname"].stringValue, forKey: .personName)
+                    UserDefaults.User.set(value: json["data"]["subjectname"].stringValue, forKey: .majorName)
+                    UserDefaults.User.set(value: json["data"]["highestdegree"].stringValue, forKey: .highestDegree)
+                    UserDefaults.User.set(value: json["data"]["phoneno"].stringValue, forKey: .phoneNo)
+                    
+                }else{
+                    myAlert(self, message: "请求我的信息失败!")
+                }
+            case .failure(let error):
                 print(error)
             }
             

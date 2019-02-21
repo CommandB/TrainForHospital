@@ -64,6 +64,7 @@
 		0A16C2F621E33EDA00C6B319 /* 双箭头-右蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A16C2F321E33ECA00C6B319 /* 双箭头-右蓝.png */; };
 		0A16C2F821E33EDA00C6B319 /* 二维码-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A16C2F521E33ED500C6B319 /* 二维码-icon.png */; };
 		0A1701DF21EED4A200B12EC4 /* TeachingStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1701DE21EED4A200B12EC4 /* TeachingStatisticsController.swift */; };
+		0A17CE91221D2E260057A395 /* MyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A17CE90221D2E260057A395 /* MyController.swift */; };
 		0A17DFED21DCA6EE002A4194 /* TeamSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A17DFEC21DCA6EE002A4194 /* TeamSettingController.swift */; };
 		0A17DFFB21DCB795002A4194 /* 圆形问好-蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17DFF721DCB790002A4194 /* 圆形问好-蓝.png */; };
 		0A17DFFC21DCB795002A4194 /* 人员-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17DFF821DCB792002A4194 /* 人员-2.png */; };
@@ -910,6 +911,7 @@
 		0A16C2F321E33ECA00C6B319 /* 双箭头-右蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "双箭头-右蓝.png"; sourceTree = "<group>"; };
 		0A16C2F521E33ED500C6B319 /* 二维码-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "二维码-icon.png"; sourceTree = "<group>"; };
 		0A1701DE21EED4A200B12EC4 /* TeachingStatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingStatisticsController.swift; sourceTree = "<group>"; };
+		0A17CE90221D2E260057A395 /* MyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyController.swift; sourceTree = "<group>"; };
 		0A17DFEC21DCA6EE002A4194 /* TeamSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingController.swift; sourceTree = "<group>"; };
 		0A17DFF721DCB790002A4194 /* 圆形问好-蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆形问好-蓝.png"; sourceTree = "<group>"; };
 		0A17DFF821DCB792002A4194 /* 人员-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "人员-2.png"; sourceTree = "<group>"; };
@@ -2141,6 +2143,14 @@
 			name = Refresh;
 			sourceTree = "<group>";
 		};
+		0A17CE86221D2DF90057A395 /* My */ = {
+			isa = PBXGroup;
+			children = (
+				0A17CE90221D2E260057A395 /* MyController.swift */,
+			);
+			path = My;
+			sourceTree = "<group>";
+		};
 		0A210FCF20B44C04006BC5C9 /* Web */ = {
 			isa = PBXGroup;
 			children = (
@@ -2533,6 +2543,7 @@
 				0AB5AA962105D41000A9E2EC /* Home */,
 				0A8293BF217ECBB7006047B1 /* ReleaseList */,
 				0AD14561217D8064004670A9 /* Features */,
+				0A17CE86221D2DF90057A395 /* My */,
 				0A6B326F21746BC5007FF54D /* Resource */,
 				0A6B326E21746BA8007FF54D /* --------------------------------------- */,
 				0AAB7799211C224C009C372B /* Office */,
@@ -3446,6 +3457,7 @@
 				0A6A23AC1EEE95BE00A1AC5B /* QuestionCollectionView.swift in Sources */,
 				0AFCF6AD1FFDF91D00CF044E /* FITBCollectionView.swift in Sources */,
 				0A2B356721C9109000E17AC9 /* QuestionListController.swift in Sources */,
+				0A17CE91221D2E260057A395 /* MyController.swift in Sources */,
 				0AC3B99C1EE8694B00227194 /* TaskDetailController.swift in Sources */,
 				0A125A8E1F29CC6400FDD4F4 /* SettingsCollectionView.swift in Sources */,
 				0A0E20A721F7052D00DAD2FE /* Dictionary.swift in Sources */,

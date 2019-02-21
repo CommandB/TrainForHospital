@@ -16,8 +16,10 @@ class SettingsCollectionView : MyBaseCollectionView{
     
     //设置每个分区元素的个数
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        
-        return 2
+        if isOnlyStudent(){
+            return 2
+        }
+        return 3
         
     }
     
@@ -43,6 +45,8 @@ class SettingsCollectionView : MyBaseCollectionView{
             case 10002:
                 myPresentView(parentView!, viewName: "changePasswordView")
             case 10003:
+                //myPresentView(parentView!, viewName: "hTabBarView")
+                parentView?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
                 break
             default:
                 break

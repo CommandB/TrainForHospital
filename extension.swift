@@ -34,6 +34,18 @@ func isReachable() -> Bool{
     return reachable
 }
 
+///当前登录人是否只有学生一个角色
+func isOnlyStudent() -> Bool{
+    let roleDic = (UserDefaults.standard.dictionary(forKey: LoginInfo.role.rawValue)) as! [String:Bool]
+    if roleDic["issecretary"]! {
+        return false
+    }
+    if roleDic["isteacher"]! {
+        return false
+    }
+    return true
+}
+
 //post方式提交数据
 func myPostRequest(_ url:String, _ parameters: [String: Any]? = nil , method: HTTPMethod = HTTPMethod.post , timeoutInterval : TimeInterval = 60) -> DataRequest {
     
