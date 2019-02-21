@@ -32,6 +32,7 @@ class PaperSelectorController : HBaseViewController{
         
         self.paperCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         
+        //如果已经有缓存 则不用重新加载
         if notReload{
             jds = UserDefaults.AppConfig.json(forKey: .subjectExamPaper).arrayValue
             if jds.count == 0{
@@ -42,7 +43,7 @@ class PaperSelectorController : HBaseViewController{
         }else{
             getListData()
         }
-        
+        print("notReload:\(notReload)")
         
         
     }
