@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class PaperSelectorController : HBaseViewController{
     
+    var officeId = 0
     var notReload = false
     var isSkillExam = false
     
@@ -29,6 +30,9 @@ class PaperSelectorController : HBaseViewController{
         paperCollection.delegate = self
         paperCollection.dataSource = self
         
+        if officeId == 0 {
+            officeId = UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)
+        }
         
         self.paperCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         
@@ -60,7 +64,7 @@ class PaperSelectorController : HBaseViewController{
         
         
         if selectedIndex != IndexPath(){
-            NotificationCenter.default.post(name: PaperSelectorController.defaultNoticeName, object: nil, userInfo: ["data":jds[selectedIndex.item]])
+            NotificationCenter.default.post(name: PaperSelectorController.defaultNoticeName, object: nil, userInfo: ["data":jds[selectedIndex.section].arrayValue[selectedIndex.item - 1]])
         }
         
         dismiss(animated: true, completion: nil)
@@ -78,17 +82,20 @@ class PaperSelectorController : HBaseViewController{
             url = SERVER_PORT + "rest/app/getTheoryExercisesList.do"
         }
         //下载试卷
-        myPostRequest(url, method: .post).responseString(completionHandler: {resp in
+        myPostRequest(url, ["officeid":officeId], method: .post).responseString(completionHandler: {resp in
             
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)
                 if json["code"].stringValue == "1"{
-                    let data = json["data"].arrayValue
-                    self.jds = data
+                    
+                    self.jds = [JSON]()
+                    self.jds.append(json["dataByMe"])
+                    self.jds.append(json["dataByOffice"])
+                    self.jds.append(json["data"])
                     //缓存试卷
-                    UserDefaults.AppConfig.set(value: data.description, forKey: .subjectExamPaper)
+                    UserDefaults.AppConfig.set(value: self.jds.description, forKey: .subjectExamPaper)
                     self.paperCollection.reloadData()
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
@@ -144,48 +151,76 @@ class PaperSelectorController : HBaseViewController{
 
 extension PaperSelectorController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return jds.count
+        if jds.count > section{
+            let count = jds[section].arrayValue.count
+            if count > 0{
+                //因为第一个cell要显示分类 所以显示的总数要+1
+                return count + 1
+            }
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let data = jds[indexPath.item]
-        let exercisesId = data["exercisesid"].stringValue
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
-        
-        cell.viewWithTag(10000)?.isHidden = true
-        (cell.viewWithTag(10001) as! UILabel).text = data["title"].stringValue
-        (cell.viewWithTag(20001) as! UILabel).text = data["creater"].stringValue
-        (cell.viewWithTag(20002) as! UILabel).text = data["score"].stringValue + "分"
-        
-        
-        if selectedIndex == indexPath{
-            cell.viewWithTag(10000)?.isHidden = false
+        if indexPath.item == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
             
-            if !isSkillExam{
-                
-                let questionsCollection = cell.viewWithTag(30001) as! UICollectionView
-                questionsCollection.delegate = questionsView
-                questionsCollection.dataSource = questionsView
-                questionsCollection.register(TitleReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
-                
-                questionsView.jsonDataSource = [JSON]()
-                questionsCollection.reloadData()
-                
-                if let questionData = questionCache[exercisesId]{
-                    print("读取已缓存的试题")
-                    questionsView.jsonDataSource = questionData
-                }else{
-                    print("请求的试卷ID=\(exercisesId)")
-                    requestQuestions(exercisesId: exercisesId, vn: data["versionnumber"].stringValue, collection: questionsCollection)
-                }
+            switch indexPath.section{
+                case 0:
+                    (cell.viewWithTag(10001) as! UILabel).text = "我的试卷"
+                case 1:
+                    (cell.viewWithTag(10001) as! UILabel).text = "科室试卷"
+                case 2:
+                    (cell.viewWithTag(10001) as! UILabel).text = "全部试卷"
+                default:
+                    break
             }
             
+            return cell
+        }else{
+            let data = jds[indexPath.section].arrayValue[indexPath.item - 1]
+            let exercisesId = data["exercisesid"].stringValue
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
             
+            cell.viewWithTag(10000)?.isHidden = true
+            (cell.viewWithTag(10001) as! UILabel).text = data["title"].stringValue
+            (cell.viewWithTag(20001) as! UILabel).text = data["creater"].stringValue
+            (cell.viewWithTag(20002) as! UILabel).text = data["score"].stringValue + "分"
+            
+            
+            if selectedIndex == indexPath{
+                cell.viewWithTag(10000)?.isHidden = false
+                
+                if !isSkillExam{
+                    
+                    let questionsCollection = cell.viewWithTag(30001) as! UICollectionView
+                    questionsCollection.delegate = questionsView
+                    questionsCollection.dataSource = questionsView
+                    questionsCollection.register(TitleReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+                    
+                    questionsView.jsonDataSource = [JSON]()
+                    questionsCollection.reloadData()
+                    
+                    if let questionData = questionCache[exercisesId]{
+                        print("读取已缓存的试题")
+                        questionsView.jsonDataSource = questionData
+                    }else{
+                        print("请求的试卷ID=\(exercisesId)")
+                        requestQuestions(exercisesId: exercisesId, vn: data["versionnumber"].stringValue, collection: questionsCollection)
+                    }
+                }
+                
+                
+            }
+            
+            return cell
         }
         
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -193,6 +228,9 @@ extension PaperSelectorController : UICollectionViewDelegate , UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if indexPath.item == 0{
+            return false
+        }
         if selectedIndex == indexPath{
             selectedIndex = IndexPath()
         }else{
@@ -204,7 +242,9 @@ extension PaperSelectorController : UICollectionViewDelegate , UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if selectedIndex == indexPath && !isSkillExam{
+        if indexPath.item == 0{
+            return CGSize(width: UIScreen.width, height: 40)
+        }else if selectedIndex == indexPath && !isSkillExam{
             return CGSize(width: UIScreen.width, height: 238)
         }else{
             return CGSize(width: UIScreen.width, height: 60)

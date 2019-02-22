@@ -38,9 +38,10 @@ class PanoramicEvaluationController : HBaseViewController{
         datePicker.delegate = self
         datePicker.dataSource = self
         datePicker.setWidth(width: UIScreen.width)
-        datePicker.setHight(height: 300)
-        datePicker.setY(y: UIScreen.height.subtracting(300))
+        datePicker.setHight(height: 250)
+        datePicker.setY(y: UIScreen.height.subtracting(250))
         datePicker.isHidden = true
+        datePicker.backgroundColor = UIColor.gray
         view.addSubview(datePicker)
         
 
@@ -87,6 +88,7 @@ class PanoramicEvaluationController : HBaseViewController{
     
     //确认发布
     func sureSubmit(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT + "rest/app/release360evaluate.do"
         let officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
         
@@ -114,6 +116,8 @@ class PanoramicEvaluationController : HBaseViewController{
         }
         
         myPostRequest(url, param, method: .post).responseString(completionHandler: {resp in
+            
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)
@@ -159,9 +163,9 @@ class PanoramicEvaluationController : HBaseViewController{
     
     func getListData(){
         
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         let url = SERVER_PORT + "rest/app/getPreExitOfficePerson.do"
-        
-        
         var month = (view.viewWithTag(10001) as! UIButton).title(for: .normal)
         let year = (view.viewWithTag(10002) as! UILabel).text
         if (month?.count)! < 3{
@@ -172,6 +176,7 @@ class PanoramicEvaluationController : HBaseViewController{
         print("paramMonth:\(paramMonth)")
         let officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
         myPostRequest(url, ["officeid":officeId ,"month":paramMonth ,"fortype":"evaluation"], method: .post).responseString(completionHandler: {resp in
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             self.personCollection.mj_header.endRefreshing()
             self.personCollection.mj_footer.endRefreshing()
             switch resp.result{

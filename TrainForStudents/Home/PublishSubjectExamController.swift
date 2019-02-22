@@ -13,12 +13,15 @@ import SwiftyJSON
 class PublishSubjectExamController : HBaseViewController{
     
     var isSkillExam = false
-    
+    var notReload = true
     @IBOutlet weak var studentsCollection: UICollectionView!
     
+    var officeId = 0
     var basicData = [JSON]()
     var jds = [JSON]()
     let datePicker = UIPickerView()
+    var officePicker = UIPickerView()
+    let officePickerImpl = HSimplePickerViewImpl()
     
     var isSelectedAll = false
     var selectedStudents = [IndexPath:JSON]()
@@ -31,7 +34,26 @@ class PublishSubjectExamController : HBaseViewController{
         datePicker.delegate = self
         datePicker.dataSource = self
         
-        let txt = view.viewWithTag(10001) as! TextFieldForNoMenu
+        let officeList = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue
+        var myManager = [JSON]()
+        for office in officeList{
+            if office["ismymanage"].intValue == 1{
+                myManager.append(office)
+            }
+        }
+        
+        officePicker = officePickerImpl.getDefaultPickerView()
+        officePickerImpl.titleKey = "officename"
+        officePickerImpl.clorsureImpl = addrClosureImpl
+        officePickerImpl.dataSource = myManager
+        
+        
+        
+        var txt = view.viewWithTag(10000) as! TextFieldForNoMenu
+        txt.inputView = officePicker
+        txt.text = UserDefaults.standard.string(forKey: LoginInfo.officeName.rawValue)
+        
+        txt = view.viewWithTag(10001) as! TextFieldForNoMenu
         txt.inputView = datePicker
         txt.delegate = self
         
@@ -59,6 +81,7 @@ class PublishSubjectExamController : HBaseViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        notReload = true
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PaperSelectorController.defaultNoticeName, object: nil)
     }
     
@@ -104,7 +127,8 @@ class PublishSubjectExamController : HBaseViewController{
             return
         }
         let vc = getViewToStoryboard("paperSelectorView") as! PaperSelectorController
-        vc.notReload = true
+        vc.notReload = notReload
+        vc.officeId = officeId
         present(vc, animated: true, completion: nil)
     }
     
@@ -219,6 +243,15 @@ class PublishSubjectExamController : HBaseViewController{
         jds.removeAll()
         //studentsCollection.mj_footer.resetNoMoreData()
         getListData()
+    }
+    
+    func addrClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+        let text = ds[row]["officename"].stringValue
+        let txt = view.viewWithTag(10000) as! UITextField
+        txt.text = text
+        officeId = ds[row]["officeid"].intValue
+        //如果重新选择了科室 则需要重新加载
+        notReload = false
     }
     
 }
