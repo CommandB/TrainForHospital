@@ -265,7 +265,7 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
         var image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         //压缩图片
-        let after = image.compressImage(image, maxLength: uploadImageMaxLenth)
+        let after = image.compressImage(maxLength: uploadImageMaxLenth)
         image = UIImage(data: after!)!
         
         

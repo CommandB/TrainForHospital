@@ -173,7 +173,7 @@ class ImageUploadView :UIViewController , UITableViewDelegate , UITableViewDataS
         
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-//        let after = image.compressImage(image, maxLength: uploadImageMaxLenth)
+        let after = image.compressImage(maxLength: uploadImageMaxLenth)
 //        image = UIImage(data: after!)!
         
         //添加图片到数据源

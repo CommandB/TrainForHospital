@@ -143,4 +143,19 @@ extension UIView{
     func setHight(height :CGFloat){
         self.frame.size = CGSize(width: self.W, height: height)
     }
+    
+    func moveToBefore(target: UIView , space: CGFloat = 0){
+        
+        let _h = self.H.subtracting(target.H).divided(by: 2)
+        self.setY(y: target.Y.subtracting(_h))
+        self.setX(x: target.X.subtracting(self.W).subtracting(space))
+    }
+    
+    func moveToAfter(target: UIView , space: CGFloat = 0){
+        
+        let _h = self.H.subtracting(target.H).divided(by: 2)
+        self.setY(y: target.Y.subtracting(_h))
+        self.setX(x: target.X.adding(target.W).adding(space))
+    }
+    
 }

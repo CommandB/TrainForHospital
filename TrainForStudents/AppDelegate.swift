@@ -317,6 +317,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
 }
 
 extension AppDelegate : JPUSHRegisterDelegate{
+    
+    @available(iOS 10.0, *)
+    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, openSettingsFor notification: UNNotification?) {
+        
+    }
+    
     /**
      收到静默推送的回调
      

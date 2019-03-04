@@ -11,8 +11,13 @@ import UIKit
 
 class HUtilView {
     
-    private static var redPointDic = [Int : UIView]()
     
+}
+
+//红点
+extension HUtilView{
+    
+    private static var redPointDic = [Int : UIView]()
     ///在指定view的右上角添加一个红点
     ///返回值用于删除红点
     static func addRedPoint(view :UIView) -> Int{
@@ -65,6 +70,64 @@ class HUtilView {
         }
         //print("random:\(random)")
         return Int(random.description.substring(to: 6)) ?? 0
+    }
+}
+
+//显示图片
+extension HUtilView{
+    
+    private static var showImageView = UIView()
+    
+    static func showImageToTagetView(target: UIView, image: UIImage){
+        
+        var _image = image
+        showImageView = UIView(frame: CGRect(x: 0, y: 0, width: target.W, height: target.H))
+        let btn_bg = UIButton(frame: showImageView.frame)
+        btn_bg.backgroundColor = .black
+        btn_bg.addTarget(self, action: #selector(removeImageView), for: .touchUpInside)
+        
+        //添加缩放手势
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchDid(_:)))
+        //showImageView.addGestureRecognizer(pinchGesture)
+        
+        let imageView = UIImageView()
+        imageView.tag = 10001
+        //先计算宽高
+        imageView.setWidth(width: _image.size.width)
+        imageView.setHight(height: _image.size.height)
+        if imageView.W > UIScreen.width{
+            imageView.setWidth(width: UIScreen.width)
+            _image = _image.resizeImage(newSize: _image.scaleImage(imageLength: UIScreen.width))
+        }
+        //再计算x和y
+        imageView.setX(x: showImageView.W.subtracting(imageView.W).divided(by: 2))
+        imageView.setY(y: showImageView.H.subtracting(imageView.H).divided(by: 2))
+        
+        imageView.image = _image
+        showImageView.addSubview(btn_bg)
+        showImageView.addSubview(imageView)
+        target.addSubview(showImageView)
+    }
+    
+    @objc static func removeImageView(sender: UIButton){
+        print("删除..")
+        sender.superview?.removeFromSuperview()
+    }
+    
+    @objc static func pinchDid(_ recognizer:UIPinchGestureRecognizer) {
+        //在监听方法中可以实时获得捏合的比例
+        let scale = recognizer.scale
+        let multiple = scale.subtracting(1).divided(by: 10).adding(1)
+        let imageView = HUtilView.showImageView.viewWithTag(10001) as! UIImageView
+        imageView.setWidth(width: imageView.W.multiplied(by: multiple))
+        imageView.setHight(height: imageView.H.multiplied(by: multiple))
+        imageView.setX(x: imageView.X.multiplied(by: multiple))
+        imageView.setY(y: imageView.Y.divided(by: multiple))
+        
+        //获取两个触摸点的坐标
+//        print(recognizer.location(ofTouch: 0, in: HUtilView.showImageView))
+//        print(recognizer.location(ofTouch: 1, in: HUtilView.showImageView))
+        
     }
     
 }

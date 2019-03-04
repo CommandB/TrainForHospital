@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class HomeController : UIViewController{
+class HomeController : HBaseViewController, UINavigationControllerDelegate{
     
     @IBOutlet weak var homeCollection: UICollectionView!
     
@@ -37,6 +37,29 @@ class HomeController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         homeCollection.mj_header.beginRefreshing()
+    }
+    
+    //扫一扫
+    @IBAction func btn_scanner_inside(_ sender: UIButton) {
+        
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        if LBXPermissions.isGetPhotoPermission() {
+            let takePhoto = UserDefaults.AppConfig.string(forKey: .scanCheckInTakePhoto)
+            if takePhoto == "0" || true{    //暂时不需要拍照 直接扫码
+                //不需要照片则直接打开扫码界面
+                let vc = getViewToStoryboard("scannerView") as! ScannerViewController
+                self.present(vc, animated: true, completion: nil)
+            }else{
+                //先拍照在扫码
+                picker.sourceType = .camera
+                self.present(picker, animated: true, completion: nil)
+            }
+        }else{
+            myAlert(self, message: "没有相机权限")
+        }
+        
+        
     }
     
     ///跳转到消息列表
@@ -464,3 +487,20 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
     }
     
 }
+
+extension HomeController : UIImagePickerControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let photo = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        dismiss(animated: true, completion: {
+            let vc = getViewToStoryboard("scannerView") as! ScannerViewController
+            vc.uploadPhoto = photo
+            self.present(vc, animated: true, completion: nil)
+        })
+        
+    }
+    
+}
+

@@ -4,6 +4,7 @@
 
 target ’TrainForStudents’ do  
   
+  pod 'Kingfisher', '~>3.9.1'
   pod 'Alamofire', '~> 4.0'
   pod 'SwiftDate', '~>4.0'
   pod 'SwiftyJSON'
@@ -11,7 +12,7 @@ target ’TrainForStudents’ do
   pod 'SnapKit' , '~> 3.2.0'
   pod 'BMPlayer'
   pod 'GTMRefresh'
-  pod 'JPush'
+  pod 'JPush', '~> 3.1.2'
   pod 'Reachability'
   pod "PLPlayerKit", :podspec => 'https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec'
   

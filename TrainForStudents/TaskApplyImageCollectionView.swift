@@ -106,7 +106,7 @@ class TaskApplyImageCollectionView : UIViewController,  UICollectionViewDelegate
         
         var image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-        let after = image.compressImage(image, maxLength: uploadImageMaxLenth)
+        let after = image.compressImage(maxLength: uploadImageMaxLenth)
         image = UIImage(data: after!)!
         
 //        imgButton?.setBackgroundImage(image, for: UIControlState())

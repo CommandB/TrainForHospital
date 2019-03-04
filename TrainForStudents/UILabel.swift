@@ -20,4 +20,9 @@ extension UILabel{
         return 20
     }
     
+    func setWidthFromText(){
+        //稍微增加一点 防止出现省略号
+        self.frame.size = CGSize(width: (self.text?.getWidth().adding(2))!, height: self.H)
+    }
+    
 }

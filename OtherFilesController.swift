@@ -10,6 +10,9 @@ import UIKit
 import SwiftyJSON
 import Alamofire
 import QuickLook
+import MediaPlayer
+import AVFoundation
+import AVKit
 
 class OtherFilesController: MyBaseUIViewController,UITableViewDataSource,UITableViewDelegate,UIDocumentInteractionControllerDelegate{
     var tableView = UITableView()
@@ -23,11 +26,14 @@ class OtherFilesController: MyBaseUIViewController,UITableViewDataSource,UITable
         
         super.setNavigationBarColor(views: [barView,titleView], titleIndex: 1,titleText: "附件清单")
         self.initView()
-        self.getFilesData()
+        if dataSource.count == 0{
+            self.getFilesData()
+        }
+        
     }
 
     func initView() {
-        self.tableView.frame = CGRect.init(x: 0, y: 64, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        self.tableView.frame = CGRect.init(x: 0, y: 74, width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.view.addSubview(self.tableView)
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -38,7 +44,6 @@ class OtherFilesController: MyBaseUIViewController,UITableViewDataSource,UITable
         self.tableView.register(nib, forCellReuseIdentifier: "OtherFilesCell")
     }
     
-    //获取我的信息
     func getFilesData(){
         let url = SERVER_PORT+"/rest/task/queryPCTaskResultUpload.do"
         myPostRequest(url,["taskid":taskId]).responseJSON(completionHandler: {resp in
@@ -91,6 +96,21 @@ class OtherFilesController: MyBaseUIViewController,UITableViewDataSource,UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let fileURL = self.dataSource[indexPath.section]["url"].stringValue
+        if fileURL.contains("resources/video"){
+//            let mpController = MPMoviePlayerViewController(contentURL: URL(string: fileURL)!)
+//            presentMoviePlayerViewControllerAnimated(mpController)
+            
+            let avPlayer = AVPlayer(url: URL(string: fileURL)!)
+            let avPlayerView = AVPlayerViewController()
+            avPlayerView.player = avPlayer
+            present(avPlayerView, animated: true, completion: nil)
+            
+            return
+        }
+        
+        
         //指定下载路径和保存文件名
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]

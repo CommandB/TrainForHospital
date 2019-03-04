@@ -45,3 +45,100 @@ extension UIImage{
     }
     
 }
+
+
+
+extension UIImage {
+    
+    /**
+     *  通过指定图片最长边，获得等比例的图片size
+     *
+     *  image       原始图片
+     *  imageLength 图片允许的最长宽度（高度）
+     *
+     *  return 获得等比例的size
+     */
+    func  scaleImage(imageLength: CGFloat) -> CGSize {
+        
+        //        var newWidth:CGFloat = 0.0
+        //        var newHeight:CGFloat = 0.0
+//                let width = self.size.width
+//                let height = self.size.height
+        
+        //        if (width > imageLength || height > imageLength){
+        //
+        //            if (width > height) {
+        //
+        //                newWidth = imageLength;
+        //                newHeight = newWidth * height / width;
+        //
+        //            }else if(height > width){
+        //
+        //                newHeight = imageLength;
+        //                newWidth = newHeight * width / height;
+        //
+        //            }else{
+        //
+        //                newWidth = imageLength;
+        //                newHeight = imageLength;
+        //            }
+        //            return CGSize(width: newWidth, height: newHeight)
+        //        }else{
+        //            return CGSize(width: width, height: height)
+        //        }
+        
+        
+        let width = self.size.width
+        let height = self.size.height
+        let scale = width.divided(by: imageLength)
+        return CGSize(width: imageLength, height: height.divided(by: scale))
+        
+    }
+    
+    /**
+     *  获得指定size的图片
+     *
+     *  image   原始图片
+     *  newSize 指定的size
+     *
+     *  return 调整后的图片
+     */
+    func resizeImage(newSize: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(newSize)
+        self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
+    
+    /**
+     *  压缩上传图片到指定字节
+     *
+     *  image     压缩的图片
+     *  maxLength 压缩后最大字节大小
+     *
+     *  return 压缩后图片的二进制
+     */
+    func compressImage(maxLength: Int , resize: CGFloat = 0) -> Data? {
+        
+        var newImage = self
+        if resize != 0 {
+            let newSize = self.scaleImage(imageLength: resize)
+            newImage = self.resizeImage(newSize: newSize)
+        }
+        
+        var compress:CGFloat = 0.9
+        var data = UIImageJPEGRepresentation(newImage, compress)
+        while (data?.count)! > maxLength && compress > 0.01 {
+            compress -= 0.02
+            data = UIImageJPEGRepresentation(newImage, compress)
+        }
+        
+        return data
+    }
+    
+    
+}

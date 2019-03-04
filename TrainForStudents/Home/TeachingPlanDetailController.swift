@@ -8,68 +8,139 @@
 
 import UIKit
 import SwiftyJSON
+import Kingfisher
 
 class TeachingPlanDetailController : HBaseViewController{
     
-    
     @IBOutlet weak var infoCollection: UICollectionView!
-    var jds = [JSON]()
+    
+    var jds = JSON()
     var taskInfo = JSON()
-    var qrcodeStr = ""
-    var timer:Timer?
+    var imageCollectionView = TeachingPlanDetailImageView()
     
     override func viewDidLoad() {
         
         infoCollection.delegate = self
         infoCollection.dataSource = self
         
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(reloadAction), userInfo: nil, repeats: true)
-        
+        self.infoCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
+        self.infoCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
+        self.infoCollection.mj_footer.beginRefreshing()
         (view.viewWithTag(10001) as! UILabel).text = taskInfo["title"].stringValue
         (view.viewWithTag(20001) as! UILabel).text = taskInfo["starttime"].stringValue
         (view.viewWithTag(30001) as! UILabel).text = taskInfo["endtime"].stringValue
         (view.viewWithTag(40001) as! UILabel).text = taskInfo["addressname"].stringValue
         
-        requestQRCode()
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        timer?.invalidate()
+        
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
-    func requestQRCode() {
-        let urlString = SERVER_PORT + "/rest/public/GenerateQRCode.do"
-        let params = ["type":"pctask","taskid":taskInfo["taskid"].stringValue]
+    //获取界面上的数据
+    func getListData(){
         
-        myPostRequest(urlString, params, method: .post).responseJSON { (response) in
-            switch(response.result){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        var param = ["trainid":taskInfo["taskid"].stringValue] as [String : Any]
+        print(param)
+        param["trainid"] = 10636
+        let url = SERVER_PORT + "rest/app/getTrainDetail.do"
+        myPostRequest(url,param).responseJSON(completionHandler: {resp in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.infoCollection.mj_header.endRefreshing()
+            self.infoCollection.mj_footer.endRefreshing()
+            switch resp.result{
+            case .success(let responseJson):
+                let json = JSON(responseJson)
+                print(json)
+                if json["code"].stringValue == "1"{
+                    let data = json["data"]
+                    self.jds = json["data"]
+                    (self.view.viewWithTag(10001) as! UILabel).text = data["traintypename"].stringValue
+                    (self.view.viewWithTag(20001) as! UILabel).text = data["creater"].stringValue
+                    
+                    let startDate = data["starttime"].stringValue.substring(to: 18)
+                    let endDate = data["endtime"].stringValue.substring(to: 18)
+                    let dateText = startDate.substring(to: 16) + " - " + endDate.substring(from: 11).substring(to: 5)
+                    (self.view.viewWithTag(30001) as! UILabel).text = dateText + "(\(DateUtil.getWeek(DateUtil.stringToDateTime(startDate))))"
+                    
+                    (self.view.viewWithTag(40001) as! UILabel).text = data["addressname"].stringValue
+                    
+                    //过滤确认参加 和已签到的 人数
+                    var confirmStuList = [JSON]()
+                    var signedStuList = [JSON]()
+                    for stu in self.jds["studentlist"].arrayValue{
+                        if stu["answer"].stringValue == "确认参加"{
+                            confirmStuList.append(stu)
+                        }
+                        if stu["issign"].stringValue == "1"{
+                            signedStuList.append(stu)
+                        }
+                    }
+                    self.jds["confirmStuList"] = JSON(confirmStuList)
+                    self.jds["signedStuList"] = JSON(signedStuList)
+                    
+                    self.infoCollection.reloadData()
+                }else{
+                    
+                }
             case .failure(let error):
                 print(error)
-            case .success(let response):
-                let json = JSON(response)
-                if json["code"].stringValue == "1" {
-                    
-                    self.qrcodeStr = json["qrcode"].stringValue
-                    let imageView = self.view.viewWithTag(50001) as! UIImageView
-                    imageView.image = UIImage.createQR(text: self.qrcodeStr, size: imageView.H)
-                    
-                }else{
-                    print("error")
-                }
             }
-        }
+            
+        })
     }
     
-    func reloadAction() {
-        if self.qrcodeStr.isEmpty {
-            return
-        }
-        self.requestQRCode()
+    func selectImage(){
+        //选择图片
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        
+        let alertSheet = UIAlertController(title: "提示", message: "请选择照片", preferredStyle: .actionSheet)
+        
+        //注册"相册"按钮
+        alertSheet.addAction(UIAlertAction(title: "相册", style: .default, handler: { action in
+            
+            self.present(picker, animated: true, completion: nil)
+            
+        }))
+        
+        //注册"照相"按钮
+        alertSheet.addAction(UIAlertAction(title: "照相", style: .default, handler: { action in
+            
+            if LBXPermissions.isGetPhotoPermission() {
+                picker.sourceType = .camera
+                
+                self.present(picker, animated: true, completion: nil)
+                
+            }else{
+                myAlert(self, message: "没有相机权限")
+            }
+            
+        }))
+        
+        ///注册"取消"
+        alertSheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { action in
+            
+        }))
+        
+        present(alertSheet, animated: true, completion: nil)
+    }
+    
+    func refresh() {
+        jds = JSON()
+        infoCollection.mj_footer.resetNoMoreData()
+        getListData()
+    }
+    
+    func loadMore() {
+        getListData()
     }
     
 }
@@ -77,15 +148,105 @@ class TeachingPlanDetailController : HBaseViewController{
 extension TeachingPlanDetailController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return jds.count
+        if jds.isEmpty{
+            return 0
+        }
+        return 6 + jds["evaluatedetail"].arrayValue.count
     }
     
     //渲染cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        var cell = UICollectionViewCell()
+        if indexPath.item < 6{
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c\(indexPath.item+1)", for: indexPath)
+        }else{
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c7", for: indexPath)
+        }
         
-        let data = jds[indexPath.item]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
-        
+        cell.setBorder(width: 1, color: .groupTableViewBackground)
+        switch indexPath.item {
+        case 0:
+            //主讲人
+            (cell.viewWithTag(10003) as! UILabel).text = jds["teachers"].stringValue
+            break
+        case 1:
+            //讲课素材
+            (cell.viewWithTag(10003) as! UILabel).text = "\(jds["trainfile"].arrayValue.count)"
+            (cell.viewWithTag(10004) as! UIButton).addTarget(self, action: #selector(presentFileList), for: .touchUpInside)
+            break
+        case 2:
+            //确认参加人数
+            let btn = cell.viewWithTag(10005) as! UIButton
+            let left = (cell.viewWithTag(10003) as! UILabel)
+            left.text = jds["confirmStuList"].arrayValue.count.description
+            let right = (cell.viewWithTag(10004) as! UILabel)
+            right.text = "/\(jds["studentlist"].arrayValue.count)"
+            right.setWidthFromText()
+            right.moveToBefore(target: btn, space: -50)
+            left.moveToBefore(target: right)
+            break
+        case 3:
+            
+            //已签到人数
+            let btn = cell.viewWithTag(10005) as! UIButton
+            let left = (cell.viewWithTag(10003) as! UILabel)
+            left.text = jds["signedStuList"].arrayValue.count.description
+            let right = (cell.viewWithTag(10004) as! UILabel)
+            right.text = "/\(jds["confirmStuList"].arrayValue.count)"
+            right.setWidthFromText()
+            right.moveToBefore(target: btn, space: -50)
+            left.moveToBefore(target: right)
+            let qrcodeStr = jds["qrcode"].stringValue
+            if !qrcodeStr.isEmpty{
+                let imageView = cell.viewWithTag(20001) as! UIImageView
+                imageView.image = UIImage.createQR(text: qrcodeStr, size: imageView.H)
+            }
+            break
+        case 4:
+            //图片
+            let uploadImageBtn = cell.viewWithTag(10003) as! UIButton
+            uploadImageBtn.addTarget(self, action: #selector(selectImage), for: .touchUpInside)
+            
+            let imageCollection = cell.viewWithTag(20001) as! UICollectionView
+            imageCollectionView = TeachingPlanDetailImageView()
+            imageCollection.delegate = imageCollectionView
+            imageCollection.dataSource = imageCollectionView
+            imageCollectionView.parentview = self.view
+            imageCollectionView.jds = jds["piclist"].arrayValue
+            imageCollection.reloadData()
+            
+            break
+        case 5:
+            cell.setBorder(width: 0, color: .groupTableViewBackground)
+            let _data = jds["evaluateinfo"].arrayValue[0]
+            let lbl_content = cell.viewWithTag(10002) as! UILabel
+            lbl_content.text = "\(_data["finerate"].stringValue)%，共3人 "
+            lbl_content.setWidthFromText()
+            let lbl_suffix = cell.viewWithTag(10003) as! UILabel
+            lbl_suffix.moveToAfter(target: lbl_content,space: 5)
+            break
+        default:
+            cell.setBorder(width: 0, color: .groupTableViewBackground)
+            cell.setBorderTop(size: 1, color: .groupTableViewBackground)
+            let evArray = jds["evaluatedetail"].arrayValue
+            let index = indexPath.item - 6
+            let item = evArray[index]
+            (cell.viewWithTag(10001) as! UILabel).text = "\(index+1).\(item["itemtitle"].stringValue)"
+            let lbl_bg = (cell.viewWithTag(10002) as! UILabel)
+            let lbl_progress = (cell.viewWithTag(10003) as! UILabel)
+            let lbl_rate = (cell.viewWithTag(10004) as! UILabel)
+            let rate = item["scorevalue"].doubleValue / item["sumscore"].doubleValue
+            lbl_rate.text = "\(Int(rate*100))%"
+            lbl_progress.setWidth(width: lbl_bg.W.multiplied(by: CGFloat(rate)))
+            if rate >= 0.6{
+                lbl_rate.textColor = UIColor(hex: "3186E9")
+                lbl_progress.backgroundColor = UIColor(hex: "9BDE4C")
+            }else{
+                lbl_rate.textColor = UIColor(hex: "F74747")
+                lbl_progress.backgroundColor = UIColor(hex: "F74747")
+            }
+            break
+        }
         
         return cell
     }
@@ -97,8 +258,172 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        var result = CGSize()
+        let cellWidth = collectionView.W.subtracting(5)
+        switch indexPath.item {
+        case 0:
+            result = CGSize(width: cellWidth, height: 40)
+        case 1:
+            result = CGSize(width: cellWidth, height: 40)
+        case 2:
+            result = CGSize(width: cellWidth, height: 40)
+        case 3:
+            result = CGSize(width: cellWidth, height: 220)
+        case 4:
+            result = CGSize(width: cellWidth, height: 130)
+        case 5:
+            result = CGSize(width: cellWidth, height: 30)
+        default:
+            result = CGSize(width: cellWidth, height: 65)
+        }
+        return result
+    }
+    
+    //查看附件
+    func presentFileList(sender: UIButton){
+        let vc = getViewToStoryboard("OtherFilesController") as! OtherFilesController
+        vc.dataSource = jds["trainfile"].arrayValue
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+}
 
-        return CGSize(width: UIScreen.width, height: 40)
+//图片的collectionView
+extension TeachingPlanDetailController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        myConfirm(picker, message: "确认上传此照片吗?", okHandler :{ action in
+            
+            self.dismiss(animated: true, completion: nil)
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            
+            var image = info[UIImagePickerControllerOriginalImage] as! UIImage
+            
+            let after = image.compressImage(maxLength: 1024*1024, resize: UIScreen.width)
+            image = UIImage(data: after!)!
+//            image = image.resizeImage(newSize: CGSize(width: image.size.width.divided(by: 3), height: image.size.height.divided(by: 3)))
+            
+            
+            let imageData = UIImageJPEGRepresentation(image, 1)
+            print("imageData:\(imageData!.count)")
+            if imageData?.count == 0 {
+                myAlert(self, message: "请选择上传的图片!")
+                return
+            }
+            
+            let url = SERVER_PORT + "rest/app/TrainImgAdd.do"
+            
+            var param = [String:Any]()
+            param["trainid"] = 10636//self.taskInfo["taskid"].stringValue
+            //param["context"] = txt.text
+            
+            var imgDir = [String:UIImage]()
+            //根据记录的下标读取需要上传的图片
+            
+            imgDir[arc4random().description] = image
+            
+            uploadImage(url, images: imgDir, parameters: param, completionHandler: {resp in
+                switch resp.result{
+                case .success(let responseJson):
+                    
+                    let json = JSON(responseJson)
+                    if json["code"].stringValue == "1"{
+                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                        myAlert(self, message: "图片上传成功!" , handler : { action in
+                            self.refresh()
+                        })
+                        
+                    }else{
+                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                        myAlert(self, message: "图片上传失败!\(json["msg"].stringValue)")
+                    }
+                    
+                case .failure(let error):
+                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                    print(error)
+                }
+            })
+            
+            
+            
+        }, cancelHandler :{ action in
+            
+        })
+        
+    }
+    
+}
+
+class ImageCollectionView{
+    
+}
+
+class TeachingPlanDetailImageView : UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+    
+    var parentview: UIView? = nil
+    var jds = [JSON()]
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if jds.count == 0 {
+            return 1
+        }
+        return jds.count
+    }
+    
+    //渲染cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if  jds.count == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
+            return cell
+        }
+            
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+        let data = jds[indexPath.item]
+        let imageUrl = URL(string: data["url"].stringValue)!
+        let imageView = cell.viewWithTag(10001) as! UIImageView
+        
+        do{
+//            let image = try UIImage(data: Data.init(contentsOf: imageUrl))!
+//            print("url:\(imageUrl)")
+//            print("image:\(image.size)")
+//            print("大小:\(UIImageJPEGRepresentation(image, 1)?.count)")
+            
+            imageView.kf.setImage(with: ImageResource(downloadURL: imageUrl))
+            
+            
+        }catch{}
+        return cell
+    }
+    
+    //点击cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = jds[indexPath.item]
+        let imageUrl = data["url"].stringValue
+        do{
+            
+            //判断缓存中是否存在.. 不存在则先下载 .. 存在则直接从缓存中读取图片
+            if ImageCache.default.isImageCached(forKey: imageUrl).cached{
+                let image = ImageCache.default.retrieveImageInDiskCache(forKey: imageUrl)!
+                HUtilView.showImageToTagetView(target: parentview! ,image: image)
+            }else{
+                ImageDownloader.default.downloadImage(with: URL(string: imageUrl)!, completionHandler: {image, error, url, originalData in
+                    HUtilView.showImageToTagetView(target: self.parentview! ,image: image!)
+                })
+            }
+            
+            
+        }catch{}
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if jds.count == 0 {
+            return CGSize(width: collectionView.W, height: 75)
+        }
+        return CGSize(width: 100, height: 75)
     }
     
 }

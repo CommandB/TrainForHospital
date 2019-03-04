@@ -92,6 +92,7 @@ class TeachingPlanController : HBaseViewController{
     
     func refresh() {
         jds.removeAll()
+        dataMap.removeAll()
         planCollection.mj_footer.resetNoMoreData()
         getListData()
     }

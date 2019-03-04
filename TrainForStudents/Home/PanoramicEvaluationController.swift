@@ -41,7 +41,7 @@ class PanoramicEvaluationController : HBaseViewController{
         datePicker.setHight(height: 250)
         datePicker.setY(y: UIScreen.height.subtracting(250))
         datePicker.isHidden = true
-        datePicker.backgroundColor = UIColor.gray
+        datePicker.backgroundColor = UIColor(hex:"D0D3D9")
         view.addSubview(datePicker)
         
 

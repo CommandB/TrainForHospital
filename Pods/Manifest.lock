@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.7.3)
+  - Alamofire (4.8.1)
   - BMPlayer (0.9.1):
     - BMPlayer/Full (= 0.9.1)
   - BMPlayer/Core (0.9.1)
@@ -8,15 +8,16 @@ PODS:
     - NVActivityIndicatorView (~> 3.5)
     - SnapKit (~> 3.2)
   - GTMRefresh (1.3.6)
-  - JCore (1.2.2)
-  - JPush (3.1.0):
-    - JCore (~> 1.2.0)
+  - JCore (1.2.6)
+  - JPush (3.1.2):
+    - JCore (~> 1.2.6)
+  - Kingfisher (3.9.1)
   - NVActivityIndicatorView (3.7.0):
     - NVActivityIndicatorView/Presenter (= 3.7.0)
   - NVActivityIndicatorView/Presenter (3.7.0)
-  - PLPlayerKit (3.3.3):
-    - PLPlayerKit/universal (= 3.3.3)
-  - PLPlayerKit/universal (3.3.3)
+  - PLPlayerKit (3.4.1):
+    - PLPlayerKit/universal (= 3.4.1)
+  - PLPlayerKit/universal (3.4.1)
   - Reachability (3.2)
   - SnapKit (3.2.0)
   - SwiftDate (4.5.1)
@@ -26,7 +27,8 @@ DEPENDENCIES:
   - Alamofire (~> 4.0)
   - BMPlayer
   - GTMRefresh
-  - JPush (~> 3.1.0)
+  - JPush (~> 3.1.2)
+  - Kingfisher (~> 3.9.1)
   - PLPlayerKit (from `https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec`)
   - Reachability
   - SnapKit (~> 3.2.0)
@@ -38,18 +40,19 @@ EXTERNAL SOURCES:
     :podspec: https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   BMPlayer: e68ba160d9c05ea5fffc31d37448aa02433418ab
   GTMRefresh: 9231cbdc1dca88d0a29daead8d6bd83314aa84dc
-  JCore: f14c0549968a63c22e246a4875aa9d428446f373
-  JPush: 5921e25ad13e0386351079217b009f2039084eac
+  JCore: cae516dd2bf1a73b578ce6e1065abd49e709e0f7
+  JPush: d0cead70ba223a6a3b52749899ebda830dfbc49a
+  Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
-  PLPlayerKit: 75bbb10e8428952e945dfbceb27ae8da5d15f0b8
+  PLPlayerKit: 8dbda4525878842315e0ae6329dcefa7b5d8cc7e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 21d0ae59dd4ebf71d5ac6adc0d85ed9cf8a08047
+PODFILE CHECKSUM: 5d72b0306a92d63655faacda070ff262f74ba6ca
 
 COCOAPODS: 1.4.0.beta.2
