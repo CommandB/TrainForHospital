@@ -110,6 +110,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
         }
     }
     
+    ///获取最上方教学活动的统计数据
     func getStatisticData(){
         
         let url = SERVER_PORT + "rest/app/getHomeInfo.do"
@@ -134,9 +135,9 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
         })
     }
     
-    //我的任务
+    ///获取待办事项
     func getTask(){
-        let url = SERVER_PORT + "rest/task/query.do"
+        let url = SERVER_PORT + "rest/app/getMyTask.do"
         myPostRequest(url, ["task_state":"0" ,"pageindex":0 ,"pagesize":100],  method: .post).responseString(completionHandler: {resp in
             
             self.homeCollection.mj_header.endRefreshing()
@@ -235,7 +236,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
         getOfficeTeamList()
         getStatisticData()
         getTask()
-        getTeaching()
+//        getTeaching()
     }
     
     func tabsTouchAnimation( sender : UIButton){
@@ -337,10 +338,10 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             btn.addTarget(self, action: #selector(presentToDoList), for: .touchUpInside)
             btn.restorationIdentifier = "btn_task2"
             
-            (cell.viewWithTag(20001) as! UILabel).text = data["title"].stringValue
+            (cell.viewWithTag(20001) as! UILabel).text = "[\(data["tasktype"].stringValue)]\(data["title"].stringValue)"
             (cell.viewWithTag(20002) as! UILabel).text = ""
-            (cell.viewWithTag(30001) as! UILabel).text = "时间:\(data["starttime_show"].stringValue)"
-            (cell.viewWithTag(40001) as! UILabel).text = "地址:\(data["addr"].stringValue)"
+            (cell.viewWithTag(30001) as! UILabel).text = "时间:\(data["starttime"].stringValue)"
+            (cell.viewWithTag(40001) as! UILabel).text = "地址:\(data["addressname"].stringValue)"
             
             break
         case 2:

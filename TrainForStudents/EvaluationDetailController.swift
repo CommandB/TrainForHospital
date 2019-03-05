@@ -113,9 +113,16 @@ class EvaluationDetailController: MyBaseUIViewController {
         var url = SERVER_PORT+"rest/evaluation/query.do"
         var params = ["evaluationid":headData["evaluationid"].stringValue]
         
+        
+        
         if isReadonly {
             url = SERVER_PORT+"rest/evaluation/queryHistoryResultInfo.do"
             params = ["evaluationid":headData["evaluationid"].stringValue,"taskid":headData["taskid"].stringValue,"loginpersonid":headData["personid"].stringValue]
+        }
+        
+        //如果是从待办跳转进来 则用buid
+        if headData["buid"].stringValue.count > 0 {
+            params["evaluationid"] = headData["buid"].stringValue
         }
         myPostRequest(url,params).responseJSON(completionHandler: {resp in
             

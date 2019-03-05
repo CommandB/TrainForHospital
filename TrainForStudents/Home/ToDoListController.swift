@@ -20,14 +20,62 @@ class ToDoListController : HBaseViewController{
     
     override func viewDidLoad() {
         
+        self.sortData()
+        
         toDoCollection.delegate = self
         toDoCollection.dataSource = self
         
+        self.toDoCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
+        self.toDoCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: nil)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //self.toDoCollection.mj_header.beginRefreshing()
+        
+    }
+    
+    @IBAction func btn_back_inside(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func getListData(){
+        
+        
+        let url = SERVER_PORT + "rest/app/getMyTask.do"
+        myPostRequest(url,  method: .post).responseString(completionHandler: {resp in
+            
+            self.toDoCollection.mj_header.endRefreshing()
+            self.toDoCollection.mj_footer.endRefreshingWithNoMoreData()
+            
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                //                print(json)
+                if json["code"].stringValue == "1"{
+                    self.jds = json["data"].arrayValue
+                    self.sortData()
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                    print(json)
+                }
+                break
+            case .failure(let error):
+                myAlert(self, message: "获取待办任务异常!")
+                print(error)
+                break
+            }
+            self.toDoCollection.reloadData()
+        })
+        
+    }
+    
+    func sortData(){
         //先将数据 按月份分组
         for item in dataArr{
             let startDate = DateUtil.stringToDateTime(item["starttime"].stringValue.replacingOccurrences(of: ".0", with: ""))
             //key要加上年份 不然跨年时候 当年1月会拍在上一年的12月前面
-            let month = "\(startDate.year)\(startDate.month)"
+            let month = "\(startDate.year)-\(startDate.month)"
             var monthPlans = self.dataMap[month]
             if monthPlans == nil{
                 monthPlans = [JSON]()
@@ -40,32 +88,14 @@ class ToDoListController : HBaseViewController{
         let softedKeys = self.dataMap.keys.sorted()
         for monthKey in softedKeys{
             //因为key是 年月的结构 要截断前面的年
-            let monthCellData = JSON(["text":monthKey.substring(to: 4) ,"isHeader":true])
+            let monthCellData = JSON(["text":monthKey ,"isHeader":true])
             self.jds.append(monthCellData)
             self.jds += self.dataMap[monthKey]!
         }
-        
-        self.toDoCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
-        self.toDoCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: nil)
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.toDoCollection.mj_header.beginRefreshing()
-    }
-    
-    @IBAction func btn_back_inside(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func getListData(){
-        self.toDoCollection.mj_header.endRefreshing()
-        self.toDoCollection.mj_footer.endRefreshingWithNoMoreData()
-        toDoCollection.reloadData()
     }
     
     func refresh() {
-        //toDoCollection.mj_footer.resetNoMoreData()
+        jds = [JSON]()
         getListData()
     }
     
@@ -107,8 +137,16 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
                 (cell.viewWithTag(10002) as! UILabel).text = ""
             }
             
-            (cell.viewWithTag(20001) as! UILabel).text = data["title"].stringValue
-            (cell.viewWithTag(30001) as! UILabel).text = data["starttime"].stringValue.substring(from: 11).substring(to: 5) + " - " + data["endtime"].stringValue.substring(from: 11).substring(to: 5)
+            (cell.viewWithTag(20001) as! UILabel).text = data["tasktype"].stringValue
+            
+            if data["endtime"].stringValue.count > 0{
+                (cell.viewWithTag(30001) as! UILabel).text = data["starttime"].stringValue.substring(from: 11).substring(to: 5) + " - " + data["endtime"].stringValue.substring(from: 11).substring(to: 5)
+            }else{
+                (cell.viewWithTag(30001) as! UILabel).text = data["starttime"].stringValue
+            }
+            
+            
+            
             (cell.viewWithTag(40001) as! UILabel).text = data["title"].stringValue
             (cell.viewWithTag(50002) as! UILabel).text = data["addressname"].stringValue
             
@@ -120,9 +158,14 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //myPresentView(self, viewName: "todoDetailView")
-        let vc = getViewToStoryboard("taskDetail2View") as! TaskDetail2Controller
-        vc.headDataJson = jds[indexPath.item]
-        present(vc, animated: true, completion: nil)
+        let data = jds[indexPath.item]
+        if data["butype"].stringValue == "评价"{
+            let vc = getViewToStoryboard("evaluationDetailView") as! EvaluationDetailController
+            vc.isReadonly = false
+            vc.headData = data
+            present(vc, animated: true, completion: nil)
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

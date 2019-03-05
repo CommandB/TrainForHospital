@@ -53,7 +53,8 @@ class TeachingPlanDetailController : HBaseViewController{
         myPostRequest(url,param).responseJSON(completionHandler: {resp in
             MBProgressHUD.hide(for: self.view, animated: true)
             self.infoCollection.mj_header.endRefreshing()
-            self.infoCollection.mj_footer.endRefreshing()
+            self.infoCollection.mj_footer.endRefreshingWithNoMoreData()
+            
             switch resp.result{
             case .success(let responseJson):
                 let json = JSON(responseJson)
@@ -140,7 +141,7 @@ class TeachingPlanDetailController : HBaseViewController{
     }
     
     func loadMore() {
-        getListData()
+        
     }
     
 }
