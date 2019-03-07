@@ -32,7 +32,7 @@ class ToDoListController : HBaseViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         //self.toDoCollection.mj_header.beginRefreshing()
-        
+        self.toDoCollection.mj_footer.endRefreshingWithNoMoreData()
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -40,7 +40,6 @@ class ToDoListController : HBaseViewController{
     }
     
     func getListData(){
-        
         
         let url = SERVER_PORT + "rest/app/getMyTask.do"
         myPostRequest(url,  method: .post).responseString(completionHandler: {resp in
@@ -53,17 +52,15 @@ class ToDoListController : HBaseViewController{
                 let json = JSON(parseJSON: respStr)
                 //                print(json)
                 if json["code"].stringValue == "1"{
-                    self.jds = json["data"].arrayValue
+                    self.dataArr = json["data"].arrayValue
                     self.sortData()
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
                     print(json)
                 }
-                break
             case .failure(let error):
                 myAlert(self, message: "获取待办任务异常!")
                 print(error)
-                break
             }
             self.toDoCollection.reloadData()
         })
@@ -71,6 +68,9 @@ class ToDoListController : HBaseViewController{
     }
     
     func sortData(){
+        
+        dataMap = [String:[JSON]]()
+        
         //先将数据 按月份分组
         for item in dataArr{
             let startDate = DateUtil.stringToDateTime(item["starttime"].stringValue.replacingOccurrences(of: ".0", with: ""))
@@ -160,10 +160,9 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
         //myPresentView(self, viewName: "todoDetailView")
         let data = jds[indexPath.item]
         if data["butype"].stringValue == "评价"{
-            let vc = getViewToStoryboard("evaluationDetailView") as! EvaluationDetailController
-            vc.isReadonly = false
-            vc.headData = data
-            present(vc, animated: true, completion: nil)
+            
+            presentEvaluationDetail(data["buid"].stringValue)
+
         }
         
     }
@@ -177,6 +176,34 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
             return CGSize(width: UIScreen.width, height: 110)
         }
         //return CGSize(width: UIScreen.width.subtracting(20), height: 0)
+    }
+    
+    ///跳转到待评任务
+    func presentEvaluationDetail(_ evaluateid: String){
+        
+        let url = SERVER_PORT+"rest/taskEvaluation/query.do"
+        myPostRequest(url,["evaluateid":evaluateid, "pageindex": 0 , "pagesize":10]).responseJSON(completionHandler: {resp in
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json = JSON(responseJson)
+                if json["code"].stringValue == "1"{
+                    print(json)
+                    let vc = getViewToStoryboard("evaluationDetailView") as! EvaluationDetailController
+                    vc.isReadonly = false
+                    vc.headData = json["data"].arrayValue[0]
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    myAlert(self, message: "获取评价信息失败!")
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
+        
     }
     
 }

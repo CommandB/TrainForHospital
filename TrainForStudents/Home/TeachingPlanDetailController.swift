@@ -14,9 +14,13 @@ class TeachingPlanDetailController : HBaseViewController{
     
     @IBOutlet weak var infoCollection: UICollectionView!
     
+    @IBOutlet weak var personList_view: UIView!
+    
+    
     var jds = JSON()
     var taskInfo = JSON()
     var imageCollectionView = TeachingPlanDetailImageView()
+    var personListCollectionView = TeachingPlanDetailPersonListView()
     
     override func viewDidLoad() {
         
@@ -25,16 +29,14 @@ class TeachingPlanDetailController : HBaseViewController{
         
         self.infoCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.infoCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
-        self.infoCollection.mj_footer.beginRefreshing()
         (view.viewWithTag(10001) as! UILabel).text = taskInfo["title"].stringValue
         (view.viewWithTag(20001) as! UILabel).text = taskInfo["starttime"].stringValue
         (view.viewWithTag(30001) as! UILabel).text = taskInfo["endtime"].stringValue
         (view.viewWithTag(40001) as! UILabel).text = taskInfo["addressname"].stringValue
-        
-        
+        self.infoCollection.mj_header.beginRefreshing()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
     }
     
@@ -48,7 +50,6 @@ class TeachingPlanDetailController : HBaseViewController{
         
         var param = ["trainid":taskInfo["taskid"].stringValue] as [String : Any]
         print(param)
-        param["trainid"] = 10636
         let url = SERVER_PORT + "rest/app/getTrainDetail.do"
         myPostRequest(url,param).responseJSON(completionHandler: {resp in
             MBProgressHUD.hide(for: self.view, animated: true)
@@ -178,6 +179,11 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
         case 2:
             //确认参加人数
             let btn = cell.viewWithTag(10005) as! UIButton
+            btn.viewParam = [String:Any]()
+            btn.viewParam!["title"] = "参加人员"
+            btn.viewParam!["data"] = jds["studentlist"].arrayValue
+            btn.viewParam!["isSignList"] = false
+            btn.addTarget(self, action: #selector(presentPersonList), for: .touchUpInside)
             let left = (cell.viewWithTag(10003) as! UILabel)
             left.text = jds["confirmStuList"].arrayValue.count.description
             let right = (cell.viewWithTag(10004) as! UILabel)
@@ -190,6 +196,11 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
             
             //已签到人数
             let btn = cell.viewWithTag(10005) as! UIButton
+            btn.viewParam = [String:Any]()
+            btn.viewParam!["title"] = "签到人员"
+            btn.viewParam!["data"] = jds["studentlist"].arrayValue
+            btn.viewParam!["isSignList"] = true
+            btn.addTarget(self, action: #selector(presentPersonList), for: .touchUpInside)
             let left = (cell.viewWithTag(10003) as! UILabel)
             left.text = jds["signedStuList"].arrayValue.count.description
             let right = (cell.viewWithTag(10004) as! UILabel)
@@ -282,9 +293,44 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
     
     //查看附件
     func presentFileList(sender: UIButton){
+        if jds["trainfile"].arrayValue.count == 0{
+            return
+        }
         let vc = getViewToStoryboard("OtherFilesController") as! OtherFilesController
         vc.dataSource = jds["trainfile"].arrayValue
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    ///显示人员列表
+    func presentPersonList(sender: UIButton){
+        
+        personListCollectionView.collectionTitle = sender.viewParam!["title"] as! String
+        personListCollectionView.personList = sender.viewParam!["data"] as! [JSON]
+        personListCollectionView.isSignList = sender.viewParam!["isSignList"] as! Bool
+        
+        personListCollectionView.parentView = self
+        
+        let personCollection = personList_view.viewWithTag(100001) as! UICollectionView
+        personCollection.delegate = personListCollectionView
+        personCollection.dataSource = personListCollectionView
+        personCollection.reloadData()
+        personCollection.setCornerRadius(radius: 4)
+        personCollection.setBorder(width: 1, color: .gray)
+        
+        
+        //计算一下有多少数据 来定位collection的位置
+        let cellCount = personListCollectionView.personList.count + 1
+        var collectionHeight = CGFloat(personListCollectionView.cellHeight * cellCount)
+        let maxHeight = UIScreen.height.subtracting(150)
+        if collectionHeight > maxHeight{
+            collectionHeight = maxHeight
+        }
+        personCollection.setHight(height: collectionHeight)
+        let y = UIScreen.height.subtracting(CGFloat(collectionHeight)).divided(by: 2)
+        personCollection.setY(y: y)
+        
+        personList_view.isHidden = false
+        
     }
     
 }
@@ -356,10 +402,6 @@ extension TeachingPlanDetailController : UIImagePickerControllerDelegate, UINavi
     
 }
 
-class ImageCollectionView{
-    
-}
-
 class TeachingPlanDetailImageView : UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     var parentview: UIView? = nil
@@ -425,6 +467,72 @@ class TeachingPlanDetailImageView : UIViewController, UICollectionViewDelegate ,
             return CGSize(width: collectionView.W, height: 75)
         }
         return CGSize(width: 100, height: 75)
+    }
+    
+}
+
+///查看人员情况的collection
+class TeachingPlanDetailPersonListView: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+    
+    let cellHeight = 40
+    var parentView :TeachingPlanDetailController? = nil
+    var collectionTitle = ""
+    var personList = [JSON]()
+    var isSignList = true
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return personList.count + 1
+    }
+    
+    //渲染cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        var cell = UICollectionViewCell()
+        
+        if indexPath.item == 0 {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+            (cell.viewWithTag(10001) as! UILabel).text = collectionTitle
+            (cell.viewWithTag(10002) as! UIButton).addTarget(self, action: #selector(dissmissToParent), for: .touchUpInside)
+        }else{
+            let data = personList[indexPath.item - 1]
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
+            (cell.viewWithTag(10001) as! UILabel).text = data["personname"].stringValue
+            let lbl_status = cell.viewWithTag(10002) as! UILabel
+            if isSignList{
+                if data["issign"].stringValue == "0"{
+                    lbl_status.textColor = .red
+                    lbl_status.text = "未签到"
+                }else{
+                    lbl_status.textColor = UIColor(hex: "3186E9")
+                    lbl_status.text = "已签到"
+                }
+            }else{
+                let txt = data["answer"].stringValue
+                if txt == "暂未回应"{
+                    lbl_status.textColor = .red
+                }else{
+                    lbl_status.textColor = UIColor(hex: "3186E9")
+                }
+                lbl_status.text = txt
+            }
+            
+        }
+        
+        
+        return cell
+    }
+    
+    //点击cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //myPresentView(self, viewName: "todoDetailView")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.W, height: CGFloat(cellHeight))
+    }
+    
+    func dissmissToParent(){
+        parentView?.personList_view.isHidden = true
     }
     
 }

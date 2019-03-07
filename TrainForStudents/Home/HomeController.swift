@@ -145,7 +145,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)
-//                print(json)
+
                 if json["code"].stringValue == "1"{
                     self.taskJds = json["data"].arrayValue
                 }else{
