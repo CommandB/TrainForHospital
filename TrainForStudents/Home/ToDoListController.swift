@@ -32,6 +32,7 @@ class ToDoListController : HBaseViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         //self.toDoCollection.mj_header.beginRefreshing()
+        refresh()
         self.toDoCollection.mj_footer.endRefreshingWithNoMoreData()
     }
     
@@ -74,7 +75,7 @@ class ToDoListController : HBaseViewController{
         //先将数据 按月份分组
         for item in dataArr{
             let startDate = DateUtil.stringToDateTime(item["starttime"].stringValue.replacingOccurrences(of: ".0", with: ""))
-            //key要加上年份 不然跨年时候 当年1月会拍在上一年的12月前面
+            //key要加上年份 不然跨年时候 当年1月会排在上一年的12月前面
             let month = "\(startDate.year)-\(startDate.month)"
             var monthPlans = self.dataMap[month]
             if monthPlans == nil{
@@ -85,7 +86,7 @@ class ToDoListController : HBaseViewController{
         }
         
         //然后按月份排序分组
-        let softedKeys = self.dataMap.keys.sorted()
+        let softedKeys = self.dataMap.keys.sorted().reversed()
         for monthKey in softedKeys{
             //因为key是 年月的结构 要截断前面的年
             let monthCellData = JSON(["text":monthKey ,"isHeader":true])
@@ -158,12 +159,21 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //myPresentView(self, viewName: "todoDetailView")
+        if jds.count == 0 {
+            return 
+        }
         let data = jds[indexPath.item]
         if data["butype"].stringValue == "评价"{
             
             presentEvaluationDetail(data["buid"].stringValue)
 
+        }else if data["butype"].stringValue == "教学活动"{
+            presentTeachingPlanDetail(data)
+        }else if data["butype"].stringValue == "教材阅读"{
+            presentStudyView(data)
         }
+        
+        //考试
         
     }
     
@@ -205,5 +215,24 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
         })
         
     }
+    
+    ///教学计划
+    func presentTeachingPlanDetail(_ data: JSON){
+        
+        var param = data
+        param["taskid"] = data["buid"]
+        let vc = getViewToStoryboard("teachingPlanDetailView") as! TeachingPlanDetailController
+        vc.taskInfo = param
+        present(vc, animated: true, completion: nil)
+    }
+    
+    ///教材阅读
+    func presentStudyView(_ data: JSON){
+        
+        let vc = getViewToStoryboard("studyView") as! StudyController
+        vc.taskId = data["buid"].stringValue
+        present(vc, animated: true, completion: nil)
+    }
+    
     
 }

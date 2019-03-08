@@ -82,6 +82,7 @@
 		0A17E00A21DCBF91002A4194 /* 发送附件.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17E00321DCBF8B002A4194 /* 发送附件.png */; };
 		0A17E00B21DCBF91002A4194 /* 教学分享.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17E00421DCBF8D002A4194 /* 教学分享.png */; };
 		0A17E00C21DCBF91002A4194 /* 评论.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17E00521DCBF8E002A4194 /* 评论.png */; };
+		0A18ADEF223255C30070088D /* StudyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A18ADEE223255C30070088D /* StudyController.swift */; };
 		0A19658A21E735D800379F1E /* TeachingPlanDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A19658921E735D800379F1E /* TeachingPlanDetailController.swift */; };
 		0A1A97B121D206250097C467 /* EvalueationListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A97B021D206250097C467 /* EvalueationListController.swift */; };
 		0A1A97BC21D32AD40097C467 /* PublishSubjectExamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A97BB21D32AD40097C467 /* PublishSubjectExamController.swift */; };
@@ -491,6 +492,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = BEA6A355D7D5AB8D68E11F2A844F2439;
 			remoteInfo = SwiftyJSON;
+		};
+		0A18ADFA223255C60070088D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A04270A209F817100E3E256 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 16984641455B33F02B221A6A01BBA285;
+			remoteInfo = Kingfisher;
 		};
 		0AD1453121782814004670A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -934,6 +942,7 @@
 		0A17E00321DCBF8B002A4194 /* 发送附件.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发送附件.png"; sourceTree = "<group>"; };
 		0A17E00421DCBF8D002A4194 /* 教学分享.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "教学分享.png"; sourceTree = "<group>"; };
 		0A17E00521DCBF8E002A4194 /* 评论.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "评论.png"; sourceTree = "<group>"; };
+		0A18ADEE223255C30070088D /* StudyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyController.swift; sourceTree = "<group>"; };
 		0A19658921E735D800379F1E /* TeachingPlanDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingPlanDetailController.swift; sourceTree = "<group>"; };
 		0A1A97B021D206250097C467 /* EvalueationListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvalueationListController.swift; sourceTree = "<group>"; };
 		0A1A97BB21D32AD40097C467 /* PublishSubjectExamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishSubjectExamController.swift; sourceTree = "<group>"; };
@@ -1400,6 +1409,7 @@
 				0A042897209F817200E3E256 /* Alamofire.framework */,
 				0A042899209F817200E3E256 /* BMPlayer.framework */,
 				0A04289B209F817200E3E256 /* GTMRefresh.framework */,
+				0A18ADFB223255C60070088D /* Kingfisher.framework */,
 				0A04289D209F817200E3E256 /* NVActivityIndicatorView.framework */,
 				0A04289F209F817200E3E256 /* Pods_TrainForStudents.framework */,
 				0AD1453221782814004670A9 /* Reachability.framework */,
@@ -2528,6 +2538,7 @@
 				0A14531D21E4443300741F5B /* OfficeTeacherController.swift */,
 				0A14531F21E4911500741F5B /* TeachingPlanController.swift */,
 				0A19658921E735D800379F1E /* TeachingPlanDetailController.swift */,
+				0A18ADEE223255C30070088D /* StudyController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3177,6 +3188,13 @@
 			remoteRef = 0A0428A6209F817200E3E256 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		0A18ADFB223255C60070088D /* Kingfisher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Kingfisher.framework;
+			remoteRef = 0A18ADFA223255C60070088D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		0AD1453221782814004670A9 /* Reachability.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -3611,6 +3629,7 @@
 				0A644D5B1EFD0A5A009025DD /* OutlineItem.swift in Sources */,
 				0A2B356521C9104900E17AC9 /* ExamResultController.swift in Sources */,
 				0A26BA35219AA8690071C2DC /* CommentHistoryDetailController.swift in Sources */,
+				0A18ADEF223255C30070088D /* StudyController.swift in Sources */,
 				0AD145542179CB45004670A9 /* ToDoListController.swift in Sources */,
 				B4F9E87B1F9106DD0001D88F /* OtherFilesCell.swift in Sources */,
 				0AC3B9331EE4730B00227194 /* AppDelegate.swift in Sources */,

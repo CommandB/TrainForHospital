@@ -335,8 +335,6 @@ extension OnlineAskController : UIWebViewDelegate{
         
     }
     
-    
-    
 }
 
 extension OnlineAskController : UIGestureRecognizerDelegate{

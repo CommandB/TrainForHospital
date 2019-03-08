@@ -29,10 +29,7 @@ class TeachingPlanDetailController : HBaseViewController{
         
         self.infoCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.infoCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
-        (view.viewWithTag(10001) as! UILabel).text = taskInfo["title"].stringValue
-        (view.viewWithTag(20001) as! UILabel).text = taskInfo["starttime"].stringValue
-        (view.viewWithTag(30001) as! UILabel).text = taskInfo["endtime"].stringValue
-        (view.viewWithTag(40001) as! UILabel).text = taskInfo["addressname"].stringValue
+        
         self.infoCollection.mj_header.beginRefreshing()
     }
     
@@ -49,7 +46,7 @@ class TeachingPlanDetailController : HBaseViewController{
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
         var param = ["trainid":taskInfo["taskid"].stringValue] as [String : Any]
-        print(param)
+        
         let url = SERVER_PORT + "rest/app/getTrainDetail.do"
         myPostRequest(url,param).responseJSON(completionHandler: {resp in
             MBProgressHUD.hide(for: self.view, animated: true)
@@ -59,7 +56,7 @@ class TeachingPlanDetailController : HBaseViewController{
             switch resp.result{
             case .success(let responseJson):
                 let json = JSON(responseJson)
-                print(json)
+                //print(json)
                 if json["code"].stringValue == "1"{
                     let data = json["data"]
                     self.jds = json["data"]
@@ -232,7 +229,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
             cell.setBorder(width: 0, color: .groupTableViewBackground)
             let _data = jds["evaluateinfo"].arrayValue[0]
             let lbl_content = cell.viewWithTag(10002) as! UILabel
-            lbl_content.text = "\(_data["finerate"].stringValue)%，共3人 "
+            lbl_content.text = "\(_data["finerate"].intValue)%，共3人 "
             lbl_content.setWidthFromText()
             let lbl_suffix = cell.viewWithTag(10003) as! UILabel
             lbl_suffix.moveToAfter(target: lbl_content,space: 5)
