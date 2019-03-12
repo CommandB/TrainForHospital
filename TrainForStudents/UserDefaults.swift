@@ -78,7 +78,7 @@ extension UserDefaults{
             ///扫码签到是否需要拍照
             case scanCheckInTakePhoto
             ///二维码失效时间
-            case qrCodeExpireTime
+            case qrCodeInvalidTime
             ///发布培训通知延时分钟数
             case trainingDelayNoticeMinutes
             ///带教老师是否允许发科室公告
@@ -113,6 +113,7 @@ extension UserDefaults{
             case studentTypeList
             ///人员分组清单
             case personGroupList
+            
             
             ///我自己添加的 不是初始化时候下载的
             ///出科考试试卷

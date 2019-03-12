@@ -278,7 +278,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                     UserDefaults.AppConfig.set(value: data["是否老师"].description, forKey:.isTeacher)
                     UserDefaults.AppConfig.set(value: data["是否秘书"].description, forKey:.isSecretary)
                     UserDefaults.AppConfig.set(value: data["签到机扫码拍照"].description, forKey:.checkInMachineTakePhoto)
-                    UserDefaults.AppConfig.set(value: data["二维码失效时间"].description, forKey:.qrCodeExpireTime)
+                    UserDefaults.AppConfig.set(value: data["二维码失效时间"].description, forKey:.qrCodeInvalidTime)
                     UserDefaults.AppConfig.set(value: data["科室清单"].description, forKey:.officeList)
                     
                     UserDefaults.AppConfig.set(value: data["科室清单"].description, forKey:.officeList)

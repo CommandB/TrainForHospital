@@ -21,8 +21,14 @@ class TeachingPlanDetailController : HBaseViewController{
     var taskInfo = JSON()
     var imageCollectionView = TeachingPlanDetailImageView()
     var personListCollectionView = TeachingPlanDetailPersonListView()
+    var timer = Timer()
     
     override func viewDidLoad() {
+        
+        let timeInterval = UserDefaults.AppConfig.any(forKey: .qrCodeInvalidTime) as! NSString
+        
+        
+        timer = Timer.scheduledTimer(timeInterval: timeInterval.doubleValue , target: self, selector: #selector(refreshQrCode), userInfo: nil, repeats: true)
         
         infoCollection.delegate = self
         infoCollection.dataSource = self
@@ -35,6 +41,11 @@ class TeachingPlanDetailController : HBaseViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        timer.invalidate()
+        timer = Timer()
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -56,7 +67,7 @@ class TeachingPlanDetailController : HBaseViewController{
             switch resp.result{
             case .success(let responseJson):
                 let json = JSON(responseJson)
-                //print(json)
+                print(json)
                 if json["code"].stringValue == "1"{
                     let data = json["data"]
                     self.jds = json["data"]
@@ -130,6 +141,32 @@ class TeachingPlanDetailController : HBaseViewController{
         }))
         
         present(alertSheet, animated: true, completion: nil)
+    }
+    
+    ///更新二维码
+    func refreshQrCode(){
+        //print("更新二维码了...")
+        let url = SERVER_PORT + "rest/app/getTrainQRCode.do"
+        myPostRequest(url,["trainid":taskInfo["trainid"]], method: .post).responseJSON(completionHandler: { resp in
+            
+            switch resp.result{
+                case .success(let respJson):
+                    let json = JSON(respJson)
+                    if json["code"].intValue == 1{
+                        self.jds["qrcode"] = json["qrcode"]
+                        self.infoCollection.reloadData()
+                    }else{
+                        myAlert(self, message: "更新二维码失败!")
+                    }
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
+            }
+            
+            
+        })
+        
     }
     
     func refresh() {
@@ -210,6 +247,13 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
                 let imageView = cell.viewWithTag(20001) as! UIImageView
                 imageView.image = UIImage.createQR(text: qrcodeStr, size: imageView.H)
             }
+            
+            if jds["sign"].intValue == 0 {
+                cell.viewWithTag(10006)?.isHidden = false
+            }else{
+                cell.viewWithTag(10006)?.isHidden = true
+            }
+            
             break
         case 4:
             //图片
@@ -229,7 +273,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
             cell.setBorder(width: 0, color: .groupTableViewBackground)
             let _data = jds["evaluateinfo"].arrayValue[0]
             let lbl_content = cell.viewWithTag(10002) as! UILabel
-            lbl_content.text = "\(_data["finerate"].intValue)%，共3人 "
+            lbl_content.text = "\(_data["finerate"].intValue)%，共\(_data["completecount"].intValue)人  "
             lbl_content.setWidthFromText()
             let lbl_suffix = cell.viewWithTag(10003) as! UILabel
             lbl_suffix.moveToAfter(target: lbl_content,space: 5)
@@ -278,6 +322,10 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
             result = CGSize(width: cellWidth, height: 40)
         case 3:
             result = CGSize(width: cellWidth, height: 220)
+            if jds["sign"].intValue == 0 {
+                result = CGSize(width: cellWidth, height: 40)
+            }
+            
         case 4:
             result = CGSize(width: cellWidth, height: 130)
         case 5:

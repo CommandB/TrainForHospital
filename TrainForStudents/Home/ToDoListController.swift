@@ -171,7 +171,10 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
             presentTeachingPlanDetail(data)
         }else if data["butype"].stringValue == "教材阅读"{
             presentStudyView(data)
+        }else if data["butype"].stringValue == "技能考试评分"{
+            presentSkillExam(data)
         }
+        
         
         //考试
         
@@ -233,6 +236,11 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
         vc.taskId = data["buid"].stringValue
         present(vc, animated: true, completion: nil)
     }
-    
+    ///技能考试
+    func presentSkillExam(_ data: JSON){
+        let vc = getViewToStoryboard("skillExamInfoView") as! SkillExamInfoController
+        vc.paramData = data
+        present(vc, animated: true, completion: nil)
+    }
     
 }

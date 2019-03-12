@@ -28,6 +28,7 @@
 		0A125A8C1F29CBDB00FDD4F4 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */; };
 		0A125A8E1F29CC6400FDD4F4 /* SettingsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */; };
 		0A125A901F29D1FF00FDD4F4 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */; };
+		0A12D7C32237576F005B5DD5 /* SkillExamInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A12D7C22237576F005B5DD5 /* SkillExamInfoController.swift */; };
 		0A137E8A21DF04CB00C7328D /* NoticeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A137E8921DF04CB00C7328D /* NoticeListController.swift */; };
 		0A14531321E443AD00741F5B /* JoinOfficeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14531221E443AD00741F5B /* JoinOfficeController.swift */; };
 		0A14531E21E4443300741F5B /* OfficeTeacherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14531D21E4443300741F5B /* OfficeTeacherController.swift */; };
@@ -887,6 +888,7 @@
 		0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCollectionView.swift; sourceTree = "<group>"; };
 		0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
+		0A12D7C22237576F005B5DD5 /* SkillExamInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillExamInfoController.swift; sourceTree = "<group>"; };
 		0A137E8921DF04CB00C7328D /* NoticeListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListController.swift; sourceTree = "<group>"; };
 		0A14531221E443AD00741F5B /* JoinOfficeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinOfficeController.swift; sourceTree = "<group>"; };
 		0A14531D21E4443300741F5B /* OfficeTeacherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeTeacherController.swift; sourceTree = "<group>"; };
@@ -2145,6 +2147,18 @@
 			path = Collection;
 			sourceTree = "<group>";
 		};
+		0A12D7C422378D4B005B5DD5 /* Exam */ = {
+			isa = PBXGroup;
+			children = (
+				0A2B356121C8FAFD00E17AC9 /* Views */,
+				0A12D7C22237576F005B5DD5 /* SkillExamInfoController.swift */,
+				0A2B355821C8F83E00E17AC9 /* ExamingSubScoController.swift */,
+				0A2B355A21C8F97700E17AC9 /* ExamingSubScrController.swift */,
+				0A2B356421C9104800E17AC9 /* ExamResultController.swift */,
+			);
+			path = Exam;
+			sourceTree = "<group>";
+		};
 		0A14BD8C21DDB34500261797 /* IM */ = {
 			isa = PBXGroup;
 			children = (
@@ -2564,8 +2578,9 @@
 		0AC3B9311EE4730B00227194 /* TrainForStudents */ = {
 			isa = PBXGroup;
 			children = (
-				0A26BA27219577EB0071C2DC /* Utils */,
 				0AF9D33C2180211F0068B05A /* Public */,
+				0A26BA27219577EB0071C2DC /* Utils */,
+				0A12D7C422378D4B005B5DD5 /* Exam */,
 				0AB5AA962105D41000A9E2EC /* Home */,
 				0A8293BF217ECBB7006047B1 /* ReleaseList */,
 				0AD14561217D8064004670A9 /* Features */,
@@ -2773,7 +2788,6 @@
 		0AD14561217D8064004670A9 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				0A2B356121C8FAFD00E17AC9 /* Views */,
 				0AF25E09217DB9CF00FE5425 /* Collection */,
 				0AF9D35321894C7C0068B05A /* FeaturesController.swift */,
 				0AD14562217D81FB004670A9 /* LeaveApprovedController.swift */,
@@ -2785,9 +2799,6 @@
 				0A2B354921C8CDB200E17AC9 /* CEXStudentsListController.swift */,
 				0A2B355421C8CE4100E17AC9 /* CEXCheckController.swift */,
 				0A2B355621C8F7E800E17AC9 /* StillExamController.swift */,
-				0A2B355821C8F83E00E17AC9 /* ExamingSubScoController.swift */,
-				0A2B355A21C8F97700E17AC9 /* ExamingSubScrController.swift */,
-				0A2B356421C9104800E17AC9 /* ExamResultController.swift */,
 				0A2B356621C9109000E17AC9 /* QuestionListController.swift */,
 				0A1A97B021D206250097C467 /* EvalueationListController.swift */,
 				0A22C0B821EC29B700759554 /* OfficePersonListController.swift */,
@@ -3666,6 +3677,7 @@
 				0A644D971F062480009025DD /* MyEvaluationListController.swift in Sources */,
 				B44FFFE8211C745300844C07 /* String+Extension.swift in Sources */,
 				0A494F90211C247500E95332 /* OfficeController.swift in Sources */,
+				0A12D7C32237576F005B5DD5 /* SkillExamInfoController.swift in Sources */,
 				B4FF1A8D1F94DF7D009C6685 /* SDWebImageManager.m in Sources */,
 				0A644D871F021634009025DD /* EvaluationDetailCollectionView.swift in Sources */,
 				0A31A9A521AE9ACA007AB138 /* EvaluationDimensionController.swift in Sources */,
