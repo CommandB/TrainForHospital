@@ -27,8 +27,10 @@ class TeachingPlanDetailController : HBaseViewController{
         
         let timeInterval = UserDefaults.AppConfig.any(forKey: .qrCodeInvalidTime) as! NSString
         
-        
-        timer = Timer.scheduledTimer(timeInterval: timeInterval.doubleValue , target: self, selector: #selector(refreshQrCode), userInfo: nil, repeats: true)
+        //需要签到 才更新二维码
+        if jds["sign"].intValue == 1 {
+            timer = Timer.scheduledTimer(timeInterval: timeInterval.doubleValue , target: self, selector: #selector(refreshQrCode), userInfo: nil, repeats: true)
+        }
         
         infoCollection.delegate = self
         infoCollection.dataSource = self
@@ -163,7 +165,6 @@ class TeachingPlanDetailController : HBaseViewController{
                     print(error)
                     break
             }
-            
             
         })
         

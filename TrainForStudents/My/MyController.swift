@@ -21,14 +21,7 @@ class MyController : HBaseViewController{
         messageCollection.delegate = self
         messageCollection.dataSource = self
         
-        let lbl_name = view.viewWithTag(10002) as! UILabel
-        lbl_name.text = UserDefaults.User.string(forKey: .personName)
-        var lbl = view.viewWithTag(10003) as! UILabel
-        //工号的x轴随名字长度变化
-        lbl.setX(x: lbl_name.X.adding((lbl_name.text?.getWidth())!).adding(5))
-        lbl.text = "（工号：\(UserDefaults.User.string(forKey: .jobNum)!)）"
-        lbl = view.viewWithTag(20001) as! UILabel
-        lbl.text = "科室：\(UserDefaults.User.string(forKey: .majorName)!)"
+        
         
         jds = JSON([["icon":"双箭头-右蓝","title":"切换至学生端","link":"tabBarView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
         
@@ -39,7 +32,17 @@ class MyController : HBaseViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //self.messageCollection.mj_header.beginRefreshing()
+        let lbl_name = view.viewWithTag(10002) as! UILabel
+        lbl_name.text = UserDefaults.User.string(forKey: .personName)
+        if lbl_name.text == nil{
+            lbl_name.text = ""
+        }
+        var lbl = view.viewWithTag(10003) as! UILabel
+        //工号的x轴随名字长度变化
+        lbl.setX(x: lbl_name.X.adding((lbl_name.text?.getWidth())!).adding(5))
+        lbl.text = "（工号：\(UserDefaults.User.string(forKey: .jobNum)?.description)）"
+        lbl = view.viewWithTag(20001) as! UILabel
+        lbl.text = "科室：\(UserDefaults.User.string(forKey: .majorName)?.description)"
     }
     
     

@@ -24,11 +24,13 @@
 		0A1214B521EF1ACB00BA17EE /* 技能培训.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1214AF21EF1AC500BA17EE /* 技能培训.png */; };
 		0A1214B621EF1ACB00BA17EE /* 入科教育.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1214B021EF1AC700BA17EE /* 入科教育.png */; };
 		0A1214B721EF1ACB00BA17EE /* 理论培训.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1214B121EF1AC800BA17EE /* 理论培训.png */; };
+		0A1256662238E028005A3DAE /* ExamInfoForStuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1256652238E028005A3DAE /* ExamInfoForStuController.swift */; };
 		0A125A881F2204B300FDD4F4 /* BMPlayerCustomControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A871F2204B300FDD4F4 /* BMPlayerCustomControlView.swift */; };
 		0A125A8C1F29CBDB00FDD4F4 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */; };
 		0A125A8E1F29CC6400FDD4F4 /* SettingsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */; };
 		0A125A901F29D1FF00FDD4F4 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */; };
 		0A12D7C32237576F005B5DD5 /* SkillExamInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A12D7C22237576F005B5DD5 /* SkillExamInfoController.swift */; };
+		0A12D7C82238AC15005B5DD5 /* InvigilationInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A12D7C72238AC15005B5DD5 /* InvigilationInfoController.swift */; };
 		0A137E8A21DF04CB00C7328D /* NoticeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A137E8921DF04CB00C7328D /* NoticeListController.swift */; };
 		0A14531321E443AD00741F5B /* JoinOfficeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14531221E443AD00741F5B /* JoinOfficeController.swift */; };
 		0A14531E21E4443300741F5B /* OfficeTeacherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14531D21E4443300741F5B /* OfficeTeacherController.swift */; };
@@ -884,11 +886,13 @@
 		0A1214AF21EF1AC500BA17EE /* 技能培训.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "技能培训.png"; sourceTree = "<group>"; };
 		0A1214B021EF1AC700BA17EE /* 入科教育.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "入科教育.png"; sourceTree = "<group>"; };
 		0A1214B121EF1AC800BA17EE /* 理论培训.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "理论培训.png"; sourceTree = "<group>"; };
+		0A1256652238E028005A3DAE /* ExamInfoForStuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamInfoForStuController.swift; sourceTree = "<group>"; };
 		0A125A871F2204B300FDD4F4 /* BMPlayerCustomControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMPlayerCustomControlView.swift; sourceTree = "<group>"; };
 		0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCollectionView.swift; sourceTree = "<group>"; };
 		0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
 		0A12D7C22237576F005B5DD5 /* SkillExamInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillExamInfoController.swift; sourceTree = "<group>"; };
+		0A12D7C72238AC15005B5DD5 /* InvigilationInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvigilationInfoController.swift; sourceTree = "<group>"; };
 		0A137E8921DF04CB00C7328D /* NoticeListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListController.swift; sourceTree = "<group>"; };
 		0A14531221E443AD00741F5B /* JoinOfficeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinOfficeController.swift; sourceTree = "<group>"; };
 		0A14531D21E4443300741F5B /* OfficeTeacherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeTeacherController.swift; sourceTree = "<group>"; };
@@ -2152,6 +2156,8 @@
 			children = (
 				0A2B356121C8FAFD00E17AC9 /* Views */,
 				0A12D7C22237576F005B5DD5 /* SkillExamInfoController.swift */,
+				0A12D7C72238AC15005B5DD5 /* InvigilationInfoController.swift */,
+				0A1256652238E028005A3DAE /* ExamInfoForStuController.swift */,
 				0A2B355821C8F83E00E17AC9 /* ExamingSubScoController.swift */,
 				0A2B355A21C8F97700E17AC9 /* ExamingSubScrController.swift */,
 				0A2B356421C9104800E17AC9 /* ExamResultController.swift */,
@@ -3684,9 +3690,11 @@
 				B468B7CC1FCA9BA000ECF396 /* UIScrollView+MJExtension.m in Sources */,
 				0A644D711F017B08009025DD /* HistoryEvaluationController.swift in Sources */,
 				0A8293CA217ECBFD006047B1 /* InspectController.swift in Sources */,
+				0A1256662238E028005A3DAE /* ExamInfoForStuController.swift in Sources */,
 				0A6A23B21EF2690C00A1AC5B /* RecordsCollectionView.swift in Sources */,
 				0A97554721A3F1D800267E10 /* UIView.swift in Sources */,
 				0A42F8231F179EDA001DF281 /* DateUtil.swift in Sources */,
+				0A12D7C82238AC15005B5DD5 /* InvigilationInfoController.swift in Sources */,
 				0A2B356321C8FB9700E17AC9 /* BRCommitDataManage.swift in Sources */,
 				0A88A1BE21CC980500D9AB47 /* PaperSelectorController.swift in Sources */,
 				0A644D631F00D3BC009025DD /* WaitExamTaskCollectionView.swift in Sources */,

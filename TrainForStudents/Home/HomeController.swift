@@ -102,8 +102,8 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
             myAlert(self, message: "暂未开放!")
             break
         case 6:
-            myPresentView(self, viewName: "teachingPlanView")
-//            myPresentView(self, viewName: "officePersonListView")
+            myAlert(self, message: "暂未开放!")
+//            myPresentView(self, viewName: "teachingPlanView")
             break
         default:
             break
@@ -324,10 +324,17 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
         case 1:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingCell", for: indexPath)
             if taskJds.count == 0 {
+                let bg = cell.viewWithTag(11111) as! UILabel
+                bg.text = "暂无待办"
+                //bg置顶
+                cell.bringSubview(toFront: bg)
                 break
             }
             let data = taskJds[0]
             let bg = cell.viewWithTag(11111) as! UILabel
+            bg.text = ""
+            //bg置底
+            cell.sendSubview(toBack: bg)
             bg.clipsToBounds = true
             bg.layer.cornerRadius = 8
             var btn = cell.viewWithTag(10001) as! UIButton
@@ -339,7 +346,7 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             btn.restorationIdentifier = "btn_task2"
             
             (cell.viewWithTag(20001) as! UILabel).text = "[\(data["tasktype"].stringValue)]\(data["title"].stringValue)"
-            (cell.viewWithTag(20002) as! UILabel).text = ""
+            //(cell.viewWithTag(20002) as! UILabel).text = ""
             (cell.viewWithTag(30001) as! UILabel).text = "时间:\(data["starttime"].stringValue)"
             (cell.viewWithTag(40001) as! UILabel).text = "地址:\(data["addressname"].stringValue)"
             
@@ -432,19 +439,20 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case 1,2:
-            let cell = collectionView.cellForItem(at: indexPath)
-            let bg = cell?.viewWithTag(11111)
-            if bg?.backgroundColor != UIColor.orange{
-                bg?.backgroundColor = UIColor.orange
-                let redPointTag = HUtilView.addRedPoint(view:bg!)
-                bg?.restorationIdentifier = redPointTag.description
-            }else{
-                bg?.backgroundColor = UIColor(hex: "3186E9")
-                let tag = Int(bg?.restorationIdentifier ?? "0")
-                HUtilView.removeRedPoint(tag: tag!)
-            }
+//            let cell = collectionView.cellForItem(at: indexPath)
+//            let bg = cell?.viewWithTag(11111)
+//            if bg?.backgroundColor != UIColor.orange{
+//                bg?.backgroundColor = UIColor.orange
+//                let redPointTag = HUtilView.addRedPoint(view:bg!)
+//                bg?.restorationIdentifier = redPointTag.description
+//            }else{
+//                bg?.backgroundColor = UIColor(hex: "3186E9")
+//                let tag = Int(bg?.restorationIdentifier ?? "0")
+//                HUtilView.removeRedPoint(tag: tag!)
+//            }
             
             //collectionView.reloadItems(at: [indexPath])
+            break
         case 5...messageCellLastIndex:
             let data = officeTeamJds[indexPath.item - 5]
             let vc = getViewToStoryboard("officeGroupView") as! IMOfficeGroupController
@@ -465,11 +473,11 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
         case 0:
             return CGSize(width: UIScreen.width.subtracting(20), height: 200)
         case 1:
-            if taskJds.count > 0{
+//            if taskJds.count > 0{
                 return CGSize(width: UIScreen.width, height: 165)
-            }else{
-                return CGSize(width: UIScreen.width, height: 0)
-            }
+//            }else{
+//                return CGSize(width: UIScreen.width, height: 0)
+//            }
         case 2:
             if teachingJds.count > 0{
                 return CGSize(width: UIScreen.width, height: 165)

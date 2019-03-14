@@ -31,8 +31,8 @@ class ToDoListController : HBaseViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //self.toDoCollection.mj_header.beginRefreshing()
-        refresh()
+        self.toDoCollection.mj_header.beginRefreshing()
+//        refresh()
         self.toDoCollection.mj_footer.endRefreshingWithNoMoreData()
     }
     
@@ -110,8 +110,12 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let data = jds[indexPath.item]
+        if jds.count == 0{
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "bodyCell", for: indexPath)
+        }
+        
         var cell = UICollectionViewCell()
+        let data = jds[indexPath.item]
         if let _ = data["isHeader"].bool{
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath)
             (cell.viewWithTag(10002) as! UILabel).text = data["text"].stringValue + "月"
@@ -146,8 +150,6 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
                 (cell.viewWithTag(30001) as! UILabel).text = data["starttime"].stringValue
             }
             
-            
-            
             (cell.viewWithTag(40001) as! UILabel).text = data["title"].stringValue
             (cell.viewWithTag(50002) as! UILabel).text = data["addressname"].stringValue
             
@@ -163,16 +165,19 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
             return 
         }
         let data = jds[indexPath.item]
-        if data["butype"].stringValue == "评价"{
-            
+        let type = data["butype"].stringValue
+        if type == "评价"{
             presentEvaluationDetail(data["buid"].stringValue)
-
-        }else if data["butype"].stringValue == "教学活动"{
+        }else if type == "教学活动"{
             presentTeachingPlanDetail(data)
-        }else if data["butype"].stringValue == "教材阅读"{
+        }else if type == "教材阅读"{
             presentStudyView(data)
-        }else if data["butype"].stringValue == "技能考试评分"{
+        }else if type == "技能考试评分"{
             presentSkillExam(data)
+        }else if type == "OSCE考试评分通知" || type == "理论考试监考" {
+            presentInvigilation(data)
+        }else if type == "理论考试" || type == "技能考试" || type == "OSCE考试通知" {
+            presentStuExam(data)
         }
         
         
@@ -242,5 +247,19 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
         vc.paramData = data
         present(vc, animated: true, completion: nil)
     }
+    
+    ///理论考试监考，OSCE考试评分通知
+    func presentInvigilation(_ data: JSON){
+        let vc = getViewToStoryboard("invigilationInfoView") as! InvigilationInfoController
+        vc.paramData = data
+        present(vc, animated: true, completion: nil)
+    }
+    ///
+    func presentStuExam(_ data: JSON){
+        let vc = getViewToStoryboard("examInfoForStuView") as! ExamInfoForStuController
+        vc.paramData = data
+        present(vc, animated: true, completion: nil)
+    }
+    
     
 }
