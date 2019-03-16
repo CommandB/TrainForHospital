@@ -26,7 +26,7 @@ class EvaluationItemListController : UIViewController{
     
     var pageNumber = 0
     var beginDraggingX = CGFloat(0)
-    
+    var score = 0
     //按钮的集合
     var buttonGroup = [UIButton]()
     
@@ -38,6 +38,7 @@ class EvaluationItemListController : UIViewController{
         cardCollection.delegate = self
         cardCollection.dataSource = self
         
+        detailView.parentView = self
         detailCollection.delegate = detailView
         detailCollection.dataSource = detailView
         
@@ -130,7 +131,7 @@ class EvaluationItemListController : UIViewController{
                     self.detailView.jsonDataSource = json["data"]
                     for item in json["data"].arrayValue{
                         let index = self.detailView.jsonDataSource.arrayValue.index(of: item)
-                        self.detailView.jsonDataSource[index!]["get_value"].stringValue = "5"
+                        self.detailView.jsonDataSource[index!]["get_value"].stringValue = "0"
                     }
                     self.detailCollection.reloadData()
                 }else{
@@ -299,6 +300,7 @@ extension EvaluationItemListController : UIScrollViewDelegate{
 
 class EvaluationItemViewController : UIViewController,UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
+    var parentView : EvaluationItemListController? = nil
     var jsonDataSource = JSON([:])
     var isReadonly = false
     
@@ -341,7 +343,7 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         }else{
             let slider = cell.viewWithTag(10001) as! UISlider
             let selectedNumber = data["get_value"].int
-            var lightNumber = data["starsvalue"].intValue
+            var lightNumber = 0
             if selectedNumber != nil{
                 lightNumber = selectedNumber!
             }
@@ -349,7 +351,9 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
                 lightNumber = data["numbervalue"].intValue
                 slider.isEnabled = false
             }
-            let maxStarNumber = data["starsvalue"].intValue
+//            let maxStarNumber = data["starsvalue"].intValue
+            
+            let maxStarNumber = data["numbervalue"].intValue * data["starsvalue"].intValue
             
             slider.viewParam = ["index":index ,"maxValue" : maxStarNumber ,"indexPath":indexPath]
             slider.minimumValue = 0
@@ -387,8 +391,15 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         let index = sender.viewParam!["index"] as! Int
         //四舍五入
         let score = lroundf(sender.value)
-        jsonDataSource[index]["get_value"] = JSON(score)
-        //parentVC!.detailCollection.reloadItems(at: [indexPath])
+        let numberValue = jsonDataSource[index]["numbervalue"].intValue
+        jsonDataSource[index]["get_value"] = JSON(score / numberValue)
+        parentView!.detailCollection.reloadItems(at: [indexPath])
+        
+        var total = 0
+        for item in jsonDataSource{
+            total += item.1["get_value"].intValue
+        }
+        (parentView?.view.viewWithTag(88888) as! UILabel).text = "总得分：\(total)分"
         
     }
 }

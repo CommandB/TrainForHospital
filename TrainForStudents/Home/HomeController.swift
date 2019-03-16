@@ -96,7 +96,8 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
             present(vc, animated: true, completion: nil)
             break
         case 4://入科安排
-            
+                        myPresentView(self, viewName: "evaluationItemList")
+//            myAlert(self, message: "暂未开放!")
             break
         case 5:
             let vc = getViewToStoryboard("examListView") as! ExamListController
