@@ -37,12 +37,21 @@ class MyController : HBaseViewController{
         if lbl_name.text == nil{
             lbl_name.text = ""
         }
+        
+        let jobNum = UserDefaults.User.string(forKey: .jobNum)
+        let majorName = UserDefaults.User.string(forKey: .majorName)
         var lbl = view.viewWithTag(10003) as! UILabel
         //工号的x轴随名字长度变化
         lbl.setX(x: lbl_name.X.adding((lbl_name.text?.getWidth())!).adding(5))
-        lbl.text = "（工号：\(UserDefaults.User.string(forKey: .jobNum)?.description)）"
+        if jobNum != nil{
+            lbl.text = "（工号：\(jobNum!)）"
+        }
+        
         lbl = view.viewWithTag(20001) as! UILabel
-        lbl.text = "科室：\(UserDefaults.User.string(forKey: .majorName)?.description)"
+        if majorName != nil{
+            lbl.text = "科室：\(majorName!)"
+        }
+        
     }
     
     

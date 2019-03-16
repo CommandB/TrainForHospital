@@ -25,7 +25,8 @@ class InspectStudentsController : UIViewController{
 //        self.studentsCollection.mj_footer = MJRefreshAutoNormalFooter.init()
 //        self.studentsCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
         
-        
+        InspectStudentsController.jds = [JSON]()
+        studentsCollection.reloadData()
         
         let btn_addStudents = view.viewWithTag(210001) as! UIButton
         btn_addStudents.addTarget(self, action: #selector(addStudents), for: .touchUpInside)
@@ -48,12 +49,12 @@ class InspectStudentsController : UIViewController{
         if notification.userInfo != nil{
             InspectStudentsController.jds = notification.userInfo!["data"] as! [JSON]
             studentsCollection.reloadData()
-            
         }
     }
     
     func addStudents(){
-        myPresentView(self, viewName: "personSelectorView")
+//        myPresentView(self, viewName: "personSelectorView")
+        PersonSelectorController.presentPersonSelector(viewController: self, data: InspectStudentsController.jds)
     }
     
 }

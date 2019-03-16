@@ -34,6 +34,7 @@ class ExamInfoForStuController : HBaseViewController{
         vc.exerciseId = paramData["exercisesid"].stringValue
         vc.taskId = paramData["taskid"].stringValue
         vc.isSimulation = true
+        vc.marking = paramData["marking"].intValue
         let url = SERVER_PORT + "rest/questions/queryExercisesQuestions.do"
         myPostRequest(url,["exercisesid":vc.exerciseId]).responseJSON(completionHandler: { resp in
             
@@ -82,6 +83,7 @@ class ExamInfoForStuController : HBaseViewController{
                         self.btn_exam.isHidden = false
                     }
                     self.paramData["exercisesid"] = data["exercisesid"]
+                    self.paramData["marking"] = data["marking"]
                 }
                 
             case .failure(let err):

@@ -68,6 +68,7 @@ class PersonSelectorController: HBaseViewController {
     var selectedType = 0
     ///选中的筛选条件类型
     var selectedSort = "initials"
+    var isFirstLoad = true
     
     static func presentPersonSelector(viewController :UIViewController , data : [JSON] , noticeName : String = "" , single : Bool = false){
         let vc = getViewToStoryboard("personSelectorView") as! PersonSelectorController
@@ -555,8 +556,14 @@ class PersonSelectorController: HBaseViewController {
         //print("刷新数据....")
         ///排序后的key
         sortedKeys = [String]()
-        //选中的人员数据
-        selectedList = [String:JSON]()
+        
+        //如果是界面第一次打开 则不清空已选择人员 防止把上一个界面传过来的已选给清除了
+        if !isFirstLoad{
+            //选中的人员数据
+            selectedList = [String:JSON]()
+            isFirstLoad = false
+        }
+        
         //已全选的section
         sectionIsSelected = [IndexPath:Bool]()
         

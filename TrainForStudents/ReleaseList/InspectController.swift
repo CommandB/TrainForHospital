@@ -146,14 +146,14 @@ class InspectController : HBaseViewController{
         txt = view.viewWithTag(90001) as! UITextField
         txt.delegate = self
         txt.inputView = evPicker
-        evaluaList["1"] = ["beevaluateid":"1","evaluationid":s2t["evaluationid"].stringValue]
+        evaluaList["1"] = ["beevaluateid":"1","evaluatetableid":s2t["evaluationid"].stringValue, "evaluatetablename":s2t["evaluationname"].stringValue, "beevaluatename":"学生", "evaluateid":"5", "evaluatename":"培训老师"]
         txt.text = s2t["evaluationname"].stringValue
         
         txt = view.viewWithTag(90002) as! UITextField
         txt.delegate = self
         txt.inputView = evPicker
         txt.text = t2s["evaluationname"].stringValue
-        evaluaList["5"] = ["beevaluateid":"5","evaluationid":t2s["evaluationid"].stringValue]
+        evaluaList["5"] = ["beevaluateid":"5","evaluatetableid":t2s["evaluationid"].stringValue, "evaluatetablename":s2t["evaluationname"].stringValue, "beevaluatename":"培训老师", "evaluateid":"1", "evaluatename":"学生"]
 
         
     }
@@ -176,6 +176,8 @@ class InspectController : HBaseViewController{
                 btn.setTitle(text, for: .normal)
                 btn.alpha = 1
                 btn.setTitleColor(UIColor.black, for: .normal)
+                //主讲人
+                submitParam["teacherlist"] = data
             }else{
                 btn.setTitle("点击选择主讲人", for: .normal)
                 btn.alpha = 0.8
@@ -209,7 +211,7 @@ class InspectController : HBaseViewController{
         
         submitParam["isfreein"] = 0
         submitParam["issend"] = 1
-        submitParam["type"] = trainType["traintypeid"].intValue
+        submitParam["traintype"] = trainType["traintypeid"].intValue
         submitParam["officeid"] = UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)
         
         let url = SERVER_PORT + "rest/app/train/releaseTrain.do"
@@ -239,6 +241,14 @@ class InspectController : HBaseViewController{
         submitParam["endtime"] = endTime
         
         //评价功能
+        if evaluaList["1"]!["evaluatetableid"]?.isEmpty ?? true{
+            myAlert(self, message: "请选择学员对老师的评价表!")
+            return
+        }
+        if evaluaList["5"]!["evaluatetableid"]?.isEmpty ?? true{
+            myAlert(self, message: "请选择老师对学员的评价表!")
+            return
+        }
         submitParam["evaluatelist"] = ([[String:String]])(evaluaList.values)
         
         //学员信息
@@ -256,8 +266,6 @@ class InspectController : HBaseViewController{
         
         print(submitParam)
         
-        
-        
         //view.current
         
         myPostRequest(url, submitParam, method: .post).responseString(completionHandler: {resp in
@@ -266,7 +274,9 @@ class InspectController : HBaseViewController{
                 let json = JSON(parseJSON: respStr)
                 print(json)
                 if json["code"].stringValue == "1"{
-
+                    myAlert(self, message: "发布成功!", handler: {action in
+                        self.dismiss(animated: true, completion: nil)
+                    })
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
                 }
@@ -304,7 +314,7 @@ class InspectController : HBaseViewController{
         }else if tag == 90002 || tag == 90001 {
             evPicker.reloadAllComponents()
             selectedTextField = textField
-        }else{
+        }else if tag == 30001 || tag == 30002{
             datePicker.minimumDate = nil
             let t41 = view.viewWithTag(40001) as! UITextField
             t41.text = ""
@@ -400,9 +410,11 @@ class InspectController : HBaseViewController{
             let data = ds[row]
             t.text = data["evaluationname"].stringValue
             if t.tag == 90001{
-                evaluaList["1"]!["evaluationid"] = data["evaluationid"].stringValue
+                evaluaList["1"]!["evaluatetableid"] = data["evaluationid"].stringValue
+                evaluaList["1"]!["evaluatetablename"] = t.text
             }else{
-                evaluaList["5"]!["evaluationid"] = data["evaluationid"].stringValue
+                evaluaList["5"]!["evaluatetableid"] = data["evaluationid"].stringValue
+                evaluaList["5"]!["evaluatetablename"] = t.text
             }
         }
     }

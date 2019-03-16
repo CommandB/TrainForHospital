@@ -99,11 +99,16 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
             
             break
         case 5:
-            myAlert(self, message: "暂未开放!")
+            let vc = getViewToStoryboard("examListView") as! ExamListController
+            vc.isInvigilation = true
+            present(vc, animated: true, completion: nil)
             break
         case 6:
-            myAlert(self, message: "暂未开放!")
-//            myPresentView(self, viewName: "teachingPlanView")
+            let vc = getViewToStoryboard("examListView") as! ExamListController
+            vc.isInvigilation = false
+            present(vc, animated: true, completion: nil)
+//            myPresentView(self, viewName: "evaluationItemList")
+            
             break
         default:
             break
@@ -300,17 +305,29 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             if statisticJds["teacherpanel"].arrayValue.count > 0{
                 btn_panel_1.restorationIdentifier = "teacherpanel"
                 btn_panel_1.isHidden = false
+                btn_panel_1.isEnabled = true
                 selectedPanelKey = selectedPanelKey == "" ? "teacherpanel" : selectedPanelKey
             }
+            
             if  statisticJds["secretarypanel"].arrayValue.count > 0{
                 if btn_panel_1.isHidden{
                     btn_panel_1.restorationIdentifier = "secretarypanel"
                     btn_panel_1.isHidden = false
+                    btn_panel_1.isEnabled = true
                     selectedPanelKey = "secretarypanel"
+                    //如果秘书面板没有数据 则把老师面板的按钮居中
+                    btn_panel_1.setX(x: collectionView.W.subtracting(btn_panel_1.W).divided(by: 2))
+                    lbl_markLine.setX(x: collectionView.W.subtracting(lbl_markLine.W).divided(by: 2))
                 }else{
                     btn_panel_2.restorationIdentifier = "secretarypanel"
                     btn_panel_2.isHidden = false
+                    btn_panel_2.isEnabled = true
                 }
+            }else{
+                
+                //如果秘书面板没有数据 则把老师面板的按钮居中
+                btn_panel_1.setX(x: collectionView.W.subtracting(btn_panel_1.W).divided(by: 2))
+                lbl_markLine.setX(x: collectionView.W.subtracting(lbl_markLine.W).divided(by: 2))
             }
             
             for i in 0...4{
@@ -389,10 +406,10 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             btn.set(image: nil, title: "入科安排", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
             btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             btn = cell.viewWithTag(10005) as! UIButton
-            btn.set(image: nil, title: "考情登记", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
+            btn.set(image: nil, title: "监考任务", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
             btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             btn = cell.viewWithTag(10006) as! UIButton
-            btn.set(image: nil, title: "学员轮转", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
+            btn.set(image: nil, title: "待考任务", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
             btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             break
         case 4:
