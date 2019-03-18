@@ -62,7 +62,17 @@ class PanoramicEvaluationController : HBaseViewController{
         btn.addTarget(self, action: #selector(presentDimension), for: .touchUpInside)
         
         self.personCollection.mj_header.beginRefreshing()
+        
+        //增加手势 在点击view之后 隐藏pdatepicker
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(closePickerView))
+        gesture.numberOfTapsRequired = 1
+        gesture.numberOfTouchesRequired = 1
+        gesture.delegate = self
+        view.addGestureRecognizer(gesture)
+        
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         datePicker.isHidden = true
@@ -232,6 +242,10 @@ class PanoramicEvaluationController : HBaseViewController{
         getListData()
     }
     
+    func closePickerView(){
+        datePicker.isHidden = true
+    }
+    
 }
 
 extension PanoramicEvaluationController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
@@ -308,6 +322,20 @@ extension PanoramicEvaluationController : UIPickerViewDelegate , UIPickerViewDat
             (view.viewWithTag(10001) as! UIButton).setTitle("\(month)月", for: .normal)
         }
         getListData()
+    }
+    
+}
+
+extension PanoramicEvaluationController : UIGestureRecognizerDelegate{
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        
+        let pointer = touch.location(in: self.view)
+        print(pointer.y.description + "----" + datePicker.Y.description)
+        if pointer.y > datePicker.Y{
+            return false
+        }
+        return true
     }
     
 }

@@ -20,7 +20,7 @@ class ToDoListController : HBaseViewController{
     
     override func viewDidLoad() {
         
-        self.sortData()
+//        self.sortData()
         
         toDoCollection.delegate = self
         toDoCollection.dataSource = self
@@ -33,7 +33,7 @@ class ToDoListController : HBaseViewController{
     override func viewWillAppear(_ animated: Bool) {
         self.toDoCollection.mj_header.beginRefreshing()
 //        refresh()
-        self.toDoCollection.mj_footer.endRefreshingWithNoMoreData()
+        
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -198,30 +198,33 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
     
     ///跳转到待评任务
     func presentEvaluationDetail(_ evaluateid: String){
+//        evaluationItemList
+//        let url = SERVER_PORT+"rest/taskEvaluation/query.do"
+//        myPostRequest(url,["evaluateid":evaluateid, "pageindex": 0 , "pagesize":10]).responseJSON(completionHandler: {resp in
+//
+//            switch resp.result{
+//            case .success(let responseJson):
+//
+//                let json = JSON(responseJson)
+//                if json["code"].stringValue == "1"{
+//                    print(json)
+//                    let vc = getViewToStoryboard("evaluationItemList") as! EvaluationItemListController
+//                    vc.isReadonly = false
+//                    vc.initData = json["data"].arrayValue[0]
+//                    self.present(vc, animated: true, completion: nil)
+//                }else{
+//                    myAlert(self, message: "获取评价信息失败!")
+//                }
+//
+//            case .failure(let error):
+//                print(error)
+//            }
+//
+//        })
         
-        let url = SERVER_PORT+"rest/taskEvaluation/query.do"
-        myPostRequest(url,["evaluateid":evaluateid, "pageindex": 0 , "pagesize":10]).responseJSON(completionHandler: {resp in
-            
-            switch resp.result{
-            case .success(let responseJson):
-                
-                let json = JSON(responseJson)
-                if json["code"].stringValue == "1"{
-                    print(json)
-                    let vc = getViewToStoryboard("evaluationDetailView") as! EvaluationDetailController
-                    vc.isReadonly = false
-                    vc.headData = json["data"].arrayValue[0]
-                    self.present(vc, animated: true, completion: nil)
-                }else{
-                    myAlert(self, message: "获取评价信息失败!")
-                }
-                
-            case .failure(let error):
-                print(error)
-            }
-            
-        })
-        
+        let vc = getViewToStoryboard("evaluationItemList") as! EvaluationItemListController
+        vc.initData = JSON(["evaluationid":evaluateid])
+        present(vc, animated: true, completion: nil)
     }
     
     ///教学计划

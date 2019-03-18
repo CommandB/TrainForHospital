@@ -124,12 +124,6 @@ class PublishExamController : HBaseViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(receivePaperNotice), name: PaperSelectorController.defaultNoticeName, object: nil)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //收起键盘
-        self.view.endEditing(true)
-        
-    }
-    
     func receiveNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: Notification.Name(stuNotice), object: nil)
         if notification.userInfo != nil{
@@ -422,25 +416,6 @@ class PublishExamController : HBaseViewController{
         submitParam["facilitiesid"] = ds[row]["facilitiesid"].stringValue
         submitParam["name"] = text
     }
-    
-//    func paperClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
-//
-//        let exercisesId = ds[row]["exercisesid"].stringValue
-//
-//        view.viewWithTag(90001)?.isHidden = true
-//        view.viewWithTag(90002)?.isHidden = true
-//        if ds[row]["marking"].intValue == 1 {
-//            view.viewWithTag(90001)?.isHidden = false
-//            view.viewWithTag(90002)?.isHidden = false
-//        }
-//        (view.viewWithTag(10004) as! UILabel).text = ds[row]["title"].stringValue
-//
-//        submitParam["exercisesid"] = exercisesId
-//        submitParam["versionnumber"] = ds[row]["versionnumber"].intValue
-//        submitParam["examname"] = ds[row]["title"].stringValue
-//        submitParam["marking"] = ds[row]["marking"].stringValue
-//
-//    }
     
 }
 

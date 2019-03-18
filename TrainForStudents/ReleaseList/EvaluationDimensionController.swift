@@ -34,18 +34,12 @@ class EvaluationDimensionController : HBaseViewController{
         pickerView.dataSource = self
         pickerView.reloadAllComponents()
         
-//        pickerView.setWidth(width: UIScreen.width)
-//        pickerView.setY(y: UIScreen.height.multiplied(by: 0.7))
-//        pickerView.setHight(height: UIScreen.height.subtracting(pickerView.Y))
-//        pickerView.backgroundColor = UIColor.groupTableViewBackground
-//        pickerView.isHidden = true
-//        view.addSubview(pickerView)
+        MyNotificationUtil.addKeyBoardWillChangeNotification(self)
         
-        //MyNotificationUtil.addKeyBoardWillChangeNotification(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //self.evCollection.mj_header.beginRefreshing()
+        
         keys = evDic.keys.sorted()
     }
     
@@ -70,6 +64,19 @@ extension EvaluationDimensionController {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         selectedKey = textField.viewParam!["key"] as! String
         selectedIndexPath = textField.viewParam!["indexPath"] as! IndexPath
+        
+        let selectedEvid = evDic[selectedKey]!["evaluationtableid"].intValue
+        var index = 0
+        if selectedEvid != 0{
+            //如果有已选的评价表 则把pickview滚动到对应的位置
+            for o in pds{
+                if o["evaluationid"].intValue == selectedEvid{
+                    break
+                }
+                index += 1
+            }
+        }
+        pickerView.selectRow(index, inComponent: 0, animated: true)
         return true
     }
     

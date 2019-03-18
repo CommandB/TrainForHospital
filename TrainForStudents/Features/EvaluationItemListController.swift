@@ -22,6 +22,7 @@ class EvaluationItemListController : UIViewController{
     
     var detailView = EvaluationItemViewController()
     
+    var initData = JSON()
     var jds = [JSON]()
     
     var pageNumber = 0
@@ -104,6 +105,19 @@ class EvaluationItemListController : UIViewController{
                         self.btn_right.isEnabled = false
                     }
                     self.cardCollection.reloadData()
+                    
+                    if !self.initData.isEmpty{
+                        var index = 0
+                        for o in self.jds{
+                            if o["buid"].stringValue == self.initData["evaluationid"].stringValue{
+                                self.pageNumber = index - 1
+                                self.tabsTouchAnimation(sender: self.btn_right)
+                                break
+                            }
+                            index += 1
+                        }
+                    }
+                    
                 }else{
                     myAlert(self, message: "请求待评任务列表失败!")
                 }
@@ -137,7 +151,7 @@ class EvaluationItemListController : UIViewController{
                 }else{
                     myAlert(self, message: "请求评价详情失败!")
                 }
-                
+                (self.view.viewWithTag(88888) as! UILabel).text = "总得分：0分"
             case .failure(let error):
                 print(error)
             }
@@ -158,7 +172,7 @@ class EvaluationItemListController : UIViewController{
         
         //动画开始
         UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(0.3)
+        UIView.setAnimationDuration(0.5)
         
         let collectionWidth = cardCollection.frame.width
         
@@ -184,7 +198,7 @@ class EvaluationItemListController : UIViewController{
             }
             cardCollection.setContentOffset(CGPoint(x: collectionWidth.multiplied(by: CGFloat(pageNumber)), y: 0), animated: true)
         }
-        print("pageNumber:\(pageNumber)")
+        //print("pageNumber:\(pageNumber)")
         if pageNumber < jds.count{
             getDetailDatasource(jds[pageNumber]["evaluationid"].stringValue)
         }

@@ -90,6 +90,19 @@ class PublishSubjectExamController : HBaseViewController{
     }
     
     @IBAction func btn_next_inside(_ sender: UIButton) {
+        
+        var hasSelectedStu = false
+        for item in basicData{
+            if item["exercisesid"].intValue > 0{
+                hasSelectedStu = true
+            }
+        }
+        
+        if !hasSelectedStu{
+            myAlert(self, message: "请至少给一位学员分配试卷!")
+            return
+        }
+        
         let vc = getViewToStoryboard("publishSubjectExamDetailView") as! PublishSubjectExamDetailController
         vc.jds = basicData
         vc.isSkillExam = isSkillExam
@@ -116,6 +129,14 @@ class PublishSubjectExamController : HBaseViewController{
                 btn_selectAll(sender: (view.viewWithTag(40002) as! UIButton))
             }
             
+            var hasExercises = 0
+            for item in basicData{
+                if item["exercisesid"].intValue > 0{
+                    hasExercises += 1
+                }
+            }
+            
+            (view.viewWithTag(40001) as! UIButton).setTitle("安排已分配试卷的学员考试(\(hasExercises)人)", for: .normal)
             refreshStudentsCollection()
         }
     }
@@ -134,6 +155,7 @@ class PublishSubjectExamController : HBaseViewController{
     
     ///已分配 未分配
     func btn_sort(sender : UIButton){
+        selectedStudents = [IndexPath:JSON]()
         hiddenKeyBoard()
         if isSelectedAll{
             btn_selectAll(sender: (view.viewWithTag(40002) as! UIButton))
@@ -195,7 +217,6 @@ class PublishSubjectExamController : HBaseViewController{
     
     func getListData(){
         
-        
         var month = (view.viewWithTag(10002) as! UILabel).text
         let year = (view.viewWithTag(10003) as! UILabel).text
         if (month?.count)! < 3{
@@ -226,7 +247,7 @@ class PublishSubjectExamController : HBaseViewController{
                     self.basicData = data
                     self.jds = data
                     self.refreshStudentsCollection()
-                    
+                    (self.view.viewWithTag(40001) as! UIButton).setTitle("安排已分配试卷的学员考试(0人)", for: .normal)
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
                 }
@@ -273,7 +294,7 @@ extension PublishSubjectExamController : UICollectionViewDelegate , UICollection
         lbl = cell.viewWithTag(10003) as! UILabel
         lbl.text = ""
         
-        var btn = cell.viewWithTag(10004) as! UIButton
+        let btn = cell.viewWithTag(10004) as! UIButton
         if selectedStudents[indexPath] == nil{
             btn.setImage(UIImage(named: "未选择-大"), for: .normal)
         }else{

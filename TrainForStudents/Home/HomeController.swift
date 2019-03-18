@@ -71,11 +71,11 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
     ///跳转到待办事项
     func presentToDoList(sender :UIButton){
         let vc = getViewToStoryboard("todoListView") as! ToDoListController
-        if (sender.restorationIdentifier?.contains("task"))!{
-            vc.dataArr = taskJds
-        }else{
-            vc.dataArr = teachingJds
-        }
+//        if (sender.restorationIdentifier?.contains("task"))!{
+//            vc.dataArr = taskJds
+//        }else{
+//            vc.dataArr = teachingJds
+//        }
         present(vc, animated: true, completion: nil)
     }
     

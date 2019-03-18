@@ -66,7 +66,9 @@ class ExamResultController: UIViewController,UITableViewDataSource,UITableViewDe
     }
     
     @IBAction func backToExamCenter(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
+        //presentingViewController?.presentingViewController
+        presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
