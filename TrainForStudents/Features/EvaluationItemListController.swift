@@ -50,6 +50,9 @@ class EvaluationItemListController : UIViewController{
     @IBAction func btn_back_inside(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+    @IBAction func btn_history_inside(_ sender: UIButton) {
+        myPresentView(self, viewName: "evaluationHistoryListView")
+    }
     
     //左右滑按钮
     @IBAction func btn_inside(_ sender: UIButton) {
@@ -68,7 +71,8 @@ class EvaluationItemListController : UIViewController{
                 let json=JSON(responseJson)
                 if json["code"].stringValue == "1"{
                     myAlert(self, message: "评价完成!" , handler: {action in
-                        self.dismiss(animated: true, completion: nil)
+                        //self.dismiss(animated: true, completion: nil)
+                        self.getCardListData()
                     })
                 }else{
                     myAlert(self, message: "评价失败!\(json["msg"].stringValue)")
@@ -293,21 +297,7 @@ extension EvaluationItemListController : UIScrollViewDelegate{
         }
         getDetailDatasource(jds[pageNumber]["evaluationid"].stringValue)
     }
-//
-//
-//    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-//        let x = scrollView.contentOffset.x
-//
-//        print("endDragging =   beginDraggingX:\(beginDraggingX) : x:\(x)")
-//
-//        if beginDraggingX < x{  //左滑
-//            print("左减速")
-//            tabsTouchAnimation(sender: btn_right)
-//        }else if beginDraggingX > x {   //右滑
-//            print("右减速")
-//            tabsTouchAnimation(sender: btn_left)
-//        }
-//    }
+
     
 }
 
@@ -361,11 +351,9 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
             if selectedNumber != nil{
                 lightNumber = selectedNumber!
             }
-            if isReadonly { //只读
-                lightNumber = data["numbervalue"].intValue
-                slider.isEnabled = false
-            }
-//            let maxStarNumber = data["starsvalue"].intValue
+            
+            //如果用户有改变分数 则用这个我自己 增加 的字段显示
+            lightNumber = data["score"].intValue
             
             let maxStarNumber = data["numbervalue"].intValue * data["starsvalue"].intValue
             
@@ -406,6 +394,7 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         //四舍五入
         let score = lroundf(sender.value)
         let numberValue = jsonDataSource[index]["numbervalue"].intValue
+        jsonDataSource[index]["score"] = JSON(score)
         jsonDataSource[index]["get_value"] = JSON(score / numberValue)
         parentView!.detailCollection.reloadItems(at: [indexPath])
         

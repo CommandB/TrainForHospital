@@ -18,6 +18,11 @@ class ReleaseController : UIViewController{
     
     override func viewDidLoad() {
         
+        let currentDate = Date()
+        (view.viewWithTag(10001) as! UILabel).text = "\(currentDate.day)"
+        (view.viewWithTag(10002) as! UILabel).text = DateUtil.getWeek(currentDate)
+        (view.viewWithTag(10003) as! UILabel).text = "\(currentDate.month)/\(currentDate.year)"
+        
         btnCollection.delegate = self
         btnCollection.dataSource = self
         
@@ -63,9 +68,9 @@ extension ReleaseController : UICollectionViewDelegate , UICollectionViewDataSou
             let data = jds[index]
             let title = data["traintypename"].stringValue
             var icon = UIImage(named: title)
-            if icon?.size == nil{
+//            if icon?.size == nil{
                 icon = UIImage(named: "其他教学活动")
-            }
+//            }
             btn.setImage(icon, for: .normal)
             btn.setTitle(title, for: .normal)
         }else{

@@ -63,7 +63,7 @@ class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelega
                 lightNumber = data["numbervalue"].intValue
                 slider.isEnabled = false
             }
-            let maxStarNumber = data["starsvalue"].intValue
+            let maxStarNumber = data["starsvalue"].intValue * data["numbervalue"].intValue
             
             slider.viewParam = ["index":index ,"maxValue" : maxStarNumber ,"indexPath":indexPath]
             slider.minimumValue = 0

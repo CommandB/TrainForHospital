@@ -26,13 +26,13 @@ class JoinOfficeController : UIViewController {
         students_collection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: nil)
         
         
-        students_collection.mj_header.beginRefreshing()
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        students_collection.mj_header.beginRefreshing()
         selectedPerson = [String:JSON]()
         
     }

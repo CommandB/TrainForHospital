@@ -64,6 +64,10 @@ class IMOfficeGroupController : HBaseViewController{
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func btn_tips_inside(_ sender: UIButton) {
+        myAlert(self, message: "暂未开放!")
+    }
+    
     //设置
     @IBAction func btn_setting_inside(_ sender: UIButton) {
         let vc = getViewToStoryboard("teamSettingView") as! TeamSettingController

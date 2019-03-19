@@ -64,6 +64,7 @@
 		0A15D5571F0EA52D00908B7F /* 我的-灰.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15D5531F0EA52D00908B7F /* 我的-灰.png */; };
 		0A15D5581F0EA52D00908B7F /* 我的.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15D5541F0EA52D00908B7F /* 我的.png */; };
 		0A15D55A1F0EA5ED00908B7F /* 任务中心.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15D5591F0EA5ED00908B7F /* 任务中心.png */; };
+		0A16417E22408DEC002B0E50 /* NewsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16417D22408DEC002B0E50 /* NewsListController.swift */; };
 		0A16C2F621E33EDA00C6B319 /* 双箭头-右蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A16C2F321E33ECA00C6B319 /* 双箭头-右蓝.png */; };
 		0A16C2F821E33EDA00C6B319 /* 二维码-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A16C2F521E33ED500C6B319 /* 二维码-icon.png */; };
 		0A1701DF21EED4A200B12EC4 /* TeachingStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1701DE21EED4A200B12EC4 /* TeachingStatisticsController.swift */; };
@@ -101,8 +102,8 @@
 		0A26BA2D219969330071C2DC /* 理论考试.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26BA2B219969310071C2DC /* 理论考试.png */; };
 		0A26BA2F2199806D0071C2DC /* 教学评论.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26BA2E2199806B0071C2DC /* 教学评论.png */; };
 		0A26BA31219A9F3A0071C2DC /* ZYStarRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA30219A9F3A0071C2DC /* ZYStarRateView.swift */; };
-		0A26BA33219AA4C20071C2DC /* CommentHistoryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA32219AA4C20071C2DC /* CommentHistoryListController.swift */; };
-		0A26BA35219AA8690071C2DC /* CommentHistoryDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA34219AA8690071C2DC /* CommentHistoryDetailController.swift */; };
+		0A26BA33219AA4C20071C2DC /* EvaluationHistoryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA32219AA4C20071C2DC /* EvaluationHistoryListController.swift */; };
+		0A26BA35219AA8690071C2DC /* EvaluationHistoryDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26BA34219AA8690071C2DC /* EvaluationHistoryDetailController.swift */; };
 		0A26BA39219AABB20071C2DC /* 黄星星-空.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26BA36219AABAC0071C2DC /* 黄星星-空.png */; };
 		0A26BA3A219AABB20071C2DC /* 黄星星-实.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26BA37219AABAF0071C2DC /* 黄星星-实.png */; };
 		0A26BA3B219AABB20071C2DC /* 白星星-空.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26BA38219AABB10071C2DC /* 白星星-空.png */; };
@@ -930,6 +931,7 @@
 		0A15D5531F0EA52D00908B7F /* 我的-灰.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的-灰.png"; sourceTree = "<group>"; };
 		0A15D5541F0EA52D00908B7F /* 我的.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的.png"; sourceTree = "<group>"; };
 		0A15D5591F0EA5ED00908B7F /* 任务中心.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务中心.png"; sourceTree = "<group>"; };
+		0A16417D22408DEC002B0E50 /* NewsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListController.swift; sourceTree = "<group>"; };
 		0A16C2F321E33ECA00C6B319 /* 双箭头-右蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "双箭头-右蓝.png"; sourceTree = "<group>"; };
 		0A16C2F521E33ED500C6B319 /* 二维码-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "二维码-icon.png"; sourceTree = "<group>"; };
 		0A1701DE21EED4A200B12EC4 /* TeachingStatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingStatisticsController.swift; sourceTree = "<group>"; };
@@ -967,8 +969,8 @@
 		0A26BA2B219969310071C2DC /* 理论考试.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "理论考试.png"; sourceTree = "<group>"; };
 		0A26BA2E2199806B0071C2DC /* 教学评论.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "教学评论.png"; sourceTree = "<group>"; };
 		0A26BA30219A9F3A0071C2DC /* ZYStarRateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYStarRateView.swift; sourceTree = "<group>"; };
-		0A26BA32219AA4C20071C2DC /* CommentHistoryListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentHistoryListController.swift; sourceTree = "<group>"; };
-		0A26BA34219AA8690071C2DC /* CommentHistoryDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentHistoryDetailController.swift; sourceTree = "<group>"; };
+		0A26BA32219AA4C20071C2DC /* EvaluationHistoryListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationHistoryListController.swift; sourceTree = "<group>"; };
+		0A26BA34219AA8690071C2DC /* EvaluationHistoryDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationHistoryDetailController.swift; sourceTree = "<group>"; };
 		0A26BA36219AABAC0071C2DC /* 黄星星-空.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黄星星-空.png"; sourceTree = "<group>"; };
 		0A26BA37219AABAF0071C2DC /* 黄星星-实.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黄星星-实.png"; sourceTree = "<group>"; };
 		0A26BA38219AABB10071C2DC /* 白星星-空.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "白星星-空.png"; sourceTree = "<group>"; };
@@ -2190,6 +2192,14 @@
 			name = Refresh;
 			sourceTree = "<group>";
 		};
+		0A16417222408B68002B0E50 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				0A16417D22408DEC002B0E50 /* NewsListController.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
 		0A17CE86221D2DF90057A395 /* My */ = {
 			isa = PBXGroup;
 			children = (
@@ -2597,6 +2607,7 @@
 				0A26BA27219577EB0071C2DC /* Utils */,
 				0A12D7C422378D4B005B5DD5 /* Exam */,
 				0AB5AA962105D41000A9E2EC /* Home */,
+				0A16417222408B68002B0E50 /* News */,
 				0A8293BF217ECBB7006047B1 /* ReleaseList */,
 				0AD14561217D8064004670A9 /* Features */,
 				0A17CE86221D2DF90057A395 /* My */,
@@ -2806,9 +2817,9 @@
 				0AF25E09217DB9CF00FE5425 /* Collection */,
 				0AF9D35321894C7C0068B05A /* FeaturesController.swift */,
 				0AD14562217D81FB004670A9 /* LeaveApprovedController.swift */,
-				0A26BA32219AA4C20071C2DC /* CommentHistoryListController.swift */,
-				0A26BA34219AA8690071C2DC /* CommentHistoryDetailController.swift */,
 				0A26BA3C219ABB5B0071C2DC /* EvaluationItemListController.swift */,
+				0A26BA32219AA4C20071C2DC /* EvaluationHistoryListController.swift */,
+				0A26BA34219AA8690071C2DC /* EvaluationHistoryDetailController.swift */,
 				0A31A9B621B6567A007AB138 /* PublishExamController.swift */,
 				0A3E186221C79FAA00BF1816 /* PublishStillController.swift */,
 				0A2B354921C8CDB200E17AC9 /* CEXStudentsListController.swift */,
@@ -3618,13 +3629,14 @@
 				0A667BCB2085CF4E00594BE7 /* LiveLIstController.swift in Sources */,
 				0AC3B9811EE53F5900227194 /* String.swift in Sources */,
 				0A137E8A21DF04CB00C7328D /* NoticeListController.swift in Sources */,
+				0A16417E22408DEC002B0E50 /* NewsListController.swift in Sources */,
 				0A15D5161F0BF5FB00908B7F /* QQStylePullingIndicator.swift in Sources */,
 				0AC3BCA41EE94DA300227194 /* LBXScanWrapper.swift in Sources */,
 				0A644D9B1F065B26009025DD /* MyEvaluationDetailController.swift in Sources */,
 				0A644D951F04E685009025DD /* WishDetailCollectionView.swift in Sources */,
 				0A6A23AE1EF1607C00A1AC5B /* PeiwuCollectionView.swift in Sources */,
 				B468B7C81FCA9BA000ECF396 /* MJRefreshStateHeader.m in Sources */,
-				0A26BA33219AA4C20071C2DC /* CommentHistoryListController.swift in Sources */,
+				0A26BA33219AA4C20071C2DC /* EvaluationHistoryListController.swift in Sources */,
 				B4FF1A871F94DF7D009C6685 /* SDImageCache.m in Sources */,
 				0A42F82D1F1D23FB001DF281 /* OutlineTaskCollectionView.swift in Sources */,
 				B4FF1A881F94DF7D009C6685 /* SDImageCacheConfig.m in Sources */,
@@ -3656,7 +3668,7 @@
 				0AC3BB041EE94A0D00227194 /* MyBaseUIViewController.swift in Sources */,
 				0A644D5B1EFD0A5A009025DD /* OutlineItem.swift in Sources */,
 				0A2B356521C9104900E17AC9 /* ExamResultController.swift in Sources */,
-				0A26BA35219AA8690071C2DC /* CommentHistoryDetailController.swift in Sources */,
+				0A26BA35219AA8690071C2DC /* EvaluationHistoryDetailController.swift in Sources */,
 				0A18ADEF223255C30070088D /* StudyController.swift in Sources */,
 				0AD145542179CB45004670A9 /* ToDoListController.swift in Sources */,
 				B4F9E87B1F9106DD0001D88F /* OtherFilesCell.swift in Sources */,

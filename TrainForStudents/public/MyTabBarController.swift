@@ -38,7 +38,7 @@ class MyTabBarController : UITabBarController{
             break
         case "资讯":
             lastViewName = "newsView"
-            selectedTabBarIndex = 1
+            //selectedTabBarIndex = 1
             break
         case "发布":
             myPresentView(self, viewName: "releaseView")

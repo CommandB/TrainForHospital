@@ -142,6 +142,10 @@ extension TeachingPlanController : UICollectionViewDelegate , UICollectionViewDa
     //点击cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if jds.count == 0 {
+            return 
+        }
+        
         let data = jds[indexPath.item]
         if !data["isHeader"].boolValue{
             let vc = getViewToStoryboard("teachingPlanDetailView") as! TeachingPlanDetailController

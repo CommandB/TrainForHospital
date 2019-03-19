@@ -331,6 +331,9 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                         myPresentView(self, viewName: "tabBarView")
                     }else{
                         //myPresentView(self, viewName: "hTabBarView")
+                        let app = (UIApplication.shared.delegate) as! AppDelegate
+                        let tabBar = (app.window?.rootViewController) as! MyTabBarController
+                        tabBar.selectedIndex = 0
                         self.dismiss(animated: true, completion: nil)
                     }
                     

@@ -28,12 +28,14 @@ class HistoryEvaluationController : MyBaseUIViewController{
         evaluationCollection.delegate = evaluationView
         evaluationCollection.dataSource = evaluationView
         
+        self.evaluationCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
+        self.evaluationCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        getEvaluationDatasource()
+        evaluationCollection.mj_header.beginRefreshing()
     }
     
     //返回按钮
@@ -45,14 +47,19 @@ class HistoryEvaluationController : MyBaseUIViewController{
     func getEvaluationDatasource(){
         
         let url = SERVER_PORT+"rest/taskEvaluation/queryHistory.do"
-        myPostRequest(url,["pageindex":pageIndex , "pagesize":pageSize]).responseJSON(completionHandler: {resp in
-            
+        myPostRequest(url,["pageindex":evaluationView.jsonDataSource.count , "pagesize":20]).responseJSON(completionHandler: {resp in
+            self.evaluationCollection.mj_header.endRefreshing()
+            self.evaluationCollection.mj_footer.endRefreshing()
             switch resp.result{
             case .success(let responseJson):
                 
-                let json=JSON(responseJson)
+                let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
-                    self.evaluationView.jsonDataSource = json["data"].arrayValue
+                    let data = json["data"].arrayValue
+                    if data.count == 0 {
+                        self.evaluationCollection.mj_footer.endRefreshingWithNoMoreData()
+                    }
+                    self.evaluationView.jsonDataSource += data
                     self.evaluationCollection.reloadData()
                 }else{
                     myAlert(self, message: "请求历史考评列表失败!")
@@ -64,6 +71,17 @@ class HistoryEvaluationController : MyBaseUIViewController{
             
         })
         
+    }
+    
+    override func refresh() {
+        evaluationView.jsonDataSource.removeAll()
+        evaluationCollection.reloadData()
+        evaluationCollection.mj_footer.resetNoMoreData()
+        getEvaluationDatasource()
+    }
+    
+    override func loadMore() {
+        getEvaluationDatasource()
     }
     
 }
