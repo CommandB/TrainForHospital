@@ -98,7 +98,6 @@ extension UIImage {
     /**
      *  获得指定size的图片
      *
-     *  image   原始图片
      *  newSize 指定的size
      *
      *  return 调整后的图片

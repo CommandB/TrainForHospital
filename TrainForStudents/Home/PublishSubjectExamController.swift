@@ -13,7 +13,7 @@ import SwiftyJSON
 class PublishSubjectExamController : HBaseViewController{
     
     var isSkillExam = false
-    var notReload = true
+    var notReload = false
     @IBOutlet weak var studentsCollection: UICollectionView!
     
     var officeId = 0
@@ -81,7 +81,7 @@ class PublishSubjectExamController : HBaseViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        notReload = true
+        
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PaperSelectorController.defaultNoticeName, object: nil)
     }
     
@@ -114,7 +114,7 @@ class PublishSubjectExamController : HBaseViewController{
     func receiveNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: PaperSelectorController.defaultNoticeName, object: nil)
         if notification.userInfo != nil{
-            
+            notReload = true
             let paper = notification.userInfo!["data"] as! JSON
             
             //把试卷内容组合到学员信息里
@@ -150,6 +150,7 @@ class PublishSubjectExamController : HBaseViewController{
         let vc = getViewToStoryboard("paperSelectorView") as! PaperSelectorController
         vc.notReload = notReload
         vc.officeId = officeId
+        vc.isSkillExam = isSkillExam
         present(vc, animated: true, completion: nil)
     }
     

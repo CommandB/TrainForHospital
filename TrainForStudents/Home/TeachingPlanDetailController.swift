@@ -16,7 +16,6 @@ class TeachingPlanDetailController : HBaseViewController{
     
     @IBOutlet weak var personList_view: UIView!
     
-    
     var jds = JSON()
     var taskInfo = JSON()
     var imageCollectionView = TeachingPlanDetailImageView()
@@ -362,6 +361,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
         personCollection.reloadData()
         personCollection.setCornerRadius(radius: 4)
         personCollection.setBorder(width: 1, color: .gray)
+        
         
         
         //计算一下有多少数据 来定位collection的位置

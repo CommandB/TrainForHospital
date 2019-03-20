@@ -183,7 +183,7 @@ class PanoramicEvaluationController : HBaseViewController{
         }
         let paramMonth = (year! + month!).replacingOccurrences(of: "月", with: "")
         
-        print("paramMonth:\(paramMonth)")
+        //print("paramMonth:\(paramMonth)")
         let officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
         myPostRequest(url, ["officeid":officeId ,"month":paramMonth ,"fortype":"evaluation"], method: .post).responseString(completionHandler: {resp in
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
@@ -331,7 +331,7 @@ extension PanoramicEvaluationController : UIGestureRecognizerDelegate{
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
         let pointer = touch.location(in: self.view)
-        print(pointer.y.description + "----" + datePicker.Y.description)
+//        print(pointer.y.description + "----" + datePicker.Y.description)
         if pointer.y > datePicker.Y{
             return false
         }

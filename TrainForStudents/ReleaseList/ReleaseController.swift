@@ -67,7 +67,7 @@ extension ReleaseController : UICollectionViewDelegate , UICollectionViewDataSou
             btn.isHidden = false
             let data = jds[index]
             let title = data["traintypename"].stringValue
-            var icon = UIImage(named: title)
+            var icon = UIImage(named: "fb-\(title)")
 //            if icon?.size == nil{
                 icon = UIImage(named: "其他教学活动")
 //            }

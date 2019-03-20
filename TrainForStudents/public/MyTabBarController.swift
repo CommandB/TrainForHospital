@@ -14,23 +14,32 @@ class MyTabBarController : UITabBarController{
     var lastViewName = ""
     
     override func viewDidLoad() {
-        
-        for item in tabBar.items!{
-//            let title = item.title!
-//            item.image = UIImage(named: title)
-//            item.imageInsets = UIEdgeInsets(top: 11, left: 11, bottom: 11, right: 11)
-//            if title == "发布"{
-//                item.imageInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-//                item.selectedImage = UIImage(named: "\(title)")
-//            }else{
-//                item.selectedImage = UIImage(named: "\(title)-选择")
-//            }
+        let tabBarItems = tabBar.items
+        if tabBarItems != nil{
+            
+            tabBarItems![0].image = UIImage(named: "首页-tabbar")?.resizeImage(newSize: CGSize(width: 25, height: 25)).withRenderingMode(.alwaysOriginal)
+            tabBarItems![0].selectedImage = UIImage(named: "首页-选择")?.resizeImage(newSize: CGSize(width: 25, height: 25)).withRenderingMode(.alwaysOriginal)
+            
+            tabBarItems![1].image = UIImage(named: "资讯-tabbar")?.resizeImage(newSize: CGSize(width: 25, height: 25)).withRenderingMode(.alwaysOriginal)
+            tabBarItems![1].selectedImage = UIImage(named: "资讯-选择")?.resizeImage(newSize: CGSize(width: 25, height: 25)).withRenderingMode(.alwaysOriginal)
+            
+            tabBarItems![2].image = UIImage(named: "发布")?.resizeImage(newSize: CGSize(width: 27, height: 27)).withRenderingMode(.alwaysOriginal)
+            tabBarItems![2].selectedImage = UIImage(named: "发布")?.resizeImage(newSize: CGSize(width: 27, height: 27)).withRenderingMode(.alwaysOriginal)
+            
+            tabBarItems![3].image = UIImage(named: "功能-tabbar")?.resizeImage(newSize: CGSize(width: 25, height: 25)).withRenderingMode(.alwaysOriginal)
+            tabBarItems![3].selectedImage = UIImage(named: "功能-选择")?.resizeImage(newSize: CGSize(width: 25, height: 25)).withRenderingMode(.alwaysOriginal)
+            
+            tabBarItems![4].image = UIImage(named: "我的-tabbar")?.resizeImage(newSize: CGSize(width: 25, height: 25)).withRenderingMode(.alwaysOriginal)
+            tabBarItems![4].selectedImage = UIImage(named: "我的-选择")?.resizeImage(newSize: CGSize(width: 25, height: 25)).withRenderingMode(.alwaysOriginal)
             
         }
         
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        
+        
+        
         switch item.title {
         case "首页":
             lastViewName = "homeView"
@@ -41,6 +50,9 @@ class MyTabBarController : UITabBarController{
             //selectedTabBarIndex = 1
             break
         case "发布":
+//                    tabBar_Item.image =
+//                    tabBar_Item.selectedImage = UIImage(named: "首页-选择.png")?.withRenderingMode(.alwaysOriginal)
+            //item.image = UIImage(named: "发布")?.withRenderingMode(.alwaysOriginal)
             myPresentView(self, viewName: "releaseView")
             break
         case "功能":

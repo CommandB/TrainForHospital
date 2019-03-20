@@ -27,6 +27,9 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
     
     override func viewDidLoad() {
         
+//        tabBar_Item.image = UIImage(named: "首页.png")?.withRenderingMode(.alwaysOriginal)
+//        tabBar_Item.selectedImage = UIImage(named: "首页-选择.png")?.withRenderingMode(.alwaysOriginal)
+        
         homeCollection.delegate = self
         homeCollection.dataSource = self
         let btn = view.viewWithTag(10001) as! UIButton

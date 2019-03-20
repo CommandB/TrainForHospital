@@ -264,8 +264,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                     
                     self.appDelegate.loadAppConfig()
                     
-                    //请求登录人的个人信息
-                    self.getMySelfData()
+                    
                     
                     //请求科室信息
                     let getOfficeURL = SERVER_PORT+"rest/app/queryMyOffice.do"
@@ -278,26 +277,15 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                             //print(json)
                             if json["code"].stringValue == "1"{
                                 //缓存科室信息
-                                let data = json["data"].arrayValue[0]
-                                UserDefaults.standard.set(data["officeid"].stringValue, forKey:
+                                let data = json["data"].arrayValue
+                                if data.count == 0 {
+                                    myAlert(self, message: "您暂未分配科室,请联系科教!")
+                                    return
+                                }
+                                UserDefaults.standard.set(data[0]["officeid"].stringValue, forKey:
                                     LoginInfo.officeId.rawValue)
-                                UserDefaults.standard.set(data["officename"].stringValue, forKey:
+                                UserDefaults.standard.set(data[0]["officename"].stringValue, forKey:
                                     LoginInfo.officeName.rawValue)
-                                
-                                //缓存app配置信息
-//                                let appConfig = json["appconfig"].arrayValue
-//                                for config in appConfig{
-//                                    let name = config["name"].stringValue
-//                                    let val = config["value"].stringValue
-//                                    if  name == AppConfiguration.teacherCreateNoticeText.rawValue{
-//                                        UserDefaults.standard.set(val, forKey: AppConfiguration.teacherCreateNotice.rawValue)
-//                                    }else if name == AppConfiguration.signInTakePhotoText.rawValue{
-//                                        UserDefaults.standard.set(val, forKey: AppConfiguration.signInTakePhoto.rawValue)
-//                                    }else if name == AppConfiguration.complaintTitleText.rawValue{
-//                                        //缓存投诉功能模块名称
-//                                        UserDefaults.standard.set(val, forKey: AppConfiguration.complaintTitle.rawValue)
-//                                    }
-//                                }
                                 
                                 //解析角色信息并缓存
                                 let role = json["role"].arrayValue
@@ -305,7 +293,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                 if role.count > 0{
                                     let r = role[0]
                                     for item in r{
-                                        if "0" == item.1{
+                                        if 0 == item.1{
                                             roleDic[item.0] = false
                                         }else{
                                             roleDic[item.0] = true
@@ -313,6 +301,18 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                     }
                                 }
                                 UserDefaults.standard.set(roleDic, forKey: LoginInfo.role.rawValue)
+                                //验证角色,判断登录到哪一端
+                                if isOnlyStudent(){
+                                    //请求登录人的个人信息
+                                    self.getMySelfData()
+                                    myPresentView(self, viewName: "tabBarView")
+                                }else{
+                                    //myPresentView(self, viewName: "hTabBarView")
+                                    let app = (UIApplication.shared.delegate) as! AppDelegate
+                                    let tabBar = (app.window?.rootViewController) as! MyTabBarController
+                                    tabBar.selectedIndex = 0
+                                    self.dismiss(animated: true, completion: nil)
+                                }
                                 
                             }else{
                                 myAlert(self, message: json["msg"].stringValue)
@@ -327,15 +327,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                         
                     })
                     
-                    if isOnlyStudent(){
-                        myPresentView(self, viewName: "tabBarView")
-                    }else{
-                        //myPresentView(self, viewName: "hTabBarView")
-                        let app = (UIApplication.shared.delegate) as! AppDelegate
-                        let tabBar = (app.window?.rootViewController) as! MyTabBarController
-                        tabBar.selectedIndex = 0
-                        self.dismiss(animated: true, completion: nil)
-                    }
+                    
                     
 //                    let vc = getViewToStoryboard("hTabBarView") as! MyTabBarController
 //                    self.present(vc, animated: true, completion: nil)
