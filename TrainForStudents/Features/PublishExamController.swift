@@ -39,6 +39,7 @@ class PublishExamController : HBaseViewController{
             (view.viewWithTag(100002) as! UIButton).isEnabled = false
         }
         
+        
         submitParam["markingteacherlist"] = [JSON]()
         
         personCollection.delegate = self

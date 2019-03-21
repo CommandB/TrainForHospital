@@ -291,7 +291,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                     UserDefaults.AppConfig.set(value: data["年级清单"].description, forKey:.gradeList)
                     UserDefaults.AppConfig.set(value: data["届别清单"].description, forKey:.gradeYearList)
                     UserDefaults.AppConfig.set(value: data["学员类型清单"].description, forKey:.studentTypeList)
-                    UserDefaults.AppConfig.set(value: data["人员分组清单"].description, forKey:.personGroupList)
+                    UserDefaults.AppConfig.set(value: data["分组清单"].description, forKey:.personGroupList)
+                    
                     
                 }else{
                     myAlert(rootView!, message: json["msg"].stringValue)

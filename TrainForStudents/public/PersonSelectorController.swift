@@ -558,10 +558,11 @@ class PersonSelectorController: HBaseViewController {
         sortedKeys = [String]()
         
         //如果是界面第一次打开 则不清空已选择人员 防止把上一个界面传过来的已选给清除了
-        if !isFirstLoad{
+        if isFirstLoad{
+            isFirstLoad = false
+        }else{
             //选中的人员数据
             selectedList = [String:JSON]()
-            isFirstLoad = false
         }
         
         //已全选的section

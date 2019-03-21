@@ -39,7 +39,11 @@ class SkillExamInfoController : HBaseViewController{
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT + "rest/app/getJNExamInfo.do"
-        myPostRequest(url,["taskid":paramData["taskid"], "bepersonid": paramData["buid"]], method: .post).responseJSON(completionHandler: {resp in
+        var param = ["taskid":paramData["taskid"], "bepersonid": paramData["bepersonid"]]
+        if paramData["bepersonid"].isEmpty{
+            param.removeValue(forKey: "bepersonid")
+        }
+        myPostRequest(url, param , method: .post).responseJSON(completionHandler: {resp in
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             
             //启用 开始考试 按钮

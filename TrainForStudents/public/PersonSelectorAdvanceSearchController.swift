@@ -44,7 +44,7 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
         (view.viewWithTag(70001) as! UITextField).delegate = self
         
         
-        
+        //            personGroupList
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -82,7 +82,7 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
             if row == 0{
                 submitData.removeValue(forKey: "majorsubjectid")
             }
-        case 20001:
+        case 20001://            personGroupList
             data = UserDefaults.AppConfig.json(forKey: .gradeList).arrayValue[index]
             text = data["grade"].stringValue
             submitData["grade"] = text

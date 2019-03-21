@@ -35,9 +35,12 @@ class InspectController : HBaseViewController{
     var jds = [JSON]()
     
     let datePicker = UIDatePicker()
+    var durationPicker = UIPickerView()
     let addrPicker = UIPickerView()
     var evPicker = UIPickerView()
+    
     let hPickerImpl = HSimplePickerViewImpl()
+    let durationPickerImpl = HSimplePickerViewImpl()
     
     var addrPickerDs = [JSON]()
     
@@ -80,6 +83,11 @@ class InspectController : HBaseViewController{
         hPickerImpl.dataSource = UserDefaults.AppConfig.json(forKey: .teachingActivityEvaluationList).arrayValue
         hPickerImpl.clorsureImpl = evClosureImpl
         
+        durationPicker = durationPickerImpl.getDefaultPickerView()
+        durationPickerImpl.titleKey = "text"
+        durationPickerImpl.dataSource = JSON([["text":"请选择"], ["text":"15分钟", "value":"15"], ["text":"30分钟", "value":30]]).arrayValue
+        durationPickerImpl.clorsureImpl = durationClosureImpl
+        
         //用作滚动页的容器
         scrollView.contentSize = CGSize(width: UIScreen.width.multiplied(by: 3), height: scrollView.frame.height)
         scrollView.showsHorizontalScrollIndicator = false
@@ -97,6 +105,11 @@ class InspectController : HBaseViewController{
         //基础数据设置
         var txt = view.viewWithTag(10001) as! UITextField
         txt.delegate = self
+        
+        txt = view.viewWithTag(20001) as! TextFieldForNoMenu
+        txt.inputView = durationPicker
+        txt.delegate = self
+        
         txt = view.viewWithTag(30001) as! TextFieldForNoMenu
         txt.inputView = datePicker
         txt.delegate = self
@@ -296,39 +309,6 @@ class InspectController : HBaseViewController{
         tabsTouchAnimation(sender: sender)
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        let tag = textField.tag
-        if tag == 40001 || tag == 40002{
-            let t31 = view.viewWithTag(30001) as! UITextField
-            let t32 = view.viewWithTag(30002) as! UITextField
-            if t31.text == nil || t31.text == ""{
-                myAlert(self, message: "请先选择开始时间!")
-                return false
-            }
-            //设置开始时间为最小时间
-            let dateStr = "\(t31.text!) \(t32.text!):00"
-            datePicker.minimumDate = DateUtil.stringToDateTime(dateStr)
-        }else if tag == 50001{
-            textField.text = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesname"].stringValue
-            submitParam["address"] = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesid"].stringValue
-        }else if tag == 90002 || tag == 90001 {
-            evPicker.reloadAllComponents()
-            selectedTextField = textField
-        }else if tag == 30001 || tag == 30002{
-            datePicker.minimumDate = nil
-            let t41 = view.viewWithTag(40001) as! UITextField
-            t41.text = ""
-            let t42 = view.viewWithTag(40002) as! UITextField
-            t42.text = ""
-        }
-        return true
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        hiddenKeyBoard()
-        return true
-    }
-    
     func tabsTouchAnimation( sender : UIButton){
         //-----------------计算 "下标线"label的动画参数
         
@@ -400,8 +380,8 @@ class InspectController : HBaseViewController{
             t42.text = time
             //计算开始和结束时间的区间
             let interval = DateUtil.intervalDate("\(t31.text!) \(t32.text!)", to: "\(t41.text!) \(t42.text!)", pattern: "yyyy-MM-dd HH:mm")
-            let lbl = view.viewWithTag(20001) as! UILabel
-            lbl.text = "时长：\(interval.hour)时\(interval.minute)分"
+            let txt = view.viewWithTag(20001) as! TextFieldForNoMenu
+            txt.text = "时长：\(interval.hour)时\(interval.minute)分"
         }
     }
     
@@ -417,6 +397,66 @@ class InspectController : HBaseViewController{
                 evaluaList["5"]!["evaluatetablename"] = t.text
             }
         }
+    }
+    
+    func durationClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+        
+        if row == 0{
+            return
+        }
+        
+        let t41 = view.viewWithTag(40001) as! UITextField
+        let t42 = view.viewWithTag(40002) as! UITextField
+        let data = ds[row]
+        let txt = view.viewWithTag(20001) as! TextFieldForNoMenu
+        txt.text = "时长：\(data["text"].stringValue)"
+        let startTimeStr = (view.viewWithTag(30001) as! UITextField).text! + " " + (view.viewWithTag(30002) as! UITextField).text! + ":00"
+        var endTime = DateUtil.stringToDateTime(startTimeStr)
+        endTime.addTimeInterval(data["value"].doubleValue * 60)
+        let endTimeStr = DateUtil.dateTimeToString(endTime)
+        let date = endTimeStr.substring(to: 10)
+        let time = endTimeStr.substring(from: 11).substring(to:5)
+        t41.text = date
+        t42.text = time
+        
+        
+    }
+    
+}
+
+extension InspectController {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        let tag = textField.tag
+        if tag == 40001 || tag == 40002 || tag == 20001{
+            let t31 = view.viewWithTag(30001) as! UITextField
+            let t32 = view.viewWithTag(30002) as! UITextField
+            if t31.text == nil || t31.text == ""{
+                myAlert(self, message: "请先选择开始时间!")
+                return false
+            }
+            //设置开始时间为最小时间
+            let dateStr = "\(t31.text!) \(t32.text!):00"
+            datePicker.minimumDate = DateUtil.stringToDateTime(dateStr)
+        }else if tag == 50001{
+            textField.text = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesname"].stringValue
+            submitParam["address"] = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesid"].stringValue
+        }else if tag == 90002 || tag == 90001 {
+            evPicker.reloadAllComponents()
+            selectedTextField = textField
+        }else if tag == 30001 || tag == 30002{
+            datePicker.minimumDate = nil
+            let t41 = view.viewWithTag(40001) as! UITextField
+            t41.text = ""
+            let t42 = view.viewWithTag(40002) as! UITextField
+            t42.text = ""
+        }
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        hiddenKeyBoard()
+        return true
     }
     
 }

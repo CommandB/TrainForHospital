@@ -247,7 +247,9 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
     ///技能考试
     func presentSkillExam(_ data: JSON){
         let vc = getViewToStoryboard("skillExamInfoView") as! SkillExamInfoController
-        vc.paramData = data
+        var param = data
+        param["bepersonid"] = data["buid"]
+        vc.paramData = param
         present(vc, animated: true, completion: nil)
     }
     

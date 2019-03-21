@@ -121,6 +121,55 @@ extension ExamListController : UICollectionViewDelegate , UICollectionViewDataSo
     //点击cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //myPresentView(self, viewName: "todoDetailView")
+        let data = jds[indexPath.item]
+        if isInvigilation{
+            if data["ishistory"].intValue == 1{
+                
+            }else{  //非历史
+                if data["butype"].stringValue == "技能考试"{
+                    let vc = getViewToStoryboard("skillExamInfoView") as! SkillExamInfoController
+                    vc.paramData = data
+                    //                present(vc, animated: true, completion: nil)
+                }
+            }
+            
+        }else{
+            if data["ishistory"].intValue == 1{
+                
+            }else{  //非历史
+                if data["butype"].stringValue == "理论考试"{
+                    let vc = getViewToStoryboard("examView") as! ExamViewController
+                    vc.exerciseId = data["buid"].stringValue
+                    vc.taskId = data["taskid"].stringValue
+                    vc.isSimulation = true
+                    let url = SERVER_PORT + "rest/questions/queryExercisesQuestions.do"
+                    myPostRequest(url,["exercisesid":vc.exerciseId]).responseJSON(completionHandler: { resp in
+                        
+                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                        
+                        switch  resp.result{
+                        case .success(let result):
+                            let json = JSON(result)
+                            if json["code"].intValue == 1 {
+                                vc.exercises = json["data"].arrayValue
+                                vc.fromView = self
+                                self.present(vc, animated: true, completion: nil)
+                            }else{
+                                myAlert(self, message: json["msg"].stringValue)
+                            }
+                            
+                        case .failure(let error):
+                            debugPrint(error)
+                        }
+                    })
+                }else{
+                    let vc = getViewToStoryboard("skillExamInfoView") as! SkillExamInfoController
+                    vc.paramData = data
+                    present(vc, animated: true, completion: nil)
+                }
+            }
+            
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -138,7 +138,8 @@ class PublishSubjectExamDetailController : HBaseViewController{
     @IBAction func btn_submit_inside(_ sender: UIButton) {
         
         submitData["officeid"] = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
-        
+        //默认是出科考试
+        submitData["stagetype"] = 1
         if let t = (view.viewWithTag(10001) as! UITextField).text{
             submitData["examname"] = t
         }else{
@@ -187,7 +188,7 @@ class PublishSubjectExamDetailController : HBaseViewController{
         
         var url = ""
         if isSkillExam{
-//            url = SERVER_PORT + "rest/app/releaseSkillExam.do"
+            url = SERVER_PORT + "rest/app/releaseSkillExam.do"
         }else{
             url = SERVER_PORT + "rest/app/releaseExitOfficeTheoryExam.do"
         }

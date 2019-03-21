@@ -44,7 +44,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
         myPickerView.dataSource = self
         myPickerView.delegate = self
         
-        myPickerView.frame = CGRect.init(x: 0, y:  loginBtn.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height-loginBtn.frame.maxY)
+//        myPickerView.frame = CGRect.init(x: 0, y:  loginBtn.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height-loginBtn.frame.maxY)
 
         
         txt_loginId.returnKeyType = .next
