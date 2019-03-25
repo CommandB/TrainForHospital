@@ -121,15 +121,44 @@ extension ExamListController : UICollectionViewDelegate , UICollectionViewDataSo
     //点击cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //myPresentView(self, viewName: "todoDetailView")
-        let data = jds[indexPath.item]
+        var data = jds[indexPath.item]
         if isInvigilation{
             if data["ishistory"].intValue == 1{
-                
-            }else{  //非历史
-                if data["butype"].stringValue == "技能考试"{
-                    let vc = getViewToStoryboard("skillExamInfoView") as! SkillExamInfoController
+                if data["butype"].stringValue == "理论考试监考"{
+                    let vc = getViewToStoryboard("invigilationInfoView") as! InvigilationInfoController
                     vc.paramData = data
-                    //                present(vc, animated: true, completion: nil)
+                    present(vc, animated: true, completion: nil)
+                }else{
+                    //跳转到
+                    
+                    let url = SERVER_PORT + "rest/app/getSkillExamInfo.do"
+                    
+                    myPostRequest(url, ["personid":data["buid"].intValue, "examroomid":data["examroomid"].stringValue] , method: .post).responseJSON(completionHandler: {resp in
+                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                        
+                        switch resp.result{
+                        case .success(let respJson):
+                            let json = JSON(respJson)
+                            print(json)
+                            
+                        case .failure(let err):
+                            print(err)
+                            break
+                        }
+                        
+                    })
+                    
+                }
+            }else{  //非历史
+                if data["butype"].stringValue == "理论考试监考"{
+                    let vc = getViewToStoryboard("invigilationInfoView") as! InvigilationInfoController
+                    vc.paramData = data
+                    present(vc, animated: true, completion: nil)
+                }else{
+                    let vc = getViewToStoryboard("skillExamInfoView") as! SkillExamInfoController
+                    data["bepersonid"] = data["buid"]
+                    vc.paramData = data
+                    present(vc, animated: true, completion: nil)
                 }
             }
             
@@ -138,32 +167,11 @@ extension ExamListController : UICollectionViewDelegate , UICollectionViewDataSo
                 
             }else{  //非历史
                 if data["butype"].stringValue == "理论考试"{
-                    let vc = getViewToStoryboard("examView") as! ExamViewController
-                    vc.exerciseId = data["buid"].stringValue
-                    vc.taskId = data["taskid"].stringValue
-                    vc.isSimulation = true
-                    let url = SERVER_PORT + "rest/questions/queryExercisesQuestions.do"
-                    myPostRequest(url,["exercisesid":vc.exerciseId]).responseJSON(completionHandler: { resp in
-                        
-                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-                        
-                        switch  resp.result{
-                        case .success(let result):
-                            let json = JSON(result)
-                            if json["code"].intValue == 1 {
-                                vc.exercises = json["data"].arrayValue
-                                vc.fromView = self
-                                self.present(vc, animated: true, completion: nil)
-                            }else{
-                                myAlert(self, message: json["msg"].stringValue)
-                            }
-                            
-                        case .failure(let error):
-                            debugPrint(error)
-                        }
-                    })
+                    let vc = getViewToStoryboard("examInfoForStuView") as! ExamInfoForStuController
+                    vc.paramData = data
+                    present(vc, animated: true, completion: nil)
                 }else{
-                    let vc = getViewToStoryboard("skillExamInfoView") as! SkillExamInfoController
+                    let vc = getViewToStoryboard("examInfoForStuView") as! ExamInfoForStuController
                     vc.paramData = data
                     present(vc, animated: true, completion: nil)
                 }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-///老师进来技能考试的前置页
+///老师进来技能考试的前置页 / 学生待考任务进来的界面
 class SkillExamInfoController : HBaseViewController{
     
     
@@ -40,7 +40,7 @@ class SkillExamInfoController : HBaseViewController{
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT + "rest/app/getJNExamInfo.do"
         var param = ["taskid":paramData["taskid"], "bepersonid": paramData["bepersonid"]]
-        if paramData["bepersonid"].isEmpty{
+        if paramData["bepersonid"].stringValue.isEmpty{
             param.removeValue(forKey: "bepersonid")
         }
         myPostRequest(url, param , method: .post).responseJSON(completionHandler: {resp in

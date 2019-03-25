@@ -87,7 +87,11 @@ class EvaluationItemListController : UIViewController{
     }
     
     func getCardListData(){
+        
         MBProgressHUD.showAdded(to: view, animated: true)
+        
+        pageNumber = 0
+        
         let url = SERVER_PORT+"rest/app/getMyEvaluateTask.do"
         myPostRequest(url).responseJSON(completionHandler: {resp in
             
@@ -136,11 +140,11 @@ class EvaluationItemListController : UIViewController{
     //获取评价详情
     func getDetailDatasource(_ evaluationId : String){
         
-        MBProgressHUD.showAdded(to: detailCollection, animated: true)
+        MBProgressHUD.showAdded(to: view, animated: true)
         
-        var url = SERVER_PORT+"rest/evaluation/query.do"
+        let url = SERVER_PORT+"rest/evaluation/query.do"
         myPostRequest(url,["evaluationid": evaluationId]).responseJSON(completionHandler: {resp in
-            MBProgressHUD.hideAllHUDs(for: self.detailCollection, animated: true)
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             switch resp.result{
             case .success(let responseJson):
                 
