@@ -73,12 +73,12 @@ class ExamListController : HBaseViewController{
         
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         getListData()
     }
     

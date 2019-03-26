@@ -87,7 +87,7 @@ class TurnTaskCollectionView : UIViewController,  UICollectionViewDelegate , UIC
                 if lastItemY < y{
                     lastItemY = CGFloat(y)
                 }
-                y = lastItemY.adding(lastItemHeight)
+                y = lastItemY + lastItemHeight
                 frame.origin = CGPoint(x: x, y: y)
                 v.frame = frame
                 cell.addSubview(v)
@@ -122,7 +122,7 @@ class TurnTaskCollectionView : UIViewController,  UICollectionViewDelegate , UIC
                 btn.setTitleColor(UIColor.white, for: .normal)
                 btn.setTitle(json["mountcount"].stringValue, for: .normal)
                 if #available(iOS 8.2, *) {
-                    btn.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: 500)
+                    btn.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight(rawValue: 500))
                 } else {
                     let font = UIFont()
                     font.withSize(13)
@@ -165,9 +165,9 @@ class TurnTaskCollectionView : UIViewController,  UICollectionViewDelegate , UIC
                     v.lbl_content.numberOfLines = itemName.getLineNumberForWidth(width: v.lbl_content.frame.width - boundary, cFont: (v.lbl_content.font)!)
                     let itemHeight = getHeightForLabel(lbl: v.lbl_content)
                     if itemHeight < 40{
-                        height.add(40)
+                        height += 40
                     }else{
-                        height.add(itemHeight)
+                        height += (itemHeight)
                     }
                     
                 }
@@ -210,7 +210,7 @@ class TurnTaskCollectionView : UIViewController,  UICollectionViewDelegate , UIC
         return CGSize.zero
     }
     
-    func btn_action_inside(sender : UIButton){
+    @objc func btn_action_inside(sender : UIButton){
         parentView?.buttonViewIsHidden(true)
     }
     

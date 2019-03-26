@@ -64,7 +64,7 @@ class LiveListController: MyBaseUIViewController,UITableViewDataSource,UITableVi
         }
         
         let num = lbl.text?.getLineNumberForUILabel(lbl)
-        lbl.frame.size = CGSize(width: lbl.frame.width, height: lbl.frame.height.multiplied(by: CGFloat(num!)))
+        lbl.frame.size = CGSize(width: lbl.frame.width, height: lbl.frame.height * CGFloat(num!))
         
         imgView.snp.makeConstraints({(make) in
 //            make.height.equalTo(imgView.frame.width/16*9)

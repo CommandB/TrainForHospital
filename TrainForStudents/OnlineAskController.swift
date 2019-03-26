@@ -243,7 +243,7 @@ class OnlineAskController: MyBaseUIViewController {
     }
     
     //浏览office的webview的点击事件
-    func wordFill (){
+    @objc func wordFill (){
 //        if webView.frame == player.frame{
 //            webView.frame = view.frame
 //        }else{
@@ -368,6 +368,11 @@ extension OnlineAskController : UIDocumentInteractionControllerDelegate{
 }
 
 extension OnlineAskController: BMPlayerDelegate {
+    
+    func bmPlayer(player: BMPlayer, playerOrientChanged isFullscreen: Bool) {
+        print("| BMPlayerDelegate | playerOrientChanged | player - \(player)")
+    }
+    
     // Call back when playing state changed, use to detect is playing or not
     func bmPlayer(player: BMPlayer, playerIsPlaying playing: Bool) {
         print("| BMPlayerDelegate | playerIsPlaying | playing - \(playing)")

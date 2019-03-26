@@ -79,7 +79,7 @@ class JoinOfficeController : UIViewController {
         })
     }
     
-    func refresh() {
+    @objc func refresh() {
         self.students_collection.mj_footer.resetNoMoreData()
         jds.removeAll()
         getListData()

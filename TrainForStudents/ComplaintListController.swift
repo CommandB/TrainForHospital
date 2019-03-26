@@ -115,11 +115,11 @@ class ComplaintListController : MyBaseUIViewController{
         
     }
     
-    func btn_cancel_inside(){
+    @objc func btn_cancel_inside(){
         addView.isHidden = true
     }
     
-    func btn_submit_inside(){
+    @objc func btn_submit_inside(){
         
         let text = (addView.viewWithTag(10001) as! UITextView).text.trimmingCharacters(in: .whitespacesAndNewlines)
         if text == "" {

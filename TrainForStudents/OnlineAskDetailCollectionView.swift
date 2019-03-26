@@ -61,7 +61,7 @@ class OnlineAskDetailCollectionView : UIViewController,  UICollectionViewDelegat
         //通过文本计算cell的高度
         let lineNumber = str.getLineNumberForWidth(width: lblWidth - 5)
         //70是lebel上下间距的总和
-        let height = 70 + UILabel.getDefaultLineHeight().multiplied(by: CGFloat(lineNumber))
+        let height = 70 + UILabel.getDefaultLineHeight() * CGFloat(lineNumber)
         
         return CGSize(width: UIScreen.width , height: height )
         

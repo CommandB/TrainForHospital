@@ -130,7 +130,7 @@ class StudyController : HBaseViewController{
     }
     
     //浏览office的webview的点击事件
-    func wordFill (){
+    @objc func wordFill (){
         
         let url = materialData["url"].stringValue
         let fileName = materialData["title"].stringValue

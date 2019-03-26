@@ -36,7 +36,7 @@ class ScannerViewController: MyBaseUIViewController , AVCaptureMetadataOutputObj
         tabBar.hidesBottomBarWhenPushed = true
         
         do{
-            self.device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+            self.device = AVCaptureDevice.default(for: AVMediaType.video)
             
             self.input = try AVCaptureDeviceInput(device: device)
             
@@ -45,15 +45,15 @@ class ScannerViewController: MyBaseUIViewController , AVCaptureMetadataOutputObj
             
             self.session = AVCaptureSession()
             if UIScreen.main.bounds.size.height<500 {
-                self.session.sessionPreset = AVCaptureSessionPreset640x480
+                self.session.sessionPreset = AVCaptureSession.Preset.vga640x480
             }else{
-                self.session.sessionPreset = AVCaptureSessionPresetHigh
+                self.session.sessionPreset = AVCaptureSession.Preset.high
             }
             
             self.session.addInput(self.input)
             self.session.addOutput(self.output)
             
-            self.output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+            self.output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
             
             //计算中间可探测区域
             let windowSize = UIScreen.main.bounds.size
@@ -70,7 +70,7 @@ class ScannerViewController: MyBaseUIViewController , AVCaptureMetadataOutputObj
             self.output.rectOfInterest = scanRect
             
             self.preview = AVCaptureVideoPreviewLayer(session:self.session)
-            self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill
+            self.preview.videoGravity = AVLayerVideoGravity.resizeAspectFill
             self.preview.frame = UIScreen.main.bounds
             self.view.layer.insertSublayer(self.preview, at:0)
             

@@ -120,21 +120,16 @@ class MyBaseUIViewController : UIViewController , UITextFieldDelegate  {
         
     }
     
-}
-
-//对上拉 下拉刷新的支持
-extension MyBaseUIViewController {
-    
-    public func refresh() {
+    @objc func refresh() {
         
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         
     }
     
     ///初始化分页属性
-    func initLimitPage(){
+    @objc func initLimitPage(){
         pageIndex = 0
         isLoading = false
         isLastPage = false

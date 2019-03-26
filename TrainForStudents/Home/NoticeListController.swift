@@ -72,13 +72,13 @@ class NoticeListController : HBaseViewController{
         
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         messageCollection.mj_footer.resetNoMoreData()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         getListData()
     }
     
@@ -105,7 +105,7 @@ extension NoticeListController : UICollectionViewDelegate , UICollectionViewData
         lbl.text = content
         let lineNum = content.getLineNumberForUILabel(lbl)
         lbl.numberOfLines = lineNum
-        lbl.frame.size = CGSize(width: lbl.frame.width, height: size12LineHeight.multiplied(by: CGFloat(lineNum)))
+        lbl.frame.size = CGSize(width: lbl.frame.width, height: size12LineHeight * CGFloat(lineNum))
         
         return cell
     }
@@ -123,7 +123,7 @@ extension NoticeListController : UICollectionViewDelegate , UICollectionViewData
         let lbl = cell.viewWithTag(20001) as! UILabel
         let lineNumber = content.getLineNumberForUILabel(lbl)
         
-        let cellHeight = size12LineHeight.multiplied(by: CGFloat(lineNumber)).adding(50)
+        let cellHeight = size12LineHeight * CGFloat(lineNumber) + (50)
         print("cellHeight:\(cellHeight)")
         //return CGSize(width: UIScreen.width, height: 95)
         return CGSize(width: UIScreen.width - 15, height: cellHeight)

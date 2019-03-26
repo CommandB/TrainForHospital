@@ -111,7 +111,7 @@ class QuestionDetailCollectionView : UIViewController,  UICollectionViewDelegate
         switch indexPath.item {
             case 0:
             let titleText = jsonDataSource["title"].stringValue
-            let lineNumber = titleText.getLineNumberForWidth(width: UIScreen.width.subtracting(40), cFont: titleFont)
+            let lineNumber = titleText.getLineNumberForWidth(width: UIScreen.width - 40, cFont: titleFont)
             lineHeight = lineNumber * 20 + 10
         case 1:
             lineHeight = 40
@@ -123,7 +123,7 @@ class QuestionDetailCollectionView : UIViewController,  UICollectionViewDelegate
             if type == 0 {  //选择题
                 let text = jsonDataSource["wordsvalue"].stringValue
                 
-                let lineNumber = text.getLineNumberForWidth(width: UIScreen.width.subtracting(40), cFont: titleFont)
+                let lineNumber = text.getLineNumberForWidth(width: UIScreen.width - (40), cFont: titleFont)
 
                 lineHeight = lineNumber * 20 + 10
                 if lineHeight < 40{

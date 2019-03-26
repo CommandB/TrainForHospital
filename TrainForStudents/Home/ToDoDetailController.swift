@@ -42,13 +42,13 @@ class ToDoDetailController : UIViewController{
         toDoCollection.reloadData()
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         toDoCollection.mj_footer.resetNoMoreData()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         getListData()
     }
     

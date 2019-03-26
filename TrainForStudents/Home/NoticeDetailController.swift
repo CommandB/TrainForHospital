@@ -34,7 +34,7 @@ class NoticeDetailController : HBaseViewController{
         lbl?.text = content
         let lineNum = content.getLineNumberForUILabel(lbl!)
         lbl?.numberOfLines = lineNum
-        lbl?.frame.size = CGSize(width: (lbl?.frame.width)!, height: size12LineHeight.multiplied(by: CGFloat(lineNum)))
+        lbl?.frame.size = CGSize(width: (lbl?.frame.width)!, height: size12LineHeight * CGFloat(lineNum))
         
         print(noticeJson)
         

@@ -111,7 +111,7 @@ class PublishSubjectExamController : HBaseViewController{
     
     
     //选好试卷的 callback
-    func receiveNotice(notification : NSNotification){
+    @objc func receiveNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: PaperSelectorController.defaultNoticeName, object: nil)
         if notification.userInfo != nil{
             notReload = true
@@ -142,7 +142,7 @@ class PublishSubjectExamController : HBaseViewController{
     }
     
     //选试卷
-    func btn_selectorExam_inside(_ sender: UIButton) {
+    @objc func btn_selectorExam_inside(_ sender: UIButton) {
         if selectedStudents.count == 0 {
             myAlert(self, message: "请先选择学员!")
             return
@@ -155,7 +155,7 @@ class PublishSubjectExamController : HBaseViewController{
     }
     
     ///已分配 未分配
-    func btn_sort(sender : UIButton){
+    @objc func btn_sort(sender : UIButton){
         selectedStudents = [IndexPath:JSON]()
         hiddenKeyBoard()
         if isSelectedAll{
@@ -198,7 +198,7 @@ class PublishSubjectExamController : HBaseViewController{
     }
     
     ///全选
-    func btn_selectAll(sender : UIButton){
+    @objc func btn_selectAll(sender : UIButton){
         if isSelectedAll{
             isSelectedAll = false
             selectedStudents.removeAll()
@@ -261,7 +261,7 @@ class PublishSubjectExamController : HBaseViewController{
         })
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         //studentsCollection.mj_footer.resetNoMoreData()
         getListData()
@@ -289,7 +289,7 @@ extension PublishSubjectExamController : UICollectionViewDelegate , UICollection
         let data = jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         let btn_avatar = cell.viewWithTag(10001) as! UIButton
-        btn_avatar.setCornerRadius(radius: btn_avatar.W.divided(by: 2))
+        btn_avatar.setCornerRadius(radius: btn_avatar.W / 2)
         var lbl = cell.viewWithTag(10002) as! UILabel
         lbl.text = data["personname"].stringValue
         lbl = cell.viewWithTag(10003) as! UILabel

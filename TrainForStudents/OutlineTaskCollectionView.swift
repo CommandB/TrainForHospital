@@ -62,7 +62,7 @@ class OutlineTaskCollectionView : UIViewController,  UICollectionViewDelegate , 
                 //单行的高度
                 let lineHeight = contentText.getHeight(font: v.lbl_content.font)
                 //计算label的高度
-                let contentHeight = lineHeight.multiplied(by: CGFloat(v.lbl_content.numberOfLines))
+                let contentHeight = lineHeight * CGFloat(v.lbl_content.numberOfLines)
                 //设置label的高度
                 v.lbl_content.frame.size = CGSize(width: v.lbl_content.frame.width, height: contentHeight)
                 
@@ -76,9 +76,9 @@ class OutlineTaskCollectionView : UIViewController,  UICollectionViewDelegate , 
                 
                 var frame = CGRect()
                 //y轴 = 上一个元素的Y轴坐标 + 上一个元素的高度
-                y = previousItemHeight.adding(previousItemY)
+                y = previousItemHeight + (previousItemY)
                 //item高度 = 内容高度 + 间距
-                itemHeight = contentHeight.adding(itemSpcaing)
+                itemHeight = contentHeight + (itemSpcaing)
                 
                 frame.origin = CGPoint(x: x, y: y)
                 frame.size = CGSize(width: itemWidth, height: itemHeight)
@@ -130,15 +130,15 @@ class OutlineTaskCollectionView : UIViewController,  UICollectionViewDelegate , 
                 //单行的高度
                 let lineHeight = contentText.getHeight(font: v.lbl_content.font)
                 //计算label的高度
-                let contentHeight = lineHeight.multiplied(by: CGFloat(v.lbl_content.numberOfLines))
+                let contentHeight = lineHeight * CGFloat(v.lbl_content.numberOfLines)
                 
                 //item高度 = 内容高度 + 间距
-                let itemHeight = contentHeight.adding(itemSpcaing)
+                let itemHeight = contentHeight + (itemSpcaing)
                 
-                total.add(itemHeight)
+                total += (itemHeight)
                 
             }
-            height.add(total)
+            height += (total)
         }
         
         return CGSize(width: collectionView.frame.width, height: height)
@@ -160,7 +160,7 @@ class OutlineTaskCollectionView : UIViewController,  UICollectionViewDelegate , 
         
     }
     
-    func btn_action_inside(sender : UIButton){
+    @objc func btn_action_inside(sender : UIButton){
         let outlineId = sender.restorationIdentifier!
         let taskId = parentView?.ttc.selectedTaskId
         

@@ -111,7 +111,7 @@ class PaperSelectorController : HBaseViewController{
         
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         getListData()
     }

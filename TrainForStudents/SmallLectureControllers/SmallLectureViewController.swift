@@ -82,7 +82,7 @@ class SmallLectureViewController: JHBaseViewController,UITableViewDataSource,UIT
         tableview.reloadData()
     }
     
-    func refreshAction() {
+    @objc func refreshAction() {
         index = 0
         getData(pageindex: index)
     }
@@ -158,7 +158,7 @@ class SmallLectureViewController: JHBaseViewController,UITableViewDataSource,UIT
         //        self.present(nav, animated: true, completion: nil)
     }
     
-    func historyTaskAction() {
+    @objc func historyTaskAction() {
         let completeView = LectureCompleteController()
         self.navigationController?.pushViewController(completeView, animated: true)
     }

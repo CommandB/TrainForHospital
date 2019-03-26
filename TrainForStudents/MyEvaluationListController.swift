@@ -53,7 +53,7 @@ class MyEvaluationListController: MyBaseUIViewController , AVCaptureMetadataOutp
         deptCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))
     }
     
-    func refreshAction() {
+    @objc func refreshAction() {
         getEvaluationCollectionDatasource(60)
     }
     

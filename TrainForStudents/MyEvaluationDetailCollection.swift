@@ -45,7 +45,7 @@ class MyEvaluationDetailCollection : UIViewController,  UICollectionViewDelegate
         
         // 加5是为了右边空出一点
         let contentWidth = 5 + "\(json["itemrate"].stringValue)%".getWidth(font: UIFont.systemFont(ofSize: 14))
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: btn.frame.width.subtracting(contentWidth), bottom: 0, right: 0)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: btn.frame.width - (contentWidth), bottom: 0, right: 0)
         
         return cell
         
@@ -57,14 +57,14 @@ class MyEvaluationDetailCollection : UIViewController,  UICollectionViewDelegate
         btn.backgroundColor = UIColor(hex: "f5f8fb")
         // 加5是为了右边空出一点
         let contentWidth = 5 + "\(btnContent)%".getWidth(font: UIFont.systemFont(ofSize: 14))
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: frame.width.subtracting(contentWidth), bottom: 0, right: 0)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: frame.width - (contentWidth), bottom: 0, right: 0)
         
         btn.setTitle("\(btnContent)%", for: .normal)
         btn.setTitleColor(UIColor(hex: "3b454f"), for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         
         
-        let lbl = UILabel(frame: CGRect(x: 5, y: 0, width: frame.width.subtracting(contentWidth), height: btn.frame.height))
+        let lbl = UILabel(frame: CGRect(x: 5, y: 0, width: frame.width - (contentWidth), height: btn.frame.height))
         lbl.text = btnTitle
         lbl.font = UIFont.systemFont(ofSize: 14)
         lbl.textColor = UIColor(hex: "3b454f")

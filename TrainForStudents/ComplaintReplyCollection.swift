@@ -41,7 +41,7 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         let contentLbl = cell.viewWithTag(10001) as! UILabel
         contentLbl.font = titleFont
         let text = json["reply"].stringValue
-        let tn = text.getLineNumberForWidth(width: contentLbl.frame.width.subtracting(10), cFont: contentLbl.font)
+        let tn = text.getLineNumberForWidth(width: contentLbl.frame.width - 10, cFont: contentLbl.font)
         contentLbl.numberOfLines = 0
         contentLbl.text = text
         var lblHeight = lineHeight * tn
@@ -57,7 +57,7 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         }
         
         let f = contentLbl.frame
-        let dateLbl = UILabel(frame: CGRect(x: f.origin.x, y: f.origin.y.adding(f.size.height).adding(5), width: cell.frame.width.subtracting(75), height: 20))
+        let dateLbl = UILabel(frame: CGRect(x: f.origin.x, y: f.origin.y + (f.size.height) + (5), width: cell.frame.width - (75), height: 20))
         dateLbl.text = json["replytime"].stringValue
         dateLbl.textColor = UIColor.gray
         dateLbl.font = UIFont.systemFont(ofSize: 13)
@@ -98,7 +98,7 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         
         //计算多行label的高度
 //        let lineNumber = str.getLineNumberForWidth(width: lbl.frame.width.subtracting(10),cFont: lbl.font)
-        let lineNumber = str.getLineNumberForWidth(width: UIScreen.width.subtracting(10), cFont: titleFont)
+        let lineNumber = str.getLineNumberForWidth(width: UIScreen.width - (10), cFont: titleFont)
 
         let lblHeight = lineHeight * lineNumber
         var cellHeight = lblHeight + 40

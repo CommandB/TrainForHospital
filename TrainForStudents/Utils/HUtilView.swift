@@ -25,12 +25,12 @@ extension HUtilView{
         let superView = view.superview!
         
         let size = CGSize(width: 10, height: 10)
-        let origin = CGPoint(x: view.frame.width.adding(view.frame.origin.x).subtracting(size.width.divided(by: 2)), y: view.frame.origin.y.subtracting(size.height.divided(by: 2)))
+        let origin = CGPoint(x: view.frame.width + view.frame.origin.x - (size.width / 2), y: view.frame.origin.y - (size.height / 2))
         let redPoint = UILabel()
         redPoint.frame.size = size
         redPoint.frame.origin = origin
         redPoint.clipsToBounds = true
-        redPoint.layer.cornerRadius = size.width.divided(by: 2)
+        redPoint.layer.cornerRadius = size.width / 2
         redPoint.backgroundColor = UIColor.red
         
         //随机生成一个tag
@@ -100,8 +100,8 @@ extension HUtilView{
             _image = _image.resizeImage(newSize: _image.scaleImage(imageLength: UIScreen.width))
         }
         //再计算x和y
-        imageView.setX(x: showImageView.W.subtracting(imageView.W).divided(by: 2))
-        imageView.setY(y: showImageView.H.subtracting(imageView.H).divided(by: 2))
+        imageView.setX(x: (showImageView.W - (imageView.W)) / 2)
+        imageView.setY(y: (showImageView.H - (imageView.H)) / 2)
         
         imageView.image = _image
         showImageView.addSubview(btn_bg)
@@ -117,12 +117,12 @@ extension HUtilView{
     @objc static func pinchDid(_ recognizer:UIPinchGestureRecognizer) {
         //在监听方法中可以实时获得捏合的比例
         let scale = recognizer.scale
-        let multiple = scale.subtracting(1).divided(by: 10).adding(1)
+        let multiple = (scale - 1) / 10 + 1
         let imageView = HUtilView.showImageView.viewWithTag(10001) as! UIImageView
-        imageView.setWidth(width: imageView.W.multiplied(by: multiple))
-        imageView.setHight(height: imageView.H.multiplied(by: multiple))
-        imageView.setX(x: imageView.X.multiplied(by: multiple))
-        imageView.setY(y: imageView.Y.divided(by: multiple))
+        imageView.setWidth(width: imageView.W * multiple)
+        imageView.setHight(height: imageView.H * multiple)
+        imageView.setX(x: imageView.X * multiple)
+        imageView.setY(y: imageView.Y / multiple)
         
         //获取两个触摸点的坐标
 //        print(recognizer.location(ofTouch: 0, in: HUtilView.showImageView))

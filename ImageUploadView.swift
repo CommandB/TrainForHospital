@@ -64,12 +64,12 @@ class ImageUploadView :UIViewController , UITableViewDelegate , UITableViewDataS
 //                index.add(1)
                 
                 let imageView = UIButton(frame: btn.frame)
-                imageView.frame.origin = CGPoint(x: space.adding(btnWidth).multiplied(by: index).adding(prefix), y: btn.frame.origin.y)
+                imageView.frame.origin = CGPoint(x: space + (btnWidth) * (index) + (prefix), y: btn.frame.origin.y)
                 imageView.setImage(image, for: .normal)
                 cell.addSubview(imageView)
-                btn.frame.origin  = CGPoint(x: space.adding(btnWidth).multiplied(by: index.adding(1)).adding(prefix), y: btn.frame.origin.y)
+                btn.frame.origin  = CGPoint(x: space + (btnWidth) * (index + (1)) + (prefix), y: btn.frame.origin.y)
                 imageView.addTarget(self, action: #selector(btn_image_inside), for: .touchUpInside)
-                index.add(1)
+                index += (1)
                 
             }
             
@@ -132,7 +132,7 @@ class ImageUploadView :UIViewController , UITableViewDelegate , UITableViewDataS
         return label
     }
     
-    func selectImage(){
+    @objc func selectImage(){
         //选择图片
         let picker = UIImagePickerController()
         
@@ -184,7 +184,7 @@ class ImageUploadView :UIViewController , UITableViewDelegate , UITableViewDataS
         parentView?.tbl_imageUpload.reloadData()
     }
     
-    func btn_image_inside(sender: UIButton){
+    @objc func btn_image_inside(sender: UIButton){
         let iv = parentView?.showImageView.viewWithTag(10001) as! UIImageView
         iv.image = sender.imageView?.image
 //        iv.frame = setFrame(frame: iv.frame,image: (sender.imageView?.image)!)

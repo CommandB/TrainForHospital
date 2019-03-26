@@ -107,7 +107,7 @@ class TeachingPlanDetailController : HBaseViewController{
         })
     }
     
-    func selectImage(){
+    @objc func selectImage(){
         //选择图片
         let picker = UIImagePickerController()
         
@@ -145,7 +145,7 @@ class TeachingPlanDetailController : HBaseViewController{
     }
     
     ///更新二维码
-    func refreshQrCode(){
+    @objc func refreshQrCode(){
         //print("更新二维码了...")
         let url = SERVER_PORT + "rest/app/getTrainQRCode.do"
         myPostRequest(url,["trainid":taskInfo["trainid"]], method: .post).responseJSON(completionHandler: { resp in
@@ -169,13 +169,13 @@ class TeachingPlanDetailController : HBaseViewController{
         
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds = JSON()
         infoCollection.mj_footer.resetNoMoreData()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         
     }
     
@@ -290,7 +290,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
             let lbl_rate = (cell.viewWithTag(10004) as! UILabel)
             let rate = item["scorevalue"].doubleValue / item["sumscore"].doubleValue
             lbl_rate.text = "\(Int(rate*100))%"
-            lbl_progress.setWidth(width: lbl_bg.W.multiplied(by: CGFloat(rate)))
+            lbl_progress.setWidth(width: lbl_bg.W * CGFloat(rate))
             if rate >= 0.6{
                 lbl_rate.textColor = UIColor(hex: "3186E9")
                 lbl_progress.backgroundColor = UIColor(hex: "9BDE4C")
@@ -312,7 +312,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         var result = CGSize()
-        let cellWidth = collectionView.W.subtracting(5)
+        let cellWidth = collectionView.W - (5)
         switch indexPath.item {
         case 0:
             result = CGSize(width: cellWidth, height: 40)
@@ -337,7 +337,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
     }
     
     //查看附件
-    func presentFileList(sender: UIButton){
+    @objc func presentFileList(sender: UIButton){
         if jds["trainfile"].arrayValue.count == 0{
             return
         }
@@ -347,7 +347,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
     }
     
     ///显示人员列表
-    func presentPersonList(sender: UIButton){
+    @objc func presentPersonList(sender: UIButton){
         
         personListCollectionView.collectionTitle = sender.viewParam!["title"] as! String
         personListCollectionView.personList = sender.viewParam!["data"] as! [JSON]
@@ -367,12 +367,12 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
         //计算一下有多少数据 来定位collection的位置
         let cellCount = personListCollectionView.personList.count + 1
         var collectionHeight = CGFloat(personListCollectionView.cellHeight * cellCount)
-        let maxHeight = UIScreen.height.subtracting(150)
+        let maxHeight = UIScreen.height - (150)
         if collectionHeight > maxHeight{
             collectionHeight = maxHeight
         }
         personCollection.setHight(height: collectionHeight)
-        let y = UIScreen.height.subtracting(CGFloat(collectionHeight)).divided(by: 2)
+        let y = (UIScreen.height - CGFloat(collectionHeight)) / 2
         personCollection.setY(y: y)
         
         personList_view.isHidden = false
@@ -577,7 +577,7 @@ class TeachingPlanDetailPersonListView: UIViewController, UICollectionViewDelega
         return CGSize(width: collectionView.W, height: CGFloat(cellHeight))
     }
     
-    func dissmissToParent(){
+    @objc func dissmissToParent(){
         parentView?.personList_view.isHidden = true
     }
     

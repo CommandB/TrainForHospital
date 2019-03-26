@@ -51,7 +51,7 @@ class WishDetailCollectionView : UIViewController,  UICollectionViewDelegate , U
             let str = jsonDataSource["wishcontent"].stringValue
             //计算多行label的高度
             lbl.numberOfLines = str.getLineNumberForWidth(width: lbl.frame.width - 5)
-            lbl.frame.size = CGSize.init(width: lbl.frame.width, height: UILabel.getDefaultLineHeight().multiplied(by: CGFloat(lbl.numberOfLines)))
+            lbl.frame.size = CGSize.init(width: lbl.frame.width, height: UILabel.getDefaultLineHeight() *  CGFloat(lbl.numberOfLines))
             
         }else{
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
@@ -79,7 +79,7 @@ class WishDetailCollectionView : UIViewController,  UICollectionViewDelegate , U
             
             //计算多行label的高度
             let lineNumber = str.getLineNumberForWidth(width: UIScreen.width - 86 - 13 - 5)
-            let lblHeight = UILabel.getDefaultLineHeight().multiplied(by: CGFloat(lineNumber))
+            let lblHeight = UILabel.getDefaultLineHeight() * CGFloat(lineNumber)
             return CGSize.init(width: UIScreen.width, height: 140 + lblHeight - 20)
         }else{
             return CGSize.init(width: UIScreen.width, height: 140)

@@ -66,13 +66,13 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
     }
     
     ///跳转到消息列表
-    func btn_message_event(){
+    @objc func btn_message_event(){
         //myPresentView(self, viewName: "messageListView")
         //UIApplication.shared.openURL(URL.init(string: "telprompt:13616543097")!)
     }
     
     ///跳转到待办事项
-    func presentToDoList(sender :UIButton){
+    @objc func presentToDoList(sender :UIButton){
         let vc = getViewToStoryboard("todoListView") as! ToDoListController
 //        if (sender.restorationIdentifier?.contains("task"))!{
 //            vc.dataArr = taskJds
@@ -83,7 +83,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
     }
     
     ///6个功能按钮
-    func btn_features_event(sender : UIButton){
+    @objc func btn_features_event(sender : UIButton){
         switch sender.tag - 10000 {
         case 1: //360评价
             myPresentView(self, viewName: "panoramicEvaluationView")
@@ -228,19 +228,19 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
     }
     
     //第一栏 的更多按钮
-    func showMoreTeachingData(){
+    @objc func showMoreTeachingData(){
         let vc = getViewToStoryboard("teachingStatisticsView") as! TeachingStatisticsController
         vc.jds = statisticJds[selectedPanelKey].arrayValue
         present(vc, animated: true, completion: nil)
     }
     //第一栏 顶部两个按钮 切换老师和秘书的统计面板
-    func panelSwitch(sender : UIButton){
+    @objc func panelSwitch(sender : UIButton){
         selectedPanelKey = sender.restorationIdentifier!
         tabsTouchAnimation(sender: sender)
         self.homeCollection.reloadData()
     }
     
-    func refresh() {
+    @objc func refresh() {
         officeTeamJds.removeAll()
         getOfficeTeamList()
         getStatisticData()
@@ -320,8 +320,8 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
                     btn_panel_1.isEnabled = true
                     selectedPanelKey = "secretarypanel"
                     //如果秘书面板没有数据 则把老师面板的按钮居中
-                    btn_panel_1.setX(x: collectionView.W.subtracting(btn_panel_1.W).divided(by: 2))
-                    lbl_markLine.setX(x: collectionView.W.subtracting(lbl_markLine.W).divided(by: 2))
+                    btn_panel_1.setX(x: (collectionView.W - btn_panel_1.W) / 2)
+                    lbl_markLine.setX(x: (collectionView.W - lbl_markLine.W) / 2)
                 }else{
                     btn_panel_2.restorationIdentifier = "secretarypanel"
                     btn_panel_2.isHidden = false
@@ -330,8 +330,8 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             }else{
                 
                 //如果秘书面板没有数据 则把老师面板的按钮居中
-                btn_panel_1.setX(x: collectionView.W.subtracting(btn_panel_1.W).divided(by: 2))
-                lbl_markLine.setX(x: collectionView.W.subtracting(lbl_markLine.W).divided(by: 2))
+                btn_panel_1.setX(x: (collectionView.W - btn_panel_1.W) / 2)
+                lbl_markLine.setX(x: (collectionView.W - lbl_markLine.W) / 2)
             }
             
             for i in 0...4{
@@ -424,7 +424,7 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             let data = officeTeamJds[indexPath.item - 5]
             let btn_headShow = cell.viewWithTag(10001) as! UIButton
             btn_headShow.clipsToBounds = true
-            btn_headShow.layer.cornerRadius = btn_headShow.frame.width.divided(by: 2)
+            btn_headShow.layer.cornerRadius = btn_headShow.frame.width / 2
             
             var lbl = cell.viewWithTag(10002) as! UILabel
             lbl.text = data["teamname"].stringValue
@@ -445,7 +445,7 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             lbl.text = data["lastmsg"].stringValue
             lbl = cell.viewWithTag(20002) as! UILabel
             lbl.clipsToBounds = true
-            lbl.layer.cornerRadius = lbl.frame.width.divided(by: 2)
+            lbl.layer.cornerRadius = lbl.frame.width / 2
             lbl.isHidden = true
             break
         default:
@@ -492,7 +492,7 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
         
         switch indexPath.item {
         case 0:
-            return CGSize(width: UIScreen.width.subtracting(20), height: 200)
+            return CGSize(width: UIScreen.width - (20), height: 200)
         case 1:
 //            if taskJds.count > 0{
                 return CGSize(width: UIScreen.width, height: 165)

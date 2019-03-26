@@ -40,13 +40,13 @@ class MessageListController : HBaseViewController{
         messageCollection.reloadData()
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         messageCollection.mj_footer.resetNoMoreData()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         getListData()
     }
     

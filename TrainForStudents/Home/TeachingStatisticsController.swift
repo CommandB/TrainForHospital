@@ -40,7 +40,7 @@ class TeachingStatisticsController : HBaseViewController{
         teachingTypeCollection.reloadData()
     }
     
-    func refresh() {
+    @objc func refresh() {
         teachingTypeCollection.mj_footer.resetNoMoreData()
         getListData()
     }

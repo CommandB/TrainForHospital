@@ -90,8 +90,8 @@ extension UIImage {
         
         let width = self.size.width
         let height = self.size.height
-        let scale = width.divided(by: imageLength)
-        return CGSize(width: imageLength, height: height.divided(by: scale))
+        let scale = width / imageLength
+        return CGSize(width: imageLength, height: height / scale)
         
     }
     

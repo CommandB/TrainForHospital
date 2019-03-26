@@ -190,7 +190,7 @@ class TaskApplyController: MyBaseUIViewController , UIPickerViewDataSource , UIP
         return true
     }
     
-    func datePickerChange(picker :UIDatePicker){
+    @objc func datePickerChange(picker :UIDatePicker){
         
         txt_completeDate.text = DateUtil.dateToString(picker.date)
         

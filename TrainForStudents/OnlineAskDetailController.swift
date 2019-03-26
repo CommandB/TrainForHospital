@@ -50,8 +50,8 @@ class OnlineAskDetailController: MyBaseUIViewController {
         lbl.frame.size = CGSize(width: lbl.frame.width, height: (lbl.text?.getHeight(font: lbl.font))!)
         //通过label的高度 重新计算下面collection的高度以及y轴坐标
         let exHeight = lbl.frame.height - UILabel.getDefaultLineHeight()
-        onlineAskCollection.frame.size = CGSize(width: UIScreen.width, height: onlineAskCollection.frame.height.subtracting(exHeight))
-        onlineAskCollection.frame.origin = CGPoint(x: 0, y: onlineAskCollection.frame.origin.y.adding(exHeight))
+        onlineAskCollection.frame.size = CGSize(width: UIScreen.width, height: onlineAskCollection.frame.height - (exHeight))
+        onlineAskCollection.frame.origin = CGPoint(x: 0, y: onlineAskCollection.frame.origin.y + (exHeight))
         
         
         askView.jsonDataSource = headData["answers"].arrayValue

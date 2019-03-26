@@ -101,7 +101,7 @@ class LiveController : MyBaseUIViewController,PLPlayerDelegate {
 
     }
     
-    func buttonclick(button:UIButton)  {
+    @objc func buttonclick(button:UIButton)  {
         if button.isSelected {
             player.pause()
             button.setImage(UIImage(named: "暂停.png"), for: .normal)
@@ -116,11 +116,11 @@ class LiveController : MyBaseUIViewController,PLPlayerDelegate {
         button.isSelected = !button.isSelected
     }
     
-    func btn_back_event(button:UIButton)  {
+    @objc func btn_back_event(button:UIButton)  {
         dismiss(animated: true, completion: nil)
     }
     
-    func receiverNotification(){
+    @objc func receiverNotification(){
         let orient = UIDevice.current.orientation
         switch orient {
         case .portrait :

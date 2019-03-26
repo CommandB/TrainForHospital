@@ -34,7 +34,7 @@ class OfficePeopleViewController: JHBaseViewController,UITableViewDelegate,UITab
         self.tableView.mj_header.beginRefreshing()
     }
     
-    func requestOfficePeople() {
+    @objc func requestOfficePeople() {
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT+"rest/app/getOfficePerson.do"
         let params = ["officeid":UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)]

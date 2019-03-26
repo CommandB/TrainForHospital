@@ -42,8 +42,7 @@ class FilesCollectionView : UICollectionView , UICollectionViewDelegate,UICollec
         cell.backgroundColor = UIColor.white
         let icon = UIImageView.init(frame: CGRect(x: 25, y: 10, width: 45, height: 45))
         icon.image = UIImage(named: "ppt")
-        
-        let lbl_title = UILabel(frame: CGRect(x: 75, y: 10, width: UIScreen.width.subtracting(75), height: 22))
+        let lbl_title = UILabel(frame: CGRect(x: 75, y: 10, width: UIScreen.width - 75, height: 22))
         lbl_title.text = "标题..."
         lbl_title.font = UIFont.systemFont(ofSize: 16)
         
@@ -51,7 +50,7 @@ class FilesCollectionView : UICollectionView , UICollectionViewDelegate,UICollec
         lbl_creater.text = "上传人：张三"
         lbl_creater.font = UIFont.systemFont(ofSize: 14)
         
-        let lbl_date = UILabel(frame: CGRect(x: 250, y: 38, width: UIScreen.width.subtracting(260), height: 16))
+        let lbl_date = UILabel(frame: CGRect(x: 250, y: 38, width: UIScreen.width - 260, height: 16))
         lbl_date.text = "2018-07-23 10:30"
         lbl_date.font = UIFont.systemFont(ofSize: 12)
         lbl_date.textColor = UIColor.init(hex: "979797")

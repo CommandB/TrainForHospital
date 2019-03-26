@@ -147,7 +147,7 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
     }
     
     //我的工具按钮点击事件
-    func myTools(sender : UIButton){
+    @objc func myTools(sender : UIButton){
         switch sender.tag {
         case 50001:
             //心愿单
@@ -222,7 +222,7 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
         }
     }
     
-    func btn_avatar_inside(_ sender: UIButton) {
+    @objc func btn_avatar_inside(_ sender: UIButton) {
         //选择图片
         let picker = UIImagePickerController()
         
@@ -294,7 +294,7 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
     }
     
     
-    func openWebView(sender: UIButton){
+    @objc func openWebView(sender: UIButton){
         let webModule = UserDefaults.AppConfig.string(forKey: .webModule)
         let json = JSON.init(parseJSON: webModule!).arrayValue
         let index = sender.tag - 50001

@@ -73,7 +73,7 @@ class OfficePersonListController : HBaseViewController{
         
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         personCollection.mj_footer.resetNoMoreData()
         getListData()

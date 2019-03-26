@@ -47,12 +47,12 @@ class LiveMessageTableView : UIViewController,UITableViewDataSource,UITableViewD
         lbl.layer.cornerRadius = 4
         lbl.layer.masksToBounds = true
         //减去头像的宽度和边上空白位置
-        let maxWidth = cell.frame.width.subtracting(78)
+        let maxWidth = cell.frame.width - (78)
         let num = lbl.text?.getLineNumberForWidth(width: maxWidth)
         if num == 1{
-            lbl.frame.size = CGSize(width: (lbl.text?.getWidth())!.adding(8), height: lbl.frame.height.multiplied(by: CGFloat(num!)).adding(5))
+            lbl.frame.size = CGSize(width: (lbl.text?.getWidth())! + 8, height: lbl.frame.height * CGFloat(num! + 5))
         }else{
-            lbl.frame.size = CGSize(width: maxWidth, height: lbl.frame.height.multiplied(by: CGFloat(num!)))
+            lbl.frame.size = CGSize(width: maxWidth, height: lbl.frame.height * CGFloat(num!))
         }
         lbl.numberOfLines = num!
         print("frame:\(lbl.frame) \r text:\(String(describing: lbl.text)) numberOfLine:\(lbl.numberOfLines)")
@@ -73,13 +73,13 @@ class LiveMessageTableView : UIViewController,UITableViewDataSource,UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: cellName)!
         let lbl = cell.viewWithTag(20001) as! UILabel
         var height = lbl.frame.height
-        let maxWidth = cell.frame.width.subtracting(78)
+        let maxWidth = cell.frame.width - 78
         let t = text[indexPath.item]
         let num = t.getLineNumberForWidth(width: maxWidth)
         if num > 1{
-            height = height.multiplied(by: CGFloat(num))
+            height = height * CGFloat(num)
         }
-        return CGFloat.init(height).adding(42)
+        return CGFloat.init(height + 42)
     }
     
     //section的高度

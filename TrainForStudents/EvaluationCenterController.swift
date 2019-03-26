@@ -106,7 +106,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         
         questionnaireCollection.mj_header.beginRefreshing()
         
-        questionnaireCollection.frame.origin = CGPoint(x: UIScreen.width.multiplied(by: 2), y: evaluationCollection.frame.origin.y)
+        questionnaireCollection.frame.origin = CGPoint(x: UIScreen.width * 2, y: evaluationCollection.frame.origin.y)
         
         //上部3个按钮
         btn_1.layer.cornerRadius = btn_1.frame.width / 2
@@ -119,7 +119,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
 //        btn_3.titleEdgeInsets = UIEdgeInsets(top: 55, left: 0, bottom: 0, right: 0)
         
         //用作待考,待评,问卷左右滑动的容器
-        scrollView.contentSize = CGSize(width: UIScreen.width.multiplied(by: 3), height: scrollView.frame.height)
+        scrollView.contentSize = CGSize(width: UIScreen.width * 3, height: scrollView.frame.height)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
@@ -249,10 +249,10 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = scrollView.contentOffset.x
-        if x < UIScreen.width.divided(by: 2){
+        if x < UIScreen.width / 2{
 //            print("滑动到待考")
             tabsTouchAnimation(sender: btn_exam)
-        }else if x > UIScreen.width.divided(by: 2) && x < UIScreen.width.adding(UIScreen.width.divided(by: 2)){
+        }else if x > UIScreen.width / 2 && x < UIScreen.width + UIScreen.width / 2{
 //            print("滑动到待评")
             tabsTouchAnimation(sender: btn_evaluation)
         }else{
@@ -265,9 +265,9 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
 //        print("触发了减速")
         let x = scrollView.contentOffset.x
-        if x < UIScreen.width.divided(by: 2){
+        if x < UIScreen.width / 2{
             tabsTouchAnimation(sender: btn_exam)
-        }else if x > UIScreen.width.divided(by: 2) && x < UIScreen.width.adding(UIScreen.width.divided(by: 2)){
+        }else if x > UIScreen.width / 2 && x < UIScreen.width + UIScreen.width / 2{
             tabsTouchAnimation(sender: btn_evaluation)
         }else{
             tabsTouchAnimation(sender: btn_questionnaire)
@@ -435,7 +435,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         }else if sender.restorationIdentifier == "btn_over"{
             scrollView.setContentOffset(CGPoint(x: UIScreen.width, y: 0), animated: true)
         }else if sender.restorationIdentifier == "btn_questionnaire"{
-            scrollView.setContentOffset(CGPoint(x: UIScreen.width.multiplied(by: 2), y: 0), animated: true)
+            scrollView.setContentOffset(CGPoint(x: UIScreen.width * 2, y: 0), animated: true)
         }
         UIView.setAnimationCurve(.easeOut)
         UIView.commitAnimations()
@@ -469,7 +469,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         })
     }
     //提交调查问卷成功
-    func QuestionnaireCommitSuccess() {
+    @objc func QuestionnaireCommitSuccess() {
         self.questionnaireView.jsonDataSource.removeAll()
         getQuestionnaireDatasource()
     }

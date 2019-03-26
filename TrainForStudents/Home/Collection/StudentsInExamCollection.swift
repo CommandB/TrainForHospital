@@ -24,7 +24,7 @@ class StudentsInExamCollection: UIViewController ,UICollectionViewDelegate , UIC
         let data = jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
         let btn = cell.viewWithTag(10001) as! UIButton
-        btn.setCornerRadius(radius: btn.W.divided(by: 2))
+        btn.setCornerRadius(radius: btn.W - 2)
         btn.setImage(UIImage(named: "loginId"), for: .normal)
         let lbl = cell.viewWithTag(10002) as! UILabel
         lbl.text = data["personname"].stringValue

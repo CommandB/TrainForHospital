@@ -32,7 +32,7 @@ extension UIButton{
         //let imageSize = self.imageRect(forContentRect: self.frame)
         let imageSize = UIImageView(image: image).frame
         let titleFont = self.titleLabel?.font!
-        let titleSize = title.size(attributes: [NSFontAttributeName: titleFont!])
+        let titleSize = title.size(withAttributes: [NSAttributedStringKey.font: titleFont!])
         
         var titleInsets: UIEdgeInsets
         var imageInsets: UIEdgeInsets

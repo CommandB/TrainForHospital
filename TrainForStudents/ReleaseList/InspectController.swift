@@ -89,7 +89,7 @@ class InspectController : HBaseViewController{
         durationPickerImpl.clorsureImpl = durationClosureImpl
         
         //用作滚动页的容器
-        scrollView.contentSize = CGSize(width: UIScreen.width.multiplied(by: 3), height: scrollView.frame.height)
+        scrollView.contentSize = CGSize(width: UIScreen.width * (3), height: scrollView.frame.height)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
@@ -100,7 +100,7 @@ class InspectController : HBaseViewController{
         buttonGroup = [btn_baseInfo ,btn_students ,btn_patient ,btn_files]
         
         students_view.frame.origin = CGPoint(x: UIScreen.width, y: students_view.frame.origin.y)
-        patient_View.frame.origin = CGPoint(x: UIScreen.width.multiplied(by: 2), y: patient_View.frame.origin.y)
+        patient_View.frame.origin = CGPoint(x: UIScreen.width * (2), y: patient_View.frame.origin.y)
         
         //基础数据设置
         var txt = view.viewWithTag(10001) as! UITextField
@@ -176,7 +176,7 @@ class InspectController : HBaseViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: Notification.Name.init(speakerNotice), object: nil)
     }
     
-    func receiveNotice(notification : NSNotification){
+    @objc func receiveNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self)
         if notification.userInfo != nil{
             let data = notification.userInfo!["data"] as! [JSON]
@@ -200,11 +200,11 @@ class InspectController : HBaseViewController{
         }
     }
     
-    func addSpeaker(sender : UIButton){
+    @objc func addSpeaker(sender : UIButton){
         PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON]() , noticeName: speakerNotice)
     }
     
-    func showOfficeList(){
+    @objc func showOfficeList(){
         officeList_View.isHidden = false
     }
     
@@ -340,7 +340,7 @@ class InspectController : HBaseViewController{
         }else if sender.restorationIdentifier == "btn_students"{
             scrollView.setContentOffset(CGPoint(x: UIScreen.width, y: 0), animated: true)
         }else if sender.restorationIdentifier == "btn_patient"{
-            scrollView.setContentOffset(CGPoint(x: UIScreen.width.multiplied(by: 2), y: 0), animated: true)
+            scrollView.setContentOffset(CGPoint(x: UIScreen.width * 2, y: 0), animated: true)
         }
         UIView.setAnimationCurve(.easeOut)
         UIView.commitAnimations()
@@ -348,7 +348,7 @@ class InspectController : HBaseViewController{
         //print("lbl_markLine.frame = \(lbl_markLine.frame)")
     }
     
-    func chooseCheckInType(sender : UIButton){
+    @objc func chooseCheckInType(sender : UIButton){
         hiddenKeyBoard()
         var i = 0
         while (i < 3){
@@ -364,7 +364,7 @@ class InspectController : HBaseViewController{
     }
     
     
-    func chooseDate(picker :UIDatePicker){
+    @objc func chooseDate(picker :UIDatePicker){
         let t31 = view.viewWithTag(30001) as! UITextField
         let t32 = view.viewWithTag(30002) as! UITextField
         let t41 = view.viewWithTag(40001) as! UITextField
@@ -494,9 +494,9 @@ extension InspectController : UIScrollViewDelegate{
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = scrollView.contentOffset.x
-        if x < UIScreen.width.divided(by: 2){
+        if x < UIScreen.width / 2{
             tabsTouchAnimation(sender: btn_baseInfo)
-        }else if x > UIScreen.width.divided(by: 2) && x < UIScreen.width.adding(UIScreen.width.divided(by: 2)){
+        }else if x > UIScreen.width / 2 && x < UIScreen.width + (UIScreen.width / 2){
             tabsTouchAnimation(sender: btn_students)
         }else{
             tabsTouchAnimation(sender: btn_patient)
@@ -505,9 +505,9 @@ extension InspectController : UIScrollViewDelegate{
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         let x = scrollView.contentOffset.x
-        if x < UIScreen.width.divided(by: 2){
+        if x < UIScreen.width / 2{
             tabsTouchAnimation(sender: btn_baseInfo)
-        }else if x > UIScreen.width.divided(by: 2) && x < UIScreen.width.adding(UIScreen.width.divided(by: 2)){
+        }else if x > UIScreen.width / 2 && x < UIScreen.width + (UIScreen.width / 2){
             tabsTouchAnimation(sender: btn_students)
         }else{
             tabsTouchAnimation(sender: btn_patient)

@@ -38,7 +38,7 @@ extension UIViewController {
             let frame = value.cgRectValue
             let intersection = frame.intersection(vc.view.frame)
             
-            UIView.animate(withDuration: duration, delay: 0.0, options: UIViewAnimationOptions(rawValue: curve), animations: { _ in
+            UIView.animate(withDuration: duration, delay: 0.0, options: UIViewAnimationOptions(rawValue: curve), animations: { 
                 
                 if vc.view.frame.size.height >= UIScreen.height{
                     vc.view.frame.size.height = vc.view.frame.size.height-intersection.height
@@ -50,14 +50,14 @@ extension UIViewController {
         }
     }
     
-    func keyboardWillHide(_ notification : Notification){
+    @objc func keyboardWillHide(_ notification : Notification){
         
         let vc = self
         if let userInfo = notification.userInfo,
             let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
             let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
             
-            UIView.animate(withDuration: duration, delay: 0.0, options: UIViewAnimationOptions(rawValue: curve), animations: { _ in
+            UIView.animate(withDuration: duration, delay: 0.0, options: UIViewAnimationOptions(rawValue: curve), animations: { 
                 
                 vc.view.frame.size.height = UIScreen.height
                 
@@ -65,7 +65,7 @@ extension UIViewController {
         }
     }
     
-    func keyboardWillShow(_ notification : Notification){
+    @objc func keyboardWillShow(_ notification : Notification){
         
         let vc = self
         if let userInfo = notification.userInfo,
@@ -76,7 +76,7 @@ extension UIViewController {
             let frame = value.cgRectValue
             let intersection = frame.intersection(vc.view.frame)
             
-            UIView.animate(withDuration: duration, delay: 0.0, options: UIViewAnimationOptions(rawValue: curve), animations: { _ in
+            UIView.animate(withDuration: duration, delay: 0.0, options: UIViewAnimationOptions(rawValue: curve), animations: { 
                 
                 vc.view.frame.size.height = vc.view.frame.size.height-intersection.height
                 

@@ -72,7 +72,7 @@ class OfficeController: MyBaseUIViewController, UICollectionViewDelegate, UIColl
         //分割线
         let dividing = cell.viewWithTag(20001) as! UILabel
         var frame = CGRect()
-        frame.origin = CGPoint(x: dividing.frame.origin.x, y: lbl.frame.height.adding(lbl.frame.origin.y))
+        frame.origin = CGPoint(x: dividing.frame.origin.x, y: lbl.frame.height + (lbl.frame.origin.y))
         frame.size = dividing.frame.size
         dividing.frame = frame
         
@@ -83,7 +83,7 @@ class OfficeController: MyBaseUIViewController, UICollectionViewDelegate, UIColl
         let mn = Double.init(msg.getLineNumberForUILabel(lbl))
         lbl.text = "\(msg)"
         lbl.frame.size = CGSize(width: lbl.frame.size.width, height: CGFloat(lineHeight*mn))
-        lbl.frame.origin = CGPoint(x: lbl.frame.origin.x, y: dividing.frame.origin.y.adding(1))
+        lbl.frame.origin = CGPoint(x: lbl.frame.origin.x, y: dividing.frame.origin.y + (1))
         
         return cell
     }
@@ -99,7 +99,7 @@ class OfficeController: MyBaseUIViewController, UICollectionViewDelegate, UIColl
         //正文的行数
         let mn = msg.getLineNumberForWidth(width: 300, cFont: UIFont.systemFont(ofSize: 13))
         let contentHeight = lineHeight*Double.init(tn+mn)
-        return CGSize(width: UIScreen.width.subtracting(40), height: CGFloat(contentHeight + 20))
+        return CGSize(width: UIScreen.width - (40), height: CGFloat(contentHeight + 20))
         
     }
     
@@ -154,17 +154,17 @@ class OfficeController: MyBaseUIViewController, UICollectionViewDelegate, UIColl
         })
     }
     
-    func refreshAction() {
+    @objc func refreshAction() {
         collectionDs.removeAll()
         self.notice_collection.mj_footer.resetNoMoreData()
         loadData()
     }
     
-    func loadMoreAction() {
+    @objc func loadMoreAction() {
         loadData()
     }
     
-    func btn_nav_tui(sender : UIButton){
+    @objc func btn_nav_tui(sender : UIButton){
         switch sender.tag {
         case 20001:
             let vc = OfficePeopleViewController()

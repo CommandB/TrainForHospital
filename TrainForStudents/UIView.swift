@@ -146,16 +146,16 @@ extension UIView{
     
     func moveToBefore(target: UIView , space: CGFloat = 0){
         
-        let _h = self.H.subtracting(target.H).divided(by: 2)
-        self.setY(y: target.Y.subtracting(_h))
-        self.setX(x: target.X.subtracting(self.W).subtracting(space))
+        let _h = (self.H - (target.H)) / 2
+        self.setY(y: target.Y - (_h))
+        self.setX(x: target.X - self.W - space)
     }
     
     func moveToAfter(target: UIView , space: CGFloat = 0){
         
-        let _h = self.H.subtracting(target.H).divided(by: 2)
-        self.setY(y: target.Y.subtracting(_h))
-        self.setX(x: target.X.adding(target.W).adding(space))
+        let _h = (self.H - target.H) / 2
+        self.setY(y: target.Y - (_h))
+        self.setX(x: (target.X + target.W) / space)
     }
     
 }

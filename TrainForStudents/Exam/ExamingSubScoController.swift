@@ -120,7 +120,7 @@ class ExamingSubScoController: UIViewController,UITableViewDelegate,UITableViewD
         sureBtn.isHidden = true
     }
     
-    func lastQuestionBtnTapped() {
+    @objc func lastQuestionBtnTapped() {
         questionIndex = questionIndex-1
         if questionIndex <= 0 {
             lastQuestionBtn.isHidden = true
@@ -130,7 +130,7 @@ class ExamingSubScoController: UIViewController,UITableViewDelegate,UITableViewD
         
     }
     
-    func nextQuestionBtnTapped() {
+    @objc func nextQuestionBtnTapped() {
         let maxQuestionIndex = headDataArr.count - 1
         
         if questionIndex >= headDataArr.count {
@@ -156,7 +156,7 @@ class ExamingSubScoController: UIViewController,UITableViewDelegate,UITableViewD
         (self.parent as! StillExamController).reloadHeadTitle(questionIndex:questionIndex)
     }
     
-    func sureBtnTapped() {
+    @objc func sureBtnTapped() {
         
         MBProgressHUD.showMessage("提交中", to: self.view)
         let urlString = SERVER_PORT + "rest/taskExercisesResult/commitPaper.do"

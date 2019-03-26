@@ -45,7 +45,7 @@ class UndoneCollectionView: MyBaseCollectionView{
         lbl.text = "\(json["title"].stringValue)"
         let btn = cell.viewWithTag(10002) as! UIButton
         let f = btn.frame
-        lbl = UILabel(frame: CGRect(x: UIScreen.width.subtracting(46), y: f.origin.y.subtracting(3), width: f.size.width.subtracting(10), height: f.size.height))
+        lbl = UILabel(frame: CGRect(x: UIScreen.width - (46), y: f.origin.y - (3), width: f.size.width - 10, height: f.size.height))
         lbl.text = json["tasktypeshort"].stringValue
         lbl.textColor = UIColor.white
         lbl.font = UIFont.systemFont(ofSize: 12)
@@ -154,13 +154,13 @@ class UndoneCollectionView: MyBaseCollectionView{
         return CGSize(width: UIScreen.width, height: cellHeight)
     }
     
-    func btn_assistant_inside(sender : UIButton){
+    @objc func btn_assistant_inside(sender : UIButton){
         let vc = getViewToStoryboard("assistantView") as! AssistantController
         vc.taskId = sender.restorationIdentifier!
         parentView?.present(vc, animated: true, completion: nil)
     }
     
-    func signUpAction(sender:UIButton){
+    @objc func signUpAction(sender:UIButton){
         if sender.currentTitle == "我要报名" {
             let signUpAlert = UIAlertController.init(title: "是否报名", message: nil, preferredStyle: .alert)
             let sureAction = UIAlertAction.init(title: "是", style: .default, handler:{

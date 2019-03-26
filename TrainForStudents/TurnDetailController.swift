@@ -196,8 +196,9 @@ class TurnDetailController : MyBaseUIViewController{
         buttonView.isHidden = isHidden
     }
     
-    public override func refresh() {
-        initLimitPage()
+    
+    override func refresh() {
+        self.initLimitPage()
         getOutlineCollectionDatasource()
         getNoOutlineTask()
     }

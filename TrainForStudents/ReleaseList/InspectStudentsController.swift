@@ -44,7 +44,7 @@ class InspectStudentsController : UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonDefaultNotificationName, object: nil)
     }
     
-    func receiveNotice(notification : NSNotification){
+    @objc func receiveNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self)
         if notification.userInfo != nil{
             InspectStudentsController.jds = notification.userInfo!["data"] as! [JSON]
@@ -52,7 +52,7 @@ class InspectStudentsController : UIViewController{
         }
     }
     
-    func addStudents(){
+    @objc func addStudents(){
 //        myPresentView(self, viewName: "personSelectorView")
         PersonSelectorController.presentPersonSelector(viewController: self, data: InspectStudentsController.jds)
     }
@@ -89,7 +89,7 @@ extension InspectStudentsController : UICollectionViewDelegate , UICollectionVie
         return CGSize(width: UIScreen.width, height: 40)
     }
     
-    func removeStudents(sender : UIButton){
+    @objc func removeStudents(sender : UIButton){
         if sender.superview?.tag != nil{
             InspectStudentsController.jds.remove(at: sender.superview!.tag)
             studentsCollection.reloadData()

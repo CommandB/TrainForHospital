@@ -50,7 +50,7 @@ class HistoryExamCollectionView : MyBaseCollectionView{
         
         
         let json = jsonDataSource[indexPath.item]
-        let lblWidth = UIScreen.width.subtracting(100)
+        let lblWidth = UIScreen.width - 100
         let title = json["tasktitle"].stringValue
         let lineNumber = title.getLineNumberForWidth(width: lblWidth, cFont: UIFont.systemFont(ofSize: 17))
         let cHeight = 85 + (lineNumber - 1) * 25

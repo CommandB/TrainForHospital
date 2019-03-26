@@ -66,7 +66,7 @@ class ShortAnswerCollectionView : QuestionCollectionView ,UITextViewDelegate{
             text = data["indexname"].stringValue + " " + data["title"].stringValue
             let lineNumber = text.getLineNumberForWidth(width: labelWidth, cFont: questionFont)
             lineHeight = text.getHeight(font:questionFont)
-            lineHeight.multiply(by: CGFloat(lineNumber))
+            lineHeight *= CGFloat(lineNumber)
         }else{
             lineHeight = 140
         }

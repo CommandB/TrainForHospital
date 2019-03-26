@@ -42,7 +42,7 @@ class RecordsAnalysisCollectionView : QuestionCollectionView{
             lbl.numberOfLines = title.getLineNumberForWidth(width: lbl.frame.width - boundary, cFont: (lbl.font)!)
             lbl.frame.size = CGSize(width: lbl.frame.size.width, height: getHeightForLabel(lbl: lbl))
             let txt = cell.viewWithTag(20001) as! UITextView
-            txt.frame.origin = CGPoint(x: txt.frame.origin.x, y: lbl.frame.height.adding(10))
+            txt.frame.origin = CGPoint(x: txt.frame.origin.x, y: lbl.frame.height + (10))
             
         }
         
@@ -70,12 +70,12 @@ class RecordsAnalysisCollectionView : QuestionCollectionView{
             labelWidth = UIScreen.width - 40 - 35 - 8 - boundary
             data = subQ[index - 1]
             text = data["indexname"].stringValue + " " + data["title"].stringValue
-            minHeight.add(10)  //答案选项的cell需要增加间距
+            minHeight += (10)  //答案选项的cell需要增加间距
         }
         let lineNumber = text.getLineNumberForWidth(width: labelWidth, cFont: questionFont)
         lineHeight = text.getHeight(font:questionFont)
-        lineHeight.multiply(by: CGFloat(lineNumber))
-        lineHeight.add(5)
+        lineHeight *= CGFloat(lineNumber)
+        lineHeight += 5
         
         
         if lineHeight < minHeight {

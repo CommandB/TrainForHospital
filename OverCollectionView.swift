@@ -41,7 +41,7 @@ class OverCollectionView: MyBaseCollectionView{
         let btn = cell.viewWithTag(10002) as! UIButton
         let f = btn.frame
         if cell.viewWithTag(10003) == nil{
-            lbl = UILabel(frame: CGRect(x: UIScreen.width.subtracting(46), y: f.origin.y.subtracting(3), width: f.size.width.subtracting(10), height: f.size.height))
+            lbl = UILabel(frame: CGRect(x: UIScreen.width - 46, y: f.origin.y - (3), width: f.size.width - (10), height: f.size.height))
         }else{
             lbl = cell.viewWithTag(10003) as! UILabel
         }
@@ -149,7 +149,7 @@ class OverCollectionView: MyBaseCollectionView{
         jsonDataSource = [JSON]()
     }
     
-    func btn_assistant_inside(sender : UIButton){
+    @objc func btn_assistant_inside(sender : UIButton){
         let vc = getViewToStoryboard("assistantView") as! AssistantController
         vc.taskId = sender.restorationIdentifier!
         parentView?.present(vc, animated: true, completion: nil)

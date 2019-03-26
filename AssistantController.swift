@@ -138,14 +138,14 @@ class AssistantController: MyBaseUIViewController {
     }
     
     ///两个页签的touch事件
-    func btn_tab_inside(sender :UIButton){
+    @objc func btn_tab_inside(sender :UIButton){
         
         tabsTouchAnimation(sender)
         
     }
     
     //获取我的信息
-    func getStudentsData(){
+    @objc func getStudentsData(){
         
         let url = SERVER_PORT+"rest/task/queryTaskAllStudent.do"
         myPostRequest(url,["taskid":taskId]).responseJSON(completionHandler: {resp in

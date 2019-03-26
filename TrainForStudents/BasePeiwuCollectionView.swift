@@ -119,11 +119,11 @@ class BasePeiwuCollectionView: QuestionCollectionView {
             labelWidth = UIScreen.width - 40 - 35 - 8 - boundary
             data = a[index - subQ.count]
             text = data["answervalue"].stringValue
-            minHeight.add(10)  //答案选项的cell需要增加间距
+            minHeight += 10  //答案选项的cell需要增加间距
         }
         let lineNumber = text.getLineNumberForWidth(width: labelWidth, cFont: questionFont)
         lineHeight = text.getHeight(font:questionFont)
-        lineHeight.multiply(by: CGFloat(lineNumber))
+        lineHeight *= CGFloat(lineNumber)
         //lineHeight.add(CGFloat(30))
         
         

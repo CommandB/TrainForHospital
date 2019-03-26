@@ -62,8 +62,8 @@ class QuestionCollectionView : UIViewController,  UICollectionViewDelegate , UIC
         let title = json["title"].stringValue
         var lineHeight = title.getHeight(font:questionFont)
         let lineNumber = title.getLineNumberForWidth(width: labelWidth, cFont: questionFont)
-        lineHeight.multiply(by: CGFloat(lineNumber))
-        lineHeight.add(CGFloat(20))
+        lineHeight *= CGFloat(lineNumber)
+        lineHeight += CGFloat(20)
         return CGSize(width: UIScreen.width, height: lineHeight)
         
         

@@ -110,7 +110,7 @@ class RecordsCollectionView : QuestionCollectionView{
                 let answersJson = subQ[indexPath.section - 1]["answers"].arrayValue
                 data = answersJson[indexPath.item - 1]
                 text = data["answervalue"].stringValue
-                minHeight.add(10)  //答案选项的cell需要增加间距
+                minHeight += (10)  //答案选项的cell需要增加间距
                 
             }else{
                 data = subQ[indexPath.section - 1]
@@ -125,8 +125,8 @@ class RecordsCollectionView : QuestionCollectionView{
             lineNumber += 1
         }
         lineHeight = text.getHeight(font:questionFont)
-        lineHeight.multiply(by: CGFloat(lineNumber))
-        lineHeight.add(5)
+        lineHeight *= CGFloat(lineNumber)
+        lineHeight += (5)
         
         
         if lineHeight < minHeight {

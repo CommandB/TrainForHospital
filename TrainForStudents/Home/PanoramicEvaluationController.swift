@@ -39,7 +39,7 @@ class PanoramicEvaluationController : HBaseViewController{
         datePicker.dataSource = self
         datePicker.setWidth(width: UIScreen.width)
         datePicker.setHight(height: 250)
-        datePicker.setY(y: UIScreen.height.subtracting(250))
+        datePicker.setY(y: UIScreen.height - (250))
         datePicker.isHidden = true
         datePicker.backgroundColor = UIColor(hex:"D0D3D9")
         view.addSubview(datePicker)
@@ -53,7 +53,7 @@ class PanoramicEvaluationController : HBaseViewController{
         
         var btn = view.viewWithTag(10001) as! UIButton
         btn.setTitle("\(Date().month)月", for: .normal)
-        btn.setCornerRadius(radius: btn.W.divided(by: 2))
+        btn.setCornerRadius(radius: btn.W / 2)
         btn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
         let lbl = view.viewWithTag(10002) as! UILabel
         lbl.text = "\(Date().year)"
@@ -92,7 +92,7 @@ class PanoramicEvaluationController : HBaseViewController{
         
     }
     
-    func showDatePicker(sender: UIButton){
+    @objc func showDatePicker(sender: UIButton){
         datePicker.isHidden = !datePicker.isHidden
     }
     
@@ -145,7 +145,7 @@ class PanoramicEvaluationController : HBaseViewController{
         })
     }
     
-    func receiveNotice(notification : NSNotification){
+    @objc func receiveNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: PanoramicEvaluationDetailController.callbackNotificationName, object: nil)
         //print("处理通知")
         if notification.userInfo != nil{
@@ -156,7 +156,7 @@ class PanoramicEvaluationController : HBaseViewController{
         }
     }
     
-    func receiveNotice2(notification : NSNotification){
+    @objc func receiveNotice2(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: EvaluationDimensionController.callbackNotificationName, object: nil)
         //print("处理通知")
         if notification.userInfo != nil{
@@ -165,7 +165,7 @@ class PanoramicEvaluationController : HBaseViewController{
         }
     }
     
-    func presentDimension(){
+    @objc func presentDimension(){
         let vc = getViewToStoryboard("evaluationDimensionView") as! EvaluationDimensionController
         vc.evDic = evDic
         present(vc, animated: true, completion: nil)
@@ -232,17 +232,17 @@ class PanoramicEvaluationController : HBaseViewController{
         personCollection.reloadData()
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         personCollection.mj_footer.resetNoMoreData()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         getListData()
     }
     
-    func closePickerView(){
+    @objc func closePickerView(){
         datePicker.isHidden = true
     }
     
@@ -259,7 +259,7 @@ extension PanoramicEvaluationController : UICollectionViewDelegate , UICollectio
         let data = jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         let btn_avatar = cell.viewWithTag(10001) as! UIButton
-        btn_avatar.setCornerRadius(radius: btn_avatar.W.divided(by: 2))
+        btn_avatar.setCornerRadius(radius: btn_avatar.W / 2)
         var lbl = cell.viewWithTag(10002) as! UILabel
         lbl.text = data["personname"].stringValue
         lbl = cell.viewWithTag(10003) as! UILabel

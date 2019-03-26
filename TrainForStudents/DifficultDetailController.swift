@@ -42,14 +42,14 @@ class DifficultDetailController: MyBaseUIViewController {
         lbl.text = headData["title"].stringValue
         lbl.numberOfLines = 0
         var num = lbl.text?.getLineNumberForUILabel(lbl)
-        lbl.frame.size = CGSize(width: lbl.frame.width, height: lbl.frame.height.multiplied(by: CGFloat(num!)))
+        lbl.frame.size = CGSize(width: lbl.frame.width, height: lbl.frame.height * CGFloat(num!))
         lbl.lineBreakMode = .byCharWrapping
         
         lbl = view.viewWithTag(20001) as! UILabel
         lbl.text = "\(headData["content"].stringValue)"
         lbl.numberOfLines = 0
         num = lbl.text?.getLineNumberForUILabel(lbl)
-        lbl.frame.size = CGSize(width: lbl.frame.width, height: lbl.frame.height.multiplied(by: CGFloat(num!)))
+        lbl.frame.size = CGSize(width: lbl.frame.width, height: lbl.frame.height * CGFloat(num!))
         lbl.lineBreakMode = .byCharWrapping
         
         lbl = view.viewWithTag(30001) as! UILabel

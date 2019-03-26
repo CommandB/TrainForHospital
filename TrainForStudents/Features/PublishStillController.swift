@@ -109,12 +109,12 @@ class PublishStillController : HBaseViewController{
     }
     
     //选考试学生
-    func btn_student_evet(sender : UIButton){
+    @objc func btn_student_evet(sender : UIButton){
         PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON](), single: true)
     }
     
     //选择试卷
-    func btn_paper_evet(sender : UIButton){
+    @objc func btn_paper_evet(sender : UIButton){
         
         let vc = getViewToStoryboard("paperSelectorView") as! PaperSelectorController
         vc.isSkillExam = true
@@ -123,7 +123,7 @@ class PublishStillController : HBaseViewController{
     }
     
     //考试类型选择
-    func chooseExamType(sender : UIButton){
+    @objc func chooseExamType(sender : UIButton){
         
         var i = 0
         while (i < 2){
@@ -139,7 +139,7 @@ class PublishStillController : HBaseViewController{
     }
     
     //人员选择器 callback
-    func receiveStudentNotice(notification : NSNotification){
+    @objc func receiveStudentNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: PersonSelectorController.addPersonDefaultNotificationName, object: nil)
         if notification.userInfo != nil{
             let data = notification.userInfo!["data"] as! [JSON]
@@ -167,7 +167,7 @@ class PublishStillController : HBaseViewController{
     }
     
     //试卷选择器 callback
-    func receivePaperNotice(notification : NSNotification){
+    @objc func receivePaperNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: PaperSelectorController.defaultNoticeName, object: nil)
         
         if notification.userInfo != nil{

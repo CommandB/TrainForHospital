@@ -36,7 +36,7 @@ class MyEvaluationListCollectionView : MyBaseCollectionView{
         //按钮间距
         let spacing = 15
         //按钮宽度 = [屏幕宽度 - (5 * 按钮间距)] / 3
-        let btnWidth = Int(UIScreen.width.subtracting(CGFloat(5 * spacing)).divided(by: 3))
+        let btnWidth = Int((UIScreen.width - (CGFloat(5 * spacing))) / 3)
         let btnHeight = 30
         let items = json["items"].arrayValue
         let maxItems = items.count > 6 ? 6 : items.count
@@ -63,7 +63,7 @@ class MyEvaluationListCollectionView : MyBaseCollectionView{
         btn.backgroundColor = UIColor(hex: "f5f8fb")
         // 加5是为了右边空出一点
         let contentWidth = 5 + "\(btnContent)%".getWidth(font: UIFont.systemFont(ofSize: 14))
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: frame.width.subtracting(contentWidth), bottom: 0, right: 0)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: frame.width - (contentWidth), bottom: 0, right: 0)
 
         btn.setTitle("\(btnContent)%", for: .normal)
         btn.setTitleColor(UIColor(hex: "3b454f"), for: .normal)
@@ -73,7 +73,7 @@ class MyEvaluationListCollectionView : MyBaseCollectionView{
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true 
         
-        let lbl = UILabel(frame: CGRect(x: 5, y: 0, width: frame.width.subtracting(contentWidth), height: btn.frame.height))
+        let lbl = UILabel(frame: CGRect(x: 5, y: 0, width: frame.width - (contentWidth), height: btn.frame.height))
         lbl.text = btnTitle
         lbl.font = UIFont.systemFont(ofSize: 14)
         lbl.textColor = UIColor(hex: "3b454f")

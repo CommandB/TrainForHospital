@@ -236,7 +236,7 @@ class PublishSubjectExamDetailController : HBaseViewController{
     }
     
     ///选监考老师 callback
-    func receiveTeacherNotice(notification : NSNotification){
+    @objc func receiveTeacherNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: Notification.Name(teacherNotice), object: nil)
         if notification.userInfo != nil{
             let data = notification.userInfo!["data"] as! [JSON]
@@ -262,7 +262,7 @@ class PublishSubjectExamDetailController : HBaseViewController{
     }
     
     ///选阅卷老师 回调
-    func receiveMarkingNotice(notification : NSNotification){
+    @objc func receiveMarkingNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: Notification.Name(markingNotice), object: nil)
         if notification.userInfo != nil{
             let data = (notification.userInfo!["data"] as! [JSON])
@@ -286,12 +286,12 @@ class PublishSubjectExamDetailController : HBaseViewController{
     }
     
     //选监考老师
-    func btn_teacher_evet(sender : UIButton){
+    @objc func btn_teacher_evet(sender : UIButton){
         PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON](), noticeName: teacherNotice)
     }
     
     //选阅卷老师
-    func btn_marking_evet(sender : UIButton){
+    @objc func btn_marking_evet(sender : UIButton){
         //记录当前的选的index
 //        currentChooseExamIndex = sender.viewParam!["indexPath"] as! IndexPath
         submitData["indexPath"] = (sender.viewParam!["indexPath"] as! IndexPath).item
@@ -301,7 +301,7 @@ class PublishSubjectExamDetailController : HBaseViewController{
     
     
     ///选时间日期
-    func chooseDate(picker :UIDatePicker){
+    @objc func chooseDate(picker :UIDatePicker){
         
         let t31 = view.viewWithTag(30001) as! UITextField
         let t32 = view.viewWithTag(30002) as! UITextField
@@ -326,7 +326,7 @@ class PublishSubjectExamDetailController : HBaseViewController{
     }
     
     ///选签到类型
-    func chooseSignInType(sender : UIButton){
+    @objc func chooseSignInType(sender : UIButton){
         hiddenKeyBoard()
         var i = 0
         while (i < 2){
@@ -342,7 +342,7 @@ class PublishSubjectExamDetailController : HBaseViewController{
     }
     
     ///选是否可以APP考试
-    func chooseAppExam(sender : UIButton){
+    @objc func chooseAppExam(sender : UIButton){
         hiddenKeyBoard()
         var i = 0
         while (i < 2){

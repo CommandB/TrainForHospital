@@ -62,6 +62,15 @@ class EvaluationItemListController : UIViewController{
     //提交按钮
     @IBAction func btn_submit_inside(_ sender: UIButton) {
         
+        var index = 1
+        for item in detailView.jsonDataSource{
+            if item.1["get_value"].intValue == 0{
+                myAlert(self, message: "请评价第\(index)题!")
+                return
+            }
+            index += 1
+        }
+        
         let data = jds[pageNumber]
         let url = SERVER_PORT+"rest/evaluation/commitEvaluationResult.do"
         myPostRequest(url,JSON(["items":detailView.jsonDataSource , "taskid":data["taskid"].stringValue, "evaluateid": data["buid"].stringValue]).dictionaryObject).responseJSON(completionHandler: {resp in
@@ -194,7 +203,7 @@ class EvaluationItemListController : UIViewController{
             if pageNumber < 0{
                 pageNumber = 0
             }
-            cardCollection.setContentOffset(CGPoint(x: collectionWidth.multiplied(by: CGFloat(pageNumber)), y: 0), animated: true)
+            cardCollection.setContentOffset(CGPoint(x: collectionWidth * CGFloat(pageNumber), y: 0), animated: true)
         }else if sender.restorationIdentifier == "btn_right"{
             //边界控制
             if jds.count == 0 || pageNumber == jds.count - 1{
@@ -204,7 +213,7 @@ class EvaluationItemListController : UIViewController{
             if pageNumber >= jds.count{
                 pageNumber = jds.count - 1
             }
-            cardCollection.setContentOffset(CGPoint(x: collectionWidth.multiplied(by: CGFloat(pageNumber)), y: 0), animated: true)
+            cardCollection.setContentOffset(CGPoint(x: collectionWidth * CGFloat(pageNumber), y: 0), animated: true)
         }
         //print("pageNumber:\(pageNumber)")
         if pageNumber < jds.count{
@@ -391,7 +400,7 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         
     }
     
-    func setScore(sender : UISlider){
+    @objc func setScore(sender : UISlider){
         
         let indexPath = sender.viewParam!["indexPath"] as! IndexPath
         let index = sender.viewParam!["index"] as! Int

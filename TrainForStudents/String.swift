@@ -56,7 +56,7 @@ extension String {
         
         
         let content = NSString(data: data(using: .utf8)!, encoding: String.Encoding.utf8.rawValue)
-        let attr = [NSFontAttributeName:font]
+        let attr = [NSAttributedStringKey.font:font]
         let size = CGSize(width: 99999, height: 99999)
         let rect = content?.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attr, context: nil)
         
@@ -86,7 +86,7 @@ extension String {
     }
     
     func getLineNumberForUILabel(_ lbl : UILabel) -> Int{
-        return getLineNumberForWidth(width: lbl.frame.width.subtracting(5), cFont: lbl.font)
+        return getLineNumberForWidth(width: lbl.frame.width + (5), cFont: lbl.font)
     }
     
     func toInt() -> Int{

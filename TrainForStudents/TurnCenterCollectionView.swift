@@ -75,7 +75,7 @@ class TurnCenterCollectionView : UIViewController,  UICollectionViewDelegate , U
         lbl?.text = outLineName
         let lineNum = outLineName.getLineNumberForUILabel(lbl!)
         lbl?.numberOfLines = lineNum
-        lbl?.frame.size = CGSize(width: (lbl?.frame.width)!, height: outLineContentHeight.multiplied(by: CGFloat(lineNum)))
+        lbl?.frame.size = CGSize(width: (lbl?.frame.width)!, height: outLineContentHeight *  CGFloat(lineNum))
         
         
         lbl = cell.viewWithTag(10002) as? UILabel
@@ -174,7 +174,7 @@ class TurnCenterCollectionView : UIViewController,  UICollectionViewDelegate , U
             let outLineName = json["outlinename"].stringValue
             let lineNum = outLineName.getLineNumberForWidth(width: outLineContentWidth, cFont: outLineContentFont)
             //print("这个高度是:\(CGFloat(20 * lineNum + 25))")
-            return CGSize(width: UIScreen.width, height: outLineContentHeight.multiplied(by: CGFloat(lineNum)).adding(25))
+            return CGSize(width: UIScreen.width, height: outLineContentHeight * CGFloat(lineNum) + (25))
             
         }else{  //任务的cell
             return CGSize(width: UIScreen.width-20, height: 110 )

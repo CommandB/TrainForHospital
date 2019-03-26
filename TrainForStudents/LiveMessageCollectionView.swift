@@ -60,12 +60,13 @@ class LiveMessageCollectionView : MyBaseCollectionView {
         lbl.layer.cornerRadius = 4
         lbl.layer.masksToBounds = true
         //减去头像的宽度和边上空白位置
-        let maxWidth = cell.frame.width.subtracting(85)
+        let maxWidth = cell.frame.width - (85)
         let num = lbl.text?.getLineNumberForWidth(width: maxWidth)
         if num == 1{
-            lbl.frame.size = CGSize(width: (lbl.text?.getWidth())!.adding(8), height: CGFloat(20).adding(5))
+            
+            lbl.frame.size = CGSize(width: (lbl.text?.getWidth())! + 8, height: CGFloat(20 + 5))
         }else{
-            lbl.frame.size = CGSize(width: maxWidth, height: (lbl.text?.getHeight().multiplied(by: CGFloat(num!)))!.adding(5))
+            lbl.frame.size = CGSize(width: maxWidth, height: (lbl.text?.getHeight())! * CGFloat(num! + 5))
          
         }
         //lbl.numberOfLines = num!
@@ -86,15 +87,15 @@ class LiveMessageCollectionView : MyBaseCollectionView {
         
         var contentTextHeight = CGFloat(20)
         var cellHeight = CGFloat(0)
-        let maxWidth = collectionView.frame.width.subtracting(78)
+        let maxWidth = collectionView.frame.width - 78
         let t = text[indexPath.item]
         let num = t.getLineNumberForWidth(width: maxWidth)
         
         if num > 1{
-            contentTextHeight = "".getHeight(font: UIFont.systemFont(ofSize: UIFont.systemFontSize)).adding(1).multiplied(by: CGFloat(num))
+            contentTextHeight = ("".getHeight(font: UIFont.systemFont(ofSize: UIFont.systemFontSize)) + 1) *  CGFloat(num)
 //            height = height.multiplied(by: CGFloat(num))
         }
-        cellHeight = contentTextHeight.adding(40)
+        cellHeight = contentTextHeight + 40
         if cellHeight < 60{
             cellHeight = 60
         }

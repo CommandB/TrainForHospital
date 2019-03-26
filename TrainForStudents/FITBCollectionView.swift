@@ -75,8 +75,8 @@ class FITBCollectionView : BasePeiwuCollectionView , UITextFieldDelegate{
             text = data["indexname"].stringValue + " " + data["title"].stringValue
             let lineNumber = text.getLineNumberForWidth(width: labelWidth, cFont: questionFont)
             lineHeight = text.getHeight(font:questionFont)
-            lineHeight.multiply(by: CGFloat(lineNumber))
-            lineHeight.add(5)
+            lineHeight *= CGFloat(lineNumber)
+            lineHeight += 5
             
             if lineHeight < minHeight {
                 lineHeight = minHeight

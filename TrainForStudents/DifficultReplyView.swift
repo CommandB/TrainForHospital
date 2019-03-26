@@ -36,7 +36,7 @@ class DifficultReplyView :UIViewController , UITableViewDelegate , UITableViewDa
         
         lbl.numberOfLines = 0
         let num = lbl.text?.getLineNumberForUILabel(lbl)
-        lbl.frame.size = CGSize(width: lbl.frame.width, height: lbl.frame.height.multiplied(by: CGFloat(num!)))
+        lbl.frame.size = CGSize(width: lbl.frame.width, height: lbl.frame.height * CGFloat(num!))
         lbl.lineBreakMode = .byCharWrapping
         
         

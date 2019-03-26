@@ -52,7 +52,7 @@ class ComplaintReplyController : MyBaseUIViewController{
         
         let f = contentLbl.frame
         let dateLbl = view.viewWithTag(10002) as! UILabel
-        dateLbl.frame = CGRect(x: f.origin.x, y: f.origin.y.adding(f.size.height).adding(10), width: f.size.width, height: 20)
+        dateLbl.frame = CGRect(x: f.origin.x, y: f.origin.y + f.size.height + (10), width: f.size.width, height: 20)
         dateLbl.text = data["makingtime"].stringValue.substring(to: 16)
         dateLbl.textColor = UIColor.gray
         dateLbl.font = UIFont.systemFont(ofSize: 13)
@@ -60,9 +60,9 @@ class ComplaintReplyController : MyBaseUIViewController{
         
         
         //计算collection的y轴
-        replyCollection.frame.origin = CGPoint(x: 0, y: dateLbl.frame.origin.y.adding(30))
+        replyCollection.frame.origin = CGPoint(x: 0, y: dateLbl.frame.origin.y + (30))
         //计算collection的高度
-        let h = UIScreen.height.subtracting(replyCollection.frame.origin.y).subtracting(CGFloat(collectionMarginBottom))
+        let h = UIScreen.height - (replyCollection.frame.origin.y) - (CGFloat(collectionMarginBottom))
         replyCollection.frame.size = CGSize(width: replyCollection.frame.width, height: h)
         self.replyView.isanonymous = self.data["isanonymous"].boolValue
         replyView.jsonDataSource = data["gjwhisperreply"].arrayValue
@@ -83,7 +83,7 @@ class ComplaintReplyController : MyBaseUIViewController{
         dismiss(animated: true, completion: nil)
     }
     
-    func submit(){
+    @objc func submit(){
         let content = (view.viewWithTag(30001) as! UITextField).text
         
         if content == ""{

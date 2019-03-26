@@ -75,7 +75,7 @@ class IMOfficeGroupController : HBaseViewController{
         present(vc, animated: true, completion: nil)
     }
     
-    func btn_bottomBtnGroup_inside(sender : UIButton){
+    @objc func btn_bottomBtnGroup_inside(sender : UIButton){
         
         switch sender.tag {
         case 40001:
@@ -137,7 +137,7 @@ class IMOfficeGroupController : HBaseViewController{
         getNoticeData()
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         getListData()
     }

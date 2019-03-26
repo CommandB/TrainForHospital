@@ -90,14 +90,14 @@ class TeachingPlanController : HBaseViewController{
         })
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         dataMap.removeAll()
         planCollection.mj_footer.resetNoMoreData()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         getListData()
     }
     

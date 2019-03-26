@@ -71,13 +71,13 @@ class EvaluationListController : HBaseViewController{
         
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         evaluationCollection.mj_footer.resetNoMoreData()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         getListData()
     }
     

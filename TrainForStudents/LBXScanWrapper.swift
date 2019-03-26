@@ -40,13 +40,14 @@ public struct  LBXScanResult {
     //扫描图像
     public var imgScanned:UIImage?
     //码的类型
-    public var strBarCodeType:String? = ""
+    public var strBarCodeType:AVMetadataObject.ObjectType?
     
     //码在图像中的位置
     public var arrayCorner:[AnyObject]?
     
-    public init(str:String?,img:UIImage?,barCodeType:String?,corner:[AnyObject]?)
+    public init(str:String?,img:UIImage?,barCodeType:AVMetadataObject.ObjectType?,corner:[AnyObject]?)
     {
+        
         self.strScanned = str
         self.imgScanned = img
         self.strBarCodeType = barCodeType
@@ -59,7 +60,7 @@ public struct  LBXScanResult {
 @available(iOS 10.0, *)
 open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     
-    var device:AVCaptureDevice? = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo);
+    var device:AVCaptureDevice? = AVCaptureDevice.default(for: AVMediaType.video)
     
     var input:AVCaptureDeviceInput?
     var output:AVCaptureMetadataOutput
@@ -90,13 +91,13 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
      - parameter success:      返回识别信息
      - returns:
      */
-    init( videoPreView:UIView,objType:[String] = [AVMetadataObjectTypeQRCode],isCaptureImg:Bool,cropRect:CGRect=CGRect.zero,success:@escaping ( ([LBXScanResult]) -> Void) )
+    init( videoPreView:UIView,objType:[AVMetadataObject.ObjectType] = [AVMetadataObject.ObjectType(rawValue: AVMetadataObject.ObjectType.qr.rawValue)],isCaptureImg:Bool,cropRect:CGRect=CGRect.zero,success:@escaping ( ([LBXScanResult]) -> Void) )
     {
         
         successBlock = success
         isNeedCaptureImage = isCaptureImg
         do{
-            input = try AVCaptureDeviceInput(device: device)
+            input = try AVCaptureDeviceInput(device: device!)
         }
         catch let error as NSError {
             print("AVCaptureDeviceInput(): \(error)")
@@ -116,21 +117,21 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
             // Fallback on earlier versions
         };
         
-        session.sessionPreset = AVCaptureSessionPresetHigh
+        session.sessionPreset = AVCaptureSession.Preset.high
         
         if device == nil{
             return
         }
         
         
-        if session.canAddInput(input){
-            session.addInput(input)
+        if session.canAddInput(input!){
+            session.addInput(input!)
         }
         if session.canAddOutput(output){
             session.addOutput(output)
         }
-        if session.canAddOutput(stillImageOutput){
-            session.addOutput(stillImageOutput)
+        if session.canAddOutput(stillImageOutput!){
+            session.addOutput(stillImageOutput!)
         }
         
 //        let outputSettings:Dictionary = [AVVideoCodecJPEG:AVVideoCodecKey]
@@ -150,7 +151,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
 
         
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
         var frame:CGRect = videoPreView.frame
         frame.origin = CGPoint.zero
@@ -161,13 +162,13 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         videoPreView.layer.insertSublayer(previewLayer!, at: 0)
         
         
-        if ( device!.isFocusPointOfInterestSupported && device!.isFocusModeSupported(AVCaptureFocusMode.continuousAutoFocus) )
+        if ( device!.isFocusPointOfInterestSupported && device!.isFocusModeSupported(AVCaptureDevice.FocusMode.continuousAutoFocus) )
         {
             do
             {
                 try input?.device.lockForConfiguration()
                 
-                input?.device.focusMode = AVCaptureFocusMode.continuousAutoFocus
+                input?.device.focusMode = AVCaptureDevice.FocusMode.continuousAutoFocus
                 
                 input?.device.unlockForConfiguration()
             }
@@ -225,7 +226,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                 //4个字典，分别 左上角-右上角-右下角-左下角的 坐标百分百，可以使用这个比例抠出码的图像
                // let arrayRatio = code.corners
                 
-                arrayResult.append(LBXScanResult(str: codeContent, img: UIImage(), barCodeType: codeType,corner: code.corners! as [AnyObject]))
+                arrayResult.append(LBXScanResult(str: codeContent, img: UIImage(), barCodeType: AVMetadataObject.ObjectType(rawValue: codeType.rawValue),corner: code.corners as [AnyObject]))
             }
         }
         
@@ -256,7 +257,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     //MARK: ----拍照
     open func captureImage()
     {
-        let stillImageConnection:AVCaptureConnection? = connectionWithMediaType(AVMediaTypeVideo, connections: (stillImageOutput?.connections)! as [AnyObject])
+        let stillImageConnection:AVCaptureConnection? = connectionWithMediaType(AVMediaType.video.rawValue, connections: (stillImageOutput?.connections)! as [AnyObject])
         
         
         
@@ -289,10 +290,10 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
             
             for port:Any in connectionTmp.inputPorts
             {
-                if (port as AnyObject).isKind(of: AVCaptureInputPort.self)
+                if (port as AnyObject).isKind(of: AVCaptureInput.Port.self)
                 {
-                    let portTmp:AVCaptureInputPort = port as! AVCaptureInputPort
-                    if portTmp.mediaType == mediaType
+                    let portTmp:AVCaptureInput.Port = port as! AVCaptureInput.Port
+                    if portTmp.mediaType.rawValue == mediaType
                     {
                         return connectionTmp
                     }
@@ -313,7 +314,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     }
 
     //MARK: 切换识别码的类型
-    open func changeScanType(_ objType:[String])
+    open func changeScanType(_ objType:[AVMetadataObject.ObjectType])
     {
         //待测试中途修改是否有效
         output.metadataObjectTypes = objType
@@ -340,7 +341,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
             {
                 try input?.device.lockForConfiguration()
                 
-                input?.device.torchMode = torch ? AVCaptureTorchMode.on : AVCaptureTorchMode.off
+                input?.device.torchMode = torch ? AVCaptureDevice.TorchMode.on : AVCaptureDevice.TorchMode.off
                 
                 input?.device.unlockForConfiguration()
             }
@@ -366,16 +367,16 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                 
                 var torch = false
                 
-                if input?.device.torchMode == AVCaptureTorchMode.on
+                if input?.device.torchMode == AVCaptureDevice.TorchMode.on
                 {
                     torch = false
                 }
-                else if input?.device.torchMode == AVCaptureTorchMode.off
+                else if input?.device.torchMode == AVCaptureDevice.TorchMode.off
                 {
                     torch = true
                 }
                 
-                input?.device.torchMode = torch ? AVCaptureTorchMode.on : AVCaptureTorchMode.off
+                input?.device.torchMode = torch ? AVCaptureDevice.TorchMode.on : AVCaptureDevice.TorchMode.off
                 
                 input?.device.unlockForConfiguration()
             }
@@ -387,30 +388,29 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     }
     
     //MARK: ------获取系统默认支持的码的类型
-    static func defaultMetaDataObjectTypes() ->[String]
-    {
+    static func defaultMetaDataObjectTypes() ->[AVMetadataObject.ObjectType] {
         var types =
-        [AVMetadataObjectTypeQRCode,
-            AVMetadataObjectTypeUPCECode,
-            AVMetadataObjectTypeCode39Code,
-            AVMetadataObjectTypeCode39Mod43Code,
-            AVMetadataObjectTypeEAN13Code,
-            AVMetadataObjectTypeEAN8Code,
-            AVMetadataObjectTypeCode93Code,
-            AVMetadataObjectTypeCode128Code,
-            AVMetadataObjectTypePDF417Code,
-            AVMetadataObjectTypeAztecCode,
+            [AVMetadataObject.ObjectType.qr,
+             AVMetadataObject.ObjectType.upce,
+             AVMetadataObject.ObjectType.code39,
+             AVMetadataObject.ObjectType.code39Mod43,
+             AVMetadataObject.ObjectType.ean13,
+             AVMetadataObject.ObjectType.ean8,
+            AVMetadataObject.ObjectType.code93,
+            AVMetadataObject.ObjectType.code128,
+            AVMetadataObject.ObjectType.pdf417,
+            AVMetadataObject.ObjectType.aztec,
             
         ];
         //if #available(iOS 8.0, *)
        
-        types.append(AVMetadataObjectTypeInterleaved2of5Code)
-        types.append(AVMetadataObjectTypeITF14Code)
-        types.append(AVMetadataObjectTypeDataMatrixCode)
+        types.append(AVMetadataObject.ObjectType.interleaved2of5)
+        types.append(AVMetadataObject.ObjectType.itf14)
+        types.append(AVMetadataObject.ObjectType.dataMatrix)
         
-        types.append(AVMetadataObjectTypeInterleaved2of5Code)
-        types.append(AVMetadataObjectTypeITF14Code)
-        types.append(AVMetadataObjectTypeDataMatrixCode)
+        types.append(AVMetadataObject.ObjectType.interleaved2of5)
+        types.append(AVMetadataObject.ObjectType.itf14)
+        types.append(AVMetadataObject.ObjectType.dataMatrix)
         
         
         return types;
@@ -456,7 +456,8 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                     let scanResult = featureTmp.messageString
                     
                     
-                    let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObjectTypeQRCode,corner: nil)
+                    let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObject.ObjectType.qr,corner: nil)
+                    
                     
                     returnResult.append(result)
                 }

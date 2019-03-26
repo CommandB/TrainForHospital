@@ -68,7 +68,7 @@ class TaskCenterController: MyBaseUIViewController, UIImagePickerControllerDeleg
     
     var searchParam : [String:Any]? = nil
     
-    func datePickerChange(picker :UIDatePicker){
+    @objc func datePickerChange(picker :UIDatePicker){
         
         txt_s_date.text = DateUtil.dateToString(picker.date)
         

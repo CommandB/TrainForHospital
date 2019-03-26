@@ -95,7 +95,7 @@ class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelega
         
     }
     
-    func setScore(sender : UISlider){
+    @objc func setScore(sender : UISlider){
         
         let indexPath = sender.viewParam!["indexPath"] as! IndexPath
         let index = sender.viewParam!["index"] as! Int

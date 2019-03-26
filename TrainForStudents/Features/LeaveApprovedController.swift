@@ -37,7 +37,7 @@ class LeaveApprovedController : UIViewController{
         btn_undone.restorationIdentifier = "btn_undone"
         btn_over.restorationIdentifier = "btn_over"
         
-        scrollView.contentSize = CGSize(width: UIScreen.width.multiplied(by: 2), height: scrollView.frame.height)
+        scrollView.contentSize = CGSize(width: UIScreen.width * 2, height: scrollView.frame.height)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
@@ -117,7 +117,7 @@ extension LeaveApprovedController : UIScrollViewDelegate{
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = scrollView.contentOffset.x
-        if x < UIScreen.width.divided(by: 2){
+        if x < UIScreen.width / 2{
             tabsTouchAnimation(sender: btn_undone)
         }else{
             tabsTouchAnimation(sender: btn_over)
@@ -126,7 +126,7 @@ extension LeaveApprovedController : UIScrollViewDelegate{
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         let x = scrollView.contentOffset.x
-        if x < UIScreen.width.divided(by: 2){
+        if x < UIScreen.width / 2{
             tabsTouchAnimation(sender: btn_undone)
         }else{
             tabsTouchAnimation(sender: btn_over)

@@ -31,12 +31,12 @@ class LeaveOverCollection : UIViewController ,UICollectionViewDelegate ,UICollec
         parentView?.overCollection.reloadData()
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         parentView?.overCollection.mj_footer.resetNoMoreData()
         getListData()
     }
-    
+    @objc  
     func loadMore() {
         getListData()
     }

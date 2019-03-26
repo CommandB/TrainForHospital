@@ -48,7 +48,7 @@ class CEXStudentsListController : HBaseViewController {
     }
     
     
-    func btn_score_tui(sender :UIButton){
+    @objc func btn_score_tui(sender :UIButton){
         let vc = getViewToStoryboard("cexCheckView") as! CEXCheckController
         let index = (sender.superview?.superview?.tag)!
         let json = collectionDs[index]
@@ -80,7 +80,7 @@ class CEXStudentsListController : HBaseViewController {
         })
     }
     
-    func refreshAction() {
+    @objc func refreshAction() {
         collectionDs.removeAll()
         loadData()
     }

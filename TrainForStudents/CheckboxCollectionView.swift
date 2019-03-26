@@ -51,7 +51,7 @@ class CheckboxCollectionView : BasePeiwuCollectionView{
             let title = data["answervalue"].stringValue
             lbl.text = title
             lbl.numberOfLines = title.getLineNumberForWidth(width: lbl.frame.width - boundary, cFont: (lbl.font)!)
-            let y = btn.frame.origin.y.adding(4)
+            let y = btn.frame.origin.y + 4
 //            var y = lbl.frame.origin.y
 //            if lbl.numberOfLines >= 2{
 //                y = btn.frame.origin.y
@@ -104,12 +104,12 @@ class CheckboxCollectionView : BasePeiwuCollectionView{
             labelWidth = UIScreen.width - 40 - 35 - 8 - boundary
             data = a[index - 1]
             text = data["answervalue"].stringValue
-            minHeight.add(10)  //答案选项的cell需要增加间距
+            minHeight += 10  //答案选项的cell需要增加间距
         }
         let lineNumber = text.getLineNumberForWidth(width: labelWidth, cFont: questionFont)
         lineHeight = text.getHeight(font:questionFont)
-        lineHeight.multiply(by: CGFloat(lineNumber))
-        lineHeight.add(5)
+        lineHeight *= CGFloat(lineNumber)
+        lineHeight += 5
         
         if lineHeight < minHeight {
             lineHeight = minHeight

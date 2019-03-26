@@ -31,13 +31,13 @@ class LeaveUndoneCollection : UIViewController ,UICollectionViewDelegate ,UIColl
         parentView?.overCollection.reloadData()
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         parentView?.overCollection.mj_footer.resetNoMoreData()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         getListData()
     }
     

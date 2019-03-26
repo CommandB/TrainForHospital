@@ -244,7 +244,7 @@ class PersonSelectorController: HBaseViewController {
         personCollection.reloadData()
     }
     
-    func receiveAdvanceSearch(notification : NSNotification){
+    @objc func receiveAdvanceSearch(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: PersonSelectorAdvanceSearchController.defaultNoticeName, object: nil)
         
         if notification.userInfo != nil{
@@ -542,12 +542,12 @@ class PersonSelectorController: HBaseViewController {
         
     }
     
-    func refresh() {
+    @objc func refresh() {
         resetAllStatus()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         getListData()
     }
     
@@ -582,6 +582,36 @@ class PersonSelectorController: HBaseViewController {
         isSelectedAllNurse = false
         
         (view.viewWithTag(40002) as! UIButton).setImage(UIImage(named: "未选择-大"), for: .normal)
+    }
+    
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
+        var cds = [String : [JSON]]()
+        let str = textField.text
+        if str == nil || str == ""{
+            cds = allPersonDir
+        }else{
+            for key in allPersonDir.keys{
+                
+                var arr = [JSON]()
+                for person in allPersonDir[key]!{
+                    
+                    if person["personname"].stringValue.range(of: str!) != nil {
+                        arr.append(person)
+                    }
+                }
+                if arr.count > 0 {
+                    cds[key] = arr
+                }
+                
+            }
+        }
+        
+        jds = cds
+        personCollection.reloadData()
+        MBProgressHUD.hideAllHUDs(for: view, animated: true)
+        return true
     }
     
 }
@@ -720,7 +750,7 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
     }
     
     //某分组 全选
-    func chooseThisSection(sender : UIButton){
+    @objc func chooseThisSection(sender : UIButton){
         
         let key = sender.viewParam!["key"] as! String
         let indexPath = sender.viewParam!["index"] as! IndexPath
@@ -741,37 +771,4 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
     }
     
     
-}
-
-extension PersonSelectorController{
-    
-    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        MBProgressHUD.showAdded(to: view, animated: true)
-        var cds = [String : [JSON]]()
-        let str = textField.text
-        if str == nil || str == ""{
-            cds = allPersonDir
-        }else{
-            for key in allPersonDir.keys{
-                
-                var arr = [JSON]()
-                for person in allPersonDir[key]!{
-                    
-                    if person["personname"].stringValue.range(of: str!) != nil {
-                        arr.append(person)
-                    }
-                }
-                if arr.count > 0 {
-                    cds[key] = arr
-                }
-                
-            }
-        }
-        
-        jds = cds
-        personCollection.reloadData()
-        MBProgressHUD.hideAllHUDs(for: view, animated: true)
-        return true
-    }
 }

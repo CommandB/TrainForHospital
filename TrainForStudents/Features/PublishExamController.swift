@@ -125,7 +125,7 @@ class PublishExamController : HBaseViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(receivePaperNotice), name: PaperSelectorController.defaultNoticeName, object: nil)
     }
     
-    func receiveNotice(notification : NSNotification){
+    @objc func receiveNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: Notification.Name(stuNotice), object: nil)
         if notification.userInfo != nil{
             jds = notification.userInfo!["data"] as! [JSON]
@@ -137,7 +137,7 @@ class PublishExamController : HBaseViewController{
         }
     }
     
-    func receiveTeacherNotice(notification : NSNotification){
+    @objc func receiveTeacherNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: Notification.Name(teacherNotice), object: nil)
         if notification.userInfo != nil{
             let data = notification.userInfo!["data"] as! [JSON]
@@ -162,7 +162,7 @@ class PublishExamController : HBaseViewController{
         }
     }
     
-    func receiveMarkingNotice(notification : NSNotification){
+    @objc func receiveMarkingNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: Notification.Name(markingNotice), object: nil)
         if notification.userInfo != nil{
             let data = (notification.userInfo!["data"] as! [JSON])
@@ -187,7 +187,7 @@ class PublishExamController : HBaseViewController{
     }
     
     //试卷选择器 callback
-    func receivePaperNotice(notification : NSNotification){
+    @objc func receivePaperNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self, name: PaperSelectorController.defaultNoticeName, object: nil)
         
         if notification.userInfo != nil{
@@ -204,7 +204,6 @@ class PublishExamController : HBaseViewController{
                 
                 submitParam["exercisesid"] = data["exercisesid"].stringValue
                 submitParam["versionnumber"] =  data["versionnumber"].intValue
-                submitParam["examname"] =  data["title"].stringValue
                 submitParam["marking"] =  data["marking"].stringValue
                 
             }
@@ -235,6 +234,14 @@ class PublishExamController : HBaseViewController{
         if endTime.count != 16{
             myAlert(self, message: "结束时间不合法!")
             return
+        }
+        
+        let examName = (view.viewWithTag(110001) as! UITextField).text
+        if  examName?.isEmpty ?? true {
+            myAlert(self, message: "请填写考试主题!")
+            return
+        }else{
+            submitParam["examname"] = examName
         }
         
         if submitParam["studentlist"] == nil{
@@ -333,16 +340,16 @@ class PublishExamController : HBaseViewController{
     }
     
     //选监考老师
-    func btn_teacher_evet(sender : UIButton){
+    @objc func btn_teacher_evet(sender : UIButton){
         PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON](), noticeName: teacherNotice)
     }
     
     //选阅卷老师
-    func btn_marking_evet(sender : UIButton){
+    @objc func btn_marking_evet(sender : UIButton){
         PersonSelectorController.presentPersonSelector(viewController: self, data: [JSON](), noticeName: markingNotice)
     }
     
-    func chooseDate(picker :UIDatePicker){
+    @objc func chooseDate(picker :UIDatePicker){
         
         let t31 = view.viewWithTag(30001) as! UITextField
         let t32 = view.viewWithTag(30002) as! UITextField
@@ -364,7 +371,7 @@ class PublishExamController : HBaseViewController{
         }
     }
     
-    func chooseExamType(sender : UIButton){
+    @objc func chooseExamType(sender : UIButton){
         
         hiddenKeyBoard()
         var i = 0
@@ -380,7 +387,7 @@ class PublishExamController : HBaseViewController{
         }
     }
     
-    func chooseSignInType(sender : UIButton){
+    @objc func chooseSignInType(sender : UIButton){
         hiddenKeyBoard()
         var i = 0
         while (i < 2){
@@ -395,7 +402,7 @@ class PublishExamController : HBaseViewController{
         }
     }
     
-    func chooseAppExam(sender : UIButton){
+    @objc func chooseAppExam(sender : UIButton){
         hiddenKeyBoard()
         var i = 0
         while (i < 2){
@@ -431,12 +438,12 @@ extension PublishExamController : UICollectionViewDelegate , UICollectionViewDat
         let data = jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         var btn = cell.viewWithTag(10001) as! UIButton
-        btn.setCornerRadius(radius: btn.W.divided(by: 2))
+        btn.setCornerRadius(radius: btn.W / 2)
         btn.setImage(UIImage(named: "loginId"), for: .normal)
         let lbl = cell.viewWithTag(10002) as! UILabel
         lbl.text = data["personname"].stringValue
         btn = cell.viewWithTag(10003) as! UIButton
-        btn.setCornerRadius(radius: btn.W.divided(by: 2))
+        btn.setCornerRadius(radius: btn.W / 2)
         btn.addTarget(self, action: #selector(removePerson), for: .touchUpInside)
         btn.viewParam = ["indexPath" : indexPath]
         return cell
@@ -453,7 +460,7 @@ extension PublishExamController : UICollectionViewDelegate , UICollectionViewDat
         return CGSize(width: 60, height: 70)
     }
     
-    func removePerson(sender : UIButton){
+    @objc func removePerson(sender : UIButton){
         let indexPath = sender.viewParam!["indexPath"] as! IndexPath
         jds.remove(at: indexPath.item)
         submitParam["studentlist"] = jds

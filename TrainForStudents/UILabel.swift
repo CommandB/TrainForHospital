@@ -22,7 +22,7 @@ extension UILabel{
     
     func setWidthFromText(){
         //稍微增加一点 防止出现省略号
-        self.frame.size = CGSize(width: (self.text?.getWidth().adding(4))!, height: self.H)
+        self.frame.size = CGSize(width: ((self.text?.getWidth())! + (4)), height: self.H)
     }
     
 }

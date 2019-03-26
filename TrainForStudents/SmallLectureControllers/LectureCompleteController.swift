@@ -84,7 +84,7 @@ class LectureCompleteController: JHBaseViewController,UITableViewDelegate,UITabl
         tableview.reloadData()
     }
     
-    func refreshAction() {
+    @objc func refreshAction() {
         index = 0
         getData(pageindex: index)
     }

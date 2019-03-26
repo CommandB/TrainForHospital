@@ -70,12 +70,12 @@ class InvigilationInfoController : HBaseViewController{
         
     }
     
-    func refresh() {
+    @objc func refresh() {
         jds.removeAll()
         getListData()
     }
     
-    func loadMore() {
+    @objc func loadMore() {
         
     }
     
@@ -105,7 +105,7 @@ extension InvigilationInfoController : UICollectionViewDelegate , UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         
-        let width = collectionView.W.subtracting(15).divided(by: 3)
+        let width = (collectionView.W + 15) / 3
         return CGSize(width: width, height: 40)
     }
     

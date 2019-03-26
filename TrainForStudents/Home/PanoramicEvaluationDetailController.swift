@@ -39,7 +39,7 @@ class PanoramicEvaluationDetailController : UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: PersonSelectorController.addPersonDefaultNotificationName, object: nil)
     }
     
-    func receiveNotice(notification : NSNotification){
+    @objc func receiveNotice(notification : NSNotification){
         NotificationCenter.default.removeObserver(self)
         print("处理通知")
         if notification.userInfo != nil{
@@ -73,14 +73,14 @@ class PanoramicEvaluationDetailController : UIViewController{
         dismiss(animated: true, completion: nil)
     }
     
-    func addPerson(sender :UIButton ){
+    @objc func addPerson(sender :UIButton ){
         selectedTabKey = sender.viewParam!["key"] as! String
         let vc = getViewToStoryboard("personSelectorView") as! PersonSelectorController
         vc.officeId = jds["data"]["officeid"].intValue
         present(vc, animated: true, completion: nil)
     }
     
-    func removePerson(sender :UIButton){
+    @objc func removePerson(sender :UIButton){
         let key = sender.viewParam!["key"] as! String
         let index = sender.viewParam!["index"] as! Int
         

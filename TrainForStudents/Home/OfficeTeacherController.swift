@@ -146,7 +146,7 @@ extension OfficeTeacherController : UICollectionViewDelegate, UICollectionViewDa
             
             if index == 0{
                 let lf = lbl.frame
-                let line = UILabel(frame: CGRect.init(x: lf.origin.x, y: lf.origin.y.adding(lf.height).adding(5), width: lf.width, height: 1))
+                let line = UILabel(frame: CGRect.init(x: lf.origin.x, y: lf.origin.y + (lf.height) + (5), width: lf.width, height: 1))
                 line.backgroundColor = UIColor.lightGray
                 cell.subviews[0].addSubview(line)
             }

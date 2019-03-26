@@ -42,7 +42,7 @@ class FeaturesController : UIViewController{
         
     }
     
-    func btn_features_even(sender :UIButton){
+    @objc func btn_features_even(sender :UIButton){
         
         switch sender.tag {
         case 10001:
