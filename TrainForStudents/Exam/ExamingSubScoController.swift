@@ -37,7 +37,7 @@ class ExamingSubScoController: UIViewController,UITableViewDelegate,UITableViewD
             }else{
                 nextQuestionBtn.setTitle("下一题", for: .normal)
             }
-            print("Will set an new value \(newValue) to age")
+            //print("Will set an new value \(newValue) to age")
         }
         didSet
         {
@@ -85,7 +85,9 @@ class ExamingSubScoController: UIViewController,UITableViewDelegate,UITableViewD
         
         lastQuestionBtn.translatesAutoresizingMaskIntoConstraints = false
         bottomView.addSubview(lastQuestionBtn)
-        lastQuestionBtn.setBackgroundImage(UIImage.init(named: "上一题"), for: .normal)
+        lastQuestionBtn.setBackgroundImage(UIImage.init(named: "nextQuestion"), for: .normal)
+        lastQuestionBtn.setTitle("上一题", for: .normal)
+        lastQuestionBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         bottomView.addConstraint(NSLayoutConstraint.init(item: lastQuestionBtn, attribute: .leading, relatedBy: .equal, toItem: bottomView, attribute: .leading, multiplier: 1.0, constant: 15))
         bottomView.addConstraint(NSLayoutConstraint.init(item: lastQuestionBtn, attribute: .centerY, relatedBy: .equal, toItem: bottomView, attribute: .centerY, multiplier: 1.0, constant: 0))
         
@@ -165,8 +167,9 @@ class ExamingSubScoController: UIViewController,UITableViewDelegate,UITableViewD
         var params = JSON(["commit_questions":JSON.init(BRCommitDataManage.shared.allItemQuestions)]).dictionaryObject
         
         params?["taskid"] = parentInfo["taskid"]
-        params?["personid"] = parentInfo["exampersonid"]
+        params?["personid"] = parentInfo["bepersonid"]
         params?["exercisesid"] = parentInfo["exercisesid"]
+        params?["fromteacher"] = 1
         
         myPostRequest(urlString,params, method: HTTPMethod.post).responseJSON { (response) in
             MBProgressHUD.hide(for: self.view, animated: true)

@@ -40,6 +40,8 @@
 		0A125A8C1F29CBDB00FDD4F4 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */; };
 		0A125A8E1F29CC6400FDD4F4 /* SettingsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */; };
 		0A125A901F29D1FF00FDD4F4 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */; };
+		0A1299A1224DFBC000F99176 /* 技能考试-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1299A0224DFBBD00F99176 /* 技能考试-icon.png */; };
+		0A1299A3224DFD6900F99176 /* 监考.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1299A2224DFD6700F99176 /* 监考.png */; };
 		0A12D7C32237576F005B5DD5 /* SkillExamInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A12D7C22237576F005B5DD5 /* SkillExamInfoController.swift */; };
 		0A12D7C82238AC15005B5DD5 /* InvigilationInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A12D7C72238AC15005B5DD5 /* InvigilationInfoController.swift */; };
 		0A137E8A21DF04CB00C7328D /* NoticeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A137E8921DF04CB00C7328D /* NoticeListController.swift */; };
@@ -186,6 +188,8 @@
 		0A494F9D211C286F00E95332 /* office_person.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A494F9B211C286E00E95332 /* office_person.png */; };
 		0A494FA0211C29D100E95332 /* 科室-灰色@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A494F9E211C29CF00E95332 /* 科室-灰色@2x.png */; };
 		0A494FA1211C29D100E95332 /* 科室@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A494F9F211C29D000E95332 /* 科室@2x.png */; };
+		0A55EC41224A221F00110BBD /* HistorySkillExamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A55EC40224A221F00110BBD /* HistorySkillExamController.swift */; };
+		0A55EC58224B5D1600110BBD /* HistoryTheoryExamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A55EC57224B5D1600110BBD /* HistoryTheoryExamController.swift */; };
 		0A56E39C1F5D8A2300EF9855 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A56E39B1F5D8A2300EF9855 /* CoreTelephony.framework */; };
 		0A56E3A01F5D92C700EF9855 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A56E39F1F5D92C700EF9855 /* libz.tbd */; };
 		0A56E3A21F5D92CF00EF9855 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A56E3A11F5D92CF00EF9855 /* SystemConfiguration.framework */; };
@@ -287,7 +291,6 @@
 		0AB5AAA12105D50900A9E2EC /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5AAA02105D50900A9E2EC /* HomeController.swift */; };
 		0AC3B9331EE4730B00227194 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC3B9321EE4730B00227194 /* AppDelegate.swift */; };
 		0AC3B9351EE4730B00227194 /* TurnCenterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC3B9341EE4730B00227194 /* TurnCenterController.swift */; };
-		0AC3B9371EE4730B00227194 /* ExamCenterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC3B9361EE4730B00227194 /* ExamCenterController.swift */; };
 		0AC3B93A1EE4730B00227194 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AC3B9381EE4730B00227194 /* Main.storyboard */; };
 		0AC3B93C1EE4730B00227194 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AC3B93B1EE4730B00227194 /* Assets.xcassets */; };
 		0AC3B93F1EE4730B00227194 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AC3B93D1EE4730B00227194 /* LaunchScreen.storyboard */; };
@@ -912,6 +915,8 @@
 		0A125A8B1F29CBDB00FDD4F4 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0A125A8D1F29CC6400FDD4F4 /* SettingsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCollectionView.swift; sourceTree = "<group>"; };
 		0A125A8F1F29D1FF00FDD4F4 /* ChangePasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
+		0A1299A0224DFBBD00F99176 /* 技能考试-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "技能考试-icon.png"; sourceTree = "<group>"; };
+		0A1299A2224DFD6700F99176 /* 监考.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "监考.png"; sourceTree = "<group>"; };
 		0A12D7C22237576F005B5DD5 /* SkillExamInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillExamInfoController.swift; sourceTree = "<group>"; };
 		0A12D7C72238AC15005B5DD5 /* InvigilationInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvigilationInfoController.swift; sourceTree = "<group>"; };
 		0A137E8921DF04CB00C7328D /* NoticeListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListController.swift; sourceTree = "<group>"; };
@@ -1059,6 +1064,8 @@
 		0A494F9B211C286E00E95332 /* office_person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = office_person.png; sourceTree = "<group>"; };
 		0A494F9E211C29CF00E95332 /* 科室-灰色@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "科室-灰色@2x.png"; sourceTree = "<group>"; };
 		0A494F9F211C29D000E95332 /* 科室@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "科室@2x.png"; sourceTree = "<group>"; };
+		0A55EC40224A221F00110BBD /* HistorySkillExamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySkillExamController.swift; sourceTree = "<group>"; };
+		0A55EC57224B5D1600110BBD /* HistoryTheoryExamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTheoryExamController.swift; sourceTree = "<group>"; };
 		0A56E39B1F5D8A2300EF9855 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		0A56E39F1F5D92C700EF9855 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		0A56E3A11F5D92CF00EF9855 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1162,7 +1169,6 @@
 		0AC3B92F1EE4730B00227194 /* TrainForStudents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainForStudents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC3B9321EE4730B00227194 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AC3B9341EE4730B00227194 /* TurnCenterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnCenterController.swift; sourceTree = "<group>"; };
-		0AC3B9361EE4730B00227194 /* ExamCenterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamCenterController.swift; sourceTree = "<group>"; };
 		0AC3B9391EE4730B00227194 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0AC3B93B1EE4730B00227194 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AC3B93E1EE4730B00227194 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -2181,6 +2187,8 @@
 				0A2B355A21C8F97700E17AC9 /* ExamingSubScrController.swift */,
 				0A2B356421C9104800E17AC9 /* ExamResultController.swift */,
 				0A2399EE223CD90B00EFB9BF /* ExamListController.swift */,
+				0A55EC40224A221F00110BBD /* HistorySkillExamController.swift */,
+				0A55EC57224B5D1600110BBD /* HistoryTheoryExamController.swift */,
 			);
 			path = Exam;
 			sourceTree = "<group>";
@@ -2373,7 +2381,6 @@
 			children = (
 				0A6A23A81EEE8FA300A1AC5B /* Collection */,
 				0A6A23A91EEE8FCD00A1AC5B /* ExamViewController.swift */,
-				0AC3B9361EE4730B00227194 /* ExamCenterController.swift */,
 				0A6A23B81EF3BE9400A1AC5B /* DirectoryController.swift */,
 			);
 			name = Exam;
@@ -2414,6 +2421,8 @@
 		0A6B327321746BFE007FF54D /* image */ = {
 			isa = PBXGroup;
 			children = (
+				0A1299A2224DFD6700F99176 /* 监考.png */,
+				0A1299A0224DFBBD00F99176 /* 技能考试-icon.png */,
 				0A123DB42241ED7800FB2BE4 /* func-home.png */,
 				0A17CE95221E93820057A395 /* 讲课素材.png */,
 				0A239A00223CE81700EFB9BF /* location-gary.png */,
@@ -3361,6 +3370,7 @@
 				0A26BA3B219AABB20071C2DC /* 白星星-空.png in Resources */,
 				0A26BA2D219969330071C2DC /* 理论考试.png in Resources */,
 				0AC3C4462189B77A006C0DAB /* 科主任.png in Resources */,
+				0A1299A3224DFD6900F99176 /* 监考.png in Resources */,
 				0AD14578217D8F89004670A9 /* 加号.png in Resources */,
 				0A1214B321EF1ACB00BA17EE /* 自主训练.png in Resources */,
 				0A42F82F1F1D2B0A001DF281 /* AnwsersItem.xib in Resources */,
@@ -3458,6 +3468,7 @@
 				0A940F0F21A2AB87001BEE9D /* 第二名.png in Resources */,
 				0A15D5551F0EA52D00908B7F /* 考评-灰.png in Resources */,
 				0AC3C45221902908006C0DAB /* 选择-方.png in Resources */,
+				0A1299A1224DFBC000F99176 /* 技能考试-icon.png in Resources */,
 				0A14BD9021DDF88600261797 /* 公告-蓝.png in Resources */,
 				0A42F8331F1E01B2001DF281 /* artboard.png in Resources */,
 				0A6B344221747AD0007FF54D /* 出科考试.png in Resources */,
@@ -3626,7 +3637,6 @@
 				0A2B355E21C8FAE800E17AC9 /* SubScoreCell.swift in Sources */,
 				0A644D8F1F04E556009025DD /* WishListController.swift in Sources */,
 				0A15D5171F0BF5FB00908B7F /* QQStyleRefreshHeader.swift in Sources */,
-				0AC3B9371EE4730B00227194 /* ExamCenterController.swift in Sources */,
 				0AC3B9861EE5810900227194 /* TurnDetailController.swift in Sources */,
 				0A644D601F00BD52009025DD /* EvaluationCenterController.swift in Sources */,
 				0A14531E21E4443300741F5B /* OfficeTeacherController.swift in Sources */,
@@ -3688,6 +3698,7 @@
 				0A15C3661F494A4700C53F61 /* DifficultDetailController.swift in Sources */,
 				0AF9D36021895D660068B05A /* ReleaseController.swift in Sources */,
 				0AC3B9981EE6A60700227194 /* LoginViewController.swift in Sources */,
+				0A55EC41224A221F00110BBD /* HistorySkillExamController.swift in Sources */,
 				0AC3BB041EE94A0D00227194 /* MyBaseUIViewController.swift in Sources */,
 				0A644D5B1EFD0A5A009025DD /* OutlineItem.swift in Sources */,
 				0A2B356521C9104900E17AC9 /* ExamResultController.swift in Sources */,
@@ -3760,6 +3771,7 @@
 				B468B7CE1FCA9BA000ECF396 /* UIView+MJExtension.m in Sources */,
 				0AC3BCA31EE94DA300227194 /* LBXScanViewStyle.swift in Sources */,
 				B468B7C41FCA9BA000ECF396 /* MJRefreshBackNormalFooter.m in Sources */,
+				0A55EC58224B5D1600110BBD /* HistoryTheoryExamController.swift in Sources */,
 				B468B7BC1FCA9BA000ECF396 /* MJRefreshBackFooter.m in Sources */,
 				0A97555821A7C21700267E10 /* PersonSelectorController.swift in Sources */,
 				0A91142F201D60D2001A1936 /* UserDefaults.swift in Sources */,

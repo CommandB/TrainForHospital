@@ -12,6 +12,8 @@ import SwiftyJSON
 import CoreTelephony
 class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIPickerViewDelegate{
     
+    @IBOutlet weak var content: UILabel!
+    
     @IBOutlet weak var txt_loginId: UITextField!
     
     @IBOutlet weak var txt_password: UITextField!
@@ -27,7 +29,44 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
     
     @IBAction func btn_login_inside(_ sender: UIButton) {
         login()
+        
+        
+        
+        
+        
+        
+        //富文本设置
+        var attributeString = NSMutableAttributedString(string:"welcome to hangge.com")
+        //从文本0开始6个字符字体HelveticaNeue-Bold,16号
+        attributeString.addAttribute(NSAttributedStringKey.font, value: UIFont(name: "HelveticaNeue-Bold", size: 16)!,
+                                     range: NSMakeRange(0,6))
+        //设置字体颜色
+        attributeString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.blue,
+                                     range: NSMakeRange(0, 3))
+        //设置文字背景颜色
+        attributeString.addAttribute(NSAttributedStringKey.backgroundColor, value: UIColor.green,
+                                     range: NSMakeRange(3,3))
+        
+        
+
+        
+        content.attributedText = attributeString
+        
+//        var htmlText = "空は<font color=\"blue\">青い</font>。<br>An apple is <font color=\"red\">red</font>."
+//        do{
+//            let attrStr = try NSAttributedString(data: htmlText.data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
+//
+//            content.attributedText = attrStr
+//        }catch let error as NSError {
+//            print(error.localizedDescription)
+//        }
+        
+        
+        setup(content: "<div style='font-size:20px;color:red;background-color:green;'>哈哈哈哈哈哈哦哦哦哦<img style='width:30px !important;height:30px; margin-left:20px;padding-right:50px;' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554102155517&di=3408e01d4ed786bf7495b1c6e4e1a68f&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201408%2F18%2F20140818125020_GLPZS.jpeg'><input type='text' value='好好好' style='color:#c00'>哒哒哒哒哒哒哒哒哒哒哒哒</div><img src='https://avatar.csdn.net/9/6/F/3_flg1554112450.jpg'>")
+        
     }
+    
+    
     
     @IBAction func btn_hospital_inside(_ sender: UITextField) {
         
@@ -35,6 +74,43 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
     
     @IBAction func btn_forgotPassword_inside(_ sender: UIButton) {
         myAlert(self, message: "请联系科教处!")
+    }
+    
+    
+    func setup(content:String){
+        self.content.preferredMaxLayoutWidth = UIScreen.main.bounds.size.width - 36
+        let content = "<html><head><meta name= \"viewport\" content= \"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\"></head><body>" + content + "</body></html>"
+        
+
+        let data:NSData? = content.data(using:.unicode, allowLossyConversion: true) as NSData?
+    
+        do {
+            
+            
+            
+//            let attrStr = try NSMutableAttributedString(data: data! as Data, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
+            
+//            nsdocumentt
+            
+            let attrStr = try NSMutableAttributedString(data: data as! Data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
+            
+            attrStr.enumerateAttribute(NSAttributedStringKey.attachment, in: NSMakeRange(0, attrStr.length), options: NSAttributedString.EnumerationOptions.reverse, using: { (vale, range, stop) -> Void in
+                if let ment = vale as? NSTextAttachment{
+                    ment.bounds.size = CGSize(width: UIScreen.main.bounds.size.width - 20, height: 130)
+                }
+            })
+            
+            attrStr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 14), range: NSMakeRange(0, attrStr.length))
+            // 设置行距
+            let style = NSMutableParagraphStyle()
+            style.lineSpacing = 5
+            attrStr.addAttribute(NSAttributedStringKey.paragraphStyle, value: style, range: NSMakeRange(0, attrStr.length))
+            self.content.attributedText = attrStr
+        } catch{
+            
+        }
+        self.content.font = UIFont.systemFont(ofSize: 14)
+        self.content.textColor = UIColor.darkGray
     }
     
     

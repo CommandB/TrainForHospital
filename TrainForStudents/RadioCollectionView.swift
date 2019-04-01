@@ -164,6 +164,7 @@ class RadioCollectionView : PeiwuCollectionView{
         }
         parentView?.answerDic[questionId] = answerDic
         parentView?.questionCollection.reloadData()
+//        parentView?.questionCollection.reloadItems(at: [indexPath])
         
     }
     

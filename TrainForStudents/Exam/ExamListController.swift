@@ -30,11 +30,11 @@ class ExamListController : HBaseViewController{
         
         self.examCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.examCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
-        
+        self.examCollection.mj_header.beginRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.examCollection.mj_header.beginRefreshing()
+        
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -122,6 +122,7 @@ extension ExamListController : UICollectionViewDelegate , UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //myPresentView(self, viewName: "todoDetailView")
         var data = jds[indexPath.item]
+        print(data)
         if isInvigilation{
             if data["ishistory"].intValue == 1{
                 if data["butype"].stringValue == "理论考试监考"{
@@ -129,24 +130,10 @@ extension ExamListController : UICollectionViewDelegate , UICollectionViewDataSo
                     vc.paramData = data
                     present(vc, animated: true, completion: nil)
                 }else{
-                    //跳转到
-                    
-                    let url = SERVER_PORT + "rest/app/getSkillExamInfo.do"
-                    
-                    myPostRequest(url, ["personid":data["buid"].intValue, "examroomid":data["examroomid"].stringValue] , method: .post).responseJSON(completionHandler: {resp in
-                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-                        
-                        switch resp.result{
-                        case .success(let respJson):
-                            let json = JSON(respJson)
-                            print(json)
-                            
-                        case .failure(let err):
-                            print(err)
-                            break
-                        }
-                        
-                    })
+                    //跳转到历史技能考试
+                    let vc = getViewToStoryboard("historySkillExamView") as! HistorySkillExamController
+                    vc.paramData = data
+                    present(vc, animated: true, completion: nil)
                     
                 }
             }else{  //非历史
@@ -164,7 +151,34 @@ extension ExamListController : UICollectionViewDelegate , UICollectionViewDataSo
             
         }else{
             if data["ishistory"].intValue == 1{
-                
+                if data["butype"].stringValue == "理论考试"{
+                    
+                    MBProgressHUD.showAdded(to: self.view, animated: true)
+                    let url = SERVER_PORT + "rest/app/getExamInfoByStudent.do"
+                    myPostRequest(url,["examroomid": data["buid"]], method: .post).responseJSON(completionHandler: {resp in
+                        
+                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                        switch resp.result{
+                        case .success(let respJson):
+                            let json = JSON(respJson)
+                            if json["code"].intValue == 1{
+                                let _data = json["data"]
+                                let vc = getViewToStoryboard("historyTheoryExamView") as! HistoryTheoryExamController
+                                data["exercisesid"] = _data["exercisesid"]
+                                vc.paramData = data
+                                self.present(vc, animated: true, completion: nil)
+                            }
+                            
+                        case .failure(let err):
+                            print(err)
+                            break
+                        }
+                        
+                    })
+
+                }else{
+                    //TODO:历史技能考试
+                }
             }else{  //非历史
                 if data["butype"].stringValue == "理论考试"{
                     let vc = getViewToStoryboard("examInfoForStuView") as! ExamInfoForStuController

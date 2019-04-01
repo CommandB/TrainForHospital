@@ -66,13 +66,27 @@ extension String {
     ///根据字体大小以及设置的宽度计算字符串需要几行来显示
     func getLineNumberForWidth(width : CGFloat, cFont : UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)) -> Int{
         
+        
+        
         var lineNumber = 0
         
         //获取字符串在一行时占的总宽度
-        let contentWidth = getWidth(font: cFont)
+        var contentWidth = getWidth(font: cFont)
+        
+        /***********/
+        //hws给他加了个修正系数
+        var revise = CGFloat(1)
+        if contentWidth > 500 && contentWidth < 1000{
+            revise = 1.03
+        }else if contentWidth > 1000{
+            revise = 1.02
+        }else if contentWidth > 1500{
+            revise = 1.01
+        }
+        /***********/
         
         //计算需要几行
-        let multipleF = contentWidth / width
+        let multipleF = contentWidth * revise / width
         let multipleI = Int.init(multipleF)
         //判断是否有余数 需要加一行
         if multipleF > CGFloat.init(multipleI) {

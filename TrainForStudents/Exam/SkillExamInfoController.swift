@@ -58,21 +58,11 @@ class SkillExamInfoController : HBaseViewController{
                     (self.view.viewWithTag(20001) as! UILabel).text = data["examtypename"].stringValue
                     (self.view.viewWithTag(30001) as! UILabel).text = data["bepersonname"].stringValue
 //                    (self.view.viewWithTag(40001) as! UILabel).text = data["exercisesid"].stringValue
-                    (self.view.viewWithTag(50001) as! UILabel).text = data["passscore"].stringValue
+                    (self.view.viewWithTag(50001) as! UILabel).text = data["score"].stringValue
                     (self.view.viewWithTag(60001) as! UILabel).text = data["longtime"].stringValue
                     (self.view.viewWithTag(70001) as! UILabel).text = data["starttime"].stringValue
                     self.paramData["exercisesid"] = data["exercisesid"]
                 }
-                
-                /*
-                 时长
-                 地点
-                 开始时间
-                 类型
-                 被考人/监考人
-                 
-                 
-                 */
             case .failure(let err):
                 print(err)
                 break

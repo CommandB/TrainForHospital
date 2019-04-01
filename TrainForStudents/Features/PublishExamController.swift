@@ -409,7 +409,7 @@ class PublishExamController : HBaseViewController{
             let btn = view.viewWithTag(100001+i) as! UIButton
             if btn.tag == sender.tag{
                 btn.setImage(UIImage(named: "选择-大"), for: .normal)
-                submitParam["appexamination"] = sender.tag - 80001
+                submitParam["appexamination"] = sender.tag - 100001
             }else{
                 btn.setImage(UIImage(named: "未选择-大"), for: .normal)
             }
