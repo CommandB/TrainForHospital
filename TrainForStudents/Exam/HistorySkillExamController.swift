@@ -64,15 +64,17 @@ class HistorySkillExamController : HBaseViewController{
     
     func getListData(){
         
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
         let url = SERVER_PORT+"rest/app/getSkillExamInfo.do"
         
         myPostRequest(url,["personid":paramData["buid"].intValue, "examroomid":paramData["examroomid"].stringValue]).responseJSON(completionHandler: {resp in
-            
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             switch resp.result{
             case .success(let responseJson):
                 
                 let json = JSON(responseJson)
-                                print(json)
+                                //print(json)
                 if json["code"].stringValue == "1"{
                     self.jds = json["data"].arrayValue
                     (self.view.viewWithTag(10001) as! UILabel).text = self.jds[0]["questionstitle"].stringValue

@@ -271,8 +271,15 @@ extension HistoryTheoryExamController : UICollectionViewDelegate , UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
             let stuAnswer = jds["studentanswervalue"].stringValue
             var title = jds["title"].stringValue
-            let answerIndex = title.index(title.endIndex, offsetBy: -2)
-            title.insert(contentsOf: stuAnswer, at: answerIndex)
+            
+            //如果题目的最后是以括号结尾则把答案写在括号前面 否则 直接把答案写在后面
+            if (title.index(of: ")") == title.endIndex){
+                let answerIndex = title.index(title.endIndex, offsetBy: -2)
+                title.insert(contentsOf: stuAnswer, at: answerIndex)
+            }else{
+                title += stuAnswer
+            }
+            
             (cell.viewWithTag(10001) as! UILabel).text = "\(jds["indexname"])\(title)"
             return cell
         }else{

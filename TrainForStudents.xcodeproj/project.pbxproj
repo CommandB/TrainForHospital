@@ -16,6 +16,7 @@
 		0A0E20A321F5A27000DAD2FE /* 箭头-右灰.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E20A221F5A26B00DAD2FE /* 箭头-右灰.png */; };
 		0A0E20A521F5A6B200DAD2FE /* PersonSelectorAdvanceSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E20A421F5A6B200DAD2FE /* PersonSelectorAdvanceSearchController.swift */; };
 		0A0E20A721F7052D00DAD2FE /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E20A621F7052D00DAD2FE /* Dictionary.swift */; };
+		0A0EB4EF2253394900FA2D84 /* TurnTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EB4EE2253394900FA2D84 /* TurnTaskController.swift */; };
 		0A0FA88C1F0F615300DFEA7E /* voice.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0FA8871F0F615300DFEA7E /* voice.png */; };
 		0A1018BD21D4B5AA00E07B33 /* StudentsInExamCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1018BC21D4B5AA00E07B33 /* StudentsInExamCollection.swift */; };
 		0A1214B221EF1ACB00BA17EE /* 面授.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1214A321EF1ABF00BA17EE /* 面授.png */; };
@@ -890,6 +891,7 @@
 		0A0E20A221F5A26B00DAD2FE /* 箭头-右灰.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "箭头-右灰.png"; sourceTree = "<group>"; };
 		0A0E20A421F5A6B200DAD2FE /* PersonSelectorAdvanceSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersonSelectorAdvanceSearchController.swift; path = TrainForStudents/public/PersonSelectorAdvanceSearchController.swift; sourceTree = SOURCE_ROOT; };
 		0A0E20A621F7052D00DAD2FE /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		0A0EB4EE2253394900FA2D84 /* TurnTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnTaskController.swift; sourceTree = "<group>"; };
 		0A0FA8871F0F615300DFEA7E /* voice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice.png; sourceTree = "<group>"; };
 		0A0FA88F1F110DB100DFEA7E /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		0A1018BC21D4B5AA00E07B33 /* StudentsInExamCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsInExamCollection.swift; sourceTree = "<group>"; };
@@ -2168,6 +2170,22 @@
 			path = JPush;
 			sourceTree = "<group>";
 		};
+		0A0EB4EC225338F600FA2D84 /* Student */ = {
+			isa = PBXGroup;
+			children = (
+				0A0EB4ED2253390000FA2D84 /* TurnTask */,
+			);
+			path = Student;
+			sourceTree = "<group>";
+		};
+		0A0EB4ED2253390000FA2D84 /* TurnTask */ = {
+			isa = PBXGroup;
+			children = (
+				0A0EB4EE2253394900FA2D84 /* TurnTaskController.swift */,
+			);
+			path = TurnTask;
+			sourceTree = "<group>";
+		};
 		0A1018BB21D4B56300E07B33 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
@@ -2628,6 +2646,7 @@
 		0AC3B9311EE4730B00227194 /* TrainForStudents */ = {
 			isa = PBXGroup;
 			children = (
+				0A0EB4EC225338F600FA2D84 /* Student */,
 				0AF9D33C2180211F0068B05A /* Public */,
 				0A26BA27219577EB0071C2DC /* Utils */,
 				0A12D7C422378D4B005B5DD5 /* Exam */,
@@ -3765,6 +3784,7 @@
 				0A31A9A821B50441007AB138 /* HSimplePickerViewImpl.swift in Sources */,
 				0AC3BCA01EE94DA300227194 /* LBXScanNetAnimation.swift in Sources */,
 				0A2399EF223CD90B00EFB9BF /* ExamListController.swift in Sources */,
+				0A0EB4EF2253394900FA2D84 /* TurnTaskController.swift in Sources */,
 				0A125A901F29D1FF00FDD4F4 /* ChangePasswordController.swift in Sources */,
 				B4FF1A891F94DF7D009C6685 /* SDWebImageCompat.m in Sources */,
 				0A644D911F04E5DC009025DD /* WishListCollectionView.swift in Sources */,
