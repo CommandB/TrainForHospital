@@ -306,7 +306,7 @@ class PersonSelectorController: HBaseViewController {
         if param.count == 0 {
             submitParam["officeid"] = officeId
         }else{
-            submitParam["officeid"] = officeId
+            //submitParam["officeid"] = officeId
             submitParam.merge(param)
             
         }
@@ -609,6 +609,8 @@ class PersonSelectorController: HBaseViewController {
         }
         
         jds = cds
+        let lbl = view.viewWithTag(40001) as! UILabel
+        lbl.text = "共筛选出\(jds.count)人"
         personCollection.reloadData()
         MBProgressHUD.hideAllHUDs(for: view, animated: true)
         return true

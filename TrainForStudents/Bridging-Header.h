@@ -4,10 +4,8 @@
 
 // Swift中使用sha1算法  引入这个库
 #import <CommonCrypto/CommonCrypto.h>
-//极光推送
-#import "JPUSHService.h"
-// iOS10注册APNs所需头文件
-#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+
+
 #import <UserNotifications/UserNotifications.h>
 #import "UIButton+WebCache.h"
 #import "MJRefresh.h"
@@ -16,4 +14,6 @@
 #import "MBProgressHUD.h"
 #import "PLPlayerKit/PLPlayerKit.h"
 #import "NSDictionary+Additions.h"
-#endif
+// iOS10注册APNs所需头文件
+//#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+//#endif

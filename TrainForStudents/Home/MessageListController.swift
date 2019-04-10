@@ -77,7 +77,7 @@ extension MessageListController : UICollectionViewDelegate , UICollectionViewDat
 
 
         //return CGSize(width: UIScreen.width, height: 95)
-        return CGSize(width: UIScreen.width, height: 55)
+        return CGSize(width: collectionView.W, height: 55)
     }
     
 }

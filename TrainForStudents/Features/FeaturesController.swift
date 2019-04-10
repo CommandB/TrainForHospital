@@ -16,22 +16,22 @@ class FeaturesController : UIViewController{
     override func viewDidLoad() {
         
         var btn = view.viewWithTag(10001) as! UIButton
-        btn.set(image: nil, title: "现场考试", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
-        btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
-        btn = view.viewWithTag(10002) as! UIButton
         btn.set(image: nil, title: "理论考试", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
-        btn = view.viewWithTag(10003) as! UIButton
-        btn.set(image: nil, title: "评价", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
-        btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
-        btn = view.viewWithTag(10004) as! UIButton
-        btn.set(image: nil, title: "大纲审批", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
-        btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
-        btn = view.viewWithTag(20001) as! UIButton
+        btn = view.viewWithTag(10002) as! UIButton
         btn.set(image: nil, title: "技能考试", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
-        btn = view.viewWithTag(20002) as! UIButton
+        btn = view.viewWithTag(10003) as! UIButton
+        btn.set(image: nil, title: "评价任务", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
+        btn = view.viewWithTag(10004) as! UIButton
+        btn.set(image: nil, title: "待考任务", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
+        btn = view.viewWithTag(20001) as! UIButton
         btn.set(image: nil, title: "mini-cex", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
+        btn = view.viewWithTag(20002) as! UIButton
+        btn.set(image: nil, title: "轮转查询", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(20003) as! UIButton
         btn.set(image: nil, title: "请假审批", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
@@ -46,13 +46,15 @@ class FeaturesController : UIViewController{
         
         switch sender.tag {
         case 10001:
-            //现场技能考试
-            myPresentView(self, viewName: "publishStillView")
-            break
-        case 10002:
             //理论考试
             let vc = getViewToStoryboard("publishExamView") as! PublishExamController
             vc.isSkillExam = false
+            present(vc, animated: true, completion: nil)
+            break
+        case 10002:
+            //技能考试
+            let vc = getViewToStoryboard("publishExamView") as! PublishExamController
+            vc.isSkillExam = true
             present(vc, animated: true, completion: nil)
             break
         case 10003: //待评任务
@@ -60,16 +62,17 @@ class FeaturesController : UIViewController{
 //            myPresentView(self, viewName: "evaluationListView")
             break
         case 10004:
-            myAlert(self, message: "暂未开放!")
+            let vc = getViewToStoryboard("examListView") as! ExamListController
+            vc.isInvigilation = false
+            present(vc, animated: true, completion: nil)
+            
             break
         case 20001:
-            //技能考试
-            let vc = getViewToStoryboard("publishExamView") as! PublishExamController
-            vc.isSkillExam = true
-            present(vc, animated: true, completion: nil)
+            myPresentView(self, viewName: "cexStudentsView")
             break
         case 20002:
-            myPresentView(self, viewName: "cexStudentsView")
+            
+            myAlert(self, message: "暂未开放!")
             break
         case 20003:
             myAlert(self, message: "暂未开放!")
@@ -80,7 +83,6 @@ class FeaturesController : UIViewController{
         default:
             break
         }
-        
     }
     
 }

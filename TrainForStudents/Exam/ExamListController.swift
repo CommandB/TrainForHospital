@@ -30,11 +30,10 @@ class ExamListController : HBaseViewController{
         
         self.examCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.examCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
-        self.examCollection.mj_header.beginRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.examCollection.mj_header.beginRefreshing()
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {

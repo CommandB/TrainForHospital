@@ -413,7 +413,7 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         
         var total = 0
         for item in jsonDataSource{
-            total += item.1["get_value"].intValue
+            total += item.1["score"].intValue
         }
         (parentView?.view.viewWithTag(88888) as! UILabel).text = "总得分：\(total)分"
         

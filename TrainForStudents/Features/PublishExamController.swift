@@ -77,6 +77,7 @@ class PublishExamController : HBaseViewController{
         
         txt = view.viewWithTag(50001) as! TextFieldForNoMenu
         txt.inputView = addrPicker
+        txt.delegate = self
         
         btn = view.viewWithTag(60001) as! UIButton
         btn.addTarget(self, action: #selector(btn_teacher_evet), for: .touchUpInside)
@@ -319,7 +320,15 @@ class PublishExamController : HBaseViewController{
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let tag = textField.tag
-        if tag == 40001 || tag == 40002{
+        if tag == 50001{
+            
+            let row = addrPicker.selectedRow(inComponent: 0)
+            let text = addrPickerImpl.dataSource[row]["facilitiesname"].stringValue
+            textField.text = text
+            submitParam["facilitiesid"] = addrPickerImpl.dataSource[row]["facilitiesid"].stringValue
+            submitParam["name"] = text
+            
+        }else if tag == 40001 || tag == 40002{
             let t31 = view.viewWithTag(30001) as! UITextField
             let t32 = view.viewWithTag(30002) as! UITextField
             if t31.text == nil || t31.text == ""{
@@ -465,6 +474,8 @@ extension PublishExamController : UICollectionViewDelegate , UICollectionViewDat
         jds.remove(at: indexPath.item)
         submitParam["studentlist"] = jds
         personCollection.reloadData()
+        let lbl = view.viewWithTag(10001) as! UIButton
+        lbl.setTitle(jds.count.description, for: .normal)
     }
     
 }

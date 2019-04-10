@@ -21,12 +21,13 @@ class ExamViewController : MyBaseUIViewController{
     var typeIndex = 0
     var questionIndex = 0
     
+    //false == 考试  true == 练习
+    var isTrain = false
+    
     ///存储已选择的答案
     var answerDic = [String:Dictionary<String, String>]()
     
     let questionTypeTitle = "    %@【%@】 共%d道 每道%d分 共%d分"
-    
-    var fromView = UIViewController()
     
     @IBOutlet weak var lbl_questionType: UILabel!
     
@@ -60,13 +61,17 @@ class ExamViewController : MyBaseUIViewController{
         questionCollection.collectionViewLayout = questionlayout
         MyNotificationUtil.addKeyBoardWillChangeNotification(self)
         resultView.isHidden = true
+        view.bringSubview(toFront: resultView)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        var cacheAnswerDic = UserDefaults.Exam.any(forKey: .answerDic) as! [String : [String : Dictionary<String, String>]]
-        cacheAnswerDic[taskId] = answerDic
-        // 将当前答案保存到应用缓存中
-        UserDefaults.Exam.set(value: cacheAnswerDic, forKey: .answerDic)
+        //如果是练习 taskId 是没有的 所以不需要缓存作答
+        if !taskId.isEmpty{
+            var cacheAnswerDic = UserDefaults.Exam.any(forKey: .answerDic) as! [String : [String : Dictionary<String, String>]]
+            cacheAnswerDic[taskId] = answerDic
+            // 将当前答案保存到应用缓存中
+            UserDefaults.Exam.set(value: cacheAnswerDic, forKey: .answerDic)
+        }
         
     }
     
@@ -77,7 +82,7 @@ class ExamViewController : MyBaseUIViewController{
         let dic = UserDefaults.Exam.any(forKey: .answerDic)
         if dic != nil{
             let cacheAnswerDic = dic as! [String : [String : Dictionary<String, String>]]
-            if cacheAnswerDic[taskId] != nil{
+            if !taskId.isEmpty && cacheAnswerDic[taskId] != nil{
                 self.answerDic = cacheAnswerDic[taskId]!
             }
             
@@ -103,8 +108,11 @@ class ExamViewController : MyBaseUIViewController{
     
     ///返回按钮
     @IBAction func btn_back_inside(_ sender: UIButton) {
-        
-        myConfirm(self, message:"是否退出考试?" ,
+        var text = "是否退出考试?"
+        if isTrain{
+            text = "是否退出练习?"
+        }
+        myConfirm(self, message:text ,
                   okHandler:{action in
                     
                 // 将当前答案保存到应用缓存中
@@ -196,6 +204,11 @@ class ExamViewController : MyBaseUIViewController{
     //完成
     @IBAction func btn_complete_inside(_ sender: UIButton) {
         
+        //如果是练习 则直接返回
+        if isTrain{
+            self.dismiss(animated: true, completion: nil)
+        }
+        
         //判断当前题目是否已全部作答
         var isComplete = true
         let curQuestion = questionView.jsonDataSource
@@ -257,6 +270,15 @@ class ExamViewController : MyBaseUIViewController{
     }
     
     func isAnswered(qid : String , quesionJson : JSON , initAnswer : Bool = true) {
+        //如果是练习 则不用提示是否已做题
+        if isTrain{
+            if initAnswer{
+                let qcv = QuestionCollectionView()
+                self.answerDic[qid] = qcv.getAnswerJson(json: quesionJson)
+            }
+            self.nextQeustion()
+            return
+        }
         myConfirm(self, message: "本题未做完,是否进入下一题" , okHandler : { action in
             if initAnswer{
                 let qcv = QuestionCollectionView()
@@ -278,7 +300,7 @@ class ExamViewController : MyBaseUIViewController{
     }
     
     func nextQeustion(){
-        //TODO 进入下一题的代码写这里
+        // 进入下一题的代码写这里
         self.questionIndex += 1
         //如果已是当前题型最后一题 则切换到下一题型
         if self.questionIndex >= self.currentType["questions"].arrayValue.count{
@@ -343,9 +365,6 @@ class ExamViewController : MyBaseUIViewController{
                             lbl.text = json["score"].stringValue
                             let btn = self.resultView.viewWithTag(40002) as! UIButton
                             btn.isHidden = false
-                            if self.isSimulation{   //模拟考和抽考区分处理
-                                //btn.setTitle("返回", for: .normal)
-                            }
 
                         }else{
                             let imageView = self.resultView.viewWithTag(10001) as! UIImageView

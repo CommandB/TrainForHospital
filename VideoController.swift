@@ -93,7 +93,6 @@ class VideoController : MyBaseUIViewController {
                     //停止播放视频
                     self.player.pause()
                     vc.exercises = json["data"].arrayValue
-                    vc.fromView = self
                     self.present(vc, animated: true, completion: nil)
                 }else{
                     myAlert(self, message: json["msg"].stringValue)

@@ -62,11 +62,14 @@ class InspectController : HBaseViewController{
     
     override func viewDidLoad() {
         
+        view.bringSubview(toFront: officeList_View)
+        
         let lbl_viewTitle = view.viewWithTag(11111) as! UILabel
         lbl_viewTitle.text = trainType["traintypename"].stringValue
         
         officeList_collection.delegate = self
         officeList_collection.dataSource = self
+        
         jds = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue
         
         officeList_collection.reloadData()
@@ -223,7 +226,8 @@ class InspectController : HBaseViewController{
         //dismiss(animated: true, completion: nil)
         
         submitParam["isfreein"] = 0
-        submitParam["issend"] = 1
+        submitParam["issend"] = 0
+        submitParam["videiotape"] = 0
         submitParam["traintype"] = trainType["traintypeid"].intValue
         submitParam["officeid"] = UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)
         

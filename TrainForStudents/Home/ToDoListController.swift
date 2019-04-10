@@ -144,7 +144,10 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
             
             (cell.viewWithTag(20001) as! UILabel).text = data["tasktype"].stringValue
             
-            if data["endtime"].stringValue.count > 0{
+            if data["tasktype"].stringValue == "出科评价"{
+                (cell.viewWithTag(30001) as! UILabel).text = "截止: \(data["endtime"].stringValue.substring(to: 11))"
+            }
+            else if data["endtime"].stringValue.count > 0{
                 (cell.viewWithTag(30001) as! UILabel).text = data["starttime"].stringValue.substring(from: 11).substring(to: 5) + " - " + data["endtime"].stringValue.substring(from: 11).substring(to: 5)
             }else{
                 (cell.viewWithTag(30001) as! UILabel).text = data["starttime"].stringValue

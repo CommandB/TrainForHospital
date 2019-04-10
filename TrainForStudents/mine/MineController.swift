@@ -23,7 +23,7 @@ class MineController : HBaseViewController{
         
         
         
-        jds = JSON([["icon":"双箭头-右蓝","title":"切换至学生端","link":"tabBarView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
+        jds = JSON([["icon":"双箭头-右蓝","title":"切换至老师端","link":"dissmiss"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
         
         
         //        self.messageCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
@@ -73,7 +73,7 @@ class MineController : HBaseViewController{
     
 }
 
-extension MyController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+extension MineController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return jds.count
@@ -97,6 +97,10 @@ extension MyController : UICollectionViewDelegate , UICollectionViewDataSource ,
         let data = jds[indexPath.item]
         let viewName = data["link"].stringValue
         if viewName.count > 0 {
+            if viewName == "dissmiss"{
+                self.dismiss(animated: true, completion: nil)
+                return
+            }
             if viewName == "loginView"{
                 //退出系统
                 UserDefaults.standard.set(nil, forKey: LoginInfo.token.rawValue)

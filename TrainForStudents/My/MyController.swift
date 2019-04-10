@@ -21,9 +21,7 @@ class MyController : HBaseViewController{
         messageCollection.delegate = self
         messageCollection.dataSource = self
         
-        
-        
-        jds = JSON([["icon":"双箭头-右蓝","title":"切换至学生端","link":"tabBarView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
+        jds = JSON([["icon":"双箭头-右蓝","title":"切换至学生端","link":"studentTabbar"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
         
         
 //        self.messageCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
@@ -32,6 +30,7 @@ class MyController : HBaseViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        view.bringSubview(toFront: messageCollection)
         let lbl_name = view.viewWithTag(10002) as! UILabel
         lbl_name.text = UserDefaults.User.string(forKey: .personName)
         if lbl_name.text == nil{
@@ -89,7 +88,8 @@ extension MyController : UICollectionViewDelegate , UICollectionViewDataSource ,
         let title = cell.viewWithTag(10002) as! UILabel
         title.text = data["title"].stringValue
         
-        return cell
+        return
+        cell
     }
     
     //点击cell
@@ -103,6 +103,9 @@ extension MyController : UICollectionViewDelegate , UICollectionViewDataSource ,
                 r_token = ""
             }
             myPresentView(self, viewName: viewName)
+            let tabBar = (appDelegate.window?.rootViewController) as! MyTabBarController
+            tabBar.selectedIndex = 0
+            
         }
         
         

@@ -27,9 +27,6 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
     
     override func viewDidLoad() {
         
-//        tabBar_Item.image = UIImage(named: "首页.png")?.withRenderingMode(.alwaysOriginal)
-//        tabBar_Item.selectedImage = UIImage(named: "首页-选择.png")?.withRenderingMode(.alwaysOriginal)
-        
         homeCollection.delegate = self
         homeCollection.dataSource = self
         let btn = view.viewWithTag(10001) as! UIButton
@@ -61,7 +58,6 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
         }else{
             myAlert(self, message: "没有相机权限")
         }
-        
         
     }
     
@@ -99,8 +95,8 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
             present(vc, animated: true, completion: nil)
             break
         case 4://入科安排
-                        myPresentView(self, viewName: "evaluationItemList")
-//            myAlert(self, message: "暂未开放!")
+//                        myPresentView(self, viewName: "evaluationItemList")
+            myAlert(self, message: "暂未开放!")
             break
         case 5:
             let vc = getViewToStoryboard("examListView") as! ExamListController
@@ -108,10 +104,8 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
             present(vc, animated: true, completion: nil)
             break
         case 6:
-            let vc = getViewToStoryboard("examListView") as! ExamListController
-            vc.isInvigilation = false
-            present(vc, animated: true, completion: nil)
-//            myPresentView(self, viewName: "evaluationItemList")
+            //现场技能考试
+            myPresentView(self, viewName: "publishStillView")
             
             break
         default:
@@ -242,9 +236,9 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
     
     @objc func refresh() {
         officeTeamJds.removeAll()
+        getTask()
         getOfficeTeamList()
         getStatisticData()
-        getTask()
 //        getTeaching()
     }
     
@@ -413,7 +407,7 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
             btn.set(image: nil, title: "监考任务", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
             btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             btn = cell.viewWithTag(10006) as! UIButton
-            btn.set(image: nil, title: "待考任务", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
+            btn.set(image: nil, title: "现场考试", titlePosition: .bottom, additionalSpacing: 30.0, state: .normal)
             btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             break
         case 4:
@@ -531,6 +525,5 @@ extension HomeController : UIImagePickerControllerDelegate{
         })
         
     }
-    
 }
 

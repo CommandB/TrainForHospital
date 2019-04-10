@@ -46,7 +46,6 @@ class ExamInfoForStuController : HBaseViewController{
                 let json = JSON(result)
                 if json["code"].intValue == 1 {
                     vc.exercises = json["data"].arrayValue
-                    vc.fromView = self
                     self.present(vc, animated: true, completion: nil)
                 }else{
                     myAlert(self, message: json["msg"].stringValue)

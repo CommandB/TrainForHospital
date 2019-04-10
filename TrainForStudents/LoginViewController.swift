@@ -38,7 +38,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
         //富文本设置
         var attributeString = NSMutableAttributedString(string:"welcome to hangge.com")
         //从文本0开始6个字符字体HelveticaNeue-Bold,16号
-        attributeString.addAttribute(NSAttributedStringKey.font, value: UIFont(name: "HelveticaNeue-Bold", size: 16)!,
+        attributeString.addAttribute(NSAttributedStringKey.font, value: UIFont(name: "HelveticaNeue-Bold", size: 18)!,
                                      range: NSMakeRange(0,6))
         //设置字体颜色
         attributeString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.blue,
@@ -47,9 +47,13 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
         attributeString.addAttribute(NSAttributedStringKey.backgroundColor, value: UIColor.green,
                                      range: NSMakeRange(3,3))
         
-        
+        let smileImage : UIImage = UIImage(named: "playboy.jpg")!
+        let textAttachment : NSTextAttachment = NSTextAttachment()
+        textAttachment.image = smileImage
+        textAttachment.bounds = CGRect(x: 0, y: -20, width: 50, height: 50)
 
-        
+        attributeString.append(NSAttributedString(attachment: textAttachment))
+        attributeString.append(NSAttributedString(string: "一些什么东西呢"))
         content.attributedText = attributeString
         
 //        var htmlText = "空は<font color=\"blue\">青い</font>。<br>An apple is <font color=\"red\">red</font>."
@@ -62,7 +66,7 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
 //        }
         
         
-        setup(content: "<div style='font-size:20px;color:red;background-color:green;'>哈哈哈哈哈哈哦哦哦哦<img style='width:30px !important;height:30px; margin-left:20px;padding-right:50px;' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554102155517&di=3408e01d4ed786bf7495b1c6e4e1a68f&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201408%2F18%2F20140818125020_GLPZS.jpeg'><input type='text' value='好好好' style='color:#c00'>哒哒哒哒哒哒哒哒哒哒哒哒</div><img src='https://avatar.csdn.net/9/6/F/3_flg1554112450.jpg'>")
+//        setup(content: "<div style='font-size:20px;color:red;background-color:green;'>哈哈哈哈哈哈哦哦哦哦<img style='width:30px !important;height:30px; margin-left:20px;padding-right:50px;' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554102155517&di=3408e01d4ed786bf7495b1c6e4e1a68f&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201408%2F18%2F20140818125020_GLPZS.jpeg'><input type='text' value='好好好' style='color:#c00'>哒哒哒哒哒哒哒哒哒哒哒哒</div><img src='https://avatar.csdn.net/9/6/F/3_flg1554112450.jpg'>")
         
     }
     
@@ -116,6 +120,8 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        content.isHidden = true
         
         myPickerView.dataSource = self
         myPickerView.delegate = self
@@ -334,10 +340,6 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                         
                     }
                     
-                    //注册极光推送别名
-                    JPUSHService.setAlias(json["userkey"].stringValue, callbackSelector: nil, object: 0)
-                    //print("极光推送注册的别名:\(json["userkey"].stringValue)")
-                    
                     self.appDelegate.loadAppConfig()
                     
                     
@@ -377,11 +379,11 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                     }
                                 }
                                 UserDefaults.standard.set(roleDic, forKey: LoginInfo.role.rawValue)
+                                self.getMySelfData()
                                 //验证角色,判断登录到哪一端
                                 if isOnlyStudent(){
                                     //请求登录人的个人信息
-                                    self.getMySelfData()
-                                    myPresentView(self, viewName: "tabBarView")
+                                    myPresentView(self, viewName: "studentTabbar")
                                 }else{
                                     //myPresentView(self, viewName: "hTabBarView")
                                     let app = (UIApplication.shared.delegate) as! AppDelegate

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class CEXCheckController : UIViewController{
+class CEXCheckController : HBaseViewController{
     
     var studentId = 0
     var studentName = ""
