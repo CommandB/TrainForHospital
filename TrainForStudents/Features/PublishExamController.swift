@@ -260,10 +260,10 @@ class PublishExamController : HBaseViewController{
             return
         }
         
-        if submitParam["teacherlist"] == nil{
-            myAlert(self, message: "请选择监考老师!")
-            return
-        }
+//        if submitParam["teacherlist"] == nil{
+//            myAlert(self, message: "请选择监考老师!")
+//            return
+//        }
         
         if submitParam["marking"].debugDescription == "1" && (submitParam["markingteacherlist"] as! [JSON]).count == 1 {
             myAlert(self, message: "请选择阅卷老师!")

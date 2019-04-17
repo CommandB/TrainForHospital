@@ -334,6 +334,8 @@ extension PanoramicEvaluationController : UIGestureRecognizerDelegate{
 //        print(pointer.y.description + "----" + datePicker.Y.description)
         if pointer.y > datePicker.Y{
             return false
+        }else if NSStringFromClass((touch.view?.superview!.classForCoder)!) == "UICollectionViewCell"{
+            return false
         }
         return true
     }

@@ -132,7 +132,7 @@ class EvaluationDetailController: MyBaseUIViewController {
                     self.detailView.jsonDataSource = json["data"]
                     for item in json["data"].arrayValue{
                         let index = self.detailView.jsonDataSource.arrayValue.index(of: item)
-                        self.detailView.jsonDataSource[index!]["get_value"].stringValue = "5"
+                        self.detailView.jsonDataSource[index!]["get_value"].stringValue = "0"
                     }
                     self.detailCollection.reloadData()
                 }else{

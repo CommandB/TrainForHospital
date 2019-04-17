@@ -42,6 +42,8 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
         (view.viewWithTag(60001) as! UITextField).delegate = self
         (view.viewWithTag(70001) as! UITextField).inputView = dataPicker
         (view.viewWithTag(70001) as! UITextField).delegate = self
+        (view.viewWithTag(80001) as! UITextField).inputView = dataPicker
+        (view.viewWithTag(80001) as! UITextField).delegate = self
         
         
         //            personGroupList
@@ -60,7 +62,7 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
     }
     @IBAction func btn_reset_inside(_ sender: UIButton) {
         
-        for i in 1...7{
+        for i in 1...8{
             let tag = i * 10000 + 1
             (view.viewWithTag(tag) as! UITextField).text = "全部"
         }
@@ -124,6 +126,13 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
             if row == 0{
                 submitData.removeValue(forKey: "highestdegree")
             }
+        case 80001:
+            data = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue[index]
+            text = data["officename"].stringValue
+            submitData["officeid"] = data["officeid"].stringValue
+            if row == 0{
+                submitData.removeValue(forKey: "officeid")
+            }
         default:
             break
         }
@@ -176,6 +185,11 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
             array.insert(JSON(["highestdegree":"全部"]), at: 0)
             dataPickerImpl.dataSource = array
             dataPickerImpl.titleKey = "highestdegree"
+        case 80001:
+            var array = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue
+            array.insert(JSON(["officename":"全部"]), at: 0)
+            dataPickerImpl.dataSource = array
+            dataPickerImpl.titleKey = "officename"
         default:
             break
         }

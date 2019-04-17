@@ -77,8 +77,12 @@ extension HUtilView{
 extension HUtilView{
     
     private static var showImageView = UIView()
+    private static var prevScale = CGFloat(0)
+    private static var originSize = CGSize(width: 0, height: 0)
+    private static var originCenterPoint = CGPoint(x: 0, y: 0)
     
     static func showImageToTagetView(target: UIView, image: UIImage){
+        
         
         var _image = image
         showImageView = UIView(frame: CGRect(x: 0, y: 0, width: target.W, height: target.H))
@@ -88,25 +92,31 @@ extension HUtilView{
         
         //添加缩放手势
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchDid(_:)))
-        //showImageView.addGestureRecognizer(pinchGesture)
+        showImageView.addGestureRecognizer(pinchGesture)
         
         let imageView = UIImageView()
         imageView.tag = 10001
         //先计算宽高
-        imageView.setWidth(width: _image.size.width)
-        imageView.setHight(height: _image.size.height)
-        if imageView.W > UIScreen.width{
+        if _image.size.width > UIScreen.width{
             imageView.setWidth(width: UIScreen.width)
             _image = _image.resizeImage(newSize: _image.scaleImage(imageLength: UIScreen.width))
         }
+        imageView.setWidth(width: _image.size.width)
+        imageView.setHight(height: _image.size.height)
+        
         //再计算x和y
         imageView.setX(x: (showImageView.W - (imageView.W)) / 2)
         imageView.setY(y: (showImageView.H - (imageView.H)) / 2)
+        
+        //保存图片缩放后在视图中的原始尺寸
+        originSize = _image.size
+        originCenterPoint = imageView.center
         
         imageView.image = _image
         showImageView.addSubview(btn_bg)
         showImageView.addSubview(imageView)
         target.addSubview(showImageView)
+        
     }
     
     @objc static func removeImageView(sender: UIButton){
@@ -117,16 +127,34 @@ extension HUtilView{
     @objc static func pinchDid(_ recognizer:UIPinchGestureRecognizer) {
         //在监听方法中可以实时获得捏合的比例
         let scale = recognizer.scale
+        //prevScale - scale
         let multiple = (scale - 1) / 10 + 1
         let imageView = HUtilView.showImageView.viewWithTag(10001) as! UIImageView
         imageView.setWidth(width: imageView.W * multiple)
         imageView.setHight(height: imageView.H * multiple)
-        imageView.setX(x: imageView.X * multiple)
-        imageView.setY(y: imageView.Y / multiple)
+
+        //不能小于原始尺寸
+        if imageView.W  < originSize.width {
+            imageView.setWidth(width: originSize.width)
+            imageView.setHight(height: originSize.height)
+        }
+        
+        //不能大于原始尺寸3倍
+        if imageView.W  > originSize.width * 3{
+            imageView.setWidth(width: originSize.width * 3)
+            imageView.setHight(height: originSize.height * 3)
+        }
+        
+        imageView.center = originCenterPoint
         
         //获取两个触摸点的坐标
-//        print(recognizer.location(ofTouch: 0, in: HUtilView.showImageView))
-//        print(recognizer.location(ofTouch: 1, in: HUtilView.showImageView))
+        print("scale:\(scale)")
+        print("multiple:\(multiple)")
+//        print("1:\(recognizer.location(ofTouch: 0, in: HUtilView.showImageView))")
+//        print("2:\(recognizer.location(ofTouch: 1, in: HUtilView.showImageView))")
+        print(imageView.frame)
+        print("--------------------------------------------")
+        print("--------------------------------------------")
         
     }
     

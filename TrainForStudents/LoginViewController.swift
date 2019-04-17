@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 import CoreTelephony
-class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIPickerViewDelegate{
+class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPickerViewDelegate{
     
     @IBOutlet weak var content: UILabel!
     
@@ -342,8 +342,6 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                     
                     self.appDelegate.loadAppConfig()
                     
-                    
-                    
                     //请求科室信息
                     let getOfficeURL = SERVER_PORT+"rest/app/queryMyOffice.do"
                     myPostRequest(getOfficeURL).responseJSON(completionHandler: { resp in
@@ -382,8 +380,11 @@ class LoginViewController : MyBaseUIViewController, UIPickerViewDataSource , UIP
                                 self.getMySelfData()
                                 //验证角色,判断登录到哪一端
                                 if isOnlyStudent(){
-                                    //请求登录人的个人信息
-                                    myPresentView(self, viewName: "studentTabbar")
+                                    if UserDefaults.AppConfig.json(forKey: .isUseNewApp).intValue == 1{
+                                        self.appDelegate.window?.rootViewController = getViewToStoryboard("studentTabbar")
+                                    }else{
+                                        self.appDelegate.window?.rootViewController = getViewToStoryboard("tabBarView")
+                                    }
                                 }else{
                                     //myPresentView(self, viewName: "hTabBarView")
                                     let app = (UIApplication.shared.delegate) as! AppDelegate

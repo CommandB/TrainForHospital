@@ -6,12 +6,13 @@
 //  Copyright © 2017年 黄玮晟. All rights reserved.
 //
 
+
 import Foundation
 import UIKit
 import SwiftyJSON
 
 class RadioCollectionView : PeiwuCollectionView{
-
+    
     //实现UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
@@ -27,9 +28,11 @@ class RadioCollectionView : PeiwuCollectionView{
             let qid = data["questionsid"].stringValue
             //渲染问题
             let lbl = (cell.viewWithTag(10001) as? UILabel)!
+//            cell.backgroundColor = .green
+//            lbl.backgroundColor = .gray
             var title = data["indexname"].stringValue + " " + data["title"].stringValue
             lbl.text = title
-
+            
             //计算出需要的行数后在多加一行防止一些空格和符号显示不全
             lbl.numberOfLines = title.getLineNumberForWidth(width: lbl.frame.width - boundary, cFont: (lbl.font)!) + 1
             lbl.frame.size = CGSize(width: lbl.frame.size.width, height: getHeightForLabel(lbl: lbl))
@@ -46,7 +49,7 @@ class RadioCollectionView : PeiwuCollectionView{
             }
             //被选中则需要把题目对应被选中的答案也带出来
             selectedDic[qid] = parentView?.answerDic[qid]?["inputanswer"]
-
+            
         }else{
             let cellName = "c2"
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath)
@@ -61,10 +64,10 @@ class RadioCollectionView : PeiwuCollectionView{
             btn.layer.cornerRadius = btn.frame.width / 2
             btn.setTitle(data["selecttab"].stringValue, for: .normal)
             //关闭按钮动画
-//            btn.adjustsImageWhenDisabled = false
-//            btn.adjustsImageWhenHighlighted = false
-//            btn.showsTouchWhenHighlighted = false
-//            btn.reversesTitleShadowWhenHighlighted = false
+            //            btn.adjustsImageWhenDisabled = false
+            //            btn.adjustsImageWhenHighlighted = false
+            //            btn.showsTouchWhenHighlighted = false
+            //            btn.reversesTitleShadowWhenHighlighted = false
             let lbl = (cell.viewWithTag(10002) as? UILabel)!
             let title = data["answervalue"].stringValue
             lbl.text = title
@@ -72,10 +75,10 @@ class RadioCollectionView : PeiwuCollectionView{
             lbl.numberOfLines = title.getLineNumberForWidth(width: lbl.frame.width - boundary, cFont: (lbl.font)!)
             
             let y = btn.frame.origin.y + (4)
-//            var y = lbl.frame.origin.y
-//            if lbl.numberOfLines >= 2{
-//               y = btn.frame.origin.y
-//            }
+            //            var y = lbl.frame.origin.y
+            //            if lbl.numberOfLines >= 2{
+            //               y = btn.frame.origin.y
+            //            }
             lbl.frame.origin = CGPoint(x: lbl.frame.origin.x, y: y)
             lbl.frame.size = CGSize(width: lbl.frame.size.width, height: getHeightForLabel(lbl: lbl))
             
@@ -164,7 +167,7 @@ class RadioCollectionView : PeiwuCollectionView{
         }
         parentView?.answerDic[questionId] = answerDic
         parentView?.questionCollection.reloadData()
-//        parentView?.questionCollection.reloadItems(at: [indexPath])
+        //        parentView?.questionCollection.reloadItems(at: [indexPath])
         
     }
     

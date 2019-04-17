@@ -14,6 +14,9 @@
 #import "MBProgressHUD.h"
 #import "PLPlayerKit/PLPlayerKit.h"
 #import "NSDictionary+Additions.h"
+//ali推送
+#import <CloudPushSDK/CloudPushSDK.h>
+
 // iOS10注册APNs所需头文件
 //#ifdef NSFoundationVersionNumber_iOS_9_x_Max
 //#endif

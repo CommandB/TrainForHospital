@@ -118,22 +118,20 @@ class ScannerViewController: MyBaseUIViewController , AVCaptureMetadataOutputObj
     }
     
     //摄像头捕获
-    func captureOutput(_ captureOutput: AVCaptureOutput!,
-                       didOutputMetadataObjects metadataObjects: [Any]!,
-                       from connection: AVCaptureConnection!) {
-        
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         var stringValue:String?
         if metadataObjects.count > 0 {
             let metadataObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
             stringValue = metadataObject.stringValue
-            
+
             if stringValue != nil{
                 self.session.stopRunning()
             }
         }
         self.session.stopRunning()
-        
+
         myClosure!(stringValue! , self)
+        
 //        输出结果
 //        let alertController = UIAlertController(title: "二维码",
 //                                                message: stringValue,preferredStyle: .alert)
@@ -145,8 +143,9 @@ class ScannerViewController: MyBaseUIViewController , AVCaptureMetadataOutputObj
 //        })
 //        alertController.addAction(okAction)
 //        self.present(alertController, animated: true, completion: nil)
+        
     }
-
+    
     @IBAction func btn_back_inside(_ sender: UIButton) {
 //        let tabBar = self.tabBarController
 //        tabBar?.selectedIndex = selectedTabBarIndex

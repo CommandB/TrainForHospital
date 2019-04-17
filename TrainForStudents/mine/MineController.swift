@@ -23,11 +23,35 @@ class MineController : HBaseViewController{
         
         
         
-        jds = JSON([["icon":"双箭头-右蓝","title":"切换至老师端","link":"dissmiss"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
+        jds = JSON([["icon":"双箭头-右蓝","title":"切换至老师端","link":"hTabBarView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
         
         
         //        self.messageCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         //        self.messageCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
+        
+    }
+    
+    //获取我的二维码
+    @IBAction func btn_qr_inside(_ sender: UIButton) {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        let url = SERVER_PORT+"rest/public/GenerateQRCode.do"
+        myPostRequest(url,["type":"mycode"]).responseJSON(completionHandler: {resp in
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json = JSON(responseJson)
+                if json["code"].stringValue == "1"{
+                    let qrCode = json["qrcode"].stringValue
+                    HUtilView.showImageToTagetView(target: self.view, image: UIImage.createQR(text: qrCode, size: 240))
+                }else{
+                    myAlert(self, message: "获取我的二维码信息失败!")
+                }
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
         
     }
     
@@ -97,8 +121,8 @@ extension MineController : UICollectionViewDelegate , UICollectionViewDataSource
         let data = jds[indexPath.item]
         let viewName = data["link"].stringValue
         if viewName.count > 0 {
-            if viewName == "dissmiss"{
-                self.dismiss(animated: true, completion: nil)
+            if viewName == "hTabBarView"{
+                appDelegate.window?.rootViewController = getViewToStoryboard(viewName)
                 return
             }
             if viewName == "loginView"{

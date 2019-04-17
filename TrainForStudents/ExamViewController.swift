@@ -48,8 +48,10 @@ class ExamViewController : MyBaseUIViewController{
     
     //collection
     @IBOutlet weak var questionCollection: UICollectionView!
-    
     var questionView = QuestionCollectionView()
+    
+    @IBOutlet weak var imageCollection: UICollectionView!
+    var imageCollectionView = ImageCollectionForExamView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +59,10 @@ class ExamViewController : MyBaseUIViewController{
         let questionlayout = UICollectionViewFlowLayout()
         questionlayout.minimumLineSpacing = 3
         questionlayout.minimumInteritemSpacing = 0
+        
+        imageCollection.delegate = imageCollectionView
+        imageCollection.dataSource = imageCollectionView
+        imageCollectionView.parentView = self.view
         
         questionCollection.collectionViewLayout = questionlayout
         MyNotificationUtil.addKeyBoardWillChangeNotification(self)
@@ -206,7 +212,27 @@ class ExamViewController : MyBaseUIViewController{
         
         //如果是练习 则直接返回
         if isTrain{
-            self.dismiss(animated: true, completion: nil)
+            
+//            studentanswervalue
+            //把学生填写的答案 放入题目列表中
+            
+            var qList = exercises[0]["questions"].arrayValue
+            for i in 0...(qList.count - 1){
+                var question = qList[i]
+                let qid = question["questionsid"].stringValue
+                if let answer = answerDic[qid]{
+                    question["studentanswervalue"] = JSON(answer["inputanswer"])
+                }
+                qList[i] = question
+            }
+            self.exercises[0]["questions"] = JSON(qList)
+            let vc = getViewToStoryboard("historyTheoryExamView") as! HistoryTheoryExamController
+            vc.paperJson = self.exercises
+            vc.viewTitle = "查看练习答案"
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+            self.presentingViewController?.present(vc, animated: true, completion: nil)
+            
+            
         }
         
         //判断当前题目是否已全部作答
@@ -463,6 +489,25 @@ class ExamViewController : MyBaseUIViewController{
         questionCollection.delegate = questionView
         questionCollection.dataSource = questionView
         
+        //展示图片列表
+        initImageList()
+        
+    }
+    
+    func initImageList(){
+        let imageList = questionView.jsonDataSource["imglist"].arrayValue
+        if imageList.count == 0 {
+            imageCollection.isHidden = true
+            questionCollection.setY(y: imageCollection.Y)
+            questionCollection.setHight(height: questionCollection.H + imageCollection.H)
+        }else{
+            imageCollection.isHidden = false
+            questionCollection.setY(y: imageCollection.Y + imageCollection.H)
+            questionCollection.setHight(height: UIScreen.height - questionCollection.Y - 5 - 47)
+        }
+        imageCollectionView.jds = imageList
+        imageCollection.reloadData()
+        questionCollection.reloadData()
     }
     
     

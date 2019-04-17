@@ -18,6 +18,7 @@ class HistoryTheoryExamController : HBaseViewController{
     
     @IBOutlet weak var btn_next: UIButton!
     
+    var viewTitle = "历史理论考试"
     
     ///试卷的JSON
     var paperJson = [JSON]()
@@ -35,9 +36,16 @@ class HistoryTheoryExamController : HBaseViewController{
     
     override func viewDidLoad() {
         
+        (view.viewWithTag(22222) as! UILabel).text = viewTitle
+        
         questionCollection.delegate = self
         questionCollection.dataSource = self
-        getListData()
+        if paperJson.isEmpty{
+            getListData()
+        }else{
+            initPaperData()
+        }
+        
         
     }
     
@@ -136,10 +144,7 @@ class HistoryTheoryExamController : HBaseViewController{
                 if json["code"].stringValue == "1"{
                     
                     self.paperJson = json["data"].arrayValue
-                    self.jds = self.paperJson[self.questionTypeIndex]["questions"].arrayValue[self.questionIndex]
-                    //更新题型简介
-                    let _j = self.paperJson[self.questionTypeIndex]
-                    (self.view.viewWithTag(10001) as! UILabel).text = "    \(_j["indexname"].stringValue)【\(_j["typename"].stringValue)】 共\(_j["count"].stringValue)道 每道\(_j["score"].stringValue)分 共\(_j["count"].intValue * _j["score"].intValue )分"
+                    self.initPaperData()
                 }else{
                     myAlert(self, message: "请求考试列表失败!")
                 }
@@ -150,6 +155,15 @@ class HistoryTheoryExamController : HBaseViewController{
             
         })
     }
+    
+    ///初始化考试数据...
+    func initPaperData(){
+        self.jds = self.paperJson[self.questionTypeIndex]["questions"].arrayValue[self.questionIndex]
+        //更新题型简介
+        let _j = self.paperJson[self.questionTypeIndex]
+        (self.view.viewWithTag(10001) as! UILabel).text = "    \(_j["indexname"].stringValue)【\(_j["typename"].stringValue)】 共\(_j["count"].stringValue)道 每道\(_j["score"].stringValue)分 共\(_j["count"].intValue * _j["score"].intValue )分"
+    }
+    
 }
 
 extension HistoryTheoryExamController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {

@@ -11,6 +11,7 @@
 		0A01F102225DA158009087B2 /* 扫一扫-home.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A01F0FF225DA156009087B2 /* 扫一扫-home.png */; };
 		0A01F103225DA158009087B2 /* 题目练习-home.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A01F100225DA157009087B2 /* 题目练习-home.png */; };
 		0A01F105225DAC22009087B2 /* StudentTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F104225DAC22009087B2 /* StudentTabbarController.swift */; };
+		0A01F112225EE398009087B2 /* AliyunEmasServices-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A01F107225EE398009087B2 /* AliyunEmasServices-Info.plist */; };
 		0A0428B0209F826F00E3E256 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0428AF209F826F00E3E256 /* libc++.tbd */; };
 		0A0428B2209F827900E3E256 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0428B1209F827900E3E256 /* libbz2.tbd */; };
 		0A0C570D1F4D70AE008551D3 /* ChangePersonInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C570C1F4D70AE008551D3 /* ChangePersonInfoController.swift */; };
@@ -84,6 +85,7 @@
 		0A15D5581F0EA52D00908B7F /* 我的.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15D5541F0EA52D00908B7F /* 我的.png */; };
 		0A15D55A1F0EA5ED00908B7F /* 任务中心.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15D5591F0EA5ED00908B7F /* 任务中心.png */; };
 		0A16417E22408DEC002B0E50 /* NewsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16417D22408DEC002B0E50 /* NewsListController.swift */; };
+		0A16644B226426F500D88BBA /* ImageForCollectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16644A226426F500D88BBA /* ImageForCollectionCellView.swift */; };
 		0A16C2F621E33EDA00C6B319 /* 双箭头-右蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A16C2F321E33ECA00C6B319 /* 双箭头-右蓝.png */; };
 		0A16C2F821E33EDA00C6B319 /* 二维码-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A16C2F521E33ED500C6B319 /* 二维码-icon.png */; };
 		0A1701DF21EED4A200B12EC4 /* TeachingStatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1701DE21EED4A200B12EC4 /* TeachingStatisticsController.swift */; };
@@ -540,6 +542,7 @@
 		0A01F0FF225DA156009087B2 /* 扫一扫-home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫一扫-home.png"; sourceTree = "<group>"; };
 		0A01F100225DA157009087B2 /* 题目练习-home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "题目练习-home.png"; sourceTree = "<group>"; };
 		0A01F104225DAC22009087B2 /* StudentTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTabbarController.swift; sourceTree = "<group>"; };
+		0A01F107225EE398009087B2 /* AliyunEmasServices-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AliyunEmasServices-Info.plist"; sourceTree = "<group>"; };
 		0A042706209F817100E3E256 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		0A042708209F817100E3E256 /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		0A042709209F817100E3E256 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -969,6 +972,7 @@
 		0A15D5541F0EA52D00908B7F /* 我的.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的.png"; sourceTree = "<group>"; };
 		0A15D5591F0EA5ED00908B7F /* 任务中心.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务中心.png"; sourceTree = "<group>"; };
 		0A16417D22408DEC002B0E50 /* NewsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListController.swift; sourceTree = "<group>"; };
+		0A16644A226426F500D88BBA /* ImageForCollectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageForCollectionCellView.swift; sourceTree = "<group>"; };
 		0A16C2F321E33ECA00C6B319 /* 双箭头-右蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "双箭头-右蓝.png"; sourceTree = "<group>"; };
 		0A16C2F521E33ED500C6B319 /* 二维码-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "二维码-icon.png"; sourceTree = "<group>"; };
 		0A1701DE21EED4A200B12EC4 /* TeachingStatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingStatisticsController.swift; sourceTree = "<group>"; };
@@ -2193,6 +2197,7 @@
 			children = (
 				0AAFD70122549F35002C9729 /* Home */,
 				0A0EB4ED2253390000FA2D84 /* TurnTask */,
+				0A156F80225C4892001CF31C /* mine */,
 			);
 			path = Student;
 			sourceTree = "<group>";
@@ -2245,7 +2250,8 @@
 			children = (
 				0A156F8B225C48A1001CF31C /* MineController.swift */,
 			);
-			path = mine;
+			name = mine;
+			path = ../mine;
 			sourceTree = "<group>";
 		};
 		0A15D5121F0BF5E900908B7F /* Refresh */ = {
@@ -2445,6 +2451,7 @@
 				0A6A23BA1EF3BEBE00A1AC5B /* DirectoryCollectionView.swift */,
 				B468B7CF1FCC63BC00ECF396 /* BasePeiwuCollectionView.swift */,
 				0AFCF6AC1FFDF91D00CF044E /* FITBCollectionView.swift */,
+				0A16644A226426F500D88BBA /* ImageForCollectionCellView.swift */,
 			);
 			name = Collection;
 			sourceTree = "<group>";
@@ -2689,7 +2696,6 @@
 			isa = PBXGroup;
 			children = (
 				0A0EB4EC225338F600FA2D84 /* Student */,
-				0A156F80225C4892001CF31C /* mine */,
 				0AF9D33C2180211F0068B05A /* Public */,
 				0A26BA27219577EB0071C2DC /* Utils */,
 				0A12D7C422378D4B005B5DD5 /* Exam */,
@@ -2720,6 +2726,7 @@
 				0A210FE020B44C1E006BC5C9 /* WebViewTestController.swift */,
 				0AC3B9461EE4732700227194 /* CircleDataView.swift */,
 				0AC3B9381EE4730B00227194 /* Main.storyboard */,
+				0A01F107225EE398009087B2 /* AliyunEmasServices-Info.plist */,
 				0A44131B1EE9BD4100BAB679 /* test.mp4 */,
 				0AC3B93B1EE4730B00227194 /* Assets.xcassets */,
 				0AC3B93D1EE4730B00227194 /* LaunchScreen.storyboard */,
@@ -3470,6 +3477,7 @@
 				0AF9D36A218963380068B05A /* 其他教学活动.png in Resources */,
 				0A123DE422422C0E00FB2BE4 /* fb-理论培训.png in Resources */,
 				0A17E00B21DCBF91002A4194 /* 教学分享.png in Resources */,
+				0A01F112225EE398009087B2 /* AliyunEmasServices-Info.plist in Resources */,
 				0A17E00C21DCBF91002A4194 /* 评论.png in Resources */,
 				0A2B356F21CB48E600E17AC9 /* nextQuestion.png in Resources */,
 				0A0FA88C1F0F615300DFEA7E /* voice.png in Resources */,
@@ -3803,6 +3811,7 @@
 				B468B7BE1FCA9BA000ECF396 /* MJRefreshFooter.m in Sources */,
 				0AC3B99B1EE8694B00227194 /* TaskCenterController.swift in Sources */,
 				0A15D50D1F0B8F6000908B7F /* OnlineAskDetailCollectionView.swift in Sources */,
+				0A16644B226426F500D88BBA /* ImageForCollectionCellView.swift in Sources */,
 				0AC3BC9E1EE94DA300227194 /* LBXPermissions.swift in Sources */,
 				0A42F8271F1C7319001DF281 /* TaskApplyListCollectionView.swift in Sources */,
 				0A644D971F062480009025DD /* MyEvaluationListController.swift in Sources */,

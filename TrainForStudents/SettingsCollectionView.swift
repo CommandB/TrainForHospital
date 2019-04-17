@@ -45,8 +45,7 @@ class SettingsCollectionView : MyBaseCollectionView{
             case 10002:
                 myPresentView(parentView!, viewName: "changePasswordView")
             case 10003:
-                //myPresentView(parentView!, viewName: "hTabBarView")
-                parentView?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                parentView?.appDelegate.window?.rootViewController = getViewToStoryboard("hTabBarView")
                 break
             default:
                 break

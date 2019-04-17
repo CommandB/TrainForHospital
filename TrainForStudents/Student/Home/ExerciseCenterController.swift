@@ -188,10 +188,6 @@ extension ExerciseCenterController : UITableViewDelegate , UITableViewDataSource
 }
 
 
-
-
-
-
 //题型collection delegate
 class QuestionTypeView: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     

@@ -1,8 +1,8 @@
 # Uncomment this line to define a global platform for your project
  platform :ios, ’9.0’
  use_frameworks!
-#source 'https://github.com/CocoaPods/Specs.git'
-#source 'https://github.com/aliyun/aliyun-specs.git'
+ source 'https://github.com/CocoaPods/Specs.git'
+ source 'https://github.com/aliyun/aliyun-specs.git'
 
 target ’TrainForStudents’ do  
   
@@ -15,7 +15,7 @@ target ’TrainForStudents’ do
   pod 'BMPlayer', '~>1.0.1'
   pod 'GTMRefresh', '~>1.3.6'
   pod 'Reachability'
-  #pod 'AlicloudPush', '~> 1.9.8'
+  pod 'AlicloudPush', '~> 1.9.8'
   pod "PLPlayerKit", :podspec => 'https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec'
   
 end

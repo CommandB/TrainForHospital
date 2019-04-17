@@ -79,16 +79,26 @@ class InspectController : HBaseViewController{
         
         addrPicker.delegate = self
         addrPicker.dataSource = self
-        addrPickerDs = JSON(parseJSON:UserDefaults.AppConfig.string(forKey: .classroomList)!).arrayValue
+        var classroomList = UserDefaults.AppConfig.json(forKey: .classroomList).arrayValue
+        classroomList.insert(["facilitiesname":""], at: 0)
+        addrPickerDs = classroomList
+        
+        let switchKeyBoardBtn = UIButton(frame: CGRect(x: 10, y: 10, width: 70, height: 20))
+        switchKeyBoardBtn.setTitle("手动输入", for: .normal)
+        switchKeyBoardBtn.addTarget(self, action: #selector(switchKeyboard), for: .touchUpInside)
+//        addrPicker.addSubview(switchKeyBoardBtn)
+        addrPicker.bringSubview(toFront: switchKeyBoardBtn)
         
         evPicker = hPickerImpl.getDefaultPickerView()
         hPickerImpl.titleKey = "evaluationname"
-        hPickerImpl.dataSource = UserDefaults.AppConfig.json(forKey: .teachingActivityEvaluationList).arrayValue
+        var teachingActivityEvaluationList = UserDefaults.AppConfig.json(forKey: .teachingActivityEvaluationList).arrayValue
+        teachingActivityEvaluationList.insert(JSON(["evaluationname":"不需要评价"]), at: 0)
+        hPickerImpl.dataSource = teachingActivityEvaluationList
         hPickerImpl.clorsureImpl = evClosureImpl
         
         durationPicker = durationPickerImpl.getDefaultPickerView()
         durationPickerImpl.titleKey = "text"
-        durationPickerImpl.dataSource = JSON([["text":"请选择"], ["text":"15分钟", "value":"15"], ["text":"30分钟", "value":30]]).arrayValue
+        durationPickerImpl.dataSource = JSON([["text":"请选择"], ["text":"30分钟", "value":30],["text":"45分钟", "value":45], ["text":"1小时", "value":60], ["text":"1小时30分钟", "value":90], ["text":"2小时", "value":120]]).arrayValue
         durationPickerImpl.clorsureImpl = durationClosureImpl
         
         //用作滚动页的容器
@@ -169,7 +179,7 @@ class InspectController : HBaseViewController{
         txt.delegate = self
         txt.inputView = evPicker
         txt.text = t2s["evaluationname"].stringValue
-        evaluaList["5"] = ["beevaluateid":"5","evaluatetableid":t2s["evaluationid"].stringValue, "evaluatetablename":s2t["evaluationname"].stringValue, "beevaluatename":"培训老师", "evaluateid":"1", "evaluatename":"学生"]
+        evaluaList["5"] = ["beevaluateid":"5","evaluatetableid":t2s["evaluationid"].stringValue, "evaluatetablename":t2s["evaluationname"].stringValue, "beevaluatename":"培训老师", "evaluateid":"1", "evaluatename":"学生"]
 
         
     }
@@ -258,14 +268,6 @@ class InspectController : HBaseViewController{
         submitParam["endtime"] = endTime
         
         //评价功能
-        if evaluaList["1"]!["evaluatetableid"]?.isEmpty ?? true{
-            myAlert(self, message: "请选择学员对老师的评价表!")
-            return
-        }
-        if evaluaList["5"]!["evaluatetableid"]?.isEmpty ?? true{
-            myAlert(self, message: "请选择老师对学员的评价表!")
-            return
-        }
         submitParam["evaluatelist"] = ([[String:String]])(evaluaList.values)
         
         //学员信息
@@ -284,11 +286,10 @@ class InspectController : HBaseViewController{
         print(submitParam)
         
         //view.current
-        
-        myPostRequest(url, submitParam, method: .post).responseString(completionHandler: {resp in
+        uploadImage(url, images: nil, parameters: submitParam, completionHandler: {resp in
             switch resp.result{
             case .success(let respStr):
-                let json = JSON(parseJSON: respStr)
+                let json = JSON(respStr)
                 print(json)
                 if json["code"].stringValue == "1"{
                     myAlert(self, message: "发布成功!", handler: {action in
@@ -311,6 +312,10 @@ class InspectController : HBaseViewController{
     @IBAction func btn_undone_inside(_ sender: UIButton) {
         hiddenKeyBoard()
         tabsTouchAnimation(sender: sender)
+    }
+    
+    @objc func switchKeyboard(sender : UIButton){
+        print("我来啦啦啦安利安利安利安利啊啊来啦安利安利啊~~")
     }
     
     func tabsTouchAnimation( sender : UIButton){
@@ -391,15 +396,29 @@ class InspectController : HBaseViewController{
     
     func evClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
         if let t = selectedTextField{
+            var key = "1"
             let data = ds[row]
-            t.text = data["evaluationname"].stringValue
-            if t.tag == 90001{
-                evaluaList["1"]!["evaluatetableid"] = data["evaluationid"].stringValue
-                evaluaList["1"]!["evaluatetablename"] = t.text
-            }else{
-                evaluaList["5"]!["evaluatetableid"] = data["evaluationid"].stringValue
-                evaluaList["5"]!["evaluatetablename"] = t.text
+            if t.tag == 90002{
+                key = "5"
             }
+            if row == 0 {
+                t.text = data["evaluationname"].stringValue
+                evaluaList.removeValue(forKey: key)
+            }else{
+                t.text = data["evaluationname"].stringValue
+//                evaluaList[key]!["evaluatetableid"] = data["evaluationid"].stringValue
+//                evaluaList[key]!["evaluatetablename"] = t.text
+                
+                if t.tag == 90001{
+                    evaluaList["1"] = ["beevaluateid":"1","evaluatetableid":data["evaluationid"].stringValue, "evaluatetablename":t.text!, "beevaluatename":"学生", "evaluateid":"5", "evaluatename":"培训老师"]
+                }else{
+                    evaluaList["5"] = ["beevaluateid":"5","evaluatetableid":data["evaluationid"].stringValue, "evaluatetablename":t.text!, "beevaluatename":"培训老师", "evaluateid":"1", "evaluatename":"学生"]
+                }
+                
+            }
+            
+            
+            
         }
     }
     
@@ -446,7 +465,26 @@ extension InspectController {
             textField.text = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesname"].stringValue
             submitParam["address"] = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesid"].stringValue
         }else if tag == 90002 || tag == 90001 {
-            evPicker.reloadAllComponents()
+            
+            var selectedRowNumber = 0
+            var key = "1"
+            if tag == 90002{
+                key = "5"
+            }
+            if !(evaluaList[key]?.isEmpty ?? true){
+                let selectedId = evaluaList[key]!["evaluatetableid"]
+                let json = UserDefaults.AppConfig.json(forKey: .teachingActivityEvaluationList).arrayValue
+                var index = 0
+                for o in json{
+                    if o["evaluationid"].stringValue == selectedId{
+                        break
+                    }
+                    index += 1
+                    
+                }
+                selectedRowNumber = index + 1
+            }
+            evPicker.selectRow(selectedRowNumber, inComponent: 0, animated: true)
             selectedTextField = textField
         }else if tag == 30001 || tag == 30002{
             datePicker.minimumDate = nil
@@ -482,6 +520,9 @@ extension InspectController : UIPickerViewDelegate , UIPickerViewDataSource{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let addr = addrPickerDs[row]["facilitiesname"].stringValue
         submitParam["address"] = addrPickerDs[row]["facilitiesid"].stringValue
+        if row == 0 {
+            submitParam["address"] = "-1"
+        }
         let txt = view.viewWithTag(50001) as! TextFieldForNoMenu
         txt.text = addr
     }

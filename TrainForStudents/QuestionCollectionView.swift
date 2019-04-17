@@ -16,6 +16,7 @@ class QuestionCollectionView : UIViewController,  UICollectionViewDelegate , UIC
     var parentView : ExamViewController?
     var jsonDataSource = JSON.init("{}")
     var myCollection : UICollectionView?
+    var imageCollectionViewForCell = ImageCollectionForExamView()
     let questionFont = UIFont.systemFont(ofSize: 15)
     let boundary = CGFloat(9)
     

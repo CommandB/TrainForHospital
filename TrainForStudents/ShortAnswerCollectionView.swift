@@ -18,6 +18,7 @@ class ShortAnswerCollectionView : QuestionCollectionView ,UITextViewDelegate{
         
         var cell = UICollectionViewCell.init()
         var data = jsonDataSource
+
         if 0 == indexPath.item{
             let cellName = "c1"
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath)
@@ -59,7 +60,7 @@ class ShortAnswerCollectionView : QuestionCollectionView ,UITextViewDelegate{
         var text = ""
         let index = indexPath.item
         let minHeight = CGFloat(40)
-        
+
         //判断是题目还是答案
         if index == 0{
             data = jsonDataSource
@@ -67,16 +68,14 @@ class ShortAnswerCollectionView : QuestionCollectionView ,UITextViewDelegate{
             let lineNumber = text.getLineNumberForWidth(width: labelWidth, cFont: questionFont)
             lineHeight = text.getHeight(font:questionFont)
             lineHeight *= CGFloat(lineNumber)
-        }else{
+        }else {
             lineHeight = 140
         }
-        
-        
+
         if lineHeight < minHeight {
             lineHeight = minHeight
         }
-        
-        
+
         return CGSize(width: UIScreen.width, height: lineHeight)
         
     }

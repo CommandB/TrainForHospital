@@ -55,7 +55,7 @@ class EvaluationDetailCollectionView : UIViewController,  UICollectionViewDelega
         }else{
             let slider = cell.viewWithTag(10001) as! UISlider
             let selectedNumber = data["get_value"].int
-            var lightNumber = data["starsvalue"].intValue
+            var lightNumber = 0
             if selectedNumber != nil{
                 lightNumber = selectedNumber!
             }

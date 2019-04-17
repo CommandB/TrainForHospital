@@ -33,6 +33,27 @@ class StudentHomeController : HBaseViewController, UINavigationControllerDelegat
         homeCollection.mj_header.beginRefreshing()
     }
     
+    //扫一扫
+    @IBAction func btn_scanner_inside(_ sender: UIButton) {
+        
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        if LBXPermissions.isGetPhotoPermission() {
+            let takePhoto = UserDefaults.AppConfig.string(forKey: .scanCheckInTakePhoto)
+            if takePhoto == "0" || true{    //暂时不需要拍照 直接扫码
+                //不需要照片则直接打开扫码界面
+                let vc = getViewToStoryboard("scannerView") as! ScannerViewController
+                self.present(vc, animated: true, completion: nil)
+            }else{
+                //先拍照在扫码
+                picker.sourceType = .camera
+                self.present(picker, animated: true, completion: nil)
+            }
+        }else{
+            myAlert(self, message: "没有相机权限")
+        }
+        
+    }
     
     func getListData(){
         self.homeCollection.mj_header.endRefreshing()
@@ -300,29 +321,19 @@ extension StudentHomeController : UICollectionViewDelegate , UICollectionViewDat
     ///4个功能按钮
     @objc func btn_features_event(sender : UIButton){
         switch sender.tag - 10000 {
-        case 1: //扫一扫
-            let picker = UIImagePickerController()
-            picker.delegate = self
-            if LBXPermissions.isGetPhotoPermission() {
-                let takePhoto = UserDefaults.AppConfig.string(forKey: .scanCheckInTakePhoto)
-                if takePhoto == "0" || true{    //暂时不需要拍照 直接扫码
-                    //不需要照片则直接打开扫码界面
-                    let vc = getViewToStoryboard("scannerView") as! ScannerViewController
-                    self.present(vc, animated: true, completion: nil)
-                }else{
-                    //先拍照在扫码
-                    picker.sourceType = .camera
-                    self.present(picker, animated: true, completion: nil)
-                }
-            }else{
-                myAlert(self, message: "没有相机权限")
-            }
+        case 1: //待考任务
+            let vc = getViewToStoryboard("examListView") as! ExamListController
+            vc.isInvigilation = false
+            present(vc, animated: true, completion: nil)
+            break
+        case 10004:
+            
             break
         case 2: //题目练习
             myPresentView(self, viewName: "exerciseCenterView")
             break
-        case 3: //评价二维码
-            getMyQr()
+        case 3: //待评任务
+            myPresentView(self, viewName: "evaluationItemList")
             break
         case 4:
             myAlert(self, message: "暂未开放!")
@@ -330,30 +341,6 @@ extension StudentHomeController : UICollectionViewDelegate , UICollectionViewDat
         default:
             break
         }
-    }
-    
-    //获取我的二维码
-    @objc func getMyQr(){
-        MBProgressHUD.showAdded(to: view, animated: true)
-        let url = SERVER_PORT+"rest/public/GenerateQRCode.do"
-        myPostRequest(url,["type":"mycode"]).responseJSON(completionHandler: {resp in
-            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-            switch resp.result{
-            case .success(let responseJson):
-                
-                let json = JSON(responseJson)
-                if json["code"].stringValue == "1"{
-                    let qrCode = json["qrcode"].stringValue
-                    HUtilView.showImageToTagetView(target: self.view, image: UIImage.createQR(text: qrCode, size: 240))
-                }else{
-                    myAlert(self, message: "获取我的二维码信息失败!")
-                }
-            case .failure(let error):
-                print(error)
-            }
-            
-        })
-        
     }
     
 }
