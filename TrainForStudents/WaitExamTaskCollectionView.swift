@@ -46,19 +46,13 @@ class WaitExamTaskCollectionView : MyBaseCollectionView{
         
     }
     
-    //size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let json = jsonDataSource[indexPath.item]
         if json["examtypename"].stringValue == "理论" {
             return CGSize(width: UIScreen.width, height: 190)
         }
-        return CGSize(width: UIScreen.width, height: 155)
+        return CGSize(width: UIScreen.width, height: 150)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
     
     public override func refresh() {
         initLimitPage()

@@ -82,17 +82,31 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
     @objc func btn_features_event(sender : UIButton){
         switch sender.tag - 10000 {
         case 1: //360评价
-            myPresentView(self, viewName: "panoramicEvaluationView")
+            if UserDefaults.AppConfig.json(forKey: .panoramicEvaluationAvailable).intValue == 1{
+                myPresentView(self, viewName: "panoramicEvaluationView")
+            }else{
+                myAlert(self, message: "暂无使用权限")
+            }
+            
             break
         case 2: //出科理论考试
-            let vc = getViewToStoryboard("publishSubjectExamView") as! PublishSubjectExamController
-            vc.isSkillExam = false
-            present(vc, animated: true, completion: nil)
+            if UserDefaults.AppConfig.json(forKey: .subjectTheoryAvailable).intValue == 1{
+                let vc = getViewToStoryboard("publishSubjectExamView") as! PublishSubjectExamController
+                vc.isSkillExam = false
+                present(vc, animated: true, completion: nil)
+            }else{
+                myAlert(self, message: "暂无使用权限")
+            }
+            
             break
         case 3: //出科技能考试
-            let vc = getViewToStoryboard("publishSubjectExamView") as! PublishSubjectExamController
-            vc.isSkillExam = true
-            present(vc, animated: true, completion: nil)
+            if UserDefaults.AppConfig.json(forKey: .subjectSkillAvailable).intValue == 1{
+                let vc = getViewToStoryboard("publishSubjectExamView") as! PublishSubjectExamController
+                vc.isSkillExam = true
+                present(vc, animated: true, completion: nil)
+            }else{
+                myAlert(self, message: "暂无使用权限")
+            }
             break
         case 4://入科安排
 //                        myPresentView(self, viewName: "evaluationItemList")
@@ -232,6 +246,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
         selectedPanelKey = sender.restorationIdentifier!
         tabsTouchAnimation(sender: sender)
         self.homeCollection.reloadData()
+        
     }
     
     @objc func refresh() {
@@ -295,15 +310,22 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
                 break
             }
             
+            
             let btn_panel_1 = cell.viewWithTag(10001) as! UIButton
             let btn_panel_2 = cell.viewWithTag(10002) as! UIButton
             buttonGroup = [btn_panel_1 ,btn_panel_2]
+            
+            if selectedPanelKey.isEmpty{
+                lbl_markLine.setX(x: btn_panel_1.X + 20)
+            }
+            
             btn_panel_1.addTarget(self, action: #selector(panelSwitch), for: .touchUpInside)
             btn_panel_2.addTarget(self, action: #selector(panelSwitch), for: .touchUpInside)
             if statisticJds["teacherpanel"].arrayValue.count > 0{
                 btn_panel_1.restorationIdentifier = "teacherpanel"
                 btn_panel_1.isHidden = false
                 btn_panel_1.isEnabled = true
+                btn_panel_1.setX(x: 50)
                 selectedPanelKey = selectedPanelKey == "" ? "teacherpanel" : selectedPanelKey
             }
             
@@ -322,13 +344,16 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
                     btn_panel_2.isEnabled = true
                 }
             }else{
-                
+                btn_panel_2.isHidden = true
                 //如果秘书面板没有数据 则把老师面板的按钮居中
                 btn_panel_1.setX(x: (collectionView.W - btn_panel_1.W) / 2)
                 lbl_markLine.setX(x: (collectionView.W - lbl_markLine.W) / 2)
             }
             
             for i in 0...4{
+                if i >= statisticJds[selectedPanelKey].arrayValue.count{
+                    break
+                }
                 let data = statisticJds[selectedPanelKey].arrayValue[i]
                 (cell.viewWithTag(20001 + i) as! UILabel).text = data["times"].stringValue
                 (cell.viewWithTag(30001 + i) as! UIButton).setTitle(data["traintypename"].stringValue, for: .normal)
@@ -343,6 +368,11 @@ extension HomeController : UICollectionViewDelegate , UICollectionViewDataSource
                 bg.text = "暂无待办"
                 //bg置顶
                 cell.bringSubview(toFront: bg)
+                (cell.viewWithTag(10001) as! UIButton).setTitle("", for: .normal)
+                (cell.viewWithTag(10002) as! UIButton).setTitle("", for: .normal)
+                (cell.viewWithTag(20001) as! UILabel).text = ""
+                (cell.viewWithTag(30001) as! UILabel).text = ""
+                (cell.viewWithTag(40001) as! UILabel).text = ""
                 break
             }
             let data = taskJds[0]

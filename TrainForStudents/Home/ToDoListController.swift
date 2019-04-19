@@ -125,22 +125,24 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
             
             //判断一下 如果当前日期和上一个日期一样 则这一个cell不显示日期
             let previousItem = jds[indexPath.item - 1]
-            var previousItemDateStr = previousItem["starttime_show"].stringValue
+            var previousItemDateStr = previousItem["starttime"].stringValue
             if previousItemDateStr == ""{
                 previousItemDateStr = data["starttime"].stringValue.replacingOccurrences(of: ".0", with: "")
             }
             if previousItem["isHeader"].boolValue || date.day != DateUtil.stringToDateTime(previousItemDateStr).day{
                 (cell.viewWithTag(10001) as! UILabel).text = date.day.description
                 (cell.viewWithTag(10002) as! UILabel).text = DateUtil.getWeek(date)
-                //            if date.isToday{
-                //                (cell.viewWithTag(10003) as! UILabel).text = "今天"
-                //            }else{
-                //                (cell.viewWithTag(10003) as! UILabel).text = ""
-                //            }
+                if date.isToday{
+                    (cell.viewWithTag(10003) as! UILabel).text = "今天"
+                }else{
+                    (cell.viewWithTag(10003) as! UILabel).text = ""
+                }
             }else{
                 (cell.viewWithTag(10001) as! UILabel).text = ""
                 (cell.viewWithTag(10002) as! UILabel).text = ""
+                (cell.viewWithTag(10003) as! UILabel).text = ""
             }
+            
             
             (cell.viewWithTag(20001) as! UILabel).text = data["tasktype"].stringValue
             
@@ -171,7 +173,7 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
         let type = data["butype"].stringValue
         if type == "评价"{
             presentEvaluationDetail(data["buid"].stringValue)
-        }else if type == "教学活动"{
+        }else if type == "教学活动" || type == "参加培训"{
             presentTeachingPlanDetail(data)
         }else if type == "教材阅读"{
             presentStudyView(data)
@@ -182,9 +184,6 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
         }else if type == "理论考试" || type == "技能考试" || type == "OSCE考试通知" {
             presentStuExam(data)
         }
-        
-        
-        //考试
         
     }
     
@@ -234,7 +233,7 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
     func presentTeachingPlanDetail(_ data: JSON){
         
         var param = data
-        param["taskid"] = data["buid"]
+        param["trainid"] = data["buid"]
         let vc = getViewToStoryboard("teachingPlanDetailView") as! TeachingPlanDetailController
         vc.taskInfo = param
         present(vc, animated: true, completion: nil)

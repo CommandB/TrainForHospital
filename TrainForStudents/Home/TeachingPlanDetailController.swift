@@ -24,13 +24,6 @@ class TeachingPlanDetailController : HBaseViewController{
     
     override func viewDidLoad() {
         
-        let timeInterval = UserDefaults.AppConfig.any(forKey: .qrCodeInvalidTime) as! NSString
-        
-        //需要签到 才更新二维码
-        if jds["sign"].intValue == 1 {
-            timer = Timer.scheduledTimer(timeInterval: timeInterval.doubleValue , target: self, selector: #selector(refreshQrCode), userInfo: nil, repeats: true)
-        }
-        
         infoCollection.delegate = self
         infoCollection.dataSource = self
         
@@ -41,7 +34,7 @@ class TeachingPlanDetailController : HBaseViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.view.bringSubview(toFront: personList_view)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -57,7 +50,7 @@ class TeachingPlanDetailController : HBaseViewController{
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
-        var param = ["trainid":taskInfo["taskid"].stringValue] as [String : Any]
+        var param = ["trainid":taskInfo["trainid"].stringValue] as [String : Any]
         
         let url = SERVER_PORT + "rest/app/getTrainDetail.do"
         myPostRequest(url,param).responseJSON(completionHandler: {resp in
@@ -68,10 +61,18 @@ class TeachingPlanDetailController : HBaseViewController{
             switch resp.result{
             case .success(let responseJson):
                 let json = JSON(responseJson)
-                print(json)
+                //print(json)
                 if json["code"].stringValue == "1"{
                     let data = json["data"]
                     self.jds = json["data"]
+                    
+                    //需要签到 才更新二维码
+                    if self.jds["sign"].intValue == 1 {
+                        self.timer.invalidate()
+                        let timeInterval = UserDefaults.AppConfig.any(forKey: .qrCodeInvalidTime) as! NSString
+                        self.timer = Timer.scheduledTimer(timeInterval: timeInterval.doubleValue , target: self, selector: #selector(self.refreshQrCode), userInfo: nil, repeats: true)
+                    }
+                    
                     (self.view.viewWithTag(10001) as! UILabel).text = data["traintypename"].stringValue
                     (self.view.viewWithTag(20001) as! UILabel).text = data["creater"].stringValue
                     
@@ -146,7 +147,7 @@ class TeachingPlanDetailController : HBaseViewController{
     
     ///更新二维码
     @objc func refreshQrCode(){
-        //print("更新二维码了...")
+        print("更新二维码了...\(DateUtil.getCurrentDateTime())")
         let url = SERVER_PORT + "rest/app/getTrainQRCode.do"
         myPostRequest(url,["trainid":taskInfo["trainid"]], method: .post).responseJSON(completionHandler: { resp in
             
@@ -276,7 +277,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
             lbl_content.text = "\(_data["finerate"].intValue)%，共\(_data["completecount"].intValue)人  "
             lbl_content.setWidthFromText()
             let lbl_suffix = cell.viewWithTag(10003) as! UILabel
-            lbl_suffix.moveToAfter(target: lbl_content,space: 5)
+            lbl_suffix.moveToAfter(target: lbl_content,space: 0)
             break
         default:
             cell.setBorder(width: 0, color: .groupTableViewBackground)
@@ -408,7 +409,7 @@ extension TeachingPlanDetailController : UIImagePickerControllerDelegate, UINavi
             let url = SERVER_PORT + "rest/app/TrainImgAdd.do"
             
             var param = [String:Any]()
-            param["trainid"] = 10636//self.taskInfo["taskid"].stringValue
+//            param["trainid"] = 10636//self.taskInfo["taskid"].stringValue
             //param["context"] = txt.text
             
             var imgDir = [String:UIImage]()

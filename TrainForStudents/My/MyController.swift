@@ -22,7 +22,7 @@ class MyController : HBaseViewController{
         messageCollection.dataSource = self
         
         var studentView = "tabBarView"
-        if UserDefaults.AppConfig.json(forKey: .isUseNewApp).intValue == 0{
+        if UserDefaults.AppConfig.json(forKey: .isUseNewApp).intValue == 1{
             studentView = "studentTabbar"
         }
         

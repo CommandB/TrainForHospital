@@ -155,7 +155,7 @@ extension UIView{
         
         let _h = (self.H - target.H) / 2
         self.setY(y: target.Y - (_h))
-        self.setX(x: (target.X + target.W) / space)
+        self.setX(x: (target.X + target.W) + space)
     }
     
 }

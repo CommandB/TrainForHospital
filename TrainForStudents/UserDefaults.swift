@@ -115,6 +115,16 @@ extension UserDefaults{
             case personGroupList
             ///使用新版本app
             case isUseNewApp
+            //360评价是否使用
+            case panoramicEvaluationAvailable
+            //出科理论是否使用
+            case subjectTheoryAvailable
+            //出科技能是否使用
+            case subjectSkillAvailable
+            
+            
+            
+            
             
             ///我自己添加的 不是初始化时候下载的
             ///出科考试试卷

@@ -96,23 +96,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
+//        print("applicationDidBecomeActive.......start")
         //判断缓存中是否存在token
         let token = UserDefaults.standard.string(forKey: LoginInfo.token.rawValue)
         if token == nil{
             myPresentView((self.window?.rootViewController)!, viewName: "loginView")
         }else{
-//            if isOnlyStudent(){
-//                if UserDefaults.AppConfig.json(forKey: .isUseNewApp).intValue == 1{
-//                    myPresentView(self.window?.rootViewController! ?? MyTabBarController(), viewName: "studentTabbar")
-//                }else{
-//                    myPresentView(self.window?.rootViewController! ?? MyTabBarController(), viewName: "tabBarView")
-//                }
-//            }
+            if isOnlyStudent(){
+                if UserDefaults.AppConfig.json(forKey: .isUseNewApp).intValue == 1{
+                    let vc = getViewToStoryboard("studentTabbar")
+                    if self.window?.rootViewController?.classForCoder.description() != vc.classForCoder.description(){
+                        self.window?.rootViewController = vc
+                    }
+                }else{
+                    let vc = getViewToStoryboard("tabBarView")
+                    if self.window?.rootViewController?.classForCoder.description() != vc.classForCoder.description(){
+                        self.window?.rootViewController = vc
+                    }
+                }
+            }
+            
             loadAppConfigFailedCount = 0
             loadAppConfig()
         }
-        
+//        print("applicationDidBecomeActive.......end")
         
     }
 
@@ -217,7 +224,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
                     let data = json["data"]
-                    print(json)
+//                    print(json)
                     UserDefaults.AppConfig.set(value: data["投诉功能名称"].description, forKey:.complaintTitle)
                     UserDefaults.AppConfig.set(value: data["教学计划未提报通知时间"].description, forKey: .planNoticeTime)
                     UserDefaults.AppConfig.set(value: data["培训是否默认需要签到"].description, forKey: .trainingIsNeedCheckIn)
@@ -251,6 +258,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                     UserDefaults.AppConfig.set(value: data["学员类型清单"].description, forKey:.studentTypeList)
                     UserDefaults.AppConfig.set(value: data["分组清单"].description, forKey:.personGroupList)
                     
+                    UserDefaults.AppConfig.set(value: data["使用新版本APP"].description, forKey:.isUseNewApp)
+                    UserDefaults.AppConfig.set(value: data["360评价是否使用"].description, forKey:.panoramicEvaluationAvailable)
+                    UserDefaults.AppConfig.set(value: data["出科理论是否使用"].description, forKey:.subjectTheoryAvailable)
+                    UserDefaults.AppConfig.set(value: data["出科技能是否使用"].description, forKey:.subjectSkillAvailable)
                     
                 }else{
                     //token无效,请重新登录!

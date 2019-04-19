@@ -116,18 +116,33 @@ extension TeachingPlanController : UICollectionViewDelegate , UICollectionViewDa
         var cell = UICollectionViewCell()
         if let _ = data["isHeader"].bool{
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath)
-            (cell.viewWithTag(10001) as! UILabel).text = data["text"].stringValue
+            (cell.viewWithTag(10002) as! UILabel).text = data["text"].stringValue + "月"
         }else{
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bodyCell", for: indexPath)
             let date = DateUtil.stringToDateTime(data["starttime"].stringValue)
             
-            (cell.viewWithTag(10001) as! UILabel).text = date.day.description
-            (cell.viewWithTag(10002) as! UILabel).text = data["weekday"].stringValue
-            if date.isToday{
-                (cell.viewWithTag(10003) as! UILabel).text = "今天"
+            //判断一下 如果当前日期和上一个日期一样 则这一个cell不显示日期
+            let previousItem = jds[indexPath.item - 1]
+            var previousItemDateStr = previousItem["starttime"].stringValue
+            if previousItemDateStr == ""{
+                previousItemDateStr = data["starttime"].stringValue.replacingOccurrences(of: ".0", with: "")
+                
+            }
+            
+            if previousItem["isHeader"].boolValue || date.day != DateUtil.stringToDateTime(previousItemDateStr).day{
+                (cell.viewWithTag(10001) as! UILabel).text = date.day.description
+                (cell.viewWithTag(10002) as! UILabel).text = DateUtil.getWeek(date)
+                if date.isToday{
+                    (cell.viewWithTag(10003) as! UILabel).text = "今天"
+                }else{
+                    (cell.viewWithTag(10003) as! UILabel).text = ""
+                }
             }else{
+                (cell.viewWithTag(10001) as! UILabel).text = ""
+                (cell.viewWithTag(10002) as! UILabel).text = ""
                 (cell.viewWithTag(10003) as! UILabel).text = ""
             }
+            
             (cell.viewWithTag(20001) as! UILabel).text = data["traintype"].stringValue
             (cell.viewWithTag(30001) as! UILabel).text = data["starttime"].stringValue.substring(from: 11).substring(to: 5) + " - " + data["endtime"].stringValue.substring(from: 11).substring(to: 5)
             (cell.viewWithTag(40001) as! UILabel).text = data["title"].stringValue

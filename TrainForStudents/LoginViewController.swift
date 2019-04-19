@@ -387,8 +387,8 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                                     }
                                 }else{
                                     //myPresentView(self, viewName: "hTabBarView")
-                                    let app = (UIApplication.shared.delegate) as! AppDelegate
-                                    let tabBar = (app.window?.rootViewController) as! MyTabBarController
+                                    self.appDelegate.window?.rootViewController = getViewToStoryboard("hTabBarView")
+                                    let tabBar = (self.appDelegate.window?.rootViewController) as! MyTabBarController
                                     tabBar.selectedIndex = 0
                                     self.dismiss(animated: true, completion: nil)
                                 }
