@@ -221,6 +221,14 @@ extension StudentHomeController : UICollectionViewDelegate , UICollectionViewDat
             btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             btn = cell.viewWithTag(10003) as! UIButton
             btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
+            btn = cell.viewWithTag(10003) as! UIButton
+            btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
+            btn = cell.viewWithTag(10004) as! UIButton
+            btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
+            let btn4_title = UserDefaults.AppConfig.string(forKey: .complaintTitle)
+            if btn4_title != nil && btn4_title != ""{
+                btn.setTitle(btn4_title, for: .normal)
+            }
             break
         case 3:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "classTitleCell", for: indexPath)
@@ -335,8 +343,8 @@ extension StudentHomeController : UICollectionViewDelegate , UICollectionViewDat
         case 3: //待评任务
             myPresentView(self, viewName: "evaluationItemList")
             break
-        case 4:
-            myAlert(self, message: "暂未开放!")
+        case 4://悄悄话
+            myPresentView(self, viewName: "complaintListView")
             break
         default:
             break

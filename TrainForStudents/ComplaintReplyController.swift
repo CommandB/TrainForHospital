@@ -24,7 +24,7 @@ class ComplaintReplyController : MyBaseUIViewController{
         
         let barView = view.viewWithTag(11111)
         let titleView = view.viewWithTag(22222) as! UILabel
-        super.setNavigationBarColor(views: [barView,titleView], titleIndex: 1,titleText: "回复")
+//        super.setNavigationBarColor(views: [barView,titleView], titleIndex: 1,titleText: "回复")
         
         replyView.parentView = self
         replyCollection.registerNoDataCellView()

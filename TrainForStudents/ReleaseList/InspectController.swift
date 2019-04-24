@@ -451,7 +451,15 @@ extension InspectController {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let tag = textField.tag
-        if tag == 40001 || tag == 40002 || tag == 20001{
+        if tag == 30001 || tag == 30002{
+            let t31 = view.viewWithTag(30001) as! UITextField
+            let t32 = view.viewWithTag(30002) as! UITextField
+            if t31.text == nil || t32.text == ""{
+                t31.text = DateUtil.formatDate(Date(), pattern: DateUtil.datePattern)
+                t32.text = DateUtil.formatDate(Date(), pattern: "HH:mm")
+            }
+            
+        }else if tag == 40001 || tag == 40002 || tag == 20001{
             let t31 = view.viewWithTag(30001) as! UITextField
             let t32 = view.viewWithTag(30002) as! UITextField
             if t31.text == nil || t31.text == ""{

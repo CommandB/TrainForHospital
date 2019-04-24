@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             myPresentView((self.window?.rootViewController)!, viewName: "loginView")
         }else{
             if isOnlyStudent(){
-                if UserDefaults.AppConfig.json(forKey: .isUseNewApp).intValue == 1{
+                if UserDefaults.AppConfig.string(forKey: .isUseNewApp) == "1"{
                     let vc = getViewToStoryboard("studentTabbar")
                     if self.window?.rootViewController?.classForCoder.description() != vc.classForCoder.description(){
                         self.window?.rootViewController = vc
@@ -196,6 +196,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    
     
     
     func loadAppConfig(){
@@ -302,9 +304,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
         print("Receive a notification in foreground.")
         handleiOS10Notification(notification)
         // 通知不弹出
-        completionHandler([])
+//        completionHandler([])
         // 通知弹出，且带有声音、内容和角标
-        //completionHandler([.alert, .badge, .sound])
+        completionHandler([.alert, .badge, .sound])
     }
     
     // 触发通知动作时回调，比如点击、删除通知和点击自定义action(iOS 10+)

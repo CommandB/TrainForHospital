@@ -161,7 +161,12 @@ extension UserDefaultsKeys where defaultKeys.RawValue == String {
         if str == nil{
             return JSON()
         }
-        return JSON.init(parseJSON: str!)
+        var resultJson = JSON(str!)
+        if resultJson.isEmpty{
+            resultJson = JSON(parseJSON: str!)
+        }
+        
+        return resultJson
     }
     
     static func any(forKey key: defaultKeys) -> Any? {

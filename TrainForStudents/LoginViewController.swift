@@ -302,6 +302,9 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
     
     //登录
     func login(){
+        
+        hiddenKeyBoard()
+        
         if txt_loginId.text?.length == 0{
             myAlert(self, message: "请输入用户名!")
             return
@@ -312,7 +315,7 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
             myAlert(self, message: "请选择基地")
             return
         }
-        
+        let uuid = UIDevice.current.identifierForVendor?.uuidString
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = PORTAL_PORT + "rest/loginCheck.do"
 //        let url = "http://192.168.1.106:8081/doctor_portal/rest/loginCheck.do"
@@ -380,7 +383,7 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                                 self.getMySelfData()
                                 //验证角色,判断登录到哪一端
                                 if isOnlyStudent(){
-                                    if UserDefaults.AppConfig.json(forKey: .isUseNewApp).intValue == 1{
+                                    if UserDefaults.AppConfig.string(forKey: .isUseNewApp) == "1"{
                                         self.appDelegate.window?.rootViewController = getViewToStoryboard("studentTabbar")
                                     }else{
                                         self.appDelegate.window?.rootViewController = getViewToStoryboard("tabBarView")

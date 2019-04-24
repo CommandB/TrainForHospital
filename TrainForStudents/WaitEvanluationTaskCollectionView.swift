@@ -10,17 +10,23 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class WaitEvanluationTaskCollectionView : MyBaseCollectionView{
+class WaitEvanluationTaskCollectionView : UIViewController,  UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
     
+    var jsonDataSource = [JSON]()
     var parentView : EvaluationCenterController? = nil
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return jsonDataSource.count
+    }
+    
     //实现UICollectionViewDataSource
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         
-        if showNoDataCell{
-            return collectionView.dequeueReusableCell(withReuseIdentifier: MyNoDataCellView.identifier, for: indexPath)
-        }
         let cellName = "c1"
         let json = jsonDataSource[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath)
@@ -50,23 +56,16 @@ class WaitEvanluationTaskCollectionView : MyBaseCollectionView{
         parentView?.present(vc, animated: true, completion: nil)
     }
     
-    public override func refresh() {
-        initLimitPage()
-        parentView?.getEvaluationDatasource()
-        parentView?.evaluationCollection.endLoadMore(isNoMoreData:false)
-    }
-    
-    override func loadMore() {
-        parentView?.getEvaluationDatasource()
-    }
-    
-    ///初始化分页属性
-    override func initLimitPage(){
-        pageIndex = 0
-        isLoading = false
-        isLastPage = false
+    @objc public func refresh() {
+        
         jsonDataSource = [JSON]()
-        parentView?.evaluationCollection.reloadData()
+        parentView?.evaluationCollection.mj_footer.resetNoMoreData()
+        parentView?.getEvaluationDatasource()
+        
+    }
+    
+    @objc public func loadMore() {
+        parentView?.getEvaluationDatasource()
     }
     
     

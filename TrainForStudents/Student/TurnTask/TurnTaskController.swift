@@ -46,6 +46,8 @@ class TurnTaskController : HBaseViewController{
                 if json["code"].stringValue == "1"{
                     self.jds = json["data"].arrayValue
                     if self.jds.count == 0 {
+                        self.turnTaskCollection.mj_header.endRefreshing()
+                        self.turnTaskCollection.mj_footer.endRefreshingWithNoMoreData()
                         return
                     }
                     let url2 = SERVER_PORT + "rest/app/getMyRoundHistory.do"

@@ -28,6 +28,24 @@ class HSimplePickerViewImpl :UIViewController, UIPickerViewDelegate , UIPickerVi
         return p
     }
     
+    func getOfficePickerView( picker :UIPickerView? = nil) -> UIPickerView{
+        
+        
+        self.titleKey = "officename"
+        self.dataSource = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue
+        self.dataSource.insert(JSON(["officename":"全部","officeid":"-1"]), at: 0)
+        var p = UIPickerView()
+        if picker != nil{
+            p = picker!
+        }
+        p.delegate = self
+        p.dataSource = self
+        
+        
+        
+        return p
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

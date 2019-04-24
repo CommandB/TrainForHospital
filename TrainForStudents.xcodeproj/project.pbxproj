@@ -110,6 +110,7 @@
 		0A17E00B21DCBF91002A4194 /* 教学分享.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17E00421DCBF8D002A4194 /* 教学分享.png */; };
 		0A17E00C21DCBF91002A4194 /* 评论.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17E00521DCBF8E002A4194 /* 评论.png */; };
 		0A185B31225B2FF90078A603 /* StudentHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A185B30225B2FF90078A603 /* StudentHomeController.swift */; };
+		0A18915422700AE400F3BB82 /* TrainingListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A18915322700AE400F3BB82 /* TrainingListController.swift */; };
 		0A18ADEF223255C30070088D /* StudyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A18ADEE223255C30070088D /* StudyController.swift */; };
 		0A19658A21E735D800379F1E /* TeachingPlanDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A19658921E735D800379F1E /* TeachingPlanDetailController.swift */; };
 		0A1A97B121D206250097C467 /* EvalueationListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A97B021D206250097C467 /* EvalueationListController.swift */; };
@@ -997,6 +998,7 @@
 		0A17E00421DCBF8D002A4194 /* 教学分享.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "教学分享.png"; sourceTree = "<group>"; };
 		0A17E00521DCBF8E002A4194 /* 评论.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "评论.png"; sourceTree = "<group>"; };
 		0A185B30225B2FF90078A603 /* StudentHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentHomeController.swift; sourceTree = "<group>"; };
+		0A18915322700AE400F3BB82 /* TrainingListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingListController.swift; sourceTree = "<group>"; };
 		0A18ADEE223255C30070088D /* StudyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyController.swift; sourceTree = "<group>"; };
 		0A19658921E735D800379F1E /* TeachingPlanDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingPlanDetailController.swift; sourceTree = "<group>"; };
 		0A1A97B021D206250097C467 /* EvalueationListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvalueationListController.swift; sourceTree = "<group>"; };
@@ -2195,8 +2197,10 @@
 		0A0EB4EC225338F600FA2D84 /* Student */ = {
 			isa = PBXGroup;
 			children = (
+				0A01F104225DAC22009087B2 /* StudentTabbarController.swift */,
 				0AAFD70122549F35002C9729 /* Home */,
 				0A0EB4ED2253390000FA2D84 /* TurnTask */,
+				0A189147226FFA1500F3BB82 /* Train */,
 				0A156F80225C4892001CF31C /* mine */,
 			);
 			path = Student;
@@ -2277,6 +2281,14 @@
 				0A17CE90221D2E260057A395 /* MyController.swift */,
 			);
 			path = My;
+			sourceTree = "<group>";
+		};
+		0A189147226FFA1500F3BB82 /* Train */ = {
+			isa = PBXGroup;
+			children = (
+				0A18915322700AE400F3BB82 /* TrainingListController.swift */,
+			);
+			path = Train;
 			sourceTree = "<group>";
 		};
 		0A210FCF20B44C04006BC5C9 /* Web */ = {
@@ -2644,7 +2656,6 @@
 			children = (
 				0A185B30225B2FF90078A603 /* StudentHomeController.swift */,
 				0AAFD70222549F76002C9729 /* ExerciseCenterController.swift */,
-				0A01F104225DAC22009087B2 /* StudentTabbarController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3869,6 +3880,7 @@
 				0AC3BC9F1EE94DA300227194 /* LBXScanLineAnimation.swift in Sources */,
 				0A01F105225DAC22009087B2 /* StudentTabbarController.swift in Sources */,
 				B49971851FBC702000192CCF /* Task.swift in Sources */,
+				0A18915422700AE400F3BB82 /* TrainingListController.swift in Sources */,
 				0AF9D35021830EA00068B05A /* InspectPatientsController.swift in Sources */,
 				0A42F8291F1C7F2D001DF281 /* TaskApplyController.swift in Sources */,
 				0A31A99921AD39CA007AB138 /* PanoramicEvaluationDetailController.swift in Sources */,

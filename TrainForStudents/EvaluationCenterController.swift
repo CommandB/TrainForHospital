@@ -88,12 +88,10 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         evaluationView.parentView = self
         evaluationCollection.delegate = evaluationView
         evaluationCollection.dataSource = evaluationView
-        evaluationCollection.gtm_addRefreshHeaderView(refreshBlock: {
-            self.evaluationView.refresh()
-        })
-        evaluationCollection.gtm_addLoadMoreFooterView(loadMoreBlock: {
-            self.evaluationView.loadMore()
-        })
+        
+        self.evaluationCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: evaluationView, refreshingAction: #selector(evaluationView.refresh))
+        self.evaluationCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: evaluationView, refreshingAction: #selector(evaluationView.loadMore))
+
         evaluationCollection.registerNoDataCellView()
         evaluationCollection.frame.origin = CGPoint(x: UIScreen.width, y: evaluationCollection.frame.origin.y)
         
@@ -132,7 +130,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         btn_exam.restorationIdentifier = "btn_exam"
         
         examView.initLimitPage()
-        evaluationView.initLimitPage()
+        
         getExamDatasource()
         getEvaluationDatasource()
         //提交调查问卷成功
@@ -323,13 +321,11 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     //获取待评任务
     func getEvaluationDatasource(){
         
-        if evaluationView.isLastPage{
-            evaluationCollection.endLoadMore(isNoMoreData:true)
-            return
-        }
-        
         let url = SERVER_PORT+"rest/taskEvaluation/query.do"
-        myPostRequest(url,["pageindex": evaluationView.pageIndex * pageSize , "pagesize":pageSize]).responseJSON(completionHandler: {resp in
+        myPostRequest(url,["pageindex": evaluationView.jsonDataSource.count, "pagesize":pageSize]).responseJSON(completionHandler: {resp in
+            
+            self.evaluationCollection.mj_header.endRefreshing()
+            self.evaluationCollection.mj_footer.endRefreshing()
             
             switch resp.result{
             case .success(let responseJson):
@@ -340,23 +336,17 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
                     let arrayData = json["data"].arrayValue
                     //判断是否在最后一页
                     if arrayData.count < self.pageSize{
-                        self.evaluationView.isLastPage = true
+                        self.evaluationCollection.mj_footer.endRefreshingWithNoMoreData()
                     }
                     
                     self.evaluationView.jsonDataSource += json["data"].arrayValue
-                    //修改上拉刷新和下拉加载的状态
-                    self.evaluationCollection.endRefreshing(isSuccess: true)
-                    self.evaluationCollection.endLoadMore(isNoMoreData: self.evaluationView.isLastPage)
                     
                     self.evaluationCollection.reloadData()
                 }else{
-                    self.evaluationCollection.endRefreshing(isSuccess: false)
                     myAlert(self, message: "请求待评任务列表失败!")
                 }
-                self.evaluationView.pageIndex += 1    //页码增加
                 
             case .failure(let error):
-                self.evaluationCollection.endRefreshing(isSuccess: false)
                 print(error)
             }
             

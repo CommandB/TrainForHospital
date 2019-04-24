@@ -82,7 +82,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
     @objc func btn_features_event(sender : UIButton){
         switch sender.tag - 10000 {
         case 1: //360评价
-            if UserDefaults.AppConfig.json(forKey: .panoramicEvaluationAvailable).intValue == 1{
+            if UserDefaults.AppConfig.string(forKey: .panoramicEvaluationAvailable) == "1"{
                 myPresentView(self, viewName: "panoramicEvaluationView")
             }else{
                 myAlert(self, message: "暂无使用权限")
@@ -90,7 +90,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
             
             break
         case 2: //出科理论考试
-            if UserDefaults.AppConfig.json(forKey: .subjectTheoryAvailable).intValue == 1{
+            if UserDefaults.AppConfig.string(forKey: .subjectTheoryAvailable) == "1"{
                 let vc = getViewToStoryboard("publishSubjectExamView") as! PublishSubjectExamController
                 vc.isSkillExam = false
                 present(vc, animated: true, completion: nil)
@@ -100,7 +100,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
             
             break
         case 3: //出科技能考试
-            if UserDefaults.AppConfig.json(forKey: .subjectSkillAvailable).intValue == 1{
+            if UserDefaults.AppConfig.string(forKey: .subjectSkillAvailable) == "1"{
                 let vc = getViewToStoryboard("publishSubjectExamView") as! PublishSubjectExamController
                 vc.isSkillExam = true
                 present(vc, animated: true, completion: nil)
@@ -110,7 +110,9 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
             break
         case 4://入科安排
 //                        myPresentView(self, viewName: "evaluationItemList")
-            myAlert(self, message: "暂未开放!")
+//            myAlert(self, message: "暂未开放!")
+            let vc = getViewToStoryboard("joinOfficeView") as! JoinOfficeController
+            self.present(vc, animated: true, completion: nil)
             break
         case 5:
             let vc = getViewToStoryboard("examListView") as! ExamListController

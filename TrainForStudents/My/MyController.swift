@@ -22,7 +22,7 @@ class MyController : HBaseViewController{
         messageCollection.dataSource = self
         
         var studentView = "tabBarView"
-        if UserDefaults.AppConfig.json(forKey: .isUseNewApp).intValue == 1{
+        if UserDefaults.AppConfig.string(forKey: .isUseNewApp) == "1"{
             studentView = "studentTabbar"
         }
         
@@ -40,7 +40,7 @@ class MyController : HBaseViewController{
         }
         
         let jobNum = UserDefaults.User.string(forKey: .jobNum)
-        let majorName = UserDefaults.User.string(forKey: .majorName)
+        let officeName = UserDefaults.standard.string(forKey: LoginInfo.officeName)
         var lbl = view.viewWithTag(10003) as! UILabel
         //工号的x轴随名字长度变化
         lbl.setX(x: lbl_name.X + ((lbl_name.text?.getWidth())!) + (5))
@@ -49,8 +49,8 @@ class MyController : HBaseViewController{
         }
         
         lbl = view.viewWithTag(20001) as! UILabel
-        if majorName != nil{
-            lbl.text = "科室：\(majorName!)"
+        if officeName != nil{
+            lbl.text = "科室：\(officeName!)"
         }
         
     }

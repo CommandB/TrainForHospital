@@ -26,8 +26,6 @@ class JoinOfficeController : UIViewController {
         students_collection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: nil)
         
         
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
