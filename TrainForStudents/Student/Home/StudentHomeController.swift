@@ -323,6 +323,7 @@ extension StudentHomeController : UICollectionViewDelegate , UICollectionViewDat
     ///跳转到待办事项
     @objc func presentToDoList(sender :UIButton){
         let vc = getViewToStoryboard("todoListView") as! ToDoListController
+        vc.isStudent = true
         present(vc, animated: true, completion: nil)
     }
     

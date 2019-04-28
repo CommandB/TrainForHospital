@@ -40,7 +40,7 @@ class MyController : HBaseViewController{
         }
         
         let jobNum = UserDefaults.User.string(forKey: .jobNum)
-        let officeName = UserDefaults.standard.string(forKey: LoginInfo.officeName)
+        let officeName = UserDefaults.standard.string(forKey: LoginInfo.officeName.rawValue)
         var lbl = view.viewWithTag(10003) as! UILabel
         //工号的x轴随名字长度变化
         lbl.setX(x: lbl_name.X + ((lbl_name.text?.getWidth())!) + (5))

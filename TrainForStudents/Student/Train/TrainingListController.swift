@@ -151,16 +151,17 @@ class TrainingListController : HBaseViewController{
     
     @objc func btn_submit(sender: UIButton){
         
+        MBProgressHUD.showAdded(to: view, animated: true)
         let url = SERVER_PORT + "rest/app/txaddAutonomyTrain.do"
-        myPostRequest(url,sender.viewParam).responseString(completionHandler: { resp in
-            
+        myPostRequest(url,sender.viewParam).responseJSON(completionHandler: { resp in
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(respStr)
                 print(json)
                 if json["code"].intValue == 1{
-                    
-                    
+                    myAlert(self, message: "参加培训报名成功!")
+                    self.getListData()
                 }else{
                     print(json)
                     myAlert(self, message: json["msg"].stringValue)
@@ -168,7 +169,6 @@ class TrainingListController : HBaseViewController{
             case .failure(let err):
                 print(err)
             }
-            self.trainingCollection.reloadData()
             
         })
         

@@ -111,6 +111,7 @@
 		0A17E00C21DCBF91002A4194 /* 评论.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A17E00521DCBF8E002A4194 /* 评论.png */; };
 		0A185B31225B2FF90078A603 /* StudentHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A185B30225B2FF90078A603 /* StudentHomeController.swift */; };
 		0A18915422700AE400F3BB82 /* TrainingListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A18915322700AE400F3BB82 /* TrainingListController.swift */; };
+		0A1891562271569800F3BB82 /* AttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1891552271569800F3BB82 /* AttendanceController.swift */; };
 		0A18ADEF223255C30070088D /* StudyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A18ADEE223255C30070088D /* StudyController.swift */; };
 		0A19658A21E735D800379F1E /* TeachingPlanDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A19658921E735D800379F1E /* TeachingPlanDetailController.swift */; };
 		0A1A97B121D206250097C467 /* EvalueationListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A97B021D206250097C467 /* EvalueationListController.swift */; };
@@ -999,6 +1000,8 @@
 		0A17E00521DCBF8E002A4194 /* 评论.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "评论.png"; sourceTree = "<group>"; };
 		0A185B30225B2FF90078A603 /* StudentHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentHomeController.swift; sourceTree = "<group>"; };
 		0A18915322700AE400F3BB82 /* TrainingListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingListController.swift; sourceTree = "<group>"; };
+		0A1891552271569800F3BB82 /* AttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceController.swift; sourceTree = "<group>"; };
+		0A18915722715ECE00F3BB82 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0A18ADEE223255C30070088D /* StudyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyController.swift; sourceTree = "<group>"; };
 		0A19658921E735D800379F1E /* TeachingPlanDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingPlanDetailController.swift; sourceTree = "<group>"; };
 		0A1A97B021D206250097C467 /* EvalueationListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvalueationListController.swift; sourceTree = "<group>"; };
@@ -2688,6 +2691,7 @@
 		0AC3B9261EE4730B00227194 = {
 			isa = PBXGroup;
 			children = (
+				0A18915722715ECE00F3BB82 /* MyPlayground.playground */,
 				0AC3B9311EE4730B00227194 /* TrainForStudents */,
 				0AC3B9301EE4730B00227194 /* Products */,
 				3FE1948275F9CFBB0239CC51 /* Pods */,
@@ -2933,6 +2937,7 @@
 				0A2B356621C9109000E17AC9 /* QuestionListController.swift */,
 				0A1A97B021D206250097C467 /* EvalueationListController.swift */,
 				0A22C0B821EC29B700759554 /* OfficePersonListController.swift */,
+				0A1891552271569800F3BB82 /* AttendanceController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -3759,6 +3764,7 @@
 				B4FF1A871F94DF7D009C6685 /* SDImageCache.m in Sources */,
 				0A42F82D1F1D23FB001DF281 /* OutlineTaskCollectionView.swift in Sources */,
 				B4FF1A881F94DF7D009C6685 /* SDImageCacheConfig.m in Sources */,
+				0A1891562271569800F3BB82 /* AttendanceController.swift in Sources */,
 				B468B7CB1FCA9BA000ECF396 /* NSBundle+MJRefresh.m in Sources */,
 				B4847FAE1F9E13B600307D6F /* ImageUploadView.swift in Sources */,
 				B4FF1A911F94DF7D009C6685 /* UIImage+MultiFormat.m in Sources */,

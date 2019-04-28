@@ -21,6 +21,7 @@ class TeachingPlanDetailController : HBaseViewController{
     var imageCollectionView = TeachingPlanDetailImageView()
     var personListCollectionView = TeachingPlanDetailPersonListView()
     var timer = Timer()
+    var isStudents = false
     
     override func viewDidLoad() {
         
@@ -67,7 +68,7 @@ class TeachingPlanDetailController : HBaseViewController{
                     self.jds = json["data"]
                     
                     //需要签到 才更新二维码
-                    if self.jds["sign"].intValue == 1 {
+                    if self.jds["sign"].intValue == 1 && !self.isStudents{
                         self.timer.invalidate()
                         let timeInterval = UserDefaults.AppConfig.any(forKey: .qrCodeInvalidTime) as! NSString
                         self.timer = Timer.scheduledTimer(timeInterval: timeInterval.doubleValue , target: self, selector: #selector(self.refreshQrCode), userInfo: nil, repeats: true)
@@ -147,7 +148,7 @@ class TeachingPlanDetailController : HBaseViewController{
     
     ///更新二维码
     @objc func refreshQrCode(){
-        print("更新二维码了...\(DateUtil.getCurrentDateTime())")
+//        print("更新二维码了...\(DateUtil.getCurrentDateTime())")
         let url = SERVER_PORT + "rest/app/getTrainQRCode.do"
         myPostRequest(url,["trainid":taskInfo["trainid"]], method: .post).responseJSON(completionHandler: { resp in
             
@@ -188,16 +189,16 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
         if jds.isEmpty{
             return 0
         }
-        return 6 + jds["evaluatedetail"].arrayValue.count
+        return 7 + jds["evaluatedetail"].arrayValue.count
     }
     
     //渲染cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = UICollectionViewCell()
-        if indexPath.item < 6{
+        if indexPath.item < 7{
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c\(indexPath.item+1)", for: indexPath)
         }else{
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c7", for: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c8", for: indexPath)
         }
         
         cell.setBorder(width: 1, color: .groupTableViewBackground)
@@ -279,6 +280,21 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
             let lbl_suffix = cell.viewWithTag(10003) as! UILabel
             lbl_suffix.moveToAfter(target: lbl_content,space: 0)
             break
+        case 6:
+            (cell.viewWithTag(10001) as! UIButton).addTarget(self, action: #selector(regist(sender:)), for: .touchUpInside)
+            (cell.viewWithTag(20001) as! UIButton).addTarget(self, action: #selector(leave(sender:)), for: .touchUpInside)
+            let lbl = (cell.viewWithTag(30001) as! UILabel)
+            let answer = jds["answer"].intValue
+            if answer == 1{
+                lbl.text = jds["answerreason"].stringValue
+                lbl.isHidden = false
+            }else if answer == 99{
+                lbl.text = "请假:\(jds["answerreason"].stringValue)"
+                lbl.isHidden = false
+            }else{
+                lbl.isHidden = true
+            }
+            break
         default:
             cell.setBorder(width: 0, color: .groupTableViewBackground)
             cell.setBorderTop(size: 1, color: .groupTableViewBackground)
@@ -315,22 +331,38 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
         var result = CGSize()
         let cellWidth = collectionView.W - (5)
         switch indexPath.item {
-        case 0:
+        case 0://主讲人
             result = CGSize(width: cellWidth, height: 40)
-        case 1:
+        case 1://讲课素材
             result = CGSize(width: cellWidth, height: 40)
-        case 2:
+        case 2://确认参加人数
             result = CGSize(width: cellWidth, height: 40)
-        case 3:
+            if isStudents{
+                result = CGSize(width: cellWidth, height: 0)
+            }
+        case 3://已签到人数
             result = CGSize(width: cellWidth, height: 220)
             if jds["sign"].intValue == 0 {
                 result = CGSize(width: cellWidth, height: 40)
             }
-            
-        case 4:
+            if isStudents{
+                result = CGSize(width: cellWidth, height: 0)
+            }
+        case 4://现场照片
             result = CGSize(width: cellWidth, height: 130)
-        case 5:
+            if isStudents{
+                result = CGSize(width: cellWidth, height: 0)
+            }
+        case 5://好评度
             result = CGSize(width: cellWidth, height: 30)
+            if isStudents{
+                result = CGSize(width: cellWidth, height: 0)
+            }
+        case 6://答复
+            result = CGSize(width: cellWidth, height: 0)
+            if isStudents{
+                result = CGSize(width: cellWidth, height: 160)
+            }
         default:
             result = CGSize(width: cellWidth, height: 65)
         }
@@ -363,8 +395,6 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
         personCollection.setCornerRadius(radius: 4)
         personCollection.setBorder(width: 1, color: .gray)
         
-        
-        
         //计算一下有多少数据 来定位collection的位置
         let cellCount = personListCollectionView.personList.count + 1
         var collectionHeight = CGFloat(personListCollectionView.cellHeight * cellCount)
@@ -377,6 +407,71 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
         personCollection.setY(y: y)
         
         personList_view.isHidden = false
+        
+    }
+    
+    @objc func regist(sender : UIButton){
+        MBProgressHUD.showAdded(to: view, animated: true)
+        let url = SERVER_PORT + "rest/app/trainAnswer.do"
+        myPostRequest(url,["trainid":taskInfo["trainid"],"answer":"1", "answerreason":"准时参加"], method: .post).responseJSON(completionHandler: { resp in
+            
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            switch resp.result{
+            case .success(let respJson):
+                let json = JSON(respJson)
+                if json["code"].intValue == 1{
+                    
+                }else{
+                    myAlert(self, message: "回复失败!")
+                }
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+            
+        })
+    }
+    
+    @objc func leave(sender : UIButton){
+        
+        var txt = UITextField()
+        
+        let alert = UIAlertController(title: "提示", message: "请输入请假原因", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { action in
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            let url = SERVER_PORT + "rest/app/trainAnswer.do"
+            myPostRequest(url,["trainid":self.taskInfo["trainid"],"answer":"1","answerreason":txt.text], method: .post).responseJSON(completionHandler: { resp in
+                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                switch resp.result{
+                case .success(let respJson):
+                    let json = JSON(respJson)
+                    if json["code"].intValue == 1{
+                        
+                    }else{
+                        myAlert(self, message: "报名失败!")
+                    }
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
+                }
+                
+            })
+
+        }))
+        alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { action in
+            
+        }))
+        
+        alert.addTextField(configurationHandler: { textFiled in
+            txt = textFiled
+            
+        })
+
+        present(alert, animated: true, completion: nil)
+        
+        
         
     }
     

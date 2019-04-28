@@ -56,7 +56,7 @@ class LeaveApprovedController : UIViewController{
         overCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: overView, refreshingAction: #selector(overView.loadMore))
         overCollection.mj_header.beginRefreshing()
         overCollection.frame.origin = CGPoint(x: UIScreen.width, y: overCollection.frame.origin.y)
-
+        
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {

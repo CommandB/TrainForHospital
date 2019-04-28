@@ -9,13 +9,13 @@
 import UIKit
 import SwiftyJSON
 
-class JoinOfficeController : UIViewController {
-    
+class JoinOfficeController : HBaseViewController {
     
     @IBOutlet weak var students_collection: UICollectionView!
     var office = JSON()
     var jds = [JSON]()
     var selectedPerson = [String:JSON]()
+    var officePicckView = HSimplePickerViewImpl()
     
     override func viewDidLoad() {
         students_collection.dataSource = self
@@ -25,7 +25,10 @@ class JoinOfficeController : UIViewController {
         students_collection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         students_collection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: nil)
         
+        let txt = view.viewWithTag(10001) as! TextFieldForNoMenu
         
+        txt.inputView = officePicckView.getOfficePickerView()
+        officePicckView.clorsureImpl = officePicker(_:_:_:_:)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +86,15 @@ class JoinOfficeController : UIViewController {
         getListData()
     }
     
+    func officePicker(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+        
+        let data = ds[row]
+        office["officeid"] = data["officeid"]
+        (view.viewWithTag(10001) as! TextFieldForNoMenu).text = office["officename"].stringValue
+        getListData()
+        
+    }
+    
 }
 
 extension JoinOfficeController : UICollectionViewDelegate , UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
@@ -91,6 +103,7 @@ extension JoinOfficeController : UICollectionViewDelegate , UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        hiddenKeyBoard()
         let cell = students_collection.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         let data = jds[indexPath.item]
         let btn = cell.viewWithTag(10001) as! UIButton

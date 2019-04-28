@@ -17,6 +17,7 @@ class ToDoListController : HBaseViewController{
     var jds = [JSON]()
     var dataMap = [String:[JSON]]()
     var dataArr = [JSON]()
+    var isStudent = false
     
     override func viewDidLoad() {
         
@@ -236,6 +237,7 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
         param["trainid"] = data["buid"]
         let vc = getViewToStoryboard("teachingPlanDetailView") as! TeachingPlanDetailController
         vc.taskInfo = param
+        vc.isStudents = isStudent
         present(vc, animated: true, completion: nil)
     }
     

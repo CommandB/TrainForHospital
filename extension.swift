@@ -145,14 +145,17 @@ func signUpAlertPresent(_ viewController:UIViewController, title:String?, messag
 }
 
 ///confirm
-func myConfirm(_ viewController:UIViewController, title:String = "系统提示", message:String, okTitle:String = "好的", cancelTitle:String = "取消" , okHandler:((UIAlertAction) -> Void)? = nil , cancelHandler:((UIAlertAction) -> Void)? = nil){
+func myConfirm(_ viewController:UIViewController, title:String = "系统提示", message:String, okTitle:String = "好的", cancelTitle:String = "取消" , okHandler:((UIAlertAction) -> Void)? = nil , cancelHandler:((UIAlertAction) -> Void)? = nil ){
     
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: okTitle, style: .default, handler: okHandler))
     alert.addAction(UIAlertAction(title: cancelTitle, style: .default, handler: cancelHandler))
+    
     viewController.present(alert, animated: true, completion: nil)
     
 }
+
+
 
 ///跳转view
 func myPresentView(_ controller:UIViewController, viewName:String , completion: (() -> Void)? = nil ){

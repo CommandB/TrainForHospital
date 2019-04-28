@@ -138,8 +138,8 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-         selectedTabBarIndex = 3
+        evaluationCollection.mj_header.beginRefreshing()
+        selectedTabBarIndex = 3
         
         super.viewWillAppear(true)
         buttonView.isHidden = true

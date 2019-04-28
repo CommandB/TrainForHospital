@@ -11,42 +11,43 @@ import SwiftDate
 
 class DateUtil{
 
-    static let dayToSecond=86400
-    static let hourToSecond=3600
-    static let minuteToSecond=60
+    static let dayToSecond = 86400
+    static let hourToSecond = 3600
+    static let minuteToSecond = 60
     //默认日期格式化参数
-    static let datePattern="yyyy-MM-dd"
+    ///yyyy-MM
+    static let monthOfYearPattern = "yyyy-MM"
+    ///yyyy-MM-dd
+    static let datePattern = "yyyy-MM-dd"
+    ///yyyy-MM-dd HH:mm:ss
     static let dateTimePattern="yyyy-MM-dd HH:mm:ss"
+    ///yyyy-MM-dd HH:mm:ss.s
     static let dateTimeSecondPattern="yyyy-MM-dd HH:mm:ss.s"
     
     ///自定义pattern
     static func formatString(_ dateStr:String,pattern:String) ->Date{
-        do{
-            return try dateStr.date(format: DateFormat.custom(pattern))!.absoluteDate
-        }catch{
-            print("格式化日期异常...")
-        }
-        return Date()
+//        let regin = DateInRegion()
+//        regin.formatters.dateFormatter().locale = Locale.current
+//        let r = Region.GMT()
+        
+//        return dateStr.date(format: DateFormat.custom(pattern) , fromRegion: r)!.absoluteDate
+        let formatter = DateFormatter()
+        formatter.dateFormat = pattern
+        return formatter.date(from: dateStr)!
     }
     
     ///格式化符合yyyy-MM-dd格式的字符串
     static func stringToDate(_ dateStr:String) -> Date{
-        do{
-            return try dateStr.date(format: DateFormat.custom(datePattern))!.absoluteDate
-        }catch{
-            print("格式化日期异常...")
-        }
-        return Date()
+        return formatString(dateStr, pattern: datePattern)
     }
     
     ///格式化符合yyyy-MM-dd HH:mm:ss格式的字符串
     static func stringToDateTime(_ dateTimeStr:String) -> Date{
-        do{
-            return try dateTimeStr.date(format: DateFormat.custom(dateTimePattern))!.absoluteDate
-        }catch{
-            print("格式化日期异常...")
-        }
-        return Date()
+        return formatString(dateTimeStr, pattern: dateTimePattern)
+    }
+    
+    static func formatDate(_ date:Date,pattern:String) -> String {
+        return date.string(format: DateFormat.custom(pattern))
     }
     
     ///格式化日期 精确到分钟
@@ -54,19 +55,16 @@ class DateUtil{
         return DateUtil.formatDate(DateUtil.stringToDateTime(dateStr), pattern: "yyyy-MM-dd HH:mm")
     }
     
-    
-    static func formatDate(_ date:Date,pattern:String) -> String {
-        return date.string(format: DateFormat.custom(pattern))
-//        return date.toString(format: DateFormatter.custom(pattern))
-    }
-    
     static func dateToString(_ date:Date) -> String {
-        return date.string(format: DateFormat.custom(datePattern))
-//        return date.toString(format: DateFormatter.custom(datePattern))
+        return formatDate(date, pattern: datePattern)
     }
     
     static func dateTimeToString(_ date:Date) -> String{
-        return date.string(format: DateFormat.custom(dateTimePattern))
+        return formatDate(date, pattern: dateTimePattern)
+    }
+    
+    static func dateMonthOfYearToString(_ date:Date) -> String{
+        return formatDate(date, pattern: monthOfYearPattern)
     }
     
     ///获取字符串格式的当前日期
@@ -110,6 +108,21 @@ class DateUtil{
 
         return result
 
+    }
+    
+    
+    ///获取某月份中所有的天数
+    static func getAlldayOfMonth(_ date : Date) -> [Date]{
+        var dayOfMonth = [Date]()
+        let startDate = date.startOf(component: .month)
+        let startDay = date.startOf(component: .month).day
+        let endDay = date.endOf(component: .month).day
+        
+        for i in startDay...endDay{
+            dayOfMonth.append(startDate.addingTimeInterval(TimeInterval(60 * 60 * 24 * (i - 1))))
+        }
+        
+        return dayOfMonth
     }
     
     static func getWeek(_ date : Date) -> String {
