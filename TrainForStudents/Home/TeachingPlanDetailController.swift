@@ -299,7 +299,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
             cell.setBorder(width: 0, color: .groupTableViewBackground)
             cell.setBorderTop(size: 1, color: .groupTableViewBackground)
             let evArray = jds["evaluatedetail"].arrayValue
-            let index = indexPath.item - 6
+            let index = indexPath.item - 7
             let item = evArray[index]
             (cell.viewWithTag(10001) as! UILabel).text = "\(index+1).\(item["itemtitle"].stringValue)"
             let lbl_bg = (cell.viewWithTag(10002) as! UILabel)
@@ -504,8 +504,9 @@ extension TeachingPlanDetailController : UIImagePickerControllerDelegate, UINavi
             let url = SERVER_PORT + "rest/app/TrainImgAdd.do"
             
             var param = [String:Any]()
-//            param["trainid"] = 10636//self.taskInfo["taskid"].stringValue
-            //param["context"] = txt.text
+            param["taskid"] = self.taskInfo["taskid"].stringValue
+            param["context"] = ""
+            param["trainid"] = self.taskInfo["trainid"].stringValue
             
             var imgDir = [String:UIImage]()
             //根据记录的下标读取需要上传的图片

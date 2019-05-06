@@ -99,10 +99,8 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         questionnaireView.parentView = self
         questionnaireCollection.delegate = questionnaireView
         questionnaireCollection.dataSource = questionnaireView
-        questionnaireCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: questionnaireView, refreshingAction: #selector(refresh))
-        questionnaireCollection.mj_footer = MJRefreshBackNormalFooter.init(refreshingTarget: questionnaireView, refreshingAction: #selector(loadMore))
-        
-        questionnaireCollection.mj_header.beginRefreshing()
+        questionnaireCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: questionnaireView, refreshingAction: #selector(questionnaireView.refresh))
+        questionnaireCollection.mj_footer = MJRefreshAutoNormalFooter.init(refreshingTarget: questionnaireView, refreshingAction: #selector(questionnaireView.loadMore))
         
         questionnaireCollection.frame.origin = CGPoint(x: UIScreen.width * 2, y: evaluationCollection.frame.origin.y)
         
@@ -110,11 +108,6 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         btn_1.layer.cornerRadius = btn_1.frame.width / 2
         btn_2.layer.cornerRadius = btn_1.frame.width / 2
         btn_3.layer.cornerRadius = btn_1.frame.width / 2
-        
-        
-//        btn_1.titleEdgeInsets = UIEdgeInsets(top: 55, left: 0, bottom: 0, right: 0)
-//        btn_2.titleEdgeInsets = UIEdgeInsets(top: 55, left: 0, bottom: 0, right: 0)
-//        btn_3.titleEdgeInsets = UIEdgeInsets(top: 55, left: 0, bottom: 0, right: 0)
         
         //用作待考,待评,问卷左右滑动的容器
         scrollView.contentSize = CGSize(width: UIScreen.width * 3, height: scrollView.frame.height)
@@ -138,12 +131,15 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        evaluationCollection.mj_header.beginRefreshing()
+        
         selectedTabBarIndex = 3
         
         super.viewWillAppear(true)
         buttonView.isHidden = true
         btn_btnList.tag = 0
+        
+        evaluationCollection.mj_header.beginRefreshing()
+        questionnaireCollection.mj_header.beginRefreshing()
         
     }
     
@@ -320,7 +316,7 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
     
     //获取待评任务
     func getEvaluationDatasource(){
-        
+        print("获取待评数据...")
         let url = SERVER_PORT+"rest/taskEvaluation/query.do"
         myPostRequest(url,["pageindex": evaluationView.jsonDataSource.count, "pagesize":pageSize]).responseJSON(completionHandler: {resp in
             
@@ -359,25 +355,16 @@ class EvaluationCenterController : MyBaseUIViewController , UIScrollViewDelegate
         
         let url = SERVER_PORT+"rest/questionnaire/queryAllQuestionnaire.do"
         myPostRequest(url,["personid":UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!]).responseJSON(completionHandler: {resp in
-            self.questionnaireCollection.mj_footer.endRefreshing()
             self.questionnaireCollection.mj_header.endRefreshing()
+            self.questionnaireCollection.mj_footer.endRefreshingWithNoMoreData()
             switch resp.result{
             case .success(let responseJson):
                 
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
-                    
-                    let arrayData = json["data"].arrayValue
-                    //判断是否在最后一页
-                    if arrayData.count == 0 {
-                        self.questionnaireCollection.mj_footer.endRefreshingWithNoMoreData()
-                    }
-                    
-                    self.questionnaireView.jsonDataSource += json["data"].arrayValue
-                    
+                    self.questionnaireView.jsonDataSource = json["data"].arrayValue
                     self.questionnaireCollection.reloadData()
                 }else{
-                    
                     myAlert(self, message: "请求调查问卷列表失败!")
                 }
                 

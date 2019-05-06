@@ -57,7 +57,7 @@ class WaitEvanluationTaskCollectionView : UIViewController,  UICollectionViewDel
     }
     
     @objc public func refresh() {
-        
+        print("评价刷新")
         jsonDataSource = [JSON]()
         parentView?.evaluationCollection.mj_footer.resetNoMoreData()
         parentView?.getEvaluationDatasource()

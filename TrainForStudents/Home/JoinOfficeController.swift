@@ -90,7 +90,7 @@ class JoinOfficeController : HBaseViewController {
         
         let data = ds[row]
         office["officeid"] = data["officeid"]
-        (view.viewWithTag(10001) as! TextFieldForNoMenu).text = office["officename"].stringValue
+        (view.viewWithTag(10001) as! TextFieldForNoMenu).text = data["officename"].stringValue
         getListData()
         
     }

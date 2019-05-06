@@ -20,10 +20,23 @@ class EvaluationItemListController : UIViewController{
     
     @IBOutlet weak var btn_right: UIButton!
     
+    @IBOutlet weak var btn_list: UIButton!
+    
+    @IBOutlet weak var btn_all: UIButton!
+    
+    @IBOutlet weak var btn_train: UIButton!
+    
+    @IBOutlet weak var btn_subject: UIButton!
+    
+    let mark_uncheck = "⚪️"
+    let mark_checked = "🔘"
+    var selectedBtnTag = 0
+    
     var detailView = EvaluationItemViewController()
     
     var initData = JSON()
     var jds = [JSON]()
+    var dataList = [JSON]()
     
     var pageNumber = 0
     var beginDraggingX = CGFloat(0)
@@ -45,6 +58,12 @@ class EvaluationItemListController : UIViewController{
         
         getCardListData()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotice), name: EvaluationHistoryListController.defaultNoticeName, object: nil)
+        
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -95,6 +114,68 @@ class EvaluationItemListController : UIViewController{
         
     }
     
+    //未评列表
+    @IBAction func btn_list_inside(_ sender: UIButton) {
+        let vc = getViewToStoryboard("evaluationHistoryListView") as! EvaluationHistoryListController
+        vc.jds = dataList
+        vc.viewTitle = "评价列表"
+        vc.isHistory = false
+        present(vc, animated: true, completion: nil)
+        
+        
+    }
+    
+    //全部 培训 出科
+    @IBAction func btn_sort_inside(_ sender: UIButton) {
+        
+        if sender.tag == selectedBtnTag{
+            return
+        }
+        selectedBtnTag = sender.tag
+        btn_all.setTitle(mark_uncheck + "全部", for: .normal)
+        btn_train.setTitle(mark_uncheck + "培训评价", for: .normal)
+        btn_subject.setTitle(mark_uncheck + "出科评价", for: .normal)
+        
+        var taskType = ""
+        switch sender.tag {
+        case 10011:
+            btn_all.setTitle(mark_checked + "全部", for: .normal)
+        case 10012:
+            taskType = "培训评价"
+            btn_train.setTitle(mark_checked + "培训评价", for: .normal)
+        case 10013:
+            taskType = "出科评价"
+            btn_subject.setTitle(mark_checked + "出科评价", for: .normal)
+        default:
+            break
+        }
+        
+        //过滤评价数据
+        if taskType == ""{
+            jds = dataList
+        }else{
+            jds.removeAll()
+            for item in dataList{
+                if item["tasktype"].stringValue == taskType{
+                    jds.append(item)
+                }
+            }
+        }
+        pageNumber = 0
+        if self.jds.count > 0{
+            self.changeIndex(self.pageNumber + 1)
+            self.getDetailDatasource(self.jds[0]["evaluationid"].stringValue)
+            self.btn_left.isEnabled = true
+            self.btn_right.isEnabled = true
+        }else{
+            self.changeIndex(0)
+            self.btn_left.isEnabled = false
+            self.btn_right.isEnabled = false
+        }
+        self.cardCollection.reloadData()
+        cardCollection.setContentOffset(CGPoint(x: cardCollection.W * CGFloat(pageNumber), y: 0), animated: true)
+    }
+    
     func getCardListData(){
         
         MBProgressHUD.showAdded(to: view, animated: true)
@@ -113,11 +194,14 @@ class EvaluationItemListController : UIViewController{
                 if json["code"].stringValue == "1"{
                     
                     self.jds  = json["data"].arrayValue
-                    (self.view.viewWithTag(10011) as! UILabel).text = "待评价(\(self.jds.count))"
+                    self.dataList = self.jds
+                    
                     //如果有待评数据 则默认把第一个待评的 评价详情给加载出来
                     if self.jds.count > 0{
+                        self.changeIndex(self.pageNumber + 1)
                         self.getDetailDatasource(self.jds[0]["evaluationid"].stringValue)
                     }else{
+                        self.changeIndex(0)
                         self.btn_left.isEnabled = false
                         self.btn_right.isEnabled = false
                     }
@@ -219,8 +303,26 @@ class EvaluationItemListController : UIViewController{
         if pageNumber < jds.count{
             getDetailDatasource(jds[pageNumber]["evaluationid"].stringValue)
         }
+        changeIndex(pageNumber + 1)
         UIView.setAnimationCurve(.easeOut)
         UIView.commitAnimations()
+    }
+    
+    ///改变左上角 待评价(xx/xxx)
+    func changeIndex(_ num : Int){
+        self.btn_list.setTitle("待评价(\(num)/\(jds.count))", for: .normal)
+    }
+    
+    @objc func receiveNotice(notification : NSNotification){
+        
+        if notification.userInfo != nil{
+            let index = notification.userInfo!["index"] as! Int
+            pageNumber = index
+            cardCollection.setContentOffset(CGPoint(x: cardCollection.W * CGFloat(index), y: 0), animated: true)
+            changeIndex(pageNumber + 1)
+            getDetailDatasource(jds[pageNumber]["evaluationid"].stringValue)
+        }
+        
     }
     
 }
@@ -283,7 +385,7 @@ extension EvaluationItemListController : UIScrollViewDelegate{
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = scrollView.contentOffset.x
 
-        print("endDragging =   beginDraggingX:\(beginDraggingX) : x:\(x)")
+//        print("endDragging =   beginDraggingX:\(beginDraggingX) : x:\(x)")
 
         if beginDraggingX < x{  //左滑
             print("左滑")
@@ -308,6 +410,7 @@ extension EvaluationItemListController : UIScrollViewDelegate{
             }
             print("右滑")
         }
+        changeIndex(pageNumber + 1)
         getDetailDatasource(jds[pageNumber]["evaluationid"].stringValue)
     }
 

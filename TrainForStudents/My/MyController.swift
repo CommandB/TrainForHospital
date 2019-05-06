@@ -21,17 +21,20 @@ class MyController : HBaseViewController{
         messageCollection.delegate = self
         messageCollection.dataSource = self
         
+       
+//        jds = JSON([["icon":"双箭头-右蓝","title":"切换至学生端","link":"tabBarView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
         var studentView = "tabBarView"
         if UserDefaults.AppConfig.string(forKey: .isUseNewApp) == "1"{
             studentView = "studentTabbar"
         }
         
         jds = JSON([["icon":"双箭头-右蓝","title":"切换至学生端","link":studentView],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
-//        jds = JSON([["icon":"双箭头-右蓝","title":"切换至学生端","link":"tabBarView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         view.bringSubview(toFront: messageCollection)
         let lbl_name = view.viewWithTag(10002) as! UILabel
         lbl_name.text = UserDefaults.User.string(forKey: .personName)

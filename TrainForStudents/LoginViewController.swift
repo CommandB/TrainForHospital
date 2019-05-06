@@ -345,10 +345,10 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                     
                     self.appDelegate.loadAppConfig()
                     
-                    //请求科室信息
+                    //-----------------------------请求科室信息开始-----------------------------
                     let getOfficeURL = SERVER_PORT+"rest/app/queryMyOffice.do"
                     myPostRequest(getOfficeURL).responseJSON(completionHandler: { resp in
-                        MBProgressHUD.hide(for: self.view, animated: true)
+                        
                         switch  resp.result{
                         case .success(let result):
                             
@@ -358,6 +358,7 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                                 //缓存科室信息
                                 let data = json["data"].arrayValue
                                 if data.count == 0 {
+                                    MBProgressHUD.hide(for: self.view, animated: true)
                                     myAlert(self, message: "您暂未分配科室,请联系科教!")
                                     return
                                 }
@@ -381,39 +382,54 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                                 }
                                 UserDefaults.standard.set(roleDic, forKey: LoginInfo.role.rawValue)
                                 self.getMySelfData()
-                                //验证角色,判断登录到哪一端
-                                if isOnlyStudent(){
-                                    if UserDefaults.AppConfig.string(forKey: .isUseNewApp) == "1"{
-                                        self.appDelegate.window?.rootViewController = getViewToStoryboard("studentTabbar")
-                                    }else{
-                                        self.appDelegate.window?.rootViewController = getViewToStoryboard("tabBarView")
+
+                                //-----------------------------请求配置信息开始-----------------------------
+                                let url = SERVER_PORT+"rest/app/systemConfigData.do"
+                                myPostRequest(url).responseJSON(completionHandler: {resp in
+                                    MBProgressHUD.hide(for: self.view, animated: true)
+                                    switch resp.result{
+                                    case .success(let responseJson):
+                                        
+                                        let json = JSON(responseJson)
+                                        if json["code"].stringValue == "1"{
+                                            let data = json["data"]
+                                            self.appDelegate.saveConfigToCache(data: data)
+                                            
+                                            //验证角色,判断登录到哪一端
+                                            if isOnlyStudent(){
+                                                if UserDefaults.AppConfig.string(forKey: .isUseNewApp) == "1"{
+                                                    self.appDelegate.window?.rootViewController = getViewToStoryboard("studentTabbar")
+                                                }else{
+                                                    self.appDelegate.window?.rootViewController = getViewToStoryboard("tabBarView")
+                                                }
+                                            }else{
+                                                //myPresentView(self, viewName: "hTabBarView")
+                                                self.appDelegate.window?.rootViewController = getViewToStoryboard("hTabBarView")
+                                                let tabBar = (self.appDelegate.window?.rootViewController) as! MyTabBarController
+                                                tabBar.selectedIndex = 0
+                                                self.dismiss(animated: true, completion: nil)
+                                            }
+                                        }else{
+                                            myAlert(self, message: json["msg"].stringValue)
+                                        }
+                                    case .failure(let error):
+                                        print(error)
                                     }
-                                }else{
-                                    //myPresentView(self, viewName: "hTabBarView")
-                                    self.appDelegate.window?.rootViewController = getViewToStoryboard("hTabBarView")
-                                    let tabBar = (self.appDelegate.window?.rootViewController) as! MyTabBarController
-                                    tabBar.selectedIndex = 0
-                                    self.dismiss(animated: true, completion: nil)
-                                }
+                                    
+                                })
+                                //-----------------------------请求配置信息结束-----------------------------
                                 
                             }else{
+                                MBProgressHUD.hide(for: self.view, animated: true)
                                 myAlert(self, message: json["msg"].stringValue)
                             }
-                            
-                            
                         case .failure(let err):
-                            
+                            MBProgressHUD.hide(for: self.view, animated: true)
                             myAlert(self, message: "服务器异常!")
                             print(err)
                         }
-                        
                     })
-                    
-                    
-                    
-//                    let vc = getViewToStoryboard("hTabBarView") as! MyTabBarController
-//                    self.present(vc, animated: true, completion: nil)
-//                    self.dismiss(animated: true, completion: nil)
+                    //-----------------------------请求科室信息结束-----------------------------
                     
                 }else{
                     MBProgressHUD.hide(for: self.view, animated: true)

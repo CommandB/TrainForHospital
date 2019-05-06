@@ -31,6 +31,12 @@ class StudyController : HBaseViewController{
         appDelegate.blockRotation = true
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        player.pause()
+        player.playerLayer?.prepareToDeinit()
+        
+    }
+    
     @IBAction func btn_back_inside(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
@@ -74,7 +80,7 @@ class StudyController : HBaseViewController{
                     let data = json["data"]
                     self.materialData = data
                     (self.view.viewWithTag(10001) as! UILabel).text = data["title"].stringValue
-                    (self.view.viewWithTag(10001) as! UILabel).text = data["note"].stringValue
+                    (self.view.viewWithTag(30001) as! UILabel).text = data["note"].stringValue
                     //let placeholder = self.view.viewWithTag(20001)!
                     let fileURL = data["url"].stringValue
                     let url = URL(string: fileURL)
@@ -82,7 +88,7 @@ class StudyController : HBaseViewController{
                         
                         //视频播放
                         self.player.parentView = self
-                        //self.player.markView = view.viewWithTag(20001)
+                        self.player.markView = self.view.viewWithTag(20001)
                         
                         self.player.backBlock = { [unowned self] (isFullScreen) in
                             if isFullScreen == true {

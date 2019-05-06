@@ -92,7 +92,7 @@ extension HUtilView{
         
         //添加缩放手势
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchDid(_:)))
-        showImageView.addGestureRecognizer(pinchGesture)
+//        showImageView.addGestureRecognizer(pinchGesture)
         
         let imageView = UIImageView()
         imageView.tag = 10001

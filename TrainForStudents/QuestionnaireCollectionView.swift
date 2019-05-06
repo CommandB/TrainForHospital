@@ -46,14 +46,14 @@ class QuestionnaireCollectionView : MyBaseCollectionView{
         parentView?.present(vc, animated: true, completion: nil)
     }
     
-    public override func refresh() {
+    @objc public override func refresh() {
         jsonDataSource = [JSON]()
-        parentView?.questionnaireCollection.mj_footer.resetNoMoreData()
+//        parentView?.questionnaireCollection.mj_footer.resetNoMoreData()
         parentView?.getQuestionnaireDatasource()
     }
     
-    override func loadMore() {
-//        parentView?.getQuestionnaireDatasource()
+    @objc override func loadMore() {
+        parentView?.questionnaireCollection.mj_footer.endRefreshingWithNoMoreData()
     }
     
     

@@ -24,6 +24,8 @@ class AttendanceController : HBaseViewController{
     var jds = [Date]()
     var selectedCellIndex = IndexPath()
     
+    var tagListView = UIView()
+    
     override func viewDidLoad() {
         
         dateCollection.delegate = self
@@ -52,12 +54,40 @@ class AttendanceController : HBaseViewController{
         let currentDate = Date()
         
         //初始化前后六个月的数据
-        monthList = getBeforeTwoMonths(date: currentDate.prevMonth) + getAfterTwoMonths(date: currentDate)
+        monthList =  getAfterTwoMonths(date: currentDate)
         
         //生成数据
         generationData(mList: monthList)
         
-        dateCollection.reloadData()
+//        dateCollection.reloadData()
+        //dateCollection.setContentOffset(CGPoint(x: 0, y: dateCollection.W * 2 ), animated: true)
+        
+        let mList = getBeforeTwoMonths(date: currentDate.prevMonth)
+        generationData(mList: mList)
+        monthList = mList + monthList
+        
+        let btn = UIButton(frame: CGRect(x: 10, y: 100, width: 100, height: 30))
+        btn.setTitle("关闭", for: .normal)
+        btn.addTarget(self, action: #selector(btn_dismissTagListView(sender:)), for: .touchUpInside)
+        tagListView.frame = view.frame
+        tagListView.backgroundColor = .groupTableViewBackground
+        tagListView.setY(y: UIScreen.height)
+        tagListView.alpha = 0
+        tagListView.addSubview(btn)
+        
+        view.addSubview(tagListView)
+        
+    }
+    
+    @objc func btn_dismissTagListView(sender : UIButton){
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.tagListView.alpha = 0
+            self.tagListView.setY(y: UIScreen.height)
+        }) { (true) in
+            
+            
+        }
         
     }
     
@@ -185,6 +215,12 @@ extension AttendanceController : UICollectionViewDelegate , UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCellIndex = indexPath
         collectionView.reloadData()
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.tagListView.alpha = 0.9
+            self.tagListView.setY(y: 0)
+        }, completion: nil)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

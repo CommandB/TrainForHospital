@@ -31,7 +31,7 @@ class FeaturesController : UIViewController{
         btn.set(image: nil, title: "mini-cex", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(20002) as! UIButton
-        btn.set(image: nil, title: "轮转查询", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.set(image: nil, title: "调查问卷", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(20003) as! UIButton
         btn.set(image: nil, title: "请假审批", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
@@ -70,9 +70,9 @@ class FeaturesController : UIViewController{
         case 20001:
             myPresentView(self, viewName: "cexStudentsView")
             break
-        case 20002:
-            
-            myAlert(self, message: "暂未开放!")
+        case 20002://调查问卷
+            myPresentView(self, viewName: "surveyListView")
+            //myAlert(self, message: "暂未开放!")
             break
         case 20003:
             myAlert(self, message: "暂未开放!")

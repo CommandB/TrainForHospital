@@ -383,6 +383,7 @@
 		0AEBF3C51F20804700520E27 /* 出科.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBF3C41F20804700520E27 /* 出科.png */; };
 		0AF25E0B217DBA4500FE5425 /* LeaveUndoneCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF25E0A217DBA4500FE5425 /* LeaveUndoneCollection.swift */; };
 		0AF25E0D217DBB4500FE5425 /* LeaveOverCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF25E0C217DBB4500FE5425 /* LeaveOverCollection.swift */; };
+		0AF518F0227E830C0019ECF7 /* SurveyListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF518EF227E830C0019ECF7 /* SurveyListController.swift */; };
 		0AF9D331217F26090068B05A /* 关闭.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D327217F26070068B05A /* 关闭.png */; };
 		0AF9D33721801BCA0068B05A /* 搜索.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D33221801BC20068B05A /* 搜索.png */; };
 		0AF9D34321805EC60068B05A /* 未选择-大.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9D33F21805EC10068B05A /* 未选择-大.png */; };
@@ -1279,6 +1280,7 @@
 		0AEBF3C41F20804700520E27 /* 出科.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "出科.png"; sourceTree = "<group>"; };
 		0AF25E0A217DBA4500FE5425 /* LeaveUndoneCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveUndoneCollection.swift; sourceTree = "<group>"; };
 		0AF25E0C217DBB4500FE5425 /* LeaveOverCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveOverCollection.swift; sourceTree = "<group>"; };
+		0AF518EF227E830C0019ECF7 /* SurveyListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyListController.swift; sourceTree = "<group>"; };
 		0AF9D327217F26070068B05A /* 关闭.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "关闭.png"; sourceTree = "<group>"; };
 		0AF9D33221801BC20068B05A /* 搜索.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索.png"; sourceTree = "<group>"; };
 		0AF9D33F21805EC10068B05A /* 未选择-大.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未选择-大.png"; sourceTree = "<group>"; };
@@ -2639,7 +2641,6 @@
 				0A8293C9217ECBFD006047B1 /* InspectController.swift */,
 				0AF9D34D21830D570068B05A /* InspectStudentsController.swift */,
 				0AF9D34F21830EA00068B05A /* InspectPatientsController.swift */,
-				0A31A9A421AE9ACA007AB138 /* EvaluationDimensionController.swift */,
 			);
 			path = ReleaseList;
 			sourceTree = "<group>";
@@ -2675,6 +2676,7 @@
 				0A3A7F8C2194309200334307 /* MessageListController.swift */,
 				0A31A98B21ABD36E007AB138 /* PanoramicEvaluationController.swift */,
 				0A31A99821AD39CA007AB138 /* PanoramicEvaluationDetailController.swift */,
+				0A31A9A421AE9ACA007AB138 /* EvaluationDimensionController.swift */,
 				0A1A97BB21D32AD40097C467 /* PublishSubjectExamController.swift */,
 				0AE552B321D398BB00B82032 /* PublishSubjectExamDetailController.swift */,
 				0A14BD9121DE0D1000261797 /* NoticeDetailController.swift */,
@@ -2938,6 +2940,7 @@
 				0A1A97B021D206250097C467 /* EvalueationListController.swift */,
 				0A22C0B821EC29B700759554 /* OfficePersonListController.swift */,
 				0A1891552271569800F3BB82 /* AttendanceController.swift */,
+				0AF518EF227E830C0019ECF7 /* SurveyListController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -3702,6 +3705,7 @@
 				0AD14563217D81FB004670A9 /* LeaveApprovedController.swift in Sources */,
 				0A15D5281F0E51F200908B7F /* MeterialListController.swift in Sources */,
 				0A14532021E4911500741F5B /* TeachingPlanController.swift in Sources */,
+				0AF518F0227E830C0019ECF7 /* SurveyListController.swift in Sources */,
 				0A44131D1EEAC64F00BAB679 /* BMCustomPlayer.swift in Sources */,
 				B468B7BD1FCA9BA000ECF396 /* MJRefreshComponent.m in Sources */,
 				0A19658A21E735D800379F1E /* TeachingPlanDetailController.swift in Sources */,

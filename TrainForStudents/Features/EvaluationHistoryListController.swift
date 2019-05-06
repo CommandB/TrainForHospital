@@ -12,22 +12,32 @@ import SwiftyJSON
 
 class EvaluationHistoryListController : UIViewController{
     
+    static var defaultNoticeName = NSNotification.Name(rawValue: "selectedEvaluationNotificationName")
+    
     @IBOutlet weak var evaluationCollection: UICollectionView!
     
     var jds = [JSON]()
+    var isHistory = true
+    var viewTitle = ""
     
     override func viewDidLoad() {
         
         evaluationCollection.delegate = self
         evaluationCollection.dataSource = self
         
-        self.evaluationCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
-        self.evaluationCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
+        if isHistory{
+            self.evaluationCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
+            self.evaluationCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
+        }else{
+            (view.viewWithTag(22222) as! UILabel).text = viewTitle
+        }
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.evaluationCollection.mj_header.beginRefreshing()
+        if isHistory{
+            self.evaluationCollection.mj_header.beginRefreshing()
+        }
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -49,7 +59,7 @@ class EvaluationHistoryListController : UIViewController{
             case .success(let responseJson):
                 
                 let json = JSON(responseJson)
-                print(json)
+                
                 if json["code"].stringValue == "1"{
                     
                     self.jds = json["data"].arrayValue
@@ -91,8 +101,18 @@ extension EvaluationHistoryListController : UICollectionViewDelegate , UICollect
         let data = jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         (cell.viewWithTag(10001) as! UILabel).text = data["objectname"].stringValue
-        (cell.viewWithTag(10002) as! UILabel).text = data["value"].stringValue + "分"
-        (cell.viewWithTag(10003) as! UILabel).text = data["evaluationvalue"].stringValue + "分"
+        if isHistory{
+            (cell.viewWithTag(10002) as! UILabel).text = data["value"].stringValue + "分"
+        }else{
+            (cell.viewWithTag(10002) as! UILabel).text = ""
+        }
+        
+        if isHistory{
+            (cell.viewWithTag(10003) as! UILabel).text = data["evaluationvalue"].stringValue + "分"
+        }else{
+            (cell.viewWithTag(10003) as! UILabel).text = ""
+        }
+        
         (cell.viewWithTag(20001) as! UILabel).text = data["evaluatename"].stringValue
         (cell.viewWithTag(30001) as! UILabel).text = data["evaluatetime"].stringValue
         
@@ -100,10 +120,15 @@ extension EvaluationHistoryListController : UICollectionViewDelegate , UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if isHistory{
+            let vc = getViewToStoryboard("evaluationHistoryDetailView") as! EvaluationHistoryDetailController
+            vc.headData = jds[indexPath.item]
+            present(vc, animated: true, completion: nil)
+        }else{
+            NotificationCenter.default.post(name: EvaluationHistoryListController.defaultNoticeName, object: nil, userInfo: ["index":indexPath.item])
+            dismiss(animated: true, completion: nil)
+        }
         
-        let vc = getViewToStoryboard("evaluationHistoryDetailView") as! EvaluationHistoryDetailController
-        vc.headData = jds[indexPath.item]
-        present(vc, animated: true, completion: nil)
         
     }
     
