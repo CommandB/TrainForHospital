@@ -34,7 +34,7 @@ class FeaturesController : UIViewController{
         btn.set(image: nil, title: "调查问卷", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(20003) as! UIButton
-        btn.set(image: nil, title: "请假审批", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.set(image: nil, title: "考题练习", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(20004) as! UIButton
         btn.set(image: nil, title: "教学拍照", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
@@ -74,8 +74,9 @@ class FeaturesController : UIViewController{
             myPresentView(self, viewName: "surveyListView")
             //myAlert(self, message: "暂未开放!")
             break
-        case 20003:
-            myAlert(self, message: "暂未开放!")
+        case 20003: //考题练习
+            myPresentView(self, viewName: "exerciseCenterView")
+//            myAlert(self, message: "暂未开放!")
             break
         case 20004:
             myAlert(self, message: "暂未开放!")

@@ -352,6 +352,7 @@
 		0AC3C4562190304C006C0DAB /* release-360评价.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AC3C4542190304B006C0DAB /* release-360评价.png */; };
 		0AC3C45821903600006C0DAB /* 评价-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AC3C457219035FE006C0DAB /* 评价-icon.png */; };
 		0AC49F621F347D290028A65C /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC49F611F347D290028A65C /* UIImage.swift */; };
+		0AC7C41A22829FD0004EA009 /* HistorySearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC7C41922829FD0004EA009 /* HistorySearchController.swift */; };
 		0AD004AE213D27D1008D3062 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD004AD213D27D1008D3062 /* WebViewController.swift */; };
 		0AD1454421797B47004670A9 /* 箭头3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AD1453421797B3C004670A9 /* 箭头3.png */; };
 		0AD1454521797B47004670A9 /* 星形1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AD1453E21797B3D004670A9 /* 星形1.png */; };
@@ -1247,6 +1248,7 @@
 		0AC3C4542190304B006C0DAB /* release-360评价.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release-360评价.png"; sourceTree = "<group>"; };
 		0AC3C457219035FE006C0DAB /* 评价-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "评价-icon.png"; sourceTree = "<group>"; };
 		0AC49F611F347D290028A65C /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		0AC7C41922829FD0004EA009 /* HistorySearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchController.swift; sourceTree = "<group>"; };
 		0AD004AD213D27D1008D3062 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0AD1453421797B3C004670A9 /* 箭头3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "箭头3.png"; sourceTree = "<group>"; };
 		0AD1453E21797B3D004670A9 /* 星形1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "星形1.png"; sourceTree = "<group>"; };
@@ -2660,6 +2662,7 @@
 			children = (
 				0A185B30225B2FF90078A603 /* StudentHomeController.swift */,
 				0AAFD70222549F76002C9729 /* ExerciseCenterController.swift */,
+				0AC7C41922829FD0004EA009 /* HistorySearchController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3655,6 +3658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4FF1A931F94DF7D009C6685 /* UIImageView+WebCache.m in Sources */,
+				0AC7C41A22829FD0004EA009 /* HistorySearchController.swift in Sources */,
 				0A667BC92084B14800594BE7 /* LiveController.swift in Sources */,
 				B4FF1A951F94DF7D009C6685 /* UIView+WebCacheOperation.m in Sources */,
 				0AC49F621F347D290028A65C /* UIImage.swift in Sources */,

@@ -12,26 +12,37 @@ import SwiftyJSON
 //    exerciseCenterView
 class ExerciseCenterController : HBaseViewController{
     
-//    @IBOutlet weak var deptCollection: UICollectionView!
+    let hisSearchCacheKey = "exercisehisSearchCacheKey"
     
     @IBOutlet weak var deptCollection: UITableView!
     
     @IBOutlet weak var questionTypeCollection: UICollectionView!
     
+    @IBOutlet weak var hisSearchCollection: UICollectionView!
+    
     @IBOutlet weak var scroll: UIScrollView!
     
+    @IBOutlet weak var view_search: UIView!
+    
+    @IBOutlet weak var txt_search: UITextField!
+    
     var questionTypeView = QuestionTypeView()
+    var hisSearchView = HistorySearchController()
     
     var jds = [JSON]()
-    
+    var hisTextArray = [JSON]()
     ///label
     let lineHeight = 15
     
     override func viewDidLoad() {
         
+        //搜索框
+        txt_search.delegate = self
+        
         deptCollection.delegate = self
         deptCollection.dataSource = self
         deptCollection.estimatedRowHeight = 55
+        deptCollection.separatorStyle = .none
         
         //deptCollection.rowHeight = UITableView.auto
         
@@ -40,14 +51,20 @@ class ExerciseCenterController : HBaseViewController{
         questionTypeCollection.dataSource = questionTypeView
         
         questionTypeCollection.setX(x: deptCollection.W)
-        //搜索框
-        (view.viewWithTag(10001) as! UITextField).delegate = self
+        
+        let cache = UserDefaults.standard.string(forKey: hisSearchCacheKey)
+        if cache != nil {
+            hisTextArray = JSON(parseJSON: cache!).arrayValue
+        }
+        hisSearchCollection.delegate = hisSearchView
+        hisSearchCollection.dataSource = hisSearchView
+        hisSearchView.jds = hisTextArray.reversed()
+        hisSearchView.clorsureImpl = selectedHisText(_:_:_:)
+        hisSearchCollection.reloadData()
         
 //        self.deptCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.deptCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
-        
-        
-        textFieldShouldReturn(view.viewWithTag(10001) as! UITextField)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,19 +82,38 @@ class ExerciseCenterController : HBaseViewController{
         
     }
     
+    @IBAction func btn_hotSearch_inside(_ sender: UIButton) {
+        
+        txt_search.text = sender.titleLabel?.text
+        let _ = textFieldShouldReturn(txt_search)
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        view_search.isHidden = false
+        return true
+    }
+    
+    override func textFieldDidEndEditing(_ textField: UITextField) {
+        view_search.isHidden = true
+    }
+    
     override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let _ = super.textFieldShouldReturn(textField)
+        
+        deptCollection.separatorStyle = .singleLine
         
         MBProgressHUD.showAdded(to: view, animated: true)
         self.scroll.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         
         self.deptCollection.reloadData()
-        let searchStr = textField.text
+        let searchStr = textField.text ?? ""
         
         //查询题目类目
         let url = SERVER_PORT + "rest/app/getCloudQuestionDept.do"
-        myPostRequest(url, ["searchvalue":searchStr ?? ""],  method: .post).responseString(completionHandler: {resp in
-            
+        myPostRequest(url, ["searchvalue":searchStr],  method: .post).responseString(completionHandler: {resp in
+            if searchStr.count > 0{
+                self.updateHistorySearchCache(text: searchStr)
+            }
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             self.deptCollection.mj_footer.endRefreshingWithNoMoreData()
             
@@ -116,6 +152,38 @@ class ExerciseCenterController : HBaseViewController{
         getListData()
     }
     
+    
+    //更新历史搜索缓存
+    func updateHistorySearchCache(text : String){
+        
+        var index = 0
+        var removeIndex = -1
+        for item in hisTextArray{
+            if item["text"].stringValue == text{
+                removeIndex = index
+                break
+            }
+            index += 1
+        }
+        if removeIndex != -1{
+            hisTextArray.remove(at: removeIndex)
+        }
+        hisTextArray.append(JSON(["text":text]))
+        
+        //最多缓存7个历史搜索记录
+        if hisTextArray.count > 7 {
+            hisTextArray.remove(at: 0)
+        }
+        UserDefaults.standard.set(hisTextArray.description, forKey: hisSearchCacheKey)
+        hisSearchView.jds = JSON(hisTextArray).arrayValue.reversed()
+        hisSearchCollection.reloadData()
+    }
+    
+    func selectedHisText(_ ds:[JSON], _ collectionView: UICollectionView, _ indexPath: IndexPath) -> Void{
+        txt_search.text = ds[indexPath.item]["text"].stringValue
+        let _ = textFieldShouldReturn(txt_search)
+    }
+    
 }
 
 extension ExerciseCenterController : UITableViewDelegate , UITableViewDataSource{
@@ -147,7 +215,7 @@ extension ExerciseCenterController : UITableViewDelegate , UITableViewDataSource
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        MBProgressHUD.showAdded(to: view, animated: true)
         let data = jds[indexPath.item]
         let url = SERVER_PORT + "rest/app/getQuestionCountByType.do"
         myPostRequest(url, ["questionsdeptid":data["questionsdeptid"]],  method: .post).responseString(completionHandler: {resp in
@@ -265,3 +333,5 @@ class QuestionTypeView: UIViewController, UICollectionViewDelegate , UICollectio
     }
     
 }
+
+

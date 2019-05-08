@@ -467,6 +467,7 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                     UserDefaults.User.set(value: json["data"]["subjectname"].stringValue, forKey: .majorName)
                     UserDefaults.User.set(value: json["data"]["highestdegree"].stringValue, forKey: .highestDegree)
                     UserDefaults.User.set(value: json["data"]["phoneno"].stringValue, forKey: .phoneNo)
+                    UserDefaults.User.set(value: json["data"]["sex"].stringValue, forKey: .sex)
                     
                 }else{
                     myAlert(self, message: "请求我的信息失败!")

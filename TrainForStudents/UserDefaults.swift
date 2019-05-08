@@ -41,6 +41,7 @@ extension UserDefaults{
             case majorName
             case highestDegree
             case phoneNo
+            case sex
         }
     }
     

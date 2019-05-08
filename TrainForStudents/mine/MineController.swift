@@ -23,7 +23,7 @@ class MineController : HBaseViewController{
         
         
         
-        jds = JSON([["icon":"双箭头-右蓝","title":"切换至老师端","link":"hTabBarView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
+        jds = JSON([["icon":"我的-选择","title":"修改个人资料","link":"changePersonInfoView"],["icon":"双箭头-右蓝","title":"切换至老师端","link":"hTabBarView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
         
         
         //        self.messageCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))

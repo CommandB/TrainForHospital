@@ -11,6 +11,42 @@ import SwiftyJSON
 
 class ChangePersonInfoController: MyBaseUIViewController   {
     
+    var sex = 0
+    var selectedSexBtn = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        sex = Int(UserDefaults.User.string(forKey: .sex) ?? "0")!
+        
+        let tag = 20001 + sex
+        (view.viewWithTag(tag) as! UIButton).setTitle("🔘\(sex == 1 ? "男" : "女")", for: .normal)
+        var textField = self.view.viewWithTag(30001) as! UITextField
+        textField.clearButtonMode = .always
+        textField.keyboardType = .numberPad
+        textField.text = UserDefaults.User.string(forKey: .phoneNo)
+        
+        textField = self.view.viewWithTag(40001) as! UITextField
+        textField.clearButtonMode = .always
+        textField.text = UserDefaults.User.string(forKey: .highestDegree)
+        
+    }
+    
+    
+    @IBAction func btn_sex(_ sender: UIButton) {
+        
+        (view.viewWithTag(20001) as! UIButton).setTitle("⚪️女", for: .normal)
+        (view.viewWithTag(20002) as! UIButton).setTitle("⚪️男", for: .normal)
+        
+        if sender.tag == 20002{
+            sex = 1
+            (view.viewWithTag(20002) as! UIButton).setTitle("🔘男", for: .normal)
+        }else{
+            sex = 0
+            (view.viewWithTag(20001) as! UIButton).setTitle("🔘女", for: .normal)
+        }
+        
+    }
     
     //返回
     @IBAction func btn_back(_ sender: UIButton) {
@@ -21,12 +57,6 @@ class ChangePersonInfoController: MyBaseUIViewController   {
     @IBAction func btn_submit(_ sender: UIButton) {
         
         let url = SERVER_PORT + "rest/person/UpdatePerson.do"
-        
-        let personname = self.view.viewWithTag(20001) as! UITextField
-        if personname.text == ""{
-            myAlert(self, message: "请输入姓名!")
-            return
-        }
         
         let phoneno = self.view.viewWithTag(30001) as! UITextField
         if phoneno.text == ""{
@@ -40,7 +70,7 @@ class ChangePersonInfoController: MyBaseUIViewController   {
             return
         }
         
-        myPostRequest(url,["personid":UserDefaults.User.string(forKey: .personId),"jobnum":UserDefaults.User.string(forKey: .jobNum),"personname":personname.text,"phoneno":phoneno.text,"highestdegree":highestdegree.text]).responseJSON(completionHandler: { resp in
+        myPostRequest(url,["sex":sex, "personid":UserDefaults.User.string(forKey: .personId),"jobnum":UserDefaults.User.string(forKey: .jobNum),"personname":UserDefaults.User.string(forKey: .personName),"phoneno":phoneno.text,"highestdegree":highestdegree.text]).responseJSON(completionHandler: { resp in
             
             switch  resp.result{
             case .success(let result):
@@ -49,11 +79,11 @@ class ChangePersonInfoController: MyBaseUIViewController   {
                 switch  resultJson["code"].stringValue{
                 case "1":
                     myAlert(self, message: "修改成功!", handler: {action in
-                        var root = self.presentingViewController
-                        while let parent = root?.presentingViewController{
-                            root = parent
-                        }
-                        root?.dismiss(animated: true, completion: nil)
+                        //更新缓存
+                        UserDefaults.User.set(value: highestdegree.text, forKey: .highestDegree)
+                        UserDefaults.User.set(value: phoneno.text, forKey: .phoneNo)
+                        UserDefaults.User.set(value: self.sex, forKey: .sex)
+                        self.dismiss(animated: true, completion: nil)
                     })
                 default:
                     myAlert(self, message: resultJson["msg"].stringValue)
@@ -66,26 +96,6 @@ class ChangePersonInfoController: MyBaseUIViewController   {
             }
             
         })
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        var textField = self.view.viewWithTag(20001) as! UITextField
-        textField.clearButtonMode = .always
-        textField.text = UserDefaults.User.string(forKey: .personName)
-        
-        textField = self.view.viewWithTag(30001) as! UITextField
-        textField.clearButtonMode = .always
-        textField.keyboardType = .numberPad
-        textField.text = UserDefaults.User.string(forKey: .phoneNo)
-        
-        textField = self.view.viewWithTag(40001) as! UITextField
-        textField.clearButtonMode = .always
-        textField.text = UserDefaults.User.string(forKey: .highestDegree)
-        
-        
         
     }
     
