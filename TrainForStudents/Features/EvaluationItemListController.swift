@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class EvaluationItemListController : UIViewController{
+class EvaluationItemListController : HBaseViewController{
     
     @IBOutlet weak var cardCollection: UICollectionView!
     
@@ -45,6 +45,9 @@ class EvaluationItemListController : UIViewController{
     var buttonGroup = [UIButton]()
     
     override func viewDidLoad() {
+        
+        MyNotificationUtil.addKeyBoardWillChangeNotification(self)
+        
         buttonGroup = [btn_left , btn_right]
         btn_left.restorationIdentifier = "btn_left"
         btn_right.restorationIdentifier = "btn_right"
@@ -89,14 +92,17 @@ class EvaluationItemListController : UIViewController{
             }
             index += 1
         }
-        
+        MBProgressHUD.showAdded(to: view, animated: true)
         let data = jds[pageNumber]
         let url = SERVER_PORT+"rest/evaluation/commitEvaluationResult.do"
-        myPostRequest(url,JSON(["items":detailView.jsonDataSource , "taskid":data["taskid"].stringValue, "evaluateid": data["buid"].stringValue]).dictionaryObject).responseJSON(completionHandler: {resp in
+        myPostRequest(url,JSON(["items":detailView.jsonDataSource , "taskid":data["taskid"].stringValue, "evaluateid": data["buid"].stringValue,"wordlist":detailView.wordList]).dictionaryObject).responseJSON(completionHandler: {resp in
+            
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            
             switch resp.result{
             case .success(let responseJson):
                 
-                let json=JSON(responseJson)
+                let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
                     myAlert(self, message: "评价完成!" , handler: {action in
                         //self.dismiss(animated: true, completion: nil)
@@ -244,6 +250,7 @@ class EvaluationItemListController : UIViewController{
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
                     self.detailView.jsonDataSource = json["data"]
+                    self.detailView.wordList = json["wordslist"].arrayValue
                     for item in json["data"].arrayValue{
                         let index = self.detailView.jsonDataSource.arrayValue.index(of: item)
                         self.detailView.jsonDataSource[index!]["get_value"].stringValue = "0"
@@ -422,6 +429,7 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
     
     var parentView : EvaluationItemListController? = nil
     var jsonDataSource = JSON([:])
+    var wordList = [JSON]()
     var isReadonly = false
     
     //设置collectionView的分区个数
@@ -432,7 +440,7 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
     //设置每个分区元素的个数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return jsonDataSource.count * 2
+        return jsonDataSource.count + wordList.count
         
     }
     
@@ -441,27 +449,19 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
     {
         
         var cellName = "c1"
-        var index = 0
-        
-        if indexPath.item == 0{
-            index = 0
-            cellName = "c1"
-        }else if indexPath.item % 2 == 0{
-            index = indexPath.item / 2
-            cellName = "c1"
-        }else{
-            index = (indexPath.item - 1) / 2
+        var data = jsonDataSource[indexPath.item]
+        if indexPath.item >= jsonDataSource.count{
             cellName = "c2"
+            data = wordList[indexPath.item - jsonDataSource.count]
         }
+
         
-        let data = jsonDataSource[index]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath)
         
         if cellName == "c1"{
-            let lbl = cell.viewWithTag(10001) as? UILabel
-            lbl?.text = data["itemtitle"].stringValue
-        }else{
-            let slider = cell.viewWithTag(10001) as! UISlider
+            var lbl = cell.viewWithTag(10001) as! UILabel
+            lbl.text = data["itemtitle"].stringValue
+            let slider = cell.viewWithTag(10002) as! UISlider
             let selectedNumber = data["get_value"].int
             var lightNumber = 0
             if selectedNumber != nil{
@@ -473,16 +473,25 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
             
             let maxStarNumber = data["numbervalue"].intValue * data["starsvalue"].intValue
             
-            slider.viewParam = ["index":index ,"maxValue" : maxStarNumber ,"indexPath":indexPath]
+            slider.viewParam = ["maxValue" : maxStarNumber ,"indexPath":indexPath]
             slider.minimumValue = 0
             slider.maximumValue = Float(maxStarNumber)
             slider.value = Float(lightNumber)
             slider.addTarget(self, action: #selector(setScore), for: .valueChanged)
             
             //展示分数
-            let lbl = cell.viewWithTag(10002) as! UILabel
+            lbl = cell.viewWithTag(10003) as! UILabel
             lbl.text = "\(lightNumber)/\(maxStarNumber)分"
             
+        }else if cellName == "c2"{
+            let lbl = cell.viewWithTag(10001) as! UILabel
+            lbl.text = data["wordtitle"].stringValue
+            let txt = cell.viewWithTag(10002) as! UITextField
+            txt.text = data["wordValue"].stringValue
+            txt.setBorderBottom(size: 1, color: .groupTableViewBackground)
+            txt.addTarget(self, action: #selector(txt_change(sender:)), for: .editingChanged)
+            txt.viewParam = ["index":indexPath.item - jsonDataSource.count]
+            txt.delegate = parentView
         }
         
         return cell
@@ -491,7 +500,7 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
     
     //cell点击
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        parentView?.hiddenKeyBoard()
         print(indexPath.item)
         
     }
@@ -499,14 +508,20 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
     //设置cell的大小
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: UIScreen.width, height: 45)
+        return CGSize(width: UIScreen.width, height: 80)
         
+    }
+    
+    
+    //scroll滚动时 隐藏keyboard
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        parentView?.hiddenKeyBoard()
     }
     
     @objc func setScore(sender : UISlider){
         
         let indexPath = sender.viewParam!["indexPath"] as! IndexPath
-        let index = sender.viewParam!["index"] as! Int
+        let index = indexPath.item
         //四舍五入
         let score = lroundf(sender.value)
         let numberValue = jsonDataSource[index]["numbervalue"].intValue
@@ -520,5 +535,11 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         }
         (parentView?.view.viewWithTag(88888) as! UILabel).text = "总得分：\(total)分"
         
+    }
+    
+    @objc func txt_change(sender : UITextField){
+        let index = sender.viewParam!["index"] as! Int
+        wordList[index]["wordValue"] = JSON(sender.text)
+        print(wordList[index])
     }
 }

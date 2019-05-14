@@ -50,7 +50,6 @@ class OfficePersonListController : HBaseViewController{
         myPostRequest(url, ["officeid":officeId], method: .post).responseJSON(completionHandler: { resp in
             
             self.personCollection.mj_header.endRefreshing()
-            self.personCollection.mj_footer.endRefreshing()
             self.personCollection.mj_footer.endRefreshingWithNoMoreData()
             
             switch resp.result {

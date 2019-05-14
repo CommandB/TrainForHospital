@@ -27,13 +27,10 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
     
     let pickerViewFirstStr = "请选择"
     
+    var btn_closePickerView = UIButton()
+    
     @IBAction func btn_login_inside(_ sender: UIButton) {
         login()
-        
-        
-        
-        
-        
         
         //富文本设置
         var attributeString = NSMutableAttributedString(string:"welcome to hangge.com")
@@ -68,9 +65,9 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
         
 //        setup(content: "<div style='font-size:20px;color:red;background-color:green;'>哈哈哈哈哈哈哦哦哦哦<img style='width:30px !important;height:30px; margin-left:20px;padding-right:50px;' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554102155517&di=3408e01d4ed786bf7495b1c6e4e1a68f&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201408%2F18%2F20140818125020_GLPZS.jpeg'><input type='text' value='好好好' style='color:#c00'>哒哒哒哒哒哒哒哒哒哒哒哒</div><img src='https://avatar.csdn.net/9/6/F/3_flg1554112450.jpg'>")
         
+        
+        
     }
-    
-    
     
     @IBAction func btn_hospital_inside(_ sender: UITextField) {
         
@@ -142,7 +139,11 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
         checkNetworkEnable()
         
         loadHospital()
+        
+        myPickerView.addCloseButton(parentView: self.view)
+        
     }
+    
     
     func checkNetworkEnable() {
         let cellularData = CTCellularData()
@@ -319,7 +320,7 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = PORTAL_PORT + "rest/loginCheck.do"
 //        let url = "http://192.168.1.106:8081/doctor_portal/rest/loginCheck.do"
-        myPostRequest(url,["loginid":txt_loginId.text , "password":txt_password.text?.sha1() ,"logintype":"iphone"]).responseJSON(completionHandler: {resp in
+        myPostRequest(url,["loginid":txt_loginId.text , "password":txt_password.text?.sha1() ,"logintype":"iphone", "mac":uuid]).responseJSON(completionHandler: {resp in
             
             switch resp.result{
             case .success(let responseJson):
@@ -496,3 +497,9 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
     }
     
 }
+
+
+
+
+
+

@@ -138,7 +138,7 @@ extension OfficeTeacherController : UICollectionViewDelegate, UICollectionViewDa
             btn.backgroundColor = UIColor.groupTableViewBackground
         }
         let lbl = cell.viewWithTag(10002) as! UILabel
-        lbl.text = "\(data["personname"])(\(data["jobnum"]))"
+        lbl.text = "\(data["personname"])"
         
         let studentList = data["studentlist"].arrayValue
         var index = 0

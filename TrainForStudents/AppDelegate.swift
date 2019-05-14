@@ -295,6 +295,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         UserDefaults.AppConfig.set(value: data["360评价是否使用"].description, forKey:.panoramicEvaluationAvailable)
         UserDefaults.AppConfig.set(value: data["出科理论是否使用"].description, forKey:.subjectTheoryAvailable)
         UserDefaults.AppConfig.set(value: data["出科技能是否使用"].description, forKey:.subjectSkillAvailable)
+        UserDefaults.AppConfig.set(value: data["标签清单"].description, forKey:.tagList)
+        
     }
     
 

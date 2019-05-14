@@ -298,7 +298,7 @@ class QuestionTypeView: UIViewController, UICollectionViewDelegate , UICollectio
     }
     
     @objc func startExercise(sender : UIButton){
-        
+        MBProgressHUD.showAdded(to: view, animated: true)
         //查询练习题
         let url = SERVER_PORT + "rest/app/getPracticeQuestionByDept.do"
         myPostRequest(url, sender.viewParam,  method: .post).responseString(completionHandler: {resp in

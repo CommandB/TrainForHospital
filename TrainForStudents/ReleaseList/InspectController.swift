@@ -235,6 +235,7 @@ class InspectController : HBaseViewController{
     @IBAction func btn_sure_inside(_ sender: UIButton) {
         //dismiss(animated: true, completion: nil)
         
+        submitParam["sign"] = 0
         submitParam["isfreein"] = 0
         submitParam["issend"] = 0
         submitParam["videiotape"] = 0
@@ -283,7 +284,7 @@ class InspectController : HBaseViewController{
         }
         submitParam["studentlist"] = stuList
         
-        print(submitParam)
+//        print(submitParam)
         
         //view.current
         uploadImage(url, images: nil, parameters: submitParam, completionHandler: {resp in

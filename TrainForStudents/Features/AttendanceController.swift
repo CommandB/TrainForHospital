@@ -12,31 +12,48 @@ import SwiftyJSON
 
 class AttendanceController : HBaseViewController{
     
-    @IBOutlet weak var dateCollection: UICollectionView!
+    @IBOutlet weak var calendarCollection: UICollectionView!
+    
+    @IBOutlet weak var personCollection: UICollectionView!
     
     @IBOutlet weak var tagCollection: UICollectionView!
     
+    var personTagView = AttendancePersonTagCollectionView()
     var tagView = AttendanceTagCollectionView()
+    var calendarView = AttendanceCalendarCollectinView()
     
-    let sectionHeaderId = "CollectionReusableViewHeader"
+    var jds = [JSON]()
+    
     var monthList = [String]()
-    var dayDic = [String:[Date]]()
-    var jds = [Date]()
-    var selectedCellIndex = IndexPath()
+//    var dayDic = [String:[Date]]()
     
-    var tagListView = UIView()
+    var tagListBackgroundView = UIView()
+    //标签collection距离屏幕顶部的距离
+    var tagColletionToTopDistance = 175
+    //已选中的日期
+    var selectedDate = DateUtil.dateToString(Date())
+    //当前设置的科室
+    var officeId = "0"
+    //选中的人
+    var selectedPersonId = "0"
     
     override func viewDidLoad() {
         
-        dateCollection.delegate = self
-        dateCollection.dataSource = self
+        officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)!
         
-        dateCollection.register(CollectionReusableViewHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: sectionHeaderId)
+        calendarView.parentView = self
+        calendarCollection.delegate = calendarView
+        calendarCollection.dataSource = calendarView
         
-        tagCollection.delegate = tagView
-        tagCollection.dataSource = tagView
-        tagView.jds = JSON([["text":"病假"],["text":"名字很长的假"],["text":"事假"],["text":"早上加班"],["text":"大夜班"],["text":"旷工"],["text":"例假"],["text":"迟到"],["text":"名字比很长更长的假"]]).arrayValue
-        tagCollection.reloadData()
+        calendarCollection.register(CollectionReusableViewHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: calendarView.sectionHeaderId)
+        
+        
+        personCollection.delegate = self
+        personCollection.dataSource = self
+        
+//        tagView.jds = JSON([["text":"病假"],["text":"名字很长的假"],["text":"事假"],["text":"早上加班"],["text":"大夜班"],["text":"旷工"],["text":"例假"],["text":"迟到"],["text":"名字比很长更长的假"]]).arrayValue
+//        tagCollection.reloadData()
+        
         //显示头部星期文本
         let weekText = ["日","一","二","三","四","五","六"]
         for i in 0..<weekText.count{
@@ -54,66 +71,294 @@ class AttendanceController : HBaseViewController{
         let currentDate = Date()
         
         //初始化前后六个月的数据
-        monthList =  getAfterTwoMonths(date: currentDate)
+        monthList =  calendarView.getAfterTwoMonths(date: currentDate)
         
         //生成数据
-        generationData(mList: monthList)
+        calendarView.generationData(mList: monthList)
         
-//        dateCollection.reloadData()
-        //dateCollection.setContentOffset(CGPoint(x: 0, y: dateCollection.W * 2 ), animated: true)
+        calendarCollection.setContentOffset(CGPoint(x: 0, y: calendarCollection.W * 2.5 ), animated: true)
         
-        let mList = getBeforeTwoMonths(date: currentDate.prevMonth)
-        generationData(mList: mList)
+        //添加前2个月的数据
+        let mList = calendarView.getBeforeTwoMonths(date: currentDate.prevMonth)
+        calendarView.generationData(mList: mList)
         monthList = mList + monthList
         
-        let btn = UIButton(frame: CGRect(x: 10, y: 100, width: 100, height: 30))
-        btn.setTitle("关闭", for: .normal)
+        calendarView.monthList = monthList
+//        calendarView.dayDic = dayDic
+        
+        //加载可以选择的tag
+        tagView.parentView = self
+        tagView.jds = UserDefaults.AppConfig.json(forKey: .tagList).arrayValue
+        tagCollection.delegate = tagView
+        tagCollection.dataSource = tagView
+        tagCollection.reloadData()
+        tagCollection.setY(y: UIScreen.height)
+        if tagView.jds.count < 6{
+            tagCollection.setHight(height: CGFloat(tagView.jds.count * 40))
+        }
+        
+        let btn = UIButton(frame: CGRect(x: UIScreen.width - 30 - 20, y: 100, width: 30, height: 30))
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
+        btn.setCornerRadius(radius: 15)
+        btn.setTitle("x", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.addTarget(self, action: #selector(btn_dismissTagListView(sender:)), for: .touchUpInside)
-        tagListView.frame = view.frame
-        tagListView.backgroundColor = .groupTableViewBackground
-        tagListView.setY(y: UIScreen.height)
-        tagListView.alpha = 0
-        tagListView.addSubview(btn)
-        
-        view.addSubview(tagListView)
-        
+//        btn.setCornerRadius(radius: 4)
+        btn.setBorder(width: 1, color: .lightGray)
+        tagListBackgroundView.frame = view.frame
+        tagListBackgroundView.backgroundColor = .groupTableViewBackground
+//        tagListBackgroundView.setY(y: UIScreen.height)
+        tagListBackgroundView.alpha = 0
+        tagListBackgroundView.addSubview(btn)
+
+        view.addSubview(tagListBackgroundView)
+        view.bringSubview(toFront: tagCollection)
     }
     
     @objc func btn_dismissTagListView(sender : UIButton){
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.tagListView.alpha = 0
-            self.tagListView.setY(y: UIScreen.height)
+        let opt : UIView.AnimationOptions = .curveEaseOut
+        //隐藏bg
+        UIView.animate(withDuration: 0.3, delay:0, options:opt, animations: {
+            self.tagListBackgroundView.alpha = 0
+//            self.tagListBackgroundView.setY(y: UIScreen.height)
         }) { (true) in
             
+        }
+        
+        //隐藏tagCollection
+        UIView.animate(withDuration: 0.3, delay:0, options:opt, animations: {
+            self.tagCollection.alpha = 0
+            self.tagCollection.setY(y: UIScreen.height)
+        }) { (true) in
             
         }
         
     }
     
+    @objc func showAddTagView(sender: UIButton){
+        
+        if let param = sender.viewParam{
+            selectedPersonId = param["personId"] as! String
+        }
+        
+        let opt : UIView.AnimationOptions = .curveEaseIn
+        UIView.animate(withDuration: 0.2, delay:0, options:opt, animations: {
+            self.tagListBackgroundView.alpha = 0.8
+//            self.tagListBackgroundView.setY(y: 0)
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.2, delay:0, options:opt, animations: {
+            self.tagCollection.alpha = 1
+            self.tagCollection.setY(y: 175)
+        }, completion: nil)
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        //self.messageCollection.mj_header.beginRefreshing()
+        getListData()
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
+    //
     func getListData(){
-//        self.messageCollection.mj_header.endRefreshing()
-//        self.messageCollection.mj_footer.endRefreshing()
-//        messageCollection.reloadData()
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
+        let url = SERVER_PORT+"rest/app/getPersonLabel.do"
+        myPostRequest(url,["signtime":selectedDate , "officeid":officeId]).responseJSON(completionHandler: {resp in
+            
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json = JSON(responseJson)
+//                print(json)
+                if json["code"].stringValue == "1"{
+                    self.jds = json["data"].arrayValue
+                    self.personCollection.reloadData()
+                }else{
+                    myAlert(self, message: "请求人员数据失败!")
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
+
     }
     
+    
     @objc func refresh() {
-        jds.removeAll()
-//        messageCollection.mj_footer.resetNoMoreData()
         getListData()
     }
     
     @objc func loadMore() {
         getListData()
     }
+    
+    
+    
+}
+
+//人员collection
+extension AttendanceController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return jds.count
+    }
+    
+    //渲染cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let data = jds[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+        let lbl = cell.viewWithTag(10001) as! UILabel
+        lbl.text = data["personname"].stringValue
+        
+        let personTagScroll = cell.viewWithTag(10002) as! UIScrollView
+        
+        //先清除所有子视图
+        for subview in personTagScroll.subviews{
+            subview.removeFromSuperview()
+        }
+        
+//        let separator = 5
+        var index = 0
+        var preView = UIView()
+        for label in data["labellist"].arrayValue{
+            
+            let btn = UIButton()
+            btn.setBorder(width: 1, color: .groupTableViewBackground)
+            btn.setCornerRadius(radius: 4)
+            btn.titleLabel?.font = .systemFont(ofSize: 14)
+            btn.titleLabel?.textAlignment = .center
+            btn.setY(y: 0)
+            btn.setHight(height: personTagScroll.H)
+            btn.setWidth(width: label["labelname"].stringValue.getWidth() + 15)
+            btn.tag = label["serialid"].intValue
+            if index == 0{
+                btn.setX(x: 0)
+            }else{
+                btn.moveToAfter(target: preView,space: 5)
+            }
+            btn.setTitleColor(.black, for: .normal)
+            btn.setTitle(label["labelname"].stringValue, for: .normal)
+            btn.addTarget(self, action: #selector(removeTag(sender:)), for: .touchUpInside)
+            personTagScroll.addSubview(btn)
+            preView = btn
+            index += 1
+        }
+        
+        personTagScroll.contentSize = CGSize(width: preView.X + preView.W + 10, height: preView.H)
+        
+        let btn_add = (cell.viewWithTag(10003) as! UIButton)
+        btn_add.addTarget(self, action: #selector(showAddTagView(sender:)), for: .touchUpInside)
+        btn_add.viewParam = ["personId":data["personid"].stringValue]
+        
+        return cell
+    }
+    
+    //点击cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.W, height: 45)
+    }
+    
+    @objc func removeTag(sender: UIButton){
+        
+        myConfirm(self, message: "确定删除此标签吗?", okTitle: "确定", okHandler: { action in
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            let url = SERVER_PORT+"rest/app/cancelPersonLabel.do"
+            myPostRequest(url,["serialid":sender.tag]).responseJSON(completionHandler: {resp in
+                
+//                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                
+                switch resp.result{
+                case .success(let responseJson):
+                    let json = JSON(responseJson)
+                    if json["code"].stringValue == "1"{
+                        self.getListData()
+                    }else{
+                        myAlert(self, message: "删除标签失败!")
+                    }
+                    
+                case .failure(let error):
+                    print(error)
+                }
+                
+            })
+        })
+        
+    }
+    
+}
+
+
+//人员列表里已分配的tagCollectin
+class AttendancePersonTagCollectionView :UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+    
+    var jds = [JSON]()
+    var selectedTagIndex = IndexPath()
+    var parentView : AttendanceController?
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("jds.count:\(jds.count)")
+        return jds.count
+    }
+    
+    //渲染cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let data = jds[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+        cell.setCornerRadius(radius: 4)
+        let lbl = cell.viewWithTag(10001) as! UILabel
+        lbl.text = data["labelname"].stringValue
+        
+        if selectedTagIndex == indexPath{
+            cell.setBorder(width: 2, color: .red)
+        }else{
+            cell.setBorder(width: 1, color: .groupTableViewBackground)
+        }
+        
+        return cell
+    }
+    
+    //点击cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedTagIndex = indexPath
+        collectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let data = jds[indexPath.item]
+        return CGSize(width: data["labelname"].stringValue.getWidth() + 15, height: 30)
+    }
+    
+}
+
+
+class AttendanceCalendarCollectinView : UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+    
+    let sectionHeaderId = "CollectionReusableViewHeader"
+    
+    var parentView : AttendanceController?
+    var monthList = [String]()
+    var dayDic = [String:[Date]]()
+    var selectedDate = DateUtil.dateToString(Date())
+    //选中的日期cell的IndexPath
+    var selectedCalendarCellIndex = IndexPath()
     
     ///获取当前传入时间的月份以及后2个月的时间
     func getAfterTwoMonths(date : Date) -> [String]{
@@ -151,28 +396,6 @@ class AttendanceController : HBaseViewController{
         }
     }
     
-}
-
-extension AttendanceController : UIScrollViewDelegate{
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print(scrollView.contentOffset)
-        //当用户滚动到最后一页时扩充数据源
-        let boundary = scrollView.contentSize.height - ((scrollView.contentSize.height / CGFloat(monthList.count)) * 2)
-        if scrollView.contentOffset.y >= boundary{
-            let date = DateUtil.formatString(monthList.last!, pattern: DateUtil.monthOfYearPattern)
-            let mList = getAfterTwoMonths(date: date.nextMonth)
-            generationData(mList: mList)
-            monthList += mList
-            dateCollection.reloadData()
-        }
-        //print(monthList)
-    }
-    
-}
-
-extension AttendanceController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return monthList.count
     }
@@ -189,14 +412,14 @@ extension AttendanceController : UICollectionViewDelegate , UICollectionViewData
 //        print("cell:\(indexPath) \t data:\(data)")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         let lbl = cell.viewWithTag(10001) as! UILabel
-        lbl.setCornerRadius(radius: lbl.W / 2)
+        lbl.setCornerRadius(radius: (cell.W - 8) / 2)
         if data.year == 1970{
             lbl.text = ""
         }else{
             lbl.text = data.day.description
         }
         
-        if indexPath == selectedCellIndex{
+        if indexPath == selectedCalendarCellIndex || selectedDate == DateUtil.dateToString(data){
             lbl.backgroundColor = UIColor.init(hex: "3186E9")
             lbl.textColor = .white
         }else{
@@ -213,13 +436,11 @@ extension AttendanceController : UICollectionViewDelegate , UICollectionViewData
     
     //点击cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedCellIndex = indexPath
-        collectionView.reloadData()
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.tagListView.alpha = 0.9
-            self.tagListView.setY(y: 0)
-        }, completion: nil)
+        selectedCalendarCellIndex = indexPath
+        selectedDate = DateUtil.dateToString(dayDic[monthList[indexPath.section]]![indexPath.item])
+        parentView?.selectedDate = selectedDate
+        parentView?.getListData()
+        parentView?.calendarCollection.reloadData()
         
     }
     
@@ -240,14 +461,30 @@ extension AttendanceController : UICollectionViewDelegate , UICollectionViewData
         if kind == UICollectionElementKindSectionHeader{
             let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: sectionHeaderId, for: indexPath) as! CollectionReusableViewHeader
             let key = monthList[indexPath.section]
-//            let days = dayDic[key]
-//            print("header:\(key)")
             reusableView.label.text = key
             reusableView.label.textAlignment = .center
             
             return reusableView
         }
         return UICollectionReusableView()
+    }
+    
+}
+
+extension AttendanceCalendarCollectinView : UIScrollViewDelegate{
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //        print(scrollView.contentOffset)
+        //当用户滚动到最后一页时扩充数据源
+        let boundary = scrollView.contentSize.height - ((scrollView.contentSize.height / CGFloat(monthList.count)) * 2)
+        if scrollView.contentOffset.y >= boundary{
+            let date = DateUtil.formatString(monthList.last!, pattern: DateUtil.monthOfYearPattern)
+            let mList = getAfterTwoMonths(date: date.nextMonth)
+            generationData(mList: mList)
+            monthList += mList
+            parentView?.calendarCollection.reloadData()
+        }
+        //print(monthList)
     }
     
 }
@@ -271,54 +508,11 @@ class CollectionReusableViewHeader: UICollectionReusableView {
 }
 
 
-
-
+//tagListCollectin
 class AttendanceTagCollectionView :UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     var jds = [JSON]()
-    var selectedTagIndex = IndexPath()
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return jds.count
-    }
-    
-    //渲染cell
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let data = jds[indexPath.item]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
-        cell.setCornerRadius(radius: 4)
-        let lbl = cell.viewWithTag(10001) as! UILabel
-        lbl.text = data["text"].stringValue
-        
-        if selectedTagIndex == indexPath{
-            cell.setBorder(width: 2, color: .red)
-        }else{
-            cell.setBorder(width: 1, color: .groupTableViewBackground)
-        }
-        
-        return cell
-    }
-    
-    //点击cell
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedTagIndex = indexPath
-        collectionView.reloadData()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let data = jds[indexPath.item]
-        return CGSize(width: data["text"].stringValue.getWidth() + 15, height: 30)
-    }
-
-}
-
-
-class AttendancePersonCollectionView :UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
-    
-    var jds = [JSON]()
+    var parentView : AttendanceController?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -331,22 +525,46 @@ class AttendancePersonCollectionView :UIViewController, UICollectionViewDelegate
         let data = jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         let lbl = cell.viewWithTag(10001) as! UILabel
-        lbl.text = data["text"].stringValue
-        
-        
+        lbl.text = data["name"].stringValue
+        lbl.setBorderBottom(size: 1, color: UIColor(hex: "3186E9"))
         return cell
     }
     
     //点击cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        selectedCellIndex = indexPath
-        collectionView.reloadData()
+//        collectionView.reloadData()
+        let data = jds[indexPath.item]
+        MBProgressHUD.showAdded(to: view, animated: true)
+        let url = SERVER_PORT+"rest/app/setPersonLabel.do"
+        myPostRequest(url,["labelid":data["labelid"].stringValue,"bepersonid":parentView?.selectedPersonId ,"signtime":parentView?.selectedDate]).responseJSON(completionHandler: {resp in
+            
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json = JSON(responseJson)
+//                print(json)
+                if json["code"].stringValue == "1"{
+                    self.parentView?.getListData()
+                    self.parentView?.btn_dismissTagListView(sender: UIButton())
+                }else{
+                    myAlert(self, message: "设置标签失败!")
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
+        
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
         
-        return CGSize(width: collectionView.W, height: 45)
+        return CGSize(width: collectionView.W, height: 40)
     }
     
 }

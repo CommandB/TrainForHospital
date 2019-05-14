@@ -159,3 +159,29 @@ extension UIView{
     }
     
 }
+
+
+
+extension UIView {
+    
+    // 360度旋转图片
+    func hAnimat_rotate360Degree(repeatCount : Float = 1 , duration : TimeInterval = 1) {
+        // 让其在z轴旋转
+        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        // 旋转角度
+        rotationAnimation.toValue = NSNumber(value: .pi * 2.0)
+        // 动画持续时间
+        rotationAnimation.duration = duration
+        // 旋转累加角度
+        rotationAnimation.isCumulative = true
+        // 旋转次数
+        rotationAnimation.repeatCount = repeatCount
+        layer.add(rotationAnimation, forKey: "rotationAnimation")
+    }
+    
+    // 停止所有动画
+    func stopAllAnimations() {
+        layer.removeAllAnimations()
+        
+    }
+}

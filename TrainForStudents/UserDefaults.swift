@@ -122,7 +122,8 @@ extension UserDefaults{
             case subjectTheoryAvailable
             //出科技能是否使用
             case subjectSkillAvailable
-            
+            //标签清单
+            case tagList
             
             
             
