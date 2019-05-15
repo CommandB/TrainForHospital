@@ -27,7 +27,7 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
     
     let pickerViewFirstStr = "请选择"
     
-    var btn_closePickerView = UIButton()
+//    var btn_closePickerView = UIButton()
     
     @IBAction func btn_login_inside(_ sender: UIButton) {
         login()

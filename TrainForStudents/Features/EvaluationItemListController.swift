@@ -483,6 +483,12 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
             lbl = cell.viewWithTag(10003) as! UILabel
             lbl.text = "\(lightNumber)/\(maxStarNumber)分"
             
+            if UserDefaults.AppConfig.string(forKey: .clientCode) == "ZEYY"{
+                let tuple = getTextForScore(lightNumber)
+                lbl.text = "\(lbl.text!)\n\(tuple.0)"
+                lbl.textColor = tuple.1
+            }
+            
         }else if cellName == "c2"{
             let lbl = cell.viewWithTag(10001) as! UILabel
             lbl.text = data["wordtitle"].stringValue
@@ -533,6 +539,7 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         for item in jsonDataSource{
             total += item.1["score"].intValue
         }
+        
         (parentView?.view.viewWithTag(88888) as! UILabel).text = "总得分：\(total)分"
         
     }
@@ -541,5 +548,24 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         let index = sender.viewParam!["index"] as! Int
         wordList[index]["wordValue"] = JSON(sender.text)
         print(wordList[index])
+    }
+    
+    func getTextForScore(_ score : Int) -> (String,UIColor){
+        
+        switch score {
+        case 0,1,2:
+            return ("不合格", UIColor(hex:"941100"))
+        case 3,4:
+            return ("需要改进", .red)
+        case 5,6:
+            return ("合格", .orange)
+        case 7,8:
+            return ("良好", UIColor(hex:"008F00"))
+        case 9,10:
+            return ("优秀", UIColor(hex:"008F00"))
+        default:
+            return ("", .black)
+        }
+        
     }
 }

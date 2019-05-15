@@ -61,9 +61,13 @@ class MyselfCollectionView : UIViewController,  UICollectionViewDelegate , UICol
             let btn = cell.viewWithTag(10010) as! UIButton
 //            btn.setImage(avatarImage, for: .normal)
             do{
-                if !json["photourl"].stringValue.isEmpty{
+                let photourl = json["photourl"].stringValue
+                if photourl.isEmpty{
 //                    try avatarImage = UIImage(data: Data.init(contentsOf: URL(string: json["photourl"].stringValue)!))!
-                    btn.sd_setBackgroundImage(with: URL(string: json["photourl"].stringValue)!, for: .normal)
+                    if photourl.contains("http"){
+                        btn.sd_setBackgroundImage(with: URL(string: photourl)!, for: .normal)
+                    }
+                    
                 }
             }catch{
             

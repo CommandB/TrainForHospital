@@ -37,7 +37,7 @@ class ExamInfoForStuController : HBaseViewController{
         vc.isTheoryExam = true
         vc.marking = paramData["marking"].intValue
         let url = SERVER_PORT + "rest/questions/queryExercisesQuestions.do"
-        myPostRequest(url,["exercisesid":vc.exerciseId]).responseJSON(completionHandler: { resp in
+        myPostRequest(url,["taskid":paramData["taskid"].stringValue, "exercisesid":vc.exerciseId]).responseJSON(completionHandler: { resp in
             
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             

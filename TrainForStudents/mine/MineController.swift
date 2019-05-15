@@ -23,11 +23,39 @@ class MineController : HBaseViewController{
         
         
         
-        jds = JSON([["icon":"我的-选择","title":"修改个人资料","link":"changePersonInfoView"],["icon":"双箭头-右蓝","title":"切换至老师端","link":"hTabBarView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
-        
+        jds = JSON([["icon":"我的-选择","title":"修改个人资料","link":"changePersonInfoView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
+
         
         //        self.messageCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         //        self.messageCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if !isOnlyStudent(){
+            jds.insert(JSON(["icon":"双箭头-右蓝","title":"切换至老师端","link":"hTabBarView"]), at: 1)
+        }
+        
+        let lbl_name = view.viewWithTag(10002) as! UILabel
+        lbl_name.text = UserDefaults.User.string(forKey: .personName)
+        if lbl_name.text == nil{
+            lbl_name.text = ""
+        }
+        
+        let jobNum = UserDefaults.User.string(forKey: .jobNum)
+        let majorName = UserDefaults.User.string(forKey: .majorName)
+        var lbl = view.viewWithTag(10003) as! UILabel
+        //工号的x轴随名字长度变化
+        lbl.setX(x: lbl_name.X + ((lbl_name.text?.getWidth())!) + (5))
+        if jobNum != nil{
+            lbl.text = "（工号：\(jobNum!)）"
+        }
+        
+        lbl = view.viewWithTag(20001) as! UILabel
+        if majorName != nil{
+            lbl.text = "科室：\(majorName!)"
+        }
         
     }
     
@@ -52,29 +80,6 @@ class MineController : HBaseViewController{
             }
             
         })
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        let lbl_name = view.viewWithTag(10002) as! UILabel
-        lbl_name.text = UserDefaults.User.string(forKey: .personName)
-        if lbl_name.text == nil{
-            lbl_name.text = ""
-        }
-        
-        let jobNum = UserDefaults.User.string(forKey: .jobNum)
-        let majorName = UserDefaults.User.string(forKey: .majorName)
-        var lbl = view.viewWithTag(10003) as! UILabel
-        //工号的x轴随名字长度变化
-        lbl.setX(x: lbl_name.X + ((lbl_name.text?.getWidth())!) + (5))
-        if jobNum != nil{
-            lbl.text = "（工号：\(jobNum!)）"
-        }
-        
-        lbl = view.viewWithTag(20001) as! UILabel
-        if majorName != nil{
-            lbl.text = "科室：\(majorName!)"
-        }
         
     }
     

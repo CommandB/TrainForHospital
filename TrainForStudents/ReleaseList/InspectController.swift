@@ -90,6 +90,7 @@ class InspectController : HBaseViewController{
         addrPicker.bringSubview(toFront: switchKeyBoardBtn)
         
         evPicker = hPickerImpl.getDefaultPickerView()
+        evPicker.addCloseButton(parentView: self.view)
         hPickerImpl.titleKey = "evaluationname"
         var teachingActivityEvaluationList = UserDefaults.AppConfig.json(forKey: .teachingActivityEvaluationList).arrayValue
         teachingActivityEvaluationList.insert(JSON(["evaluationname":"不需要评价"]), at: 0)
@@ -396,6 +397,7 @@ class InspectController : HBaseViewController{
     }
     
     func evClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+        print(row)
         if let t = selectedTextField{
             var key = "1"
             let data = ds[row]
