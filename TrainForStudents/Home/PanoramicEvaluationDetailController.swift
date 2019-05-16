@@ -160,10 +160,10 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
                 lbl.text = "已选择\(jds["data"]["secretarylist"].count)位科室秘书"
             case "t2s":
                 cellData = jds["data"]["teacherlist"].arrayValue
-                lbl.text = "已选择\(jds["data"]["nurselist"].count)位带教老师"
+                lbl.text = "已选择\(jds["data"]["nurselist"].count)位对我评价的带教老师"
             case "s2t":
                 cellData = jds["data"]["teacherlist"].arrayValue
-                lbl.text = "已选择\(jds["data"]["teacherlist"].count)位带教老师"
+                lbl.text = "已选择\(jds["data"]["teacherlist"].count)位我需要评价的带教老师"
                 btn.isHidden = true
             case "s2o":
                 cellData = JSON([["officeid":UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue) ,"personname":UserDefaults.standard.string(forKey: LoginInfo.officeName.rawValue)]]).arrayValue

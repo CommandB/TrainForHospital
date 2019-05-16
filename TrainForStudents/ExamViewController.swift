@@ -27,7 +27,7 @@ class ExamViewController : MyBaseUIViewController{
     ///存储已选择的答案
     var answerDic = [String:Dictionary<String, String>]()
     
-    let questionTypeTitle = "    %@【%@】 共%d道 每道%d分 共%d分"
+    let questionTypeTitle = "    %@【%@】 共%d道 每道%@分 共%@分"
     
     @IBOutlet weak var lbl_questionType: UILabel!
     
@@ -97,7 +97,7 @@ class ExamViewController : MyBaseUIViewController{
         currentType = exercises[typeIndex]
         
         //初始化题型标题
-        lbl_questionType.text = String(format: questionTypeTitle, arguments: [currentType["indexname"].stringValue,currentType["typename"].stringValue,currentType["count"].intValue,currentType["score"].intValue,currentType["count"].intValue * currentType["score"].intValue])
+        lbl_questionType.text = String(format: questionTypeTitle, arguments: [currentType["indexname"].stringValue,currentType["typename"].stringValue,currentType["count"].intValue,currentType["score"].stringValue,String(currentType["count"].doubleValue * currentType["score"].doubleValue)])
         promptSwap(currentType["typename"].stringValue)
         
         btn_complete.isHidden = true
@@ -563,11 +563,12 @@ class ExamViewController : MyBaseUIViewController{
         }
         
         //初始化题型标题
-        lbl_questionType.text = String(format: questionTypeTitle, arguments: [currentType["indexname"].stringValue,currentType["typename"].stringValue,currentType["count"].intValue,currentType["score"].intValue,currentType["count"].intValue * currentType["score"].intValue])
+        lbl_questionType.text = String(format: questionTypeTitle, arguments: [currentType["indexname"].stringValue,currentType["typename"].stringValue,currentType["count"].intValue,currentType["score"].stringValue,String(currentType["count"].doubleValue * currentType["score"].doubleValue)])
         promptSwap(currentType["typename"].stringValue)
         
         btn_prev.isEnabled = !isFirstQuestion()
         btn_next.isEnabled = !isLastQuestion()
+        let b = currentType["score"]
         
     }
     

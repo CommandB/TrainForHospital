@@ -87,8 +87,6 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
     
         do {
             
-            
-            
 //            let attrStr = try NSMutableAttributedString(data: data! as Data, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
             
 //            nsdocumentt

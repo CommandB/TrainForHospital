@@ -62,6 +62,10 @@ class InspectController : HBaseViewController{
     
     override func viewDidLoad() {
         
+        //初始化提交数据
+        submitParam["sign"] = 0
+        submitParam["officeid"] = UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)
+        
         view.bringSubview(toFront: officeList_View)
         
         let lbl_viewTitle = view.viewWithTag(11111) as! UILabel
@@ -173,14 +177,14 @@ class InspectController : HBaseViewController{
         txt = view.viewWithTag(90001) as! UITextField
         txt.delegate = self
         txt.inputView = evPicker
-        evaluaList["1"] = ["beevaluateid":"1","evaluatetableid":s2t["evaluationid"].stringValue, "evaluatetablename":s2t["evaluationname"].stringValue, "beevaluatename":"学生", "evaluateid":"5", "evaluatename":"培训老师"]
+        evaluaList["s2t"] = ["beevaluateid":"5", "beevaluatename":"培训老师" , "evaluatetableid":s2t["evaluationid"].stringValue, "evaluatetablename":s2t["evaluationname"].stringValue, "evaluateid":"1", "evaluatename":"学生"]
         txt.text = s2t["evaluationname"].stringValue
         
         txt = view.viewWithTag(90002) as! UITextField
         txt.delegate = self
         txt.inputView = evPicker
         txt.text = t2s["evaluationname"].stringValue
-        evaluaList["5"] = ["beevaluateid":"5","evaluatetableid":t2s["evaluationid"].stringValue, "evaluatetablename":t2s["evaluationname"].stringValue, "beevaluatename":"培训老师", "evaluateid":"1", "evaluatename":"学生"]
+        evaluaList["t2s"] = ["beevaluateid":"1", "beevaluatename":"学生", "evaluatetableid":t2s["evaluationid"].stringValue, "evaluatetablename":t2s["evaluationname"].stringValue, "evaluateid":"5", "evaluatename":"培训老师"]
 
         
     }
@@ -236,12 +240,10 @@ class InspectController : HBaseViewController{
     @IBAction func btn_sure_inside(_ sender: UIButton) {
         //dismiss(animated: true, completion: nil)
         
-        submitParam["sign"] = 0
         submitParam["isfreein"] = 0
         submitParam["issend"] = 0
         submitParam["videiotape"] = 0
         submitParam["traintype"] = trainType["traintypeid"].intValue
-        submitParam["officeid"] = UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)
         
         let url = SERVER_PORT + "rest/app/train/releaseTrain.do"
         
@@ -413,9 +415,9 @@ class InspectController : HBaseViewController{
 //                evaluaList[key]!["evaluatetablename"] = t.text
                 
                 if t.tag == 90001{
-                    evaluaList["1"] = ["beevaluateid":"1","evaluatetableid":data["evaluationid"].stringValue, "evaluatetablename":t.text!, "beevaluatename":"学生", "evaluateid":"5", "evaluatename":"培训老师"]
+                    evaluaList["s2t"] = ["beevaluateid":"5","beevaluatename":"培训老师", "evaluatetableid":data["evaluationid"].stringValue, "evaluatetablename":t.text!, "evaluateid":"1", "evaluatename":"学生"]
                 }else{
-                    evaluaList["5"] = ["beevaluateid":"5","evaluatetableid":data["evaluationid"].stringValue, "evaluatetablename":t.text!, "beevaluatename":"培训老师", "evaluateid":"1", "evaluatename":"学生"]
+                    evaluaList["t2s"] = ["beevaluateid":"1","beevaluatename":"学生", "evaluatetableid":data["evaluationid"].stringValue, "evaluatetablename":t.text!,  "evaluateid":"5", "evaluatename":"培训老师"]
                 }
                 
             }
@@ -530,7 +532,7 @@ extension InspectController : UIPickerViewDelegate , UIPickerViewDataSource{
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let addr = addrPickerDs[row]["facilitiesname"].stringValue
-        submitParam["address"] = addrPickerDs[row]["facilitiesid"].stringValue
+        submitParam["address"] = addrPickerDs[row]["facilitiesname"].stringValue
         if row == 0 {
             submitParam["address"] = "-1"
         }

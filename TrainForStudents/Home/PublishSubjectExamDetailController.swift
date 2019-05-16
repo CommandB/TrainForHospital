@@ -35,6 +35,8 @@ class PublishSubjectExamDetailController : HBaseViewController{
     
     override func viewDidLoad() {
         
+        
+        
         examInfoCollection.delegate = self
         examInfoCollection.dataSource = self
         
@@ -77,7 +79,6 @@ class PublishSubjectExamDetailController : HBaseViewController{
         
         
         submitData["exerciseslist"] = [JSON]()
-        
         var exercisesList = [JSON]()
         for stu in jds{
             var index = 0
@@ -114,6 +115,7 @@ class PublishSubjectExamDetailController : HBaseViewController{
         
         submitData["exerciseslist"] = exercisesList
         submitData["marking"] = "0"
+        submitData["isneedsign"] = 0
         jds = exercisesList
         
 //        examInfoCollection.reloadData()
@@ -349,7 +351,7 @@ class PublishSubjectExamDetailController : HBaseViewController{
             let btn = view.viewWithTag(100001+i) as! UIButton
             if btn.tag == sender.tag{
                 btn.setImage(UIImage(named: "选择-大"), for: .normal)
-                submitData["appexamination"] = sender.tag - 80001
+                submitData["appexamination"] = sender.tag - 100001
             }else{
                 btn.setImage(UIImage(named: "未选择-大"), for: .normal)
             }

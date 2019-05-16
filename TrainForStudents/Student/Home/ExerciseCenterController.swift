@@ -69,6 +69,7 @@ class ExerciseCenterController : HBaseViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         //self.deptCollection.mj_header.beginRefreshing()
+        textFieldShouldReturn(txt_search)
         deptCollection.mj_footer.endRefreshingWithNoMoreData()
     }
     

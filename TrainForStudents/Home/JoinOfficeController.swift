@@ -29,13 +29,16 @@ class JoinOfficeController : HBaseViewController {
         
         txt.inputView = officePicckView.getOfficePickerView()
         officePicckView.clorsureImpl = officePicker(_:_:_:_:)
+        
+        if office.isEmpty{
+            office["officeid"] = JSON(UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue))
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         students_collection.mj_header.beginRefreshing()
-        selectedPerson = [String:JSON]()
-        
     }
     
     @IBAction func btn_back_tui(_ sender: UIButton) {
@@ -83,6 +86,7 @@ class JoinOfficeController : HBaseViewController {
     @objc func refresh() {
         self.students_collection.mj_footer.resetNoMoreData()
         jds.removeAll()
+        selectedPerson = [String:JSON]()
         getListData()
     }
     

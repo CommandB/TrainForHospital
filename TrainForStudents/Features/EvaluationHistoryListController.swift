@@ -102,7 +102,7 @@ extension EvaluationHistoryListController : UICollectionViewDelegate , UICollect
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         (cell.viewWithTag(10001) as! UILabel).text = data["objectname"].stringValue
         if isHistory{
-            (cell.viewWithTag(10002) as! UILabel).text = data["value"].stringValue + "分"
+            (cell.viewWithTag(10002) as! UILabel).text = data["value"].stringValue + "分/"
         }else{
             (cell.viewWithTag(10002) as! UILabel).text = ""
         }

@@ -26,7 +26,7 @@ class EvaluationHistoryDetailController : UIViewController{
         
         (view.viewWithTag(10000) as! UILabel).text = headData["evaluatename"].stringValue
         (view.viewWithTag(10001) as! UILabel).text = headData["objectname"].stringValue
-        (view.viewWithTag(10002) as! UILabel).text = headData["value"].stringValue + "分"
+        (view.viewWithTag(10002) as! UILabel).text = headData["value"].stringValue + "分/"
         (view.viewWithTag(10003) as! UILabel).text = headData["evaluationvalue"].stringValue + "分"
         (view.viewWithTag(20001) as! UILabel).text = headData["evaluatetime"].stringValue
         (view.viewWithTag(20002) as! UILabel).text = headData["evaluatetype"].stringValue

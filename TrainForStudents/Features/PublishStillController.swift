@@ -71,7 +71,7 @@ class PublishStillController : HBaseViewController{
             return
         }
         
-        if submitParam["bepersonid"] == nil {
+        if submitParam["exampersonid"] == nil {
             myAlert(self, message: "请选择考试学员!")
             return
         }
@@ -89,6 +89,7 @@ class PublishStillController : HBaseViewController{
                 if json["code"].stringValue == "1"{
                     self.submitParam["taskid"] = json["taskid"].stringValue
                     self.submitParam["exercisesid"] = json["exercisesid"].stringValue
+                    self.submitParam["bepersonid"] = self.submitParam["exampersonid"]
                     let vc = getViewToStoryboard("stillExamView") as! StillExamController
                     //vc.exercisesId = self.exercisesId
                     vc.headInfo = self.submitParam
@@ -146,7 +147,7 @@ class PublishStillController : HBaseViewController{
             var text = ""
             for item in data{
                 text += item["personname"].stringValue + " "
-                submitParam["bepersonid"] = item["personid"].stringValue
+                submitParam["exampersonid"] = item["personid"].stringValue
             }
             
             //添加考试学员
@@ -157,7 +158,7 @@ class PublishStillController : HBaseViewController{
                 btn.setTitleColor(UIColor.darkText, for: .normal)
                 btn.alpha = 1
             }else{
-                submitParam["bepersonid"] = nil
+                submitParam["exampersonid"] = nil
                 btn.setTitle("点击选择学员", for: .normal)
                 btn.setTitleColor(UIColor.lightGray, for: .normal)
                 btn.alpha = 0.6

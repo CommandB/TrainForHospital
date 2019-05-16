@@ -111,7 +111,7 @@ extension ExamListController : UICollectionViewDelegate , UICollectionViewDataSo
             lbl_examTime.text = "\(lbl_examTime.text!)-\(endDateStr.substring(from: 11).substring(to: 5))"
         }
         
-        (cell.viewWithTag(50001) as! UILabel).text = data["addr"].stringValue
+        (cell.viewWithTag(50001) as! UILabel).text = data["addressname"].stringValue
         
         
         return cell

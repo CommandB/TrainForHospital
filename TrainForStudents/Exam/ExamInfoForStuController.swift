@@ -81,6 +81,8 @@ class ExamInfoForStuController : HBaseViewController{
                     (self.view.viewWithTag(70001) as! UILabel).text = data["starttime"].stringValue
                     if data["appexamination"].intValue == 1{
                         self.btn_exam.isHidden = false
+                    }else{
+                        (self.view.viewWithTag(80001) as! UILabel).isHidden = false
                     }
                     self.paramData["exercisesid"] = data["exercisesid"]
                     self.paramData["marking"] = data["marking"]

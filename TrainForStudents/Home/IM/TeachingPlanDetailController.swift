@@ -420,7 +420,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
             case .success(let respJson):
                 let json = JSON(respJson)
                 if json["code"].intValue == 1{
-                    
+                    self.refresh()
                 }else{
                     myAlert(self, message: "回复失败!")
                 }
@@ -447,7 +447,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
                 case .success(let respJson):
                     let json = JSON(respJson)
                     if json["code"].intValue == 1{
-                        
+                        self.refresh()
                     }else{
                         myAlert(self, message: "报名失败!")
                     }

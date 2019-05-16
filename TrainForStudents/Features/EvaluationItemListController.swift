@@ -86,7 +86,7 @@ class EvaluationItemListController : HBaseViewController{
         
         var index = 1
         for item in detailView.jsonDataSource{
-            if item.1["get_value"].intValue == 0{
+            if item.1["get_value"].doubleValue == 0{
                 myAlert(self, message: "请评价第\(index)题!")
                 return
             }
@@ -253,6 +253,7 @@ class EvaluationItemListController : HBaseViewController{
                     self.detailView.wordList = json["wordslist"].arrayValue
                     for item in json["data"].arrayValue{
                         let index = self.detailView.jsonDataSource.arrayValue.index(of: item)
+                        //get_value是已选择的星星数 {  已选择的分数(slider.value) / 每个星星的值(numbervalue) = 已选择的星星数(get_value)    }
                         self.detailView.jsonDataSource[index!]["get_value"].stringValue = "0"
                     }
                     self.detailCollection.reloadData()
@@ -462,29 +463,25 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
             var lbl = cell.viewWithTag(10001) as! UILabel
             lbl.text = data["itemtitle"].stringValue
             let slider = cell.viewWithTag(10002) as! UISlider
-            let selectedNumber = data["get_value"].int
-            var lightNumber = 0
-            if selectedNumber != nil{
-                lightNumber = selectedNumber!
-            }
             
-            //如果用户有改变分数 则用这个我自己 增加 的字段显示
-            lightNumber = data["score"].intValue
-            
-            let maxStarNumber = data["numbervalue"].intValue * data["starsvalue"].intValue
+            //get_value是已选择的星星数
+            //{  已选择的分数(slider.value) / 每个星星的值(numbervalue) = 已选择的星星数(get_value)    }
+            let score = data["get_value"].doubleValue * data["numbervalue"].doubleValue
+            let score_int = lround(score)
+            let maxStarNumber = Int(data["numbervalue"].doubleValue * data["starsvalue"].doubleValue)
             
             slider.viewParam = ["maxValue" : maxStarNumber ,"indexPath":indexPath]
             slider.minimumValue = 0
             slider.maximumValue = Float(maxStarNumber)
-            slider.value = Float(lightNumber)
+            slider.value = data["sliderValue"].floatValue
             slider.addTarget(self, action: #selector(setScore), for: .valueChanged)
             
             //展示分数
             lbl = cell.viewWithTag(10003) as! UILabel
-            lbl.text = "\(lightNumber)/\(maxStarNumber)分"
+            lbl.text = "\(score_int)/\(maxStarNumber)分"
             
             if UserDefaults.AppConfig.string(forKey: .clientCode) == "ZEYY"{
-                let tuple = getTextForScore(lightNumber)
+                let tuple = getTextForScore(score_int)
                 lbl.text = "\(lbl.text!)\n\(tuple.0)"
                 lbl.textColor = tuple.1
             }
@@ -528,19 +525,21 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         
         let indexPath = sender.viewParam!["indexPath"] as! IndexPath
         let index = indexPath.item
-        //四舍五入
+
+        
+        let numberValue = jsonDataSource[index]["numbervalue"].floatValue
         let score = lroundf(sender.value)
-        let numberValue = jsonDataSource[index]["numbervalue"].intValue
-        jsonDataSource[index]["score"] = JSON(score)
-        jsonDataSource[index]["get_value"] = JSON(score / numberValue)
+        jsonDataSource[index]["sliderValue"] = JSON(sender.value)
+        jsonDataSource[index]["get_value"] = JSON(Float(score) / numberValue)
         parentView!.detailCollection.reloadItems(at: [indexPath])
         
-        var total = 0
+        //算总分
+        var total = 0.0
         for item in jsonDataSource{
-            total += item.1["score"].intValue
+            total += item.1["get_value"].doubleValue * item.1["numbervalue"].doubleValue
         }
         
-        (parentView?.view.viewWithTag(88888) as! UILabel).text = "总得分：\(total)分"
+        (parentView?.view.viewWithTag(88888) as! UILabel).text = "总得分：\(Int(total))分"
         
     }
     

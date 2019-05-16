@@ -5251,7 +5251,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uky-3t-lzj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6393" y="3272"/>
+            <point key="canvasLocation" x="4398" y="3265"/>
         </scene>
         <!--Study Controller-->
         <scene sceneID="Iyj-ev-9gb">
@@ -5344,7 +5344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lgr-Ch-Dnn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7028" y="3268.5157421289359"/>
+            <point key="canvasLocation" x="5102" y="3272"/>
         </scene>
         <!--Check Controller-->
         <scene sceneID="Mqw-hR-9ul">
@@ -6606,7 +6606,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZH-fd-AdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2364" y="6011"/>
+            <point key="canvasLocation" x="2364" y="6010.3448275862074"/>
         </scene>
         <!--Survey List Controller-->
         <scene sceneID="ezg-6L-OHY">
@@ -7126,15 +7126,15 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="10003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="/100分" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kz3-H4-bbN">
-                                                    <rect key="frame" x="315" y="12" width="45" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="10003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="/100分" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kz3-H4-bbN">
+                                                    <rect key="frame" x="325" y="11" width="45" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="10002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="89分" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fq1-fm-SDI">
-                                                    <rect key="frame" x="244" y="9" width="77" height="20"/>
+                                                    <rect key="frame" x="248" y="9" width="77" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -7292,13 +7292,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="10002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEh-L8-iy7">
-                                <rect key="frame" x="241" y="108" width="77" height="20"/>
+                                <rect key="frame" x="240" y="108" width="77" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" tag="10003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45j-IM-T11">
+                            <label opaque="NO" userInteractionEnabled="NO" tag="10003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45j-IM-T11">
                                 <rect key="frame" x="314" y="109" width="45" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -10448,7 +10448,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d0w-KL-E1h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1761" y="4092"/>
+            <point key="canvasLocation" x="-1762.4000000000001" y="4091.6041979010497"/>
         </scene>
         <!--Message List Controller-->
         <scene sceneID="xcB-ci-m6v">
@@ -11025,8 +11025,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" tag="10001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="学生理论" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNS-lb-rco">
-                                <rect key="frame" x="0.0" y="69" width="375" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="10001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="学生理论" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNS-lb-rco">
+                                <rect key="frame" x="0.0" y="69" width="375" height="55"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -11118,6 +11118,13 @@
                                 <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="80001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="注意! 本场考试不支持在线答题，请前往指定地点进行考试" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyu-zf-pNX">
+                                <rect key="frame" x="16" y="312" width="340" height="16"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="dWA-fg-JBT"/>
@@ -11128,7 +11135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nrb-fQ-hP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3119" y="2578"/>
+            <point key="canvasLocation" x="3117.5999999999999" y="2577.6611694152925"/>
         </scene>
         <!--Invigilation Info Controller-->
         <scene sceneID="gYu-F1-wgj">
@@ -12192,7 +12199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n7e-gH-BbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2420" y="4092"/>
+            <point key="canvasLocation" x="-2420" y="4091.6041979010497"/>
         </scene>
         <!--Teaching Statistics Controller-->
         <scene sceneID="BcS-8M-soz">
@@ -14911,7 +14918,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kh-70-C8A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3081" y="3265"/>
+            <point key="canvasLocation" x="8130" y="4028"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="sLb-dR-24d">
@@ -15078,7 +15085,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z9l-dO-KGJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3703" y="3269"/>
+            <point key="canvasLocation" x="7468" y="3996"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ixl-5h-0Jc">
@@ -15219,7 +15226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hnt-yd-FHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4484" y="3269"/>
+            <point key="canvasLocation" x="5834" y="3976"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="aL5-xG-shc">
@@ -15305,7 +15312,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIs-Dx-8dU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5137" y="3270"/>
+            <point key="canvasLocation" x="6526" y="2731"/>
         </scene>
         <!--Publish Subject Exam Controller-->
         <scene sceneID="M4x-52-YeB">
@@ -15529,7 +15536,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLY-h7-PuO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5756" y="3270.3148425787108"/>
+            <point key="canvasLocation" x="3761" y="3264"/>
         </scene>
         <!--Person Selector Advance Search Controller-->
         <scene sceneID="F88-kQ-4h4">
@@ -21350,7 +21357,7 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="10002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="【科主任】" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vi-Ew-Hjv">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="10002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="【科主任】" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vi-Ew-Hjv">
                                                     <rect key="frame" x="140" y="16" width="100" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -21384,7 +21391,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6B-3n-wwc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5101.6000000000004" y="3955.7721139430287"/>
+            <point key="canvasLocation" x="3118" y="3272"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="HYf-OC-zNG">
@@ -21577,7 +21584,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="um1-dU-pSM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5881" y="3956"/>
+            <point key="canvasLocation" x="6708" y="3976"/>
         </scene>
         <!--Teaching Plan Controller-->
         <scene sceneID="20G-3G-faV">
