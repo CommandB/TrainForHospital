@@ -187,10 +187,9 @@ class PublishSubjectExamDetailController : HBaseViewController{
         }
         
         //print(submitParam)
-        
         var url = ""
         if isSkillExam{
-            url = SERVER_PORT + "rest/app/releaseSkillExam.do"
+            url = SERVER_PORT + "rest/app/releaseExitOfficeSkillExam.do"
         }else{
             url = SERVER_PORT + "rest/app/releaseExitOfficeTheoryExam.do"
         }

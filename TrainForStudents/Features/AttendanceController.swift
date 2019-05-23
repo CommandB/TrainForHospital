@@ -231,25 +231,27 @@ extension AttendanceController : UICollectionViewDelegate , UICollectionViewData
         var index = 0
         var preView = UIView()
         for label in data["labellist"].arrayValue{
-            
+            //生成标签数据
             let btn = UIButton()
             btn.setBorder(width: 1, color: .groupTableViewBackground)
             btn.setCornerRadius(radius: 4)
             btn.titleLabel?.font = .systemFont(ofSize: 14)
             btn.titleLabel?.textAlignment = .center
-            btn.setY(y: 0)
-            btn.setHight(height: personTagScroll.H)
+            btn.setY(y: 8)
+            btn.setHight(height: 28)
             btn.setWidth(width: label["labelname"].stringValue.getWidth() + 15)
             btn.tag = label["serialid"].intValue
             if index == 0{
                 btn.setX(x: 0)
             }else{
-                btn.moveToAfter(target: preView,space: 5)
+                btn.moveToAfter(target: preView,space: 10)
             }
             btn.setTitleColor(.black, for: .normal)
             btn.setTitle(label["labelname"].stringValue, for: .normal)
             btn.addTarget(self, action: #selector(removeTag(sender:)), for: .touchUpInside)
             personTagScroll.addSubview(btn)
+            HUtilView.addRedPoint(view: btn,isClose: true)
+            
             preView = btn
             index += 1
         }

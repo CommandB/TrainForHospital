@@ -33,6 +33,10 @@ class PanoramicEvaluationController : HBaseViewController{
     ///各种评价表的dic
     var evDic = [String : JSON]()
     
+    var officeId = 0
+    var officePicker = UIPickerView()
+    let officePickerImpl = HSimplePickerViewImpl()
+    
     override func viewDidLoad() {
         
         datePicker.delegate = self
@@ -42,9 +46,40 @@ class PanoramicEvaluationController : HBaseViewController{
         datePicker.setY(y: UIScreen.height - (250))
         datePicker.isHidden = true
         datePicker.backgroundColor = UIColor(hex:"D0D3D9")
+        datePicker.selectRow(1, inComponent: 0, animated: true)
         view.addSubview(datePicker)
         
-
+        
+        officeId = UserDefaults.standard.integer(forKey: LoginInfo.officeId.rawValue)
+        let officeList = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue
+        var myManager = [JSON]()
+        for office in officeList{
+            if office["ismymanage"].intValue == 1{
+                myManager.append(office)
+            }
+        }
+        
+        //判断当前科室在数据源中的索引..方便显示
+        var index = 0
+        for office in myManager{
+            if office["officeid"].intValue == officeId{
+                break
+            }
+            index += 1
+        }
+        
+        officePicker = officePickerImpl.getDefaultPickerView()
+        officePickerImpl.titleKey = "officename"
+        officePickerImpl.clorsureImpl = addrClosureImpl
+        officePickerImpl.dataSource = myManager
+        officePicker.selectRow(index, inComponent: 0, animated: true)
+        
+        let txt = view.viewWithTag(10000) as! TextFieldForNoMenu
+        txt.inputView = officePicker
+        txt.text = UserDefaults.standard.string(forKey: LoginInfo.officeName.rawValue)
+        txt.delegate = self
+        
+        
         personCollection.delegate = self
         personCollection.dataSource = self
         
@@ -93,6 +128,7 @@ class PanoramicEvaluationController : HBaseViewController{
     }
     
     @objc func showDatePicker(sender: UIButton){
+        hiddenKeyBoard()
         datePicker.isHidden = !datePicker.isHidden
     }
     
@@ -132,7 +168,9 @@ class PanoramicEvaluationController : HBaseViewController{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)
                 if json["code"].stringValue == "1"{
-                    myAlert(self, message: "发布成功!")
+                    myAlert(self, message: "发布成功!" , handler : {action in
+                        self.dismiss(animated: true, completion: nil)
+                    })
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
                 }
@@ -184,7 +222,6 @@ class PanoramicEvaluationController : HBaseViewController{
         let paramMonth = (year! + month!).replacingOccurrences(of: "月", with: "")
         
         //print("paramMonth:\(paramMonth)")
-        let officeId = UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue)
         myPostRequest(url, ["officeid":officeId ,"month":paramMonth ,"fortype":"evaluation"], method: .post).responseString(completionHandler: {resp in
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             self.personCollection.mj_header.endRefreshing()
@@ -244,6 +281,19 @@ class PanoramicEvaluationController : HBaseViewController{
     
     @objc func closePickerView(){
         datePicker.isHidden = true
+    }
+    
+    func addrClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+        let text = ds[row]["officename"].stringValue
+        let txt = view.viewWithTag(10000) as! TextFieldForNoMenu
+        txt.text = text
+        officeId = ds[row]["officeid"].intValue
+        getListData()
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        datePicker.isHidden = true
+        return true
     }
     
 }

@@ -240,7 +240,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
             let left = (cell.viewWithTag(10003) as! UILabel)
             left.text = jds["signedStuList"].arrayValue.count.description
             let right = (cell.viewWithTag(10004) as! UILabel)
-            right.text = "/\(jds["confirmStuList"].arrayValue.count)"
+            right.text = "/\(jds["studentlist"].arrayValue.count)"
             right.setWidthFromText()
             right.moveToBefore(target: btn, space: -50)
             left.moveToBefore(target: right)

@@ -121,7 +121,7 @@ class OtherFilesController: MyBaseUIViewController,UITableViewDataSource,UITable
         }
         MBProgressHUD.showAdded(to: self.view, animated: true)
         //开始下载
-        Alamofire.download(dataSource[indexPath.section]["urlstr"].stringValue, to: destination)
+        Alamofire.download(fileURL, to: destination)
             .response { response in
                 //print(response)
                 let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -131,10 +131,10 @@ class OtherFilesController: MyBaseUIViewController,UITableViewDataSource,UITable
     }
     
     func openFile(_ filePath: URL) {
-        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         let _docController = UIDocumentInteractionController.init(url: filePath)
         _docController.delegate = self
 //        _docController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         _docController.presentPreview(animated: true)
         }
     

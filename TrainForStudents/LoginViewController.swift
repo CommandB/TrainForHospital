@@ -138,7 +138,7 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
         
         loadHospital()
         
-        myPickerView.addCloseButton(parentView: self.view)
+//        myPickerView.addCloseButton(parentView: self.view)
         
     }
     

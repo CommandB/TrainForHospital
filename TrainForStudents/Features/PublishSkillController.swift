@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class PublishStillController : HBaseViewController{
+class PublishSkillController : HBaseViewController{
     
     @IBOutlet weak var questionsCollection: UICollectionView!
     

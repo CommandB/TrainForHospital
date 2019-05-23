@@ -121,7 +121,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
             break
         case 6:
             //现场技能考试
-            myPresentView(self, viewName: "publishStillView")
+            myPresentView(self, viewName: "publishSkillView")
             
             break
         default:

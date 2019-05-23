@@ -19,8 +19,12 @@ class StudyController : HBaseViewController{
     var webView = UIWebView()
     var materialData = JSON()
     var tagGtr = UITapGestureRecognizer()
+    var isHistory = false
+    var isFull = false
     
     override func viewDidLoad() {
+
+        (view.viewWithTag(40001) as! UIButton).isHidden = isHistory
         
         getData()
         
@@ -34,10 +38,18 @@ class StudyController : HBaseViewController{
     override func viewDidDisappear(_ animated: Bool) {
         player.pause()
         player.playerLayer?.prepareToDeinit()
+        player = nil
         
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
+        if isFull{
+            isFull = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.webView.frame = self.player.frame
+            })
+            return
+        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -48,7 +60,7 @@ class StudyController : HBaseViewController{
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             switch resp.result{
             case .success(let responseJson):
-                
+
                 let json = JSON(responseJson)
                 if json["code"].stringValue == "1"{
                     myAlert(self, message: "上报成功!",handler:{action in
@@ -57,11 +69,11 @@ class StudyController : HBaseViewController{
                 }else{
                     myAlert(self, message: "上报失败..!")
                 }
-                
+
             case .failure(let error):
                 print(error)
             }
-            
+
         })
         //dismiss(animated: true, completion: nil)
     }
@@ -137,28 +149,40 @@ class StudyController : HBaseViewController{
     
     //浏览office的webview的点击事件
     @objc func wordFill (){
-        
-        let url = materialData["url"].stringValue
-        let fileName = materialData["title"].stringValue
-        
-        
-        //        //指定下载路径和保存文件名
-        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let fileURL = documentsURL.appendingPathComponent(fileName)
-            print("\r\r测试--------------文件保存---------------\r\r")
-            //两个参数表示如果有同名文件则会覆盖，如果路径中文件夹不存在则会自动创建
-            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+        if !isFull{
+            isFull = true
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                self.webView.setX(x: 0)
+                self.webView.setY(y: 70)
+                self.webView.setWidth(width: UIScreen.width)
+                self.webView.setHight(height: UIScreen.height - 70)
+                
+            })
         }
         
-        //        //开始下载
-        Alamofire.download(url, to: destination)
-            .response { response in
-                print(response)
-                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                let fileURL = documentsURL.appendingPathComponent(fileName)
-                self.openFile(fileURL)
-        }
+        
+//        let url = materialData["url"].stringValue
+//        let fileName = materialData["title"].stringValue
+//
+//
+//        //        //指定下载路径和保存文件名
+//        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+//            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//            let fileURL = documentsURL.appendingPathComponent(fileName)
+//            print("\r\r测试--------------文件保存---------------\r\r")
+//            //两个参数表示如果有同名文件则会覆盖，如果路径中文件夹不存在则会自动创建
+//            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+//        }
+//
+//        //        //开始下载
+//        Alamofire.download(url, to: destination)
+//            .response { response in
+////                print(response)
+//                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//                let fileURL = documentsURL.appendingPathComponent(fileName)
+//                self.openFile(fileURL)
+//        }
         
     }
     
@@ -178,6 +202,8 @@ extension StudyController: UIDocumentInteractionControllerDelegate{
         _docController.delegate = self
         //        _docController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
         _docController.presentPreview(animated: true)
+//        _docController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+//        present(_docController, animated: true, completion: nil)
     }
     
     func documentInteractionControllerViewForPreview(_ controller: UIDocumentInteractionController) -> UIView? {

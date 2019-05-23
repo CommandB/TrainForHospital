@@ -20,18 +20,24 @@ extension HUtilView{
     private static var redPointDic = [Int : UIView]()
     ///在指定view的右上角添加一个红点
     ///返回值用于删除红点
-    static func addRedPoint(view :UIView) -> Int{
+    static func addRedPoint(view :UIView , isClose : Bool = false) -> Int{
         
         let superView = view.superview!
         
         let size = CGSize(width: 10, height: 10)
-        let origin = CGPoint(x: view.frame.width + view.frame.origin.x - (size.width / 2), y: view.frame.origin.y - (size.height / 2))
+        let origin = CGPoint(x: view.frame.width + view.frame.origin.x - (size.width / 2) - 1 , y: view.frame.origin.y - (size.height / 2) + 1)
         let redPoint = UILabel()
         redPoint.frame.size = size
         redPoint.frame.origin = origin
         redPoint.clipsToBounds = true
         redPoint.layer.cornerRadius = size.width / 2
         redPoint.backgroundColor = UIColor.red
+        
+        if isClose{
+            redPoint.text = "❌"
+            redPoint.font = .systemFont(ofSize: 7)
+            redPoint.backgroundColor = .white
+        }
         
         //随机生成一个tag
         var tag = generateTag4RedPoint()

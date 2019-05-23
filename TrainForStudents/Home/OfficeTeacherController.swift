@@ -63,10 +63,9 @@ class OfficeTeacherController : UIViewController{
                     //重新加载列表
                     self.loadTeacherInfo()
                 }else{
-                    myAlert(self, message: "入科失败")
+                    myAlert(self, message: "入科失败,\(json["msg"].stringValue)")
                 }
             case .failure(let error):
-                
                 print(error)
             }
             

@@ -28,16 +28,17 @@ class EvaluationHistoryListController : UIViewController{
         if isHistory{
             self.evaluationCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
             self.evaluationCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
+            self.evaluationCollection.mj_header.beginRefreshing()
         }else{
             (view.viewWithTag(22222) as! UILabel).text = viewTitle
         }
         
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if isHistory{
-            self.evaluationCollection.mj_header.beginRefreshing()
-        }
+        
     }
     
     @IBAction func btn_back_inside(_ sender: UIButton) {
@@ -134,7 +135,7 @@ extension EvaluationHistoryListController : UICollectionViewDelegate , UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: UIScreen.width, height: 80)
+        return CGSize(width: UIScreen.width, height: 70)
     }
     
 }

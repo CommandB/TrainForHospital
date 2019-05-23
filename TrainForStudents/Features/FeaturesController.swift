@@ -37,7 +37,10 @@ class FeaturesController : UIViewController{
         btn.set(image: nil, title: "考题练习", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         btn = view.viewWithTag(20004) as! UIButton
-        btn.set(image: nil, title: "考勤登记", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.set(image: nil, title: "标签上报", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
+        btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
+        btn = view.viewWithTag(30001) as! UIButton
+        btn.set(image: nil, title: "历史教材", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
         
     }
@@ -65,7 +68,6 @@ class FeaturesController : UIViewController{
             let vc = getViewToStoryboard("examListView") as! ExamListController
             vc.isInvigilation = false
             present(vc, animated: true, completion: nil)
-            
             break
         case 20001:
             myPresentView(self, viewName: "cexStudentsView")
@@ -79,8 +81,12 @@ class FeaturesController : UIViewController{
 //            myAlert(self, message: "暂未开放!")
             break
         case 20004: //考勤登记
-//            myPresentView(self, viewName: "attendanceView")
-            myAlert(self, message: "暂未开放!")
+            myPresentView(self, viewName: "attendanceView")
+            
+//            myAlert(self, message: "暂未开放!")
+            break
+        case 30001: //历史教材阅读
+            myPresentView(self, viewName: "historyTextbookView")
             break
         default:
             break

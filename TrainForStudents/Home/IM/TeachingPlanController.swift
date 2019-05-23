@@ -163,9 +163,12 @@ extension TeachingPlanController : UICollectionViewDelegate , UICollectionViewDa
         
         let data = jds[indexPath.item]
         if !data["isHeader"].boolValue{
-            let vc = getViewToStoryboard("teachingPlanDetailView") as! TeachingPlanDetailController
-            vc.taskInfo = data
-            present(vc, animated: true, completion: nil)
+            //如果他不只是学生 则可以点
+            if !isOnlyStudent(){
+                let vc = getViewToStoryboard("teachingPlanDetailView") as! TeachingPlanDetailController
+                vc.taskInfo = data
+                present(vc, animated: true, completion: nil)
+            }
         }
         
     }

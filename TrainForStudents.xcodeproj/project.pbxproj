@@ -57,6 +57,7 @@
 		0A14BD8E21DDB37A00261797 /* IMOfficeGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14BD8D21DDB37A00261797 /* IMOfficeGroupController.swift */; };
 		0A14BD9021DDF88600261797 /* 公告-蓝.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A14BD8F21DDF88200261797 /* 公告-蓝.png */; };
 		0A14BD9221DE0D1000261797 /* NoticeDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14BD9121DE0D1000261797 /* NoticeDetailController.swift */; };
+		0A15258C228FA9CF009A62F3 /* HistoryTextbookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15258B228FA9CF009A62F3 /* HistoryTextbookController.swift */; };
 		0A156F8C225C48A1001CF31C /* MineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A156F8B225C48A1001CF31C /* MineController.swift */; };
 		0A15C3611F46FAEE00C53F61 /* 没通过.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15C35F1F46FAEE00C53F61 /* 没通过.png */; };
 		0A15C3621F46FAEE00C53F61 /* 签到成功.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A15C3601F46FAEE00C53F61 /* 签到成功.png */; };
@@ -182,7 +183,7 @@
 		0A3A7F872194225A00334307 /* 日历.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A7F832194225700334307 /* 日历.png */; };
 		0A3A7F89219425F500334307 /* 紧急.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A7F88219425F200334307 /* 紧急.png */; };
 		0A3A7F8D2194309200334307 /* MessageListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A7F8C2194309200334307 /* MessageListController.swift */; };
-		0A3E186321C79FAA00BF1816 /* PublishStillController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3E186221C79FAA00BF1816 /* PublishStillController.swift */; };
+		0A3E186321C79FAA00BF1816 /* PublishSkillController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3E186221C79FAA00BF1816 /* PublishSkillController.swift */; };
 		0A42F81B1F14C13B001DF281 /* LoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42F81A1F14C13B001DF281 /* LoginInfo.swift */; };
 		0A42F81D1F15D706001DF281 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A42F81C1F15D706001DF281 /* location.png */; };
 		0A42F8211F160F1D001DF281 /* AssistantCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42F8201F160F1D001DF281 /* AssistantCollectionView.swift */; };
@@ -949,6 +950,7 @@
 		0A14BD8D21DDB37A00261797 /* IMOfficeGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMOfficeGroupController.swift; sourceTree = "<group>"; };
 		0A14BD8F21DDF88200261797 /* 公告-蓝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "公告-蓝.png"; sourceTree = "<group>"; };
 		0A14BD9121DE0D1000261797 /* NoticeDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailController.swift; sourceTree = "<group>"; };
+		0A15258B228FA9CF009A62F3 /* HistoryTextbookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTextbookController.swift; sourceTree = "<group>"; };
 		0A156F8B225C48A1001CF31C /* MineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineController.swift; sourceTree = "<group>"; };
 		0A15C35F1F46FAEE00C53F61 /* 没通过.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没通过.png"; sourceTree = "<group>"; };
 		0A15C3601F46FAEE00C53F61 /* 签到成功.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "签到成功.png"; sourceTree = "<group>"; };
@@ -1076,7 +1078,7 @@
 		0A3A7F832194225700334307 /* 日历.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "日历.png"; sourceTree = "<group>"; };
 		0A3A7F88219425F200334307 /* 紧急.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "紧急.png"; sourceTree = "<group>"; };
 		0A3A7F8C2194309200334307 /* MessageListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListController.swift; sourceTree = "<group>"; };
-		0A3E186221C79FAA00BF1816 /* PublishStillController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishStillController.swift; sourceTree = "<group>"; };
+		0A3E186221C79FAA00BF1816 /* PublishSkillController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishSkillController.swift; sourceTree = "<group>"; };
 		0A42F81A1F14C13B001DF281 /* LoginInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInfo.swift; sourceTree = "<group>"; };
 		0A42F81C1F15D706001DF281 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		0A42F8201F160F1D001DF281 /* AssistantCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistantCollectionView.swift; sourceTree = "<group>"; };
@@ -2941,7 +2943,7 @@
 				0A26BA32219AA4C20071C2DC /* EvaluationHistoryListController.swift */,
 				0A26BA34219AA8690071C2DC /* EvaluationHistoryDetailController.swift */,
 				0A31A9B621B6567A007AB138 /* PublishExamController.swift */,
-				0A3E186221C79FAA00BF1816 /* PublishStillController.swift */,
+				0A3E186221C79FAA00BF1816 /* PublishSkillController.swift */,
 				0A2B354921C8CDB200E17AC9 /* CEXStudentsListController.swift */,
 				0A2B355621C8F7E800E17AC9 /* StillExamController.swift */,
 				0A2B356621C9109000E17AC9 /* QuestionListController.swift */,
@@ -2949,6 +2951,7 @@
 				0A2B355421C8CE4100E17AC9 /* CEXCheckController.swift */,
 				0A1891552271569800F3BB82 /* AttendanceController.swift */,
 				0AF518EF227E830C0019ECF7 /* SurveyListController.swift */,
+				0A15258B228FA9CF009A62F3 /* HistoryTextbookController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -3681,7 +3684,7 @@
 				0A2B355721C8F7E800E17AC9 /* StillExamController.swift in Sources */,
 				0AF25E0D217DBB4500FE5425 /* LeaveOverCollection.swift in Sources */,
 				0A31A9B721B6567A007AB138 /* PublishExamController.swift in Sources */,
-				0A3E186321C79FAA00BF1816 /* PublishStillController.swift in Sources */,
+				0A3E186321C79FAA00BF1816 /* PublishSkillController.swift in Sources */,
 				0A291B6A1F429DDB008784B5 /* TaskApplyDetailImageCollectionView.swift in Sources */,
 				0AC3B9A11EE8FC0000227194 /* OverCollectionView.swift in Sources */,
 				0A1018BD21D4B5AA00E07B33 /* StudentsInExamCollection.swift in Sources */,
@@ -3867,6 +3870,7 @@
 				0A29CDD7216DE6A100200650 /* QuestionDetailCollectionView.swift in Sources */,
 				0AC3B9351EE4730B00227194 /* TurnCenterController.swift in Sources */,
 				0A644DA11F078D9A009025DD /* DifficultListController.swift in Sources */,
+				0A15258C228FA9CF009A62F3 /* HistoryTextbookController.swift in Sources */,
 				0A90EFB11EFA20B400B4CC7A /* CheckboxCollectionView.swift in Sources */,
 				0A1701DF21EED4A200B12EC4 /* TeachingStatisticsController.swift in Sources */,
 				0A15D5111F0BA78700908B7F /* MyNotificationUtil.swift in Sources */,

@@ -16,6 +16,7 @@ class EvaluationHistoryDetailController : UIViewController{
     
     var headData = JSON()
     var jds = [JSON]()
+    var wordList = [JSON]()
     
     override func viewDidLoad() {
         
@@ -56,6 +57,7 @@ class EvaluationHistoryDetailController : UIViewController{
                 if json["code"].stringValue == "1"{
                     
                     self.jds = json["data"].arrayValue
+                    self.wordList = json["wordslist"].arrayValue
                     self.evaluationCollection.reloadData()
                     
                 }else{
@@ -90,8 +92,7 @@ extension EvaluationHistoryDetailController : UICollectionViewDelegate , UIColle
     //设置每个分区元素的个数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return jds.count * 2
-        
+        return jds.count + wordList.count
     }
     
     //实现UICollectionViewDataSource
@@ -99,39 +100,44 @@ extension EvaluationHistoryDetailController : UICollectionViewDelegate , UIColle
     {
         
         var cellName = "c1"
-        var index = 0
-        
-        if indexPath.item == 0{
-            index = 0
-            cellName = "c1"
-        }else if indexPath.item % 2 == 0{
-            index = indexPath.item / 2
-            cellName = "c1"
-        }else{
-            index = (indexPath.item - 1) / 2
+        var data = JSON()
+        if indexPath.item >= jds.count{
             cellName = "c2"
+            data = wordList[indexPath.item - jds.count]
+        }else{
+            data = jds[indexPath.item]
         }
         
-        let data = jds[index]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath)
         
         if cellName == "c1"{
-            let lbl = cell.viewWithTag(10001) as? UILabel
-            lbl?.text = data["itemtitle"].stringValue
-        }else{
-            let slider = cell.viewWithTag(10001) as! UISlider
+            var lbl = cell.viewWithTag(10001) as! UILabel
+            lbl.text = data["itemtitle"].stringValue
+            
             
             let lightNumber = data["realvalue"].intValue
             let maxStarNumber = data["maxvalue"].intValue
-            
+            let slider = cell.viewWithTag(20001) as! UISlider
             slider.minimumValue = 0
             slider.maximumValue = Float(maxStarNumber)
             slider.value = Float(lightNumber)
             slider.isEnabled = false
             
             //展示分数
-            let lbl = cell.viewWithTag(10002) as! UILabel
+            lbl = cell.viewWithTag(20002) as! UILabel
             lbl.text = "\(lightNumber)/\(maxStarNumber)分"
+            lbl.setBorderBottom(size: 1, color: .groupTableViewBackground)
+            
+            if UserDefaults.AppConfig.string(forKey: .clientCode) == "ZEYY"{
+                let tuple = getTextForScore(lightNumber)
+                lbl.text = "\(lbl.text!)\n\(tuple.0)"
+                lbl.textColor = tuple.1
+            }
+        }else{
+            var lbl = cell.viewWithTag(10001) as! UILabel
+            lbl.text = data["wordtitle"].stringValue
+            lbl = cell.viewWithTag(20001) as! UILabel
+            lbl.text = data["wordsvalue"].stringValue
             
         }
         
@@ -142,14 +148,32 @@ extension EvaluationHistoryDetailController : UICollectionViewDelegate , UIColle
     //cell点击
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        //print(indexPath.item)
         
     }
     
     //设置cell的大小
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: UIScreen.width, height: 45)
+        return CGSize(width: UIScreen.width, height: 80)
+        
+    }
+    
+    func getTextForScore(_ score : Int) -> (String,UIColor){
+        
+        switch score {
+        case 0,1,2:
+            return ("不合格", UIColor(hex:"941100"))
+        case 3,4:
+            return ("需要改进", .red)
+        case 5,6:
+            return ("合格", .orange)
+        case 7,8:
+            return ("良好", UIColor(hex:"008F00"))
+        case 9,10:
+            return ("优秀", UIColor(hex:"008F00"))
+        default:
+            return ("", .black)
+        }
         
     }
     

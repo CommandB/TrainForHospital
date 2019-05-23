@@ -202,16 +202,6 @@ class EvaluationItemListController : HBaseViewController{
                     self.jds  = json["data"].arrayValue
                     self.dataList = self.jds
                     
-                    //如果有待评数据 则默认把第一个待评的 评价详情给加载出来
-                    if self.jds.count > 0{
-                        self.changeIndex(self.pageNumber + 1)
-                        self.getDetailDatasource(self.jds[0]["evaluationid"].stringValue)
-                    }else{
-                        self.changeIndex(0)
-                        self.btn_left.isEnabled = false
-                        self.btn_right.isEnabled = false
-                    }
-                    self.cardCollection.reloadData()
                     
                     if !self.initData.isEmpty{
                         var index = 0
@@ -223,7 +213,20 @@ class EvaluationItemListController : HBaseViewController{
                             }
                             index += 1
                         }
+                    }else{
+                        //如果有待评数据 则默认把第一个待评的 评价详情给加载出来
+                        if self.jds.count > 0{
+                            self.changeIndex(self.pageNumber + 1)
+                            self.getDetailDatasource(self.jds[0]["evaluationid"].stringValue)
+                        }else{
+                            self.changeIndex(0)
+                            self.btn_left.isEnabled = false
+                            self.btn_right.isEnabled = false
+                        }
                     }
+                    self.cardCollection.reloadData()
+                    
+                    
                     
                 }else{
                     myAlert(self, message: "请求待评任务列表失败!")
@@ -240,6 +243,9 @@ class EvaluationItemListController : HBaseViewController{
     func getDetailDatasource(_ evaluationId : String){
         
         MBProgressHUD.showAdded(to: view, animated: true)
+        
+        //加载完成后 清空初始化的数据
+        initData = JSON()
         
         let url = SERVER_PORT+"rest/evaluation/query.do"
         myPostRequest(url,["evaluationid": evaluationId]).responseJSON(completionHandler: {resp in
@@ -329,6 +335,7 @@ class EvaluationItemListController : HBaseViewController{
             cardCollection.setContentOffset(CGPoint(x: cardCollection.W * CGFloat(index), y: 0), animated: true)
             changeIndex(pageNumber + 1)
             getDetailDatasource(jds[pageNumber]["evaluationid"].stringValue)
+            NotificationCenter.default.removeObserver(self, name: EvaluationHistoryListController.defaultNoticeName, object: nil)
         }
         
     }
@@ -450,10 +457,12 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
     {
         
         var cellName = "c1"
-        var data = jsonDataSource[indexPath.item]
+        var data = JSON()
         if indexPath.item >= jsonDataSource.count{
             cellName = "c2"
             data = wordList[indexPath.item - jsonDataSource.count]
+        }else{
+            data = jsonDataSource[indexPath.item]
         }
 
         
