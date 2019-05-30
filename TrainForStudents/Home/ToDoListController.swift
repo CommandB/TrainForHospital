@@ -174,7 +174,10 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
         let type = data["butype"].stringValue
         if type == "评价"{
             presentEvaluationDetail(data["buid"].stringValue)
-        }else if type == "教学活动" || type == "参加培训"{
+        }else if type == "教学活动"{
+            isStudent = false
+            presentTeachingPlanDetail(data)
+        }else if type == "参加培训"{
             presentTeachingPlanDetail(data)
         }else if type == "教材阅读" || type == "在线学习"{
             presentStudyView(data)

@@ -15,11 +15,69 @@ class OfficeTeacherController : UIViewController{
     let studentLabelheight = 20
     
     @IBOutlet weak var teacher_collection: UICollectionView!
+    
+    @IBOutlet weak var nurseCollection: UICollectionView!
+    
+    var nurseView = JoinOfficeNurseCollectionView()
+    
+    var tagListBackgroundView = UIView()
+    
+    var selectNurseOfJoinOffice = "0"
     var office = JSON()
     var collectionDs = [JSON]()
     var selectedPerson = [String:JSON]()
     //被选中的学生
     var selectedStudents = [String:JSON]()
+    ///被选中的护士
+    var selectedNurseId = ""
+    var selectedNurseName = ""
+    
+    override func viewDidLoad() {
+        
+        loadNurseList()
+        
+        selectNurseOfJoinOffice = UserDefaults.AppConfig.string(forKey: .selectNurseOfJoinOffice)!
+        
+        //加载可以选择的tag
+        nurseView.parentView = self
+        nurseView.jds = UserDefaults.AppConfig.json(forKey: .tagList).arrayValue
+        nurseCollection.delegate = nurseView
+        nurseCollection.dataSource = nurseView
+        nurseCollection.reloadData()
+        nurseCollection.setY(y: UIScreen.height)
+        if nurseView.jds.count < 6{
+            nurseCollection.setHight(height: CGFloat(nurseView.jds.count * 40))
+        }
+        
+        let btn = UIButton(frame: CGRect(x: UIScreen.width - 30 - 20, y: 100, width: 30, height: 30))
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
+        btn.setCornerRadius(radius: 15)
+//        btn.setTitle("x", for: .normal)
+        btn.setImage(UIImage(named: "关闭-叉"), for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(btn_dismissNurseListView(sender:)), for: .touchUpInside)
+        //        btn.setCornerRadius(radius: 4)
+        btn.setBorder(width: 1, color: .lightGray)
+        tagListBackgroundView.frame = view.frame
+        tagListBackgroundView.backgroundColor = .groupTableViewBackground
+        //        tagListBackgroundView.setY(y: UIScreen.height)
+        tagListBackgroundView.alpha = 0
+        tagListBackgroundView.addSubview(btn)
+        
+        view.addSubview(tagListBackgroundView)
+        view.bringSubview(toFront: nurseCollection)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        teacher_collection.dataSource = self
+        teacher_collection.delegate = self
+        teacher_collection.reloadData()
+        
+        loadTeacherInfo()
+    }
+    
     
     //返回
     @IBAction func btn_back_tui(_ sender: UIButton) {
@@ -36,6 +94,14 @@ class OfficeTeacherController : UIViewController{
             myAlert(self, message: "请选择带教老师!")
             return
         }
+        if nurseView.jds.count > 0 && selectNurseOfJoinOffice == "1"{
+            
+            if selectedNurseId == "0" || selectedNurseId.isEmpty{
+                myAlert(self, message: "未选择责任护士，无法进行入科登记！")
+                return
+            }
+            
+        }
         
         let teacher = selectedPerson.values.first
         
@@ -49,7 +115,7 @@ class OfficeTeacherController : UIViewController{
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT + "rest/app/studentJoinOffice.do"
-        myPostRequest(url,["teacherid":teacher!["personid"].stringValue, "studentlist":stus]).responseJSON(completionHandler: {resp in
+        myPostRequest(url,["teacherid":teacher!["personid"].stringValue, "studentlist":stus , "nurseid":selectedNurseId ,"nursename":selectedNurseName]).responseJSON(completionHandler: {resp in
             MBProgressHUD.hide(for: self.view, animated: true)
             switch resp.result{
             case .success(let responseJson):
@@ -71,17 +137,6 @@ class OfficeTeacherController : UIViewController{
             
         })
         
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        teacher_collection.dataSource = self
-        teacher_collection.delegate = self
-        teacher_collection.reloadData()
-        
-        loadTeacherInfo()
     }
     
     func loadTeacherInfo(){
@@ -108,6 +163,59 @@ class OfficeTeacherController : UIViewController{
         })
     }
     
+    func loadNurseList(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        let url = SERVER_PORT + "rest/app/queryOfficeNurse.do"
+        myPostRequest(url,["officeid":office["officeid"].stringValue]).responseJSON(completionHandler: {resp in
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            switch resp.result{
+            case .success(let responseJson):
+                let json = JSON(responseJson)
+                print(json)
+                if json["code"].stringValue == "1"{
+                    
+                    self.nurseView.jds = json["data"].arrayValue
+                    self.nurseCollection.reloadData()
+                }else{
+                    
+                }
+            case .failure(let error):
+                
+                print(error)
+            }
+            
+        })
+    }
+    
+    @objc func btn_dismissNurseListView(sender : UIButton){
+        let opt : UIView.AnimationOptions = .curveEaseOut
+        //隐藏bg
+        UIView.animate(withDuration: 0.3, delay:0, options:opt, animations: {
+            self.tagListBackgroundView.alpha = 0
+            //            self.tagListBackgroundView.setY(y: UIScreen.height)
+        })
+        
+        //隐藏tagCollection
+        UIView.animate(withDuration: 0.3, delay:0, options:opt, animations: {
+            self.nurseCollection.alpha = 0
+            self.nurseCollection.setY(y: UIScreen.height)
+        })
+        
+    }
+    
+    func showAddNurseView(){
+
+        let opt : UIView.AnimationOptions = .curveEaseIn
+        UIView.animate(withDuration: 0.2, delay:0, options:opt, animations: {
+            self.tagListBackgroundView.alpha = 0.8
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.2, delay:0, options:opt, animations: {
+            self.nurseCollection.alpha = 1
+            self.nurseCollection.setY(y: 175)
+        }, completion: nil)
+        
+    }
     
 }
 
@@ -181,6 +289,13 @@ extension OfficeTeacherController : UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectItem(collectionView, indexPath: indexPath)
+        if "1" == selectNurseOfJoinOffice{
+            if nurseView.jds.count == 0 {
+                myAlert(self, message: "暂无责任护士,可先不指定!")
+            }else{
+                showAddNurseView()
+            }
+        }
     }
     
     func selectItem(_ collectionView: UICollectionView, indexPath: IndexPath) {
@@ -198,4 +313,40 @@ extension OfficeTeacherController : UICollectionViewDelegate, UICollectionViewDa
         }
         collectionView.reloadData()
     }
+}
+
+class JoinOfficeNurseCollectionView :UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+    
+    var jds = [JSON]()
+    var parentView : OfficeTeacherController?
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return jds.count
+    }
+    
+    //渲染cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let data = jds[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+        let lbl = cell.viewWithTag(10001) as! UILabel
+        lbl.text = data["personname"].stringValue
+        lbl.setBorderBottom(size: 1, color: UIColor(hex: "3186E9"))
+        return cell
+    }
+    
+    //点击cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = jds[indexPath.item]
+        parentView?.selectedNurseId = data["personid"].stringValue
+        parentView?.selectedNurseName = data["personname"].stringValue
+        parentView?.btn_dismissNurseListView(sender: UIButton())
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.W, height: 40)
+    }
+    
 }

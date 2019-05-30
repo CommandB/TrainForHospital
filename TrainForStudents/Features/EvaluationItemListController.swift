@@ -84,6 +84,10 @@ class EvaluationItemListController : HBaseViewController{
     //提交按钮
     @IBAction func btn_submit_inside(_ sender: UIButton) {
         
+        if jds.count == 0 {
+            return
+        }
+        
         var index = 1
         for item in detailView.jsonDataSource{
             if item.1["get_value"].doubleValue == 0{
@@ -92,9 +96,17 @@ class EvaluationItemListController : HBaseViewController{
             }
             index += 1
         }
+        
         MBProgressHUD.showAdded(to: view, animated: true)
         let data = jds[pageNumber]
         let url = SERVER_PORT+"rest/evaluation/commitEvaluationResult.do"
+        
+        
+//        for iitem in detailView.jsonDataSource{
+//            print("title:\(iitem.1["itemtitle"].stringValue) get_value:\(iitem.1["get_value"].stringValue) numbervalue:\(iitem.1["numbervalue"].stringValue) totoal:\(iitem.1["get_value"].doubleValue * iitem.1["numbervalue"].doubleValue)")
+//        }
+//        print("-----------------------------------------------------")
+        
         myPostRequest(url,JSON(["items":detailView.jsonDataSource , "taskid":data["taskid"].stringValue, "evaluateid": data["buid"].stringValue,"wordlist":detailView.wordList]).dictionaryObject).responseJSON(completionHandler: {resp in
             
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
@@ -123,7 +135,7 @@ class EvaluationItemListController : HBaseViewController{
     //未评列表
     @IBAction func btn_list_inside(_ sender: UIButton) {
         let vc = getViewToStoryboard("evaluationHistoryListView") as! EvaluationHistoryListController
-        vc.jds = dataList
+        vc.jds = jds
         vc.viewTitle = "评价列表"
         vc.isHistory = false
         present(vc, animated: true, completion: nil)
@@ -334,6 +346,7 @@ class EvaluationItemListController : HBaseViewController{
             pageNumber = index
             cardCollection.setContentOffset(CGPoint(x: cardCollection.W * CGFloat(index), y: 0), animated: true)
             changeIndex(pageNumber + 1)
+            //btn_sort_inside(btn_all)
             getDetailDatasource(jds[pageNumber]["evaluationid"].stringValue)
             NotificationCenter.default.removeObserver(self, name: EvaluationHistoryListController.defaultNoticeName, object: nil)
         }
@@ -358,6 +371,20 @@ extension EvaluationItemListController : UICollectionViewDelegate , UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         if jds.count == 0{
             (cell.viewWithTag(20001) as! UILabel).text = "暂无数据"
+            let btn = cell.viewWithTag(10001) as! UIButton
+            btn.setTitle("", for: .normal)
+            var lbl = cell.viewWithTag(10002) as! UILabel
+            lbl.text = ""
+            lbl = cell.viewWithTag(10003) as! UILabel
+            lbl.text = ""
+            lbl = cell.viewWithTag(10004) as! UILabel
+            lbl.text = ""
+            lbl = cell.viewWithTag(10005) as! UILabel
+            lbl.text = ""
+            lbl = cell.viewWithTag(10006) as! UILabel
+            lbl.text = ""
+            lbl = cell.viewWithTag(10007) as! UILabel
+            lbl.text = ""
             return cell
         }
         let data = jds[indexPath.item]
@@ -534,7 +561,6 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         
         let indexPath = sender.viewParam!["indexPath"] as! IndexPath
         let index = indexPath.item
-
         
         let numberValue = jsonDataSource[index]["numbervalue"].floatValue
         let score = lroundf(sender.value)
@@ -547,10 +573,14 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         for item in jsonDataSource{
             total += item.1["get_value"].doubleValue * item.1["numbervalue"].doubleValue
         }
+        if total - Double(Int(total)) > 0{
+            print("总分:\(total)")
+        }
         
-        (parentView?.view.viewWithTag(88888) as! UILabel).text = "总得分：\(Int(total))分"
+        (parentView?.view.viewWithTag(88888) as! UILabel).text = "总得分：\(Int(round(total)))分"
         
     }
+    
     
     @objc func txt_change(sender : UITextField){
         let index = sender.viewParam!["index"] as! Int

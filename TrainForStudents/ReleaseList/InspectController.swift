@@ -94,7 +94,7 @@ class InspectController : HBaseViewController{
         addrPicker.bringSubview(toFront: switchKeyBoardBtn)
         
         evPicker = hPickerImpl.getDefaultPickerView()
-        evPicker.addCloseButton(parentView: self.view)
+//        evPicker.addCloseButton(parentView: self.view)
         hPickerImpl.titleKey = "evaluationname"
         var teachingActivityEvaluationList = UserDefaults.AppConfig.json(forKey: .teachingActivityEvaluationList).arrayValue
         teachingActivityEvaluationList.insert(JSON(["evaluationname":"不需要评价"]), at: 0)
@@ -409,10 +409,13 @@ class InspectController : HBaseViewController{
             if row == 0 {
                 t.text = data["evaluationname"].stringValue
                 evaluaList.removeValue(forKey: key)
+                if t.tag == 90001{
+                    evaluaList["s2t"]?.removeAll()
+                }else if t.tag == 90002{
+                    evaluaList["t2s"]?.removeAll()
+                }
             }else{
                 t.text = data["evaluationname"].stringValue
-//                evaluaList[key]!["evaluatetableid"] = data["evaluationid"].stringValue
-//                evaluaList[key]!["evaluatetablename"] = t.text
                 
                 if t.tag == 90001{
                     evaluaList["s2t"] = ["beevaluateid":"5","beevaluatename":"培训老师", "evaluatetableid":data["evaluationid"].stringValue, "evaluatetablename":t.text!, "evaluateid":"1", "evaluatename":"学生"]
@@ -480,9 +483,9 @@ extension InspectController {
         }else if tag == 90002 || tag == 90001 {
             
             var selectedRowNumber = 0
-            var key = "1"
+            var key = "s2t"
             if tag == 90002{
-                key = "5"
+                key = "t2s"
             }
             if !(evaluaList[key]?.isEmpty ?? true){
                 let selectedId = evaluaList[key]!["evaluatetableid"]

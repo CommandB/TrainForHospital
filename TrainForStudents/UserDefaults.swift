@@ -124,7 +124,8 @@ extension UserDefaults{
             case subjectSkillAvailable
             //标签清单
             case tagList
-            
+            //入科是否需要指定责任护士
+            case selectNurseOfJoinOffice
             
             
             

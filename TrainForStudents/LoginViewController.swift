@@ -318,7 +318,7 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = PORTAL_PORT + "rest/loginCheck.do"
 //        let url = "http://192.168.1.106:8081/doctor_portal/rest/loginCheck.do"
-        myPostRequest(url,["loginid":txt_loginId.text , "password":txt_password.text?.sha1() ,"logintype":"iphone", "mac":uuid]).responseJSON(completionHandler: {resp in
+        myPostRequest(url,["loginid":txt_loginId.text , "password":txt_password.text?.sha1() ,"logintype":"iphone", "mac":uuid,"devicetype":"ios","deviceid":CloudPushSDK.getDeviceId()!]).responseJSON(completionHandler: {resp in
             
             switch resp.result{
             case .success(let responseJson):
