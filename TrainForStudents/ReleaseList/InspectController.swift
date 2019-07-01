@@ -100,6 +100,7 @@ class InspectController : HBaseViewController{
         teachingActivityEvaluationList.insert(JSON(["evaluationname":"不需要评价"]), at: 0)
         hPickerImpl.dataSource = teachingActivityEvaluationList
         hPickerImpl.clorsureImpl = evClosureImpl
+//        hPickerImpl.parentView = self
         
         durationPicker = durationPickerImpl.getDefaultPickerView()
         durationPickerImpl.titleKey = "text"
@@ -399,7 +400,7 @@ class InspectController : HBaseViewController{
     }
     
     func evClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
-        print(row)
+//        myAlert(self, message: "row:\(row)")
         if let t = selectedTextField{
             var key = "1"
             let data = ds[row]
@@ -455,7 +456,7 @@ class InspectController : HBaseViewController{
     
 }
 
-extension InspectController {
+extension InspectController : UITextFieldDelegate{
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let tag = textField.tag

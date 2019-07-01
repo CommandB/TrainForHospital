@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 //    exerciseCenterView
-class ExerciseCenterController : HBaseViewController{
+class ExerciseCenterController : UIViewController , UITextFieldDelegate{
     
     let hisSearchCacheKey = "exercisehisSearchCacheKey"
     
@@ -94,13 +94,13 @@ class ExerciseCenterController : HBaseViewController{
         return true
     }
     
-    override func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         view_search.isHidden = true
     }
     
-    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let _ = super.textFieldShouldReturn(textField)
-        
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        let _ = super.textFieldShouldReturn(textField)
+        view.endEditing(true)
         deptCollection.separatorStyle = .singleLine
         
         MBProgressHUD.showAdded(to: view, animated: true)

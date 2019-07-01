@@ -47,8 +47,6 @@ class PublishSubjectExamController : HBaseViewController{
         officePickerImpl.clorsureImpl = addrClosureImpl
         officePickerImpl.dataSource = myManager
         
-        
-        
         var txt = view.viewWithTag(10000) as! TextFieldForNoMenu
         txt.inputView = officePicker
         txt.text = UserDefaults.standard.string(forKey: LoginInfo.officeName.rawValue)
@@ -363,6 +361,15 @@ extension PublishSubjectExamController : UIPickerViewDelegate , UIPickerViewData
             (view.viewWithTag(10002) as! UILabel).text = "\(month)月"
         }
         getListData()
+    }
+    
+}
+
+extension PublishSubjectExamController : UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hiddenKeyBoard()
+        return true
     }
     
 }

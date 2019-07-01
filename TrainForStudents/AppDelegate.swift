@@ -103,17 +103,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             myPresentView((self.window?.rootViewController)!, viewName: "loginView")
         }else{
             if isOnlyStudent(){
-                if UserDefaults.AppConfig.string(forKey: .isUseNewApp) == "1"{
+//                if UserDefaults.AppConfig.string(forKey: .isUseNewApp) == "1"{
                     let vc = getViewToStoryboard("studentTabbar")
                     if self.window?.rootViewController?.classForCoder.description() != vc.classForCoder.description(){
                         self.window?.rootViewController = vc
                     }
-                }else{
-                    let vc = getViewToStoryboard("tabBarView")
-                    if self.window?.rootViewController?.classForCoder.description() != vc.classForCoder.description(){
-                        self.window?.rootViewController = vc
-                    }
-                }
+//                }else{
+//                    let vc = getViewToStoryboard("tabBarView")
+//                    if self.window?.rootViewController?.classForCoder.description() != vc.classForCoder.description(){
+//                        self.window?.rootViewController = vc
+//                    }
+//                }
             }
             
             loadAppConfigFailedCount = 0

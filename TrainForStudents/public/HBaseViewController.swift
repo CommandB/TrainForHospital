@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HBaseViewController : UIViewController , UITextFieldDelegate  {
+class HBaseViewController : UIViewController{
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let loadingDialog = UIAlertController(title: "", message: "加载中,请稍后...", preferredStyle: .alert)
@@ -57,22 +57,6 @@ class HBaseViewController : UIViewController , UITextFieldDelegate  {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        keyBoardHidden = false
-        //        print("textFieldDidBeginEditing")
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        //        print("textFieldDidEndEditing")
-        keyBoardHidden = true
-        hiddenKeyBoard()
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
     }
     
     ///隐藏键盘

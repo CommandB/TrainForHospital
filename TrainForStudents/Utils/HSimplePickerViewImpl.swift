@@ -17,6 +17,7 @@ class HSimplePickerViewImpl :UIViewController, UIPickerViewDelegate , UIPickerVi
     var clorsureImpl : didSelectorClorsure?
     var dataSource = [JSON]()
     var titleKey = ""
+//    var parentView : UIViewController? = nil
     
     func getDefaultPickerView( picker :UIPickerView? = nil) -> UIPickerView{
         var p = UIPickerView()
@@ -63,6 +64,12 @@ class HSimplePickerViewImpl :UIViewController, UIPickerViewDelegate , UIPickerVi
         //1520
         //1521
 //        AudioServicesPlayAlertSound(1520)
+//        if parentView != nil{
+//            if clorsureImpl == nil{
+//                myAlert(parentView!, message: "clorsureImpl == nil")
+//            }
+//        }
+        
         if clorsureImpl != nil{
             clorsureImpl!(dataSource,pickerView,row,component)
         }

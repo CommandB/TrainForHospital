@@ -137,7 +137,6 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell = UICollectionViewCell()
-        
         if indexPath.item == 0{
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
             let lbl = cell.viewWithTag(10001) as! UILabel
@@ -147,33 +146,45 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
             btn.isHidden = false
             switch keys[indexPath.section] {
             case "nerse2s":
-                cellData = jds["data"]["nurselist"].arrayValue
                 lbl.text = "已选择\(jds["data"]["nurselist"].count)位护士"
             case "dir2s":
-                cellData = jds["data"]["directorylist"].arrayValue
                 lbl.text = "已选择\(jds["data"]["directorylist"].count)位科主任"
             case "cm2s":
-                cellData = jds["data"]["classmatelist"].arrayValue
                 lbl.text = "已选择\(jds["data"]["classmatelist"].count)位同科同学"
             case "se2s":
-                cellData = jds["data"]["secretarylist"].arrayValue
                 lbl.text = "已选择\(jds["data"]["secretarylist"].count)位科室秘书"
             case "t2s":
-                cellData = jds["data"]["teacherlist"].arrayValue
-                lbl.text = "已选择\(jds["data"]["nurselist"].count)位对我评价的带教老师"
+                lbl.text = "已选择\(jds["data"]["teacherlist"].count)位对我评价的带教老师"
             case "s2t":
-                cellData = jds["data"]["teacherlist"].arrayValue
                 lbl.text = "已选择\(jds["data"]["teacherlist"].count)位我需要评价的带教老师"
                 btn.isHidden = true
             case "s2o":
-                cellData = JSON([["officeid":UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue) ,"personname":UserDefaults.standard.string(forKey: LoginInfo.officeName.rawValue)]]).arrayValue
                 lbl.text = "已选择1个科室"
                 btn.isHidden = true
             default:
                 break
             }
-            
         }else{
+            
+            switch keys[indexPath.section] {
+            case "nerse2s":
+                cellData = jds["data"]["nurselist"].arrayValue
+            case "dir2s":
+                cellData = jds["data"]["directorylist"].arrayValue
+            case "cm2s":
+                cellData = jds["data"]["classmatelist"].arrayValue
+            case "se2s":
+                cellData = jds["data"]["secretarylist"].arrayValue
+            case "t2s":
+                cellData = jds["data"]["teacherlist"].arrayValue
+            case "s2t":
+                cellData = jds["data"]["teacherlist"].arrayValue
+            case "s2o":
+                cellData = JSON([["officeid":UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue) ,"personname":UserDefaults.standard.string(forKey: LoginInfo.officeName.rawValue)]]).arrayValue
+            default:
+                break
+            }
+            
             let index = indexPath.item - 1
             var data = cellData[index]
             //print(data)

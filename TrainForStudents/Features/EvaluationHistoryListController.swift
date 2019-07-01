@@ -115,7 +115,12 @@ extension EvaluationHistoryListController : UICollectionViewDelegate , UICollect
         }
         
         (cell.viewWithTag(20001) as! UILabel).text = data["evaluatename"].stringValue
-        (cell.viewWithTag(30001) as! UILabel).text = data["evaluatetime"].stringValue
+        if data["evaluatetime"].stringValue.isEmpty{
+            (cell.viewWithTag(30001) as! UILabel).text = data["starttime"].stringValue
+        }else{
+            (cell.viewWithTag(30001) as! UILabel).text = data["evaluatetime"].stringValue
+        }
+        
         
         return cell
     }

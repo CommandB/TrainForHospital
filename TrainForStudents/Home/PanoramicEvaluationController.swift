@@ -291,11 +291,6 @@ class PanoramicEvaluationController : HBaseViewController{
         getListData()
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        datePicker.isHidden = true
-        return true
-    }
-    
 }
 
 extension PanoramicEvaluationController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
@@ -387,6 +382,15 @@ extension PanoramicEvaluationController : UIGestureRecognizerDelegate{
         }else if NSStringFromClass((touch.view?.superview!.classForCoder)!) == "UICollectionViewCell"{
             return false
         }
+        return true
+    }
+    
+}
+
+extension PanoramicEvaluationController : UITextFieldDelegate{
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        datePicker.isHidden = true
         return true
     }
     

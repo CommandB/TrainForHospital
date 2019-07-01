@@ -217,24 +217,6 @@ class PublishSubjectExamDetailController : HBaseViewController{
         })
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        let tag = textField.tag
-        if tag == 40001 || tag == 40002{
-            let t31 = view.viewWithTag(30001) as! UITextField
-            if t31.text == nil || t31.text == ""{
-                myAlert(self, message: "请先选择开始时间!")
-                return false
-            }
-        }else{
-            datePicker.minimumDate = nil
-            let t41 = view.viewWithTag(40001) as! UITextField
-            t41.text = ""
-            let t42 = view.viewWithTag(40002) as! UITextField
-            t42.text = ""
-        }
-        return true
-    }
     
     ///选监考老师 callback
     @objc func receiveTeacherNotice(notification : NSNotification){
@@ -445,6 +427,29 @@ extension PublishSubjectExamDetailController : UICollectionViewDelegate , UIColl
             return CGSize(width: UIScreen.width, height: 100)
         }
         
+    }
+    
+}
+
+extension PublishSubjectExamDetailController: UITextFieldDelegate{
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        let tag = textField.tag
+        if tag == 40001 || tag == 40002{
+            let t31 = view.viewWithTag(30001) as! UITextField
+            if t31.text == nil || t31.text == ""{
+                myAlert(self, message: "请先选择开始时间!")
+                return false
+            }
+        }else{
+            datePicker.minimumDate = nil
+            let t41 = view.viewWithTag(40001) as! UITextField
+            t41.text = ""
+            let t42 = view.viewWithTag(40002) as! UITextField
+            t42.text = ""
+        }
+        return true
     }
     
 }

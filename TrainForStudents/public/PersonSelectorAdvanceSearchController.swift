@@ -129,9 +129,10 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
         case 80001:
             data = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue[index]
             text = data["officename"].stringValue
-            submitData["officeid"] = data["officeid"].stringValue
+            submitData["officeid"] = data["officeid"].intValue
             if row == 0{
                 submitData.removeValue(forKey: "officeid")
+                submitData["officeid"] = -1
             }
         default:
             break
@@ -144,6 +145,10 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
         
         
     }
+    
+}
+
+extension PersonSelectorAdvanceSearchController : UITextFieldDelegate{
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         //切换数据源
@@ -195,10 +200,9 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
         }
         dataPicker.selectRow(0, inComponent: 0, animated: true)
         dataPicker.reloadAllComponents()
-//        dataPicker.reloadInputViews()
+        //        dataPicker.reloadInputViews()
         return true
         
     }
-    
     
 }

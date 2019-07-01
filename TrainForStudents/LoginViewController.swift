@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 import CoreTelephony
+
 class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPickerViewDelegate{
     
     @IBOutlet weak var content: UILabel!
@@ -187,33 +188,6 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
             txt_hospital.text = hospital
         }
         
-    }
-    
-    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if "loginId" == textField.restorationIdentifier{
-            txt_password.becomeFirstResponder()
-        }else if "password" == textField.restorationIdentifier{
-            login()
-        }
-        
-        return true
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if "hospital" == textField.restorationIdentifier{
-            myPickerView.selectRow(0, inComponent: 0, animated: true)
-        }
-        return true
-    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if pickerDataSource.count <= 0 {
-            loadHospital()
-            myAlert(self, message: "基地列表加载中,请稍后...")
-            return false
-        }
-        return true
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -396,11 +370,11 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                                             
                                             //验证角色,判断登录到哪一端
                                             if isOnlyStudent(){
-                                                if UserDefaults.AppConfig.string(forKey: .isUseNewApp) == "1"{
+//                                                if UserDefaults.AppConfig.string(forKey: .isUseNewApp) == "1"{
                                                     self.appDelegate.window?.rootViewController = getViewToStoryboard("studentTabbar")
-                                                }else{
-                                                    self.appDelegate.window?.rootViewController = getViewToStoryboard("tabBarView")
-                                                }
+//                                                }else{
+//                                                    self.appDelegate.window?.rootViewController = getViewToStoryboard("tabBarView")
+//                                                }
                                             }else{
                                                 //myPresentView(self, viewName: "hTabBarView")
                                                 self.appDelegate.window?.rootViewController = getViewToStoryboard("hTabBarView")
@@ -496,8 +470,33 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
     
 }
 
-
-
-
-
-
+extension LoginViewController : UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if "loginId" == textField.restorationIdentifier{
+            txt_password.becomeFirstResponder()
+        }else if "password" == textField.restorationIdentifier{
+            login()
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if "hospital" == textField.restorationIdentifier{
+            myPickerView.selectRow(0, inComponent: 0, animated: true)
+        }
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if pickerDataSource.count <= 0 {
+            loadHospital()
+            myAlert(self, message: "基地列表加载中,请稍后...")
+            return false
+        }
+        return true
+    }
+    
+}

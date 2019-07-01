@@ -229,6 +229,8 @@ extension StudentHomeController : UICollectionViewDelegate , UICollectionViewDat
             if btn4_title != nil && btn4_title != ""{
                 btn.setTitle(btn4_title, for: .normal)
             }
+            btn = cell.viewWithTag(10005) as! UIButton
+            btn.addTarget(self, action: #selector(btn_features_event), for: .touchUpInside)
             break
         case 3:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "classTitleCell", for: indexPath)
@@ -346,6 +348,8 @@ extension StudentHomeController : UICollectionViewDelegate , UICollectionViewDat
             break
         case 4://悄悄话
             myPresentView(self, viewName: "complaintListView")
+        case 5://学习平台
+            myPresentView(self, viewName: "studyCenterView")
             break
         default:
             break

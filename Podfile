@@ -6,6 +6,7 @@
 
 target ’TrainForStudents’ do  
   
+  pod 'GTMBarcodeScanner'
   pod 'Kingfisher', '~> 4.10.1'
   pod 'Alamofire', '~> 4.0'
   pod 'SwiftDate', '~>4.0'

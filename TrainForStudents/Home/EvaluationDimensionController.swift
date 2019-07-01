@@ -59,7 +59,7 @@ class EvaluationDimensionController : HBaseViewController{
     
 }
 
-extension EvaluationDimensionController {
+extension EvaluationDimensionController : UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         selectedKey = textField.viewParam!["key"] as! String

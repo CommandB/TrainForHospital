@@ -310,6 +310,11 @@ class PersonSelectorController: HBaseViewController {
             submitParam.merge(param)
             
         }
+        
+        if submitParam["officeid"] as! Int == -1{
+            submitParam.removeValue(forKey: "officeid")
+        }
+        
         print("查询参数=\(submitParam)")
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT + "/rest/app/searchPerson.do"
@@ -584,38 +589,6 @@ class PersonSelectorController: HBaseViewController {
         (view.viewWithTag(40002) as! UIButton).setImage(UIImage(named: "未选择-大"), for: .normal)
     }
     
-    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        MBProgressHUD.showAdded(to: view, animated: true)
-        var cds = [String : [JSON]]()
-        let str = textField.text
-        if str == nil || str == ""{
-            cds = allPersonDir
-        }else{
-            for key in allPersonDir.keys{
-                
-                var arr = [JSON]()
-                for person in allPersonDir[key]!{
-                    
-                    if person["personname"].stringValue.range(of: str!) != nil {
-                        arr.append(person)
-                    }
-                }
-                if arr.count > 0 {
-                    cds[key] = arr
-                }
-                
-            }
-        }
-        
-        jds = cds
-        let lbl = view.viewWithTag(40001) as! UILabel
-        lbl.text = "共筛选出\(jds.count)人"
-        personCollection.reloadData()
-        MBProgressHUD.hideAllHUDs(for: view, animated: true)
-        return true
-    }
-    
 }
 
 
@@ -772,5 +745,40 @@ extension PersonSelectorController : UICollectionViewDelegate ,UICollectionViewD
         
     }
     
+}
+
+extension PersonSelectorController : UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
+        var cds = [String : [JSON]]()
+        let str = textField.text
+        if str == nil || str == ""{
+            cds = allPersonDir
+        }else{
+            for key in allPersonDir.keys{
+                
+                var arr = [JSON]()
+                for person in allPersonDir[key]!{
+                    
+                    if person["personname"].stringValue.range(of: str!) != nil {
+                        arr.append(person)
+                    }
+                }
+                if arr.count > 0 {
+                    cds[key] = arr
+                }
+                
+            }
+        }
+        
+        jds = cds
+        let lbl = view.viewWithTag(40001) as! UILabel
+        lbl.text = "共筛选出\(jds.count)人"
+        personCollection.reloadData()
+        MBProgressHUD.hideAllHUDs(for: view, animated: true)
+        return true
+    }
     
 }

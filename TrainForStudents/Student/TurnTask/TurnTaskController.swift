@@ -125,7 +125,7 @@ extension TurnTaskController : UICollectionViewDelegate , UICollectionViewDataSo
             bg.setBorder(width: 1, color: .gray)
         }
         (cell.viewWithTag(20001) as! UILabel).text = "\(data["month"])月"
-        (cell.viewWithTag(20002) as! UILabel).text = "\(data["endtime"])~\(data["starttime"])"
+        (cell.viewWithTag(20002) as! UILabel).text = "\(data["starttime"])~\(data["endtime"])"
         (cell.viewWithTag(30001) as! UILabel).text = data["officename"].stringValue
         (cell.viewWithTag(40001) as! UILabel).text = data["contacts"].stringValue == "" ? "暂无" : data["contacts"].stringValue
         (cell.viewWithTag(40002) as! UILabel).text = data["contactsphoneno"].stringValue == "" ? "暂无" : data["contactsphoneno"].stringValue

@@ -124,30 +124,7 @@ class TrainingListController : HBaseViewController{
         
     }
     
-    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        hiddenKeyBoard()
-        if txt_searchTitle!.text! == ""{
-            jds = trainingList
-            return true
-        }
-        
-        jds = [JSON]()
-        for item in trainingList{
-            let title = item["title"].stringValue
-            
-            if title.contains(txt_searchTitle!.text!){
-                jds.append(item)
-            }
-        }
-        trainingCollection.reloadData()
-        return true
-    }
     
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        jds = trainingList
-        trainingCollection.reloadData()
-        return true
-    }
     
     @objc func btn_submit(sender: UIButton){
         
@@ -208,6 +185,35 @@ extension TrainingListController : UICollectionViewDelegate , UICollectionViewDa
         
         //return CGSize(width: UIScreen.width, height: 95)
         return CGSize(width: collectionView.W - 20, height: 135)
+    }
+    
+}
+
+extension TrainingListController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hiddenKeyBoard()
+        if txt_searchTitle!.text! == ""{
+            jds = trainingList
+            return true
+        }
+        
+        jds = [JSON]()
+        for item in trainingList{
+            let title = item["title"].stringValue
+            
+            if title.contains(txt_searchTitle!.text!){
+                jds.append(item)
+            }
+        }
+        trainingCollection.reloadData()
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        jds = trainingList
+        trainingCollection.reloadData()
+        return true
     }
     
 }

@@ -72,6 +72,19 @@ THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright (c) 2019年 GTMYang &lt;oluoluoa@gmail.com&gt;
+
+在不违反中华人民共和国法律(当前和未来的新)的前提下,可用作任意用途。
+</string>
+			<key>License</key>
+			<string>MINE</string>
+			<key>Title</key>
+			<string>GTMBarcodeScanner</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>The MIT License (MIT)
 
 Copyright (c) 2016年 GTMYang &lt;oluoluoa@gmail.com&gt;

@@ -9,7 +9,8 @@
 import UIKit
 import SwiftyJSON
 
-class HomeController : HBaseViewController, UINavigationControllerDelegate{
+class HomeController : HBaseViewController, UINavigationControllerDelegate {
+    
     
     @IBOutlet weak var homeCollection: UICollectionView!
     
@@ -58,6 +59,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate{
         }else{
             myAlert(self, message: "没有相机权限")
         }
+        
         
     }
     

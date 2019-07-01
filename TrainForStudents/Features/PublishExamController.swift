@@ -317,36 +317,7 @@ class PublishExamController : HBaseViewController{
     }
     
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        let tag = textField.tag
-        if tag == 50001{
-            
-            let row = addrPicker.selectedRow(inComponent: 0)
-            let text = addrPickerImpl.dataSource[row]["facilitiesname"].stringValue
-            textField.text = text
-            submitParam["facilitiesid"] = addrPickerImpl.dataSource[row]["facilitiesid"].stringValue
-            submitParam["name"] = text
-            
-        }else if tag == 40001 || tag == 40002{
-            let t31 = view.viewWithTag(30001) as! UITextField
-            let t32 = view.viewWithTag(30002) as! UITextField
-            if t31.text == nil || t31.text == ""{
-                myAlert(self, message: "请先选择开始时间!")
-                return false
-            }
-            //设置开始时间为最小时间
-            let dateStr = "\(t31.text!) \(t32.text!):00"
-            datePicker.minimumDate = DateUtil.stringToDateTime(dateStr)
-        }else{
-            datePicker.minimumDate = nil
-            let t41 = view.viewWithTag(40001) as! UITextField
-            t41.text = ""
-            let t42 = view.viewWithTag(40002) as! UITextField
-            t42.text = ""
-        }
-        return true
-    }
+    
     
     //选监考老师
     @objc func btn_teacher_evet(sender : UIButton){
@@ -476,6 +447,41 @@ extension PublishExamController : UICollectionViewDelegate , UICollectionViewDat
         personCollection.reloadData()
         let lbl = view.viewWithTag(10001) as! UIButton
         lbl.setTitle(jds.count.description, for: .normal)
+    }
+    
+}
+
+extension PublishExamController : UITextFieldDelegate{
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        let tag = textField.tag
+        if tag == 50001{
+            
+            let row = addrPicker.selectedRow(inComponent: 0)
+            let text = addrPickerImpl.dataSource[row]["facilitiesname"].stringValue
+            textField.text = text
+            submitParam["facilitiesid"] = addrPickerImpl.dataSource[row]["facilitiesid"].stringValue
+            submitParam["name"] = text
+            
+        }else if tag == 40001 || tag == 40002{
+            let t31 = view.viewWithTag(30001) as! UITextField
+            let t32 = view.viewWithTag(30002) as! UITextField
+            if t31.text == nil || t31.text == ""{
+                myAlert(self, message: "请先选择开始时间!")
+                return false
+            }
+            //设置开始时间为最小时间
+            let dateStr = "\(t31.text!) \(t32.text!):00"
+            datePicker.minimumDate = DateUtil.stringToDateTime(dateStr)
+        }else{
+            datePicker.minimumDate = nil
+            let t41 = view.viewWithTag(40001) as! UITextField
+            t41.text = ""
+            let t42 = view.viewWithTag(40002) as! UITextField
+            t42.text = ""
+        }
+        return true
     }
     
 }

@@ -15,6 +15,7 @@ PODS:
     - BMPlayer/Core
     - NVActivityIndicatorView (~> 4.0.0)
     - SnapKit (~> 4.0.0)
+  - GTMBarcodeScanner (1.0.1)
   - GTMRefresh (1.3.6)
   - Kingfisher (4.10.1)
   - NVActivityIndicatorView (4.0.1):
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlicloudPush (~> 1.9.8)
   - BMPlayer (~> 1.0.1)
+  - GTMBarcodeScanner
   - GTMRefresh (~> 1.3.6)
   - Kingfisher (~> 4.10.1)
   - PLPlayerKit (from `https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec`)
@@ -51,6 +53,7 @@ SPEC CHECKSUMS:
   AlicloudUTDID: 79f509c3e997ef85fe307f8bfb2bb3be27f7e205
   AlicloudUtils: 9047114c9c1854205ae26db58264bf1555242ffb
   BMPlayer: 44eebf06eb01450dd14ea74b27d07c5222f0eed1
+  GTMBarcodeScanner: 22d8bb7e3dc32882f8b9be1da9947e6c8ec8c45f
   GTMRefresh: 9231cbdc1dca88d0a29daead8d6bd83314aa84dc
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   NVActivityIndicatorView: 77ed6d7b571643e24899e7858bf9ae2ee4c21f31
@@ -60,6 +63,6 @@ SPEC CHECKSUMS:
   SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: a9df28d5baa97a0b0bf3d0c535903b52e9f63ef7
+PODFILE CHECKSUM: f864908abb77917c4c1ccf9e23e2c769ec8ce806
 
 COCOAPODS: 1.4.0.beta.2

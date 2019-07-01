@@ -68,7 +68,7 @@ class TeachingPlanDetailController : HBaseViewController{
                     self.jds = json["data"]
                     
                     //需要签到 才更新二维码
-                    if self.jds["sign"].intValue == 1 && !self.isStudents{
+                    if self.jds["sign"].intValue != 0 && !self.isStudents{
                         self.timer.invalidate()
                         let timeInterval = UserDefaults.AppConfig.any(forKey: .qrCodeInvalidTime) as! NSString
                         self.timer = Timer.scheduledTimer(timeInterval: timeInterval.doubleValue , target: self, selector: #selector(self.refreshQrCode), userInfo: nil, repeats: true)
@@ -156,6 +156,7 @@ class TeachingPlanDetailController : HBaseViewController{
                 case .success(let respJson):
                     let json = JSON(respJson)
                     if json["code"].intValue == 1{
+                        print(json["qrcode"])
                         self.jds["qrcode"] = json["qrcode"]
                         self.infoCollection.reloadData()
                     }else{

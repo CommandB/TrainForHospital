@@ -47,6 +47,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+## GTMBarcodeScanner
+
+Copyright (c) 2019年 GTMYang <oluoluoa@gmail.com>
+
+在不违反中华人民共和国法律(当前和未来的新)的前提下,可用作任意用途。
+
+
 ## GTMRefresh
 
 The MIT License (MIT)

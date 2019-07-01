@@ -459,6 +459,15 @@ extension EvaluationItemListController : UIScrollViewDelegate{
     
 }
 
+extension EvaluationItemListController : UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hiddenKeyBoard()
+        return true
+    }
+    
+}
+
 
 class EvaluationItemViewController : UIViewController,UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
@@ -572,6 +581,7 @@ class EvaluationItemViewController : UIViewController,UICollectionViewDelegate ,
         var total = 0.0
         for item in jsonDataSource{
             total += item.1["get_value"].doubleValue * item.1["numbervalue"].doubleValue
+            print("item:\(item) total:\(total)")
         }
         if total - Double(Int(total)) > 0{
             print("总分:\(total)")

@@ -42,7 +42,8 @@ class FeaturesController : UIViewController{
         btn = view.viewWithTag(30001) as! UIButton
         btn.set(image: nil, title: "历史教材", titlePosition: .bottom, additionalSpacing: 50.0, state: .normal)
         btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
-        
+        btn = view.viewWithTag(30002) as! UIButton
+        btn.addTarget(self, action: #selector(btn_features_even), for: .touchUpInside)
     }
     
     @objc func btn_features_even(sender :UIButton){
@@ -87,6 +88,9 @@ class FeaturesController : UIViewController{
             break
         case 30001: //历史教材阅读
             myPresentView(self, viewName: "historyTextbookView")
+            break
+        case 30002: //学习平台
+            myPresentView(self, viewName: "studyCenterView")
             break
         default:
             break

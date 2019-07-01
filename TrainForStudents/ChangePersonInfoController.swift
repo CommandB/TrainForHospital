@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class ChangePersonInfoController: MyBaseUIViewController   {
+class ChangePersonInfoController: MyBaseUIViewController {
     
     var sex = 0
     var selectedSexBtn = 0
@@ -17,7 +17,13 @@ class ChangePersonInfoController: MyBaseUIViewController   {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sex = Int(UserDefaults.User.string(forKey: .sex) ?? "0")!
+        let sexStr = UserDefaults.User.string(forKey: .sex) ?? "0"
+        if sexStr.isEmpty{
+            sex = 0
+        }else{
+            sex = Int(sexStr)!
+        }
+        
         
         let tag = 20001 + sex
         (view.viewWithTag(tag) as! UIButton).setTitle("🔘\(sex == 1 ? "男" : "女")", for: .normal)
