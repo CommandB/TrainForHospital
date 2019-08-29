@@ -14,6 +14,7 @@
 #import "MBProgressHUD.h"
 #import "PLPlayerKit/PLPlayerKit.h"
 #import "NSDictionary+Additions.h"
+#import "Masonry.h"
 //ali推送
 #import <CloudPushSDK/CloudPushSDK.h>
 
