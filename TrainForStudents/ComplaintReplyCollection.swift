@@ -39,7 +39,7 @@ class ComplaintReplyCollection : MyBaseCollectionView{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
         
         let contentLbl = cell.viewWithTag(10001) as! UILabel
-        contentLbl.backgroundColor = .red
+//        contentLbl.backgroundColor = .red
         contentLbl.font = titleFont
         let text = json["reply"].stringValue
         let tn = text.getLineNumberForWidth(width: contentLbl.frame.width - 10, cFont: contentLbl.font)

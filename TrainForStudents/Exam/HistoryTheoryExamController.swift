@@ -175,7 +175,7 @@ extension HistoryTheoryExamController : UICollectionViewDelegate , UICollectionV
         }
         
         switch jds["type"].intValue {
-        case 0,2:
+        case 0,2,10:
             //单选题,多选题
             return jds["answers"].arrayValue.count + 1
         case 3:
@@ -298,6 +298,7 @@ extension HistoryTheoryExamController : UICollectionViewDelegate , UICollectionV
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
+            
             let data = jds["answers"].arrayValue[indexPath.item - 1]
             (cell.viewWithTag(10001) as! UILabel).text = data["indexname"].stringValue
             (cell.viewWithTag(10002) as! UILabel).text = data["answervalue"].stringValue

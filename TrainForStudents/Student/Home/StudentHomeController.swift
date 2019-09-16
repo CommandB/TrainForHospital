@@ -188,6 +188,12 @@ extension StudentHomeController : UICollectionViewDelegate , UICollectionViewDat
             if taskJds.count == 0 {
                 let bg = cell.viewWithTag(11111) as! UILabel
                 bg.text = "暂无待办"
+                let btn = cell.viewWithTag(10001) as! UIButton
+                btn.setTitle("", for: .normal)
+                (cell.viewWithTag(20001) as! UILabel).text = ""
+                (cell.viewWithTag(30001) as! UILabel).text = ""
+                (cell.viewWithTag(40001) as! UILabel).text = ""
+                
                 //bg置顶
                 cell.bringSubview(toFront: bg)
                 break
