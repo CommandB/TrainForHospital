@@ -75,10 +75,31 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
         
         if let cell1 = cell as? FooterWordCell {
             cell1.bindData(dataSource1: self.requestedData[indexPath.row], title: "")
+            cell1.addLongGes(target: self, action: #selector(longPreAction))
             return cell1
         }
         return cell
         
+    }
+    
+    @objc func longPreAction(gesture:UILongPressGestureRecognizer) {
+        guard let cell = gesture.view?.superview as? UITableViewCell else { return }
+        guard let indexPath = self.tableView.indexPath(for: cell) else { return }
+        
+        let alert = UIAlertController(title: "是否确认删除", message: nil, preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            
+        }
+        let action2 = UIAlertAction(title: "确认", style: .default) { (action) in
+            if var dataArray = UserDefaults.standard.stringArray(forKey: self.fileType+"footer") {
+                dataArray.remove(at: indexPath.row)
+                UserDefaults.standard.set(dataArray, forKey: self.fileType+"footer")
+                self.initData()
+            }
+        }
+        alert.addAction(action1)
+        alert.addAction(action2)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -127,7 +148,6 @@ class FooterWordCell: UITableViewCell {
     var buttonClickCallBack : funcBlock?
     var dataSource = JSON()
     
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = UITableViewCellSelectionStyle.none
@@ -141,6 +161,11 @@ class FooterWordCell: UITableViewCell {
         self.contentView.addSubview(self.titleLabel)
         self.contentView.addSubview(self.dateLabel)
         self.contentView.addSubview(self.passPeopleLabel)
+    }
+    
+    func addLongGes(target:Any,action:Selector) {
+        let longPressGes = UILongPressGestureRecognizer(target: target, action: action)
+        self.contentView.addGestureRecognizer(longPressGes)
     }
     
     func setUpContrains() {
