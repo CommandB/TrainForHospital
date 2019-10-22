@@ -442,7 +442,7 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
         alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { action in
             MBProgressHUD.showAdded(to: self.view, animated: true)
             let url = SERVER_PORT + "rest/app/trainAnswer.do"
-            myPostRequest(url,["trainid":self.taskInfo["trainid"],"answer":"1","answerreason":txt.text], method: .post).responseJSON(completionHandler: { resp in
+            myPostRequest(url,["trainid":self.taskInfo["trainid"],"answer":"99","answerreason":txt.text], method: .post).responseJSON(completionHandler: { resp in
                 MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
                 switch resp.result{
                 case .success(let respJson):
