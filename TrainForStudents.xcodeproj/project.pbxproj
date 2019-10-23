@@ -412,14 +412,16 @@
 		0AFE94241F209874009C4CDF /* MyCollectionBaseFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE94231F209874009C4CDF /* MyCollectionBaseFooter.swift */; };
 		0AFE94261F209C3F009C4CDF /* MyNoDataCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE94251F209C3F009C4CDF /* MyNoDataCellView.swift */; };
 		0AFE94281F209D46009C4CDF /* MyBaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE94271F209D46009C4CDF /* MyBaseCollectionView.swift */; };
+		2AE46D1C235FF7BE00964DED /* NewsChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D0F235FF7BD00964DED /* NewsChannelCell.swift */; };
+		2AE46D1D235FF7BE00964DED /* NewsOfficeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D1B235FF7BE00964DED /* NewsOfficeCell.swift */; };
+		2AE46D23235FF90A00964DED /* learn_footprint.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE46D1E235FF90800964DED /* learn_footprint.png */; };
+		2AE46D24235FF90A00964DED /* learn_collection.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE46D1F235FF90900964DED /* learn_collection.png */; };
+		2AE46D25235FF90A00964DED /* learn_brush_problem.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE46D20235FF90900964DED /* learn_brush_problem.png */; };
+		2AE46D26235FF90A00964DED /* learn_live_broadcast.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE46D21235FF90900964DED /* learn_live_broadcast.png */; };
+		2AE46D27235FF90A00964DED /* learn_other.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE46D22235FF90900964DED /* learn_other.png */; };
 		351DE4A8F35C513E54679BCA /* Pods_TrainForStudents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734644A1ED16B32D9EAD775A /* Pods_TrainForStudents.framework */; };
 		930E47DD230BE4B600B78737 /* topBackgroundIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47DC230BE4B500B78737 /* topBackgroundIcon.png */; };
 		930E47E3230BF28200B78737 /* newsDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47E2230BF28200B78737 /* newsDefault.png */; };
-		930E47F5230C0C5F00B78737 /* learn_live_broadcast.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47F0230C0C5A00B78737 /* learn_live_broadcast.png */; };
-		930E47F6230C0C5F00B78737 /* learn_footprint.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47F1230C0C5B00B78737 /* learn_footprint.png */; };
-		930E47F7230C0C5F00B78737 /* learn_collection.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47F2230C0C5C00B78737 /* learn_collection.png */; };
-		930E47F8230C0C5F00B78737 /* learn_brush_problem.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47F3230C0C5D00B78737 /* learn_brush_problem.png */; };
-		930E47F9230C0C5F00B78737 /* learn_other.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47F4230C0C5E00B78737 /* learn_other.png */; };
 		930E4811230D78A500B78737 /* FileSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E4810230D78A400B78737 /* FileSubView.swift */; };
 		930E481E230D828600B78737 /* FileSubviewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E481D230D828600B78737 /* FileSubviewsController.swift */; };
 		930E4822230D85D500B78737 /* subFiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E4821230D85D500B78737 /* subFiles.png */; };
@@ -436,9 +438,7 @@
 		930E48D62312934400B78737 /* OpenFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E48D52312934300B78737 /* OpenFileViewController.swift */; };
 		930E48D8231296E500B78737 /* NewsBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E48D7231296E500B78737 /* NewsBaseViewController.swift */; };
 		930E48E023129E1300B78737 /* xiazai.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E48DF23129E1100B78737 /* xiazai.png */; };
-		9354822922FE736900E17394 /* NewsChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354822822FE736900E17394 /* NewsChannelCell.swift */; };
 		9354823622FE741600E17394 /* NewsChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354823522FE741600E17394 /* NewsChannelView.swift */; };
-		9354823822FE949D00E17394 /* NewsOfficeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354823722FE949D00E17394 /* NewsOfficeCell.swift */; };
 		9354823C22FECB0000E17394 /* NewsPageHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354823B22FECB0000E17394 /* NewsPageHeadView.swift */; };
 		9354823F22FED00C00E17394 /* BaseFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354823E22FED00C00E17394 /* BaseFileViewController.swift */; };
 		9354824122FED20400E17394 /* FileDownHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354824022FED20400E17394 /* FileDownHeadView.swift */; };
@@ -1375,16 +1375,18 @@
 		0AFE94231F209874009C4CDF /* MyCollectionBaseFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionBaseFooter.swift; sourceTree = "<group>"; };
 		0AFE94251F209C3F009C4CDF /* MyNoDataCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNoDataCellView.swift; sourceTree = "<group>"; };
 		0AFE94271F209D46009C4CDF /* MyBaseCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBaseCollectionView.swift; sourceTree = "<group>"; };
+		2AE46D0F235FF7BD00964DED /* NewsChannelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsChannelCell.swift; path = "../../../九华/TrainForHospital-1.1.0study/TrainForStudents/News/NewsChannelCell.swift"; sourceTree = "<group>"; };
+		2AE46D1B235FF7BE00964DED /* NewsOfficeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsOfficeCell.swift; path = "../../../九华/TrainForHospital-1.1.0study/TrainForStudents/News/NewsOfficeCell.swift"; sourceTree = "<group>"; };
+		2AE46D1E235FF90800964DED /* learn_footprint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_footprint.png; sourceTree = "<group>"; };
+		2AE46D1F235FF90900964DED /* learn_collection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_collection.png; sourceTree = "<group>"; };
+		2AE46D20235FF90900964DED /* learn_brush_problem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_brush_problem.png; sourceTree = "<group>"; };
+		2AE46D21235FF90900964DED /* learn_live_broadcast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_live_broadcast.png; sourceTree = "<group>"; };
+		2AE46D22235FF90900964DED /* learn_other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_other.png; sourceTree = "<group>"; };
 		734644A1ED16B32D9EAD775A /* Pods_TrainForStudents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrainForStudents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82FD0C3B5DF5EF07841E9B70 /* Pods-TrainForStudents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainForStudents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrainForStudents/Pods-TrainForStudents.debug.xcconfig"; sourceTree = "<group>"; };
 		8CCC089957700C973EA57112 /* Pods-TrainForStudents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainForStudents.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrainForStudents/Pods-TrainForStudents.release.xcconfig"; sourceTree = "<group>"; };
 		930E47DC230BE4B500B78737 /* topBackgroundIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topBackgroundIcon.png; sourceTree = "<group>"; };
 		930E47E2230BF28200B78737 /* newsDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsDefault.png; sourceTree = "<group>"; };
-		930E47F0230C0C5A00B78737 /* learn_live_broadcast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_live_broadcast.png; sourceTree = "<group>"; };
-		930E47F1230C0C5B00B78737 /* learn_footprint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_footprint.png; sourceTree = "<group>"; };
-		930E47F2230C0C5C00B78737 /* learn_collection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_collection.png; sourceTree = "<group>"; };
-		930E47F3230C0C5D00B78737 /* learn_brush_problem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_brush_problem.png; sourceTree = "<group>"; };
-		930E47F4230C0C5E00B78737 /* learn_other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_other.png; sourceTree = "<group>"; };
 		930E4810230D78A400B78737 /* FileSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSubView.swift; sourceTree = "<group>"; };
 		930E481D230D828600B78737 /* FileSubviewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSubviewsController.swift; sourceTree = "<group>"; };
 		930E4821230D85D500B78737 /* subFiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subFiles.png; sourceTree = "<group>"; };
@@ -1401,9 +1403,7 @@
 		930E48D52312934300B78737 /* OpenFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFileViewController.swift; sourceTree = "<group>"; };
 		930E48D7231296E500B78737 /* NewsBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsBaseViewController.swift; sourceTree = "<group>"; };
 		930E48DF23129E1100B78737 /* xiazai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiazai.png; sourceTree = "<group>"; };
-		9354822822FE736900E17394 /* NewsChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsChannelCell.swift; sourceTree = "<group>"; };
 		9354823522FE741600E17394 /* NewsChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsChannelView.swift; sourceTree = "<group>"; };
-		9354823722FE949D00E17394 /* NewsOfficeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsOfficeCell.swift; sourceTree = "<group>"; };
 		9354823B22FECB0000E17394 /* NewsPageHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPageHeadView.swift; sourceTree = "<group>"; };
 		9354823E22FED00C00E17394 /* BaseFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFileViewController.swift; sourceTree = "<group>"; };
 		9354824022FED20400E17394 /* FileDownHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDownHeadView.swift; sourceTree = "<group>"; };
@@ -2424,9 +2424,9 @@
 				0A16417D22408DEC002B0E50 /* NewsListController.swift */,
 				93C3C75D22FB033F00A5A108 /* NewsPageControlCell.swift */,
 				9354823B22FECB0000E17394 /* NewsPageHeadView.swift */,
-				9354822822FE736900E17394 /* NewsChannelCell.swift */,
+				2AE46D0F235FF7BD00964DED /* NewsChannelCell.swift */,
+				2AE46D1B235FF7BE00964DED /* NewsOfficeCell.swift */,
 				9354823522FE741600E17394 /* NewsChannelView.swift */,
-				9354823722FE949D00E17394 /* NewsOfficeCell.swift */,
 				930E48D7231296E500B78737 /* NewsBaseViewController.swift */,
 				9354823D22FECFED00E17394 /* Files */,
 			);
@@ -2985,11 +2985,11 @@
 		0AC3B98A1EE5868E00227194 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				930E47F3230C0C5D00B78737 /* learn_brush_problem.png */,
-				930E47F2230C0C5C00B78737 /* learn_collection.png */,
-				930E47F1230C0C5B00B78737 /* learn_footprint.png */,
-				930E47F0230C0C5A00B78737 /* learn_live_broadcast.png */,
-				930E47F4230C0C5E00B78737 /* learn_other.png */,
+				2AE46D20235FF90900964DED /* learn_brush_problem.png */,
+				2AE46D1F235FF90900964DED /* learn_collection.png */,
+				2AE46D1E235FF90800964DED /* learn_footprint.png */,
+				2AE46D21235FF90900964DED /* learn_live_broadcast.png */,
+				2AE46D22235FF90900964DED /* learn_other.png */,
 				B44FFFED211C7BC000844C07 /* 返回@2x.png */,
 				B44FFFEE211C7BC000844C07 /* 返回@3x.png */,
 				B44FFFE9211C763600844C07 /* topBack.png */,
@@ -3642,7 +3642,6 @@
 				0AC3B93F1EE4730B00227194 /* LaunchScreen.storyboard in Resources */,
 				930E48E023129E1300B78737 /* xiazai.png in Resources */,
 				0A7818F41F32F6990072CF16 /* 远程3x.png in Resources */,
-				930E47F6230C0C5F00B78737 /* learn_footprint.png in Resources */,
 				0AC3B93C1EE4730B00227194 /* Assets.xcassets in Resources */,
 				0A3A7F89219425F500334307 /* 紧急.png in Resources */,
 				0A0E20A121F5A23E00DAD2FE /* 考试试卷.png in Resources */,
@@ -3656,7 +3655,6 @@
 				0A6DD15521213BD900060A4A /* 扫一扫-白.png in Resources */,
 				0A15D51E1F0C9B7F00908B7F /* wenhao.png in Resources */,
 				0AD1454521797B47004670A9 /* 星形1.png in Resources */,
-				930E47F7230C0C5F00B78737 /* learn_collection.png in Resources */,
 				930E48C2231130B600B78737 /* newsFilesExcel.png in Resources */,
 				0A15D54F1F0EA46000908B7F /* 轮转-灰.png in Resources */,
 				0A17CE9A221E938C0057A395 /* 讲课素材.png in Resources */,
@@ -3677,6 +3675,7 @@
 				0A644D5D1EFD0A9A009025DD /* OutlineItem.xib in Resources */,
 				930E48C3231130B600B78737 /* newsFilesPDF.png in Resources */,
 				930E48C1231130B600B78737 /* newsFilesWord.png in Resources */,
+				2AE46D24235FF90A00964DED /* learn_collection.png in Resources */,
 				0A6B344921747AD0007FF54D /* 360评价.png in Resources */,
 				0A940F0E21A2AB87001BEE9D /* 第一名.png in Resources */,
 				0A644D7F1F0190BE009025DD /* 试题4.png in Resources */,
@@ -3720,7 +3719,6 @@
 				0A7818F01F32F6990072CF16 /* 教材3x.png in Resources */,
 				0A123DE722422C0E00FB2BE4 /* fb-病例探讨.png in Resources */,
 				0AF9D34321805EC60068B05A /* 未选择-大.png in Resources */,
-				930E47F9230C0C5F00B78737 /* learn_other.png in Resources */,
 				0A123DEA22422C0E00FB2BE4 /* fb-监考.png in Resources */,
 				0A26BA3B219AABB20071C2DC /* 白星星-空.png in Resources */,
 				0A26BA2D219969330071C2DC /* 理论考试.png in Resources */,
@@ -3751,10 +3749,12 @@
 				0AD1454721797B47004670A9 /* 箭头2.png in Resources */,
 				0AD14570217D850B004670A9 /* 拍照.png in Resources */,
 				0A17E00821DCBF91002A4194 /* 公告-红.png in Resources */,
+				2AE46D26235FF90A00964DED /* learn_live_broadcast.png in Resources */,
 				0A7818F31F32F6990072CF16 /* 远程2x.png in Resources */,
 				0A75CF1321D7532E004E9734 /* 我的-选择.png in Resources */,
 				0A123DC82242269600FB2BE4 /* 资讯-tabbar.png in Resources */,
 				0AC3C4402189B77A006C0DAB /* 合并形状.png in Resources */,
+				2AE46D27235FF90A00964DED /* learn_other.png in Resources */,
 				0AC3C44C218FE32D006C0DAB /* 箭头.png in Resources */,
 				0A1941BD22C0D39900225323 /* pdf.png in Resources */,
 				0A17DFFE21DCB795002A4194 /* 圆形感叹号-蓝.png in Resources */,
@@ -3776,6 +3776,7 @@
 				0AC3C4562190304C006C0DAB /* release-360评价.png in Resources */,
 				0A15D5581F0EA52D00908B7F /* 我的.png in Resources */,
 				0A123DC92242269600FB2BE4 /* 首页-tabbar.png in Resources */,
+				2AE46D25235FF90A00964DED /* learn_brush_problem.png in Resources */,
 				0A17E00721DCBF91002A4194 /* 发布事件.png in Resources */,
 				0A6B343621747AAF007FF54D /* 新消息.png in Resources */,
 				0A239A01223CE81B00EFB9BF /* location-gary.png in Resources */,
@@ -3832,6 +3833,7 @@
 				930E48D42312210F00B78737 /* shoucang2.png in Resources */,
 				0A15D5551F0EA52D00908B7F /* 考评-灰.png in Resources */,
 				0AC3C45221902908006C0DAB /* 选择-方.png in Resources */,
+				2AE46D23235FF90A00964DED /* learn_footprint.png in Resources */,
 				0A1299A1224DFBC000F99176 /* 技能考试-icon.png in Resources */,
 				0A14BD9021DDF88600261797 /* 公告-蓝.png in Resources */,
 				0A42F8331F1E01B2001DF281 /* artboard.png in Resources */,
@@ -3842,8 +3844,6 @@
 				0A3A7F872194225A00334307 /* 日历.png in Resources */,
 				0AF9D34421805EC60068B05A /* 选择-大.png in Resources */,
 				0A123DCA2242269600FB2BE4 /* 我的-tabbar.png in Resources */,
-				930E47F8230C0C5F00B78737 /* learn_brush_problem.png in Resources */,
-				930E47F5230C0C5F00B78737 /* learn_live_broadcast.png in Resources */,
 				0A75CF1421D7532E004E9734 /* 资讯-选择.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3929,6 +3929,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AE46D1D235FF7BE00964DED /* NewsOfficeCell.swift in Sources */,
 				B4FF1A931F94DF7D009C6685 /* UIImageView+WebCache.m in Sources */,
 				0AC7C41A22829FD0004EA009 /* HistorySearchController.swift in Sources */,
 				0A667BC92084B14800594BE7 /* LiveController.swift in Sources */,
@@ -4086,7 +4087,6 @@
 				0AAFD70322549F76002C9729 /* ExerciseCenterController.swift in Sources */,
 				B4FF1A8E1F94DF7D009C6685 /* SDWebImagePrefetcher.m in Sources */,
 				B4F9E8781F91014A0001D88F /* OtherFilesController.swift in Sources */,
-				9354823822FE949D00E17394 /* NewsOfficeCell.swift in Sources */,
 				0A15D50F1F0BA58500908B7F /* TextFieldForNoMenu.swift in Sources */,
 				0A644D6F1F0179C6009025DD /* HistoryExamController.swift in Sources */,
 				0A15C3661F494A4700C53F61 /* DifficultDetailController.swift in Sources */,
@@ -4098,7 +4098,6 @@
 				0A2B356521C9104900E17AC9 /* ExamResultController.swift in Sources */,
 				0A26BA35219AA8690071C2DC /* EvaluationHistoryDetailController.swift in Sources */,
 				0A18ADEF223255C30070088D /* StudyController.swift in Sources */,
-				9354822922FE736900E17394 /* NewsChannelCell.swift in Sources */,
 				0AD145542179CB45004670A9 /* ToDoListController.swift in Sources */,
 				B4F9E87B1F9106DD0001D88F /* OtherFilesCell.swift in Sources */,
 				0AC3B9331EE4730B00227194 /* AppDelegate.swift in Sources */,
@@ -4172,6 +4171,7 @@
 				0AC3BCA01EE94DA300227194 /* LBXScanNetAnimation.swift in Sources */,
 				0A2399EF223CD90B00EFB9BF /* ExamListController.swift in Sources */,
 				0A0EB4EF2253394900FA2D84 /* TurnTaskController.swift in Sources */,
+				2AE46D1C235FF7BE00964DED /* NewsChannelCell.swift in Sources */,
 				0A125A901F29D1FF00FDD4F4 /* ChangePasswordController.swift in Sources */,
 				B4FF1A891F94DF7D009C6685 /* SDWebImageCompat.m in Sources */,
 				0A1941A722C0A8CF00225323 /* StudyCenterController.swift in Sources */,
