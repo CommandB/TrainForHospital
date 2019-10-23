@@ -75,7 +75,10 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
     }
     
     @IBAction func btn_forgotPassword_inside(_ sender: UIButton) {
-        myAlert(self, message: "请联系科教处!")
+        let nav = UINavigationController(rootViewController: ForgotPasswordViewController())
+        
+        self.present(nav, animated: true, completion: nil)
+        
     }
     
     
@@ -302,7 +305,7 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                     let token = json["token"].stringValue
                     r_token = token
                     UserDefaults.standard.set(token, forKey: LoginInfo.token.rawValue)
-                    
+
                     //如果本次登录账号和上次登录账号不一样 则清除缓存的考试数据并修改本地缓存
                     let preLoginId = UserDefaults.standard.string(forKey: LoginInfo.loginId.rawValue)
                     if preLoginId != self.txt_loginId.text!{

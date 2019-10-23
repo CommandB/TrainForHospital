@@ -413,6 +413,54 @@
 		0AFE94261F209C3F009C4CDF /* MyNoDataCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE94251F209C3F009C4CDF /* MyNoDataCellView.swift */; };
 		0AFE94281F209D46009C4CDF /* MyBaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE94271F209D46009C4CDF /* MyBaseCollectionView.swift */; };
 		351DE4A8F35C513E54679BCA /* Pods_TrainForStudents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734644A1ED16B32D9EAD775A /* Pods_TrainForStudents.framework */; };
+		930E47DD230BE4B600B78737 /* topBackgroundIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47DC230BE4B500B78737 /* topBackgroundIcon.png */; };
+		930E47E3230BF28200B78737 /* newsDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47E2230BF28200B78737 /* newsDefault.png */; };
+		930E47F5230C0C5F00B78737 /* learn_live_broadcast.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47F0230C0C5A00B78737 /* learn_live_broadcast.png */; };
+		930E47F6230C0C5F00B78737 /* learn_footprint.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47F1230C0C5B00B78737 /* learn_footprint.png */; };
+		930E47F7230C0C5F00B78737 /* learn_collection.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47F2230C0C5C00B78737 /* learn_collection.png */; };
+		930E47F8230C0C5F00B78737 /* learn_brush_problem.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47F3230C0C5D00B78737 /* learn_brush_problem.png */; };
+		930E47F9230C0C5F00B78737 /* learn_other.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47F4230C0C5E00B78737 /* learn_other.png */; };
+		930E4811230D78A500B78737 /* FileSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E4810230D78A400B78737 /* FileSubView.swift */; };
+		930E481E230D828600B78737 /* FileSubviewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E481D230D828600B78737 /* FileSubviewsController.swift */; };
+		930E4822230D85D500B78737 /* subFiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E4821230D85D500B78737 /* subFiles.png */; };
+		930E48AA2310C6E100B78737 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E48A92310C6E100B78737 /* ForgotPasswordViewController.swift */; };
+		930E48AC2310D76000B78737 /* GradientLayerBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E48AB2310D76000B78737 /* GradientLayerBaseView.swift */; };
+		930E48AE2310DA7F00B78737 /* GradientLayerBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E48AD2310DA7F00B78737 /* GradientLayerBaseButton.swift */; };
+		930E48C0231130B600B78737 /* newsFilesMP4.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E48B0231130AF00B78737 /* newsFilesMP4.png */; };
+		930E48C1231130B600B78737 /* newsFilesWord.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E48BC231130B100B78737 /* newsFilesWord.png */; };
+		930E48C2231130B600B78737 /* newsFilesExcel.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E48BD231130B300B78737 /* newsFilesExcel.png */; };
+		930E48C3231130B600B78737 /* newsFilesPDF.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E48BE231130B400B78737 /* newsFilesPDF.png */; };
+		930E48C4231130B600B78737 /* newsFilesPPT.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E48BF231130B500B78737 /* newsFilesPPT.png */; };
+		930E48D32312210F00B78737 /* shoucang1.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E48C62312210C00B78737 /* shoucang1.png */; };
+		930E48D42312210F00B78737 /* shoucang2.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E48D22312210E00B78737 /* shoucang2.png */; };
+		930E48D62312934400B78737 /* OpenFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E48D52312934300B78737 /* OpenFileViewController.swift */; };
+		930E48D8231296E500B78737 /* NewsBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E48D7231296E500B78737 /* NewsBaseViewController.swift */; };
+		930E48E023129E1300B78737 /* xiazai.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E48DF23129E1100B78737 /* xiazai.png */; };
+		9354822922FE736900E17394 /* NewsChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354822822FE736900E17394 /* NewsChannelCell.swift */; };
+		9354823622FE741600E17394 /* NewsChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354823522FE741600E17394 /* NewsChannelView.swift */; };
+		9354823822FE949D00E17394 /* NewsOfficeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354823722FE949D00E17394 /* NewsOfficeCell.swift */; };
+		9354823C22FECB0000E17394 /* NewsPageHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354823B22FECB0000E17394 /* NewsPageHeadView.swift */; };
+		9354823F22FED00C00E17394 /* BaseFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354823E22FED00C00E17394 /* BaseFileViewController.swift */; };
+		9354824122FED20400E17394 /* FileDownHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354824022FED20400E17394 /* FileDownHeadView.swift */; };
+		9354825C22FED62E00E17394 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9354824422FED62E00E17394 /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		9354825D22FED62E00E17394 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9354824D22FED62E00E17394 /* ViewController+MASAdditions.m */; };
+		9354825E22FED62E00E17394 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9354825122FED62E00E17394 /* MASCompositeConstraint.m */; };
+		9354825F22FED62E00E17394 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9354825222FED62E00E17394 /* MASConstraintMaker.m */; };
+		9354826022FED62E00E17394 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9354825322FED62E00E17394 /* MASLayoutConstraint.m */; };
+		9354826122FED62E00E17394 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9354825422FED62E00E17394 /* NSArray+MASAdditions.m */; };
+		9354826222FED62E00E17394 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9354825522FED62E00E17394 /* View+MASAdditions.m */; };
+		9354826322FED62E00E17394 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9354825822FED62E00E17394 /* MASConstraint.m */; };
+		9354826422FED62E00E17394 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9354825A22FED62E00E17394 /* MASViewConstraint.m */; };
+		9354826522FED62E00E17394 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9354825B22FED62E00E17394 /* MASViewAttribute.m */; };
+		9374EF8B2314C69200B48486 /* FileCachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374EF8A2314C69200B48486 /* FileCachedData.swift */; };
+		9374EF992314FA8F00B48486 /* CollectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374EF982314FA8F00B48486 /* CollectViewController.swift */; };
+		9374EFB62316119900B48486 /* CollectWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374EFB52316119900B48486 /* CollectWordViewController.swift */; };
+		9374EFBE2317A93B00B48486 /* SetNewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374EFBD2317A93B00B48486 /* SetNewPasswordViewController.swift */; };
+		9374EFD02317D64700B48486 /* FooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374EFCF2317D64700B48486 /* FooterViewController.swift */; };
+		9374EFDD2317D72B00B48486 /* FooterWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374EFDC2317D72B00B48486 /* FooterWordViewController.swift */; };
+		93A6FA77230934470098AD52 /* FIleWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A6FA76230934460098AD52 /* FIleWordViewController.swift */; };
+		93C3C74D22F99D8F00A5A108 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C74C22F99D8F00A5A108 /* UIDevice.swift */; };
+		93C3C75E22FB034000A5A108 /* NewsPageControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3C75D22FB033F00A5A108 /* NewsPageControlCell.swift */; };
 		B44FFFD9211C6BBD00844C07 /* OfficePeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFD2211C6BBD00844C07 /* OfficePeopleViewController.swift */; };
 		B44FFFDA211C6BBD00844C07 /* OfficePeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFD3211C6BBD00844C07 /* OfficePeopleCell.swift */; };
 		B44FFFDB211C6BBD00844C07 /* JHTrainingChangedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FFFD5211C6BBD00844C07 /* JHTrainingChangedCell.swift */; };
@@ -1330,6 +1378,69 @@
 		734644A1ED16B32D9EAD775A /* Pods_TrainForStudents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrainForStudents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82FD0C3B5DF5EF07841E9B70 /* Pods-TrainForStudents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainForStudents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrainForStudents/Pods-TrainForStudents.debug.xcconfig"; sourceTree = "<group>"; };
 		8CCC089957700C973EA57112 /* Pods-TrainForStudents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainForStudents.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrainForStudents/Pods-TrainForStudents.release.xcconfig"; sourceTree = "<group>"; };
+		930E47DC230BE4B500B78737 /* topBackgroundIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topBackgroundIcon.png; sourceTree = "<group>"; };
+		930E47E2230BF28200B78737 /* newsDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsDefault.png; sourceTree = "<group>"; };
+		930E47F0230C0C5A00B78737 /* learn_live_broadcast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_live_broadcast.png; sourceTree = "<group>"; };
+		930E47F1230C0C5B00B78737 /* learn_footprint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_footprint.png; sourceTree = "<group>"; };
+		930E47F2230C0C5C00B78737 /* learn_collection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_collection.png; sourceTree = "<group>"; };
+		930E47F3230C0C5D00B78737 /* learn_brush_problem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_brush_problem.png; sourceTree = "<group>"; };
+		930E47F4230C0C5E00B78737 /* learn_other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_other.png; sourceTree = "<group>"; };
+		930E4810230D78A400B78737 /* FileSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSubView.swift; sourceTree = "<group>"; };
+		930E481D230D828600B78737 /* FileSubviewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSubviewsController.swift; sourceTree = "<group>"; };
+		930E4821230D85D500B78737 /* subFiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subFiles.png; sourceTree = "<group>"; };
+		930E48A92310C6E100B78737 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		930E48AB2310D76000B78737 /* GradientLayerBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayerBaseView.swift; sourceTree = "<group>"; };
+		930E48AD2310DA7F00B78737 /* GradientLayerBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayerBaseButton.swift; sourceTree = "<group>"; };
+		930E48B0231130AF00B78737 /* newsFilesMP4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsFilesMP4.png; sourceTree = "<group>"; };
+		930E48BC231130B100B78737 /* newsFilesWord.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsFilesWord.png; sourceTree = "<group>"; };
+		930E48BD231130B300B78737 /* newsFilesExcel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsFilesExcel.png; sourceTree = "<group>"; };
+		930E48BE231130B400B78737 /* newsFilesPDF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsFilesPDF.png; sourceTree = "<group>"; };
+		930E48BF231130B500B78737 /* newsFilesPPT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsFilesPPT.png; sourceTree = "<group>"; };
+		930E48C62312210C00B78737 /* shoucang1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoucang1.png; sourceTree = "<group>"; };
+		930E48D22312210E00B78737 /* shoucang2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoucang2.png; sourceTree = "<group>"; };
+		930E48D52312934300B78737 /* OpenFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFileViewController.swift; sourceTree = "<group>"; };
+		930E48D7231296E500B78737 /* NewsBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsBaseViewController.swift; sourceTree = "<group>"; };
+		930E48DF23129E1100B78737 /* xiazai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiazai.png; sourceTree = "<group>"; };
+		9354822822FE736900E17394 /* NewsChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsChannelCell.swift; sourceTree = "<group>"; };
+		9354823522FE741600E17394 /* NewsChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsChannelView.swift; sourceTree = "<group>"; };
+		9354823722FE949D00E17394 /* NewsOfficeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsOfficeCell.swift; sourceTree = "<group>"; };
+		9354823B22FECB0000E17394 /* NewsPageHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPageHeadView.swift; sourceTree = "<group>"; };
+		9354823E22FED00C00E17394 /* BaseFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFileViewController.swift; sourceTree = "<group>"; };
+		9354824022FED20400E17394 /* FileDownHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDownHeadView.swift; sourceTree = "<group>"; };
+		9354824322FED62E00E17394 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
+		9354824422FED62E00E17394 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		9354824522FED62E00E17394 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
+		9354824622FED62E00E17394 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
+		9354824722FED62E00E17394 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		9354824822FED62E00E17394 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
+		9354824922FED62E00E17394 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
+		9354824A22FED62E00E17394 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		9354824B22FED62E00E17394 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
+		9354824C22FED62E00E17394 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
+		9354824D22FED62E00E17394 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		9354824E22FED62E00E17394 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
+		9354824F22FED62E00E17394 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
+		9354825022FED62E00E17394 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		9354825122FED62E00E17394 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
+		9354825222FED62E00E17394 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
+		9354825322FED62E00E17394 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
+		9354825422FED62E00E17394 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		9354825522FED62E00E17394 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
+		9354825622FED62E00E17394 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		9354825722FED62E00E17394 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
+		9354825822FED62E00E17394 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
+		9354825922FED62E00E17394 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
+		9354825A22FED62E00E17394 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
+		9354825B22FED62E00E17394 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		9374EF8A2314C69200B48486 /* FileCachedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCachedData.swift; sourceTree = "<group>"; };
+		9374EF982314FA8F00B48486 /* CollectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectViewController.swift; sourceTree = "<group>"; };
+		9374EFB52316119900B48486 /* CollectWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectWordViewController.swift; sourceTree = "<group>"; };
+		9374EFBD2317A93B00B48486 /* SetNewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNewPasswordViewController.swift; sourceTree = "<group>"; };
+		9374EFCF2317D64700B48486 /* FooterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterViewController.swift; sourceTree = "<group>"; };
+		9374EFDC2317D72B00B48486 /* FooterWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterWordViewController.swift; sourceTree = "<group>"; };
+		93A6FA76230934460098AD52 /* FIleWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIleWordViewController.swift; sourceTree = "<group>"; };
+		93C3C74C22F99D8F00A5A108 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		93C3C75D22FB033F00A5A108 /* NewsPageControlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPageControlCell.swift; sourceTree = "<group>"; };
 		B44FFFD2211C6BBD00844C07 /* OfficePeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficePeopleViewController.swift; sourceTree = "<group>"; };
 		B44FFFD3211C6BBD00844C07 /* OfficePeopleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficePeopleCell.swift; sourceTree = "<group>"; };
 		B44FFFD5211C6BBD00844C07 /* JHTrainingChangedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHTrainingChangedCell.swift; sourceTree = "<group>"; };
@@ -2311,6 +2422,13 @@
 			isa = PBXGroup;
 			children = (
 				0A16417D22408DEC002B0E50 /* NewsListController.swift */,
+				93C3C75D22FB033F00A5A108 /* NewsPageControlCell.swift */,
+				9354823B22FECB0000E17394 /* NewsPageHeadView.swift */,
+				9354822822FE736900E17394 /* NewsChannelCell.swift */,
+				9354823522FE741600E17394 /* NewsChannelView.swift */,
+				9354823722FE949D00E17394 /* NewsOfficeCell.swift */,
+				930E48D7231296E500B78737 /* NewsBaseViewController.swift */,
+				9354823D22FECFED00E17394 /* Files */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -2337,6 +2455,7 @@
 				0A97555321A50A7800267E10 /* HUIScrollView.swift */,
 				0A0E20A621F7052D00DAD2FE /* Dictionary.swift */,
 				0A17D70A2283DB2400F49CE1 /* UIPickerView.swift */,
+				93C3C74C22F99D8F00A5A108 /* UIDevice.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2546,6 +2665,15 @@
 		0A6B327321746BFE007FF54D /* image */ = {
 			isa = PBXGroup;
 			children = (
+				930E48DF23129E1100B78737 /* xiazai.png */,
+				930E48C62312210C00B78737 /* shoucang1.png */,
+				930E48D22312210E00B78737 /* shoucang2.png */,
+				930E4821230D85D500B78737 /* subFiles.png */,
+				930E48BD231130B300B78737 /* newsFilesExcel.png */,
+				930E48B0231130AF00B78737 /* newsFilesMP4.png */,
+				930E48BE231130B400B78737 /* newsFilesPDF.png */,
+				930E48BF231130B500B78737 /* newsFilesPPT.png */,
+				930E48BC231130B100B78737 /* newsFilesWord.png */,
 				0A01F0FE225DA154009087B2 /* 二维码-home.png */,
 				0A01F0FF225DA156009087B2 /* 扫一扫-home.png */,
 				0A01F100225DA157009087B2 /* 题目练习-home.png */,
@@ -2562,6 +2690,7 @@
 				0A17CE96221E93860057A395 /* 主讲人.png */,
 				0A1214AE21EF1AC300BA17EE /* 读书报告.png */,
 				0A1214A321EF1ABF00BA17EE /* 面授.png */,
+				930E47DC230BE4B500B78737 /* topBackgroundIcon.png */,
 				0A1214B021EF1AC700BA17EE /* 入科教育.png */,
 				0A1214AD21EF1AC200BA17EE /* 自主训练.png */,
 				0A16C2F521E33ED500C6B319 /* 二维码-icon.png */,
@@ -2797,6 +2926,7 @@
 				B4FF1A601F94DF7D009C6685 /* Venders */,
 				0AD004AD213D27D1008D3062 /* WebViewController.swift */,
 				0AC3B9971EE6A60700227194 /* LoginViewController.swift */,
+				930E489D2310C67500B78737 /* ForgetPassword */,
 				0AC3B9321EE4730B00227194 /* AppDelegate.swift */,
 				0A210FE020B44C1E006BC5C9 /* WebViewTestController.swift */,
 				0AC3B9461EE4732700227194 /* CircleDataView.swift */,
@@ -2855,10 +2985,16 @@
 		0AC3B98A1EE5868E00227194 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				930E47F3230C0C5D00B78737 /* learn_brush_problem.png */,
+				930E47F2230C0C5C00B78737 /* learn_collection.png */,
+				930E47F1230C0C5B00B78737 /* learn_footprint.png */,
+				930E47F0230C0C5A00B78737 /* learn_live_broadcast.png */,
+				930E47F4230C0C5E00B78737 /* learn_other.png */,
 				B44FFFED211C7BC000844C07 /* 返回@2x.png */,
 				B44FFFEE211C7BC000844C07 /* 返回@3x.png */,
 				B44FFFE9211C763600844C07 /* topBack.png */,
 				B46D5F5321076E3900A1C3C7 /* excel.png */,
+				930E47E2230BF28200B78737 /* newsDefault.png */,
 				0A494F9B211C286E00E95332 /* office_person.png */,
 				0A494F9A211C286D00E95332 /* office_plan.png */,
 				B46D5F5121076E2E00A1C3C7 /* 暂停.png */,
@@ -3016,6 +3152,75 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		930E489D2310C67500B78737 /* ForgetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				930E48A92310C6E100B78737 /* ForgotPasswordViewController.swift */,
+				9374EFBD2317A93B00B48486 /* SetNewPasswordViewController.swift */,
+				930E48AB2310D76000B78737 /* GradientLayerBaseView.swift */,
+				930E48AD2310DA7F00B78737 /* GradientLayerBaseButton.swift */,
+			);
+			path = ForgetPassword;
+			sourceTree = "<group>";
+		};
+		9354823D22FECFED00E17394 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				9354823E22FED00C00E17394 /* BaseFileViewController.swift */,
+				9374EFA92316112400B48486 /* 收藏文件 */,
+				930E481D230D828600B78737 /* FileSubviewsController.swift */,
+				930E4810230D78A400B78737 /* FileSubView.swift */,
+				9354824022FED20400E17394 /* FileDownHeadView.swift */,
+				93A6FA76230934460098AD52 /* FIleWordViewController.swift */,
+				930E48D52312934300B78737 /* OpenFileViewController.swift */,
+				9374EF8A2314C69200B48486 /* FileCachedData.swift */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
+		9354824222FED62E00E17394 /* Masonry */ = {
+			isa = PBXGroup;
+			children = (
+				9354824322FED62E00E17394 /* MASCompositeConstraint.h */,
+				9354824422FED62E00E17394 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				9354824522FED62E00E17394 /* MASConstraint+Private.h */,
+				9354824622FED62E00E17394 /* MASLayoutConstraint.h */,
+				9354824722FED62E00E17394 /* NSArray+MASShorthandAdditions.h */,
+				9354824822FED62E00E17394 /* MASConstraintMaker.h */,
+				9354824922FED62E00E17394 /* View+MASAdditions.h */,
+				9354824A22FED62E00E17394 /* NSArray+MASAdditions.h */,
+				9354824B22FED62E00E17394 /* MASUtilities.h */,
+				9354824C22FED62E00E17394 /* MASViewAttribute.h */,
+				9354824D22FED62E00E17394 /* ViewController+MASAdditions.m */,
+				9354824E22FED62E00E17394 /* MASViewConstraint.h */,
+				9354824F22FED62E00E17394 /* MASConstraint.h */,
+				9354825022FED62E00E17394 /* NSLayoutConstraint+MASDebugAdditions.h */,
+				9354825122FED62E00E17394 /* MASCompositeConstraint.m */,
+				9354825222FED62E00E17394 /* MASConstraintMaker.m */,
+				9354825322FED62E00E17394 /* MASLayoutConstraint.m */,
+				9354825422FED62E00E17394 /* NSArray+MASAdditions.m */,
+				9354825522FED62E00E17394 /* View+MASAdditions.m */,
+				9354825622FED62E00E17394 /* View+MASShorthandAdditions.h */,
+				9354825722FED62E00E17394 /* Masonry.h */,
+				9354825822FED62E00E17394 /* MASConstraint.m */,
+				9354825922FED62E00E17394 /* ViewController+MASAdditions.h */,
+				9354825A22FED62E00E17394 /* MASViewConstraint.m */,
+				9354825B22FED62E00E17394 /* MASViewAttribute.m */,
+			);
+			path = Masonry;
+			sourceTree = "<group>";
+		};
+		9374EFA92316112400B48486 /* 收藏文件 */ = {
+			isa = PBXGroup;
+			children = (
+				9374EF982314FA8F00B48486 /* CollectViewController.swift */,
+				9374EFB52316119900B48486 /* CollectWordViewController.swift */,
+				9374EFCF2317D64700B48486 /* FooterViewController.swift */,
+				9374EFDC2317D72B00B48486 /* FooterWordViewController.swift */,
+			);
+			path = "收藏文件";
+			sourceTree = "<group>";
+		};
 		B44FFFD1211C6BBD00844C07 /* OfficePeopleControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -3163,6 +3368,7 @@
 		B4FF1A601F94DF7D009C6685 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				9354824222FED62E00E17394 /* Masonry */,
 				B49971841FBC702000192CCF /* Task.swift */,
 				B468B78C1FCA9BA000ECF396 /* MJRefresh */,
 				B475D86E1F9C4B5F00A72543 /* MBProgressHUD */,
@@ -3434,7 +3640,9 @@
 				0AD1454A21797B47004670A9 /* 星形2.png in Resources */,
 				0A3A7F6F2192942200334307 /* 入科.png in Resources */,
 				0AC3B93F1EE4730B00227194 /* LaunchScreen.storyboard in Resources */,
+				930E48E023129E1300B78737 /* xiazai.png in Resources */,
 				0A7818F41F32F6990072CF16 /* 远程3x.png in Resources */,
+				930E47F6230C0C5F00B78737 /* learn_footprint.png in Resources */,
 				0AC3B93C1EE4730B00227194 /* Assets.xcassets in Resources */,
 				0A3A7F89219425F500334307 /* 紧急.png in Resources */,
 				0A0E20A121F5A23E00DAD2FE /* 考试试卷.png in Resources */,
@@ -3448,6 +3656,8 @@
 				0A6DD15521213BD900060A4A /* 扫一扫-白.png in Resources */,
 				0A15D51E1F0C9B7F00908B7F /* wenhao.png in Resources */,
 				0AD1454521797B47004670A9 /* 星形1.png in Resources */,
+				930E47F7230C0C5F00B78737 /* learn_collection.png in Resources */,
+				930E48C2231130B600B78737 /* newsFilesExcel.png in Resources */,
 				0A15D54F1F0EA46000908B7F /* 轮转-灰.png in Resources */,
 				0A17CE9A221E938C0057A395 /* 讲课素材.png in Resources */,
 				0A6B343421747A96007FF54D /* 顶部固定2.png in Resources */,
@@ -3465,6 +3675,8 @@
 				0A01F102225DA158009087B2 /* 扫一扫-home.png in Resources */,
 				0AD1455021797FA8004670A9 /* 删除.png in Resources */,
 				0A644D5D1EFD0A9A009025DD /* OutlineItem.xib in Resources */,
+				930E48C3231130B600B78737 /* newsFilesPDF.png in Resources */,
+				930E48C1231130B600B78737 /* newsFilesWord.png in Resources */,
 				0A6B344921747AD0007FF54D /* 360评价.png in Resources */,
 				0A940F0E21A2AB87001BEE9D /* 第一名.png in Resources */,
 				0A644D7F1F0190BE009025DD /* 试题4.png in Resources */,
@@ -3495,16 +3707,20 @@
 				0A494FA0211C29D100E95332 /* 科室-灰色@2x.png in Resources */,
 				0AD1457B217D8F89004670A9 /* 操作-电话.png in Resources */,
 				0A123DE822422C0E00FB2BE4 /* fb-教学查房.png in Resources */,
+				930E47DD230BE4B600B78737 /* topBackgroundIcon.png in Resources */,
 				B4F9E87C1F9106DD0001D88F /* OtherFilesCell.xib in Resources */,
+				930E4822230D85D500B78737 /* subFiles.png in Resources */,
 				0AD14572217D850B004670A9 /* 评价.png in Resources */,
 				B44FFFF0211C7BC000844C07 /* 返回@3x.png in Resources */,
 				0A7818F81F32F7740072CF16 /* 设置.png in Resources */,
 				0AC3C44A218FE32D006C0DAB /* 历史.png in Resources */,
 				0A940F1021A2AB87001BEE9D /* 第三名.png in Resources */,
+				930E48D32312210F00B78737 /* shoucang1.png in Resources */,
 				0A123DE922422C0E00FB2BE4 /* fb-技能培训.png in Resources */,
 				0A7818F01F32F6990072CF16 /* 教材3x.png in Resources */,
 				0A123DE722422C0E00FB2BE4 /* fb-病例探讨.png in Resources */,
 				0AF9D34321805EC60068B05A /* 未选择-大.png in Resources */,
+				930E47F9230C0C5F00B78737 /* learn_other.png in Resources */,
 				0A123DEA22422C0E00FB2BE4 /* fb-监考.png in Resources */,
 				0A26BA3B219AABB20071C2DC /* 白星星-空.png in Resources */,
 				0A26BA2D219969330071C2DC /* 理论考试.png in Resources */,
@@ -3516,6 +3732,7 @@
 				0A2B356D21CB3EFA00E17AC9 /* minus.png in Resources */,
 				0A3A7F862194225A00334307 /* 无变化.png in Resources */,
 				0A0C570F1F4F00F2008551D3 /* 标签.png in Resources */,
+				930E48C4231130B600B78737 /* newsFilesPPT.png in Resources */,
 				0A7818FA1F3303260072CF16 /* 角标.png in Resources */,
 				0A0C57111F511D9D008551D3 /* 扫一扫.png in Resources */,
 				0A6B344521747AD0007FF54D /* 学员轮转.png in Resources */,
@@ -3569,7 +3786,9 @@
 				0A15D51C1F0C9A2F00908B7F /* more.png in Resources */,
 				0AC3BCAB1EE9577B00227194 /* CodeScan.bundle in Resources */,
 				0AEBF3C21F207EB200520E27 /* 结业.png in Resources */,
+				930E47E3230BF28200B78737 /* newsDefault.png in Resources */,
 				0A3A7F712192942200334307 /* 日历-蓝.png in Resources */,
+				930E48C0231130B600B78737 /* newsFilesMP4.png in Resources */,
 				0A3A7F852194225A00334307 /* 上升.png in Resources */,
 				0AD1454921797B47004670A9 /* 箭头4.png in Resources */,
 				0A6B344621747AD0007FF54D /* 教学监督.png in Resources */,
@@ -3610,6 +3829,7 @@
 				0AF9D368218963380068B05A /* 病例讨论.png in Resources */,
 				0A210FDE20B44C05006BC5C9 /* echarts.min.js in Resources */,
 				0A940F0F21A2AB87001BEE9D /* 第二名.png in Resources */,
+				930E48D42312210F00B78737 /* shoucang2.png in Resources */,
 				0A15D5551F0EA52D00908B7F /* 考评-灰.png in Resources */,
 				0AC3C45221902908006C0DAB /* 选择-方.png in Resources */,
 				0A1299A1224DFBC000F99176 /* 技能考试-icon.png in Resources */,
@@ -3622,6 +3842,8 @@
 				0A3A7F872194225A00334307 /* 日历.png in Resources */,
 				0AF9D34421805EC60068B05A /* 选择-大.png in Resources */,
 				0A123DCA2242269600FB2BE4 /* 我的-tabbar.png in Resources */,
+				930E47F8230C0C5F00B78737 /* learn_brush_problem.png in Resources */,
+				930E47F5230C0C5F00B78737 /* learn_live_broadcast.png in Resources */,
 				0A75CF1421D7532E004E9734 /* 资讯-选择.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3715,6 +3937,7 @@
 				0AC3BCAD1EE97F2400227194 /* SearchViewController.swift in Sources */,
 				0A14531321E443AD00741F5B /* JoinOfficeController.swift in Sources */,
 				0A6A23AC1EEE95BE00A1AC5B /* QuestionCollectionView.swift in Sources */,
+				9354826222FED62E00E17394 /* View+MASAdditions.m in Sources */,
 				0AFCF6AD1FFDF91D00CF044E /* FITBCollectionView.swift in Sources */,
 				0A2B356721C9109000E17AC9 /* QuestionListController.swift in Sources */,
 				0A17CE91221D2E260057A395 /* MyController.swift in Sources */,
@@ -3723,6 +3946,7 @@
 				0A0E20A721F7052D00DAD2FE /* Dictionary.swift in Sources */,
 				0A15C3681F494FD100C53F61 /* DifficultReplyView.swift in Sources */,
 				0A42F8211F160F1D001DF281 /* AssistantCollectionView.swift in Sources */,
+				930E48AA2310C6E100B78737 /* ForgotPasswordViewController.swift in Sources */,
 				0A2B355721C8F7E800E17AC9 /* StillExamController.swift in Sources */,
 				0AF25E0D217DBB4500FE5425 /* LeaveOverCollection.swift in Sources */,
 				0A31A9B721B6567A007AB138 /* PublishExamController.swift in Sources */,
@@ -3730,10 +3954,15 @@
 				0A291B6A1F429DDB008784B5 /* TaskApplyDetailImageCollectionView.swift in Sources */,
 				0AC3B9A11EE8FC0000227194 /* OverCollectionView.swift in Sources */,
 				0A1018BD21D4B5AA00E07B33 /* StudentsInExamCollection.swift in Sources */,
+				9374EFB62316119900B48486 /* CollectWordViewController.swift in Sources */,
+				930E48AE2310DA7F00B78737 /* GradientLayerBaseButton.swift in Sources */,
+				9354823C22FECB0000E17394 /* NewsPageHeadView.swift in Sources */,
+				9354826422FED62E00E17394 /* MASViewConstraint.m in Sources */,
 				0AFE94241F209874009C4CDF /* MyCollectionBaseFooter.swift in Sources */,
 				0A291B681F429AA5008784B5 /* TaskApplyDetailController.swift in Sources */,
 				B468B7C31FCA9BA000ECF396 /* MJRefreshBackGifFooter.m in Sources */,
 				0AB31E55215CAD39002E3F32 /* ComplaintListCollectionView.swift in Sources */,
+				930E48D8231296E500B78737 /* NewsBaseViewController.swift in Sources */,
 				0A210FE120B44C1F006BC5C9 /* WebViewTestController.swift in Sources */,
 				0A6A23AA1EEE8FCD00A1AC5B /* ExamViewController.swift in Sources */,
 				0A179F5722544F870072B7CB /* HistoryTurnTaskController.swift in Sources */,
@@ -3750,6 +3979,8 @@
 				0AB5AAA12105D50900A9E2EC /* HomeController.swift in Sources */,
 				0AC3B99F1EE8F9A100227194 /* UndoneCollectionView.swift in Sources */,
 				B44FFFDD211C6BBD00844C07 /* SmallLectureViewController.swift in Sources */,
+				9374EF8B2314C69200B48486 /* FileCachedData.swift in Sources */,
+				9374EF992314FA8F00B48486 /* CollectViewController.swift in Sources */,
 				B4FF1A921F94DF7D009C6685 /* UIImageView+HighlightedWebCache.m in Sources */,
 				0AFE94281F209D46009C4CDF /* MyBaseCollectionView.swift in Sources */,
 				0A644D731F017C06009025DD /* HistoryEvaluationCollectionView.swift in Sources */,
@@ -3759,6 +3990,7 @@
 				0AD14563217D81FB004670A9 /* LeaveApprovedController.swift in Sources */,
 				0A15D5281F0E51F200908B7F /* MeterialListController.swift in Sources */,
 				0A14532021E4911500741F5B /* TeachingPlanController.swift in Sources */,
+				930E481E230D828600B78737 /* FileSubviewsController.swift in Sources */,
 				0AF518F0227E830C0019ECF7 /* SurveyListController.swift in Sources */,
 				0A44131D1EEAC64F00BAB679 /* BMCustomPlayer.swift in Sources */,
 				B468B7BD1FCA9BA000ECF396 /* MJRefreshComponent.m in Sources */,
@@ -3771,10 +4003,13 @@
 				0A6A23B51EF28E9900A1AC5B /* ShortAnswerCollectionView.swift in Sources */,
 				0A644D991F062560009025DD /* MyEvaluationListCollectionView.swift in Sources */,
 				0AB31E57215CD14D002E3F32 /* ComplaintReplyController.swift in Sources */,
+				9374EFBE2317A93B00B48486 /* SetNewPasswordViewController.swift in Sources */,
 				B4FF1A861F94DF7D009C6685 /* NSImage+WebCache.m in Sources */,
 				0A26BA29219578070071C2DC /* HUtilView.swift in Sources */,
 				0A17DFED21DCA6EE002A4194 /* TeamSettingController.swift in Sources */,
+				93C3C75E22FB034000A5A108 /* NewsPageControlCell.swift in Sources */,
 				0A26BA31219A9F3A0071C2DC /* ZYStarRateView.swift in Sources */,
+				930E4811230D78A500B78737 /* FileSubView.swift in Sources */,
 				0A15D52A1F0E5F6100908B7F /* MeterialListCollectionView.swift in Sources */,
 				B475D8761F9C4B5F00A72543 /* MBProgressHUD+MJ.m in Sources */,
 				B4FF1A8A1F94DF7D009C6685 /* SDWebImageDecoder.m in Sources */,
@@ -3783,6 +4018,7 @@
 				B44FFFDB211C6BBD00844C07 /* JHTrainingChangedCell.swift in Sources */,
 				B44FFFE0211C6BF000844C07 /* JHBaseViewController.swift in Sources */,
 				0A17D70B2283DB2400F49CE1 /* UIPickerView.swift in Sources */,
+				930E48AC2310D76000B78737 /* GradientLayerBaseView.swift in Sources */,
 				0A26BA3D219ABB5B0071C2DC /* EvaluationItemListController.swift in Sources */,
 				0A2B355E21C8FAE800E17AC9 /* SubScoreCell.swift in Sources */,
 				0A644D8F1F04E556009025DD /* WishListController.swift in Sources */,
@@ -3799,6 +4035,7 @@
 				0A6A23BB1EF3BEBE00A1AC5B /* DirectoryCollectionView.swift in Sources */,
 				B44FFFE2211C6E2D00844C07 /* JHGlobal.swift in Sources */,
 				0A15D5091F0B3E1B00908B7F /* OnlineAskCollectionView.swift in Sources */,
+				9354826522FED62E00E17394 /* MASViewAttribute.m in Sources */,
 				0AF25E0B217DBA4500FE5425 /* LeaveUndoneCollection.swift in Sources */,
 				0A6A23A61EEC70A500A1AC5B /* ScannerViewController.swift in Sources */,
 				0A644D671F00F37A009025DD /* WaitExamInfoController.swift in Sources */,
@@ -3809,11 +4046,14 @@
 				0A42F82B1F1C9520001DF281 /* TaskApplyImageCollectionView.swift in Sources */,
 				0A29CDD4216DE1A200200650 /* QuestionnaireController.swift in Sources */,
 				0AC3B9471EE4732700227194 /* CircleDataView.swift in Sources */,
+				9354823622FE741600E17394 /* NewsChannelView.swift in Sources */,
 				0A667BCB2085CF4E00594BE7 /* LiveLIstController.swift in Sources */,
 				0AC3B9811EE53F5900227194 /* String.swift in Sources */,
 				0A137E8A21DF04CB00C7328D /* NoticeListController.swift in Sources */,
+				9354825E22FED62E00E17394 /* MASCompositeConstraint.m in Sources */,
 				0A16417E22408DEC002B0E50 /* NewsListController.swift in Sources */,
 				0A15D5161F0BF5FB00908B7F /* QQStylePullingIndicator.swift in Sources */,
+				93A6FA77230934470098AD52 /* FIleWordViewController.swift in Sources */,
 				0AC3BCA41EE94DA300227194 /* LBXScanWrapper.swift in Sources */,
 				0A644D9B1F065B26009025DD /* MyEvaluationDetailController.swift in Sources */,
 				0A644D951F04E685009025DD /* WishDetailCollectionView.swift in Sources */,
@@ -3825,6 +4065,7 @@
 				B4FF1A881F94DF7D009C6685 /* SDImageCacheConfig.m in Sources */,
 				0A1891562271569800F3BB82 /* AttendanceController.swift in Sources */,
 				B468B7CB1FCA9BA000ECF396 /* NSBundle+MJRefresh.m in Sources */,
+				9354825F22FED62E00E17394 /* MASConstraintMaker.m in Sources */,
 				B4847FAE1F9E13B600307D6F /* ImageUploadView.swift in Sources */,
 				B4FF1A911F94DF7D009C6685 /* UIImage+MultiFormat.m in Sources */,
 				0AF9D35421894C7C0068B05A /* FeaturesController.swift in Sources */,
@@ -3845,6 +4086,7 @@
 				0AAFD70322549F76002C9729 /* ExerciseCenterController.swift in Sources */,
 				B4FF1A8E1F94DF7D009C6685 /* SDWebImagePrefetcher.m in Sources */,
 				B4F9E8781F91014A0001D88F /* OtherFilesController.swift in Sources */,
+				9354823822FE949D00E17394 /* NewsOfficeCell.swift in Sources */,
 				0A15D50F1F0BA58500908B7F /* TextFieldForNoMenu.swift in Sources */,
 				0A644D6F1F0179C6009025DD /* HistoryExamController.swift in Sources */,
 				0A15C3661F494A4700C53F61 /* DifficultDetailController.swift in Sources */,
@@ -3856,6 +4098,7 @@
 				0A2B356521C9104900E17AC9 /* ExamResultController.swift in Sources */,
 				0A26BA35219AA8690071C2DC /* EvaluationHistoryDetailController.swift in Sources */,
 				0A18ADEF223255C30070088D /* StudyController.swift in Sources */,
+				9354822922FE736900E17394 /* NewsChannelCell.swift in Sources */,
 				0AD145542179CB45004670A9 /* ToDoListController.swift in Sources */,
 				B4F9E87B1F9106DD0001D88F /* OtherFilesCell.swift in Sources */,
 				0AC3B9331EE4730B00227194 /* AppDelegate.swift in Sources */,
@@ -3869,6 +4112,7 @@
 				0AC3B9511EE5343A00227194 /* TurnCenterCollectionView.swift in Sources */,
 				0A1941A922C0B66600225323 /* StudyListController.swift in Sources */,
 				0A42F81B1F14C13B001DF281 /* LoginInfo.swift in Sources */,
+				9354825C22FED62E00E17394 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				B468B7BB1FCA9BA000ECF396 /* MJRefreshAutoFooter.m in Sources */,
 				B468B7D01FCC63BC00ECF396 /* BasePeiwuCollectionView.swift in Sources */,
 				B468B7CA1FCA9BA000ECF396 /* MJRefreshConst.m in Sources */,
@@ -3876,6 +4120,7 @@
 				0A26BA3F219BD3120071C2DC /* HBaseViewController.swift in Sources */,
 				B468B7C71FCA9BA000ECF396 /* MJRefreshNormalHeader.m in Sources */,
 				0A2B355521C8CE4100E17AC9 /* CEXCheckController.swift in Sources */,
+				93C3C74D22F99D8F00A5A108 /* UIDevice.swift in Sources */,
 				0A291B641F3D8136008784B5 /* UIButton.swift in Sources */,
 				0A125A8C1F29CBDB00FDD4F4 /* SettingsController.swift in Sources */,
 				0A2B354A21C8CDB200E17AC9 /* CEXStudentsListController.swift in Sources */,
@@ -3887,8 +4132,10 @@
 				B44FFFDA211C6BBD00844C07 /* OfficePeopleCell.swift in Sources */,
 				B468B7BE1FCA9BA000ECF396 /* MJRefreshFooter.m in Sources */,
 				0AC3B99B1EE8694B00227194 /* TaskCenterController.swift in Sources */,
+				9354826122FED62E00E17394 /* NSArray+MASAdditions.m in Sources */,
 				0A15D50D1F0B8F6000908B7F /* OnlineAskDetailCollectionView.swift in Sources */,
 				0A16644B226426F500D88BBA /* ImageForCollectionCellView.swift in Sources */,
+				9354824122FED20400E17394 /* FileDownHeadView.swift in Sources */,
 				0AC3BC9E1EE94DA300227194 /* LBXPermissions.swift in Sources */,
 				0A42F8271F1C7319001DF281 /* TaskApplyListCollectionView.swift in Sources */,
 				0A644D971F062480009025DD /* MyEvaluationListController.swift in Sources */,
@@ -3906,9 +4153,11 @@
 				0A6A23B21EF2690C00A1AC5B /* RecordsCollectionView.swift in Sources */,
 				0A97554721A3F1D800267E10 /* UIView.swift in Sources */,
 				0A42F8231F179EDA001DF281 /* DateUtil.swift in Sources */,
+				9354826022FED62E00E17394 /* MASLayoutConstraint.m in Sources */,
 				0A185B31225B2FF90078A603 /* StudentHomeController.swift in Sources */,
 				0A12D7C82238AC15005B5DD5 /* InvigilationInfoController.swift in Sources */,
 				0A2B356321C8FB9700E17AC9 /* BRCommitDataManage.swift in Sources */,
+				930E48D62312934400B78737 /* OpenFileViewController.swift in Sources */,
 				0A88A1BE21CC980500D9AB47 /* PaperSelectorController.swift in Sources */,
 				0A644D631F00D3BC009025DD /* WaitExamTaskCollectionView.swift in Sources */,
 				0A29CDD7216DE6A100200650 /* QuestionDetailCollectionView.swift in Sources */,
@@ -3927,14 +4176,18 @@
 				B4FF1A891F94DF7D009C6685 /* SDWebImageCompat.m in Sources */,
 				0A1941A722C0A8CF00225323 /* StudyCenterController.swift in Sources */,
 				0A156F8C225C48A1001CF31C /* MineController.swift in Sources */,
+				9354823F22FED00C00E17394 /* BaseFileViewController.swift in Sources */,
 				0A644D911F04E5DC009025DD /* WishListCollectionView.swift in Sources */,
 				B468B7CE1FCA9BA000ECF396 /* UIView+MJExtension.m in Sources */,
 				0AC3BCA31EE94DA300227194 /* LBXScanViewStyle.swift in Sources */,
 				B468B7C41FCA9BA000ECF396 /* MJRefreshBackNormalFooter.m in Sources */,
+				9374EFD02317D64700B48486 /* FooterViewController.swift in Sources */,
 				0A55EC58224B5D1600110BBD /* HistoryTheoryExamController.swift in Sources */,
 				B468B7BC1FCA9BA000ECF396 /* MJRefreshBackFooter.m in Sources */,
+				9374EFDD2317D72B00B48486 /* FooterWordViewController.swift in Sources */,
 				0A97555821A7C21700267E10 /* PersonSelectorController.swift in Sources */,
 				0A91142F201D60D2001A1936 /* UserDefaults.swift in Sources */,
+				9354825D22FED62E00E17394 /* ViewController+MASAdditions.m in Sources */,
 				0A0E20A521F5A6B200DAD2FE /* PersonSelectorAdvanceSearchController.swift in Sources */,
 				B44FFFE6211C73EA00844C07 /* NSDictionary+Additions.m in Sources */,
 				0A0C570D1F4D70AE008551D3 /* ChangePersonInfoController.swift in Sources */,
@@ -3947,6 +4200,7 @@
 				B468B7CD1FCA9BA000ECF396 /* UIScrollView+MJRefresh.m in Sources */,
 				B44FFFDE211C6BBD00844C07 /* LectureCompleteController.swift in Sources */,
 				0AC3BC9F1EE94DA300227194 /* LBXScanLineAnimation.swift in Sources */,
+				9354826322FED62E00E17394 /* MASConstraint.m in Sources */,
 				0A01F105225DAC22009087B2 /* StudentTabbarController.swift in Sources */,
 				B49971851FBC702000192CCF /* Task.swift in Sources */,
 				0A18915422700AE400F3BB82 /* TrainingListController.swift in Sources */,

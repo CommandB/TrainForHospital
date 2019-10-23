@@ -162,6 +162,10 @@ class ScannerViewController: UIViewController /*,GTMBarcodeCoreDelegate*/ , AVCa
         
 //        selectedTabBarIndex = 2
         
+        if self.scanRectView == nil {
+            myAlert(self, message: "请打开相机权限")
+            return
+        }
         UIView.animate(withDuration: 2.5, delay:0, options:[.curveLinear , .repeat], animations: {
             self.animateView.setY(y: self.scanRectView.Y + self.scanRectView.H - 10)
         }) { (true) in

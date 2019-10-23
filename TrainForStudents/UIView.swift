@@ -22,7 +22,7 @@ extension UIView{
         set {
             layer.cornerRadius = newValue
             layer.masksToBounds = newValue > 0
-        }
+            W     }
     }
     
     @IBInspectable var borderWidth: CGFloat {
@@ -184,4 +184,5 @@ extension UIView {
         layer.removeAllAnimations()
         
     }
+
 }

@@ -49,4 +49,23 @@ extension UIColor {
             blue: (CGFloat(b)/255),
             alpha:alpha)
     }
+    
+    class func defaultColor() -> UIColor {
+        return UIColor.init(
+            red: (CGFloat(38)/255),
+            green: (CGFloat(135)/255),
+            blue: (CGFloat(241)/255),
+            alpha:1.0)
+    }
+}
+
+//MARK: 常用颜色
+func RGBCOLOR(r:CGFloat,_ g:CGFloat,_ b:CGFloat) -> UIColor
+{
+    return UIColor(red: (r)/255.0, green: (g)/255.0, blue: (b)/255.0, alpha: 1.0)
+}
+
+func RGBACOLOR(r:CGFloat,_ g:CGFloat,_ b:CGFloat,_ a:CGFloat) -> UIColor
+{
+    return UIColor(red: (r)/255.0, green: (g)/255.0, blue: (b)/255.0, alpha: a)
 }

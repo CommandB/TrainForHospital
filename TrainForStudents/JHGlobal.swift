@@ -6,6 +6,6 @@
 //  Copyright © 2018年 黄玮晟. All rights reserved.
 //
 
-let SCREEN_WIDTH = UIScreen.main.bounds.size.width
-let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
+let SCREEN_WIDTH:CGFloat = UIScreen.main.bounds.size.width
+let SCREEN_HEIGHT:CGFloat = UIScreen.main.bounds.size.height
 
