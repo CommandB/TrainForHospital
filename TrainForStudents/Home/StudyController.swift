@@ -95,8 +95,14 @@ class StudyController : HBaseViewController{
                     (self.view.viewWithTag(30001) as! UILabel).text = data["note"].stringValue
                     //let placeholder = self.view.viewWithTag(20001)!
                     let fileURL = data["url"].stringValue
-                    let url = URL(string: fileURL)
-                    if fileURL.contains("resources/video"){
+                    var url = URL(string: fileURL)
+                    if fileURL.contains("resources/video") || true{
+                        if UserDefaults.AppConfig.string(forKey: .clientCode)?.lowercased() == "zeyy"{
+                            let zeIP = UserDefaults.AppConfig.string(forKey: .zeyyVideoIP)!
+                            var videoUrl = zeIP + fileURL.substring(from: 27)
+                            videoUrl = "http://39.104.60.22:6024/doctor_train/ui/xishou.wmv"
+                            url = URL(string: videoUrl)
+                        }
                         
                         //视频播放
                         self.player.parentView = self

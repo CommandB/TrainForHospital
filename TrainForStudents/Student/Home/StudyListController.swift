@@ -160,7 +160,14 @@ extension StudyListController : UICollectionViewDelegate , UICollectionViewDataS
     
     @objc func downloadVideo(sender : UIButton){
         let param = sender.viewParam
-        let fileURL = param!["url"] as! String
+        var fileURL = param!["url"] as! String
+        
+        if UserDefaults.AppConfig.string(forKey: .clientCode)?.lowercased() == "zeyy"{
+            let zeIP = UserDefaults.AppConfig.string(forKey: .zeyyVideoIP)!
+            fileURL = zeIP + fileURL.substring(from: 27)
+        }
+        fileURL = "http://39.104.60.22:6024/doctor_train/ui/xishou.wmv"
+        print(fileURL)
         let avPlayer = AVPlayer(url: URL(string: fileURL)!)
         let avPlayerView = AVPlayerViewController()
         avPlayerView.player = avPlayer

@@ -126,6 +126,8 @@ extension UserDefaults{
             case tagList
             //入科是否需要指定责任护士
             case selectNurseOfJoinOffice
+            //浙二视频转发IPIP
+            case zeyyVideoIP
             
             
             

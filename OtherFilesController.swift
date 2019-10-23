@@ -97,10 +97,16 @@ class OtherFilesController: MyBaseUIViewController,UITableViewDataSource,UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let fileURL = self.dataSource[indexPath.section]["url"].stringValue
+        var fileURL = self.dataSource[indexPath.section]["url"].stringValue
         if fileURL.contains("resources/video"){
 //            let mpController = MPMoviePlayerViewController(contentURL: URL(string: fileURL)!)
 //            presentMoviePlayerViewControllerAnimated(mpController)
+            
+            if UserDefaults.AppConfig.string(forKey: .clientCode)?.lowercased() == "zeyy"{
+                let zeIP = UserDefaults.AppConfig.string(forKey: .zeyyVideoIP)!
+                fileURL = zeIP + fileURL.substring(from: 27)
+            }
+            
             
             let avPlayer = AVPlayer(url: URL(string: fileURL)!)
             let avPlayerView = AVPlayerViewController()

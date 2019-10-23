@@ -187,6 +187,8 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
             presentInvigilation(data)
         }else if type == "理论考试" || type == "技能考试" || type == "OSCE考试通知" {
             presentStuExam(data)
+        }else if type == "出科技能考" {
+            presentexamSkillOsce(data)
         }
         
     }
@@ -269,6 +271,13 @@ extension ToDoListController : UICollectionViewDelegate , UICollectionViewDataSo
     ///
     func presentStuExam(_ data: JSON){
         let vc = getViewToStoryboard("examInfoForStuView") as! ExamInfoForStuController
+        vc.paramData = data
+        present(vc, animated: true, completion: nil)
+    }
+    
+    ///出科技能考
+    func presentexamSkillOsce(_ data: JSON){
+        let vc = getViewToStoryboard("examSkillOsceView") as! ExamSkillOsceController
         vc.paramData = data
         present(vc, animated: true, completion: nil)
     }
