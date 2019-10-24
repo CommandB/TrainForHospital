@@ -46,7 +46,7 @@ class BaseFileViewController: UIViewController,UIScrollViewDelegate,UITableViewD
         let image = UIImage(named: "返回")!.withRenderingMode(.alwaysOriginal)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(cancelAction))
         if let title =  data?["leanchannelname"].stringValue {
-            self.title = title+">";
+            self.title = title;
         }
         self.dataArray.append(data ?? JSON())
     }

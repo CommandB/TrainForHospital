@@ -252,7 +252,6 @@ class PersonSelectorController: HBaseViewController {
             if !data.isEmpty{
                 resetAllStatus()
                 getListData(data.dictionaryObject!)
-                
             }
             
         }
@@ -306,7 +305,7 @@ class PersonSelectorController: HBaseViewController {
         if param.count == 0 {
             submitParam["officeid"] = officeId
         }else{
-            //submitParam["officeid"] = officeId
+            submitParam["officeid"] = officeId
             submitParam.merge(param)
             
         }

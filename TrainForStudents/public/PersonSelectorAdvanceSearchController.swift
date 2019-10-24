@@ -22,7 +22,8 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
     static var defaultNoticeName = NSNotification.Name(rawValue: "paperSelectorAdvanceSearchDefaultNoticeName")
     
     override func viewDidLoad() {
-        
+        submitData["officeid"] = -1
+
         dataPicker = dataPickerImpl.getDefaultPickerView()
         dataPickerImpl.titleKey = "grade"
         dataPickerImpl.dataSource = UserDefaults.AppConfig.json(forKey: .gradeList).arrayValue
@@ -55,6 +56,7 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
     
     @IBAction func btn_sure_inside(_ sender: UIButton) {
         print(submitData)
+        print("高级筛选条件")
 
         NotificationCenter.default.post(name: PersonSelectorAdvanceSearchController.defaultNoticeName, object: nil, userInfo: ["data":submitData])
 
@@ -75,7 +77,6 @@ class PersonSelectorAdvanceSearchController : HBaseViewController{
         var data = JSON()
         var text = ""
         let index = row == 0 ? 0 : row - 1
-        
         switch selectedTextField.tag {
         case 10001:
             data = UserDefaults.AppConfig.json(forKey: .majorList).arrayValue[index]

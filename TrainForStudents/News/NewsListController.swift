@@ -147,7 +147,11 @@ class NewsListController : UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10;
+        if section == 0 {
+            return 0
+        }else{
+            return 10;
+        }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.001;

@@ -33,7 +33,7 @@ class MyController : HBaseViewController{
 //            studentView = "studentTabbar"
 //        }
         
-        jds = JSON([["icon":"我的-选择","title":"修改个人资料","link":"changePersonInfoView"],["icon":"双箭头-右蓝","title":"切换至学生端","link":"studentTabbar"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
+        jds = JSON([["icon":"我的-选择","title":"修改个人资料","link":"changePersonInfoView"],["icon":"双箭头-右蓝","title":"切换至学生端","link":"studentTabbar"],["icon":"紧急","title":"退出系统","link":"loginView"],["icon":"紧急","title":"我的学员","link":"myStudentView"]]).arrayValue
         
         view.bringSubview(toFront: messageCollection)
         let lbl_name = view.viewWithTag(10002) as! UILabel
@@ -110,6 +110,10 @@ extension MyController : UICollectionViewDelegate , UICollectionViewDataSource ,
                 tabBar.selectedIndex = 0
             }else if viewName == "tabBarView" || viewName == "studentTabbar"{
                 appDelegate.window?.rootViewController = getViewToStoryboard(viewName)
+            }else if viewName == "myStudentView"{
+                let vc = MyStudentDetailController()
+                self.parent?.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
             }else{
                 myPresentView(self, viewName: viewName)
             }
