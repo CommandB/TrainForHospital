@@ -11,6 +11,8 @@ enum DateType {
     case dateTypeYear
     case dateTypeMonth
     case dateTypeDay
+    case dateTypeMinit
+    case dateTypeDate
 }
 
 extension String {
@@ -29,6 +31,12 @@ extension String {
         nextformatter.dateFormat = "dd"
         let day = nextformatter.string(from: date)
         
+        nextformatter.dateFormat = "HH:mm"
+        let minit = nextformatter.string(from: date)
+        
+        nextformatter.dateFormat = "yyyy-MM-dd"
+        let dayDate = nextformatter.string(from: date)
+        
         switch type {
         case .dateTypeYear:
             return year
@@ -36,6 +44,10 @@ extension String {
             return month
         case .dateTypeDay:
             return day
+        case .dateTypeMinit:
+            return minit
+        case .dateTypeDate:
+            return dayDate
         }
     }
     

@@ -111,9 +111,9 @@ extension MyController : UICollectionViewDelegate , UICollectionViewDataSource ,
             }else if viewName == "tabBarView" || viewName == "studentTabbar"{
                 appDelegate.window?.rootViewController = getViewToStoryboard(viewName)
             }else if viewName == "myStudentView"{
-                let vc = MyStudentDetailController()
+                let vc = MyStudentRootController()
                 self.parent?.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.present(vc, animated: true, completion: nil)
             }else{
                 myPresentView(self, viewName: viewName)
             }

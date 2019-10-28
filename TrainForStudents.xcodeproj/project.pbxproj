@@ -421,6 +421,16 @@
 		2AE46D27235FF90A00964DED /* learn_other.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE46D22235FF90900964DED /* learn_other.png */; };
 		2AE46D3523604A3600964DED /* head_card_two.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE46D2923604A3500964DED /* head_card_two.png */; };
 		2AE46D38236058FA00964DED /* MyStudentDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D37236058FA00964DED /* MyStudentDetailController.swift */; };
+		2AE46D3C23616C3F00964DED /* TableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D3B23616C3F00964DED /* TableHeaderView.swift */; };
+		2AE46D3E2361766000964DED /* TitleHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D3D2361766000964DED /* TitleHeaderCell.swift */; };
+		2AE46D4023617B4700964DED /* TurnDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D3F23617B4700964DED /* TurnDetailCell.swift */; };
+		2AE46D422361806B00964DED /* CompletionProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D412361806B00964DED /* CompletionProgressCell.swift */; };
+		2AE46D442361861500964DED /* ClassRateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D432361861500964DED /* ClassRateCell.swift */; };
+		2AE46D4623618FF700964DED /* ClassActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D4523618FF700964DED /* ClassActivityCell.swift */; };
+		2AE46D482361979100964DED /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D472361979100964DED /* ProgressView.swift */; };
+		2AE46D4A2361A71100964DED /* MyStudentRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D492361A71100964DED /* MyStudentRootController.swift */; };
+		2AE46D4C23628A3F00964DED /* StudentsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D4B23628A3E00964DED /* StudentsHeaderView.swift */; };
+		2AE46D4E23629DC200964DED /* blue_user_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE46D4D23629DBF00964DED /* blue_user_circle.png */; };
 		351DE4A8F35C513E54679BCA /* Pods_TrainForStudents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734644A1ED16B32D9EAD775A /* Pods_TrainForStudents.framework */; };
 		930E47DD230BE4B600B78737 /* topBackgroundIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47DC230BE4B500B78737 /* topBackgroundIcon.png */; };
 		930E47E3230BF28200B78737 /* newsDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47E2230BF28200B78737 /* newsDefault.png */; };
@@ -1386,6 +1396,16 @@
 		2AE46D22235FF90900964DED /* learn_other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_other.png; sourceTree = "<group>"; };
 		2AE46D2923604A3500964DED /* head_card_two.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head_card_two.png; sourceTree = "<group>"; };
 		2AE46D37236058FA00964DED /* MyStudentDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudentDetailController.swift; sourceTree = "<group>"; };
+		2AE46D3B23616C3F00964DED /* TableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderView.swift; sourceTree = "<group>"; };
+		2AE46D3D2361766000964DED /* TitleHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderCell.swift; sourceTree = "<group>"; };
+		2AE46D3F23617B4700964DED /* TurnDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnDetailCell.swift; sourceTree = "<group>"; };
+		2AE46D412361806B00964DED /* CompletionProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionProgressCell.swift; sourceTree = "<group>"; };
+		2AE46D432361861500964DED /* ClassRateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRateCell.swift; sourceTree = "<group>"; };
+		2AE46D4523618FF700964DED /* ClassActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassActivityCell.swift; sourceTree = "<group>"; };
+		2AE46D472361979100964DED /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		2AE46D492361A71100964DED /* MyStudentRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudentRootController.swift; sourceTree = "<group>"; };
+		2AE46D4B23628A3E00964DED /* StudentsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsHeaderView.swift; sourceTree = "<group>"; };
+		2AE46D4D23629DBF00964DED /* blue_user_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_user_circle.png; sourceTree = "<group>"; };
 		734644A1ED16B32D9EAD775A /* Pods_TrainForStudents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrainForStudents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82FD0C3B5DF5EF07841E9B70 /* Pods-TrainForStudents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainForStudents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrainForStudents/Pods-TrainForStudents.debug.xcconfig"; sourceTree = "<group>"; };
 		8CCC089957700C973EA57112 /* Pods-TrainForStudents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainForStudents.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrainForStudents/Pods-TrainForStudents.release.xcconfig"; sourceTree = "<group>"; };
@@ -2990,6 +3010,7 @@
 		0AC3B98A1EE5868E00227194 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				2AE46D4D23629DBF00964DED /* blue_user_circle.png */,
 				2AE46D20235FF90900964DED /* learn_brush_problem.png */,
 				2AE46D1F235FF90900964DED /* learn_collection.png */,
 				2AE46D1E235FF90800964DED /* learn_footprint.png */,
@@ -3153,6 +3174,15 @@
 			isa = PBXGroup;
 			children = (
 				2AE46D37236058FA00964DED /* MyStudentDetailController.swift */,
+				2AE46D3B23616C3F00964DED /* TableHeaderView.swift */,
+				2AE46D3D2361766000964DED /* TitleHeaderCell.swift */,
+				2AE46D3F23617B4700964DED /* TurnDetailCell.swift */,
+				2AE46D412361806B00964DED /* CompletionProgressCell.swift */,
+				2AE46D432361861500964DED /* ClassRateCell.swift */,
+				2AE46D4523618FF700964DED /* ClassActivityCell.swift */,
+				2AE46D472361979100964DED /* ProgressView.swift */,
+				2AE46D492361A71100964DED /* MyStudentRootController.swift */,
+				2AE46D4B23628A3E00964DED /* StudentsHeaderView.swift */,
 			);
 			path = NewsMyStudent;
 			sourceTree = "<group>";
@@ -3851,6 +3881,7 @@
 				2AE46D23235FF90A00964DED /* learn_footprint.png in Resources */,
 				0A1299A1224DFBC000F99176 /* 技能考试-icon.png in Resources */,
 				0A14BD9021DDF88600261797 /* 公告-蓝.png in Resources */,
+				2AE46D4E23629DC200964DED /* blue_user_circle.png in Resources */,
 				0A42F8331F1E01B2001DF281 /* artboard.png in Resources */,
 				0A6B344221747AD0007FF54D /* 出科考试.png in Resources */,
 				0A26BA2C219969330071C2DC /* 技能考试.png in Resources */,
@@ -3985,6 +4016,7 @@
 				0AC3BCAF1EE9B56E00227194 /* VideoController.swift in Sources */,
 				0A6A23B91EF3BE9400A1AC5B /* DirectoryController.swift in Sources */,
 				B468B7C21FCA9BA000ECF396 /* MJRefreshAutoStateFooter.m in Sources */,
+				2AE46D422361806B00964DED /* CompletionProgressCell.swift in Sources */,
 				B4FF1A901F94DF7D009C6685 /* UIImage+GIF.m in Sources */,
 				0A644D931F04E625009025DD /* WishDetailController.swift in Sources */,
 				0A15D5201F0CC81900908B7F /* MyselfCollectionView.swift in Sources */,
@@ -4041,6 +4073,7 @@
 				0A15D5171F0BF5FB00908B7F /* QQStyleRefreshHeader.swift in Sources */,
 				0AC3B9861EE5810900227194 /* TurnDetailController.swift in Sources */,
 				0A644D601F00BD52009025DD /* EvaluationCenterController.swift in Sources */,
+				2AE46D4A2361A71100964DED /* MyStudentRootController.swift in Sources */,
 				0A14531E21E4443300741F5B /* OfficeTeacherController.swift in Sources */,
 				0A2B355921C8F83E00E17AC9 /* ExamingSubScoController.swift in Sources */,
 				0A1A97B121D206250097C467 /* EvalueationListController.swift in Sources */,
@@ -4048,6 +4081,7 @@
 				B4FF1A941F94DF7D009C6685 /* UIView+WebCache.m in Sources */,
 				B4FF1A8B1F94DF7D009C6685 /* SDWebImageDownloader.m in Sources */,
 				B4FF1A851F94DF7D009C6685 /* NSData+ImageContentType.m in Sources */,
+				2AE46D4623618FF700964DED /* ClassActivityCell.swift in Sources */,
 				0A6A23BB1EF3BEBE00A1AC5B /* DirectoryCollectionView.swift in Sources */,
 				B44FFFE2211C6E2D00844C07 /* JHGlobal.swift in Sources */,
 				0A15D5091F0B3E1B00908B7F /* OnlineAskCollectionView.swift in Sources */,
@@ -4099,6 +4133,7 @@
 				B4FF1A8F1F94DF7D009C6685 /* UIButton+WebCache.m in Sources */,
 				0AE552B421D398BB00B82032 /* PublishSubjectExamDetailController.swift in Sources */,
 				B4847FB01F9E13DC00307D6F /* AssistantController.swift in Sources */,
+				2AE46D442361861500964DED /* ClassRateCell.swift in Sources */,
 				0AAFD70322549F76002C9729 /* ExerciseCenterController.swift in Sources */,
 				B4FF1A8E1F94DF7D009C6685 /* SDWebImagePrefetcher.m in Sources */,
 				B4F9E8781F91014A0001D88F /* OtherFilesController.swift in Sources */,
@@ -4117,13 +4152,16 @@
 				B4F9E87B1F9106DD0001D88F /* OtherFilesCell.swift in Sources */,
 				0AC3B9331EE4730B00227194 /* AppDelegate.swift in Sources */,
 				0AC3B9801EE53F5900227194 /* UIColor.swift in Sources */,
+				2AE46D4C23628A3F00964DED /* StudentsHeaderView.swift in Sources */,
 				0A644D8B1F03A459009025DD /* MyselfController.swift in Sources */,
+				2AE46D3E2361766000964DED /* TitleHeaderCell.swift in Sources */,
 				0AC3B9821EE53F5900227194 /* UIScreen.swift in Sources */,
 				0A125A881F2204B300FDD4F4 /* BMPlayerCustomControlView.swift in Sources */,
 				0A6A23B01EF23A6E00A1AC5B /* RadioCollectionView.swift in Sources */,
 				0AD004AE213D27D1008D3062 /* WebViewController.swift in Sources */,
 				0A644D651F00F09F009025DD /* WaitEvanluationTaskCollectionView.swift in Sources */,
 				0AC3B9511EE5343A00227194 /* TurnCenterCollectionView.swift in Sources */,
+				2AE46D3C23616C3F00964DED /* TableHeaderView.swift in Sources */,
 				0A1941A922C0B66600225323 /* StudyListController.swift in Sources */,
 				0A42F81B1F14C13B001DF281 /* LoginInfo.swift in Sources */,
 				2AE46D38236058FA00964DED /* MyStudentDetailController.swift in Sources */,
@@ -4205,6 +4243,7 @@
 				0A91142F201D60D2001A1936 /* UserDefaults.swift in Sources */,
 				9354825D22FED62E00E17394 /* ViewController+MASAdditions.m in Sources */,
 				0A0E20A521F5A6B200DAD2FE /* PersonSelectorAdvanceSearchController.swift in Sources */,
+				2AE46D4023617B4700964DED /* TurnDetailCell.swift in Sources */,
 				B44FFFE6211C73EA00844C07 /* NSDictionary+Additions.m in Sources */,
 				0A0C570D1F4D70AE008551D3 /* ChangePersonInfoController.swift in Sources */,
 				0A2B357B21CBA0F700E17AC9 /* MyTabBarController.swift in Sources */,
@@ -4223,6 +4262,7 @@
 				0AF9D35021830EA00068B05A /* InspectPatientsController.swift in Sources */,
 				0A42F8291F1C7F2D001DF281 /* TaskApplyController.swift in Sources */,
 				0A31A99921AD39CA007AB138 /* PanoramicEvaluationDetailController.swift in Sources */,
+				2AE46D482361979100964DED /* ProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
