@@ -15,9 +15,14 @@ class HistoryTurnTaskController : HBaseViewController{
     @IBOutlet weak var turnTaskCollection: UICollectionView!
     
     var jds = [JSON]()
+    var isTeacherPush = false
+    
+    var studentPersonID = ""
     
     override func viewDidLoad() {
-        
+        if isTeacherPush == true {
+            turnTaskCollection.setHight(height: SCREEN_HEIGHT - navHeight)
+        }
         turnTaskCollection.delegate = self
         turnTaskCollection.dataSource = self
         
@@ -37,7 +42,11 @@ class HistoryTurnTaskController : HBaseViewController{
     func getListData(){
         
         let url = SERVER_PORT + "rest/app/getMyRoundHistory.do"
-        myPostRequest(url,  method: .post).responseString(completionHandler: {resp in
+        var param = [String:Any]()
+        if isTeacherPush == true{
+            param = ["personid":self.studentPersonID,"teacherlook":"studentrotation"]
+        }
+        myPostRequest(url, param,  method: .post).responseString(completionHandler: {resp in
             self.turnTaskCollection.mj_header.endRefreshing()
             self.turnTaskCollection.mj_footer.endRefreshingWithNoMoreData()
             switch resp.result{

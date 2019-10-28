@@ -66,8 +66,8 @@ class TitleHeaderCell: UITableViewCell {
     }()
     
     lazy var PointImageView: UIImageView = {
-        let PointImageView = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH - 15 - 5, y: 11, width: 5, height: 15))
-        PointImageView.image = UIImage(named:"")
+        let PointImageView = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH - 15 - 5, y: 11, width: 5, height: 13))
+        PointImageView.image = UIImage(named:"blue_right_to_small")
         return PointImageView
     }()
     

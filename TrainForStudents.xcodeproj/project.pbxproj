@@ -431,6 +431,7 @@
 		2AE46D4A2361A71100964DED /* MyStudentRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D492361A71100964DED /* MyStudentRootController.swift */; };
 		2AE46D4C23628A3F00964DED /* StudentsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE46D4B23628A3E00964DED /* StudentsHeaderView.swift */; };
 		2AE46D4E23629DC200964DED /* blue_user_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE46D4D23629DBF00964DED /* blue_user_circle.png */; };
+		2AE46D502366B87400964DED /* blue_right_to_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE46D4F2366B87200964DED /* blue_right_to_small.png */; };
 		351DE4A8F35C513E54679BCA /* Pods_TrainForStudents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734644A1ED16B32D9EAD775A /* Pods_TrainForStudents.framework */; };
 		930E47DD230BE4B600B78737 /* topBackgroundIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47DC230BE4B500B78737 /* topBackgroundIcon.png */; };
 		930E47E3230BF28200B78737 /* newsDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E47E2230BF28200B78737 /* newsDefault.png */; };
@@ -1406,6 +1407,7 @@
 		2AE46D492361A71100964DED /* MyStudentRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudentRootController.swift; sourceTree = "<group>"; };
 		2AE46D4B23628A3E00964DED /* StudentsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsHeaderView.swift; sourceTree = "<group>"; };
 		2AE46D4D23629DBF00964DED /* blue_user_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_user_circle.png; sourceTree = "<group>"; };
+		2AE46D4F2366B87200964DED /* blue_right_to_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_right_to_small.png; sourceTree = "<group>"; };
 		734644A1ED16B32D9EAD775A /* Pods_TrainForStudents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrainForStudents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82FD0C3B5DF5EF07841E9B70 /* Pods-TrainForStudents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainForStudents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrainForStudents/Pods-TrainForStudents.debug.xcconfig"; sourceTree = "<group>"; };
 		8CCC089957700C973EA57112 /* Pods-TrainForStudents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainForStudents.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrainForStudents/Pods-TrainForStudents.release.xcconfig"; sourceTree = "<group>"; };
@@ -3010,6 +3012,7 @@
 		0AC3B98A1EE5868E00227194 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				2AE46D4F2366B87200964DED /* blue_right_to_small.png */,
 				2AE46D4D23629DBF00964DED /* blue_user_circle.png */,
 				2AE46D20235FF90900964DED /* learn_brush_problem.png */,
 				2AE46D1F235FF90900964DED /* learn_collection.png */,
@@ -3799,6 +3802,7 @@
 				0A75CF1321D7532E004E9734 /* 我的-选择.png in Resources */,
 				0A123DC82242269600FB2BE4 /* 资讯-tabbar.png in Resources */,
 				0AC3C4402189B77A006C0DAB /* 合并形状.png in Resources */,
+				2AE46D502366B87400964DED /* blue_right_to_small.png in Resources */,
 				2AE46D27235FF90A00964DED /* learn_other.png in Resources */,
 				0AC3C44C218FE32D006C0DAB /* 箭头.png in Resources */,
 				0A1941BD22C0D39900225323 /* pdf.png in Resources */,
@@ -4401,6 +4405,7 @@
 				CODE_SIGN_ENTITLEMENTS = TrainForStudents/TrainForStudents.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M3CME6CTLX;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4473,6 +4478,7 @@
 				CODE_SIGN_ENTITLEMENTS = TrainForStudents/TrainForStudents.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M3CME6CTLX;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

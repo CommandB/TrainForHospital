@@ -22,7 +22,7 @@ class TurnCenterController: MyBaseUIViewController {
         
         
         let barView = view.viewWithTag(10001)
-        let titleView = view.viewWithTag(20001)
+        let titleView = view.viewWithTag(20001) as! UILabel
         
         super.setNavigationBarColor(views: [barView,titleView], titleIndex: 1,titleText: "我的轮转")
         

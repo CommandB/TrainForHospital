@@ -152,9 +152,15 @@ class MyStudentDetailController: UIViewController,UITableViewDataSource,UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
-            let vc = TurnCenterController()
+//            myPresentView(self, viewName: "MyStudentTaskView")
+            let vc = getViewToStoryboard("MyStudentTaskView")
+            (vc as! TurnTaskController).isTeacherPush = true
+            (vc as! TurnTaskController).studentPersonID = data!["personid"].stringValue
+
+            //跳转
             self.present(vc, animated: true, completion: nil)
+//            let vc = TurnTaskController()
+//            self.present(vc, animated: true, completion: nil)
         }
         
     }

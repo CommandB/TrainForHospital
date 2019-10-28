@@ -16,14 +16,31 @@ class TurnTaskController : HBaseViewController{
     
     var jds = [JSON]()
     
+    var isTeacherPush = false
+    
+    var studentPersonID = ""
+    
     override func viewDidLoad() {
-        
+        if isTeacherPush == true {
+            turnTaskCollection.setHight(height: SCREEN_HEIGHT - navHeight)
+        }
         turnTaskCollection.delegate = self
         turnTaskCollection.dataSource = self
         
         self.turnTaskCollection.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.turnTaskCollection.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
         self.turnTaskCollection.mj_header.beginRefreshing()
+        if isTeacherPush == true {addBackView()}
+    }
+    
+    func addBackView(){
+        self.view.addSubview(self.backBtn)
+        self.backBtn.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.top.equalTo(saveNavHeight + 20)
+            make.height.width.equalTo(44)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,13 +48,27 @@ class TurnTaskController : HBaseViewController{
     }
     
     @IBAction func btn_his_inside(_ sender: UIButton) {
-        myPresentView(self, viewName: "historyTurnTaskView")
+//        myPresentView(self, viewName: "historyTurnTaskView")
+        let vc = getViewToStoryboard("historyTurnTaskView")
+        if isTeacherPush == true {
+            (vc as! HistoryTurnTaskController).isTeacherPush = true
+            (vc as! HistoryTurnTaskController).studentPersonID = studentPersonID
+        }
+        //跳转
+        self.present(vc, animated: true, completion: nil)
     }
-    
+    @objc func cancelCurrentVC(){
+        self.dismiss(animated: true, completion: nil)
+    }
     func getListData(){
-        
+        //rest/app/getMyRoundPlan.do
+
         let url = SERVER_PORT + "rest/app/getMyRoundPlan.do"
-        myPostRequest(url,  method: .post).responseString(completionHandler: {resp in
+        var param = [String:Any]()
+        if isTeacherPush == true{
+            param = ["personid":self.studentPersonID,"teacherlook":"studentrotation"]
+        }
+        myPostRequest(url, param, method: .post).responseString(completionHandler: {resp in
             
             switch resp.result{
             case .success(let respStr):
@@ -99,7 +130,12 @@ class TurnTaskController : HBaseViewController{
     @objc func loadMore() {
         
     }
-    
+    lazy var backBtn : UIButton = {
+        let backBtn = UIButton()
+        backBtn.setImage(UIImage.init(named: "navBackWhiteImage"), for: UIControlState.normal)
+        backBtn.addTarget(self, action: #selector(cancelCurrentVC), for: UIControlEvents.touchUpInside)
+        return backBtn
+    }()
 }
 
 extension TurnTaskController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
@@ -147,5 +183,7 @@ extension TurnTaskController : UICollectionViewDelegate , UICollectionViewDataSo
         
         return CGSize(width: collectionView.W - 15, height: 111)
     }
+    
+    
     
 }
