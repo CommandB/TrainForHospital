@@ -317,31 +317,36 @@ class PersonSelectorController: HBaseViewController {
         print("查询参数=\(submitParam)")
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT + "/rest/app/searchPerson.do"
-        myPostRequest(url,submitParam).responseString(completionHandler: {resp in
+        myPostRequest(url,submitParam).responseString(completionHandler: {[weak self] resp in
             
-            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-            self.personCollection.mj_header.endRefreshing()
-            self.personCollection.mj_footer.endRefreshing()
+            DispatchQueue.main.async {
+                MBProgressHUD.hideAllHUDs(for: self?.view, animated: true)
+            }
+            print(resp.description)
+            
+            self?.personCollection.mj_header.endRefreshing()
+            self?.personCollection.mj_footer.endRefreshing()
             
             switch resp.result{
             case .success(let responseJson):
-                
+
                 let json = JSON(parseJSON: responseJson)
+                print(json.stringValue)
+
                 if json["code"].stringValue == "1"{
                     
-                    self.dataDecomposer(json: json["data"].arrayValue)
-                    self.btn_side_inside(self.view.viewWithTag(10001) as! UIButton)
+                    self?.dataDecomposer(json: json["data"].arrayValue)
+                    self?.btn_side_inside(self?.view.viewWithTag(10001) as! UIButton)
                     
-                    self.personCollection.mj_footer.endRefreshingWithNoMoreData()
+                    self?.personCollection.mj_footer.endRefreshingWithNoMoreData()
                 }else{
-                    myAlert(self, message: "请求人员列表失败!")
+                    myAlert(self!, message: "请求人员列表失败!")
                     print(json["msg"].stringValue)
                 }
                 
             case .failure(let error):
                 print(error)
             }
-            
         })
     }
     

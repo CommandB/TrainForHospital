@@ -61,34 +61,47 @@ class NewsPageHeadView: UIView,UIScrollViewDelegate {
     }
     
     func bindData(dataSource:[JSON]) {
+        var tempDataSource = [JSON]()
         if dataSource.count == 0 {
-            return
+            let tempJson = JSON.init(["imgaurl":""])
+            let temp2Json = JSON.init(["imgaburl":""])
+
+            tempDataSource = [tempJson,temp2Json]
+        }else{
+            tempDataSource = dataSource
         }
-        self.backgroundColor = RGBCOLOR(r: 250, 250, 250)
+        
+        self.backgroundColor = UIColor.white
         for subview in self.scrollview.subviews {
             subview.removeFromSuperview()
         }
         
-        self.dataSource = dataSource
-        scrollview.contentSize = CGSize.init(width: SCREEN_WIDTH*CGFloat(self.dataSource.count), height: 0)
-        pageControl.numberOfPages = dataSource.count
+        self.dataSource = tempDataSource
+        scrollview.contentSize = CGSize.init(width: SCREEN_WIDTH*CGFloat(tempDataSource.count), height: 0)
+        pageControl.numberOfPages = tempDataSource.count
         
-        for item in dataSource {
-            guard let index = dataSource.index(of: item) else { return }
+        for item in tempDataSource {
+            guard let index = tempDataSource.index(of: item) else { return }
             let imageView = UIImageView()
-            imageView.contentMode = .scaleAspectFit
+            imageView.cornerRadius = 3
+            imageView.layer.masksToBounds = true
             self.scrollview.addSubview(imageView)
             imageView.snp.makeConstraints { (make) in
-                make.width.equalTo(SCREEN_WIDTH)
-                make.height.equalTo(150)
-                make.top.equalToSuperview()
-                make.left.equalTo((index)*Int(SCREEN_WIDTH))
+                make.width.equalTo(SCREEN_WIDTH - 20)
+                make.height.equalTo(130)
+                make.top.equalTo(10)
+                make.left.equalTo((index)*Int(SCREEN_WIDTH) + 10)
             }
             
             if let url = URL.init(string: item["imgurl"].stringValue) {
+                imageView.contentMode = .scaleAspectFit
                 imageView.kf.setImage(with: url, placeholder: UIImage(named: "newsDefault"), options: nil, progressBlock: nil, completionHandler: nil)
             }else{
-                imageView.image = UIImage(named: "newsDefault")
+                if index == 0 {
+                    imageView.image = UIImage(named: "head_card_two")
+                }else{
+                    imageView.image = UIImage(named: "newsDefault")
+                }
             }
             imageView.tag = 1000+index
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didClickImage))

@@ -47,7 +47,7 @@ func isOnlyStudent() -> Bool{
 }
 
 //post方式提交数据
-func myPostRequest(_ url:String, _ parameters: [String: Any]? = nil , method: HTTPMethod = HTTPMethod.post , timeoutInterval : TimeInterval = 60) -> DataRequest {
+func myPostRequest(_ url:String, _ parameters: [String: Any]? = nil , method: HTTPMethod = HTTPMethod.post , timeoutInterval : TimeInterval = 500) -> DataRequest {
     
     var requestParam = [String:Any]()
     let paramData = NSMutableDictionary(dictionary:["token":r_token])
