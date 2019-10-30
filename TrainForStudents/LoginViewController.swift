@@ -367,6 +367,7 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                                     case .success(let responseJson):
                                         
                                         let json = JSON(responseJson)
+                                        print(json)
                                         if json["code"].stringValue == "1"{
                                             let data = json["data"]
                                             self.appDelegate.saveConfigToCache(data: data)

@@ -91,7 +91,8 @@ class MyStudentRootController: UIViewController,UIScrollViewDelegate {
                 if json["code"].stringValue == "1"{
                     self?.dataArray = json["data"].array!
                     if json["data"].array == nil || json["data"].arrayValue.count == 0 {
-                        self?.dataArray.removeLast()
+                        myAlert(self ?? MyStudentRootController(), message: "暂无学员")
+//                        self?.dataArray.removeLast()
                         return
                     }
                     

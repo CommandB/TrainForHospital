@@ -73,7 +73,8 @@ class TurnTaskController : HBaseViewController{
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)
-                
+                print(json)
+
                 if json["code"].stringValue == "1"{
                     self.jds = json["data"].arrayValue
                     if self.jds.count == 0 {
@@ -90,7 +91,8 @@ class TurnTaskController : HBaseViewController{
                         switch resp.result{
                         case .success(let respStr):
                             let json = JSON(parseJSON: respStr)
-                            
+                            print(json)
+
                             if json["code"].stringValue == "1"{
                                 self.jds[0]["historyTurnTotal"] = JSON(json["data"].arrayValue.count)
                             }else{
@@ -148,24 +150,26 @@ extension TurnTaskController : UICollectionViewDelegate , UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let data = jds[indexPath.item]
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
-        if indexPath.item == 0{
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
+
+        if data["type"].stringValue == "轮转中" {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
+            (cell.viewWithTag(50002) as! UILabel).text = data["type"].stringValue
+            (cell.viewWithTag(10001) as! UILabel).text = "已轮转\(data["historyTurnTotal"].intValue)个科室"
             let bg = cell.viewWithTag(22222)!
             bg.setCornerRadius(radius: 2)
-            
-            (cell.viewWithTag(10001) as! UILabel).text = "已轮转\(data["historyTurnTotal"].intValue)个科室"
         }else{
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
             let bg = cell.viewWithTag(22222)!
             bg.setCornerRadius(radius: 2)
             bg.setBorder(width: 1, color: .gray)
         }
+
         (cell.viewWithTag(20001) as! UILabel).text = "\(data["month"])月"
         (cell.viewWithTag(20002) as! UILabel).text = "\(data["starttime"])~\(data["endtime"])"
         (cell.viewWithTag(30001) as! UILabel).text = data["officename"].stringValue
         (cell.viewWithTag(40001) as! UILabel).text = data["contacts"].stringValue == "" ? "暂无" : data["contacts"].stringValue
         (cell.viewWithTag(40002) as! UILabel).text = data["contactsphoneno"].stringValue == "" ? "暂无" : data["contactsphoneno"].stringValue
-        
+
         cell.setCornerRadius(radius: 4)
         return cell
     }

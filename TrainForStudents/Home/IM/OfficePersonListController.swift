@@ -21,7 +21,17 @@ class OfficePersonListController : HBaseViewController{
         
         personCollection.delegate = self
         personCollection.dataSource = self
+        let flow = UICollectionViewFlowLayout();
+        //垂直滚动
+        flow.scrollDirection = .vertical
+        //最小行间距(当垂直布局时是行间距，当水平布局时可以理解为列间距)
+        flow.minimumLineSpacing = 10;
+        //两个单元格之间的最小间距
+        flow.minimumInteritemSpacing = 10;
         
+        flow.estimatedItemSize = CGSize(width: 80, height: 30);
+       
+        personCollection.collectionViewLayout = flow
         personCollection.backgroundColor = UIColor(hex: "f5f8fb")
         
         personCollection.register(TitleReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
@@ -100,11 +110,21 @@ extension OfficePersonListController : UICollectionViewDelegate , UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         cell.setCornerRadius(radius: 4)
         let lbl = (cell.viewWithTag(10001) as! UILabel)
-        lbl.text = name
+        var tempName = ""
         if name.count > 4{
             lbl.font = UIFont.systemFont(ofSize: 13)
+            lbl.textAlignment = .center
+            lbl.numberOfLines = 0
+            for i in name {
+                if i == "(" {
+                    tempName.append("\n")
+                }
+                tempName.append(i)
+            }
+            lbl.text = tempName
         }else{
             lbl.font = UIFont.systemFont(ofSize: 15)
+            lbl.text = name
         }
         
         
@@ -117,12 +137,12 @@ extension OfficePersonListController : UICollectionViewDelegate , UICollectionVi
         //myPresentView(self, viewName: "todoDetailView")
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        
-        //return CGSize(width: UIScreen.width, height: 95)
-        return CGSize(width: 80, height: 30)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//
+//        //return CGSize(width: UIScreen.width, height: 95)
+//        return CGSize(width: 80, height: 30)
+//    }
     
     //展示section
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

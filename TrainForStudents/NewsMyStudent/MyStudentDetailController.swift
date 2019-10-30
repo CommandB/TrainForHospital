@@ -121,19 +121,25 @@ class MyStudentDetailController: UIViewController,UITableViewDataSource,UITableV
         }else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "TurnDetailCell", for: indexPath)
             if let cell1 = cell as? TurnDetailCell {
-                cell1.bindData(data: self.dataSource1)
+                if self.dataSource1 != nil {
+                    cell1.bindData(data: self.dataSource1)
+                }
             }
             return cell
         }else if indexPath.row == 3{
             let cell = tableView.dequeueReusableCell(withIdentifier: "CompletionProgressCell", for: indexPath)
             if let cell1 = cell as? CompletionProgressCell {
-                cell1.bindData(data: self.dataSource1)
+                if self.dataSource1 != nil {
+                    cell1.bindData(data: self.dataSource1)
+                }
             }
             return cell
         }else if indexPath.row == 5{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ClassRateCell", for: indexPath)
             if let cell1 = cell as? ClassRateCell {
-                cell1.bindData(data: self.dataSource2)
+                if self.dataSource1 != nil {
+                    cell1.bindData(data: self.dataSource2)
+                }
             }
             return cell
         }else{
@@ -147,7 +153,7 @@ class MyStudentDetailController: UIViewController,UITableViewDataSource,UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource3.count == 0 ? 0 : (7 + self.dataSource3.count)
+        return self.dataSource3.count == 0 ? 7 : (7 + self.dataSource3.count)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

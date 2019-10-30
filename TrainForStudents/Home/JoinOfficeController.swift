@@ -27,20 +27,12 @@ class JoinOfficeController : HBaseViewController {
         
         let txt = view.viewWithTag(10001) as! TextFieldForNoMenu
         
-        txt.inputView = officePicckView.getOfficePickerView()
+        txt.inputView = officePicckView.getOfficeManagerPickerView()
         officePicckView.clorsureImpl = officePicker(_:_:_:_:)
         
         if office.isEmpty{
             office["officeid"] = JSON(UserDefaults.standard.string(forKey: LoginInfo.officeId.rawValue))
-            var index = 0
-            for item in officePicckView.dataSource{
-                if item["officeid"].stringValue == office["officeid"].stringValue{
-                    txt.text = item["officename"].stringValue
-                    break
-                }
-                index += 1
-            }
-            (txt.inputView as! UIPickerView).selectRow(index, inComponent: 0, animated: true)
+            (txt.inputView as! UIPickerView).selectRow(0, inComponent: 0, animated: true)
         }else{
             //如果是从IM里进来 那就隐藏切换科室
             txt.isHidden = true

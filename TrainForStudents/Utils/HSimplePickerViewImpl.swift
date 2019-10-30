@@ -46,6 +46,31 @@ class HSimplePickerViewImpl :UIViewController, UIPickerViewDelegate , UIPickerVi
         
         return p
     }
+    //切换科室只能选择管理科室
+    func getOfficeManagerPickerView( picker :UIPickerView? = nil) -> UIPickerView{
+        
+        
+        self.titleKey = "officename"
+        let tempData = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue
+        var dataBot = [JSON]()
+        for item in tempData{
+            if item["ismymanage"].stringValue == "1"{
+                dataBot.append(item)
+            }
+        }
+        
+        self.dataSource = dataBot
+        var p = UIPickerView()
+        if picker != nil{
+            p = picker!
+        }
+        p.delegate = self
+        p.dataSource = self
+        
+        
+        
+        return p
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

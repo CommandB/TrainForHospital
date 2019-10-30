@@ -319,25 +319,21 @@ class PersonSelectorController: HBaseViewController {
         let url = SERVER_PORT + "/rest/app/searchPerson.do"
         myPostRequest(url,submitParam).responseString(completionHandler: {[weak self] resp in
             
-            DispatchQueue.main.async {
-                MBProgressHUD.hideAllHUDs(for: self?.view, animated: true)
-            }
-            print(resp.description)
+            MBProgressHUD.hideAllHUDs(for: self?.view, animated: true)
             
             self?.personCollection.mj_header.endRefreshing()
             self?.personCollection.mj_footer.endRefreshing()
-            
+
             switch resp.result{
             case .success(let responseJson):
 
                 let json = JSON(parseJSON: responseJson)
-                print(json.stringValue)
+                print(json)
 
                 if json["code"].stringValue == "1"{
                     
                     self?.dataDecomposer(json: json["data"].arrayValue)
                     self?.btn_side_inside(self?.view.viewWithTag(10001) as! UIButton)
-                    
                     self?.personCollection.mj_footer.endRefreshingWithNoMoreData()
                 }else{
                     myAlert(self!, message: "请求人员列表失败!")
@@ -348,6 +344,7 @@ class PersonSelectorController: HBaseViewController {
                 print(error)
             }
         })
+        
     }
     
     
@@ -376,7 +373,7 @@ class PersonSelectorController: HBaseViewController {
             
             //按首字母添加到"所有人"分类
             //首字母
-            let firstpy = person["firstpy"].stringValue
+            let firstpy = person["firstpy"].stringValue == "" ? findFirstLetterFromString(aString: person["personname"].stringValue) : person["firstpy"].stringValue
             if allPersonDir[firstpy] == nil{
                 allPersonDir[firstpy] = [JSON]()
             }
@@ -486,18 +483,18 @@ class PersonSelectorController: HBaseViewController {
                 //TODO
             }
             
-            
+        }
+
             allPersonDir = sort(original: allPersonDir)
             studentsDir["initials"] = sort(original: s_initialsList)
             studentsDir["position"] = sort(original: s_positionList, sortKey: "gradeyear")
             studentsDir["grade"] = sort(original: s_gradeList, sortKey: "studenttype")
-            
+
             teacherDir["initials"] = sort(original: t_initialsList)
             teacherDir["position"] = sort(original: t_positionList)
-            
+
             nurseDir["initials"] = sort(original: n_initialsList)
             nurseDir["position"] = sort(original: n_positionList)
-        }
         
     }
     
@@ -520,6 +517,38 @@ class PersonSelectorController: HBaseViewController {
         }
         return result
         
+    }
+    
+    //获取拼音首字母（大写字母）
+    func findFirstLetterFromString(aString: String) -> String {
+        //转变成可变字符串
+        let mutableString = NSMutableString.init(string: aString)
+        
+        //将中文转换成带声调的拼音
+        CFStringTransform(mutableString as CFMutableString, nil,      kCFStringTransformToLatin, false)
+        
+        //去掉声调
+        let pinyinString = mutableString.folding(options:          String.CompareOptions.diacriticInsensitive, locale:   NSLocale.current)
+        
+        //将拼音首字母换成大写
+        let strPinYin = polyphoneStringHandle(nameString: aString,    pinyinString: pinyinString).uppercased()
+        
+        //截取大写首字母
+        let firstString = strPinYin.substring(to:     strPinYin.index(strPinYin.startIndex, offsetBy: 1))
+        
+        //判断首字母是否为大写
+        let regexA = "^[A-Z]$"
+        let predA = NSPredicate.init(format: "SELF MATCHES %@", regexA)
+        return predA.evaluate(with: firstString) ? firstString : "#"
+    }
+    
+    func polyphoneStringHandle(nameString: String, pinyinString: String) -> String {
+        if nameString.hasPrefix("长") {return "chang"}
+        if nameString.hasPrefix("沈") {return "shen"}
+        if nameString.hasPrefix("厦") {return "xia"}
+        if nameString.hasPrefix("地") {return "di"}
+        if nameString.hasPrefix("重") {return "chong"}
+        return pinyinString
     }
     
     func tabsTouchAnimation( sender : UIButton){
