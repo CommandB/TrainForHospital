@@ -36,6 +36,9 @@ class AttendanceController : HBaseViewController{
     var officeId = "0"
     //选中的人
     var selectedPersonId = "0"
+    //添加选择科室
+    var officePicker = UIPickerView()
+    let officePickerImpl = HSimplePickerViewImpl()
     
     override func viewDidLoad() {
         
@@ -46,7 +49,6 @@ class AttendanceController : HBaseViewController{
         calendarCollection.dataSource = calendarView
         
         calendarCollection.register(CollectionReusableViewHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: calendarView.sectionHeaderId)
-        
         
         personCollection.delegate = self
         personCollection.dataSource = self
@@ -113,6 +115,8 @@ class AttendanceController : HBaseViewController{
 
         view.addSubview(tagListBackgroundView)
         view.bringSubview(toFront: tagCollection)
+        //添加切换科室
+        addChangeOfficeBtn()
     }
     
     @objc func btn_dismissTagListView(sender : UIButton){
@@ -133,6 +137,27 @@ class AttendanceController : HBaseViewController{
             
         }
         
+    }
+    
+    func addChangeOfficeBtn(){
+        let btn = UIButton(frame: CGRect(x: UIScreen.width - 88, y: saveNavHeight + 20, width: 88, height: 44))
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        btn.titleLabel?.textAlignment = .center
+        btn.setTitle("切换科室", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.addTarget(self, action: #selector(addPickerView), for: .touchUpInside)
+        self.view.addSubview(btn)
+    }
+    @objc func addPickerView(){
+        officePicker = officePickerImpl.getOfficeManagerPickerView()
+        officePickerImpl.titleKey = "officename"
+        officePickerImpl.clorsureImpl = addrClosureImpl
+        self.view.addSubview(officePicker)
+    }
+    func addrClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+        let data = ds[row]
+        officeId = data["officeid"].stringValue
+        getListData()
     }
     
     @objc func showAddTagView(sender: UIButton){
