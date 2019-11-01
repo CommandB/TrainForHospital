@@ -44,7 +44,7 @@ class MineController : HBaseViewController{
         }
         
         let jobNum = UserDefaults.User.string(forKey: .jobNum)
-        let majorName = UserDefaults.User.string(forKey: .majorName)
+        let majorName = UserDefaults.User.string(forKey: .personcenterofficename)
         var lbl = view.viewWithTag(10003) as! UILabel
         //工号的x轴随名字长度变化
         lbl.setX(x: lbl_name.X + ((lbl_name.text?.getWidth())!) + (5))

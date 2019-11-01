@@ -104,7 +104,7 @@ class MyStudentRootController: UIViewController,UIScrollViewDelegate {
                 }
                 break
             case .failure(let error):
-                self?.dataArray.removeLast()
+//                self?.dataArray.removeLast()
                 myAlert(self ?? MyStudentRootController(), message: "查询考题类目异常!")
                 print(error)
                 break

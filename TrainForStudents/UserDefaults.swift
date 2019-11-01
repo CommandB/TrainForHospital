@@ -42,6 +42,8 @@ extension UserDefaults{
             case highestDegree
             case phoneNo
             case sex
+            case officeName
+            case personcenterofficename
         }
     }
     

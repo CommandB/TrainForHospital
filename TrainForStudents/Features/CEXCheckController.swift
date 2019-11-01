@@ -40,6 +40,7 @@ class CEXCheckController : HBaseViewController{
     
     @IBOutlet weak var view9: UIView!
     
+    
     override func viewWillAppear(_ animated: Bool) {
         
         let lbl_title = view.viewWithTag(11001) as! UILabel
@@ -47,6 +48,8 @@ class CEXCheckController : HBaseViewController{
         lbl_title.setBorderBottom(size: 1, color: UIColor.red)
         //lbl_title.borderColor = UIColor.red
         //lbl_title.borderWidth = 1
+        let scrollview = view.viewWithTag(20022) as! UIScrollView
+        scrollview.contentSize = CGSize.init(width: 0, height: 310)
         
         viewArray=[view1,view2,view3,view4,view5,view6,view7,view8,view9]
         //        view2.isHidden = true
@@ -225,7 +228,8 @@ class CEXCheckController : HBaseViewController{
         // 评分地址
         submitData["address"] = "门诊"
         
-        //print(submitData)
+        print(submitData)
+        print("mini-cex评分参数查看")
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let url = SERVER_PORT + "rest/app/subMiniCEX.do"

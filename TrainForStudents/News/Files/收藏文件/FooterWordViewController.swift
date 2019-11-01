@@ -63,7 +63,77 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
         tableView.register(FooterWordCell.classForCoder(), forCellReuseIdentifier: "FileWordCell")
         self.view.addSubview(tableView)
     }
+    func requestCollectData(json:JSON) {
+        var url = ""
+        var isCollectionBool = false
+        let persionId = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!
+        let persionName = UserDefaults.User.string(forKey: .personName)!
+        
+        if json["iscollect"].stringValue == "0" {
+            //执行收藏操作
+            url = SERVER_PORT+"rest/app/insertlearncollect.do"
+            isCollectionBool = true
+        }else{
+            //执行取消收藏操作
+            url = SERVER_PORT+"rest/app/dellearncollect.do"
+            isCollectionBool = false
+        }
+        myPostRequest(url,["resourcesid":json["resourcesid"],"leanchannelid":json["leanchannelid"],"personid":persionId,"personname":persionName]).responseJSON(completionHandler: {resp in
+            //            self.tableView.mj_header.endRefreshing()
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json=JSON(responseJson)
+                if json["code"].stringValue == "1"{
+                    
+                    //                    self.tableView.reloadData()
+                    myAlert(self, message: isCollectionBool == true ? "收藏成功":"收藏失败")
+                    self.getPageData(fileType: self.fileType)
+                }else{
+                    myAlert(self, message: "请求我的信息失败!")
+                }
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
+        
+    }
     
+    func getPageData(fileType:String){
+        let url = SERVER_PORT + "rest/app/querylearncollect.do"
+        let persionID = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!
+        myPostRequest(url, ["personid":persionID,"filetype":fileType],  method: .post).responseString(completionHandler: {resp in
+            //            self.deptCollection.mj_footer.endRefreshingWithNoMoreData()
+            
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                print(json)
+                print("我的收藏数据请求")
+                if json["code"].stringValue == "1"{
+                    if json["cataloghierarchy"].array == nil || json["cataloghierarchy"].arrayValue.count == 0 {
+                        //                        self.dataArray.removeLast()
+                        return
+                    }
+                    self.requestedData = json["data"].arrayValue
+                    
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                    print(json)
+                }
+                break
+            case .failure(let error):
+                //                self.dataArray.removeLast()
+                myAlert(self, message: "查询考题类目异常!")
+                print(error)
+                break
+            }
+            self.tableView.reloadData()
+        })
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

@@ -56,7 +56,7 @@ class FIleWordViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func getPageData(){
         guard let jsonData = data else { return }
         let url = SERVER_PORT+"rest/app/querylearnchannelfile.do"
-        myPostRequest(url, ["leanchannelid":jsonData["leanchannelid"].stringValue,"filetype":fileType],  method: .post).responseString(completionHandler: {resp in
+        myPostRequest(url, ["leanchannelid":jsonData["leanchannelid"].stringValue,"filetype":fileType,"personid":UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!],  method: .post).responseString(completionHandler: {resp in
             self.tableView.mj_header.endRefreshing()
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
 //            self.deptCollection.mj_footer.endRefreshingWithNoMoreData()
@@ -64,6 +64,8 @@ class FIleWordViewController: UIViewController,UITableViewDelegate,UITableViewDa
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)
+                print(json)
+                print("判断是否以搜藏")
                 if json["code"].stringValue == "1"{
                     self.requestedData = json["data"].arrayValue
                     self.tableView.reloadData()
@@ -83,27 +85,40 @@ class FIleWordViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     func requestCollectData(json:JSON) {
-//        guard let index = self.requestedData.index(of: json) else { return }
-        
-        if var dataArray = UserDefaults.standard.stringArray(forKey: self.fileType) {
-            for data in dataArray {
-                let json1 = JSON(parseJSON: data)
-                if json1["resourcesid"] == json["resourcesid"] {
-                    guard let index = dataArray.index(of: data) else { return  }
-                    dataArray.remove(at: index)
-                    UserDefaults.standard.set(dataArray, forKey: self.fileType)
-                    self.tableView.reloadData()
-                    return
-                }
-            }
-            dataArray.append(json.description)
-            UserDefaults.standard.set(dataArray, forKey: self.fileType)
+        var url = ""
+        var isCollectionBool = false
+        let personId = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!
+        let personName = UserDefaults.User.string(forKey: .personName)!
+
+        if json["iscollect"].stringValue == "0" {
+            //执行收藏操作
+            url = SERVER_PORT+"rest/app/insertlearncollect.do"
+            isCollectionBool = true
         }else{
-            var array = [String]()
-            array.append(json.description)
-            UserDefaults.standard.set(array, forKey: self.fileType)
+            //执行取消收藏操作
+            url = SERVER_PORT+"rest/app/dellearncollect.do"
+            isCollectionBool = false
         }
-        self.tableView.reloadData()
+        myPostRequest(url,["resourcesid":json["resourcesid"],"leanchannelid":json["leanchannelid"],"personid":personId,"personname":personName]).responseJSON(completionHandler: {resp in
+//            self.tableView.mj_header.endRefreshing()
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json=JSON(responseJson)
+                print(json)
+                if json["code"].stringValue == "1"{
+//                    self.tableView.reloadData()
+                    myAlert(self, message: isCollectionBool == true ? "收藏成功":"取消收藏成功")
+                }else{
+                    myAlert(self, message: "请求我的信息失败!")
+                }
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
+//        self.tableView.reloadData()
         
     }
     
@@ -178,7 +193,7 @@ class FileWordCell: UITableViewCell {
     typealias funcBlock = (_ json : JSON) -> ()
     var buttonClickCallBack : funcBlock?
     var dataSource = JSON()
-    
+    var isCollectedBool = true
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -249,16 +264,14 @@ class FileWordCell: UITableViewCell {
             self.picView.image = UIImage(named: "subFiles")
         }
         
-        if let dataArray = UserDefaults.standard.stringArray(forKey: dataSource1["filetype"].stringValue) {
-            
-            for data in dataArray {
-                let json = JSON(parseJSON: data)
-                if json["resourcesid"] == dataSource1["resourcesid"] {
-                    collectButton.setImage(UIImage(named: "shoucang2"), for: .normal)
-                    self.setNeedsUpdateConstraints()
-                    return;
-                }
-            }
+        
+        if dataSource["iscollect"].stringValue == "1" {
+            collectButton.setImage(UIImage(named: "shoucang2"), for: .normal)
+            isCollectedBool = true
+            self.setNeedsUpdateConstraints()
+            return;
+        }else{
+            isCollectedBool = false
             collectButton.setImage(UIImage(named: "shoucang1"), for: .normal)
         }
         
@@ -271,6 +284,17 @@ class FileWordCell: UITableViewCell {
     @objc func didClickCollectionBtn(_button:UIButton) {
         if let callBack = buttonClickCallBack  {
             callBack(self.dataSource)
+            if isCollectedBool == true {
+                collectButton.setImage(UIImage(named: "shoucang1"), for: .normal)
+                self.dataSource["iscollect"] = "0"
+                isCollectedBool = false
+//                self.setNeedsUpdateConstraints()
+            }else{
+                self.dataSource["iscollect"] = "1"
+                isCollectedBool = true
+                collectButton.setImage(UIImage(named: "shoucang2"), for: .normal)
+            }
+            
         }
         
     }

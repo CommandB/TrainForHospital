@@ -194,6 +194,11 @@ class EvaluationItemListController : HBaseViewController{
         cardCollection.setContentOffset(CGPoint(x: cardCollection.W * CGFloat(pageNumber), y: 0), animated: true)
     }
     
+    //评价一个之后更新操作
+    func refrash(){
+        
+    }
+    
     func getCardListData(){
         
         MBProgressHUD.showAdded(to: view, animated: true)
@@ -213,7 +218,10 @@ class EvaluationItemListController : HBaseViewController{
                     
                     self.jds  = json["data"].arrayValue
                     self.dataList = self.jds
-                    
+                    if self.jds.count == 0 {
+                        self.dismiss(animated: true, completion: nil)
+                        return
+                    }
                     
                     if !self.initData.isEmpty{
                         var index = 0

@@ -329,7 +329,8 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                         case .success(let result):
                             
                             let json = JSON(result)
-                            //print(json)
+                            print(json)
+                            print("请求科室信息")
                             if json["code"].stringValue == "1"{
                                 //缓存科室信息
                                 let data = json["data"].arrayValue
@@ -342,7 +343,8 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
                                     LoginInfo.officeId.rawValue)
                                 UserDefaults.standard.set(data[0]["officename"].stringValue, forKey:
                                     LoginInfo.officeName.rawValue)
-                                
+                                UserDefaults.User.set(value: data[0]["officename"].stringValue, forKey: .personcenterofficename)
+
                                 //解析角色信息并缓存
                                 let role = json["role"].arrayValue
                                 var roleDic = [String:Bool]()
@@ -428,20 +430,27 @@ class LoginViewController : HBaseViewController, UIPickerViewDataSource , UIPick
     //获取我的信息
     func getMySelfData(){
         
-        let url = SERVER_PORT+"rest/personStudent/query.do"
+        var url = ""
+        if isOnlyStudent(){
+            url = SERVER_PORT+"rest/personStudent/query.do"
+        }else{
+            url = SERVER_PORT+"rest/personTeacher/query.do"
+        }
+            
         myPostRequest(url).responseJSON(completionHandler: {resp in
             
             switch resp.result{
             case .success(let responseJson):
-                
                 let json=JSON(responseJson)
                 if json["code"].stringValue == "1"{
-                    
+                    print(json)
+                    print("登陆获取个人信息")
                     //缓存用户基础信息
                     UserDefaults.User.set(value: json["data"]["personid"].stringValue, forKey: .personId)
                     UserDefaults.User.set(value: json["data"]["jobnum"].stringValue, forKey: .jobNum)
                     UserDefaults.User.set(value: json["data"]["personname"].stringValue, forKey: .personName)
                     UserDefaults.User.set(value: json["data"]["subjectname"].stringValue, forKey: .majorName)
+                    UserDefaults.User.set(value: json["data"]["officename"].stringValue, forKey: .officeName)
                     UserDefaults.User.set(value: json["data"]["highestdegree"].stringValue, forKey: .highestDegree)
                     UserDefaults.User.set(value: json["data"]["phoneno"].stringValue, forKey: .phoneNo)
                     UserDefaults.User.set(value: json["data"]["sex"].stringValue, forKey: .sex)

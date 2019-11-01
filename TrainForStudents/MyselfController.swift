@@ -69,12 +69,14 @@ class MyselfController: MyBaseUIViewController {
                 
                 let json=JSON(responseJson)
                 if json["code"].stringValue == "1"{
-                    
+                    print(json)
+                    print("获取个人信息")
                     //缓存用户基础信息
                     UserDefaults.User.set(value: json["data"]["personid"].stringValue, forKey: .personId)
                     UserDefaults.User.set(value: json["data"]["jobnum"].stringValue, forKey: .jobNum)
                     UserDefaults.User.set(value: json["data"]["personname"].stringValue, forKey: .personName)
                     UserDefaults.User.set(value: json["data"]["subjectname"].stringValue, forKey: .majorName)
+                    UserDefaults.User.set(value: json["data"]["officename"].stringValue, forKey: .officeName)
                     UserDefaults.User.set(value: json["data"]["highestdegree"].stringValue, forKey: .highestDegree)
                     UserDefaults.User.set(value: json["data"]["phoneno"].stringValue, forKey: .phoneNo)
                     

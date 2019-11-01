@@ -184,7 +184,7 @@ class NewsListController : UIViewController,UITableViewDelegate,UITableViewDataS
 
         }else if index == 1 {
             let vc = FooterViewController()
-            //            vc.data = json;
+//            vc.data = json;
             self.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
             self.hidesBottomBarWhenPushed = false

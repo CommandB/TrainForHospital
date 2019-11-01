@@ -140,20 +140,18 @@ class AttendanceController : HBaseViewController{
     }
     
     func addChangeOfficeBtn(){
-        let btn = UIButton(frame: CGRect(x: UIScreen.width - 88, y: saveNavHeight + 20, width: 88, height: 44))
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        btn.titleLabel?.textAlignment = .center
-        btn.setTitle("切换科室", for: .normal)
-        btn.setTitleColor(.white, for: .normal)
-        btn.addTarget(self, action: #selector(addPickerView), for: .touchUpInside)
-        self.view.addSubview(btn)
-    }
-    @objc func addPickerView(){
+        let btnView = UITextField(frame: CGRect(x: UIScreen.width - 88, y: saveNavHeight + 30, width: 88, height: 44))
+        btnView.font = UIFont.systemFont(ofSize: 18)
+        btnView.textAlignment = .center
+        btnView.text = "切换科室"
+        btnView.textColor = .white
         officePicker = officePickerImpl.getOfficeManagerPickerView()
         officePickerImpl.titleKey = "officename"
         officePickerImpl.clorsureImpl = addrClosureImpl
-        self.view.addSubview(officePicker)
+        btnView.inputView = officePicker
+        self.view.addSubview(btnView)
     }
+    
     func addrClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
         let data = ds[row]
         officeId = data["officeid"].stringValue

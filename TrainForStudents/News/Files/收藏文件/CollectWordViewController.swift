@@ -17,7 +17,6 @@ class CollectWordViewController: UIViewController,UITableViewDelegate,UITableVie
         }
         //属性已经改变时进行监听
         didSet{
-            initData()
         }
     }
     
@@ -28,19 +27,7 @@ class CollectWordViewController: UIViewController,UITableViewDelegate,UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         addChildViews()
-    }
-    
-    func initData() {
-        self.requestedData.removeAll()
-        if var dataArray = UserDefaults.standard.stringArray(forKey: self.fileType) {
-            for data in dataArray {
-                let json1 = JSON(parseJSON: data)
-               self.requestedData.append(json1)
-            }
-            self.tableView.reloadData()
-        }else{
-            requestedData = [JSON]()
-        }
+        getPageData(fileType: fileType)
     }
     
     func addChildViews() {
@@ -65,31 +52,76 @@ class CollectWordViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     func requestCollectData(json:JSON) {
-        //        guard let index = self.requestedData.index(of: json) else { return }
+        var url = ""
+        var isCollectionBool = false
+        let persionId = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!
+        let persionName = UserDefaults.User.string(forKey: .personName)!
         
-        if var dataArray = UserDefaults.standard.stringArray(forKey: self.fileType) {
-            for data in dataArray {
-                let json1 = JSON(parseJSON: data)
-                if json1["resourcesid"] == json["resourcesid"] {
-                    guard let index = dataArray.index(of: data) else { return  }
-                    dataArray.remove(at: index)
-                    UserDefaults.standard.set(dataArray, forKey: self.fileType)
-                    self.initData()
-                    return
-                }
-            }
-            dataArray.append(json.description)
-            UserDefaults.standard.set(dataArray, forKey: self.fileType)
+        if json["iscollect"].stringValue == "0" {
+            //执行收藏操作
+            url = SERVER_PORT+"rest/app/insertlearncollect.do"
+            isCollectionBool = true
         }else{
-            var array = [String]()
-            array.append(json.description)
-            UserDefaults.standard.set(array, forKey: self.fileType)
+            //执行取消收藏操作
+            url = SERVER_PORT+"rest/app/dellearncollect.do"
+            isCollectionBool = false
         }
-        self.tableView.reloadData()
+        myPostRequest(url,["resourcesid":json["resourcesid"],"leanchannelid":json["leanchannelid"],"personid":persionId,"personname":persionName]).responseJSON(completionHandler: {resp in
+            //            self.tableView.mj_header.endRefreshing()
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json=JSON(responseJson)
+                if json["code"].stringValue == "1"{
+                    
+                    //                    self.tableView.reloadData()
+                    myAlert(self, message: isCollectionBool == true ? "收藏成功":"取消收藏成功")
+                    self.getPageData(fileType: self.fileType)
+                }else{
+                    myAlert(self, message: "请求我的信息失败!")
+                }
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
         
     }
     
-    
+    func getPageData(fileType:String){
+        let url = SERVER_PORT + "rest/app/querylearncollect.do"
+        let persionID = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!
+        myPostRequest(url, ["personid":persionID,"filetype":fileType],  method: .post).responseString(completionHandler: {resp in
+            //            self.deptCollection.mj_footer.endRefreshingWithNoMoreData()
+            
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                print(json)
+                print("我的收藏数据请求")
+                if json["code"].stringValue == "1"{
+                    if json["data"].arrayValue.count == 0 {
+                        self.requestedData = json["data"].arrayValue
+                    }else{
+                        self.requestedData = json["data"].arrayValue
+                    }
+                    
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                    print(json)
+                }
+                break
+            case .failure(let error):
+//                self.dataArray.removeLast()
+                myAlert(self, message: "查询考题类目异常!")
+                print(error)
+                break
+            }
+            self.tableView.reloadData()
+        })
+        
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.requestedData.count
@@ -97,7 +129,6 @@ class CollectWordViewController: UIViewController,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileWordCell", for: indexPath)
-        
         if let cell1 = cell as? FileWordCell {
             cell1.bindData(dataSource1: self.requestedData[indexPath.row], title: "")
             cell1.buttonClickCallBack = { (json) in
