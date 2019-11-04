@@ -34,6 +34,8 @@ class InspectController : HBaseViewController{
     
     var jds = [JSON]()
     
+    var jdsMyControl = [JSON]()
+    
     let datePicker = UIDatePicker()
     var durationPicker = UIPickerView()
     let addrPicker = UIPickerView()
@@ -75,6 +77,12 @@ class InspectController : HBaseViewController{
         officeList_collection.dataSource = self
         
         jds = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue
+        
+        for item in jds{
+            if item["ismymanage"].stringValue == "1"{
+                jdsMyControl.append(item)
+            }
+        }
         
         officeList_collection.reloadData()
         
@@ -224,7 +232,12 @@ class InspectController : HBaseViewController{
     }
     
     @objc func showOfficeList(){
-        officeList_View.isHidden = false
+        if jdsMyControl.count == 0 {
+            myAlert(self, message: "暂无可切换科室")
+        }else{
+            officeList_View.isHidden = false
+        }
+        
     }
     
     
@@ -581,12 +594,13 @@ extension InspectController : UIScrollViewDelegate{
 extension InspectController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return jds.count
+        
+        return jdsMyControl.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let data = jds[indexPath.item]
+        let data = jdsMyControl[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
         let lbl = cell.viewWithTag(10001) as! UILabel
         lbl.text = data["officename"].stringValue
@@ -594,7 +608,7 @@ extension InspectController : UICollectionViewDelegate , UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = jds[indexPath.item]
+        let data = jdsMyControl[indexPath.item]
         let btn = view.viewWithTag(70001) as! UIButton
         btn.setTitle(data["officename"].stringValue, for: .normal)
         submitParam["officeid"] = data["officeid"].stringValue

@@ -1,8 +1,8 @@
 //
-//  FooterWordViewController.swift
+//  CollectWordViewController.swift
 //  TrainForStudents
 //
-//  Created by 陈海峰 on 2019/8/29.
+//  Created by 陈海峰 on 2019/8/28.
 //  Copyright © 2019 黄玮晟. All rights reserved.
 //
 
@@ -17,7 +17,6 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
         }
         //属性已经改变时进行监听
         didSet{
-            initData()
         }
     }
     
@@ -28,19 +27,7 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         addChildViews()
-    }
-    
-    func initData() {
-        self.requestedData.removeAll()
-        if var dataArray = UserDefaults.standard.stringArray(forKey: self.fileType+"footer") {
-            for data in dataArray {
-                let json1 = JSON(parseJSON: data)
-                self.requestedData.append(json1)
-            }
-            self.tableView.reloadData()
-        }else{
-            requestedData = [JSON]()
-        }
+        getPageData(fileType: fileType)
     }
     
     func addChildViews() {
@@ -60,9 +47,10 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
-        tableView.register(FooterWordCell.classForCoder(), forCellReuseIdentifier: "FileWordCell")
+        tableView.register(FileWordCell.classForCoder(), forCellReuseIdentifier: "FileWordCell")
         self.view.addSubview(tableView)
     }
+    
     func requestCollectData(json:JSON) {
         var url = ""
         var isCollectionBool = false
@@ -88,7 +76,7 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
                 if json["code"].stringValue == "1"{
                     
                     //                    self.tableView.reloadData()
-                    myAlert(self, message: isCollectionBool == true ? "收藏成功":"收藏失败")
+                    myAlert(self, message: isCollectionBool == true ? "收藏成功":"取消收藏成功")
                     self.getPageData(fileType: self.fileType)
                 }else{
                     myAlert(self, message: "请求我的信息失败!")
@@ -102,7 +90,7 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func getPageData(fileType:String){
-        let url = SERVER_PORT + "rest/app/querylearncollect.do"
+        let url = SERVER_PORT + "rest/app/querylearnmark.do"
         let persionID = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!
         myPostRequest(url, ["personid":persionID,"filetype":fileType],  method: .post).responseString(completionHandler: {resp in
             //            self.deptCollection.mj_footer.endRefreshingWithNoMoreData()
@@ -113,11 +101,11 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
                 print(json)
                 print("我的收藏数据请求")
                 if json["code"].stringValue == "1"{
-                    if json["cataloghierarchy"].array == nil || json["cataloghierarchy"].arrayValue.count == 0 {
-                        //                        self.dataArray.removeLast()
-                        return
+                    if json["data"].arrayValue.count == 0 {
+                        self.requestedData = json["data"].arrayValue
+                    }else{
+                        self.requestedData = json["data"].arrayValue
                     }
-                    self.requestedData = json["data"].arrayValue
                     
                 }else{
                     myAlert(self, message: json["msg"].stringValue)
@@ -135,6 +123,30 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
         
     }
     
+    func deletFooterCollect(json:JSON){
+        let url = SERVER_PORT + "rest/app/dellearnmark.do"
+        let personId = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!
+        let personName = UserDefaults.User.string(forKey: .personName)!
+        myPostRequest(url,["resourcesid":json["resourcesid"],"leanchannelid":json["leanchannelid"],"personid":personId,"personname":personName]).responseJSON(completionHandler: {resp in
+            //            self.tableView.mj_header.endRefreshing()
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json=JSON(responseJson)
+                print(json)
+                if json["code"].stringValue == "1"{
+                    self.tableView.reloadData()
+                }else{
+                    myAlert(self, message: "请求我的信息失败!")
+                }
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.requestedData.count
@@ -142,34 +154,15 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileWordCell", for: indexPath)
-        
-        if let cell1 = cell as? FooterWordCell {
+        if let cell1 = cell as? FileWordCell {
             cell1.bindData(dataSource1: self.requestedData[indexPath.row], title: "")
-            cell1.addLongGes(target: self, action: #selector(longPreAction))
+            cell1.buttonClickCallBack = { (json) in
+                self.requestCollectData(json: json)
+            }
             return cell1
         }
         return cell
         
-    }
-    
-    @objc func longPreAction(gesture:UILongPressGestureRecognizer) {
-        guard let cell = gesture.view?.superview as? UITableViewCell else { return }
-        guard let indexPath = self.tableView.indexPath(for: cell) else { return }
-        
-        let alert = UIAlertController(title: "是否确认删除", message: nil, preferredStyle: .alert)
-        let action1 = UIAlertAction(title: "取消", style: .cancel) { (action) in
-            
-        }
-        let action2 = UIAlertAction(title: "确认", style: .default) { (action) in
-            if var dataArray = UserDefaults.standard.stringArray(forKey: self.fileType+"footer") {
-                dataArray.remove(at: indexPath.row)
-                UserDefaults.standard.set(dataArray, forKey: self.fileType+"footer")
-                self.initData()
-            }
-        }
-        alert.addAction(action1)
-        alert.addAction(action2)
-        self.present(alert, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -185,6 +178,23 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
         return 0.0
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.delete
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "删除"
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            deletFooterCollect(json: self.requestedData[indexPath.row])
+            self.requestedData.remove(at: indexPath.row)
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -210,134 +220,5 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
      // Pass the selected object to the new view controller.
      }
      */
-    
-}
-
-class FooterWordCell: UITableViewCell {
-    typealias funcBlock = (_ json : JSON) -> ()
-    var buttonClickCallBack : funcBlock?
-    var dataSource = JSON()
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = UITableViewCellSelectionStyle.none
-        self.createCellUI()
-        self.setUpContrains()
-        self.setNeedsUpdateConstraints()
-    }
-    
-    func createCellUI()  {
-        self.contentView.addSubview(self.picView)
-        self.contentView.addSubview(self.titleLabel)
-        self.contentView.addSubview(self.dateLabel)
-        self.contentView.addSubview(self.passPeopleLabel)
-    }
-    
-    func addLongGes(target:Any,action:Selector) {
-        let longPressGes = UILongPressGestureRecognizer(target: target, action: action)
-        self.contentView.addGestureRecognizer(longPressGes)
-    }
-    
-    func setUpContrains() {
-        self.picView.mas_makeConstraints { (make) in
-            make?.left.offset()(10)
-            make?.size.mas_equalTo()(CGSize(width: 60, height: 60))
-            make?.centerY.offset()(0)
-            make?.top.offset()(10)
-        }
-        self.titleLabel.mas_makeConstraints { (make) in
-            make?.left.equalTo()(self.picView.mas_right)?.offset()(10)
-            make?.right.offset()(0)
-            make?.top.offset()(10)
-        }
-        self.dateLabel.mas_makeConstraints { (make) in
-            make?.left.equalTo()(self.picView.mas_right)?.offset()(10)
-            make?.centerY.right().offset()(0)
-        }
-        self.passPeopleLabel.mas_makeConstraints { (make) in
-            make?.left.equalTo()(self.picView.mas_right)?.offset()(10)
-            make?.right.offset()(0)
-            make?.bottom.offset()(-10)
-        }
-        
-    }
-    
-    func bindData(dataSource1:JSON,title:String) {
-        //        if dataSource1.count == 0 {
-        //            return
-        //        }
-        self.dataSource = dataSource1
-        self.picView.image = UIImage(named: "newsFilesWord")
-        self.titleLabel.text = dataSource1["reffilename"].stringValue
-        self.dateLabel.text = dataSource1["createtime"].stringValue
-        self.passPeopleLabel.text = "上传人:"+dataSource1["createname"].stringValue
-        
-        if dataSource1["filetype"].stringValue == "WORD" {
-            self.picView.image = UIImage(named: "newsFilesWord")
-        }else if dataSource1["filetype"].stringValue == "EXCEL" {
-            self.picView.image = UIImage(named: "newsFilesExcel")
-        }else if dataSource1["filetype"].stringValue == "PDF" {
-            self.picView.image = UIImage(named: "newsFilesPDF")
-        }else if dataSource1["filetype"].stringValue == "PPT" {
-            self.picView.image = UIImage(named: "newsFilesPPT")
-        }else if dataSource1["filetype"].stringValue == "视频" {
-            self.picView.image = UIImage(named: "newsFilesMP4")
-        }else{
-            self.picView.image = UIImage(named: "subFiles")
-        }
-        
-  
-        
-        //        self.contentView.mas_updateConstraints({ (make) in
-        //            make.height.equalTo(origin_y + buttonHeight + 10)
-        //        })
-        self.setNeedsUpdateConstraints()
-    }
-    
-    
-    lazy var picView: UIImageView = {
-        let picView = UIImageView()
-        picView.image = UIImage(named: " ")
-        return picView
-    }()
-    
-    lazy var titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFont(ofSize: 12)
-        titleLabel.textAlignment = .left
-        titleLabel.textColor = .black
-        return titleLabel
-    }()
-    
-    lazy var dateLabel: UILabel = {
-        let dateLabel = UILabel()
-        dateLabel.font = UIFont.systemFont(ofSize: 12)
-        dateLabel.textAlignment = .left
-        dateLabel.textColor = .black
-        return dateLabel
-    }()
-    lazy var passPeopleLabel: UILabel = {
-        let passPeopleLabel = UILabel()
-        passPeopleLabel.font = UIFont.systemFont(ofSize: 12)
-        passPeopleLabel.textAlignment = .left
-        passPeopleLabel.textColor = .black
-        return passPeopleLabel
-    }()
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
     
 }

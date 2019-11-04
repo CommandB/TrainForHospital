@@ -140,7 +140,7 @@ class AttendanceController : HBaseViewController{
     }
     
     func addChangeOfficeBtn(){
-        let btnView = UITextField(frame: CGRect(x: UIScreen.width - 88, y: saveNavHeight + 30, width: 88, height: 44))
+        let btnView = UITextField(frame: CGRect(x: UIScreen.width - 88, y: 20, width: 88, height: 44))
         btnView.font = UIFont.systemFont(ofSize: 18)
         btnView.textAlignment = .center
         btnView.text = "切换科室"

@@ -25,7 +25,7 @@ class ReleaseController : UIViewController{
         
         btnCollection.delegate = self
         btnCollection.dataSource = self
-        
+        print(jds)
         jds = UserDefaults.AppConfig.json(forKey: .teachingActivityType).arrayValue
         
         btnCollection.reloadData()
@@ -68,9 +68,9 @@ extension ReleaseController : UICollectionViewDelegate , UICollectionViewDataSou
             let data = jds[index]
             let title = data["traintypename"].stringValue
             var icon = UIImage(named: "fb-\(title)")
-            if icon?.size == nil{
+//            if icon?.size == nil{
                 icon = UIImage(named: "其他教学活动")
-            }
+//            }
             btn.setImage(icon, for: .normal)
             btn.setTitle(title, for: .normal)
         }else{

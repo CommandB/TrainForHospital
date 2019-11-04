@@ -177,8 +177,8 @@ extension StudentHomeController : UICollectionViewDelegate , UICollectionViewDat
             (cell.viewWithTag(10001) as! UILabel).text = turnTaskJds["officename"].stringValue
             (cell.viewWithTag(10002) as! UILabel).text = turnTaskJds["roundstarttime"].stringValue + " ~ " + turnTaskJds["roundendtime"].stringValue
             (cell.viewWithTag(20001) as! UILabel).text = turnTaskJds["teachername"].stringValue
-            (cell.viewWithTag(30001) as! UILabel).text = turnTaskJds["isovertheoryexam"].intValue == 0 ? "否" : "去"
-            (cell.viewWithTag(30002) as! UILabel).text = turnTaskJds["isoverskillexam"].intValue == 0 ? "否" : "去"
+            (cell.viewWithTag(30001) as! UILabel).text = turnTaskJds["isovertheoryexam"].stringValue
+            (cell.viewWithTag(30002) as! UILabel).text = turnTaskJds["isoverskillexam"].stringValue
             (cell.viewWithTag(40001) as! UILabel).text = turnTaskJds["evaluationsum"].stringValue
             (cell.viewWithTag(40002) as! UILabel).text = turnTaskJds["traincount"].intValue.description
             

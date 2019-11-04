@@ -10,6 +10,6 @@ import UIKit
 
 extension UIDevice {
     var iPhoneX: Bool {
-        return UIScreen.main.nativeBounds.height == 2436
+        return UIScreen.main.nativeBounds.height >= 2436
     }
 }

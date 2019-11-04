@@ -83,6 +83,29 @@ class FIleWordViewController: UIViewController,UITableViewDelegate,UITableViewDa
         })
         
     }
+    func addFooterCollect(json:JSON){
+        let url = SERVER_PORT + "rest/app/insertlearnmark.do"
+        let personId = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!
+        let personName = UserDefaults.User.string(forKey: .personName)!
+        myPostRequest(url,["resourcesid":json["resourcesid"],"leanchannelid":json["leanchannelid"],"personid":personId,"personname":personName]).responseJSON(completionHandler: {resp in
+            //            self.tableView.mj_header.endRefreshing()
+            
+            switch resp.result{
+            case .success(let responseJson):
+                
+                let json=JSON(responseJson)
+                print(json)
+                if json["code"].stringValue == "1"{
+                    //                    self.tableView.reloadData()
+                }else{
+                    myAlert(self, message: "请求我的信息失败!")
+                }
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
+    }
     
     func requestCollectData(json:JSON) {
         var url = ""
@@ -148,6 +171,7 @@ class FIleWordViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        addFooterCollect(json: self.requestedData[indexPath.row])
         let vc = OpenFileViewController()
         vc.data = self.requestedData[indexPath.row]
         self.parent?.hidesBottomBarWhenPushed = true
