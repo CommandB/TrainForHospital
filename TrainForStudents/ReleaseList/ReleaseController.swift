@@ -25,9 +25,9 @@ class ReleaseController : UIViewController{
         
         btnCollection.delegate = self
         btnCollection.dataSource = self
-        print(jds)
+       
         jds = UserDefaults.AppConfig.json(forKey: .teachingActivityType).arrayValue
-        
+        print(jds)
         btnCollection.reloadData()
         
     }
@@ -63,16 +63,17 @@ extension ReleaseController : UICollectionViewDelegate , UICollectionViewDataSou
         let i = jds.count - collectionView.numberOfItems(inSection: indexPath.section)
         let index = indexPath.item + i
         let btn = cell.viewWithTag(10001) as! UIButton
+        let label = cell.viewWithTag(90017) as! UILabel
         if index >= 0 {
             btn.isHidden = false
             let data = jds[index]
             let title = data["traintypename"].stringValue
             var icon = UIImage(named: "fb-\(title)")
-//            if icon?.size == nil{
+            if icon?.size == nil{
                 icon = UIImage(named: "其他教学活动")
-//            }
+            }
             btn.setImage(icon, for: .normal)
-            btn.setTitle(title, for: .normal)
+            label.text = title
         }else{
             btn.isHidden = true
         }

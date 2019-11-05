@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class InspectController : HBaseViewController{
+class InspectController : HBaseViewController,UITextFieldDelegate{
     
     @IBOutlet weak var btn_baseInfo: UIButton!
     
@@ -62,6 +62,7 @@ class InspectController : HBaseViewController{
     
     var selectedTextField : UITextField?
     
+    var switchKeyBoardBtn:UIButton!
     override func viewDidLoad() {
         
         //初始化提交数据
@@ -95,7 +96,7 @@ class InspectController : HBaseViewController{
         classroomList.insert(["facilitiesname":""], at: 0)
         addrPickerDs = classroomList
         
-        let switchKeyBoardBtn = UIButton(frame: CGRect(x: 10, y: 10, width: 70, height: 20))
+        switchKeyBoardBtn = UIButton(frame: CGRect(x: 10, y: 0, width: 100, height: 40))
         switchKeyBoardBtn.setTitle("手动输入", for: .normal)
         switchKeyBoardBtn.addTarget(self, action: #selector(switchKeyboard), for: .touchUpInside)
 //        addrPicker.addSubview(switchKeyBoardBtn)
@@ -150,7 +151,7 @@ class InspectController : HBaseViewController{
         txt.inputView = datePicker
         txt.delegate = self
         txt = view.viewWithTag(50001) as! TextFieldForNoMenu
-        txt.inputView = addrPicker
+//        txt.inputView = addrPicker
         txt.delegate = self
         
         var btn = view.viewWithTag(60001) as! UIButton
@@ -334,6 +335,7 @@ class InspectController : HBaseViewController{
     
     @objc func switchKeyboard(sender : UIButton){
         print("我来啦啦啦安利安利安利安利啊啊来啦安利安利啊~~")
+        
     }
     
     func tabsTouchAnimation( sender : UIButton){
@@ -466,10 +468,7 @@ class InspectController : HBaseViewController{
         
         
     }
-    
-}
-
-extension InspectController : UITextFieldDelegate{
+  
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let tag = textField.tag
@@ -492,8 +491,13 @@ extension InspectController : UITextFieldDelegate{
             let dateStr = "\(t31.text!) \(t32.text!):00"
             datePicker.minimumDate = DateUtil.stringToDateTime(dateStr)
         }else if tag == 50001{
-            textField.text = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesname"].stringValue
-            submitParam["address"] = addrPickerDs[addrPicker.selectedRow(inComponent: 0)]["facilitiesid"].stringValue
+            let vc = SelectAdressController()
+            vc.callback = {[weak self] str,indexID in
+                textField.text = str
+                self?.submitParam["address"] = str
+            }
+            self.present(vc, animated: true, completion: nil)
+            
         }else if tag == 90002 || tag == 90001 {
             
             var selectedRowNumber = 0

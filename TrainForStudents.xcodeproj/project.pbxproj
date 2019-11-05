@@ -35,8 +35,8 @@
 		0A123DCB2242269600FB2BE4 /* 功能-tabbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A123DC72242269400FB2BE4 /* 功能-tabbar.png */; };
 		0A123DE422422C0E00FB2BE4 /* fb-理论培训.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A123DDC22422C0000FB2BE4 /* fb-理论培训.png */; };
 		0A123DE522422C0E00FB2BE4 /* fb-带教学院.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A123DDD22422C0100FB2BE4 /* fb-带教学院.png */; };
-		0A123DE622422C0E00FB2BE4 /* fb-小讲堂.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A123DDE22422C0300FB2BE4 /* fb-小讲堂.png */; };
-		0A123DE722422C0E00FB2BE4 /* fb-病例探讨.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A123DDF22422C0500FB2BE4 /* fb-病例探讨.png */; };
+		0A123DE622422C0E00FB2BE4 /* fb-小讲课.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A123DDE22422C0300FB2BE4 /* fb-小讲课.png */; };
+		0A123DE722422C0E00FB2BE4 /* fb-病例讨论.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A123DDF22422C0500FB2BE4 /* fb-病例讨论.png */; };
 		0A123DE822422C0E00FB2BE4 /* fb-教学查房.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A123DE022422C0600FB2BE4 /* fb-教学查房.png */; };
 		0A123DE922422C0E00FB2BE4 /* fb-技能培训.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A123DE122422C0700FB2BE4 /* fb-技能培训.png */; };
 		0A123DEA22422C0E00FB2BE4 /* fb-监考.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A123DE222422C0900FB2BE4 /* fb-监考.png */; };
@@ -1004,8 +1004,8 @@
 		0A123DC72242269400FB2BE4 /* 功能-tabbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "功能-tabbar.png"; sourceTree = "<group>"; };
 		0A123DDC22422C0000FB2BE4 /* fb-理论培训.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-理论培训.png"; sourceTree = "<group>"; };
 		0A123DDD22422C0100FB2BE4 /* fb-带教学院.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-带教学院.png"; sourceTree = "<group>"; };
-		0A123DDE22422C0300FB2BE4 /* fb-小讲堂.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-小讲堂.png"; sourceTree = "<group>"; };
-		0A123DDF22422C0500FB2BE4 /* fb-病例探讨.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-病例探讨.png"; sourceTree = "<group>"; };
+		0A123DDE22422C0300FB2BE4 /* fb-小讲课.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-小讲课.png"; sourceTree = "<group>"; };
+		0A123DDF22422C0500FB2BE4 /* fb-病例讨论.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-病例讨论.png"; sourceTree = "<group>"; };
 		0A123DE022422C0600FB2BE4 /* fb-教学查房.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-教学查房.png"; sourceTree = "<group>"; };
 		0A123DE122422C0700FB2BE4 /* fb-技能培训.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-技能培训.png"; sourceTree = "<group>"; };
 		0A123DE222422C0900FB2BE4 /* fb-监考.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-监考.png"; sourceTree = "<group>"; };
@@ -2819,14 +2819,14 @@
 				0A6B343921747ABB007FF54D /* 科室空间.png */,
 				0A6B343A21747ABF007FF54D /* 入科安排.png */,
 				0A6B343B21747AC3007FF54D /* 学员轮转.png */,
-				0A123DDF22422C0500FB2BE4 /* fb-病例探讨.png */,
+				0A123DDF22422C0500FB2BE4 /* fb-病例讨论.png */,
 				0A123DDD22422C0100FB2BE4 /* fb-带教学院.png */,
 				0A123DE322422C0B00FB2BE4 /* fb-附件上传.png */,
 				0A123DE122422C0700FB2BE4 /* fb-技能培训.png */,
 				0A123DE222422C0900FB2BE4 /* fb-监考.png */,
 				0A123DE022422C0600FB2BE4 /* fb-教学查房.png */,
 				0A123DDC22422C0000FB2BE4 /* fb-理论培训.png */,
-				0A123DDE22422C0300FB2BE4 /* fb-小讲堂.png */,
+				0A123DDE22422C0300FB2BE4 /* fb-小讲课.png */,
 				0A75CF0E21D75329004E9734 /* 功能-选择.png */,
 				0A75CF0D21D75327004E9734 /* 首页-选择.png */,
 				0A75CF0F21D7532B004E9734 /* 我的-选择.png */,
@@ -3712,7 +3712,7 @@
 				0A6B343421747A96007FF54D /* 顶部固定2.png in Resources */,
 				0A7818ED1F32F6990072CF16 /* 答疑2x.png in Resources */,
 				0A494F9C211C286F00E95332 /* office_plan.png in Resources */,
-				0A123DE622422C0E00FB2BE4 /* fb-小讲堂.png in Resources */,
+				0A123DE622422C0E00FB2BE4 /* fb-小讲课.png in Resources */,
 				0AC3B98C1EE586A500227194 /* back.png in Resources */,
 				0A17CE97221E938B0057A395 /* 签到.png in Resources */,
 				0A6B344721747AD0007FF54D /* 考勤登记.png in Resources */,
@@ -3768,7 +3768,7 @@
 				930E48D32312210F00B78737 /* shoucang1.png in Resources */,
 				0A123DE922422C0E00FB2BE4 /* fb-技能培训.png in Resources */,
 				0A7818F01F32F6990072CF16 /* 教材3x.png in Resources */,
-				0A123DE722422C0E00FB2BE4 /* fb-病例探讨.png in Resources */,
+				0A123DE722422C0E00FB2BE4 /* fb-病例讨论.png in Resources */,
 				0AF9D34321805EC60068B05A /* 未选择-大.png in Resources */,
 				0A123DEA22422C0E00FB2BE4 /* fb-监考.png in Resources */,
 				0A26BA3B219AABB20071C2DC /* 白星星-空.png in Resources */,
@@ -4407,8 +4407,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TrainForStudents/TrainForStudents.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M3CME6CTLX;
 				ENABLE_BITCODE = NO;
@@ -4480,8 +4480,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TrainForStudents/TrainForStudents.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M3CME6CTLX;
 				ENABLE_BITCODE = NO;
