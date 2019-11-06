@@ -11,14 +11,14 @@ import SwiftyJSON
 
 class SelectAdressController: UIViewController,UITextFieldDelegate {
 
-    var callback:((String,Int)->())?
+    var callback:((String,String)->())?
     var TextField:UITextField!
     var selectField:UITextField!
     let addrPicker = UIPickerView()
     var addrPickerDs = [JSON]()
     
     var adress = ""
-    var adressID = ""
+    var adressID = "-1"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +70,7 @@ class SelectAdressController: UIViewController,UITextFieldDelegate {
         if TextField.text == "" {
             myAlert(self, message: "请输入地址")
         }else{
-            self.callback!(TextField.text!,0)
+            self.callback!(TextField.text!,adressID)
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -122,11 +122,12 @@ class SelectAdressController: UIViewController,UITextFieldDelegate {
     }()
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        if textField.tag == 90016 {
-//            return false
-//        }else{
+        if textField == TextField {
+            adressID = "-1"
             return true
-//        }
+        }else{
+            return true
+        }
     }
     
     
@@ -147,6 +148,7 @@ extension SelectAdressController : UIPickerViewDelegate , UIPickerViewDataSource
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let addr = addrPickerDs[row]["facilitiesname"].stringValue
+        adressID = addrPickerDs[row]["facilitiesid"].stringValue
         adress = addr
         self.TextField.text = addr
     }

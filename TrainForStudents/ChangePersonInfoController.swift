@@ -33,6 +33,7 @@ class ChangePersonInfoController: MyBaseUIViewController {
         textField.text = UserDefaults.User.string(forKey: .phoneNo)
         
         textField = self.view.viewWithTag(40001) as! UITextField
+        textField.isHidden = true
         textField.clearButtonMode = .always
         textField.text = UserDefaults.User.string(forKey: .highestDegree)
         
@@ -70,13 +71,13 @@ class ChangePersonInfoController: MyBaseUIViewController {
             return
         }
         
-        let highestdegree = self.view.viewWithTag(40001) as! UITextField
-        if highestdegree.text == ""{
-            myAlert(self, message: "请输入学历!")
-            return
-        }
+//        let highestdegree = self.view.viewWithTag(40001) as! UITextField
+//        if highestdegree.text == ""{
+//            myAlert(self, message: "请输入学历!")
+//            return
+//        }
         
-        myPostRequest(url,["sex":sex, "personid":UserDefaults.User.string(forKey: .personId),"jobnum":UserDefaults.User.string(forKey: .jobNum),"personname":UserDefaults.User.string(forKey: .personName),"phoneno":phoneno.text,"highestdegree":highestdegree.text]).responseJSON(completionHandler: { resp in
+        myPostRequest(url,["sex":sex, "personid":UserDefaults.User.string(forKey: .personId),"personname":UserDefaults.User.string(forKey: .personName),"phoneno":phoneno.text]).responseJSON(completionHandler: { resp in
             
             switch  resp.result{
             case .success(let result):
@@ -86,7 +87,7 @@ class ChangePersonInfoController: MyBaseUIViewController {
                 case "1":
                     myAlert(self, message: "修改成功!", handler: {action in
                         //更新缓存
-                        UserDefaults.User.set(value: highestdegree.text, forKey: .highestDegree)
+//                        UserDefaults.User.set(value: highestdegree.text, forKey: .highestDegree)
                         UserDefaults.User.set(value: phoneno.text, forKey: .phoneNo)
                         UserDefaults.User.set(value: self.sex, forKey: .sex)
                         self.dismiss(animated: true, completion: nil)

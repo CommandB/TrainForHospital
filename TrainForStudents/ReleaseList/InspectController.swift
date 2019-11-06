@@ -303,14 +303,17 @@ class InspectController : HBaseViewController,UITextFieldDelegate{
         submitParam["studentlist"] = stuList
         
 //        print(submitParam)
-        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+
         //view.current
         uploadImage(url, images: nil, parameters: submitParam, completionHandler: {resp in
+            
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(respStr)
                 print(json)
                 if json["code"].stringValue == "1"{
+                    MBProgressHUD.hide(for: self.view, animated: true)
                     myAlert(self, message: "发布成功!", handler: {action in
                         self.dismiss(animated: true, completion: nil)
                     })

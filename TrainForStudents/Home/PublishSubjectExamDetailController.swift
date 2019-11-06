@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class PublishSubjectExamDetailController : HBaseViewController{
+class PublishSubjectExamDetailController : HBaseViewController,UITextFieldDelegate{
     
     var isSkillExam = false
     
@@ -62,7 +62,8 @@ class PublishSubjectExamDetailController : HBaseViewController{
         txt.delegate = self
         
         txt = view.viewWithTag(50001) as! TextFieldForNoMenu
-        txt.inputView = addrPicker
+        txt.delegate = self
+//        txt.inputView = addrPicker
         
         var btn = view.viewWithTag(60001) as! UIButton
         btn.addTarget(self, action: #selector(btn_teacher_evet), for: .touchUpInside)
@@ -123,6 +124,10 @@ class PublishSubjectExamDetailController : HBaseViewController{
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
             self.reloadExamCollection()
         })
+    }
+    
+    @objc func selectAddress(){
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -354,6 +359,33 @@ class PublishSubjectExamDetailController : HBaseViewController{
         }
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        let tag = textField.tag
+        if tag == 40001 || tag == 40002{
+            let t31 = view.viewWithTag(30001) as! UITextField
+            if t31.text == nil || t31.text == ""{
+                myAlert(self, message: "请先选择开始时间!")
+                return false
+            }
+        }else if tag == 50001 {
+            let vc = SelectAdressController()
+            vc.callback = {[weak self] str,indexID in
+                textField.text = str
+                self?.submitData["facilitiesid"] = indexID
+                self?.submitData["name"] = str
+            }
+            self.present(vc, animated: true, completion: nil)
+        }else{
+            datePicker.minimumDate = nil
+            let t41 = view.viewWithTag(40001) as! UITextField
+            t41.text = ""
+            let t42 = view.viewWithTag(40002) as! UITextField
+            t42.text = ""
+        }
+        return true
+    }
+    
 }
 
 extension PublishSubjectExamDetailController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
@@ -428,28 +460,4 @@ extension PublishSubjectExamDetailController : UICollectionViewDelegate , UIColl
         }
         
     }
-    
-}
-
-extension PublishSubjectExamDetailController: UITextFieldDelegate{
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        let tag = textField.tag
-        if tag == 40001 || tag == 40002{
-            let t31 = view.viewWithTag(30001) as! UITextField
-            if t31.text == nil || t31.text == ""{
-                myAlert(self, message: "请先选择开始时间!")
-                return false
-            }
-        }else{
-            datePicker.minimumDate = nil
-            let t41 = view.viewWithTag(40001) as! UITextField
-            t41.text = ""
-            let t42 = view.viewWithTag(40002) as! UITextField
-            t42.text = ""
-        }
-        return true
-    }
-    
 }
