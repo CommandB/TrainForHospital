@@ -8,29 +8,54 @@
 
 import Foundation
 import UIKit
-
+import SnapKit
 class ExamingSubScrController: UIViewController {
+    
+    var scrollViewHeigh:CGFloat = 0
+    var sptext:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        // Do any additional setup after loading the view.
+        
+        let scrollView = UIScrollView()
+//        init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: scrollViewHeigh))
+        self.view.addSubview(scrollView)
+
+        scrollView.snp.makeConstraints { (ConstraintMaker) in
+            ConstraintMaker.left.right.top.equalToSuperview()
+            ConstraintMaker.height.equalTo(scrollViewHeigh)
+        }
+        
+        let containerView = UIView()
+        scrollView.addSubview(containerView)
+        
+        containerView.snp.makeConstraints { (ConstraintMaker) in
+            ConstraintMaker.left.top.right.equalToSuperview()
+            ConstraintMaker.height.greaterThanOrEqualTo(scrollView).offset(1)
+            
+        }
+        
+        
+        let lbl = UILabel()
+        lbl.text = sptext
+        lbl.textColor = UIColor.init(hex: "#313131")
+        lbl.font = UIFont.init(name: "PingFang-Regular", size: 15)
+        lbl.numberOfLines = 0
+        containerView.addSubview(lbl)
+        
+        lbl.snp.makeConstraints { (ConstraintMaker) in
+            ConstraintMaker.left.equalToSuperview().offset(20)
+            ConstraintMaker.width.equalTo(SCREEN_WIDTH - 40)
+            ConstraintMaker.top.equalToSuperview().offset(20)
+            ConstraintMaker.bottom.lessThanOrEqualTo(containerView).offset(-15)
+
+        }
+        scrollView.contentSize = CGSize.init(width: 0, height: lbl.frame.maxY + 20)
+
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

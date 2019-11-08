@@ -49,7 +49,8 @@ class IMOfficeGroupController : HBaseViewController{
         btn = view.viewWithTag(40004) as! UIButton
         btn.addTarget(self, action: #selector(btn_bottomBtnGroup_inside(sender:)), for: .touchUpInside)
         btn.isHidden = !isOffice
-        
+        btn.setTitle("教学分享", for: .normal)
+
         
         
         MyNotificationUtil.addKeyBoardWillChangeNotification(self)

@@ -44,13 +44,19 @@ class FITBCollectionView : BasePeiwuCollectionView , UITextFieldDelegate{
             let answerDic = parentView?.answerDic[questionId]
             var inputanswer = [Substring]()
             inputanswer = getInputanswer(dic:answerDic).0
-            
+            print(inputanswer)
+            print(answerDic)
+            print("查看渲染答案")
             //渲染选项6
             let btn = (cell.viewWithTag(10001) as? UIButton)!
             btn.layer.cornerRadius = btn.frame.width / 2
             btn.setTitle("\(indexPath.item).", for: .normal)
             let txt = (cell.viewWithTag(10002) as? UITextField)!
-            txt.text = String(inputanswer[cell.tag]).trimmingCharacters(in: CharacterSet.init(charactersIn: " "))
+            if inputanswer.count == 1 || inputanswer[cell.tag] == "" {
+                txt.text = ""
+            }else{
+                txt.text = String(inputanswer[cell.tag]).trimmingCharacters(in: CharacterSet.init(charactersIn: ""))
+            }
             txt.delegate = self
         }
         

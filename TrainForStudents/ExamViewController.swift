@@ -514,6 +514,9 @@ class ExamViewController : MyBaseUIViewController{
     ///根据题目计算collection需要显示几个cell
     func getCellTotalForQuestion(json : JSON) -> Int{
         
+        print(json)
+        print("考题kaoti")
+        
         if json["type"].stringValue == "0"{ //单选题
             return json["answers"].arrayValue.count + 1
         }else if json["type"].stringValue == "2"{ //多选题
@@ -523,8 +526,14 @@ class ExamViewController : MyBaseUIViewController{
         }else if json["type"].stringValue == "4"{   //简答题
             return 2
         }else if json["type"].stringValue == "5"{   //填空题
-            let answers = json["answervalue"].stringValue.split(separator: ",")
-            return answers.count + 1
+            if json["answervalue"].stringValue.contains(",") {
+                let answers = json["answervalue"].stringValue.split(separator: ",")
+                return answers.count + 1
+            }else{
+                let answers = json["answervalue"].stringValue.split(separator: "，")
+                return answers.count + 1
+            }
+            
         }else if json["type"].stringValue == "6"{ //名词解释
             return 2
         }else if json["type"].stringValue == "8"{ //病例题

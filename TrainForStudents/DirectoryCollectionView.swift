@@ -39,7 +39,15 @@ class DirectoryCollectionView: UIViewController,  UICollectionViewDelegate , UIC
         let questions = json["questions"].arrayValue
         let q = questions[indexPath.item]
         let lbl = (cell.viewWithTag(10001) as? UILabel)!
-        let title = q["indexname"].stringValue + " " + q["title"].stringValue
+        var title = ""
+        if q["typename"].stringValue == "配伍题" {
+            let x = q["sub_questions"].arrayValue[0]
+            title = q["indexname"].stringValue + " " + x["title"].stringValue
+        }else{
+            title = q["indexname"].stringValue + " " + q["title"].stringValue
+
+        }
+        
         lbl.text = title
         
         return cell

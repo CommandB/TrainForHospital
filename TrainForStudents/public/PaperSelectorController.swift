@@ -129,7 +129,7 @@ class PaperSelectorController : HBaseViewController{
                 if json["code"].stringValue == "1"{
                     let data = json["data"].arrayValue
                     self.questionsView.jsonDataSource = data
-                    
+                    print(data)
                     //缓存考题
                     self.questionCache[exercisesId] = data
                     collection.reloadData()

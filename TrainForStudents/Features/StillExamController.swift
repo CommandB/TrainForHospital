@@ -60,11 +60,13 @@ class StillExamController: HBaseViewController ,UIScrollViewDelegate {
                 let json = JSON(response)
                 if json["code"].stringValue == "1"{
                     self.dataSource = json["data"].arrayValue
-                    
+                    print(json)
+                    print("sp剧本")
                     if self.dataSource.count > 0{
                         self.scoreVC.headDataArr = self.dataSource
                         self.reloadHeadTitle(questionIndex: 0)
                         self.scoreVC.requestQuestionItem(questionsid: self.dataSource[0]["questionsid"].stringValue, isNextQuestionBtnTapped: true)
+                        self.spVCAdd(sptxt: self.dataSource[0]["sptext"].stringValue)
                         self.scoreVC.nextQuestionBtn.isHidden = false
                     }else{
                         self.scoreVC.nextQuestionBtn.isHidden = true
@@ -75,21 +77,29 @@ class StillExamController: HBaseViewController ,UIScrollViewDelegate {
             }
         }
     }
-    
+    func spVCAdd(sptxt:String){
+        let scriptVC = ExamingSubScrController()
+        scriptVC.scrollViewHeigh = scrollview.bounds.size.height
+        scriptVC.sptext = sptxt
+        scriptVC.scrollViewHeigh = scrollview.bounds.size.height
+        scriptVC.view.frame = CGRect(x: self.view.bounds.size.width, y: 0, width: scrollview.bounds.size.width, height: scrollview.bounds.size.height)
+        self.addChildViewController(scriptVC)
+        scrollview.addSubview(scriptVC.view)
+    }
     
     func setSubviews() {
         scrollview.contentSize = CGSize(width: self.view.bounds.size.width*2, height: 0)
         self.automaticallyAdjustsScrollViewInsets = false
         scoreVC = ExamingSubScoController()
         scoreVC.view.frame = CGRect(x: 0, y: 0, width: scrollview.frame.size.width, height: scrollview.bounds.size.height)
-        let scriptVC = ExamingSubScrController()
-        scriptVC.view.frame = CGRect(x: self.view.bounds.size.width, y: 0, width: scrollview.bounds.size.width, height: scrollview.bounds.size.height)
         scrollview.delegate = self
         self.addChildViewController(scoreVC)
-        self.addChildViewController(scriptVC)
         scrollview.addSubview(scoreVC.view)
-        scrollview.addSubview(scriptVC.view)
         scrollview.isDirectionalLockEnabled = true
+        
+        
+        
+        
     }
     
     @IBAction func didTapBtn(_ sender: Any) {

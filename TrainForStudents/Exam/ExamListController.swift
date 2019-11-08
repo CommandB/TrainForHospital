@@ -57,7 +57,7 @@ class ExamListController : HBaseViewController{
             case .success(let responseJson):
                 
                 let json = JSON(responseJson)
-//                print(json)
+                print(json)
                 if json["code"].stringValue == "1"{
                     self.jds = json["data"].arrayValue
                 }else{
@@ -108,7 +108,7 @@ extension ExamListController : UICollectionViewDelegate , UICollectionViewDataSo
         let lbl_examTime = (cell.viewWithTag(40001) as! UILabel)
         lbl_examTime.text = "\(data["starttime"].stringValue.substring(from: 11).substring(to: 5))"
         if !endDateStr.isEmpty{
-            lbl_examTime.text = "\(lbl_examTime.text!)-\(endDateStr.substring(from: 11).substring(to: 5))"
+            lbl_examTime.text = "\(lbl_examTime.text!) 结束时间：\(endDateStr.substring(from: 11).substring(to: 5))"
         }
         
         (cell.viewWithTag(50001) as! UILabel).text = data["addressname"].stringValue

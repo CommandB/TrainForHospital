@@ -124,7 +124,7 @@ class StudyController : HBaseViewController{
                         self.player.setVideo(resource: asset)
                     }else{
                         //文档浏览
-                        self.webView = UIWebView(frame: self.player.frame)
+                        self.webView = UIWebView(frame: CGRect.init(x: 0, y: 0, width: self.player.frame.width, height: self.player.frame.height))
                         self.webView.delegate = self
                         self.player.superview?.addSubview(self.webView)
                         let request = URLRequest(url: url!)
