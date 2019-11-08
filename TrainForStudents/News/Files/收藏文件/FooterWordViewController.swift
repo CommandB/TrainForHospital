@@ -84,9 +84,7 @@ class FooterWordViewController: UIViewController,UITableViewDelegate,UITableView
             case .failure(let error):
                 print(error)
             }
-            
         })
-        
     }
     
     func getPageData(fileType:String){

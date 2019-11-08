@@ -18,12 +18,6 @@ class FooterViewController: NewsBaseViewController,UIScrollViewDelegate {
     var scrollView = UIScrollView()
     var taskType = 1000
     
-    var firstVC = FooterWordViewController()
-    var secondVC = FooterWordViewController()
-    var thirdVC = FooterWordViewController()
-    var fourthVC = FooterWordViewController()
-    var fifthVC = FooterWordViewController()
-    
     var pageIndex = 0
     
     var titleStr = ""
@@ -72,6 +66,17 @@ class FooterViewController: NewsBaseViewController,UIScrollViewDelegate {
         } else {
             self.automaticallyAdjustsScrollViewInsets = false;
         }
+        let firstVC = FooterWordViewController()
+        let secondVC = FooterWordViewController()
+        let thirdVC = FooterWordViewController()
+        let fourthVC = FooterWordViewController()
+        let fifthVC = FooterWordViewController()
+        firstVC.fileType = "WORD"
+        secondVC.fileType = "EXCEL"
+        thirdVC.fileType = "PDF"
+        fourthVC.fileType = "PPT"
+        fifthVC.fileType = "视频"
+        
         
         firstVC.view.frame = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-height-50)
         secondVC.view.frame = CGRect.init(x: SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-height-50)
@@ -84,11 +89,7 @@ class FooterViewController: NewsBaseViewController,UIScrollViewDelegate {
         self.addChildViewController(thirdVC)
         self.addChildViewController(fourthVC)
         self.addChildViewController(fifthVC)
-        firstVC.fileType = "WORD"
-        secondVC.fileType = "EXCEL"
-        thirdVC.fileType = "PDF"
-        fourthVC.fileType = "PPT"
-        fifthVC.fileType = "视频"
+        
         self.scrollView.addSubview(firstVC.view)
         self.scrollView.addSubview(secondVC.view)
         self.scrollView.addSubview(thirdVC.view)

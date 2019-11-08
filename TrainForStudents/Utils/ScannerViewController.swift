@@ -270,7 +270,7 @@ class ScannerViewController: UIViewController /*,GTMBarcodeCoreDelegate*/ , AVCa
                                 
                                 let json = JSON(responseJson)
                                 if json["code"].stringValue == "1"{
-                                    myAlert(vc, title: "签到", message: signMsg, handler: { action in
+                                    myAlert(vc, title: "签到，恭喜您已成功报道！", message: signMsg, handler: { action in
                                         self.dismiss(animated: true, completion: nil)
                                     })
                                 }else{

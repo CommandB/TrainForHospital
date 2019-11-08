@@ -17,7 +17,13 @@ import AVKit
 class OpenFileViewController: NewsBaseViewController,UIDocumentInteractionControllerDelegate,UIWebViewDelegate {
     var data = JSON()
     var webView = UIWebView()
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -72,8 +78,16 @@ class OpenFileViewController: NewsBaseViewController,UIDocumentInteractionContro
                 webView.loadRequest(urlReq)
         }else {
             if let urlStr = data["url"].string,let URL = URL(string: urlStr){
-                let urlReq = URLRequest(url: URL)
-                webView.loadRequest(urlReq)
+//                AVPlayerViewController *ctrl = [[AVPlayerViewController alloc] init];
+//
+//                                        ctrl.player= [[AVPlayeralloc]initWithURL:url];
+//
+//                                        [self presentViewController:ctrl animated:YES completion:nil];
+//                let urlReq = URLRequest(url: URL)
+                let avvc = AVPlayerViewController()
+                avvc.player = AVPlayer.init(url: URL)
+                self.present(avvc, animated: true, completion: nil)
+//                webView.loadRequest(urlReq)
             }
         }
     }

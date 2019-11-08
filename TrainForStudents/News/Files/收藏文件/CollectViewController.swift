@@ -18,12 +18,6 @@ class CollectViewController: NewsBaseViewController,UIScrollViewDelegate {
     var scrollView = UIScrollView()
     var taskType = 1000
     
-    var firstVC = CollectWordViewController()
-    var secondVC = CollectWordViewController()
-    var thirdVC = CollectWordViewController()
-    var fourthVC = CollectWordViewController()
-    var fifthVC = CollectWordViewController()
-    
     var pageIndex = 0
     
     var titleStr = ""
@@ -94,6 +88,16 @@ class CollectViewController: NewsBaseViewController,UIScrollViewDelegate {
         } else {
             self.automaticallyAdjustsScrollViewInsets = false;
         }
+        let firstVC = CollectWordViewController()
+        let secondVC = CollectWordViewController()
+        let thirdVC = CollectWordViewController()
+        let fourthVC = CollectWordViewController()
+        let fifthVC = CollectWordViewController()
+        firstVC.fileType = "WORD"
+        secondVC.fileType = "EXCEL"
+        thirdVC.fileType = "PDF"
+        fourthVC.fileType = "PPT"
+        fifthVC.fileType = "视频"
         
         firstVC.view.frame = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-height-50)
         secondVC.view.frame = CGRect.init(x: SCREEN_WIDTH, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-height-50)
@@ -106,11 +110,7 @@ class CollectViewController: NewsBaseViewController,UIScrollViewDelegate {
         self.addChildViewController(thirdVC)
         self.addChildViewController(fourthVC)
         self.addChildViewController(fifthVC)
-        firstVC.fileType = "WORD"
-        secondVC.fileType = "EXCEL"
-        thirdVC.fileType = "PDF"
-        fourthVC.fileType = "PPT"
-        fifthVC.fileType = "视频"
+        
         self.scrollView.addSubview(firstVC.view)
         self.scrollView.addSubview(secondVC.view)
         self.scrollView.addSubview(thirdVC.view)

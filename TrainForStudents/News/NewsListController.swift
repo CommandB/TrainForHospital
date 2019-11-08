@@ -46,7 +46,6 @@ class NewsListController : UIViewController,UITableViewDelegate,UITableViewDataS
         let url = SERVER_PORT+"rest/app/queryLearnChannelData.do"
         myPostRequest(url).responseJSON(completionHandler: {resp in
             self.tableView.mj_header.endRefreshing()
-
             switch resp.result{
             case .success(let responseJson):
                 
@@ -76,6 +75,10 @@ class NewsListController : UIViewController,UITableViewDelegate,UITableViewDataS
             
         })
         
+    }
+    
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return false
     }
     
     @objc func refresh() {
