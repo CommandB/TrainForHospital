@@ -95,6 +95,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate {
             if UserDefaults.AppConfig.string(forKey: .subjectTheoryAvailable) == "1"{
                 let vc = getViewToStoryboard("publishSubjectExamView") as! PublishSubjectExamController
                 vc.isSkillExam = false
+                vc.titleTxt = "发布出科理论考试"
                 present(vc, animated: true, completion: nil)
             }else{
                 myAlert(self, message: "暂无使用权限")
@@ -105,6 +106,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate {
             if UserDefaults.AppConfig.string(forKey: .subjectSkillAvailable) == "1"{
                 let vc = getViewToStoryboard("publishSubjectExamView") as! PublishSubjectExamController
                 vc.isSkillExam = true
+                vc.titleTxt = "发布出科技能考试"
                 present(vc, animated: true, completion: nil)
             }else{
                 myAlert(self, message: "暂无使用权限")

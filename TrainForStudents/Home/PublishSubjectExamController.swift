@@ -14,6 +14,7 @@ class PublishSubjectExamController : HBaseViewController{
     
     var isSkillExam = false
     var notReload = false
+    var titleTxt = "发布出科考试"
     @IBOutlet weak var studentsCollection: UICollectionView!
     
     var officeId = 0
@@ -28,6 +29,9 @@ class PublishSubjectExamController : HBaseViewController{
     
     override func viewDidLoad() {
         
+        let titleLabel = view.viewWithTag(10086) as! UILabel
+        titleLabel.text = titleTxt
+
         studentsCollection.delegate = self
         studentsCollection.dataSource = self
         

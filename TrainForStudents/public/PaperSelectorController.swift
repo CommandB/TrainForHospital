@@ -65,9 +65,10 @@ class PaperSelectorController : HBaseViewController{
         
         if selectedIndex != IndexPath(){
             NotificationCenter.default.post(name: PaperSelectorController.defaultNoticeName, object: nil, userInfo: ["data":jds[selectedIndex.section].arrayValue[selectedIndex.item - 1]])
+            dismiss(animated: true, completion: nil)
+        }else{
+            myAlert(self, message: "请选择试卷")
         }
-        
-        dismiss(animated: true, completion: nil)
     }
     
     func getListData(){
