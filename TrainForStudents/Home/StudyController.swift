@@ -86,8 +86,9 @@ class StudyController : HBaseViewController{
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             switch resp.result{
             case .success(let responseJson):
-                
                 let json = JSON(responseJson)
+                print(json)
+                print("debug阅读教材")
                 if json["code"].stringValue == "1"{
                     let data = json["data"]
                     self.materialData = data
@@ -95,14 +96,14 @@ class StudyController : HBaseViewController{
                     (self.view.viewWithTag(30001) as! UILabel).text = data["note"].stringValue
                     //let placeholder = self.view.viewWithTag(20001)!
                     let fileURL = data["url"].stringValue
-                    var url = URL(string: fileURL)
-                    if fileURL.contains("resources/video") || true{
-                        if UserDefaults.AppConfig.string(forKey: .clientCode)?.lowercased() == "zeyy"{
-                            let zeIP = UserDefaults.AppConfig.string(forKey: .zeyyVideoIP)!
-                            var videoUrl = zeIP + fileURL.substring(from: 27)
-                            videoUrl = "http://39.104.60.22:6024/doctor_train/ui/xishou.wmv"
-                            url = URL(string: videoUrl)
-                        }
+                    let url = URL(string: fileURL)
+                    if data["chinatype"].stringValue == "video"{
+//                        if UserDefaults.AppConfig.string(forKey: .clientCode)?.lowercased() == "zeyy"{
+//                            let zeIP = UserDefaults.AppConfig.string(forKey: .zeyyVideoIP)!
+//                            var videoUrl = zeIP + fileURL.substring(from: 27)
+//                            videoUrl = "http://39.104.60.22:6024/doctor_train/ui/xishou.wmv"
+//                            url = URL(string: videoUrl)
+//                        }
                         
                         //视频播放
                         self.player.parentView = self
@@ -124,7 +125,7 @@ class StudyController : HBaseViewController{
                         self.player.setVideo(resource: asset)
                     }else{
                         //文档浏览
-                        self.webView = UIWebView(frame: CGRect.init(x: 0, y: 0, width: self.player.frame.width, height: self.player.frame.height))
+                        self.webView = UIWebView(frame: self.player.frame)
                         self.webView.delegate = self
                         self.player.superview?.addSubview(self.webView)
                         let request = URLRequest(url: url!)

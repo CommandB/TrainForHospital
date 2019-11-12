@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class AttendanceController : HBaseViewController{
+class AttendanceController : HBaseViewController,UITextFieldDelegate{
     
     @IBOutlet weak var calendarCollection: UICollectionView!
     
@@ -145,11 +145,19 @@ class AttendanceController : HBaseViewController{
         btnView.textAlignment = .center
         btnView.text = "切换科室"
         btnView.textColor = .white
-        officePicker = officePickerImpl.getOfficeManagerPickerView()
-        officePickerImpl.titleKey = "officename"
-        officePickerImpl.clorsureImpl = addrClosureImpl
-        btnView.inputView = officePicker
+        if officePickerImpl.juggeChanegeOfficeContent() {
+            officePicker = officePickerImpl.getOfficeManagerPickerView()
+            officePickerImpl.titleKey = "officename"
+            officePickerImpl.clorsureImpl = addrClosureImpl
+            btnView.inputView = officePicker
+        }else{
+            btnView.delegate = self
+        }
         self.view.addSubview(btnView)
+    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        myAlert(self, message: "暂无可切换科室")
+        return false
     }
     
     func addrClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{

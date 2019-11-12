@@ -40,21 +40,22 @@ class PeiwuCollectionView : QuestionCollectionView {
             
             //判断此题目是否被选中
             if parentView?.answerDic[qid] != nil {  //被选中
-                
-//                if qid == selectedQuestionId{
-//                    lbl.textColor = UIColor.init(hex: "68adf6")
-//                }
+                if qid == selectedQuestionId{
+                    lbl.textColor = UIColor.init(hex: "68adf6")
+                }else{
+                    lbl.textColor = UIColor.init(hex: "3b454f")
+                }
                 //获取题目对应被选的答案
                 let inputanswer = parentView?.answerDic[qid]?["inputanswer"]
                 if inputanswer != nil && inputanswer != ""{
                     //在题目结尾展示答案
-                    title.insert(Character.init(inputanswer!), at: title.index(before: title.endIndex))
+                    title.insert(Character.init(inputanswer!), at: title.endIndex)
                     lbl.text = title
                 }
                 //被选中则需要把题目对应被选中的答案也带出来
                 selectedDic[qid] = parentView?.answerDic[qid]?["inputanswer"]
             }else{  //没选中
-//                lbl.textColor = UIColor.init(hex: "3b454f")
+                lbl.textColor = UIColor.init(hex: "3b454f")
             }
             
         }else{
@@ -197,8 +198,8 @@ class PeiwuCollectionView : QuestionCollectionView {
             
             let cell = collectionView.cellForItem(at: indexPath)
             let btn = cell?.viewWithTag(10001) as! UIButton
-            btn.setTitleColor(UIColor.white, for: .normal)
-            btn.backgroundColor = UIColor.init(hex: "ffc84c")
+//            btn.backgroundColor = UIColor.init(hex: "ffc84c")
+//            btn.setTitleColor(UIColor.white, for: .normal)
             
             let data = a[indexPath.item - subQ.count]
             //判断该选择有否已被选中

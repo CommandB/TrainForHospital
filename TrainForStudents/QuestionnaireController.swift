@@ -158,8 +158,14 @@ class QuestionnaireController: MyBaseUIViewController{
             switch  resp.result{
             case .success(let result):
                 let json = JSON(result)
+                print(json)
+                print("调查问卷")
                 if json["code"].intValue == 1 {
                     self.dataSource = json["data"]
+                    if self.dataSource["questions"].count == 0 {
+                        myAlert(self, message: "此问卷暂无数据")
+                        return
+                    }
                     self.detailView.jsonDataSource = self.dataSource["questions"].arrayValue[0]
                     self.maxIndex = self.dataSource["questions"].count - 1
                     

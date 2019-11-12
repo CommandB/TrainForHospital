@@ -19,6 +19,9 @@ class HSimplePickerViewImpl :UIViewController, UIPickerViewDelegate , UIPickerVi
     var titleKey = ""
 //    var parentView : UIViewController? = nil
     
+   
+    
+    
     func getDefaultPickerView( picker :UIPickerView? = nil) -> UIPickerView{
         var p = UIPickerView()
         if picker != nil{
@@ -46,6 +49,23 @@ class HSimplePickerViewImpl :UIViewController, UIPickerViewDelegate , UIPickerVi
         
         return p
     }
+    //判断切换科室内容是否为空
+    func juggeChanegeOfficeContent()->Bool{
+        let tempData = UserDefaults.AppConfig.json(forKey: .officeList).arrayValue
+        var dataBot = [JSON]()
+        for item in tempData{
+            if item["ismymanage"].stringValue == "1"{
+                dataBot.append(item)
+            }
+        }
+        print(dataBot)
+        if dataBot.count == 0 {
+            return false
+        }else{
+            return true
+        }
+    }
+    
     //切换科室只能选择管理科室
     func getOfficeManagerPickerView( picker :UIPickerView? = nil) -> UIPickerView{
         
@@ -58,7 +78,6 @@ class HSimplePickerViewImpl :UIViewController, UIPickerViewDelegate , UIPickerVi
                 dataBot.append(item)
             }
         }
-        
         self.dataSource = dataBot
         var p = UIPickerView()
         if picker != nil{
@@ -66,8 +85,6 @@ class HSimplePickerViewImpl :UIViewController, UIPickerViewDelegate , UIPickerVi
         }
         p.delegate = self
         p.dataSource = self
-        
-        
         
         return p
     }

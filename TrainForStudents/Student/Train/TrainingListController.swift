@@ -29,7 +29,8 @@ class TrainingListController : HBaseViewController{
         trainingCollection.delegate = self
         trainingCollection.dataSource = self
         
-        officePicker = officePickerViewImpl.getOfficePickerView()
+        officePicker = officePickerViewImpl.getDefaultPickerView()
+        officePickerViewImpl.titleKey = "officename"
         officePickerViewImpl.clorsureImpl = selectedOffice
         
         txt_office.inputView = officePicker
@@ -62,22 +63,22 @@ class TrainingListController : HBaseViewController{
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(respStr)
-                print(json)
                 if json["code"].intValue == 1{
                     self.trainingList = json["data"].arrayValue
                     self.jds = json["data"].arrayValue
                     
                     var pickerViewDs = [JSON]()
-                    var officeDic = [String:String]()
-                    
+                    var officeIDARR = [String]()
                     //取出所有培训中的科室
-                    for item in self.jds{
-                        officeDic[item["officeid"].stringValue] = item["officename"].stringValue
-                    }
+                    
                     //把科室解析成pickerview能识别的结构
                     pickerViewDs.append(JSON(["officename":"全部","officeid":"-1"]))
-                    for item in officeDic{
-                        pickerViewDs.append(JSON(item))
+                    for item in self.jds{
+                        if !officeIDARR.contains(item["officeid"].stringValue) {
+                            pickerViewDs.append(JSON(["officename":item["officename"].stringValue,"officeid":item["officeid"].stringValue]))
+                            
+                        }
+                        officeIDARR.append(item["officeid"].stringValue)
                     }
                     //刷新pickerview
                     self.officePickerViewImpl.dataSource = pickerViewDs

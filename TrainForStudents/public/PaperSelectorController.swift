@@ -163,7 +163,7 @@ extension PaperSelectorController : UICollectionViewDelegate , UICollectionViewD
                 return count + 1
             }
         }
-        return 0
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
