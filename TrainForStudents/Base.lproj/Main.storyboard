@@ -5790,7 +5790,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" tag="33333" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="0.0" maxValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="rHP-HQ-Pie">
+                                    <slider opaque="NO" tag="88888" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="0.0" maxValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="rHP-HQ-Pie">
                                         <rect key="frame" x="9" y="80" width="244" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <connections>
@@ -5811,7 +5811,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" tag="44444" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="0.0" maxValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="uyQ-e9-anb">
+                                    <slider opaque="NO" tag="99999" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="0.0" maxValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="uyQ-e9-anb">
                                         <rect key="frame" x="9" y="146" width="244" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <connections>
@@ -5832,7 +5832,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" tag="55555" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="0.0" maxValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="64Y-PS-xDt">
+                                    <slider opaque="NO" tag="100000" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="0.0" maxValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="64Y-PS-xDt">
                                         <rect key="frame" x="9" y="212" width="244" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <connections>
@@ -9335,6 +9335,13 @@
                                             <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                         </state>
                                     </button>
+                                    <textField hidden="YES" opaque="NO" tag="35957" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gMC-nY-usB" customClass="TextFieldForNoMenu" customModule="TrainForStudents" customModuleProvider="target">
+                                        <rect key="frame" x="351" y="181" width="9" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </scrollView>
@@ -12255,12 +12262,10 @@
                                     <action selector="btn_back_inside:" destination="MEY-7k-9SW" eventType="touchUpInside" id="UnT-av-r85"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8X-Lj-58A">
-                                <rect key="frame" x="300" y="35" width="84" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8X-Lj-58A">
+                                <rect key="frame" x="299" y="35" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <inset key="titleEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="7" maxX="15" maxY="7"/>
-                                <state key="normal" title="设置" image="设置-圆形.png">
+                                <state key="normal" title="设置">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -12275,7 +12280,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                <state key="normal" title="入科须知" image="圆形感叹号-蓝.png">
+                                <state key="normal" image="圆形感叹号-蓝.png">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -12297,7 +12302,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                <state key="normal" title="常见问题" image="圆形问好-蓝.png">
+                                <state key="normal" image="圆形问好-蓝.png">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
@@ -12323,7 +12328,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                <state key="normal" title="入科须知" image="书本-蓝.png">
+                                <state key="normal" image="书本-蓝.png">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
@@ -12349,7 +12354,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                <state key="normal" title="入科须知" image="人员-2.png">
+                                <state key="normal" image="人员-2.png">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
@@ -12461,33 +12466,44 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="titleEdgeInsets" minX="-220" minY="30" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="20"/>
-                                        <state key="normal" title="教学提问" image="教学提问.png">
+                                        <state key="normal" image="教学提问.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="教学提问" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPL-Y0-DqZ">
+                                        <rect key="frame" x="108" y="43" width="60" height="15"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" tag="40003" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfb-XM-ZAS">
                                         <rect key="frame" x="204" y="8" width="60" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="titleEdgeInsets" minX="-220" minY="30" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="20"/>
-                                        <state key="normal" title="发布事件" image="发布事件.png">
+                                        <state key="normal" image="发布事件.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="发布事件" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrt-Vv-ckS">
+                                        <rect key="frame" x="204" y="43" width="60" height="15"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" tag="40004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvR-Hp-X83">
                                         <rect key="frame" x="297" y="8" width="60" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="titleEdgeInsets" minX="-220" minY="30" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="20"/>
-                                        <state key="normal" title="教学分享" image="教学分享.png">
+                                        <state key="normal" image="教学分享.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
@@ -12497,12 +12513,25 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="titleEdgeInsets" minX="-220" minY="30" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="20"/>
-                                        <state key="normal" title="发布公告" image="发送附件.png">
+                                        <state key="normal" image="发送附件.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="发布公告" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTi-Xv-wdy">
+                                        <rect key="frame" x="21" y="43" width="60" height="15"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="教学分享" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Og-av-Avc">
+                                        <rect key="frame" x="297" y="43" width="60" height="15"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xqZ-8w-pG6">
@@ -14316,9 +14345,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" tag="10002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAa-5K-iBO">
+                                                <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAa-5K-iBO">
                                                     <rect key="frame" x="112" y="20" width="60" height="60"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="Jba-zi-mEA"/>
+                                                        <constraint firstAttribute="width" constant="60" id="hR2-dV-zC0"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="-154" minY="38" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="10" minY="5" maxX="15" maxY="20"/>
@@ -14326,9 +14358,12 @@
                                                         <color key="titleColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" tag="10003" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fll-5Z-eQa">
+                                                <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fll-5Z-eQa">
                                                     <rect key="frame" x="206" y="20" width="60" height="60"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="RCu-gd-el4"/>
+                                                        <constraint firstAttribute="height" constant="60" id="WPX-Dc-tkS"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="-94" minY="38" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="10" minY="5" maxX="15" maxY="20"/>
@@ -14336,9 +14371,12 @@
                                                         <color key="titleColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" tag="10004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yaH-Yb-Kfj">
+                                                <button opaque="NO" tag="10004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yaH-Yb-Kfj">
                                                     <rect key="frame" x="291" y="20" width="70" height="60"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="2pL-XH-oau"/>
+                                                        <constraint firstAttribute="width" constant="70" id="kqy-Sz-jOU"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="-50" minY="38" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="17" minY="2" maxX="18" maxY="23"/>
@@ -14346,19 +14384,32 @@
                                                         <color key="titleColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" tag="10001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ms-5S-0hK">
+                                                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ms-5S-0hK">
                                                     <rect key="frame" x="25" y="20" width="60" height="60"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="Qbn-wc-f82"/>
+                                                        <constraint firstAttribute="height" constant="60" id="f4M-nh-9nf"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="-210" minY="38" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="13" minY="5" maxX="12" maxY="20"/>
-                                                    <state key="normal" title="待考任务" image="考勤登记.png">
+                                                    <state key="normal" title="代考任务" image="考勤登记.png">
                                                         <color key="titleColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="yaH-Yb-Kfj" firstAttribute="top" secondItem="jEH-M0-BOu" secondAttribute="top" priority="750" constant="20" id="DoT-UX-H7H"/>
+                                            <constraint firstItem="ZAa-5K-iBO" firstAttribute="leading" secondItem="5Ms-5S-0hK" secondAttribute="trailing" priority="750" constant="27" id="EaO-gL-eIX"/>
+                                            <constraint firstItem="yaH-Yb-Kfj" firstAttribute="leading" secondItem="fll-5Z-eQa" secondAttribute="trailing" priority="750" constant="25" id="Lfj-2d-IE1"/>
+                                            <constraint firstAttribute="trailing" secondItem="yaH-Yb-Kfj" secondAttribute="trailing" priority="750" constant="14" id="Uw2-SV-pzI"/>
+                                            <constraint firstItem="5Ms-5S-0hK" firstAttribute="leading" secondItem="jEH-M0-BOu" secondAttribute="leading" priority="750" constant="25" id="Zg0-Zl-iBh"/>
+                                            <constraint firstItem="ZAa-5K-iBO" firstAttribute="top" secondItem="jEH-M0-BOu" secondAttribute="top" priority="750" constant="20" id="b1T-oe-rNm"/>
+                                            <constraint firstItem="5Ms-5S-0hK" firstAttribute="top" secondItem="jEH-M0-BOu" secondAttribute="top" priority="750" constant="20" id="bYM-TY-zL9"/>
+                                            <constraint firstItem="fll-5Z-eQa" firstAttribute="top" secondItem="jEH-M0-BOu" secondAttribute="top" priority="750" constant="20" id="uhH-1m-xzn"/>
+                                        </constraints>
                                         <size key="customSize" width="375" height="100"/>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="classTitleCell" id="fhW-wc-a3h">
@@ -21240,7 +21291,7 @@
                                                     <rect key="frame" x="14" y="10" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="老师" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ong-eX-DJa">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="护士" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ong-eX-DJa">
                                                     <rect key="frame" x="28" y="78" width="29" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -21905,10 +21956,17 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <inset key="titleEdgeInsets" minX="-45" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="5" minY="2" maxX="42" maxY="2"/>
-                                                    <state key="normal" title="添加" image="添加人员.png">
+                                                    <state key="normal" image="添加人员.png">
                                                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="添加" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CS6-sr-k2L">
+                                                    <rect key="frame" x="324" y="10" width="31" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                     </collectionViewCell>
@@ -23695,7 +23753,6 @@
         <image name="考试.png" width="366" height="366"/>
         <image name="角标.png" width="128" height="128"/>
         <image name="讲课素材.png" width="72" height="82"/>
-        <image name="设置-圆形.png" width="84" height="84"/>
         <image name="设置.png" width="72" height="72"/>
         <image name="评价-icon.png" width="92" height="76"/>
         <image name="评价.png" width="366" height="366"/>

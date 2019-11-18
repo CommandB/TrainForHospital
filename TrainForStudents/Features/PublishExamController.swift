@@ -76,7 +76,7 @@ class PublishExamController : HBaseViewController{
         txt.delegate = self
         
         txt = view.viewWithTag(50001) as! TextFieldForNoMenu
-        txt.inputView = addrPicker
+//        txt.inputView = addrPicker
         txt.delegate = self
         
         btn = view.viewWithTag(60001) as! UIButton
@@ -458,12 +458,18 @@ extension PublishExamController : UITextFieldDelegate{
         let tag = textField.tag
         if tag == 50001{
             
-            let row = addrPicker.selectedRow(inComponent: 0)
-            let text = addrPickerImpl.dataSource[row]["facilitiesname"].stringValue
-            textField.text = text
-            submitParam["facilitiesid"] = addrPickerImpl.dataSource[row]["facilitiesid"].stringValue
-            submitParam["name"] = text
-            
+//            let row = addrPicker.selectedRow(inComponent: 0)
+//            let text = addrPickerImpl.dataSource[row]["facilitiesname"].stringValue
+//            textField.text = text
+//            submitParam["facilitiesid"] = addrPickerImpl.dataSource[row]["facilitiesid"].stringValue
+//            submitParam["name"] = text
+            let vc = SelectAdressController()
+            vc.callback = {[weak self] str,indexID in
+                textField.text = str
+                self?.submitParam["facilitiesid"] = indexID
+                self?.submitParam["name"] = str
+            }
+            self.present(vc, animated: true, completion: nil)
         }else if tag == 40001 || tag == 40002{
             let t31 = view.viewWithTag(30001) as! UITextField
             let t32 = view.viewWithTag(30002) as! UITextField

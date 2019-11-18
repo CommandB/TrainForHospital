@@ -148,27 +148,28 @@ class TeachingPlanDetailController : HBaseViewController{
     
     ///更新二维码
     @objc func refreshQrCode(){
+        refresh()
 //        print("更新二维码了...\(DateUtil.getCurrentDateTime())")
-        let url = SERVER_PORT + "rest/app/getTrainQRCode.do"
-        myPostRequest(url,["trainid":taskInfo["trainid"]], method: .post).responseJSON(completionHandler: { resp in
-            
-            switch resp.result{
-                case .success(let respJson):
-                    let json = JSON(respJson)
-                    if json["code"].intValue == 1{
-                        print(json["qrcode"])
-                        self.jds["qrcode"] = json["qrcode"]
-                        self.infoCollection.reloadData()
-                    }else{
-                        myAlert(self, message: "更新二维码失败!")
-                    }
-                    break
-                case .failure(let error):
-                    print(error)
-                    break
-            }
-            
-        })
+//        let url = SERVER_PORT + "rest/app/getTrainQRCode.do"
+//        myPostRequest(url,["trainid":taskInfo["trainid"]], method: .post).responseJSON(completionHandler: { resp in
+//
+//            switch resp.result{
+//                case .success(let respJson):
+//                    let json = JSON(respJson)
+//                    if json["code"].intValue == 1{
+//                        print(json["qrcode"])
+//                        self.jds["qrcode"] = json["qrcode"]
+//                        self.infoCollection.reloadData()
+//                    }else{
+//                        myAlert(self, message: "更新二维码失败!")
+//                    }
+//                    break
+//                case .failure(let error):
+//                    print(error)
+//                    break
+//            }
+//
+//        })
         
     }
     
@@ -440,6 +441,10 @@ extension TeachingPlanDetailController : UICollectionViewDelegate , UICollection
         
         let alert = UIAlertController(title: "提示", message: "请输入请假原因", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { action in
+            if txt.text == "" {
+                myAlert(self, message: "请输入请假原因")
+                return
+            }
             MBProgressHUD.showAdded(to: self.view, animated: true)
             let url = SERVER_PORT + "rest/app/trainAnswer.do"
             myPostRequest(url,["trainid":self.taskInfo["trainid"],"answer":"99","answerreason":txt.text], method: .post).responseJSON(completionHandler: { resp in

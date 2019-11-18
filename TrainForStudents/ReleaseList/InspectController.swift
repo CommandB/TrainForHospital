@@ -40,9 +40,11 @@ class InspectController : HBaseViewController,UITextFieldDelegate{
     var durationPicker = UIPickerView()
     let addrPicker = UIPickerView()
     var evPicker = UIPickerView()
+    var officePicker = UIPickerView()
     
     let hPickerImpl = HSimplePickerViewImpl()
     let durationPickerImpl = HSimplePickerViewImpl()
+    let officePickerImpl = HSimplePickerViewImpl()
     
     var addrPickerDs = [JSON]()
     
@@ -116,6 +118,12 @@ class InspectController : HBaseViewController,UITextFieldDelegate{
         durationPickerImpl.dataSource = JSON([["text":"请选择"], ["text":"30分钟", "value":30],["text":"45分钟", "value":45], ["text":"1小时", "value":60], ["text":"1小时30分钟", "value":90], ["text":"2小时", "value":120]]).arrayValue
         durationPickerImpl.clorsureImpl = durationClosureImpl
         
+        officePicker = officePickerImpl.getDefaultPickerView()
+        officePickerImpl.titleKey = "officename"
+        officePickerImpl.dataSource = jdsMyControl
+        officePickerImpl.clorsureImpl = officeClosureImpl
+        
+        
         //用作滚动页的容器
         scrollView.contentSize = CGSize(width: UIScreen.width * (3), height: scrollView.frame.height)
         scrollView.showsHorizontalScrollIndicator = false
@@ -152,6 +160,10 @@ class InspectController : HBaseViewController,UITextFieldDelegate{
         txt.delegate = self
         txt = view.viewWithTag(50001) as! TextFieldForNoMenu
 //        txt.inputView = addrPicker
+        txt.delegate = self
+        
+        txt = view.viewWithTag(35957) as! TextFieldForNoMenu
+        txt.inputView = officePicker
         txt.delegate = self
         
         var btn = view.viewWithTag(60001) as! UIButton
@@ -236,7 +248,8 @@ class InspectController : HBaseViewController,UITextFieldDelegate{
         if jdsMyControl.count == 0 {
             myAlert(self, message: "暂无可切换科室")
         }else{
-            officeList_View.isHidden = false
+            let txt = view.viewWithTag(35957) as! TextFieldForNoMenu
+            txt.becomeFirstResponder()
         }
         
     }
@@ -472,6 +485,18 @@ class InspectController : HBaseViewController,UITextFieldDelegate{
         
     }
   
+    func officeClosureImpl(_ ds: [JSON],  _ pickerView: UIPickerView, _ row: Int, _ component: Int) -> Void{
+        
+        if row == 0{
+            return
+        }
+        let data = jdsMyControl[row]
+        let btn = view.viewWithTag(70001) as! UIButton
+        btn.setTitle(data["officename"].stringValue, for: .normal)
+        submitParam["officeid"] = data["officeid"].stringValue
+        
+    }
+    
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let tag = textField.tag

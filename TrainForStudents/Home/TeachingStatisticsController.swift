@@ -15,6 +15,7 @@ class TeachingStatisticsController : HBaseViewController{
     @IBOutlet weak var teachingTypeCollection: UICollectionView!
     
     var jds = [JSON]()
+    var selectID = "teacherpanel"
     
     override func viewDidLoad() {
         
@@ -42,9 +43,32 @@ class TeachingStatisticsController : HBaseViewController{
     
     @objc func refresh() {
         teachingTypeCollection.mj_footer.resetNoMoreData()
-        getListData()
+        getStatisticData()
     }
-    
+    func getStatisticData(){
+        
+        let url = SERVER_PORT + "rest/app/getHomeInfo.do"
+        myPostRequest(url,  method: .post).responseString(completionHandler: {resp in
+            
+            switch resp.result{
+            case .success(let respStr):
+                let json = JSON(parseJSON: respStr)
+                print(json)
+                if json["code"].stringValue == "1"{
+                    self.jds = json[self.selectID].arrayValue
+                }else{
+                    myAlert(self, message: json["msg"].stringValue)
+                    print(json)
+                }
+                break
+            case .failure(let error):
+                myAlert(self, message: "获取统计数据异常!")
+                print(error)
+                break
+            }
+            self.getListData()
+        })
+    }
     
 }
 
@@ -59,8 +83,11 @@ extension TeachingStatisticsController : UICollectionViewDelegate , UICollection
         
         let data = jds[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c1", for: indexPath)
-//        let btn_icon
-        (cell.viewWithTag(10001) as! UIButton).setImage(UIImage(named: data["traintypename"].stringValue), for: .normal)
+        var btn_icon = UIImage.init(named: data["traintypename"].stringValue)
+        if btn_icon == nil {
+            btn_icon = UIImage.init(named: "其他教学活动")
+        }
+        (cell.viewWithTag(10001) as! UIButton).setImage(btn_icon, for: .normal)
         (cell.viewWithTag(10002) as! UILabel).text = data["traintypename"].stringValue
         (cell.viewWithTag(10003) as! UILabel).text = data["times"].stringValue
         

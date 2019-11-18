@@ -162,16 +162,19 @@ class CEXCheckController : HBaseViewController{
             let lbl = view8.viewWithTag(10001) as! UILabel
             lbl.text = "得 \(val)/9分"
             submitData["teacherassess"] = val
+            collectSumScore()
             break
         case 99999:
             let lbl = view8.viewWithTag(20001) as! UILabel
             lbl.text = "得 \(val)/9分"
             submitData["studentassess"] = val
+            collectSumScore()
             break
         case 100000:
             let lbl = view8.viewWithTag(30001) as! UILabel
             lbl.text = "得 \(val)/9分"
             submitData["sickassess"] = val
+            collectSumScore()
             break
         default:
             break
@@ -264,7 +267,32 @@ class CEXCheckController : HBaseViewController{
         lbl.text = tuple.0
         lbl.textColor = tuple.1
         submitData[key] = score
+        
+        collectSumScore()
+        
     }
+    
+    func collectSumScore(){
+        //计算总分
+        var sum = 0
+        sum += (submitData["inquiryscore"] as! Int)
+        sum += (submitData["checkscore"] as! Int)
+        sum += (submitData["czjnscore"] as! Int)
+        sum += (submitData["lcpdscore"] as! Int)
+        sum += (submitData["jkxjscore"] as! Int)
+        sum += (submitData["zzxnscore"] as! Int)
+        sum += (submitData["rwghscore"] as! Int)
+        sum += (submitData["teacherassess"] as! Int)
+        sum += (submitData["studentassess"] as! Int)
+        sum += (submitData["sickassess"] as! Int)
+        
+        var lbltext = (self.view.viewWithTag(50001) as! UILabel)
+        lbltext.isHidden = false
+        lbltext = (self.view.viewWithTag(50002) as! UILabel)
+        lbltext.text = sum.description
+        lbltext.isHidden = false
+    }
+    
     
     func parseScoreLevel(score : Int) -> (String,UIColor){
         

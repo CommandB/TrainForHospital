@@ -156,6 +156,7 @@ class StudyController : HBaseViewController{
     
     //浏览office的webview的点击事件
     @objc func wordFill (){
+        
         if !isFull{
             isFull = true
             UIView.animate(withDuration: 0.3, animations: {

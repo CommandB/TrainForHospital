@@ -245,6 +245,7 @@ class HomeController : HBaseViewController, UINavigationControllerDelegate {
     @objc func showMoreTeachingData(){
         let vc = getViewToStoryboard("teachingStatisticsView") as! TeachingStatisticsController
         vc.jds = statisticJds[selectedPanelKey].arrayValue
+        vc.selectID = selectedPanelKey
         present(vc, animated: true, completion: nil)
     }
     //第一栏 顶部两个按钮 切换老师和秘书的统计面板

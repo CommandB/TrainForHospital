@@ -48,6 +48,8 @@ class CollectWordViewController: UIViewController,UITableViewDelegate,UITableVie
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
         tableView.register(FileWordCell.classForCoder(), forCellReuseIdentifier: "FileWordCell")
+        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
+
         self.view.addSubview(tableView)
     }
     
@@ -88,13 +90,14 @@ class CollectWordViewController: UIViewController,UITableViewDelegate,UITableVie
         })
         
     }
-    
+    @objc func refresh(){
+        self.getPageData(fileType: self.fileType)
+    }
     func getPageData(fileType:String){
         let url = SERVER_PORT + "rest/app/querylearncollect.do"
         let persionID = UserDefaults.standard.string(forKey: LoginInfo.personId.rawValue)!
         myPostRequest(url, ["personid":persionID,"filetype":fileType],  method: .post).responseString(completionHandler: {resp in
-            //            self.deptCollection.mj_footer.endRefreshingWithNoMoreData()
-            
+            self.tableView.mj_header.endRefreshing()
             switch resp.result{
             case .success(let respStr):
                 let json = JSON(parseJSON: respStr)

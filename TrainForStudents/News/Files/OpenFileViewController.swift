@@ -78,15 +78,17 @@ class OpenFileViewController: NewsBaseViewController,UIDocumentInteractionContro
                 webView.loadRequest(urlReq)
         }else {
             if let urlStr = data["url"].string,let URL = URL(string: urlStr){
+                let urlReq = URLRequest(url: URL)
+                webView.loadRequest(urlReq)
 //                AVPlayerViewController *ctrl = [[AVPlayerViewController alloc] init];
 //
 //                                        ctrl.player= [[AVPlayeralloc]initWithURL:url];
 //
 //                                        [self presentViewController:ctrl animated:YES completion:nil];
 //                let urlReq = URLRequest(url: URL)
-                let avvc = AVPlayerViewController()
-                avvc.player = AVPlayer.init(url: URL)
-                self.present(avvc, animated: true, completion: nil)
+//                let avvc = AVPlayerViewController()
+//                avvc.player = AVPlayer.init(url: URL)
+//                self.present(avvc, animated: true, completion: nil)
 //                webView.loadRequest(urlReq)
             }
         }

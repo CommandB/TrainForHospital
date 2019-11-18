@@ -46,14 +46,17 @@ class FITBCollectionView : BasePeiwuCollectionView , UITextFieldDelegate{
             inputanswer = getInputanswer(dic:answerDic).0
             print(inputanswer)
             print(answerDic)
+            print(cell.tag)
             print("查看渲染答案")
             //渲染选项6
             let btn = (cell.viewWithTag(10001) as? UIButton)!
             btn.layer.cornerRadius = btn.frame.width / 2
             btn.setTitle("\(indexPath.item).", for: .normal)
             let txt = (cell.viewWithTag(10002) as? UITextField)!
-            if inputanswer.count == 1 || inputanswer[cell.tag] == "" {
+            if answerDic == nil {
                 txt.text = ""
+            }else if inputanswer.count == 1 {
+                txt.text = answerDic!["inputanswer"]
             }else{
                 txt.text = String(inputanswer[cell.tag]).trimmingCharacters(in: CharacterSet.init(charactersIn: ""))
             }
@@ -108,7 +111,7 @@ class FITBCollectionView : BasePeiwuCollectionView , UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString text: String) -> Bool {
         
         let currentText = textField.text!
-        let cell = textField.superview?.superview
+        let cell = textField.superview
         var answerStr = ""
         var answerDic = parentView?.answerDic[questionId]
         let tuple = getInputanswer(dic:answerDic)
@@ -117,7 +120,8 @@ class FITBCollectionView : BasePeiwuCollectionView , UITextFieldDelegate{
         
         //把最新输入的内容和原本的text结合到一起
         inputanswer[(cell?.tag)!] = Substring.init((currentText as NSString).replacingCharacters(in: range, with: text))
-        
+        print(inputanswer)
+        print("输入答案")
         for s in inputanswer{
             answerStr += ",\(s == "" ? " ":s)"
         }

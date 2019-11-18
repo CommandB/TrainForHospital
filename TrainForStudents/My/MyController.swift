@@ -33,8 +33,8 @@ class MyController : HBaseViewController{
 //            studentView = "studentTabbar"
 //        }
         
-        jds = JSON([["icon":"我的-选择","title":"修改个人资料","link":"changePersonInfoView"],["icon":"双箭头-右蓝","title":"切换至学生端","link":"studentTabbar"],["icon":"人员-2","title":"我的学员","link":"myStudentView"],["icon":"紧急","title":"退出系统","link":"loginView"]]).arrayValue
-        
+        jds = JSON([["icon":"双箭头-右蓝","title":"切换至学生端","link":"studentTabbar"],["icon":"人员-2","title":"我的学员","link":"myStudentView"],["icon":"紧急","title":"设置","link":"settingsView"]]).arrayValue
+        //,["icon":"我的-选择","title":"修改个人资料","link":"changePersonInfoView"],
         view.bringSubview(toFront: messageCollection)
         let lbl_name = view.viewWithTag(10002) as! UILabel
         lbl_name.text = UserDefaults.User.string(forKey: .personName)

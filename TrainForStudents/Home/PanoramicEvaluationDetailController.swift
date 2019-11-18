@@ -187,7 +187,7 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
             
             let index = indexPath.item - 1
             var data = cellData[index]
-            //print(data)
+            print(data)
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "c2", for: indexPath)
             var lbl = cell.viewWithTag(10001) as! UILabel
             lbl.text = data["personname"].stringValue
@@ -197,13 +197,13 @@ extension PanoramicEvaluationDetailController : UICollectionViewDelegate , UICol
             btn.viewParam = ["key" : keys[indexPath.section] ,"index" : index]
             btn.addTarget(self, action: #selector(removePerson(sender:)), for: .touchUpInside)
             //如果是科室或者学生评价老师 则隐藏工号和 删除按钮
-            if data["officeid"].stringValue != "" || keys[indexPath.section] == "s2t"{
+//            if data["officeid"].stringValue != "" || keys[indexPath.section] == "s2t"{
                 lbl.isHidden = true
-                btn.isHidden = true
-            }else{
-                lbl.isHidden = false
                 btn.isHidden = false
-            }
+//            }else{
+//                lbl.isHidden = false
+//                btn.isHidden = false
+//            }
         }
         
         return cell
